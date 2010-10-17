@@ -37,7 +37,7 @@ void WiiBaFu::showAboutBox() {
     QMessageBox::about(this, tr("About Wii Backup Fusion"),
         QString("<h2>Wii Backup Fusion %1</h2>").arg(QCoreApplication::applicationVersion()) +
         tr("<p><b><i>Wii backup solution</b></i>"
-        "<p>Copyright &copy; 2010 DynUp"
+        "<p>Copyright &copy; 2010 dynup"
         "<p>Mail: <a href='mailto:DynUp<dynup@ymail.com>?subject=WiiBaFu%20feedback'>dynup@ymail.com</a>"
         "<br>Web: <a href='http://wiibafu.codeplex.com'>wiibafu.codeplex.com</a>"
         "<p>Big thanks to the trolls for the excellent Qt toolkit! ;)"));
