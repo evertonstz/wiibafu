@@ -1,0 +1,8 @@
+This document contains important notes for Wii Backup Fusion
+
+Look & Feel of Qt applications
+==============================
+
+You can configure the look & feel of Qt applications, incl. Wii Backup Fusion.
+This contains GUI styles, 3-D effects, fonts, interface settings and so on.
+Use Qt's own setting editor 'qtconfig', it's in the Qt package in 'tools'!

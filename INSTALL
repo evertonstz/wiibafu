@@ -1,0 +1,90 @@
+This document describes how you can compile Wii Backup Fusion
+
+What you need
+=============
+
+Make sure you get the following stuff:
+
+  * Qt library (currently 4.7.0)
+
+It is important that you compile AND INSTALL the above packages!
+
+Further you will need GNU make and a working C++ compiler (e.g. gcc 3.4.x or later).
+
+
+Preparations
+============
+
+Before you start you must decide two things:
+
+1) Where do you want to have Qt installed? Qt is a bit lame in that it
+basically installs itself in its own source-tree, but symlinks are your friend.
+E.g you could link /opt/qt to where you keep your Qt source. Qt libs
+then end up in /opt/qt/lib.
+
+Make sure you do (if using sh, ksh, or bash):
+
+export QTDIR=/opt/qt
+
+With csh or tcsh the following is more appropriate:
+
+setenv QTDIR /opt/qt
+
+Now you want to make sure that Qt libraries are picked up correctly.
+
+On systems that respond to environment variables something similar to the
+following is appropriate:
+
+export LD_LIBRARY_PATH=$QTDIR/lib
+
+On systems whose diety of choice is ldconfig, try:
+
+ldconfig -m $QTDIR/lib
+
+You probably also want to add $KDEDIR/bin to your path.
+
+For configuring Qt, the magic sequence is:
+
+./configure -prefix /opt/qt
+make
+make install (as root)
+
+
+Compiling Wii Backup Fusion
+===========================
+
+cd WiiBaFu
+qmake
+make
+make install (as root)
+
+For Mac OS X you need the Xcode IDE from the Apple Developer Connection site: http://developer.apple.com
+The Xcode package from ADC also contains the SDKs, headers, tools and so on, all what you need!
+Before you can download Xcode you need to register on the ADC site! The account for Xcode tools
+download only is free!
+
+For Windows you need the MinGW compiler tools: http://www.mingw.org
+
+Common problems
+===============
+
+One of the biggest problems is picking up the correct version of Qt, especially
+if your system has more version of Qt installed. So it can be that after some
+struggle to get QTDIR setup correctly your setup is actually correct,
+but old -incorrect- settings are still lying around.
+
+Double check LD_LIBRARY_PATH points first to $QTDIR/lib
+
+Problems?
+
+See http://wiibafu.codeplex.com for help and solutions.
+
+If you encounter missing include files, especially if the files start with a
+'q', you probably have not setup your QTDIR correct or have the wrong version
+of Qt.
+
+If you still have problems look at the WiiBaFu website or send me an email:
+dynup@ymail.com
+
+Have fun!
+dynup

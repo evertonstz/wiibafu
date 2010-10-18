@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Wii Backup Fusion</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../wiibafu.qrc">
+    <normaloff>:/appicon/images/appicon.png</normaloff>:/appicon/images/appicon.png</iconset>
+  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
@@ -80,6 +84,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../wiibafu.qrc"/>
+ </resources>
  <connections/>
 </ui>
