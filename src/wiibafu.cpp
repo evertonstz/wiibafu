@@ -42,6 +42,7 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         gameTableView->setShowGrid(false);
         gameTableView->setAlternatingRowColors(true);
         gameTableView->verticalHeader()->hide();
+        gameTableView->verticalHeader()->setDefaultSectionSize(20);
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
         QHeaderView *headerView = gameTableView->horizontalHeader();
