@@ -39,9 +39,9 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tabFile">
+      <widget class="QWidget" name="tabFiles">
        <attribute name="title">
-        <string>File</string>
+        <string>Files</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>

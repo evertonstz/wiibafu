@@ -1,5 +1,5 @@
-HEADERS     += src/wiibafu.h
-SOURCES     += src/main.cpp src/wiibafu.cpp
+HEADERS     += src/wiibafu.h src/witools.h
+SOURCES     += src/main.cpp src/wiibafu.cpp src/witools.cpp
 FORMS       += resources/ui/wiibafu.ui
 RESOURCES   += resources/wiibafu.qrc
 

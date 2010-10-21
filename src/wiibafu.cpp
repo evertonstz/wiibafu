@@ -20,17 +20,44 @@
 
 #include "wiibafu.h"
 #include "ui_wiibafu.h"
+#include "witools.h"
 
 WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     ui->setupUi(this);
     this->setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
     this->setupConnections();
+
+    setGameListAttributes(ui->tableView_Files);
 }
 
 void WiiBaFu::setupConnections() {
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAboutBox()));
     connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
+
+    connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(files_Add()));
+}
+
+void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
+        gameTableView->setShowGrid(false);
+        gameTableView->setAlternatingRowColors(true);
+        gameTableView->verticalHeader()->hide();
+        gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+        QHeaderView *headerView = gameTableView->horizontalHeader();
+        QHeaderView::ResizeMode resizeMode = QHeaderView::ResizeToContents;
+        headerView->setResizeMode(resizeMode);
+}
+
+void WiiBaFu::files_Add() {
+    QString directory;
+    QFileDialog *dialog = new QFileDialog(this);
+    directory = dialog->getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
+
+    if (directory != "") {
+        WiTools *wiTools = new WiTools(this);
+        ui->tableView_Files->setModel(wiTools->getFilesModel(filesModel, directory));
+    }
 }
 
 void WiiBaFu::showAboutBox() {

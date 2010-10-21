@@ -27,8 +27,7 @@ namespace Ui {
     class WiiBaFu;
 }
 
-class WiiBaFu : public QMainWindow
-{
+class WiiBaFu : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -37,10 +36,14 @@ public:
 
 private:
     Ui::WiiBaFu *ui;
+    QStandardItemModel *filesModel;
+
     void setupConnections();
+    void setGameListAttributes(QTableView *gameTableView);
 
 private slots:
     void showAboutBox();
+    void files_Add();
 };
 
 #endif // WIIBAFU_H
