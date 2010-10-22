@@ -42,8 +42,9 @@ private:
     void setGameListAttributes(QTableView *gameTableView);
 
 private slots:
-    void showAboutBox();
     void files_Add();
+    void files_SelectAll();
+    void showAboutBox();
 };
 
 #endif // WIIBAFU_H

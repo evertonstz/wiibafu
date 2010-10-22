@@ -23,6 +23,8 @@
 #include "witools.h"
 
 WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
+    filesModel = new QStandardItemModel(this);
+
     ui->setupUi(this);
     this->setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
     this->setupConnections();
@@ -36,6 +38,7 @@ void WiiBaFu::setupConnections() {
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 
     connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(files_Add()));
+    connect(ui->pushButton_Files_Select, SIGNAL(clicked()), this, SLOT(files_SelectAll()));
 }
 
 void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
@@ -59,6 +62,10 @@ void WiiBaFu::files_Add() {
         WiTools *wiTools = new WiTools(this);
         ui->tableView_Files->setModel(wiTools->getFilesModel(filesModel, directory));
     }
+}
+
+void WiiBaFu::files_SelectAll() {
+    ui->tableView_Files->selectAll();
 }
 
 void WiiBaFu::showAboutBox() {

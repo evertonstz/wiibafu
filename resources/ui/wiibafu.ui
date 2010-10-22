@@ -65,28 +65,28 @@
            <item>
             <widget class="QPushButton" name="pushButton_Files_Add">
              <property name="text">
-              <string>Add</string>
+              <string>Add ISOs</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_Files_Select">
              <property name="text">
-              <string>Select</string>
+              <string>Select all</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_Files_Transfer">
              <property name="text">
-              <string>Transfer</string>
+              <string>Transfer to HDD</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_Files_Tools">
              <property name="text">
-              <string>Tools</string>
+              <string>Export game list</string>
              </property>
             </widget>
            </item>

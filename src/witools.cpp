@@ -25,8 +25,6 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
 }
 
 QStandardItemModel* WiTools::getFilesModel(QStandardItemModel *model, QString path) {
-    model = new QStandardItemModel(this);
-
     QProcess filesRead;
     filesRead.start("wit", QStringList() << "LIST" << "--section" << "--recurse" << path);
     filesRead.waitForFinished();
