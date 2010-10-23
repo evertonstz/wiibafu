@@ -19,18 +19,21 @@
  ***************************************************************************/
 
 #include "witools.h"
+#include "wiibafu.h"
 
 WiTools::WiTools(QObject *parent) : QObject(parent) {
 
 }
 
-QStandardItemModel* WiTools::getFilesModel(QStandardItemModel *model, QString path) {
+QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QString path) {
     QProcess filesRead;
     filesRead.start("wit", QStringList() << "LIST" << "--section" << "--recurse" << path);
     filesRead.waitForFinished();
 
     QByteArray bytes = filesRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
+
+    emit newLogEntry(QString(bytes));
 
     QList<QStandardItem *> ids, names, titles, regions, sizes, mtimes, filetypes, filenames;
 

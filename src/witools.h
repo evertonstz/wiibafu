@@ -29,7 +29,10 @@ class WiTools : public QObject {
 
 public:
     explicit WiTools(QObject *parent = 0);
-    QStandardItemModel* getFilesModel(QStandardItemModel *model, QString path);
+    QStandardItemModel* getFilesGameListModel(QStandardItemModel *model, QString path);
+
+signals:
+     void newLogEntry(QString entry);
 };
 
 #endif // WITOOLS_H

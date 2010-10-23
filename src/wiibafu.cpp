@@ -20,9 +20,9 @@
 
 #include "wiibafu.h"
 #include "ui_wiibafu.h"
-#include "witools.h"
 
 WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
+    wiTools = new WiTools(this);
     filesModel = new QStandardItemModel(this);
 
     ui->setupUi(this);
@@ -37,8 +37,14 @@ void WiiBaFu::setupConnections() {
     connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 
-    connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(files_Add()));
-    connect(ui->pushButton_Files_Select, SIGNAL(clicked()), this, SLOT(files_SelectAll()));
+    connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
+
+    connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(filesGameList_Add()));
+    connect(ui->pushButton_Files_Select, SIGNAL(clicked()), this, SLOT(filesGameList_SelectAll()));
+
+    connect(ui->pushButton_Log_Clear, SIGNAL(clicked()), this, SLOT(log_Clear()));
+    connect(ui->pushButton_Log_Copy, SIGNAL(clicked()), this, SLOT(log_Copy()));
+    connect(ui->pushButton_Log_Save, SIGNAL(clicked()), this, SLOT(log_Save()));
 }
 
 void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
@@ -53,19 +59,47 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         headerView->setResizeMode(resizeMode);
 }
 
-void WiiBaFu::files_Add() {
+void WiiBaFu::filesGameList_Add() {
     QString directory;
     QFileDialog *dialog = new QFileDialog(this);
+
     directory = dialog->getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
 
-    if (directory != "") {
-        WiTools *wiTools = new WiTools(this);
-        ui->tableView_Files->setModel(wiTools->getFilesModel(filesModel, directory));
+    if (!directory.isEmpty()) {
+        ui->tableView_Files->setModel(wiTools->getFilesGameListModel(filesModel, directory));
     }
 }
 
-void WiiBaFu::files_SelectAll() {
+void WiiBaFu::filesGameList_SelectAll() {
     ui->tableView_Files->selectAll();
+}
+
+void WiiBaFu::log_Clear() {
+    ui->plainTextEdit_Log->clear();
+}
+
+void WiiBaFu::log_Copy() {
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(ui->plainTextEdit_Log->toPlainText());
+}
+
+void WiiBaFu::log_Save() {
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save log file"), QDir::homePath().append("/WiiBaFu.log"), tr("WiiBaFu log file (*.log)"));
+
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+
+        if (file.open(QFile::WriteOnly | QFile::Truncate)) {
+            QTextStream textStream(&file);
+            textStream << ui->plainTextEdit_Log->toPlainText();
+        }
+
+        file.close();
+    }
+}
+
+void WiiBaFu::addEntryToLog(QString entry) {
+    ui->plainTextEdit_Log->appendPlainText(entry);
 }
 
 void WiiBaFu::showAboutBox() {

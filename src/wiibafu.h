@@ -23,6 +23,8 @@
 
 #include <QtGui>
 
+#include"witools.h"
+
 namespace Ui {
     class WiiBaFu;
 }
@@ -36,14 +38,19 @@ public:
 
 private:
     Ui::WiiBaFu *ui;
+    WiTools *wiTools;
     QStandardItemModel *filesModel;
 
     void setupConnections();
     void setGameListAttributes(QTableView *gameTableView);
 
 private slots:
-    void files_Add();
-    void files_SelectAll();
+    void filesGameList_Add();
+    void filesGameList_SelectAll();
+    void addEntryToLog(QString entry);
+    void log_Clear();
+    void log_Copy();
+    void log_Save();
     void showAboutBox();
 };
 
