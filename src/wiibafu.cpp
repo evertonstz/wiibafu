@@ -23,6 +23,7 @@
 
 WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     wiTools = new WiTools(this);
+    common = new Common(this);
     filesModel = new QStandardItemModel(this);
 
     ui->setupUi(this);
@@ -38,9 +39,13 @@ void WiiBaFu::setupConnections() {
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 
     connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
+    connect(common, SIGNAL(newGameCover(QImage*)), this, SLOT(showGameCover(QImage*)));
 
     connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(filesGameList_Add()));
     connect(ui->pushButton_Files_Select, SIGNAL(clicked()), this, SLOT(filesGameList_SelectAll()));
+    connect(ui->pushButton_Files_ShowInfo, SIGNAL(clicked()), this, SLOT(filesGameList_ShowInfo()));
+
+    connect(ui->pushButton_Info_GetCover, SIGNAL(clicked()), this, SLOT(infoGame_GetCover()));
 
     connect(ui->pushButton_Log_Clear, SIGNAL(clicked()), this, SLOT(log_Clear()));
     connect(ui->pushButton_Log_Copy, SIGNAL(clicked()), this, SLOT(log_Copy()));
@@ -66,12 +71,51 @@ void WiiBaFu::filesGameList_Add() {
     directory = dialog->getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
+        filesModel->clear();
         ui->tableView_Files->setModel(wiTools->getFilesGameListModel(filesModel, directory));
     }
 }
 
 void WiiBaFu::filesGameList_SelectAll() {
     ui->tableView_Files->selectAll();
+}
+
+void WiiBaFu::filesGameList_ShowInfo() {
+    WiiGame currentGame = getSelectedWiiGame();
+
+    ui->lineEdit_info_ID->setText(currentGame.id);
+    ui->lineEdit_info_Name->setText(currentGame.name);
+    ui->lineEdit_info_Title->setText(currentGame.title);
+    ui->lineEdit_info_Region->setText(currentGame.region);
+    ui->lineEdit_info_Size->setText(currentGame.size);
+    ui->lineEdit_info_Date->setText(currentGame.size);
+    ui->lineEdit_info_Type->setText(currentGame.filetype);
+    ui->lineEdit_info_FileName->setText(currentGame.filename);
+    ui->lineEdit_info_FileName->setToolTip(currentGame.filename);
+
+    common->getGameCover(filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(0).first())->text());
+
+    ui->tabWidget->setCurrentIndex(3);
+}
+
+WiiGame WiiBaFu::getSelectedWiiGame() {
+    WiiGame currentGame;
+
+    currentGame.id = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_id).first())->text();
+    currentGame.name = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_name).first())->text();
+    currentGame.title = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_title).first())->text();
+    currentGame.region = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_region).first())->text();
+    currentGame.size = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_size).first())->text();
+    currentGame.date = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_date).first())->text();
+    currentGame.filetype = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_filetype).first())->text();
+    currentGame.filename = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_filetype).first())->text();
+
+    return currentGame;
+}
+
+void WiiBaFu::infoGame_GetCover() {
+    if (!ui->lineEdit_info_ID->text().isEmpty())
+        common->getGameCover(ui->lineEdit_info_ID->text());
 }
 
 void WiiBaFu::log_Clear() {
@@ -96,6 +140,13 @@ void WiiBaFu::log_Save() {
 
         file.close();
     }
+}
+
+void WiiBaFu::showGameCover(QImage *gameCover) {
+    if (!gameCover->isNull())
+        ui->label_GameCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
+    else
+        ui->label_GameCover->setText(tr("No cover available\n\nfor this game!"));
 }
 
 void WiiBaFu::addEntryToLog(QString entry) {

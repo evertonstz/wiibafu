@@ -24,10 +24,33 @@
 #include <QtGui>
 
 #include"witools.h"
+#include "common.h"
 
 namespace Ui {
     class WiiBaFu;
 }
+
+struct WiiGame {
+    QString id;
+    QString name;
+    QString title;
+    QString region;
+    QString size;
+    QString date;
+    QString filetype;
+    QString filename;
+};
+
+enum TableRows {
+    tablerow_id = 0,
+    tablerow_name = 1,
+    tablerow_title = 2,
+    tablerow_region = 3,
+    tablerow_size = 4,
+    tablerow_date = 5,
+    tablerow_filetype = 6,
+    tablerow_filename = 7,
+};
 
 class WiiBaFu : public QMainWindow {
     Q_OBJECT
@@ -39,18 +62,23 @@ public:
 private:
     Ui::WiiBaFu *ui;
     WiTools *wiTools;
+    Common *common;
     QStandardItemModel *filesModel;
 
     void setupConnections();
     void setGameListAttributes(QTableView *gameTableView);
+    WiiGame getSelectedWiiGame();
 
 private slots:
     void filesGameList_Add();
     void filesGameList_SelectAll();
-    void addEntryToLog(QString entry);
+    void filesGameList_ShowInfo();
+    void infoGame_GetCover();
     void log_Clear();
     void log_Copy();
     void log_Save();
+    void showGameCover(QImage *gameCover);
+    void addEntryToLog(QString entry);
     void showAboutBox();
 };
 
