@@ -88,7 +88,7 @@ void WiiBaFu::filesGameList_ShowInfo() {
     ui->lineEdit_info_Title->setText(currentGame.title);
     ui->lineEdit_info_Region->setText(currentGame.region);
     ui->lineEdit_info_Size->setText(currentGame.size);
-    ui->lineEdit_info_Date->setText(currentGame.size);
+    ui->lineEdit_info_Date->setText(currentGame.date);
     ui->lineEdit_info_Type->setText(currentGame.filetype);
     ui->lineEdit_info_FileName->setText(currentGame.filename);
     ui->lineEdit_info_FileName->setToolTip(currentGame.filename);
