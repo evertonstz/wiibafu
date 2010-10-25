@@ -37,7 +37,6 @@ private:
 
 signals:
     void newGameCover(QImage *gameCover);
-    void showStatusBarMessage(QString message);
 
 private slots:
     void loadGameCoverFinished(int id, bool error);

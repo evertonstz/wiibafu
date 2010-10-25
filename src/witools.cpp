@@ -111,7 +111,7 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     QList<QStandardItem *> ids, names, titles, regions, sizes, filetypes, filenames;
 
     foreach (QString line, lines) {
-        if (line.contains("total-discs=0")) {
+        if (line.contains("used_discs=0")) {
             emit showStatusBarMessage(tr("None games found!"));
             return model;
         }
