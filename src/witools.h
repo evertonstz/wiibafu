@@ -32,7 +32,8 @@ public:
     QStandardItemModel* getFilesGameListModel(QStandardItemModel *model, QString path);
 
 signals:
-     void newLogEntry(QString entry);
+    void newLogEntry(QString entry);
+    void showStatusBarMessage(QString message);
 };
 
 #endif // WITOOLS_H

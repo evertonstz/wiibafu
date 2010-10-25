@@ -78,6 +78,7 @@ private slots:
     void log_Copy();
     void log_Save();
     void showGameCover(QImage *gameCover);
+    void setStatusBarText(QString text);
     void addEntryToLog(QString entry);
     void showAboutBox();
 };

@@ -26,6 +26,8 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
 }
 
 QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QString path) {
+    emit showStatusBarMessage(tr("Loading games..."));
+
     QProcess filesRead;
     filesRead.start("wit", QStringList() << "LIST" << "--section" << "--recurse" << path);
     filesRead.waitForFinished();
@@ -38,7 +40,11 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     QList<QStandardItem *> ids, names, titles, regions, sizes, mtimes, filetypes, filenames;
 
     foreach (QString line, lines) {
-        if (line.isEmpty())
+        if (line.contains("total-discs=0")) {
+            emit showStatusBarMessage(tr("No games found."));
+            return NULL;
+        }
+        else if (line.isEmpty())
             continue;
 
         if (line.startsWith("id=")) {
@@ -84,6 +90,8 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     model->setHeaderData(5, Qt::Horizontal, tr("Date"));
     model->setHeaderData(6, Qt::Horizontal, tr("Type"));
     model->setHeaderData(7, Qt::Horizontal, tr("File name"));
+
+    emit showStatusBarMessage(tr("Ready."));
 
     return model;
 }

@@ -21,7 +21,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#include <QObject>
+#include <QtGui>
 #include <QtNetwork>
 
 class Common : public QObject {
@@ -36,7 +36,8 @@ private:
     QHttp *http;
 
 signals:
-        void newGameCover(QImage *gameCover);
+    void newGameCover(QImage *gameCover);
+    void showStatusBarMessage(QString message);
 
 private slots:
     void loadGameCoverFinished(int id, bool error);

@@ -27,8 +27,9 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     filesModel = new QStandardItemModel(this);
 
     ui->setupUi(this);
-    this->setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
-    this->setupConnections();
+    setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
+    setStatusBarText(tr("Ready."));
+    setupConnections();
 
     setGameListAttributes(ui->tableView_Files);
 }
@@ -39,7 +40,9 @@ void WiiBaFu::setupConnections() {
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 
     connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
+    connect(wiTools, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(common, SIGNAL(newGameCover(QImage*)), this, SLOT(showGameCover(QImage*)));
+    connect(common, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
 
     connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(filesGameList_Add()));
     connect(ui->pushButton_Files_Select, SIGNAL(clicked()), this, SLOT(filesGameList_SelectAll()));
@@ -81,21 +84,23 @@ void WiiBaFu::filesGameList_SelectAll() {
 }
 
 void WiiBaFu::filesGameList_ShowInfo() {
-    WiiGame currentGame = getSelectedWiiGame();
+    if (ui->tableView_Files->selectionModel() && !ui->tableView_Files->selectionModel()->selectedRows(0).isEmpty()) {
+        WiiGame currentGame = getSelectedWiiGame();
 
-    ui->lineEdit_info_ID->setText(currentGame.id);
-    ui->lineEdit_info_Name->setText(currentGame.name);
-    ui->lineEdit_info_Title->setText(currentGame.title);
-    ui->lineEdit_info_Region->setText(currentGame.region);
-    ui->lineEdit_info_Size->setText(currentGame.size);
-    ui->lineEdit_info_Date->setText(currentGame.date);
-    ui->lineEdit_info_Type->setText(currentGame.filetype);
-    ui->lineEdit_info_FileName->setText(currentGame.filename);
-    ui->lineEdit_info_FileName->setToolTip(currentGame.filename);
+        ui->lineEdit_info_ID->setText(currentGame.id);
+        ui->lineEdit_info_Name->setText(currentGame.name);
+        ui->lineEdit_info_Title->setText(currentGame.title);
+        ui->lineEdit_info_Region->setText(currentGame.region);
+        ui->lineEdit_info_Size->setText(currentGame.size);
+        ui->lineEdit_info_Date->setText(currentGame.date);
+        ui->lineEdit_info_Type->setText(currentGame.filetype);
+        ui->lineEdit_info_FileName->setText(currentGame.filename);
+        ui->lineEdit_info_FileName->setToolTip(currentGame.filename);
 
-    common->getGameCover(filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(0).first())->text());
+        common->getGameCover(filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(0).first())->text());
 
-    ui->tabWidget->setCurrentIndex(3);
+        ui->tabWidget->setCurrentIndex(3);
+    }
 }
 
 WiiGame WiiBaFu::getSelectedWiiGame() {
@@ -147,6 +152,10 @@ void WiiBaFu::showGameCover(QImage *gameCover) {
         ui->label_GameCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
     else
         ui->label_GameCover->setText(tr("No cover available\n\nfor this game!"));
+}
+
+void WiiBaFu::setStatusBarText(QString text) {
+    ui->statusBar->showMessage(text);
 }
 
 void WiiBaFu::addEntryToLog(QString entry) {

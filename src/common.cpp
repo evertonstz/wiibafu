@@ -18,7 +18,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtGui> // -> qDebug()!!!
 #include "common.h"
 
 Common::Common(QObject *parent) : QObject(parent) {
@@ -36,8 +35,10 @@ void Common::getGameCover(QString gameID) {
 }
 
 void Common::loadGameCoverFinished(int, bool error) {
-    QImage *image = new QImage();
-    image->loadFromData(http->readAll());
+    if (!error) {
+        QImage *image = new QImage();
+        image->loadFromData(http->readAll());
 
-    emit newGameCover(image);
+        emit newGameCover(image);
+    }
 }
