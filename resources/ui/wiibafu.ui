@@ -70,7 +70,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_Files_Select">
+            <widget class="QPushButton" name="pushButton_Files_SelectAll">
              <property name="text">
               <string>Select all</string>
              </property>
@@ -175,23 +175,16 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QPushButton" name="pushButton_HDD_Drive">
+            <widget class="QPushButton" name="pushButton_HDD_List">
              <property name="text">
-              <string>Drive</string>
+              <string>List</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_HDD_Select">
+            <widget class="QPushButton" name="pushButton_HDD_SelectAll">
              <property name="text">
-              <string>Select</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_HDD_Remove">
-             <property name="text">
-              <string>Remove</string>
+              <string>Select all</string>
              </property>
             </widget>
            </item>
@@ -203,9 +196,16 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_HDD_Tools">
+            <widget class="QPushButton" name="pushButton_HDD_Remove">
              <property name="text">
-              <string>Tools</string>
+              <string>Remove</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_HDD_ShowInfo">
+             <property name="text">
+              <string>Show info</string>
              </property>
             </widget>
            </item>
@@ -403,7 +403,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_12">
                  <item>
-                  <widget class="QLabel" name="label_8">
+                  <widget class="QLabel" name="infolabel_Info_FileName">
                    <property name="minimumSize">
                     <size>
                      <width>60</width>

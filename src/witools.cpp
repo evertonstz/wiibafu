@@ -95,3 +95,69 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 
     return model;
 }
+
+QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
+    emit showStatusBarMessage(tr("Loading games..."));
+
+    QProcess filesRead;
+    filesRead.start("wwt", QStringList() << "LIST-A" << "--section" << "--test"); //TODO: Remove "--test"!
+    filesRead.waitForFinished();
+
+    QByteArray bytes = filesRead.readAllStandardOutput();
+    QStringList lines = QString(bytes).split("\n");
+
+    emit newLogEntry(QString(bytes));
+
+    QList<QStandardItem *> ids, names, titles, regions, sizes, filetypes, filenames;
+
+    foreach (QString line, lines) {
+        if (line.contains("total-discs=0")) {
+            emit showStatusBarMessage(tr("None games found!"));
+            return model;
+        }
+        else if (line.isEmpty())
+            continue;
+
+        if (line.startsWith("id=")) {
+            ids.append(new QStandardItem(line.section("=", 1)));
+        }
+        else if (line.startsWith("name=")) {
+            names.append(new QStandardItem(line.section("=", 1)));
+        }
+        else if (line.startsWith("title=")) {
+            titles.append(new QStandardItem(line.section("=", 1)));
+        }
+        else if (line.startsWith("region=")) {
+            regions.append(new QStandardItem(line.section("=", 1)));
+        }
+        else if (line.startsWith("size=")) {
+            sizes.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
+        }
+        else if (line.startsWith("filetype=")) {
+            filetypes.append(new QStandardItem(line.section("=", 1)));
+        }
+        else if (line.startsWith("filename=")) {
+            filenames.append(new QStandardItem(line.section("=", 1)));
+        }
+    }
+
+    model->appendColumn(ids);
+    model->appendColumn(names);
+    model->appendColumn(titles);
+    model->appendColumn(regions);
+    model->appendColumn(sizes);
+    model->appendColumn(filetypes);
+    model->appendColumn(filenames);
+
+    model->setHeaderData(0, Qt::Horizontal, tr("Game ID"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Game title"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Original title"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Region"));
+    model->setHeaderData(4, Qt::Horizontal, tr("Size"));
+    model->setHeaderData(5, Qt::Horizontal, tr("Type"));
+    model->setHeaderData(6, Qt::Horizontal, tr("Partition"));
+
+    emit showStatusBarMessage(tr("Ready."));
+
+    return model;
+}
