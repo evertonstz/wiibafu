@@ -76,14 +76,14 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     model->appendColumn(filetypes);
     model->appendColumn(filenames);
 
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Game ID"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Game title"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Original title"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Region"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Size"));
-    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Date"));
-    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Type"));
-    model->setHeaderData(7, Qt::Horizontal, QObject::tr("File name"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Game ID"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Game title"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Original title"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Region"));
+    model->setHeaderData(4, Qt::Horizontal, tr("Size"));
+    model->setHeaderData(5, Qt::Horizontal, tr("Date"));
+    model->setHeaderData(6, Qt::Horizontal, tr("Type"));
+    model->setHeaderData(7, Qt::Horizontal, tr("File name"));
 
     return model;
 }

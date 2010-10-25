@@ -108,7 +108,7 @@ WiiGame WiiBaFu::getSelectedWiiGame() {
     currentGame.size = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_size).first())->text();
     currentGame.date = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_date).first())->text();
     currentGame.filetype = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_filetype).first())->text();
-    currentGame.filename = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_filetype).first())->text();
+    currentGame.filename = filesModel->itemFromIndex(ui->tableView_Files->selectionModel()->selectedRows(tablerow_filename).first())->text();
 
     return currentGame;
 }
@@ -156,11 +156,13 @@ void WiiBaFu::addEntryToLog(QString entry) {
 void WiiBaFu::showAboutBox() {
     QMessageBox::about(this, tr("About Wii Backup Fusion"),
         QString("<h2>Wii Backup Fusion %1</h2>").arg(QCoreApplication::applicationVersion()) +
-        tr("<p><b><i>Wii backup solution</b></i>"
-        "<p>Copyright &copy; 2010 dynup"
-        "<p>Mail: <a href='mailto:DynUp<dynup@ymail.com>?subject=WiiBaFu%20feedback'>dynup@ymail.com</a>"
+        tr("<p><b><i>The complete and simply to use backup solution for Wii games</b></i>"
+        "<p>Copyright &copy; 2010 Kai Heitkamp"
+        "<p>Mail: <a href='mailto:dynup<dynup@ymail.com>?subject=WiiBaFu%20feedback'>dynup@ymail.com</a>"
         "<br>Web: <a href='http://wiibafu.codeplex.com'>wiibafu.codeplex.com</a>"
-        "<p>Big thanks to the trolls for the excellent Qt toolkit! ;)"));
+        "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit"
+        "<br>and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools!"
+        "<p><i>Dedicated to my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>"));
 }
 
 WiiBaFu::~WiiBaFu() {
