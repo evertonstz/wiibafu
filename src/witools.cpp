@@ -41,7 +41,7 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 
     foreach (QString line, lines) {
         if (line.contains("total-discs=0")) {
-            emit showStatusBarMessage(tr("No games found."));
+            emit showStatusBarMessage(tr("None games found!"));
             return model;
         }
         else if (line.isEmpty())
