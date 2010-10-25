@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2010 DynUp                                              *
+ *   Copyright (C) 2010 Kai Heitkamp                                       *
  *   dynup@ymail.com | wiibafu.codeplex.com                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -21,16 +21,15 @@
 #include <QtGui/QApplication>
 #include "wiibafu.h"
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    QCoreApplication::setOrganizationDomain("www..com");
-    QCoreApplication::setOrganizationName("DynUp");
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+    QCoreApplication::setOrganizationDomain("wiibafu.codeplex.com");
+    QCoreApplication::setOrganizationName("Kai Heitkamp");
     QCoreApplication::setApplicationName("Wii Backup Fusion");
     QCoreApplication::setApplicationVersion("0.1");
 
-    WiiBaFu w;
-    w.show();
+    WiiBaFu wiibafu;
+    wiibafu.show();
 
-    return a.exec();
+    return app.exec();
 }
