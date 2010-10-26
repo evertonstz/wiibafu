@@ -101,7 +101,7 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     emit showStatusBarMessage(tr("Loading games..."));
 
     QProcess filesRead;
-    filesRead.start("wwt", QStringList() << "LIST-A" << "--section" << "--test"); //TODO: Remove "--test"!
+    filesRead.start("wwt", QStringList() << "LIST-A" << "--section");
     filesRead.waitForFinished();
 
     QByteArray bytes = filesRead.readAllStandardOutput();
