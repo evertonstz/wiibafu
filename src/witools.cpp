@@ -43,6 +43,7 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
         if (line.contains("total-discs=0")) {
             emit showStatusBarMessage(tr("None games found!"));
             return model;
+            break;
         }
         else if (line.isEmpty())
             continue;
@@ -111,9 +112,15 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     QList<QStandardItem *> ids, names, titles, regions, sizes, filetypes, filenames;
 
     foreach (QString line, lines) {
-        if (line.contains("used_discs=0")) {
+        if (line.contains("text=No WBFS found")) {
+            emit showStatusBarMessage(tr("No WBFS partitions found!"));
+            return model;
+            break;
+        }
+        else if (line.contains("used_discs=0")) {
             emit showStatusBarMessage(tr("None games found!"));
             return model;
+            break;
         }
         else if (line.isEmpty())
             continue;

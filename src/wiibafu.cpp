@@ -74,14 +74,13 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 }
 
 void WiiBaFu::filesGameList_Add() {
-    QString directory;
-    QFileDialog *dialog = new QFileDialog(this);
-
-    directory = dialog->getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
+    QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
         filesListModel->clear();
-        ui->tableView_Files->setModel(wiTools->getFilesGameListModel(filesListModel, directory));
+
+        QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getFilesGameListModel, filesListModel, directory);
+        ui->tableView_Files->setModel(future.result());
     }
 }
 
@@ -95,7 +94,9 @@ void WiiBaFu::filesGameList_ShowInfo() {
 
 void WiiBaFu::hddGameList_List() {
     hddListModel->clear();
-    ui->tableView_HDD->setModel(wiTools->getHDDGameListModel(hddListModel));
+
+    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getHDDGameListModel, hddListModel);
+    ui->tableView_HDD->setModel(future.result());
 }
 
 void WiiBaFu::hddGameList_SelectAll() {
