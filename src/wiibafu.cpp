@@ -42,8 +42,16 @@ void WiiBaFu::setupConnections() {
     connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 
-    connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
+    connect(wiTools, SIGNAL(newFilesLabelTotalDiscs(QString)), this, SLOT(setFilesLabelTotalDiscs(QString)));
+    connect(wiTools, SIGNAL(newFilesLabelTotalSize(QString)), this, SLOT(setFilesLabelTotalSize(QString)));
+    connect(wiTools, SIGNAL(newHDDLabelFile(QString)), this, SLOT(setHDDLabelFile(QString)));
+    connect(wiTools, SIGNAL(newHDDLabelUsedDiscs(QString)), this, SLOT(setHDDLabelUsedDiscs(QString)));
+    connect(wiTools, SIGNAL(newHDDLabelTotalDiscs(QString)), this, SLOT(setHDDLabelTotalDiscs(QString)));
+    connect(wiTools, SIGNAL(newHDDLabelUsedMB(QString)), this, SLOT(setHDDLabelUsedMB(QString)));
+    connect(wiTools, SIGNAL(newHDDLabelFreeMB(QString)), this, SLOT(setHDDLabelFreeMB(QString)));
+    connect(wiTools, SIGNAL(newHDDLabelTotalMB(QString)), this, SLOT(setHDDLabelTotalMB(QString)));
     connect(wiTools, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
+    connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
     connect(common, SIGNAL(newGameCover(QImage*)), this, SLOT(showGameCover(QImage*)));
 
     connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(filesGameList_Add()));
@@ -107,6 +115,7 @@ void WiiBaFu::hddGameList_ShowInfo() {
     setGameInfo(ui->tableView_HDD, hddListModel);
 }
 
+//TODO: Adapt for WBFS info!
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
         ui->lineEdit_info_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
@@ -118,9 +127,9 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
         if (tableView == ui->tableView_HDD) {
             ui->lineEdit_info_Date->setText("--");
             ui->infolabel_Info_FileName->setText(tr("Partition:"));
-            ui->lineEdit_info_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
+            ui->lineEdit_info_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
             ui->lineEdit_info_FileName->setToolTip("");
-            ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
+            ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
         }
         else {
             ui->lineEdit_info_Date->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
@@ -172,6 +181,38 @@ void WiiBaFu::showGameCover(QImage *gameCover) {
         ui->label_GameCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
     else
         ui->label_GameCover->setText(tr("No cover available\n\nfor this game!"));
+}
+
+void WiiBaFu::setFilesLabelTotalDiscs(QString totalDiscs) {
+    ui->label_Files_TotalDiscs->setText(totalDiscs);
+}
+
+void WiiBaFu::setFilesLabelTotalSize(QString totalSize) {
+    ui->label_Files_TotalSize->setText(totalSize);
+}
+
+void WiiBaFu::setHDDLabelFile(QString file) {
+    ui->label_HDD_File->setText(file);
+}
+
+void WiiBaFu::setHDDLabelUsedDiscs(QString usedDiscs) {
+    ui->label_HDD_UsedDiscs->setText(usedDiscs);
+}
+
+void WiiBaFu::setHDDLabelTotalDiscs(QString totalDiscs) {
+    ui->label_HDD_TotalDiscs->setText(totalDiscs);
+}
+
+void WiiBaFu::setHDDLabelUsedMB(QString usedMB) {
+    ui->label_HDD_UsedMB->setText(usedMB);
+}
+
+void WiiBaFu::setHDDLabelFreeMB(QString freeMB) {
+    ui->label_HDD_FreeMB->setText(freeMB);
+}
+
+void WiiBaFu::setHDDLabelTotalMB(QString totalMB) {
+    ui->label_HDD_TotalMB->setText(totalMB);
 }
 
 void WiiBaFu::setStatusBarText(QString text) {

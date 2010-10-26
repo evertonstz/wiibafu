@@ -35,6 +35,14 @@ public:
 signals:
     void newLogEntry(QString entry);
     void showStatusBarMessage(QString message);
+    void newFilesLabelTotalDiscs(QString discs);
+    void newFilesLabelTotalSize(QString size);
+    void newHDDLabelFile(QString file);
+    void newHDDLabelUsedDiscs(QString discs);
+    void newHDDLabelTotalDiscs(QString tDiscs);
+    void newHDDLabelUsedMB(QString usedMB);
+    void newHDDLabelFreeMB(QString freeMB);
+    void newHDDLabelTotalMB(QString totalMB);
 };
 
 #endif // WITOOLS_H

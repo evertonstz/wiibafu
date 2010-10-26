@@ -60,8 +60,16 @@ private slots:
     void log_Copy();
     void log_Save();
     void showGameCover(QImage *gameCover);
-    void addEntryToLog(QString entry);
+    void setFilesLabelTotalDiscs(QString totalDiscs);
+    void setFilesLabelTotalSize(QString totalSize);
+    void setHDDLabelFile(QString file);
+    void setHDDLabelUsedDiscs(QString usedDiscs);
+    void setHDDLabelTotalDiscs(QString totalDiscs);
+    void setHDDLabelUsedMB(QString usedMB);
+    void setHDDLabelFreeMB(QString freeMB);
+    void setHDDLabelTotalMB(QString totalMB);
     void setStatusBarText(QString text);
+    void addEntryToLog(QString entry);
     void showAboutBox();
 };
 
