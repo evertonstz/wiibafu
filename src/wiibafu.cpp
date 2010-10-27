@@ -82,6 +82,9 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         gameTableView->verticalHeader()->hide();
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        gameTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        gameTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+        gameTableView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 
         QHeaderView *headerView = gameTableView->horizontalHeader();
         QHeaderView::ResizeMode resizeMode = QHeaderView::ResizeToContents;
