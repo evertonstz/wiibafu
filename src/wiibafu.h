@@ -22,6 +22,7 @@
 #define WIIBAFU_H
 
 #include <QtGui>
+#include <QMetaType>
 
 #include"witools.h"
 #include "common.h"

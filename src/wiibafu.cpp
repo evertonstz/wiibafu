@@ -38,6 +38,8 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 }
 
 void WiiBaFu::setupConnections() {
+    qRegisterMetaType<QString>("QString");
+
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAboutBox()));
     connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
