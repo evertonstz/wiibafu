@@ -21,24 +21,53 @@
 #include "common.h"
 
 Common::Common(QObject *parent) : QObject(parent) {
-
+    http = new QHttp(this);
+    connect(http, SIGNAL(done(bool)), this, SLOT(loadGameCoverDone(bool)));
+    connect(http, SIGNAL(responseHeaderReceived(QHttpResponseHeader)), this, SLOT(loadGameCoverResponseHeaderReceived(QHttpResponseHeader)));
 }
 
-void Common::getGameCover(QString gameID) {
-    QUrl url(QString("http://wiitdb.com/wiitdb/artwork/cover3D/EN/%1.png").arg(gameID));
-    http = new QHttp(this);
+void Common::getGame3DCover(QString gameID, QString language) {
+    hqCover = false;
+    getGameCover(gameID, language, false);
+}
+
+void Common::getGameFullHQCover(QString gameID, QString language) {
+    hqCover = true;
+    getGameCover(gameID, language, true);
+}
+
+void Common::getGameCover(QString gameID, QString language, bool fullHQCover) {
+    if (fullHQCover)
+        url = QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/%1/%2.png").arg(language, gameID);
+    else
+        url = QString("http://wiitdb.com/wiitdb/artwork/cover3D/%1/%2.png").arg(language, gameID);
+
     http->setHost(url.host());
-
-    connect(http, SIGNAL(requestFinished(int, bool)), this, SLOT(loadGameCoverFinished(int, bool)));
-
     http->get(url.path());
 }
 
-void Common::loadGameCoverFinished(int, bool error) {
+void Common::loadGameCoverResponseHeaderReceived(const QHttpResponseHeader &resp) {
+    emit newLogEntry(http->currentRequest().toString());
+    emit newLogEntry(resp.toString().remove(" "));
+}
+
+void Common::loadGameCoverDone(bool error) {
     if (!error) {
         QImage *image = new QImage();
         image->loadFromData(http->readAll());
 
-        emit newGameCover(image);
+        if (!image->isNull()) {
+            emit showStatusBarMessage(tr("Ready."));
+            if (hqCover)
+                emit newGameFullHQCover(image);
+            else
+                emit newGame3DCover(image);
+        }
+        else
+            emit showStatusBarMessage(tr("No game cover available!"));
+    }
+    else {
+        emit showStatusBarMessage(http->errorString());
+        emit newLogEntry(http->errorString().append("\n"));
     }
 }

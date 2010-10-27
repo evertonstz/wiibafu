@@ -55,12 +55,14 @@ private slots:
     void filesGameList_ShowInfo();
     void hddGameList_List();
     void hddGameList_SelectAll();
-    void infoGame_GetCover();
+    void infoGame_Load3DCover();
+    void infoGame_LoadFullHQCover();
     void hddGameList_ShowInfo();
     void log_Clear();
     void log_Copy();
     void log_Save();
-    void showGameCover(QImage *gameCover);
+    void showGame3DCover(QImage *gameCover);
+    void showGameFullHQCover(QImage *gameFullHQCover);
     void setFilesLabelTotalDiscs(QString totalDiscs);
     void setFilesLabelTotalSize(QString totalSize);
     void setHDDLabelFile(QString file);
@@ -69,6 +71,7 @@ private slots:
     void setHDDLabelUsedMB(QString usedMB);
     void setHDDLabelFreeMB(QString freeMB);
     void setHDDLabelTotalMB(QString totalMB);
+    QString getCurrentCoverLanguage();
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry);
     void showAboutBox();

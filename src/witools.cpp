@@ -94,10 +94,10 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     model->appendColumn(filenames);
 
     model->setHeaderData(0, Qt::Horizontal, tr("Game ID"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Game title (%1)").arg(ids.count()));
+    model->setHeaderData(1, Qt::Horizontal, tr("Game title"));
     model->setHeaderData(2, Qt::Horizontal, tr("Original title"));
     model->setHeaderData(3, Qt::Horizontal, tr("Region"));
-    model->setHeaderData(4, Qt::Horizontal, tr("Size (%1 GB)").arg(QString::number((count / 1073741824), 'f', 2)));
+    model->setHeaderData(4, Qt::Horizontal, tr("Size"));
     model->setHeaderData(5, Qt::Horizontal, tr("Date"));
     model->setHeaderData(6, Qt::Horizontal, tr("Type"));
     model->setHeaderData(7, Qt::Horizontal, tr("File name"));

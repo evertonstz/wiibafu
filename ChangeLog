@@ -1,3 +1,8 @@
+2010-10-27 dynup <dynup@ymail.com>
+  * Load game covers in different languages.
+  * HQ game cover functionality added.
+  * Total infos for game images and hdd wbfs.
+
 2010-10-26 dynup <dynup@ymail.com>
   * List games in seperate threads.
 

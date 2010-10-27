@@ -54,7 +54,11 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(newHDDLabelTotalMB(QString)), this, SLOT(setHDDLabelTotalMB(QString)));
     connect(wiTools, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
-    connect(common, SIGNAL(newGameCover(QImage*)), this, SLOT(showGameCover(QImage*)));
+
+    connect(common, SIGNAL(newGame3DCover(QImage*)), this, SLOT(showGame3DCover(QImage*)));
+    connect(common, SIGNAL(newGameFullHQCover(QImage*)), this, SLOT(showGameFullHQCover(QImage*)));
+    connect(common, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
+    connect(common, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
 
     connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(filesGameList_Add()));
     connect(ui->pushButton_Files_SelectAll, SIGNAL(clicked()), this, SLOT(filesGameList_SelectAll()));
@@ -64,7 +68,8 @@ void WiiBaFu::setupConnections() {
     connect(ui->pushButton_HDD_SelectAll, SIGNAL(clicked()), this, SLOT(hddGameList_SelectAll()));
     connect(ui->pushButton_HDD_ShowInfo, SIGNAL(clicked()), this, SLOT(hddGameList_ShowInfo()));
 
-    connect(ui->pushButton_Info_GetCover, SIGNAL(clicked()), this, SLOT(infoGame_GetCover()));
+    connect(ui->pushButton_Info_Load3DCover, SIGNAL(clicked()), this, SLOT(infoGame_Load3DCover()));
+    connect(ui->pushButton_Info_LoadFullHQCover, SIGNAL(clicked()), this, SLOT(infoGame_LoadFullHQCover()));
 
     connect(ui->pushButton_Log_Clear, SIGNAL(clicked()), this, SLOT(log_Clear()));
     connect(ui->pushButton_Log_Copy, SIGNAL(clicked()), this, SLOT(log_Copy()));
@@ -117,7 +122,6 @@ void WiiBaFu::hddGameList_ShowInfo() {
     setGameInfo(ui->tableView_HDD, hddListModel);
 }
 
-//TODO: Adapt for WBFS info!
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
         ui->lineEdit_info_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
@@ -141,12 +145,10 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
         }
 
-        common->getGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
-
+        infoGame_Load3DCover();
         ui->tabWidget->setCurrentIndex(3);
     }
 }
-
 
 void WiiBaFu::log_Clear() {
     ui->plainTextEdit_Log->clear();
@@ -172,17 +174,23 @@ void WiiBaFu::log_Save() {
     }
 }
 
-
-void WiiBaFu::infoGame_GetCover() {
+void WiiBaFu::infoGame_Load3DCover() {
     if (!ui->lineEdit_info_ID->text().isEmpty())
-        common->getGameCover(ui->lineEdit_info_ID->text());
+        common->getGame3DCover(ui->lineEdit_info_ID->text(), getCurrentCoverLanguage());
 }
 
-void WiiBaFu::showGameCover(QImage *gameCover) {
-    if (!gameCover->isNull())
-        ui->label_GameCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
-    else
-        ui->label_GameCover->setText(tr("No cover available\n\nfor this game!"));
+void WiiBaFu::infoGame_LoadFullHQCover() {
+    if (!ui->lineEdit_info_ID->text().isEmpty())
+        common->getGameFullHQCover(ui->lineEdit_info_ID->text(), getCurrentCoverLanguage());
+}
+
+void WiiBaFu::showGame3DCover(QImage *gameCover) {
+    ui->label_GameCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
+}
+
+void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
+    gameFullHQCover->save(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
+    QDesktopServices::openUrl(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
 }
 
 void WiiBaFu::setFilesLabelTotalDiscs(QString totalDiscs) {
@@ -223,6 +231,44 @@ void WiiBaFu::setStatusBarText(QString text) {
 
 void WiiBaFu::addEntryToLog(QString entry) {
     ui->plainTextEdit_Log->appendPlainText(entry);
+}
+
+QString WiiBaFu::getCurrentCoverLanguage() {
+    switch (ui->comboBox_CoverLanguages->currentIndex()) {
+        case 0:  return "EN";
+                 break;
+        case 1:  return "FR";
+                 break;
+        case 2:  return "DE";
+                 break;
+        case 3:  return "ES";
+                 break;
+        case 4:  return "IT";
+                 break;
+        case 5:  return "NL";
+                 break;
+        case 6:  return "PT";
+                 break;
+        case 7:  return "SE";
+                 break;
+        case 8:  return "DK";
+                 break;
+        case 9:  return "NO";
+                 break;
+        case 10: return "FI";
+                 break;
+        case 11: return "RU";
+                 break;
+        case 12: return "JA";
+                 break;
+        case 13: return "KO";
+                 break;
+        case 14: return "ZH-tw";
+                 break;
+        case 15: return "ZH-cn";
+                 break;
+        default: return "EN";
+    }
 }
 
 void WiiBaFu::showAboutBox() {

@@ -30,16 +30,25 @@ class Common : public QObject {
 public:
     explicit Common(QObject *parent = 0);
 
-    void getGameCover(QString gameID);
+    void getGame3DCover(QString gameID, QString language);
+    void getGameFullHQCover(QString gameID, QString language);
 
 private:
     QHttp *http;
+    QUrl url;
+    bool hqCover;
+
+    void getGameCover(QString gameID, QString language, bool fullHQCover);
 
 signals:
-    void newGameCover(QImage *gameCover);
+    void newGame3DCover(QImage *game3DCover);
+    void newGameFullHQCover(QImage *gameFullHQCover);
+    void showStatusBarMessage(QString message);
+    void newLogEntry(QString entry);
 
 private slots:
-    void loadGameCoverFinished(int id, bool error);
+    void loadGameCoverResponseHeaderReceived(const QHttpResponseHeader &resp);
+    void loadGameCoverDone(bool error);
 };
 
 #endif // COMMON_H
