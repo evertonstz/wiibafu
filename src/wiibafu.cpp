@@ -228,8 +228,10 @@ void WiiBaFu::showAboutBox() {
         QString("<h2>Wii Backup Fusion %1</h2>").arg(QCoreApplication::applicationVersion()) +
         tr("<p><b><i>The complete and simply to use backup solution for Wii games</b></i>"
         "<p>Copyright &copy; 2010 Kai Heitkamp"
-        "<p>Mail: <a href='mailto:dynup<dynup@ymail.com>?subject=WiiBaFu%20feedback'>dynup@ymail.com</a>"
-        "<br>Web: <a href='http://wiibafu.codeplex.com'>wiibafu.codeplex.com</a>"
+        "<p><a href='mailto:dynup<dynup@ymail.com>?subject=WiiBaFu%20feedback'>dynup@ymail.com</a>"
+        " | <a href='http://wiibafu.codeplex.com'>wiibafu.codeplex.com</a>"
+        "<p><font color='red'>I don't support piracy! If you copy games with this software,"
+        "<br>you must have the original and it's for your private use only!</font color>"
         "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit"
         "<br>and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools!"
         "<p><i>Dedicated to my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>"));
