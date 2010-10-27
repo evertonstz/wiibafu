@@ -2,14 +2,13 @@
   * Load game covers in different languages.
   * HQ game cover functionality added.
   * Total infos for game images and hdd wbfs.
+  * Switch version number to: 0.3
 
 2010-10-26 dynup <dynup@ymail.com>
   * List games in seperate threads.
 
 2010-10-25 dynup <dynup@ymail.com>
   * List games from WBFS partitions and view infos.
-
-2010-10-25 dynup <dynup@ymail.com>
   * StatusBar functionality added.
 
 2010-10-24 dynup <dynup@ymail.com>
@@ -19,10 +18,12 @@
   * Log functionality added.
 
 2010-10-21 dynup <dynup@ymail.com>
-  * Add all game isos from a directory and view infos about the game(s).
+  * Add all game images from a directory and view infos about the game(s).
+  * Switch version number to: 0.2
 
 2010-10-15 dynup <dynup@ymail.com>
   * Starting project with the great Qt library.
+  * Switch version number to: 0.1
 
 2010-10-10 dynup <dynup@ymail.com>
   * Idea and planing a gui for wimms iso tools.
