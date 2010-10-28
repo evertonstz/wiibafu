@@ -65,13 +65,8 @@ private slots:
     void showGameFullHQCover(QImage *gameFullHQCover);
     void setFilesLabelTotalDiscs(QString totalDiscs);
     void setFilesLabelTotalSize(QString totalSize);
-    void setHDDLabelFile(QString file);
-    void setHDDLabelUsedDiscs(QString usedDiscs);
-    void setHDDLabelTotalDiscs(QString totalDiscs);
-    void setHDDLabelUsedMB(QString usedMB);
-    void setHDDLabelFreeMB(QString freeMB);
-    void setHDDLabelTotalMB(QString totalMB);
     QString getCurrentCoverLanguage();
+    void setHDDProgressBar(int min, int max, int value, QString text);
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry);
     void showAboutBox();

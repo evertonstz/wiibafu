@@ -121,6 +121,8 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
 
     emit newLogEntry(QString(bytes));
 
+    int free, total;
+    QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
     QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, filetypes, containers, wbfsslots, filenames;
 
     foreach (QString line, lines) {
@@ -138,27 +140,29 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
             continue;
 
         if (line.startsWith("file=")) {
-            emit newHDDLabelFile(tr("File: %1").arg(line.section("=", 1)));
+            file = tr("%1").arg(line.section("=", 1));
             continue;
         }
         else if (line.startsWith("used_discs=")) {
-            emit newHDDLabelUsedDiscs(tr("Used discs: %1").arg(line.section("=", 1)));
+            usedDiscs = tr("Used discs: %1").arg(line.section("=", 1));
             continue;
         }
         else if (line.startsWith("total_discs=")) {
-            emit newHDDLabelTotalDiscs(tr("Total discs: %1").arg(line.section("=", 1)));
+            totalDiscs = tr("Total discs: %1").arg(line.section("=", 1));
             continue;
         }
         else if (line.startsWith("used_mib")) {
-            emit newHDDLabelUsedMB(tr("Used MB: %1").arg(line.section("=", 1)));
+            usedMB = tr("Used MB: %1").arg(line.section("=", 1));
             continue;
         }
         else if (line.startsWith("free_mib=")) {
-            emit newHDDLabelFreeMB(tr("Free MB: %1").arg(line.section("=", 1)));
+            freeMB = tr("Free MB: %1").arg(line.section("=", 1));
+            free = line.section("=", 1).toInt();
             continue;
         }
         else if (line.startsWith("total_mib=")) {
-            emit newHDDLabelTotalMB(tr("Total MB: %1").arg(line.section("=", 1)));
+            totalMB = tr("Total MB: %1").arg(line.section("=", 1));
+            total = line.section("=", 1).toInt();
             continue;
         }
 
@@ -226,6 +230,7 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     model->setHeaderData(8, Qt::Horizontal, tr("WBFS slot"));
     model->setHeaderData(9, Qt::Horizontal, tr("Partition"));
 
+    emit setProgressBarHDD(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
     emit showStatusBarMessage(tr("Ready."));
 
     return model;

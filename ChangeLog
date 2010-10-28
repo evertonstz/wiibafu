@@ -1,29 +1,32 @@
-2010-10-27 dynup <dynup@ymail.com>
+2010-10-28 Kai Heitkamp <dynup@ymail.com>
+  * Progress bar in HDD tab for additional and compact infos.
+
+2010-10-27 Kai Heitkamp <dynup@ymail.com>
   * Load game covers in different languages.
   * HQ game cover functionality added.
   * Total infos for game images and hdd wbfs.
   * Switch version number to: 0.3
 
-2010-10-26 dynup <dynup@ymail.com>
+2010-10-26 Kai Heitkamp <dynup@ymail.com>
   * List games in seperate threads.
 
-2010-10-25 dynup <dynup@ymail.com>
+2010-10-25 Kai Heitkamp <dynup@ymail.com>
   * List games from WBFS partitions and view infos.
   * StatusBar functionality added.
 
-2010-10-24 dynup <dynup@ymail.com>
+2010-10-24 Kai Heitkamp <dynup@ymail.com>
   * Game info functionality added.
 
-2010-10-23 dynup <dynup@ymail.com>
+2010-10-23 Kai Heitkamp <dynup@ymail.com>
   * Log functionality added.
 
-2010-10-21 dynup <dynup@ymail.com>
+2010-10-21 Kai Heitkamp <dynup@ymail.com>
   * Add all game images from a directory and view infos about the game(s).
   * Switch version number to: 0.2
 
-2010-10-15 dynup <dynup@ymail.com>
+2010-10-15 Kai Heitkamp <dynup@ymail.com>
   * Starting project with the great Qt library.
   * Switch version number to: 0.1
 
-2010-10-10 dynup <dynup@ymail.com>
+2010-10-10 Kai Heitkamp <dynup@ymail.com>
   * Idea and planing a gui for wimms iso tools.

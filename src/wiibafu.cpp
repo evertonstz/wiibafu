@@ -46,12 +46,7 @@ void WiiBaFu::setupConnections() {
 
     connect(wiTools, SIGNAL(newFilesLabelTotalDiscs(QString)), this, SLOT(setFilesLabelTotalDiscs(QString)));
     connect(wiTools, SIGNAL(newFilesLabelTotalSize(QString)), this, SLOT(setFilesLabelTotalSize(QString)));
-    connect(wiTools, SIGNAL(newHDDLabelFile(QString)), this, SLOT(setHDDLabelFile(QString)));
-    connect(wiTools, SIGNAL(newHDDLabelUsedDiscs(QString)), this, SLOT(setHDDLabelUsedDiscs(QString)));
-    connect(wiTools, SIGNAL(newHDDLabelTotalDiscs(QString)), this, SLOT(setHDDLabelTotalDiscs(QString)));
-    connect(wiTools, SIGNAL(newHDDLabelUsedMB(QString)), this, SLOT(setHDDLabelUsedMB(QString)));
-    connect(wiTools, SIGNAL(newHDDLabelFreeMB(QString)), this, SLOT(setHDDLabelFreeMB(QString)));
-    connect(wiTools, SIGNAL(newHDDLabelTotalMB(QString)), this, SLOT(setHDDLabelTotalMB(QString)));
+    connect(wiTools, SIGNAL(setProgressBarHDD(int, int, int, QString)), this, SLOT(setHDDProgressBar(int, int, int, QString)));
     connect(wiTools, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
 
@@ -204,28 +199,11 @@ void WiiBaFu::setFilesLabelTotalSize(QString totalSize) {
     ui->label_Files_TotalSize->setText(totalSize);
 }
 
-void WiiBaFu::setHDDLabelFile(QString file) {
-    ui->label_HDD_File->setText(file);
-}
-
-void WiiBaFu::setHDDLabelUsedDiscs(QString usedDiscs) {
-    ui->label_HDD_UsedDiscs->setText(usedDiscs);
-}
-
-void WiiBaFu::setHDDLabelTotalDiscs(QString totalDiscs) {
-    ui->label_HDD_TotalDiscs->setText(totalDiscs);
-}
-
-void WiiBaFu::setHDDLabelUsedMB(QString usedMB) {
-    ui->label_HDD_UsedMB->setText(usedMB);
-}
-
-void WiiBaFu::setHDDLabelFreeMB(QString freeMB) {
-    ui->label_HDD_FreeMB->setText(freeMB);
-}
-
-void WiiBaFu::setHDDLabelTotalMB(QString totalMB) {
-    ui->label_HDD_TotalMB->setText(totalMB);
+void WiiBaFu::setHDDProgressBar(int min, int max, int value, QString text) {
+    ui->progressBar_HDD->setMinimum(min);
+    ui->progressBar_HDD->setMaximum(max);
+    ui->progressBar_HDD->setValue(value);
+    ui->progressBar_HDD->setFormat(text);
 }
 
 void WiiBaFu::setStatusBarText(QString text) {

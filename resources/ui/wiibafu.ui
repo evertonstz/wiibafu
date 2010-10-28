@@ -193,7 +193,7 @@
        <attribute name="title">
         <string>HDD</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
          <widget class="QTableView" name="tableView_HDD"/>
         </item>
@@ -205,46 +205,11 @@
           <property name="frameShadow">
            <enum>QFrame::Sunken</enum>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_15">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
-            <widget class="QLabel" name="label_HDD_File">
-             <property name="text">
-              <string>File: /dev/</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_HDD_UsedDiscs">
-             <property name="text">
-              <string>Used discs: 0</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_HDD_TotalDiscs">
-             <property name="text">
-              <string>Total discs: 0</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_HDD_UsedMB">
-             <property name="text">
-              <string>Used MB: 0</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_HDD_FreeMB">
-             <property name="text">
-              <string>Free MB: 0</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_HDD_TotalMB">
-             <property name="text">
-              <string>Total MB: 0</string>
+            <widget class="QProgressBar" name="progressBar_HDD">
+             <property name="value">
+              <number>0</number>
              </property>
             </widget>
            </item>
