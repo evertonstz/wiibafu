@@ -123,25 +123,37 @@ void WiiBaFu::hddGameList_ShowInfo() {
 
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
-        ui->lineEdit_info_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
-        ui->lineEdit_info_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
-        ui->lineEdit_info_Title->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text());
-        ui->lineEdit_info_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
-        ui->lineEdit_info_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
-
         if (tableView == ui->tableView_HDD) {
-            ui->lineEdit_info_Date->setText("--");
-            ui->infolabel_Info_FileName->setText(tr("Partition:"));
-            ui->lineEdit_info_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
-            ui->lineEdit_info_FileName->setToolTip("");
-            ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
+            ui->lineEdit_info_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
+            ui->lineEdit_info_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
+            ui->lineEdit_info_Title->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text());
+            ui->lineEdit_info_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
+            ui->lineEdit_info_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
+            ui->lineEdit_info_UsedBlocks->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
+            ui->lineEdit_info_Insertion->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
+            ui->lineEdit_info_LastModification->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
+            ui->lineEdit_info_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
+            ui->lineEdit_info_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
+            ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
+            ui->lineEdit_info_Container->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(11).first())->text());
+            ui->lineEdit_info_WBFSSlot->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(12).first())->text());
+            ui->lineEdit_info_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(13).first())->text());
         }
         else {
-            ui->lineEdit_info_Date->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
-            ui->infolabel_Info_FileName->setText(tr("File name:"));
-            ui->lineEdit_info_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
-            ui->lineEdit_info_FileName->setToolTip(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
-            ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
+            ui->lineEdit_info_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
+            ui->lineEdit_info_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
+            ui->lineEdit_info_Title->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text());
+            ui->lineEdit_info_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
+            ui->lineEdit_info_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
+            ui->lineEdit_info_UsedBlocks->setText("--");
+            ui->lineEdit_info_Insertion->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
+            ui->lineEdit_info_LastModification->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
+            ui->lineEdit_info_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
+            ui->lineEdit_info_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
+            ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
+            ui->lineEdit_info_Container->setText("--");
+            ui->lineEdit_info_WBFSSlot->setText("--");
+            ui->lineEdit_info_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
         }
 
         infoGame_Load3DCover();

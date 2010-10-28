@@ -38,7 +38,7 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     emit newLogEntry(QString(bytes));
 
     double count = 0;
-    QList<QStandardItem *> ids, names, titles, regions, sizes, mtimes, filetypes, filenames;
+    QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
 
     foreach (QString line, lines) {
         if (line.contains("total-discs=0")) {
@@ -70,8 +70,20 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
             count = count + line.section("=", 1).toDouble();
             continue;
         }
+        else if (line.startsWith("itime=")) {
+            itimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            continue;
+        }
         else if (line.startsWith("mtime=")) {
             mtimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            continue;
+        }
+        else if (line.startsWith("ctime=")) {
+            ctimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            continue;
+        }
+        else if (line.startsWith("atime=")) {
+            atimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
             continue;
         }
         else if (line.startsWith("filetype=")) {
@@ -89,7 +101,10 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     model->appendColumn(titles);
     model->appendColumn(regions);
     model->appendColumn(sizes);
+    model->appendColumn(itimes);
     model->appendColumn(mtimes);
+    model->appendColumn(ctimes);
+    model->appendColumn(atimes);
     model->appendColumn(filetypes);
     model->appendColumn(filenames);
 
@@ -98,9 +113,12 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     model->setHeaderData(2, Qt::Horizontal, tr("Original title"));
     model->setHeaderData(3, Qt::Horizontal, tr("Region"));
     model->setHeaderData(4, Qt::Horizontal, tr("Size"));
-    model->setHeaderData(5, Qt::Horizontal, tr("Date"));
-    model->setHeaderData(6, Qt::Horizontal, tr("Type"));
-    model->setHeaderData(7, Qt::Horizontal, tr("File name"));
+    model->setHeaderData(5, Qt::Horizontal, tr("Insertion"));
+    model->setHeaderData(6, Qt::Horizontal, tr("Last modification"));
+    model->setHeaderData(7, Qt::Horizontal, tr("Last status change"));
+    model->setHeaderData(8, Qt::Horizontal, tr("Last access"));
+    model->setHeaderData(9, Qt::Horizontal, tr("Type"));
+    model->setHeaderData(10, Qt::Horizontal, tr("File name"));
 
     emit newFilesLabelTotalDiscs(tr("Total discs: %1").arg(ids.count()));
     emit newFilesLabelTotalSize(tr("Total size: %1 GB").arg(QString::number((count / 1073741824), 'f', 2)));
@@ -123,7 +141,7 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
 
     int free, total;
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
-    QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, filetypes, containers, wbfsslots, filenames;
+    QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, containers, wbfsslots, filenames;
 
     foreach (QString line, lines) {
         if (line.contains("text=No WBFS found")) {
@@ -190,6 +208,22 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
             usedblocks.append(new QStandardItem(line.section("=", 1)));
             continue;
         }
+        else if (line.startsWith("itime=")) {
+            itimes.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("mtime=")) {
+            mtimes.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("ctime=")) {
+            ctimes.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("atime=")) {
+            atimes.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
         else if (line.startsWith("filetype=")) {
             filetypes.append(new QStandardItem(line.section("=", 1)));
             continue;
@@ -214,6 +248,10 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     model->appendColumn(regions);
     model->appendColumn(sizes);
     model->appendColumn(usedblocks);
+    model->appendColumn(itimes);
+    model->appendColumn(mtimes);
+    model->appendColumn(ctimes);
+    model->appendColumn(atimes);
     model->appendColumn(filetypes);
     model->appendColumn(containers);
     model->appendColumn(wbfsslots);
@@ -225,11 +263,16 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     model->setHeaderData(3, Qt::Horizontal, tr("Region"));
     model->setHeaderData(4, Qt::Horizontal, tr("Size"));
     model->setHeaderData(5, Qt::Horizontal, tr("Used blocks"));
-    model->setHeaderData(6, Qt::Horizontal, tr("Type"));
-    model->setHeaderData(7, Qt::Horizontal, tr("Container"));
-    model->setHeaderData(8, Qt::Horizontal, tr("WBFS slot"));
-    model->setHeaderData(9, Qt::Horizontal, tr("Partition"));
+    model->setHeaderData(6, Qt::Horizontal, tr("Insertion"));
+    model->setHeaderData(7, Qt::Horizontal, tr("Last modification"));
+    model->setHeaderData(8, Qt::Horizontal, tr("Last status change"));
+    model->setHeaderData(9, Qt::Horizontal, tr("Last access"));
+    model->setHeaderData(10, Qt::Horizontal, tr("Type"));
+    model->setHeaderData(11, Qt::Horizontal, tr("Container"));
+    model->setHeaderData(12, Qt::Horizontal, tr("WBFS slot"));
+    model->setHeaderData(13, Qt::Horizontal, tr("File/Partition"));
 
+    // total - free = bug fix for wwts 'used_mib'
     emit setProgressBarHDD(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
     emit showStatusBarMessage(tr("Ready."));
 
