@@ -170,16 +170,16 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
             continue;
         }
         else if (line.startsWith("used_mib")) {
-            usedMB = tr("Used MB: %1").arg(line.section("=", 1));
+            usedMB = tr("Used MiB: %1").arg(line.section("=", 1));
             continue;
         }
         else if (line.startsWith("free_mib=")) {
-            freeMB = tr("Free MB: %1").arg(line.section("=", 1));
+            freeMB = tr("Free MiB: %1").arg(line.section("=", 1));
             free = line.section("=", 1).toInt();
             continue;
         }
         else if (line.startsWith("total_mib=")) {
-            totalMB = tr("Total MB: %1").arg(line.section("=", 1));
+            totalMB = tr("Total MiB: %1").arg(line.section("=", 1));
             total = line.section("=", 1).toInt();
             continue;
         }
