@@ -42,31 +42,45 @@ private:
     Ui::WiiBaFu *ui;
     WiTools *wiTools;
     Common *common;
+
+    QStringList filesGamePaths;
+    QProgressBar *progressBar_Main;
     QStandardItemModel *filesListModel;
     QStandardItemModel *hddListModel;
 
     void setupConnections();
+    void setupMainProgressBar();
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
 
 private slots:
+    void setMainProgressBarVisible(bool visible);
+
     void filesGameList_Add();
     void filesGameList_SelectAll();
+    void filesGameList_TransferToWBFS();
     void filesGameList_ShowInfo();
+
     void hddGameList_List();
     void hddGameList_SelectAll();
+    void hddGameList_ShowInfo();
+
     void infoGame_Load3DCover();
     void infoGame_LoadFullHQCover();
-    void hddGameList_ShowInfo();
+
     void log_Clear();
     void log_Copy();
     void log_Save();
+
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
     void setFilesLabelTotalDiscs(QString totalDiscs);
     void setFilesLabelTotalSize(QString totalSize);
+
     QString getCurrentCoverLanguage();
-    void setHDDProgressBar(int min, int max, int value, QString text);
+
+    void setHDDProgressBar(int min, int max, int value, QString format);
+    void setMainProgressBar(int value, QString format);
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry);
     void showAboutBox();

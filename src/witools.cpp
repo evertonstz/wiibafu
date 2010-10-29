@@ -130,11 +130,12 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     emit showStatusBarMessage(tr("Loading games..."));
 
-    QProcess filesRead;
-    filesRead.start("wwt", QStringList() << "LIST-A" << "--section");
-    filesRead.waitForFinished();
+    QProcess hddRead;
+    //hddRead.start("wwt", QStringList() << "LIST-A" << "--section");
+    hddRead.start("wwt", QStringList() << "LIST-A" << "/home/kai/wii.wbfs" << "--section");
+    hddRead.waitForFinished();
 
-    QByteArray bytes = filesRead.readAllStandardOutput();
+    QByteArray bytes = hddRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
 
     emit newLogEntry(QString(bytes));
@@ -277,4 +278,64 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     emit showStatusBarMessage(tr("Ready."));
 
     return model;
+}
+
+void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
+    emit showStatusBarMessage(tr("Transfering games..."));
+    emit setMainProgressBarVisible(true);
+
+    QStringList paths;
+    foreach (QModelIndex index, indexList) {
+        paths.append(index.data().toString());
+    }
+
+    QStringList arguments;
+    arguments.append("ADD");
+    arguments.append(wbfsPath);
+    if (wbfsPath.isEmpty()) {
+        arguments.append("--auto");
+    }
+    else {
+        arguments.append("--part");
+        arguments.append(wbfsPath);
+    }
+    arguments.append(paths);
+    arguments.append("--progress");
+
+    wwtADDProcess = new QProcess();
+    connect(wwtADDProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(addGamesToWBFS_readyReadStandardOutput()));
+    connect(wwtADDProcess, SIGNAL(readyReadStandardError()), this, SLOT(addGamesToWBFS_readyReadStandardError()));
+
+    wwtADDProcess->start("wwt", arguments);
+    wwtADDProcess->waitForFinished(-1);
+
+    emit showStatusBarMessage(tr("Ready."));
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::addGamesToWBFS_readyReadStandardOutput() {
+    QByteArray bytes = wwtADDProcess->readAllStandardOutput();
+    QString line;
+
+    line.operator += (bytes);
+
+    if (line.contains("already exists -> ignore")) {
+        emit newLogEntry(tr("Disc already exists!"));
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+    }
+    else if (line.contains("copied") && !line.contains("% copied")) {
+        emit newLogEntry(line);
+    }
+    else if (line.contains("disc added.")) { //TODO: discs added.
+        emit newLogEntry(line);
+    }
+}
+
+void WiTools::addGamesToWBFS_readyReadStandardError() {
+    QByteArray bytes = wwtADDProcess->readAllStandardError();
+    QString line;
+
+    emit newLogEntry(line.operator += (bytes));
 }

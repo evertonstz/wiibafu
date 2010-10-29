@@ -31,14 +31,25 @@ public:
     explicit WiTools(QObject *parent = 0);
     QStandardItemModel *getFilesGameListModel(QStandardItemModel *model, QString path);
     QStandardItemModel *getHDDGameListModel(QStandardItemModel *model);
+    void transferToWBFS(QModelIndexList indexList, QString wbfsPath);
+
+private:
+    QProcess *wwtADDProcess;
 
 signals:
-    void newLogEntry(QString entry);
+    void setMainProgressBarVisible(bool visible);
+    void setMainProgressBar(int value, QString format);
     void setProgressBarHDD(int min, int max, int value, QString text);
+
+    void newLogEntry(QString entry);
     void showStatusBarMessage(QString message);
 
     void newFilesLabelTotalDiscs(QString discs);
     void newFilesLabelTotalSize(QString size);
+
+private slots:
+    void addGamesToWBFS_readyReadStandardOutput();
+    void addGamesToWBFS_readyReadStandardError();
 };
 
 #endif // WITOOLS_H

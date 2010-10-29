@@ -31,6 +31,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     ui->setupUi(this);
     setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
     setStatusBarText(tr("Ready."));
+    setupMainProgressBar();
     setupConnections();
 
     setGameListAttributes(ui->tableView_Files);
@@ -40,12 +41,10 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
 
-    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAboutBox()));
-    connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-    connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
-
     connect(wiTools, SIGNAL(newFilesLabelTotalDiscs(QString)), this, SLOT(setFilesLabelTotalDiscs(QString)));
     connect(wiTools, SIGNAL(newFilesLabelTotalSize(QString)), this, SLOT(setFilesLabelTotalSize(QString)));
+    connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
+    connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
     connect(wiTools, SIGNAL(setProgressBarHDD(int, int, int, QString)), this, SLOT(setHDDProgressBar(int, int, int, QString)));
     connect(wiTools, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
@@ -57,6 +56,7 @@ void WiiBaFu::setupConnections() {
 
     connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(filesGameList_Add()));
     connect(ui->pushButton_Files_SelectAll, SIGNAL(clicked()), this, SLOT(filesGameList_SelectAll()));
+    connect(ui->pushButton_Files_Transfer, SIGNAL(clicked()), this, SLOT(filesGameList_TransferToWBFS()));
     connect(ui->pushButton_Files_ShowInfo, SIGNAL(clicked()), this, SLOT(filesGameList_ShowInfo()));
 
     connect(ui->pushButton_HDD_List, SIGNAL(clicked()), this, SLOT(hddGameList_List()));
@@ -69,6 +69,26 @@ void WiiBaFu::setupConnections() {
     connect(ui->pushButton_Log_Clear, SIGNAL(clicked()), this, SLOT(log_Clear()));
     connect(ui->pushButton_Log_Copy, SIGNAL(clicked()), this, SLOT(log_Copy()));
     connect(ui->pushButton_Log_Save, SIGNAL(clicked()), this, SLOT(log_Save()));
+
+    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAboutBox()));
+    connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+    connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
+}
+
+void WiiBaFu::setupMainProgressBar() {
+    progressBar_Main = new QProgressBar(this);
+    progressBar_Main->setObjectName(QString::fromUtf8("progressBarMain"));
+    progressBar_Main->setVisible(false);
+    progressBar_Main->setMinimum(0);
+    progressBar_Main->setMaximum(100);
+    progressBar_Main->setValue(0);
+
+    progressBar_Main->setMaximumHeight(16);
+    ui->statusBar->addPermanentWidget(progressBar_Main);
+}
+
+void WiiBaFu::setMainProgressBarVisible(bool visible) {
+    progressBar_Main->setVisible(visible);
 }
 
 void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
@@ -99,6 +119,11 @@ void WiiBaFu::filesGameList_Add() {
 
 void WiiBaFu::filesGameList_SelectAll() {
     ui->tableView_Files->selectAll();
+}
+
+void WiiBaFu::filesGameList_TransferToWBFS() {
+    if (ui->tableView_Files->selectionModel() && !ui->tableView_Files->selectionModel()->selectedRows(0).isEmpty())
+        QtConcurrent::run(wiTools, &WiTools::transferToWBFS, ui->tableView_Files->selectionModel()->selectedRows(10), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
 }
 
 void WiiBaFu::filesGameList_ShowInfo() {
@@ -211,11 +236,16 @@ void WiiBaFu::setFilesLabelTotalSize(QString totalSize) {
     ui->label_Files_TotalSize->setText(totalSize);
 }
 
-void WiiBaFu::setHDDProgressBar(int min, int max, int value, QString text) {
+void WiiBaFu::setMainProgressBar(int value, QString format) {
+    progressBar_Main->setValue(value);
+    progressBar_Main->setFormat(format);
+}
+
+void WiiBaFu::setHDDProgressBar(int min, int max, int value, QString format) {
     ui->progressBar_HDD->setMinimum(min);
     ui->progressBar_HDD->setMaximum(max);
     ui->progressBar_HDD->setValue(value);
-    ui->progressBar_HDD->setFormat(text);
+    ui->progressBar_HDD->setFormat(format);
 }
 
 void WiiBaFu::setStatusBarText(QString text) {
