@@ -38,8 +38,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 }
 
 void WiiBaFu::setupConnections() {
-    qRegisterMetaType<QString>("QString");
-    qRegisterMetaType<QImage>("QImage");
+    qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
 
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAboutBox()));
     connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
