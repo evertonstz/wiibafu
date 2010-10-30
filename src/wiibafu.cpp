@@ -112,6 +112,7 @@ void WiiBaFu::filesGameList_Add() {
 
         QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getFilesGameListModel, filesListModel, directory);
         ui->tableView_Files->setModel(future.result());
+        ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->tableView_Files->model()->rowCount()));
     }
 }
 
@@ -133,6 +134,7 @@ void WiiBaFu::hddGameList_List() {
 
     QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getHDDGameListModel, hddListModel);
     ui->tableView_HDD->setModel(future.result());
+    ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->tableView_HDD->model()->rowCount()));
 }
 
 void WiiBaFu::hddGameList_SelectAll() {
