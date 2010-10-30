@@ -41,8 +41,6 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
 
-    connect(wiTools, SIGNAL(newFilesLabelTotalDiscs(QString)), this, SLOT(setFilesLabelTotalDiscs(QString)));
-    connect(wiTools, SIGNAL(newFilesLabelTotalSize(QString)), this, SLOT(setFilesLabelTotalSize(QString)));
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
     connect(wiTools, SIGNAL(setProgressBarHDD(int, int, int, QString)), this, SLOT(setHDDProgressBar(int, int, int, QString)));
@@ -226,14 +224,6 @@ void WiiBaFu::showGame3DCover(QImage *gameCover) {
 void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
     gameFullHQCover->save(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
     QDesktopServices::openUrl(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
-}
-
-void WiiBaFu::setFilesLabelTotalDiscs(QString totalDiscs) {
-    ui->label_Files_TotalDiscs->setText(totalDiscs);
-}
-
-void WiiBaFu::setFilesLabelTotalSize(QString totalSize) {
-    ui->label_Files_TotalSize->setText(totalSize);
 }
 
 void WiiBaFu::setMainProgressBar(int value, QString format) {

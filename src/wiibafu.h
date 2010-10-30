@@ -74,8 +74,6 @@ private slots:
 
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
-    void setFilesLabelTotalDiscs(QString totalDiscs);
-    void setFilesLabelTotalSize(QString totalSize);
 
     QString getCurrentCoverLanguage();
 

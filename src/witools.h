@@ -44,9 +44,6 @@ signals:
     void newLogEntry(QString entry);
     void showStatusBarMessage(QString message);
 
-    void newFilesLabelTotalDiscs(QString discs);
-    void newFilesLabelTotalSize(QString size);
-
 private slots:
     void addGamesToWBFS_readyReadStandardOutput();
     void addGamesToWBFS_readyReadStandardError();
