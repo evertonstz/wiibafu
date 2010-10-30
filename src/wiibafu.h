@@ -46,7 +46,7 @@ private:
     QStringList filesGamePaths;
     QProgressBar *progressBar_Main;
     QStandardItemModel *filesListModel;
-    QStandardItemModel *hddListModel;
+    QStandardItemModel *wbfsListModel;
 
     void setupConnections();
     void setupMainProgressBar();
@@ -61,9 +61,9 @@ private slots:
     void filesGameList_TransferToWBFS();
     void filesGameList_ShowInfo();
 
-    void hddGameList_List();
-    void hddGameList_SelectAll();
-    void hddGameList_ShowInfo();
+    void wbfsGameList_List();
+    void wbfsGameList_SelectAll();
+    void wbfsGameList_ShowInfo();
 
     void infoGame_Load3DCover();
     void infoGame_LoadFullHQCover();
@@ -77,7 +77,7 @@ private slots:
 
     QString getCurrentCoverLanguage();
 
-    void setHDDProgressBar(int min, int max, int value, QString format);
+    void setWBFSProgressBar(int min, int max, int value, QString format);
     void setMainProgressBar(int value, QString format);
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry);

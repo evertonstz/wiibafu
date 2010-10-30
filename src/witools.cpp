@@ -125,15 +125,15 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     return model;
 }
 
-QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
+QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model) {
     emit newStatusBarMessage(tr("Loading games..."));
 
-    QProcess hddRead;
-    //hddRead.start("wwt", QStringList() << "LIST-A" << "--section");
-    hddRead.start("wwt", QStringList() << "LIST-A" << "/home/kai/wii.wbfs" << "--section"); //TODO: User sets the wbfs path!
-    hddRead.waitForFinished();
+    QProcess wbfsRead;
+    //wbfsRead.start("wwt", QStringList() << "LIST-A" << "--section");
+    wbfsRead.start("wwt", QStringList() << "LIST-A" << "/home/kai/wii.wbfs" << "--section"); //TODO: User sets the wbfs path!
+    wbfsRead.waitForFinished();
 
-    QByteArray bytes = hddRead.readAllStandardOutput();
+    QByteArray bytes = wbfsRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
 
     emit newLogEntry(QString(bytes));
@@ -272,7 +272,7 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
     model->setHeaderData(13, Qt::Horizontal, tr("File/Partition"));
 
     // total - free = bug fix for wwts 'used_mib'
-    emit setProgressBarHDD(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
+    emit setProgressBarWBFS(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
     emit newStatusBarMessage(tr("Ready."));
 
     return model;
@@ -324,7 +324,7 @@ void WiTools::addGamesToWBFS_readyReadStandardOutput() {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(line);
+        emit newLogEntry(line.remove(0, 5));
     }
     else if (line.contains("disc added.") || line.contains("discs added.")) {
         emit newLogEntry(line);

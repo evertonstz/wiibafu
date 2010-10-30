@@ -26,7 +26,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     common = new Common(this);
 
     filesListModel = new QStandardItemModel(this);
-    hddListModel = new QStandardItemModel(this);
+    wbfsListModel = new QStandardItemModel(this);
 
     ui->setupUi(this);
     setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
@@ -35,7 +35,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     setupConnections();
 
     setGameListAttributes(ui->tableView_Files);
-    setGameListAttributes(ui->tableView_HDD);
+    setGameListAttributes(ui->tableView_WBFS);
 }
 
 void WiiBaFu::setupConnections() {
@@ -43,7 +43,7 @@ void WiiBaFu::setupConnections() {
 
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
-    connect(wiTools, SIGNAL(setProgressBarHDD(int, int, int, QString)), this, SLOT(setHDDProgressBar(int, int, int, QString)));
+    connect(wiTools, SIGNAL(setProgressBarWBFS(int, int, int, QString)), this, SLOT(setWBFSProgressBar(int, int, int, QString)));
     connect(wiTools, SIGNAL(newStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
 
@@ -57,9 +57,9 @@ void WiiBaFu::setupConnections() {
     connect(ui->pushButton_Files_TransferToWBFS, SIGNAL(clicked()), this, SLOT(filesGameList_TransferToWBFS()));
     connect(ui->pushButton_Files_ShowInfo, SIGNAL(clicked()), this, SLOT(filesGameList_ShowInfo()));
 
-    connect(ui->pushButton_HDD_List, SIGNAL(clicked()), this, SLOT(hddGameList_List()));
-    connect(ui->pushButton_HDD_SelectAll, SIGNAL(clicked()), this, SLOT(hddGameList_SelectAll()));
-    connect(ui->pushButton_HDD_ShowInfo, SIGNAL(clicked()), this, SLOT(hddGameList_ShowInfo()));
+    connect(ui->pushButton_HDD_List, SIGNAL(clicked()), this, SLOT(wbfsGameList_List()));
+    connect(ui->pushButton_HDD_SelectAll, SIGNAL(clicked()), this, SLOT(wbfsGameList_SelectAll()));
+    connect(ui->pushButton_HDD_ShowInfo, SIGNAL(clicked()), this, SLOT(wbfsGameList_ShowInfo()));
 
     connect(ui->pushButton_Info_Load3DCover, SIGNAL(clicked()), this, SLOT(infoGame_Load3DCover()));
     connect(ui->pushButton_Info_LoadFullHQCover, SIGNAL(clicked()), this, SLOT(infoGame_LoadFullHQCover()));
@@ -129,25 +129,25 @@ void WiiBaFu::filesGameList_ShowInfo() {
     setGameInfo(ui->tableView_Files, filesListModel);
 }
 
-void WiiBaFu::hddGameList_List() {
-    hddListModel->clear();
+void WiiBaFu::wbfsGameList_List() {
+    wbfsListModel->clear();
 
-    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getHDDGameListModel, hddListModel);
-    ui->tableView_HDD->setModel(future.result());
-    ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->tableView_HDD->model()->rowCount()));
+    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel);
+    ui->tableView_WBFS->setModel(future.result());
+    ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->tableView_WBFS->model()->rowCount()));
 }
 
-void WiiBaFu::hddGameList_SelectAll() {
-    ui->tableView_HDD->selectAll();
+void WiiBaFu::wbfsGameList_SelectAll() {
+    ui->tableView_WBFS->selectAll();
 }
 
-void WiiBaFu::hddGameList_ShowInfo() {
-    setGameInfo(ui->tableView_HDD, hddListModel);
+void WiiBaFu::wbfsGameList_ShowInfo() {
+    setGameInfo(ui->tableView_WBFS, wbfsListModel);
 }
 
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
-        if (tableView == ui->tableView_HDD) {
+        if (tableView == ui->tableView_WBFS) {
             ui->lineEdit_info_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
             ui->lineEdit_info_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
             ui->lineEdit_info_Title->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text());
@@ -233,7 +233,7 @@ void WiiBaFu::setMainProgressBar(int value, QString format) {
     progressBar_Main->setFormat(format);
 }
 
-void WiiBaFu::setHDDProgressBar(int min, int max, int value, QString format) {
+void WiiBaFu::setWBFSProgressBar(int min, int max, int value, QString format) {
     ui->progressBar_HDD->setMinimum(min);
     ui->progressBar_HDD->setMaximum(max);
     ui->progressBar_HDD->setValue(value);

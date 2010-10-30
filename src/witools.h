@@ -30,7 +30,7 @@ class WiTools : public QObject {
 public:
     explicit WiTools(QObject *parent = 0);
     QStandardItemModel *getFilesGameListModel(QStandardItemModel *model, QString path);
-    QStandardItemModel *getHDDGameListModel(QStandardItemModel *model);
+    QStandardItemModel *getWBFSGameListModel(QStandardItemModel *model);
     void transferToWBFS(QModelIndexList indexList, QString wbfsPath);
 
 private:
@@ -39,7 +39,7 @@ private:
 signals:
     void setMainProgressBarVisible(bool visible);
     void setMainProgressBar(int value, QString format);
-    void setProgressBarHDD(int min, int max, int value, QString text);
+    void setProgressBarWBFS(int min, int max, int value, QString text);
 
     void newLogEntry(QString entry);
     void newStatusBarMessage(QString message);
