@@ -47,8 +47,8 @@ signals:
     void newLogEntry(QString entry);
 
 private slots:
-    void loadGameCoverResponseHeaderReceived(const QHttpResponseHeader &resp);
-    void loadGameCoverDone(bool error);
+    void loadGameCover_responseHeaderReceived(const QHttpResponseHeader &resp);
+    void loadGameCover_done(bool error);
 };
 
 #endif // COMMON_H

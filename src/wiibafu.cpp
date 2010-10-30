@@ -34,8 +34,8 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     setupMainProgressBar();
     setupConnections();
 
-    setGameListAttributes(ui->tableView_Files);
-    setGameListAttributes(ui->tableView_WBFS);
+    setGameListAttributes(ui->filesTab_tableView);
+    setGameListAttributes(ui->wbfsTab_tableView);
 }
 
 void WiiBaFu::setupConnections() {
@@ -51,22 +51,6 @@ void WiiBaFu::setupConnections() {
     connect(common, SIGNAL(newGameFullHQCover(QImage*)), this, SLOT(showGameFullHQCover(QImage*)));
     connect(common, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(common, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
-
-    connect(ui->pushButton_Files_Add, SIGNAL(clicked()), this, SLOT(filesGameList_Add()));
-    connect(ui->pushButton_Files_SelectAll, SIGNAL(clicked()), this, SLOT(filesGameList_SelectAll()));
-    connect(ui->pushButton_Files_TransferToWBFS, SIGNAL(clicked()), this, SLOT(filesGameList_TransferToWBFS()));
-    connect(ui->pushButton_Files_ShowInfo, SIGNAL(clicked()), this, SLOT(filesGameList_ShowInfo()));
-
-    connect(ui->pushButton_HDD_List, SIGNAL(clicked()), this, SLOT(wbfsGameList_List()));
-    connect(ui->pushButton_HDD_SelectAll, SIGNAL(clicked()), this, SLOT(wbfsGameList_SelectAll()));
-    connect(ui->pushButton_HDD_ShowInfo, SIGNAL(clicked()), this, SLOT(wbfsGameList_ShowInfo()));
-
-    connect(ui->pushButton_Info_Load3DCover, SIGNAL(clicked()), this, SLOT(infoGame_Load3DCover()));
-    connect(ui->pushButton_Info_LoadFullHQCover, SIGNAL(clicked()), this, SLOT(infoGame_LoadFullHQCover()));
-
-    connect(ui->pushButton_Log_Clear, SIGNAL(clicked()), this, SLOT(log_Clear()));
-    connect(ui->pushButton_Log_Copy, SIGNAL(clicked()), this, SLOT(log_Copy()));
-    connect(ui->pushButton_Log_Save, SIGNAL(clicked()), this, SLOT(log_Save()));
 
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAboutBox()));
     connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
@@ -104,97 +88,97 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         headerView->setResizeMode(resizeMode);
 }
 
-void WiiBaFu::filesGameList_Add() {
+void WiiBaFu::on_filesTab_pushButton_Add_clicked() {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
         filesListModel->clear();
 
         QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getFilesGameListModel, filesListModel, directory);
-        ui->tableView_Files->setModel(future.result());
-        ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->tableView_Files->model()->rowCount()));
+        ui->filesTab_tableView->setModel(future.result());
+        ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
     }
 }
 
-void WiiBaFu::filesGameList_SelectAll() {
-    ui->tableView_Files->selectAll();
+void WiiBaFu::on_filesTab_pushButton_SelectAll_clicked() {
+    ui->filesTab_tableView->selectAll();
 }
 
-void WiiBaFu::filesGameList_TransferToWBFS() {
-    if (ui->tableView_Files->selectionModel() && !ui->tableView_Files->selectionModel()->selectedRows(0).isEmpty())
-        QtConcurrent::run(wiTools, &WiTools::transferToWBFS, ui->tableView_Files->selectionModel()->selectedRows(10), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
+    if (ui->filesTab_tableView->selectionModel() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty())
+        QtConcurrent::run(wiTools, &WiTools::transferToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
 }
 
-void WiiBaFu::filesGameList_ShowInfo() {
-    setGameInfo(ui->tableView_Files, filesListModel);
+void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
+    setGameInfo(ui->filesTab_tableView, filesListModel);
 }
 
-void WiiBaFu::wbfsGameList_List() {
+void WiiBaFu::on_wbfsTab_pushButton_List_clicked() {
     wbfsListModel->clear();
 
     QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel);
-    ui->tableView_WBFS->setModel(future.result());
-    ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->tableView_WBFS->model()->rowCount()));
+    ui->wbfsTab_tableView->setModel(future.result());
+    ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
 }
 
-void WiiBaFu::wbfsGameList_SelectAll() {
-    ui->tableView_WBFS->selectAll();
+void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
+    ui->wbfsTab_tableView->selectAll();
 }
 
-void WiiBaFu::wbfsGameList_ShowInfo() {
-    setGameInfo(ui->tableView_WBFS, wbfsListModel);
+void WiiBaFu::on_wbfsTab_pushButton_ShowInfo_clicked() {
+    setGameInfo(ui->wbfsTab_tableView, wbfsListModel);
 }
 
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
-        if (tableView == ui->tableView_WBFS) {
-            ui->lineEdit_info_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
-            ui->lineEdit_info_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
-            ui->lineEdit_info_Title->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text());
-            ui->lineEdit_info_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
-            ui->lineEdit_info_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
-            ui->lineEdit_info_UsedBlocks->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
-            ui->lineEdit_info_Insertion->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
-            ui->lineEdit_info_LastModification->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
-            ui->lineEdit_info_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
-            ui->lineEdit_info_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
-            ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
-            ui->lineEdit_info_Container->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(11).first())->text());
-            ui->lineEdit_info_WBFSSlot->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(12).first())->text());
-            ui->lineEdit_info_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(13).first())->text());
+        if (tableView == ui->wbfsTab_tableView) {
+            ui->infoTab_lineEdit_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
+            ui->infoTab_lineEdit_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
+            ui->infoTab_lineEdit_Title->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text());
+            ui->infoTab_lineEdit_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
+            ui->infoTab_lineEdit_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
+            ui->infoTab_lineEdit_UsedBlocks->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
+            ui->infoTab_lineEdit_Insertion->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
+            ui->infoTab_lineEdit_LastModification->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
+            ui->infoTab_lineEdit_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
+            ui->infoTab_lineEdit_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
+            ui->infoTab_lineEdit_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
+            ui->infoTab_lineEdit_Container->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(11).first())->text());
+            ui->infoTab_lineEdit_WBFSSlot->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(12).first())->text());
+            ui->infoTab_lineEdit_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(13).first())->text());
         }
         else {
-            ui->lineEdit_info_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
-            ui->lineEdit_info_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
-            ui->lineEdit_info_Title->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text());
-            ui->lineEdit_info_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
-            ui->lineEdit_info_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
-            ui->lineEdit_info_UsedBlocks->setText("--");
-            ui->lineEdit_info_Insertion->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
-            ui->lineEdit_info_LastModification->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
-            ui->lineEdit_info_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
-            ui->lineEdit_info_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
-            ui->lineEdit_info_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
-            ui->lineEdit_info_Container->setText("--");
-            ui->lineEdit_info_WBFSSlot->setText("--");
-            ui->lineEdit_info_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
+            ui->infoTab_lineEdit_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
+            ui->infoTab_lineEdit_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
+            ui->infoTab_lineEdit_Title->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text());
+            ui->infoTab_lineEdit_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
+            ui->infoTab_lineEdit_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
+            ui->infoTab_lineEdit_UsedBlocks->setText("--");
+            ui->infoTab_lineEdit_Insertion->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
+            ui->infoTab_lineEdit_LastModification->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
+            ui->infoTab_lineEdit_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
+            ui->infoTab_lineEdit_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
+            ui->infoTab_lineEdit_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
+            ui->infoTab_lineEdit_Container->setText("--");
+            ui->infoTab_lineEdit_WBFSSlot->setText("--");
+            ui->infoTab_lineEdit_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
         }
 
-        infoGame_Load3DCover();
+        on_infoTab_pushButton_Load3DCover_clicked();
         ui->tabWidget->setCurrentIndex(3);
     }
 }
 
-void WiiBaFu::log_Clear() {
-    ui->plainTextEdit_Log->clear();
+void WiiBaFu::on_logTab_pushButton_Clear_clicked() {
+    ui->logTab_plainTextEdit_Log->clear();
 }
 
-void WiiBaFu::log_Copy() {
+void WiiBaFu::on_logTab_pushButton_Copy_clicked() {
     QClipboard *clipboard = QApplication::clipboard();
-    clipboard->setText(ui->plainTextEdit_Log->toPlainText());
+    clipboard->setText(ui->logTab_plainTextEdit_Log->toPlainText());
 }
 
-void WiiBaFu::log_Save() {
+void WiiBaFu::on_logTab_pushButton_Save_clicked() {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save log file"), QDir::homePath().append("/WiiBaFu.log"), tr("WiiBaFu log file (*.log)"));
 
     if (!fileName.isEmpty()) {
@@ -202,21 +186,21 @@ void WiiBaFu::log_Save() {
 
         if (file.open(QFile::WriteOnly | QFile::Truncate)) {
             QTextStream textStream(&file);
-            textStream << ui->plainTextEdit_Log->toPlainText();
+            textStream << ui->logTab_plainTextEdit_Log->toPlainText();
         }
 
         file.close();
     }
 }
 
-void WiiBaFu::infoGame_Load3DCover() {
-    if (!ui->lineEdit_info_ID->text().isEmpty())
-        common->getGame3DCover(ui->lineEdit_info_ID->text(), getCurrentCoverLanguage());
+void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
+    if (!ui->infoTab_lineEdit_ID->text().isEmpty())
+        common->getGame3DCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage());
 }
 
-void WiiBaFu::infoGame_LoadFullHQCover() {
-    if (!ui->lineEdit_info_ID->text().isEmpty())
-        common->getGameFullHQCover(ui->lineEdit_info_ID->text(), getCurrentCoverLanguage());
+void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
+    if (!ui->infoTab_lineEdit_ID->text().isEmpty())
+        common->getGameFullHQCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage());
 }
 
 void WiiBaFu::showGame3DCover(QImage *gameCover) {
@@ -234,10 +218,10 @@ void WiiBaFu::setMainProgressBar(int value, QString format) {
 }
 
 void WiiBaFu::setWBFSProgressBar(int min, int max, int value, QString format) {
-    ui->progressBar_HDD->setMinimum(min);
-    ui->progressBar_HDD->setMaximum(max);
-    ui->progressBar_HDD->setValue(value);
-    ui->progressBar_HDD->setFormat(format);
+    ui->wbfsTab_progressBar->setMinimum(min);
+    ui->wbfsTab_progressBar->setMaximum(max);
+    ui->wbfsTab_progressBar->setValue(value);
+    ui->wbfsTab_progressBar->setFormat(format);
 }
 
 void WiiBaFu::setStatusBarText(QString text) {
@@ -245,11 +229,11 @@ void WiiBaFu::setStatusBarText(QString text) {
 }
 
 void WiiBaFu::addEntryToLog(QString entry) {
-    ui->plainTextEdit_Log->appendPlainText(entry);
+    ui->logTab_plainTextEdit_Log->appendPlainText(entry);
 }
 
 QString WiiBaFu::getCurrentCoverLanguage() {
-    switch (ui->comboBox_CoverLanguages->currentIndex()) {
+    switch (ui->infoTab_comboBox_CoverLanguages->currentIndex()) {
         case 0:  return "EN";
                  break;
         case 1:  return "FR";

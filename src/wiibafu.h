@@ -56,21 +56,21 @@ private:
 private slots:
     void setMainProgressBarVisible(bool visible);
 
-    void filesGameList_Add();
-    void filesGameList_SelectAll();
-    void filesGameList_TransferToWBFS();
-    void filesGameList_ShowInfo();
+    void on_filesTab_pushButton_Add_clicked();
+    void on_filesTab_pushButton_SelectAll_clicked();
+    void on_filesTab_pushButton_TransferToWBFS_clicked();
+    void on_filesTab_pushButton_ShowInfo_clicked();
 
-    void wbfsGameList_List();
-    void wbfsGameList_SelectAll();
-    void wbfsGameList_ShowInfo();
+    void on_wbfsTab_pushButton_List_clicked();
+    void on_wbfsTab_pushButton_SelectAll_clicked();
+    void on_wbfsTab_pushButton_ShowInfo_clicked();
 
-    void infoGame_Load3DCover();
-    void infoGame_LoadFullHQCover();
+    void on_infoTab_pushButton_Load3DCover_clicked();
+    void on_infoTab_pushButton_LoadFullHQCover_clicked();
 
-    void log_Clear();
-    void log_Copy();
-    void log_Save();
+    void on_logTab_pushButton_Clear_clicked();
+    void on_logTab_pushButton_Copy_clicked();
+    void on_logTab_pushButton_Save_clicked();
 
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);

@@ -45,7 +45,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QTableView" name="tableView_Files"/>
+         <widget class="QTableView" name="filesTab_tableView"/>
         </item>
         <item>
          <widget class="QFrame" name="frame_Files">
@@ -63,28 +63,28 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QPushButton" name="pushButton_Files_Add">
+            <widget class="QPushButton" name="filesTab_pushButton_Add">
              <property name="text">
               <string>Add</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_Files_SelectAll">
+            <widget class="QPushButton" name="filesTab_pushButton_SelectAll">
              <property name="text">
               <string>Select all</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_Files_TransferToWBFS">
+            <widget class="QPushButton" name="filesTab_pushButton_TransferToWBFS">
              <property name="text">
               <string>Transfer to WBFS</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_Files_ShowInfo">
+            <widget class="QPushButton" name="filesTab_pushButton_ShowInfo">
              <property name="text">
               <string>Show info</string>
              </property>
@@ -101,7 +101,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTableView" name="tableView_DVD"/>
+         <widget class="QTableView" name="dvdTab_tableView"/>
         </item>
         <item>
          <widget class="QFrame" name="frame_DVD">
@@ -119,28 +119,28 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QPushButton" name="pushButton_DVD_Drive">
+            <widget class="QPushButton" name="dvdTab_pushButton_Drive">
              <property name="text">
               <string>Drive</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_DVD_Select">
+            <widget class="QPushButton" name="dvdTab_pushButton_Select">
              <property name="text">
               <string>Select</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_DVD_Transfer">
+            <widget class="QPushButton" name="dvdTab_pushButton_Transfer">
              <property name="text">
               <string>Transfer</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_DVD_Tools">
+            <widget class="QPushButton" name="dvdTab_pushButton_Tools">
              <property name="text">
               <string>Tools</string>
              </property>
@@ -157,7 +157,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QTableView" name="tableView_WBFS"/>
+         <widget class="QTableView" name="wbfsTab_tableView"/>
         </item>
         <item>
          <widget class="QFrame" name="frame_4">
@@ -169,7 +169,7 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
-            <widget class="QProgressBar" name="progressBar_HDD">
+            <widget class="QProgressBar" name="wbfsTab_progressBar">
              <property name="value">
               <number>0</number>
              </property>
@@ -197,35 +197,35 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QPushButton" name="pushButton_HDD_List">
+            <widget class="QPushButton" name="wbfsTab_pushButton_List">
              <property name="text">
               <string>List</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_HDD_SelectAll">
+            <widget class="QPushButton" name="wbfsTab_pushButton_SelectAll">
              <property name="text">
               <string>Select all</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_HDD_Transfer">
+            <widget class="QPushButton" name="wbfsTab_pushButton_Transfer">
              <property name="text">
               <string>Transfer</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_HDD_Remove">
+            <widget class="QPushButton" name="wbfsTab_pushButton_Remove">
              <property name="text">
               <string>Remove</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_HDD_ShowInfo">
+            <widget class="QPushButton" name="wbfsTab_pushButton_ShowInfo">
              <property name="text">
               <string>Show info</string>
              </property>
@@ -268,7 +268,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_ID">
+                <widget class="QLineEdit" name="infoTab_lineEdit_ID">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -292,7 +292,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_Name">
+                <widget class="QLineEdit" name="infoTab_lineEdit_Name">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -316,7 +316,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_Title">
+                <widget class="QLineEdit" name="infoTab_lineEdit_Title">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -340,7 +340,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_Region">
+                <widget class="QLineEdit" name="infoTab_lineEdit_Region">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -364,7 +364,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_Size">
+                <widget class="QLineEdit" name="infoTab_lineEdit_Size">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -388,7 +388,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_UsedBlocks">
+                <widget class="QLineEdit" name="infoTab_lineEdit_UsedBlocks">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -412,7 +412,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_Insertion">
+                <widget class="QLineEdit" name="infoTab_lineEdit_Insertion">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -436,7 +436,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_LastModification">
+                <widget class="QLineEdit" name="infoTab_lineEdit_LastModification">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -460,7 +460,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_LastStatusChange">
+                <widget class="QLineEdit" name="infoTab_lineEdit_LastStatusChange">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -484,7 +484,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_LastAccess">
+                <widget class="QLineEdit" name="infoTab_lineEdit_LastAccess">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -508,7 +508,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_Type">
+                <widget class="QLineEdit" name="infoTab_lineEdit_Type">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -532,7 +532,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_Container">
+                <widget class="QLineEdit" name="infoTab_lineEdit_Container">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -556,7 +556,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_WBFSSlot">
+                <widget class="QLineEdit" name="infoTab_lineEdit_WBFSSlot">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -580,7 +580,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_info_FileName">
+                <widget class="QLineEdit" name="infoTab_lineEdit_FileName">
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -710,7 +710,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_CoverLanguages">
+                <widget class="QComboBox" name="infoTab_comboBox_CoverLanguages">
                  <property name="minimumSize">
                   <size>
                    <width>100</width>
@@ -848,7 +848,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_Info_Load3DCover">
+                <widget class="QPushButton" name="infoTab_pushButton_Load3DCover">
                  <property name="minimumSize">
                   <size>
                    <width>120</width>
@@ -909,7 +909,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_Info_LoadFullHQCover">
+                <widget class="QPushButton" name="infoTab_pushButton_LoadFullHQCover">
                  <property name="minimumSize">
                   <size>
                    <width>150</width>
@@ -974,7 +974,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QPlainTextEdit" name="plainTextEdit_Log">
+         <widget class="QPlainTextEdit" name="logTab_plainTextEdit_Log">
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -996,21 +996,21 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QPushButton" name="pushButton_Log_Clear">
+            <widget class="QPushButton" name="logTab_pushButton_Clear">
              <property name="text">
               <string>Clear</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_Log_Copy">
+            <widget class="QPushButton" name="logTab_pushButton_Copy">
              <property name="text">
               <string>Copy</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_Log_Save">
+            <widget class="QPushButton" name="logTab_pushButton_Save">
              <property name="text">
               <string>Save</string>
              </property>

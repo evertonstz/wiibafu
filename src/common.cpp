@@ -22,8 +22,8 @@
 
 Common::Common(QObject *parent) : QObject(parent) {
     http = new QHttp(this);
-    connect(http, SIGNAL(done(bool)), this, SLOT(loadGameCoverDone(bool)));
-    connect(http, SIGNAL(responseHeaderReceived(QHttpResponseHeader)), this, SLOT(loadGameCoverResponseHeaderReceived(QHttpResponseHeader)));
+    connect(http, SIGNAL(done(bool)), this, SLOT(loadGameCover_done(bool)));
+    connect(http, SIGNAL(responseHeaderReceived(QHttpResponseHeader)), this, SLOT(loadGameCover_responseHeaderReceived(QHttpResponseHeader)));
 }
 
 void Common::getGame3DCover(QString gameID, QString language) {
@@ -46,12 +46,12 @@ void Common::getGameCover(QString gameID, QString language, bool fullHQCover) {
     http->get(url.path());
 }
 
-void Common::loadGameCoverResponseHeaderReceived(const QHttpResponseHeader &resp) {
+void Common::loadGameCover_responseHeaderReceived(const QHttpResponseHeader &resp) {
     emit newLogEntry(http->currentRequest().toString());
     emit newLogEntry(resp.toString().remove(" "));
 }
 
-void Common::loadGameCoverDone(bool error) {
+void Common::loadGameCover_done(bool error) {
     if (!error) {
         QImage *image = new QImage();
         image->loadFromData(http->readAll());
