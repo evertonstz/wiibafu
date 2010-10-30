@@ -43,10 +43,12 @@ signals:
 
     void newLogEntry(QString entry);
     void newStatusBarMessage(QString message);
+    void updateWBFSList();
 
 private slots:
     void addGamesToWBFS_readyReadStandardOutput();
     void addGamesToWBFS_readyReadStandardError();
+    void addGamesToWBFS_finished(int, QProcess::ExitStatus);
 };
 
 #endif // WITOOLS_H

@@ -300,8 +300,10 @@ void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
     arguments.append("--progress");
 
     wwtADDProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
     connect(wwtADDProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(addGamesToWBFS_readyReadStandardOutput()));
     connect(wwtADDProcess, SIGNAL(readyReadStandardError()), this, SLOT(addGamesToWBFS_readyReadStandardError()));
+    connect(wwtADDProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(addGamesToWBFS_finished(int, QProcess::ExitStatus)));
 
     wwtADDProcess->start("wwt", arguments);
     wwtADDProcess->waitForFinished(-1);
@@ -333,4 +335,8 @@ void WiTools::addGamesToWBFS_readyReadStandardOutput() {
 
 void WiTools::addGamesToWBFS_readyReadStandardError() {
     emit newLogEntry(wwtADDProcess->readAllStandardError().constData());
+}
+
+void WiTools::addGamesToWBFS_finished(int, QProcess::ExitStatus) {
+    emit updateWBFSList();
 }
