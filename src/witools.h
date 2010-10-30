@@ -42,7 +42,7 @@ signals:
     void setProgressBarHDD(int min, int max, int value, QString text);
 
     void newLogEntry(QString entry);
-    void showStatusBarMessage(QString message);
+    void newStatusBarMessage(QString message);
 
 private slots:
     void addGamesToWBFS_readyReadStandardOutput();

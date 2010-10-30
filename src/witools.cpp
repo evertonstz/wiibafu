@@ -26,7 +26,7 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
 }
 
 QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QString path) {
-    emit showStatusBarMessage(tr("Loading games..."));
+    emit newStatusBarMessage(tr("Loading games..."));
 
     QProcess filesRead;
     filesRead.start("wit", QStringList() << "LIST" << "--section" << "--recurse" << path);
@@ -42,7 +42,7 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 
     foreach (QString line, lines) {
         if (line.contains("total-discs=0")) {
-            emit showStatusBarMessage(tr("No games found!"));
+            emit newStatusBarMessage(tr("No games found!"));
             return model;
             break;
         }
@@ -120,17 +120,17 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     model->setHeaderData(9, Qt::Horizontal, tr("Type"));
     model->setHeaderData(10, Qt::Horizontal, tr("File name"));
 
-    emit showStatusBarMessage(tr("Ready."));
+    emit newStatusBarMessage(tr("Ready."));
 
     return model;
 }
 
 QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
-    emit showStatusBarMessage(tr("Loading games..."));
+    emit newStatusBarMessage(tr("Loading games..."));
 
     QProcess hddRead;
     //hddRead.start("wwt", QStringList() << "LIST-A" << "--section");
-    hddRead.start("wwt", QStringList() << "LIST-A" << "/home/kai/wii.wbfs" << "--section");
+    hddRead.start("wwt", QStringList() << "LIST-A" << "/home/kai/wii.wbfs" << "--section"); //TODO: User sets the wbfs path!
     hddRead.waitForFinished();
 
     QByteArray bytes = hddRead.readAllStandardOutput();
@@ -144,12 +144,12 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
 
     foreach (QString line, lines) {
         if (line.contains("text=No WBFS found")) {
-            emit showStatusBarMessage(tr("No WBFS partitions found!"));
+            emit newStatusBarMessage(tr("No WBFS partitions found!"));
             return model;
             break;
         }
         else if (line.contains("used_discs=0")) {
-            emit showStatusBarMessage(tr("No games found!"));
+            emit newStatusBarMessage(tr("No games found!"));
             return model;
             break;
         }
@@ -273,14 +273,14 @@ QStandardItemModel* WiTools::getHDDGameListModel(QStandardItemModel *model) {
 
     // total - free = bug fix for wwts 'used_mib'
     emit setProgressBarHDD(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
-    emit showStatusBarMessage(tr("Ready."));
+    emit newStatusBarMessage(tr("Ready."));
 
     return model;
 }
 
 void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
-    emit showStatusBarMessage(tr("Transfering games..."));
     emit setMainProgressBarVisible(true);
+    emit newStatusBarMessage(tr("Preparing transfer..."));
 
     QStringList paths;
     foreach (QModelIndex index, indexList) {
@@ -289,7 +289,6 @@ void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     QStringList arguments;
     arguments.append("ADD");
-    arguments.append(wbfsPath);
     if (wbfsPath.isEmpty()) {
         arguments.append("--auto");
     }
@@ -307,33 +306,31 @@ void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
     wwtADDProcess->start("wwt", arguments);
     wwtADDProcess->waitForFinished(-1);
 
-    emit showStatusBarMessage(tr("Ready."));
+    emit newStatusBarMessage(tr("Ready."));
     emit setMainProgressBarVisible(false);
 }
 
 void WiTools::addGamesToWBFS_readyReadStandardOutput() {
-    QByteArray bytes = wwtADDProcess->readAllStandardOutput();
-    QString line;
-
-    line.operator += (bytes);
+    QString line = wwtADDProcess->readAllStandardOutput().constData();
+    line.remove("\n");
 
     if (line.contains("already exists -> ignore")) {
         emit newLogEntry(tr("Disc already exists!"));
     }
+    else if (line.contains("ADD")) {
+        emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
+    }
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
     }
-    else if (line.contains("copied") && !line.contains("% copied")) {
+    else if (line.contains("copied") && !line.contains("%")) {
         emit newLogEntry(line);
     }
-    else if (line.contains("disc added.")) { //TODO: discs added.
+    else if (line.contains("disc added.") || line.contains("discs added.")) {
         emit newLogEntry(line);
     }
 }
 
 void WiTools::addGamesToWBFS_readyReadStandardError() {
-    QByteArray bytes = wwtADDProcess->readAllStandardError();
-    QString line;
-
-    emit newLogEntry(line.operator += (bytes));
+    emit newLogEntry(wwtADDProcess->readAllStandardError().constData());
 }

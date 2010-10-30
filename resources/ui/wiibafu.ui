@@ -77,9 +77,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_Files_Transfer">
+            <widget class="QPushButton" name="pushButton_Files_TransferToWBFS">
              <property name="text">
-              <string>Transfer to HDD</string>
+              <string>Transfer to WBFS</string>
              </property>
             </widget>
            </item>
@@ -151,9 +151,9 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tabHDD">
+      <widget class="QWidget" name="tabWBFS">
        <attribute name="title">
-        <string>HDD</string>
+        <string>WBFS</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
