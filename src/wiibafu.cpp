@@ -41,6 +41,8 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
 
+    connect(this, SIGNAL(cancelAddGamesToWBFS()), wiTools, SLOT(addGamesToWBFS_cancel()));
+
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
     connect(wiTools, SIGNAL(setProgressBarWBFS(int, int, int, QString)), this, SLOT(setWBFSProgressBar(int, int, int, QString)));
@@ -106,8 +108,16 @@ void WiiBaFu::on_filesTab_pushButton_SelectAll_clicked() {
 }
 
 void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
-    if (ui->filesTab_tableView->selectionModel() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty())
-        QtConcurrent::run(wiTools, &WiTools::transferToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+    if (ui->filesTab_pushButton_TransferToWBFS->text() != tr("Cancel")) {
+        if (ui->filesTab_tableView->selectionModel() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+            ui->filesTab_pushButton_TransferToWBFS->setText(tr("Cancel"));
+            QtConcurrent::run(wiTools, &WiTools::transferToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+        }
+    }
+    else {
+        emit cancelAddGamesToWBFS();
+        ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
+    }
 }
 
 void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {

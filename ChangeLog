@@ -1,13 +1,17 @@
+2010-10-31 Kai Heitkamp <dynup@ymail.com>
+  * Cancel possibility for wbfs transfer added.
+  * Version number increase to: 0.4
+
 2010-10-30 Kai Heitkamp <dynup@ymail.com>
-  * Transfer to hdd added.
+  * Transfer to wbfs added.
 
 2010-10-28 Kai Heitkamp <dynup@ymail.com>
-  * Progress bar in HDD tab for additional and compact infos.
+  * Progress bar in WBFS tab for additional and compact infos.
 
 2010-10-27 Kai Heitkamp <dynup@ymail.com>
   * Load game covers in different languages.
   * HQ game cover functionality added.
-  * Total infos for game images and hdd wbfs.
+  * Total infos for game images and wbfs.
   * Switch version number to: 0.3
 
 2010-10-26 Kai Heitkamp <dynup@ymail.com>

@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 #include "witools.h"
-#include "wiibafu.h"
 
 WiTools::WiTools(QObject *parent) : QObject(parent) {
 
@@ -339,4 +338,8 @@ void WiTools::addGamesToWBFS_readyReadStandardError() {
 
 void WiTools::addGamesToWBFS_finished(int, QProcess::ExitStatus) {
     emit updateWBFSList();
+}
+
+void WiTools::addGamesToWBFS_cancel() {
+    wwtADDProcess->kill();
 }

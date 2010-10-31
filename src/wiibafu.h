@@ -53,6 +53,9 @@ private:
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
 
+signals:
+    void cancelAddGamesToWBFS();
+
 private slots:
     void setMainProgressBarVisible(bool visible);
 
