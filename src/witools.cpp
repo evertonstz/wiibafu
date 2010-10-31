@@ -298,9 +298,9 @@ void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     wwtADDProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(wwtADDProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(addGamesToWBFS_readyReadStandardOutput()));
-    connect(wwtADDProcess, SIGNAL(readyReadStandardError()), this, SLOT(addGamesToWBFS_readyReadStandardError()));
-    connect(wwtADDProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(addGamesToWBFS_finished(int, QProcess::ExitStatus)));
+    connect(wwtADDProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGamesToWBFS_readyReadStandardOutput()));
+    connect(wwtADDProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGamesToWBFS_readyReadStandardError()));
+    connect(wwtADDProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToWBFS_finished(int, QProcess::ExitStatus)));
 
     wwtADDProcess->start("wwt", arguments);
     wwtADDProcess->waitForFinished(-1);
@@ -308,7 +308,7 @@ void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::addGamesToWBFS_readyReadStandardOutput() {
+void WiTools::transferGamesToWBFS_readyReadStandardOutput() {
     QString line = wwtADDProcess->readAllStandardOutput().constData();
 
     if (line.contains("ADD")) {
@@ -325,11 +325,11 @@ void WiTools::addGamesToWBFS_readyReadStandardOutput() {
     }
 }
 
-void WiTools::addGamesToWBFS_readyReadStandardError() {
+void WiTools::transferGamesToWBFS_readyReadStandardError() {
     emit newLogEntry(wwtADDProcess->readAllStandardError().constData());
 }
 
-void WiTools::addGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit) {
         if (exitCode == 0) {
             emit transferToWBFSsuccessfully();
@@ -343,7 +343,7 @@ void WiTools::addGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitSta
     }
 }
 
-void WiTools::addGamesToWBFS_cancel() {
+void WiTools::transferGamesToWBFS_cancel() {
     wwtADDProcess->kill();
 }
 

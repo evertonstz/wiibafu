@@ -56,7 +56,7 @@ private:
     QString getCurrentCoverLanguage();
 
 signals:
-    void cancelAddGamesToWBFS();
+    void cancelTransferGamesToWBFS();
 
 private slots:
     void setMainProgressBarVisible(bool visible);

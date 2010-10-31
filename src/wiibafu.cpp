@@ -41,7 +41,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
 
-    connect(this, SIGNAL(cancelAddGamesToWBFS()), wiTools, SLOT(addGamesToWBFS_cancel()));
+    connect(this, SIGNAL(cancelTransferGamesToWBFS()), wiTools, SLOT(transferGamesToWBFS_cancel()));
 
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
@@ -117,7 +117,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
         }
     }
     else {
-        emit cancelAddGamesToWBFS();
+        emit cancelTransferGamesToWBFS();
     }
 }
 

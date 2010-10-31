@@ -44,15 +44,17 @@ signals:
 
     void newLogEntry(QString entry);
     void newStatusBarMessage(QString message);
+
     void transferToWBFScanceled(bool discExitst);
     void transferToWBFSsuccessfully();
+
     void removeGamesFromWBFS_successfully();
 
 private slots:
-    void addGamesToWBFS_readyReadStandardOutput();
-    void addGamesToWBFS_readyReadStandardError();
-    void addGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void addGamesToWBFS_cancel();
+    void transferGamesToWBFS_readyReadStandardOutput();
+    void transferGamesToWBFS_readyReadStandardError();
+    void transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferGamesToWBFS_cancel();
 
     void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 };
