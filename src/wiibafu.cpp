@@ -106,7 +106,14 @@ void WiiBaFu::on_filesTab_pushButton_Add_clicked() {
 }
 
 void WiiBaFu::on_filesTab_pushButton_SelectAll_clicked() {
-    ui->filesTab_tableView->selectAll();
+    if (ui->filesTab_tableView->model()) {
+        if (ui->filesTab_tableView->selectionModel()->selectedRows(0).count() != ui->filesTab_tableView->model()->rowCount()) {
+            ui->filesTab_tableView->selectAll();
+        }
+        else {
+            ui->filesTab_tableView->selectionModel()->clearSelection();
+        }
+    }
 }
 
 void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
@@ -138,7 +145,14 @@ void WiiBaFu::on_wbfsTab_pushButton_List_clicked() {
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
-    ui->wbfsTab_tableView->selectAll();
+    if (ui->wbfsTab_tableView->model()) {
+        if (ui->wbfsTab_tableView->selectionModel()->selectedRows(0).count() != ui->wbfsTab_tableView->model()->rowCount()) {
+            ui->wbfsTab_tableView->selectAll();
+        }
+        else {
+            ui->wbfsTab_tableView->selectionModel()->clearSelection();
+        }
+    }
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_Remove_clicked() {
