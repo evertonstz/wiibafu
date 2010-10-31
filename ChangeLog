@@ -1,6 +1,7 @@
 2010-10-31 Kai Heitkamp <dynup@ymail.com>
-  * Cancel possibility for wbfs transfer added.
-  * Version number increase to: 0.4
+  * Cancel possibility for wbfs transfer added. (0.4)
+  * More improvements for canceling. (0.4.1)
+  * Version number increase to: 0.4.1
 
 2010-10-30 Kai Heitkamp <dynup@ymail.com>
   * Transfer to wbfs added.

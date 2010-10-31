@@ -307,18 +307,13 @@ void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
     wwtADDProcess->start("wwt", arguments);
     wwtADDProcess->waitForFinished(-1);
 
-    emit newStatusBarMessage(tr("Ready."));
     emit setMainProgressBarVisible(false);
 }
 
 void WiTools::addGamesToWBFS_readyReadStandardOutput() {
     QString line = wwtADDProcess->readAllStandardOutput().constData();
-    line.remove("\n");
 
-    if (line.contains("already exists -> ignore")) {
-        emit newLogEntry(tr("Disc already exists!"));
-    }
-    else if (line.contains("ADD")) {
+    if (line.contains("ADD")) {
         emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
     }
     else if (line.contains("% copied")) {
@@ -336,8 +331,18 @@ void WiTools::addGamesToWBFS_readyReadStandardError() {
     emit newLogEntry(wwtADDProcess->readAllStandardError().constData());
 }
 
-void WiTools::addGamesToWBFS_finished(int, QProcess::ExitStatus) {
-    emit updateWBFSList();
+void WiTools::addGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit) {
+        if (exitCode == 0) {
+            emit updateWBFSList();
+        }
+        else if (exitCode == 4) {
+            emit transferToWBFScanceled(true);
+        }
+    }
+    else {
+        emit transferToWBFScanceled(false);
+    }
 }
 
 void WiTools::addGamesToWBFS_cancel() {

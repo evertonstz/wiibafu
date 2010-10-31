@@ -77,13 +77,12 @@ private slots:
 
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
-
-    QString getCurrentCoverLanguage();
-
+    void transferToWBFScanceled(bool discExitst);
     void setWBFSProgressBar(int min, int max, int value, QString format);
     void setMainProgressBar(int value, QString format);
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry);
+    QString getCurrentCoverLanguage();
     void showAboutBox();
 };
 
