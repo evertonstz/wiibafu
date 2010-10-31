@@ -53,6 +53,8 @@ private:
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
 
+    QString getCurrentCoverLanguage();
+
 signals:
     void cancelAddGamesToWBFS();
 
@@ -66,6 +68,7 @@ private slots:
 
     void on_wbfsTab_pushButton_List_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
+    void on_wbfsTab_pushButton_Remove_clicked();
     void on_wbfsTab_pushButton_ShowInfo_clicked();
 
     void on_infoTab_pushButton_Load3DCover_clicked();
@@ -77,12 +80,15 @@ private slots:
 
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
+
+    void transferToWBFSsuccesfully();
     void transferToWBFScanceled(bool discExitst);
+
     void setWBFSProgressBar(int min, int max, int value, QString format);
     void setMainProgressBar(int value, QString format);
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry);
-    QString getCurrentCoverLanguage();
+
     void showAboutBox();
 };
 

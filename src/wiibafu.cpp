@@ -48,8 +48,9 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(setProgressBarWBFS(int, int, int, QString)), this, SLOT(setWBFSProgressBar(int, int, int, QString)));
     connect(wiTools, SIGNAL(newStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
+    connect(wiTools, SIGNAL(transferToWBFSsuccessfully()), this, SLOT(transferToWBFSsuccesfully()));
     connect(wiTools, SIGNAL(transferToWBFScanceled(bool)), this, SLOT(transferToWBFScanceled(bool)));
-    connect(wiTools, SIGNAL(updateWBFSList()), this, SLOT(on_wbfsTab_pushButton_List_clicked()));
+    connect(wiTools, SIGNAL(removeGamesFromWBFS_successfully()), this, SLOT(on_wbfsTab_pushButton_List_clicked()));
 
     connect(common, SIGNAL(newGame3DCover(QImage*)), this, SLOT(showGame3DCover(QImage*)));
     connect(common, SIGNAL(newGameFullHQCover(QImage*)), this, SLOT(showGameFullHQCover(QImage*)));
@@ -125,15 +126,28 @@ void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_List_clicked() {
-    wbfsListModel->clear();
+    setStatusBarText(tr("Loading games..."));
 
     QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel);
+
+    wbfsListModel->clear();
     ui->wbfsTab_tableView->setModel(future.result());
     ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
+
+    setStatusBarText(tr("Ready."));
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
     ui->wbfsTab_tableView->selectAll();
+}
+
+void WiiBaFu::on_wbfsTab_pushButton_Remove_clicked() {
+    if (!ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+        int result = QMessageBox::question(this, tr("Remove games"), tr("Are you sure that you want to delete the selected games?"), QMessageBox::Ok, QMessageBox::Cancel);
+        if (result == QMessageBox::Ok) {
+            QtConcurrent::run(wiTools, &WiTools::removeGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+        }
+    }
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_ShowInfo_clicked() {
@@ -221,6 +235,11 @@ void WiiBaFu::showGame3DCover(QImage *gameCover) {
 void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
     gameFullHQCover->save(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
     QDesktopServices::openUrl(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
+}
+
+void WiiBaFu::transferToWBFSsuccesfully() {
+    ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
+    on_wbfsTab_pushButton_List_clicked();
 }
 
 void WiiBaFu::transferToWBFScanceled(bool discExitst) {

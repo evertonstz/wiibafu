@@ -32,6 +32,7 @@ public:
     QStandardItemModel *getFilesGameListModel(QStandardItemModel *model, QString path);
     QStandardItemModel *getWBFSGameListModel(QStandardItemModel *model);
     void transferToWBFS(QModelIndexList indexList, QString wbfsPath);
+    void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
 
 private:
     QProcess *wwtADDProcess;
@@ -44,13 +45,16 @@ signals:
     void newLogEntry(QString entry);
     void newStatusBarMessage(QString message);
     void transferToWBFScanceled(bool discExitst);
-    void updateWBFSList();
+    void transferToWBFSsuccessfully();
+    void removeGamesFromWBFS_successfully();
 
 private slots:
     void addGamesToWBFS_readyReadStandardOutput();
     void addGamesToWBFS_readyReadStandardError();
     void addGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
     void addGamesToWBFS_cancel();
+
+    void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 };
 
 #endif // WITOOLS_H
