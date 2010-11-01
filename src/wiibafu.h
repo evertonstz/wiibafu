@@ -79,6 +79,8 @@ private slots:
     void on_logTab_pushButton_Copy_clicked();
     void on_logTab_pushButton_Save_clicked();
 
+    void on_menuTools_CheckWBFS_triggered();
+
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
 

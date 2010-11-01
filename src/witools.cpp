@@ -435,4 +435,3 @@ void WiTools::checkWBFS(QString wbfsPath) {
 
     emit newLogEntry(QString(wwtCHECKProcess.readAll()));
 }
-

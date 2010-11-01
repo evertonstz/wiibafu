@@ -176,6 +176,44 @@ void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
     }
 }
 
+void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
+    if (!ui->infoTab_lineEdit_ID->text().isEmpty())
+        common->getGame3DCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage());
+}
+
+void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
+    if (!ui->infoTab_lineEdit_ID->text().isEmpty())
+        common->getGameFullHQCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage());
+}
+
+void WiiBaFu::on_logTab_pushButton_Clear_clicked() {
+    ui->logTab_plainTextEdit_Log->clear();
+}
+
+void WiiBaFu::on_logTab_pushButton_Copy_clicked() {
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(ui->logTab_plainTextEdit_Log->toPlainText());
+}
+
+void WiiBaFu::on_logTab_pushButton_Save_clicked() {
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save log file"), QDir::homePath().append("/WiiBaFu.log"), tr("WiiBaFu log file (*.log)"));
+
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+
+        if (file.open(QFile::WriteOnly | QFile::Truncate)) {
+            QTextStream textStream(&file);
+            textStream << ui->logTab_plainTextEdit_Log->toPlainText();
+        }
+
+        file.close();
+    }
+}
+
+void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
+    on_wbfsTab_pushButton_Check_clicked();
+}
+
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
         if (tableView == ui->wbfsTab_tableView) {
@@ -214,40 +252,6 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
         on_infoTab_pushButton_Load3DCover_clicked();
         ui->tabWidget->setCurrentIndex(3);
     }
-}
-
-void WiiBaFu::on_logTab_pushButton_Clear_clicked() {
-    ui->logTab_plainTextEdit_Log->clear();
-}
-
-void WiiBaFu::on_logTab_pushButton_Copy_clicked() {
-    QClipboard *clipboard = QApplication::clipboard();
-    clipboard->setText(ui->logTab_plainTextEdit_Log->toPlainText());
-}
-
-void WiiBaFu::on_logTab_pushButton_Save_clicked() {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save log file"), QDir::homePath().append("/WiiBaFu.log"), tr("WiiBaFu log file (*.log)"));
-
-    if (!fileName.isEmpty()) {
-        QFile file(fileName);
-
-        if (file.open(QFile::WriteOnly | QFile::Truncate)) {
-            QTextStream textStream(&file);
-            textStream << ui->logTab_plainTextEdit_Log->toPlainText();
-        }
-
-        file.close();
-    }
-}
-
-void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
-    if (!ui->infoTab_lineEdit_ID->text().isEmpty())
-        common->getGame3DCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage());
-}
-
-void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
-    if (!ui->infoTab_lineEdit_ID->text().isEmpty())
-        common->getGameFullHQCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage());
 }
 
 void WiiBaFu::showGame3DCover(QImage *gameCover) {
