@@ -69,6 +69,7 @@ private slots:
     void on_wbfsTab_pushButton_List_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
     void on_wbfsTab_pushButton_Remove_clicked();
+    void on_wbfsTab_pushButton_Check_clicked();
     void on_wbfsTab_pushButton_ShowInfo_clicked();
 
     void on_infoTab_pushButton_Load3DCover_clicked();

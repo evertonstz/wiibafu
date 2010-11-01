@@ -32,6 +32,7 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 
     if (!filesRead.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("Adding games failed!"));
+        emit newLogEntry(tr("Adding games failed!\nError: %1 (%2)").arg(QString::number(filesRead.exitCode()), filesRead.errorString()));
         return model;
     }
 
@@ -129,8 +130,6 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 }
 
 QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
-    QProcess wbfsRead;
-
     QStringList arguments;
     arguments.append("LIST-A");
     if (wbfsPath.isEmpty()) {
@@ -142,10 +141,12 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
     }
     arguments.append("--section");
 
+    QProcess wbfsRead;
     wbfsRead.start("wwt", arguments);
 
     if (!wbfsRead.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("Listing games failed!"));
+        emit newLogEntry(tr("Listing games failed!\nError: %1 (%2)").arg(QString::number(wbfsRead.exitCode()), wbfsRead.errorString()));
         return model;
     }
 
@@ -404,3 +405,34 @@ void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus ex
         emit newLogEntry(message);
     }
 }
+
+void WiTools::checkWBFS(QString wbfsPath) {
+    emit newStatusBarMessage(tr("Checking WBFS..."));
+
+    QStringList arguments;
+    arguments.append("CHECK");
+    if (wbfsPath.isEmpty()) {
+        arguments.append("--auto");
+    }
+    else {
+        arguments.append("--part");
+        arguments.append(wbfsPath);
+    }
+    //arguments.append("--repair"); //TODO: Via settings
+    //arguments.append("ALL"); //TODO: Via settings
+    arguments.append("--long");
+
+    QProcess wwtCHECKProcess;
+    wwtCHECKProcess.start("wwt", arguments);
+
+    if (!wwtCHECKProcess.waitForFinished(-1)) {
+        emit newStatusBarMessage(tr("WBFS check failed!"));
+        emit newLogEntry(tr("WBFS check failed!\nError: %1 (%2)").arg(QString::number(wwtCHECKProcess.exitCode()), wwtCHECKProcess.errorString()));
+    }
+    else {
+        emit newStatusBarMessage(tr("WBFS check successfully!"));
+    }
+
+    emit newLogEntry(QString(wwtCHECKProcess.readAll()));
+}
+

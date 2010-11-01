@@ -33,6 +33,7 @@ public:
     QStandardItemModel *getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
     void transferToWBFS(QModelIndexList indexList, QString wbfsPath);
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
+    void checkWBFS(QString wbfsPath);
 
 private:
     QProcess *wwtADDProcess;

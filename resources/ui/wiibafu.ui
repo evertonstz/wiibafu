@@ -231,6 +231,13 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="wbfsTab_pushButton_Check">
+             <property name="text">
+              <string>Check</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
@@ -1052,6 +1059,7 @@
     <property name="title">
      <string>Tools</string>
     </property>
+    <addaction name="menuTools_CheckWBFS"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -1079,6 +1087,11 @@
   <action name="actionAbout_Qt">
    <property name="text">
     <string>About Qt...</string>
+   </property>
+  </action>
+  <action name="menuTools_CheckWBFS">
+   <property name="text">
+    <string>Check WBFS</string>
    </property>
   </action>
  </widget>

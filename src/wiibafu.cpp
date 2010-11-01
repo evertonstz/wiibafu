@@ -31,6 +31,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     ui->setupUi(this);
     setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
     setStatusBarText(tr("Ready."));
+    addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.\n").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()));
     setupMainProgressBar();
     setupConnections();
 
@@ -166,6 +167,13 @@ void WiiBaFu::on_wbfsTab_pushButton_Remove_clicked() {
 
 void WiiBaFu::on_wbfsTab_pushButton_ShowInfo_clicked() {
     setGameInfo(ui->wbfsTab_tableView, wbfsListModel);
+}
+
+void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
+    int result = QMessageBox::question(this, tr("Check/Repair WBFS"), tr("Are you sure that you want to check/repair the wbfs?"), QMessageBox::Ok, QMessageBox::Cancel);
+    if (result == QMessageBox::Ok) {
+        QtConcurrent::run(wiTools, &WiTools::checkWBFS, QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+    }
 }
 
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
