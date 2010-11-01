@@ -135,7 +135,7 @@ void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
 void WiiBaFu::on_wbfsTab_pushButton_List_clicked() {
     setStatusBarText(tr("Loading games..."));
 
-    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel);
+    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel, QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
 
     wbfsListModel->clear();
     ui->wbfsTab_tableView->setModel(future.result());

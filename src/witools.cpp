@@ -29,7 +29,11 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 
     QProcess filesRead;
     filesRead.start("wit", QStringList() << "LIST" << "--section" << "--recurse" << path);
-    filesRead.waitForFinished();
+
+    if (!filesRead.waitForFinished(-1)) {
+        emit newStatusBarMessage(tr("Adding games failed!"));
+        return model;
+    }
 
     QByteArray bytes = filesRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
@@ -124,11 +128,26 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     return model;
 }
 
-QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model) {
+QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
     QProcess wbfsRead;
-    //wbfsRead.start("wwt", QStringList() << "LIST-A" << "--section");
-    wbfsRead.start("wwt", QStringList() << "LIST-A" << "/home/kai/wii.wbfs" << "--section"); //TODO: User sets the wbfs path!
-    wbfsRead.waitForFinished();
+
+    QStringList arguments;
+    arguments.append("LIST-A");
+    if (wbfsPath.isEmpty()) {
+        arguments.append("--auto");
+    }
+    else {
+        arguments.append("--part");
+        arguments.append(wbfsPath);
+    }
+    arguments.append("--section");
+
+    wbfsRead.start("wwt", arguments);
+
+    if (!wbfsRead.waitForFinished(-1)) {
+        emit newStatusBarMessage(tr("Listing games failed!"));
+        return model;
+    }
 
     QByteArray bytes = wbfsRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
