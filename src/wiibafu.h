@@ -57,6 +57,7 @@ private:
 
 signals:
     void cancelTransferGamesToWBFS();
+    void cancelTransferGamesFromWBFS();
 
 private slots:
     void setMainProgressBarVisible(bool visible);
@@ -68,6 +69,7 @@ private slots:
 
     void on_wbfsTab_pushButton_List_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
+    void on_wbfsTab_pushButton_Transfer_clicked();
     void on_wbfsTab_pushButton_Remove_clicked();
     void on_wbfsTab_pushButton_Check_clicked();
     void on_wbfsTab_pushButton_ShowInfo_clicked();
@@ -84,8 +86,11 @@ private slots:
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
 
-    void transferToWBFSsuccesfully();
-    void transferToWBFScanceled(bool discExitst);
+    void transferGamesToWBFSsuccesfully();
+    void transferGamesToWBFScanceled(bool discExitst);
+
+    void transferGamesFromWBFSsuccesfully();
+    void transferGamesFromWBFScanceled();
 
     void setWBFSProgressBar(int min, int max, int value, QString format);
     void setMainProgressBar(int value, QString format);

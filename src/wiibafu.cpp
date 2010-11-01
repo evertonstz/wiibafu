@@ -43,14 +43,17 @@ void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
 
     connect(this, SIGNAL(cancelTransferGamesToWBFS()), wiTools, SLOT(transferGamesToWBFS_cancel()));
+    connect(this, SIGNAL(cancelTransferGamesFromWBFS()), wiTools, SLOT(transferGamesFromWBFS_cancel()));
 
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
     connect(wiTools, SIGNAL(setProgressBarWBFS(int, int, int, QString)), this, SLOT(setWBFSProgressBar(int, int, int, QString)));
     connect(wiTools, SIGNAL(newStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
-    connect(wiTools, SIGNAL(transferToWBFSsuccessfully()), this, SLOT(transferToWBFSsuccesfully()));
-    connect(wiTools, SIGNAL(transferToWBFScanceled(bool)), this, SLOT(transferToWBFScanceled(bool)));
+    connect(wiTools, SIGNAL(transferGamesToWBFSsuccessfully()), this, SLOT(transferGamesToWBFSsuccesfully()));
+    connect(wiTools, SIGNAL(transferGamesToWBFScanceled(bool)), this, SLOT(transferGamesToWBFScanceled(bool)));
+    connect(wiTools, SIGNAL(transferGamesFromWBFSsuccessfully()), this, SLOT(transferGamesFromWBFSsuccesfully()));
+    connect(wiTools, SIGNAL(transferGamesFromWBFScanceled()), this, SLOT(transferGamesFromWBFScanceled()));
     connect(wiTools, SIGNAL(removeGamesFromWBFS_successfully()), this, SLOT(on_wbfsTab_pushButton_List_clicked()));
 
     connect(common, SIGNAL(newGame3DCover(QImage*)), this, SLOT(showGame3DCover(QImage*)));
@@ -121,7 +124,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
     if (ui->filesTab_pushButton_TransferToWBFS->text() != tr("Cancel transfering")) {
         if (ui->filesTab_tableView->selectionModel() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             ui->filesTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
-            QtConcurrent::run(wiTools, &WiTools::transferToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+            QtConcurrent::run(wiTools, &WiTools::transferGamesToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
         }
     }
     else {
@@ -156,8 +159,25 @@ void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
     }
 }
 
+// tr("Wii Disc Format *.wdf;;Wii Plain ISO *.iso;;Wii Compact ISO *.ciso;;Wii Backup File System Container *.wbfs")
+void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
+    if (ui->wbfsTab_pushButton_Transfer->text() != tr("Cancel transfering")) {
+        if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+            QString directory = "/media/Daten/Downloads";
+
+            if (!directory.isEmpty()) {
+                ui->wbfsTab_pushButton_Transfer->setText(tr("Cancel transfering"));
+                QtConcurrent::run(wiTools, &WiTools::transferGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QString("/home/kai/wii.wbfs"), QString("iso"), directory); //TODO: User sets wbfsPath and format!
+            }
+        }
+    }
+    else {
+        emit cancelTransferGamesFromWBFS();
+    }
+}
+
 void WiiBaFu::on_wbfsTab_pushButton_Remove_clicked() {
-    if (!ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+    if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
         int result = QMessageBox::question(this, tr("Remove games"), tr("Are you sure that you want to delete the selected games?"), QMessageBox::Ok, QMessageBox::Cancel);
         if (result == QMessageBox::Ok) {
             QtConcurrent::run(wiTools, &WiTools::removeGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
@@ -263,12 +283,12 @@ void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
     QDesktopServices::openUrl(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
 }
 
-void WiiBaFu::transferToWBFSsuccesfully() {
+void WiiBaFu::transferGamesToWBFSsuccesfully() {
     ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
     on_wbfsTab_pushButton_List_clicked();
 }
 
-void WiiBaFu::transferToWBFScanceled(bool discExitst) {
+void WiiBaFu::transferGamesToWBFScanceled(bool discExitst) {
     if (discExitst) {
         ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
         addEntryToLog(tr("Disc already exists!"));
@@ -279,6 +299,17 @@ void WiiBaFu::transferToWBFScanceled(bool discExitst) {
         addEntryToLog(tr("Transfer canceled!"));
         setStatusBarText(tr("Transfer canceled!"));
     }
+}
+
+void WiiBaFu::transferGamesFromWBFSsuccesfully() {
+    ui->wbfsTab_pushButton_Transfer->setText(tr("Transfer"));
+    setStatusBarText(tr("Ready."));
+}
+
+void WiiBaFu::transferGamesFromWBFScanceled() {
+    ui->wbfsTab_pushButton_Transfer->setText(tr("Transfer"));
+    addEntryToLog(tr("Transfer canceled!"));
+    setStatusBarText(tr("Transfer canceled!"));
 }
 
 void WiiBaFu::setMainProgressBar(int value, QString format) {

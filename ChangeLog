@@ -1,3 +1,7 @@
+2010-11-01 Kai Heitkamp <dynup@ymail.com>
+  * Transfer WBFS to image added.
+  * Some improvements.
+
 2010-10-31 Kai Heitkamp <dynup@ymail.com>
   * Cancel possibility for wbfs transfer added. (0.4)
   * More improvements for canceling. (0.4.1)

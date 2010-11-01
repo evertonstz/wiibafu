@@ -294,7 +294,7 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
     return model;
 }
 
-void WiTools::transferToWBFS(QModelIndexList indexList, QString wbfsPath) {
+void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit newStatusBarMessage(tr("Preparing transfer..."));
@@ -352,14 +352,14 @@ void WiTools::transferGamesToWBFS_readyReadStandardError() {
 void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit) {
         if (exitCode == 0) {
-            emit transferToWBFSsuccessfully();
+            emit transferGamesToWBFSsuccessfully();
         }
         else if (exitCode == 4) {
-            emit transferToWBFScanceled(true);
+            emit transferGamesToWBFScanceled(true);
         }
     }
     else {
-        emit transferToWBFScanceled(false);
+        emit transferGamesToWBFScanceled(false);
     }
 }
 
@@ -404,6 +404,77 @@ void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus ex
         emit newStatusBarMessage(message);
         emit newLogEntry(message);
     }
+}
+
+void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit newStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList paths;
+    foreach (QModelIndex index, indexList) {
+        paths.append(index.data().toString());
+    }
+
+    QStringList arguments;
+    arguments.append("EXTRACT");
+    if (wbfsPath.isEmpty()) {
+        arguments.append("--auto");
+    }
+    else {
+        arguments.append("--part");
+        arguments.append(wbfsPath);
+    }
+    arguments.append(paths);
+    arguments.append(QString("--").append(format));
+    arguments.append("--dest");
+    arguments.append(directory);
+    arguments.append("--progress");
+
+    wwtEXTRACTProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(wwtEXTRACTProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGamesFromWBFS_readyReadStandardOutput()));
+    connect(wwtEXTRACTProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGamesFromWBFS_readyReadStandardError()));
+    connect(wwtEXTRACTProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesFromWBFS_finished(int, QProcess::ExitStatus)));
+
+    wwtEXTRACTProcess->start("wwt", arguments);
+    wwtEXTRACTProcess->waitForFinished(-1);
+
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::transferGamesFromWBFS_readyReadStandardOutput() {
+    QString line = wwtEXTRACTProcess->readAllStandardOutput().constData();
+
+    if (line.contains("EXTRACT")) {
+        emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5));
+    }
+    else if (line.contains("disc extracted.") || line.contains("discs extracted.")) {
+        emit newLogEntry(line);
+    }
+}
+
+void WiTools::transferGamesFromWBFS_readyReadStandardError() {
+    emit newLogEntry(wwtEXTRACTProcess->readAllStandardError().constData());
+}
+
+void WiTools::transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        emit transferGamesFromWBFSsuccessfully();
+    }
+    else {
+        emit transferGamesFromWBFScanceled();
+    }
+}
+
+void WiTools::transferGamesFromWBFS_cancel() {
+    wwtEXTRACTProcess->kill();
 }
 
 void WiTools::checkWBFS(QString wbfsPath) {

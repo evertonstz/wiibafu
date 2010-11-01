@@ -31,12 +31,14 @@ public:
     explicit WiTools(QObject *parent = 0);
     QStandardItemModel *getFilesGameListModel(QStandardItemModel *model, QString path);
     QStandardItemModel *getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
-    void transferToWBFS(QModelIndexList indexList, QString wbfsPath);
+    void transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath);
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
+    void transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
     void checkWBFS(QString wbfsPath);
 
 private:
     QProcess *wwtADDProcess;
+    QProcess *wwtEXTRACTProcess;
 
 signals:
     void setMainProgressBarVisible(bool visible);
@@ -46,8 +48,11 @@ signals:
     void newLogEntry(QString entry);
     void newStatusBarMessage(QString message);
 
-    void transferToWBFScanceled(bool discExitst);
-    void transferToWBFSsuccessfully();
+    void transferGamesToWBFScanceled(bool discExitst);
+    void transferGamesToWBFSsuccessfully();
+
+    void transferGamesFromWBFScanceled();
+    void transferGamesFromWBFSsuccessfully();
 
     void removeGamesFromWBFS_successfully();
 
@@ -56,6 +61,11 @@ private slots:
     void transferGamesToWBFS_readyReadStandardError();
     void transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
     void transferGamesToWBFS_cancel();
+
+    void transferGamesFromWBFS_readyReadStandardOutput();
+    void transferGamesFromWBFS_readyReadStandardError();
+    void transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferGamesFromWBFS_cancel();
 
     void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 };
