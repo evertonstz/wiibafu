@@ -1,6 +1,6 @@
-HEADERS     += src/wiibafu.h src/witools.h src/common.h
-SOURCES     += src/main.cpp src/wiibafu.cpp src/witools.cpp src/common.cpp
-FORMS       += resources/ui/wiibafu.ui
+HEADERS     += src/wiibafu.h src/wiibafudialog.h src/witools.h src/common.h
+SOURCES     += src/main.cpp src/wiibafu.cpp src/wiibafudialog.cpp src/witools.cpp src/common.cpp
+FORMS       += resources/ui/wiibafu.ui resources/ui/wiibafudialog.ui
 RESOURCES   += resources/wiibafu.qrc
 
 TEMPLATE     = app

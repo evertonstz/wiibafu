@@ -22,6 +22,7 @@
 #include "ui_wiibafu.h"
 
 WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
+    wiibafudialog = new WiiBaFuDialog(this);
     wiTools = new WiTools(this);
     common = new Common(this);
 
@@ -159,15 +160,16 @@ void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
     }
 }
 
-// tr("Wii Disc Format *.wdf;;Wii Plain ISO *.iso;;Wii Compact ISO *.ciso;;Wii Backup File System Container *.wbfs")
 void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
     if (ui->wbfsTab_pushButton_Transfer->text() != tr("Cancel transfering")) {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
-            QString directory = "/media/Daten/Downloads";
+            int result = wiibafudialog->exec();
+            QString directory = wiibafudialog->imageDirectory();
+            QString format = wiibafudialog->imageFormat();
 
-            if (!directory.isEmpty()) {
+            if (result == QDialog::Accepted && !directory.isEmpty() && !format.isEmpty()) {
                 ui->wbfsTab_pushButton_Transfer->setText(tr("Cancel transfering"));
-                QtConcurrent::run(wiTools, &WiTools::transferGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QString("/home/kai/wii.wbfs"), QString("iso"), directory); //TODO: User sets wbfsPath and format!
+                QtConcurrent::run(wiTools, &WiTools::transferGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QString("/home/kai/wii.wbfs"), format, directory); //TODO: User sets the wbfs path!
             }
         }
     }

@@ -25,6 +25,7 @@
 #include <QMetaType>
 
 #include"witools.h"
+#include "wiibafudialog.h"
 #include "common.h"
 
 namespace Ui {
@@ -41,6 +42,7 @@ public:
 private:
     Ui::WiiBaFu *ui;
     WiTools *wiTools;
+    WiiBaFuDialog *wiibafudialog;
     Common *common;
 
     QStringList filesGamePaths;
