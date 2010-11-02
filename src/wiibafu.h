@@ -61,6 +61,7 @@ private:
 signals:
     void cancelTransferGamesToWBFS();
     void cancelTransferGamesFromWBFS();
+    void cancelTransferGameFromDVDToWBFS();
 
 private slots:
     void setMainProgressBarVisible(bool visible);
@@ -71,6 +72,7 @@ private slots:
     void on_filesTab_pushButton_ShowInfo_clicked();
 
     void on_dvdTab_pushButton_Load_clicked();
+    void on_dvdTab_pushButton_TransferToWBFS_clicked();
 
     void on_wbfsTab_pushButton_List_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
@@ -94,6 +96,9 @@ private slots:
 
     void transferGamesToWBFSsuccesfully();
     void transferGamesToWBFScanceled(bool discExitst);
+
+    void transferGameFromDVDToWBFSsuccesfully();
+    void transferGameFromDVDToWBFScanceled(bool discExitst);
 
     void transferGamesFromWBFSsuccesfully();
     void transferGamesFromWBFScanceled();

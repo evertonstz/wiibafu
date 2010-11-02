@@ -620,6 +620,74 @@ void WiTools::transferGamesFromWBFS_cancel() {
     wwtEXTRACTProcess->kill();
 }
 
+void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit newStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList arguments;
+    arguments.append("ADD");
+    if (wbfsPath.isEmpty()) {
+        arguments.append("--auto");
+    }
+    else {
+        arguments.append("--part");
+        arguments.append(wbfsPath);
+    }
+    arguments.append(drivePath);
+    arguments.append("--progress");
+
+    wwtADDDVDProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(wwtADDDVDProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGameFromDVDToWBFS_readyReadStandardOutput()));
+    connect(wwtADDDVDProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGameFromDVDToWBFS_readyReadStandardError()));
+    connect(wwtADDDVDProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGameFromDVDToWBFS_finished(int, QProcess::ExitStatus)));
+
+    wwtADDDVDProcess->start("wwt", arguments);
+    wwtADDDVDProcess->waitForFinished(-1);
+
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::transferGameFromDVDToWBFS_readyReadStandardOutput() {
+    QString line = wwtADDDVDProcess->readAllStandardOutput().constData();
+
+    if (line.contains("ADD")) {
+        emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("[") + 1, (line.lastIndexOf("]") - line.indexOf("[")) - 1)));
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5));
+    }
+    else if (line.contains("disc added.") || line.contains("discs added.")) {
+        emit newLogEntry(line);
+    }
+}
+
+void WiTools::transferGameFromDVDToWBFS_readyReadStandardError() {
+    emit newLogEntry(wwtADDDVDProcess->readAllStandardError().constData());
+}
+
+void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit) {
+        if (exitCode == 0) {
+            emit transferGameFromDVDToWBFSsuccessfully();
+        }
+        else if (exitCode == 4) {
+            emit transferGameFromDVDToWBFScanceled(true);
+        }
+    }
+    else {
+        emit transferGameFromDVDToWBFScanceled(false);
+    }
+}
+
+void WiTools::transferGameFromDVDToWBFS_cancel() {
+    wwtADDDVDProcess->kill();
+}
+
 void WiTools::checkWBFS(QString wbfsPath) {
     emit newStatusBarMessage(tr("Checking WBFS..."));
 

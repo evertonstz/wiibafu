@@ -29,10 +29,13 @@ class WiTools : public QObject {
 
 public:
     explicit WiTools(QObject *parent = 0);
+
     QStandardItemModel *getFilesGameListModel(QStandardItemModel *model, QString path);
     QStandardItemModel *getDVDGameListModel(QStandardItemModel *model, QString path);
     QStandardItemModel *getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
+
     void transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath);
+    void transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath);
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
     void transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
     void checkWBFS(QString wbfsPath);
@@ -40,6 +43,7 @@ public:
 private:
     QProcess *wwtADDProcess;
     QProcess *wwtEXTRACTProcess;
+    QProcess *wwtADDDVDProcess;
 
 signals:
     void setMainProgressBarVisible(bool visible);
@@ -52,6 +56,9 @@ signals:
     void transferGamesToWBFScanceled(bool discExitst);
     void transferGamesToWBFSsuccessfully();
 
+    void transferGameFromDVDToWBFScanceled(bool discExitst);
+    void transferGameFromDVDToWBFSsuccessfully();
+
     void transferGamesFromWBFScanceled();
     void transferGamesFromWBFSsuccessfully();
 
@@ -62,6 +69,11 @@ private slots:
     void transferGamesToWBFS_readyReadStandardError();
     void transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
     void transferGamesToWBFS_cancel();
+
+    void transferGameFromDVDToWBFS_readyReadStandardOutput();
+    void transferGameFromDVDToWBFS_readyReadStandardError();
+    void transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferGameFromDVDToWBFS_cancel();
 
     void transferGamesFromWBFS_readyReadStandardOutput();
     void transferGamesFromWBFS_readyReadStandardError();

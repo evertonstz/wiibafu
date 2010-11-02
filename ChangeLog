@@ -1,6 +1,8 @@
 2010-11-02 Kai Heitkamp <dynup@ymail.com>
   * Transfer WBFS to image extended.
   * List game infos (incl. disc cover) from DVD.
+  * Transfer game from DVD to WBFS.
+  * Version number increase to: 0.5
 
 2010-11-01 Kai Heitkamp <dynup@ymail.com>
   * Transfer WBFS to image added.

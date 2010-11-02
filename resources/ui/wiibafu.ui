@@ -176,13 +176,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="dvdTab_pushButton_TransferToImage">
-             <property name="text">
-              <string>Transfer to image</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
