@@ -131,7 +131,7 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 
 QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
     QStringList arguments;
-    arguments.append("LIST-A");
+    arguments.append("LIST-L");
     if (wbfsPath.isEmpty()) {
         arguments.append("--auto");
     }
@@ -225,19 +225,19 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
             continue;
         }
         else if (line.startsWith("itime=")) {
-            itimes.append(new QStandardItem(line.section("=", 1)));
+            itimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
             continue;
         }
         else if (line.startsWith("mtime=")) {
-            mtimes.append(new QStandardItem(line.section("=", 1)));
+            mtimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
             continue;
         }
         else if (line.startsWith("ctime=")) {
-            ctimes.append(new QStandardItem(line.section("=", 1)));
+            ctimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
             continue;
         }
         else if (line.startsWith("atime=")) {
-            atimes.append(new QStandardItem(line.section("=", 1)));
+            atimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
             continue;
         }
         else if (line.startsWith("filetype=")) {
