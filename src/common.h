@@ -28,21 +28,27 @@ class Common : public QObject {
     Q_OBJECT
 
 public:
+    enum GameCoverArt {
+        GameCoverDisc = 0x0,
+        GameCover3D = 0x1,
+        GameCoverHQ = 0x2
+    };
+
     explicit Common(QObject *parent = 0);
 
-    void getGame3DCover(QString gameID, QString language);
-    void getGameFullHQCover(QString gameID, QString language);
+    void requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt);
 
 private:
     QHttp *http;
     QUrl url;
-    bool hqCover;
+    GameCoverArt currentGameCoverArt;
 
-    void getGameCover(QString gameID, QString language, bool fullHQCover);
+    void getGameCover(QString gameID, QString language);
 
 signals:
     void newGame3DCover(QImage *game3DCover);
     void newGameFullHQCover(QImage *gameFullHQCover);
+    void newGameDiscCover(QImage *gameDiscCover);
     void showStatusBarMessage(QString message);
     void newLogEntry(QString entry);
 

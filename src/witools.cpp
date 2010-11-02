@@ -129,6 +129,149 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     return model;
 }
 
+QStandardItemModel* WiTools::getDVDGameListModel(QStandardItemModel *model, QString path) {
+    emit newStatusBarMessage(tr("Loading disc..."));
+
+    QProcess dvdRead;
+    dvdRead.start("wit", QStringList() << "LIST-LL" << path << "--section");
+
+    if (!dvdRead.waitForFinished(-1)) {
+        emit newStatusBarMessage(tr("Loading disc failed!"));
+        emit newLogEntry(tr("Loading disc failed!\nError: %1 (%2)").arg(QString::number(dvdRead.exitCode()), dvdRead.errorString()));
+        return model;
+    }
+
+    QByteArray bytes = dvdRead.readAllStandardOutput();
+    QStringList lines = QString(bytes).split("\n");
+
+    emit newLogEntry(QString(bytes));
+
+    QList<QStandardItem *> game;
+
+    foreach (QString line, lines) {
+        if (line.contains("total-discs=0")) {
+            emit newStatusBarMessage(tr("No game found!"));
+            return model;
+            break;
+        }
+        else if (line.isEmpty())
+            continue;
+
+        if (line.startsWith("id=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("name=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("title=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("region=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("size=")) {
+            game.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
+            continue;
+        }
+        else if (line.startsWith("itime=")) {
+            if (line.section("=", 1).section(" ", 1) != "") {
+                game.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            }
+            else {
+                game.append(new QStandardItem("--"));
+            }
+            continue;
+        }
+        else if (line.startsWith("mtime=")) {
+            if (line.section("=", 1).section(" ", 1) != "") {
+                game.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            }
+            else {
+                game.append(new QStandardItem("--"));
+            }
+            continue;
+        }
+        else if (line.startsWith("ctime=")) {
+            if (line.section("=", 1).section(" ", 1) != "") {
+                game.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            }
+            else {
+                game.append(new QStandardItem("--"));
+            }
+            continue;
+        }
+        else if (line.startsWith("atime=")) {
+            if (line.section("=", 1).section(" ", 1) != "") {
+                game.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            }
+            else {
+                game.append(new QStandardItem("--"));
+            }
+            continue;
+        }
+        else if (line.startsWith("filetype=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("container=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("disctype=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("n-partitions=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("partition-info=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("wbfs_slot=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("source=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("filename=")) {
+            game.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+    }
+
+    model->appendColumn(game);
+
+    model->setHeaderData(0, Qt::Vertical, tr("Game ID:"));
+    model->setHeaderData(1, Qt::Vertical, tr("Game title:"));
+    model->setHeaderData(2, Qt::Vertical, tr("Original title:"));
+    model->setHeaderData(3, Qt::Vertical, tr("Region:"));
+    model->setHeaderData(4, Qt::Vertical, tr("Size:"));
+    model->setHeaderData(5, Qt::Vertical, tr("Insertion:"));
+    model->setHeaderData(6, Qt::Vertical, tr("Last modification:"));
+    model->setHeaderData(7, Qt::Vertical, tr("Last status change:"));
+    model->setHeaderData(8, Qt::Vertical, tr("Last access:"));
+    model->setHeaderData(9, Qt::Vertical, tr("Type:"));
+    model->setHeaderData(10, Qt::Vertical, tr("Container:"));
+    model->setHeaderData(11, Qt::Vertical, tr("Disc type:"));
+    model->setHeaderData(12, Qt::Vertical, tr("N partitions:"));
+    model->setHeaderData(13, Qt::Vertical, tr("Partition info:"));
+    model->setHeaderData(14, Qt::Vertical, tr("WBFS slot:"));
+    model->setHeaderData(15, Qt::Vertical, tr("Source:"));
+    model->setHeaderData(16, Qt::Vertical, tr("File name:"));
+
+    emit newStatusBarMessage(tr("Ready."));
+
+    return model;
+}
+
 QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
     QStringList arguments;
     arguments.append("LIST-L");

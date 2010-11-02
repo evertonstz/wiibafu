@@ -26,21 +26,18 @@ Common::Common(QObject *parent) : QObject(parent) {
     connect(http, SIGNAL(responseHeaderReceived(QHttpResponseHeader)), this, SLOT(loadGameCover_responseHeaderReceived(QHttpResponseHeader)));
 }
 
-void Common::getGame3DCover(QString gameID, QString language) {
-    hqCover = false;
-    getGameCover(gameID, language, false);
-}
-
-void Common::getGameFullHQCover(QString gameID, QString language) {
-    hqCover = true;
-    getGameCover(gameID, language, true);
-}
-
-void Common::getGameCover(QString gameID, QString language, bool fullHQCover) {
-    if (fullHQCover)
-        url = QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/%1/%2.png").arg(language, gameID);
-    else
+void Common::requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt) {
+    if (gameCoverArt == GameCoverDisc) {
+        url = QString("http://wiitdb.com/wiitdb/artwork/disc/%1/%2.png").arg(language, gameID);
+    }
+    else if (gameCoverArt == GameCover3D) {
         url = QString("http://wiitdb.com/wiitdb/artwork/cover3D/%1/%2.png").arg(language, gameID);
+    }
+    else if (gameCoverArt == GameCoverHQ) {
+        url = QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/%1/%2.png").arg(language, gameID);
+    }
+
+    currentGameCoverArt = gameCoverArt;
 
     http->setHost(url.host());
     http->get(url.path());
@@ -58,10 +55,16 @@ void Common::loadGameCover_done(bool error) {
 
         if (!image->isNull()) {
             emit showStatusBarMessage(tr("Ready."));
-            if (hqCover)
+
+            if (currentGameCoverArt == GameCoverHQ) {
                 emit newGameFullHQCover(image);
-            else
+            }
+            else if (currentGameCoverArt == GameCover3D) {
                 emit newGame3DCover(image);
+            }
+            else if (currentGameCoverArt == GameCoverDisc) {
+                emit newGameDiscCover(image);
+            }
         }
         else
             emit showStatusBarMessage(tr("No game cover available!"));

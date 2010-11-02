@@ -101,14 +101,58 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTableView" name="dvdTab_tableView"/>
+         <widget class="QFrame" name="frame_3">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QTableView" name="dvdTab_tableView">
+             <property name="minimumSize">
+              <size>
+               <width>400</width>
+               <height>342</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>500</width>
+               <height>342</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="dvdTab_label_DiscCover">
+             <property name="minimumSize">
+              <size>
+               <width>161</width>
+               <height>171</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>161</width>
+               <height>171</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
         <item>
          <widget class="QFrame" name="frame_DVD">
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>40</height>
+            <height>50</height>
            </size>
           </property>
           <property name="frameShape">
@@ -119,30 +163,23 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QPushButton" name="dvdTab_pushButton_Drive">
+            <widget class="QPushButton" name="dvdTab_pushButton_Load">
              <property name="text">
-              <string>Drive</string>
+              <string>Load</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="dvdTab_pushButton_Select">
+            <widget class="QPushButton" name="dvdTab_pushButton_TransferToWBFS">
              <property name="text">
-              <string>Select</string>
+              <string>Transfer to WBFS</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="dvdTab_pushButton_Transfer">
+            <widget class="QPushButton" name="dvdTab_pushButton_TransferToImage">
              <property name="text">
-              <string>Transfer</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="dvdTab_pushButton_Tools">
-             <property name="text">
-              <string>Tools</string>
+              <string>Transfer to image</string>
              </property>
             </widget>
            </item>
@@ -270,7 +307,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>ID:</string>
+                  <string>Game ID:</string>
                  </property>
                 </widget>
                </item>
@@ -294,7 +331,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>Name:</string>
+                  <string>Game title:</string>
                  </property>
                 </widget>
                </item>
@@ -318,7 +355,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>Title:</string>
+                  <string>Original title:</string>
                  </property>
                 </widget>
                </item>

@@ -48,6 +48,7 @@ private:
     QStringList filesGamePaths;
     QProgressBar *progressBar_Main;
     QStandardItemModel *filesListModel;
+    QStandardItemModel *dvdListModel;
     QStandardItemModel *wbfsListModel;
 
     void setupConnections();
@@ -69,6 +70,8 @@ private slots:
     void on_filesTab_pushButton_TransferToWBFS_clicked();
     void on_filesTab_pushButton_ShowInfo_clicked();
 
+    void on_dvdTab_pushButton_Load_clicked();
+
     void on_wbfsTab_pushButton_List_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
     void on_wbfsTab_pushButton_Transfer_clicked();
@@ -85,6 +88,7 @@ private slots:
 
     void on_menuTools_CheckWBFS_triggered();
 
+    void showGameDiscCover(QImage *gameCover);
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
 

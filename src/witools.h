@@ -30,6 +30,7 @@ class WiTools : public QObject {
 public:
     explicit WiTools(QObject *parent = 0);
     QStandardItemModel *getFilesGameListModel(QStandardItemModel *model, QString path);
+    QStandardItemModel *getDVDGameListModel(QStandardItemModel *model, QString path);
     QStandardItemModel *getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
     void transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath);
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);

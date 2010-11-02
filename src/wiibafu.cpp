@@ -27,6 +27,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     common = new Common(this);
 
     filesListModel = new QStandardItemModel(this);
+    dvdListModel = new QStandardItemModel(this);
     wbfsListModel = new QStandardItemModel(this);
 
     ui->setupUi(this);
@@ -37,6 +38,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     setupConnections();
 
     setGameListAttributes(ui->filesTab_tableView);
+    setGameListAttributes(ui->dvdTab_tableView);
     setGameListAttributes(ui->wbfsTab_tableView);
 }
 
@@ -59,6 +61,7 @@ void WiiBaFu::setupConnections() {
 
     connect(common, SIGNAL(newGame3DCover(QImage*)), this, SLOT(showGame3DCover(QImage*)));
     connect(common, SIGNAL(newGameFullHQCover(QImage*)), this, SLOT(showGameFullHQCover(QImage*)));
+    connect(common, SIGNAL(newGameDiscCover(QImage*)), this, SLOT(showGameDiscCover(QImage*)));
     connect(common, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(common, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
 
@@ -86,16 +89,26 @@ void WiiBaFu::setMainProgressBarVisible(bool visible) {
 void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         gameTableView->setShowGrid(false);
         gameTableView->setAlternatingRowColors(true);
-        gameTableView->verticalHeader()->hide();
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
-        gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         gameTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         gameTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
         gameTableView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 
         QHeaderView *headerView = gameTableView->horizontalHeader();
-        QHeaderView::ResizeMode resizeMode = QHeaderView::ResizeToContents;
-        headerView->setResizeMode(resizeMode);
+        QHeaderView::ResizeMode resizeMode;
+
+        if (gameTableView != ui->dvdTab_tableView) {
+            gameTableView->verticalHeader()->hide();
+            gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+            resizeMode = QHeaderView::ResizeToContents;
+            headerView->setResizeMode(resizeMode);
+        }
+        else {
+            gameTableView->horizontalHeader()->hide();
+            gameTableView->setSelectionMode(QAbstractItemView::NoSelection);
+            resizeMode = QHeaderView::Stretch;
+            headerView->setResizeMode(resizeMode);
+        }
 }
 
 void WiiBaFu::on_filesTab_pushButton_Add_clicked() {
@@ -135,6 +148,16 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
 
 void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
     setGameInfo(ui->filesTab_tableView, filesListModel);
+}
+
+void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
+    dvdListModel->clear();
+    QString drive("/dev/sr0"); //TODO: Via settings!
+
+    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getDVDGameListModel, dvdListModel, drive);
+    ui->dvdTab_tableView->setModel(future.result());
+    ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(drive));
+    common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::GameCoverDisc);
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_List_clicked() {
@@ -200,12 +223,12 @@ void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
 
 void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty())
-        common->getGame3DCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage());
+        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::GameCover3D);
 }
 
 void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty())
-        common->getGameFullHQCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage());
+        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::GameCoverHQ);
 }
 
 void WiiBaFu::on_logTab_pushButton_Clear_clicked() {
@@ -274,6 +297,10 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
         on_infoTab_pushButton_Load3DCover_clicked();
         ui->tabWidget->setCurrentIndex(3);
     }
+}
+
+void WiiBaFu::showGameDiscCover(QImage *gameCover) {
+    ui->dvdTab_label_DiscCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
 }
 
 void WiiBaFu::showGame3DCover(QImage *gameCover) {
