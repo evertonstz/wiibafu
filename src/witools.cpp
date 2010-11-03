@@ -461,6 +461,7 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
     filenames.clear();
 
     // total - free = workaround for wwts 'used_mib' calculate bug
+    usedMB = tr("Used MiB: %1").arg(total - free);
     emit setProgressBarWBFS(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
 
     return model;
