@@ -35,9 +35,9 @@ public:
     QStandardItemModel *getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
 
     void transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath);
+    void transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
     void transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath);
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
-    void transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
     void checkWBFS(QString wbfsPath);
 
 private:
@@ -54,11 +54,11 @@ signals:
     void transferGamesToWBFScanceled(bool discExitst);
     void transferGamesToWBFSsuccessfully();
 
-    void transferGameFromDVDToWBFScanceled(bool discExitst);
-    void transferGameFromDVDToWBFSsuccessfully();
-
     void transferGamesFromWBFScanceled();
     void transferGamesFromWBFSsuccessfully();
+
+    void transferGameFromDVDToWBFScanceled(bool discExitst);
+    void transferGameFromDVDToWBFSsuccessfully();
 
     void removeGamesFromWBFS_successfully();
 
@@ -68,15 +68,15 @@ private slots:
     void transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
     void transferGamesToWBFS_cancel();
 
-    void transferGameFromDVDToWBFS_readyReadStandardOutput();
-    void transferGameFromDVDToWBFS_readyReadStandardError();
-    void transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void transferGameFromDVDToWBFS_cancel();
-
     void transferGamesFromWBFS_readyReadStandardOutput();
     void transferGamesFromWBFS_readyReadStandardError();
     void transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
     void transferGamesFromWBFS_cancel();
+
+    void transferGameFromDVDToWBFS_readyReadStandardOutput();
+    void transferGameFromDVDToWBFS_readyReadStandardError();
+    void transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferGameFromDVDToWBFS_cancel();
 
     void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 };

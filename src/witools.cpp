@@ -543,48 +543,6 @@ void WiTools::transferGamesToWBFS_cancel() {
     witProcess->kill();
 }
 
-void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
-    QStringList ids;
-    foreach (QModelIndex index, indexList) {
-        ids.append(index.data().toString());
-    }
-
-    QStringList arguments;
-    arguments.append("REMOVE");
-    if (wbfsPath.isEmpty()) {
-        arguments.append("--auto");
-    }
-    else {
-        arguments.append("--part");
-        arguments.append(wbfsPath);
-    }
-    arguments.append(ids);
-
-    QProcess *wwtREMOVEProcess = new QProcess();
-    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(wwtREMOVEProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(removeGamesFromWBFS_finished(int, QProcess::ExitStatus)));
-
-    wwtREMOVEProcess->start("wwt", arguments);
-    wwtREMOVEProcess->waitForFinished(-1);
-
-    arguments.clear();
-    delete wwtREMOVEProcess;
-}
-
-void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
-    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
-        QString message(tr("Games removed successfully!"));
-        emit newStatusBarMessage(message);
-        emit newLogEntry(message);
-        emit removeGamesFromWBFS_successfully();
-    }
-    else {
-        QString message(tr("Games removed failed!"));
-        emit newStatusBarMessage(message);
-        emit newLogEntry(message);
-    }
-}
-
 void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
@@ -728,6 +686,48 @@ void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitSta
 
 void WiTools::transferGameFromDVDToWBFS_cancel() {
     witProcess->kill();
+}
+
+void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
+    QStringList ids;
+    foreach (QModelIndex index, indexList) {
+        ids.append(index.data().toString());
+    }
+
+    QStringList arguments;
+    arguments.append("REMOVE");
+    if (wbfsPath.isEmpty()) {
+        arguments.append("--auto");
+    }
+    else {
+        arguments.append("--part");
+        arguments.append(wbfsPath);
+    }
+    arguments.append(ids);
+
+    QProcess *wwtREMOVEProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(wwtREMOVEProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(removeGamesFromWBFS_finished(int, QProcess::ExitStatus)));
+
+    wwtREMOVEProcess->start("wwt", arguments);
+    wwtREMOVEProcess->waitForFinished(-1);
+
+    arguments.clear();
+    delete wwtREMOVEProcess;
+}
+
+void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        QString message(tr("Games removed successfully!"));
+        emit newStatusBarMessage(message);
+        emit newLogEntry(message);
+        emit removeGamesFromWBFS_successfully();
+    }
+    else {
+        QString message(tr("Games removed failed!"));
+        emit newStatusBarMessage(message);
+        emit newLogEntry(message);
+    }
 }
 
 void WiTools::checkWBFS(QString wbfsPath) {
