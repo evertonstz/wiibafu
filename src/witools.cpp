@@ -124,6 +124,18 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     model->setHeaderData(9, Qt::Horizontal, tr("Type"));
     model->setHeaderData(10, Qt::Horizontal, tr("File name"));
 
+    ids.clear();
+    names.clear();
+    titles.clear();
+    regions.clear();
+    sizes.clear();
+    itimes.clear();
+    mtimes.clear();
+    ctimes.clear();
+    atimes.clear();
+    filetypes.clear();
+    filenames.clear();
+
     emit newStatusBarMessage(tr("Ready."));
 
     return model;
@@ -266,6 +278,8 @@ QStandardItemModel* WiTools::getDVDGameListModel(QStandardItemModel *model, QStr
     model->setHeaderData(14, Qt::Vertical, tr("WBFS slot:"));
     model->setHeaderData(15, Qt::Vertical, tr("Source:"));
     model->setHeaderData(16, Qt::Vertical, tr("File name:"));
+
+    game.clear();
 
     emit newStatusBarMessage(tr("Ready."));
 
@@ -431,7 +445,22 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
     model->setHeaderData(12, Qt::Horizontal, tr("WBFS slot"));
     model->setHeaderData(13, Qt::Horizontal, tr("File/Partition"));
 
-    // total - free = bug fix for wwts 'used_mib'
+    ids.clear();
+    names.clear();
+    titles.clear();
+    regions.clear();
+    sizes.clear();
+    usedblocks.clear();
+    itimes.clear();
+    mtimes.clear();
+    ctimes.clear();
+    atimes.clear();
+    filetypes.clear();
+    containers.clear();
+    wbfsslots.clear();
+    filenames.clear();
+
+    // total - free = workaround for wwts 'used_mib' calculate bug
     emit setProgressBarWBFS(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
 
     return model;
@@ -459,20 +488,22 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     arguments.append(paths);
     arguments.append("--progress");
 
-    wwtADDProcess = new QProcess();
+    witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(wwtADDProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGamesToWBFS_readyReadStandardOutput()));
-    connect(wwtADDProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGamesToWBFS_readyReadStandardError()));
-    connect(wwtADDProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToWBFS_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGamesToWBFS_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGamesToWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToWBFS_finished(int, QProcess::ExitStatus)));
 
-    wwtADDProcess->start("wwt", arguments);
-    wwtADDProcess->waitForFinished(-1);
+    witProcess->start("wwt", arguments);
+    witProcess->waitForFinished(-1);
+
+    arguments.clear();
 
     emit setMainProgressBarVisible(false);
 }
 
 void WiTools::transferGamesToWBFS_readyReadStandardOutput() {
-    QString line = wwtADDProcess->readAllStandardOutput().constData();
+    QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("ADD")) {
         emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
@@ -489,7 +520,7 @@ void WiTools::transferGamesToWBFS_readyReadStandardOutput() {
 }
 
 void WiTools::transferGamesToWBFS_readyReadStandardError() {
-    emit newLogEntry(wwtADDProcess->readAllStandardError().constData());
+    emit newLogEntry(witProcess->readAllStandardError().constData());
 }
 
 void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -504,10 +535,12 @@ void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus ex
     else {
         emit transferGamesToWBFScanceled(false);
     }
+
+    delete witProcess;
 }
 
 void WiTools::transferGamesToWBFS_cancel() {
-    wwtADDProcess->kill();
+    witProcess->kill();
 }
 
 void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
@@ -533,6 +566,9 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     wwtREMOVEProcess->start("wwt", arguments);
     wwtREMOVEProcess->waitForFinished(-1);
+
+    arguments.clear();
+    delete wwtREMOVEProcess;
 }
 
 void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -574,20 +610,21 @@ void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath,
     arguments.append(directory);
     arguments.append("--progress");
 
-    wwtEXTRACTProcess = new QProcess();
+    witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(wwtEXTRACTProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGamesFromWBFS_readyReadStandardOutput()));
-    connect(wwtEXTRACTProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGamesFromWBFS_readyReadStandardError()));
-    connect(wwtEXTRACTProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesFromWBFS_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGamesFromWBFS_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGamesFromWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesFromWBFS_finished(int, QProcess::ExitStatus)));
 
-    wwtEXTRACTProcess->start("wwt", arguments);
-    wwtEXTRACTProcess->waitForFinished(-1);
+    witProcess->start("wwt", arguments);
+    witProcess->waitForFinished(-1);
 
+    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
 void WiTools::transferGamesFromWBFS_readyReadStandardOutput() {
-    QString line = wwtEXTRACTProcess->readAllStandardOutput().constData();
+    QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("EXTRACT")) {
         emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
@@ -604,7 +641,7 @@ void WiTools::transferGamesFromWBFS_readyReadStandardOutput() {
 }
 
 void WiTools::transferGamesFromWBFS_readyReadStandardError() {
-    emit newLogEntry(wwtEXTRACTProcess->readAllStandardError().constData());
+    emit newLogEntry(witProcess->readAllStandardError().constData());
 }
 
 void WiTools::transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -614,10 +651,12 @@ void WiTools::transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus 
     else {
         emit transferGamesFromWBFScanceled();
     }
+
+    delete witProcess;
 }
 
 void WiTools::transferGamesFromWBFS_cancel() {
-    wwtEXTRACTProcess->kill();
+    witProcess->kill();
 }
 
 void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
@@ -637,20 +676,21 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
     arguments.append(drivePath);
     arguments.append("--progress");
 
-    wwtADDDVDProcess = new QProcess();
+    witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(wwtADDDVDProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGameFromDVDToWBFS_readyReadStandardOutput()));
-    connect(wwtADDDVDProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGameFromDVDToWBFS_readyReadStandardError()));
-    connect(wwtADDDVDProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGameFromDVDToWBFS_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGameFromDVDToWBFS_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGameFromDVDToWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGameFromDVDToWBFS_finished(int, QProcess::ExitStatus)));
 
-    wwtADDDVDProcess->start("wwt", arguments);
-    wwtADDDVDProcess->waitForFinished(-1);
+    witProcess->start("wwt", arguments);
+    witProcess->waitForFinished(-1);
 
+    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
 void WiTools::transferGameFromDVDToWBFS_readyReadStandardOutput() {
-    QString line = wwtADDDVDProcess->readAllStandardOutput().constData();
+    QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("ADD")) {
         emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("[") + 1, (line.lastIndexOf("]") - line.indexOf("[")) - 1)));
@@ -667,7 +707,7 @@ void WiTools::transferGameFromDVDToWBFS_readyReadStandardOutput() {
 }
 
 void WiTools::transferGameFromDVDToWBFS_readyReadStandardError() {
-    emit newLogEntry(wwtADDDVDProcess->readAllStandardError().constData());
+    emit newLogEntry(witProcess->readAllStandardError().constData());
 }
 
 void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -682,10 +722,12 @@ void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitSta
     else {
         emit transferGameFromDVDToWBFScanceled(false);
     }
+
+    delete witProcess;
 }
 
 void WiTools::transferGameFromDVDToWBFS_cancel() {
-    wwtADDDVDProcess->kill();
+    witProcess->kill();
 }
 
 void WiTools::checkWBFS(QString wbfsPath) {
@@ -715,5 +757,6 @@ void WiTools::checkWBFS(QString wbfsPath) {
         emit newStatusBarMessage(tr("WBFS check successfully!"));
     }
 
+    arguments.clear();
     emit newLogEntry(QString(wwtCHECKProcess.readAll()));
 }

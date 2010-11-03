@@ -35,6 +35,7 @@ public:
     };
 
     explicit Common(QObject *parent = 0);
+    ~Common();
 
     void requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt);
 

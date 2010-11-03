@@ -451,5 +451,12 @@ void WiiBaFu::showAboutBox() {
 }
 
 WiiBaFu::~WiiBaFu() {
+    delete wiibafudialog;
+    delete wiTools;
+    delete common;
+    delete filesListModel;
+    delete dvdListModel;
+    delete wbfsListModel;
+    delete progressBar_Main;
     delete ui;
 }

@@ -66,11 +66,18 @@ void Common::loadGameCover_done(bool error) {
                 emit newGameDiscCover(image);
             }
         }
-        else
+        else {
             emit showStatusBarMessage(tr("No game cover available!"));
+        }
+
+        delete image;
     }
     else {
         emit showStatusBarMessage(http->errorString());
         emit newLogEntry(http->errorString().append("\n"));
     }
+}
+
+Common::~Common() {
+    delete http;
 }

@@ -41,9 +41,7 @@ public:
     void checkWBFS(QString wbfsPath);
 
 private:
-    QProcess *wwtADDProcess;
-    QProcess *wwtEXTRACTProcess;
-    QProcess *wwtADDDVDProcess;
+    QProcess *witProcess;
 
 signals:
     void setMainProgressBarVisible(bool visible);
