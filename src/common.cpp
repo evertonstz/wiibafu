@@ -44,8 +44,8 @@ void Common::requestGameCover(QString gameID, QString language, GameCoverArt gam
 }
 
 void Common::loadGameCover_responseHeaderReceived(const QHttpResponseHeader &resp) {
-    emit newLogEntry(http->currentRequest().toString());
-    emit newLogEntry(resp.toString().remove(" "));
+    emit newLogEntry(http->currentRequest().toString(), WiTools::Info);
+    emit newLogEntry(resp.toString().remove(" "), WiTools::Info);
 }
 
 void Common::loadGameCover_done(bool error) {
@@ -68,13 +68,14 @@ void Common::loadGameCover_done(bool error) {
         }
         else {
             emit showStatusBarMessage(tr("No game cover available!"));
+            emit newLogEntry(tr("No game cover available!"), WiTools::Error);
         }
 
         delete image;
     }
     else {
         emit showStatusBarMessage(http->errorString());
-        emit newLogEntry(http->errorString().append("\n"));
+        emit newLogEntry(http->errorString().append("\n"), WiTools::Error);
     }
 }
 

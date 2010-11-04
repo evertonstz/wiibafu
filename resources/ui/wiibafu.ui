@@ -1124,7 +1124,7 @@
   </action>
   <action name="menuOptions_Settings">
    <property name="text">
-    <string>Settings</string>
+    <string>Settings...</string>
    </property>
   </action>
  </widget>

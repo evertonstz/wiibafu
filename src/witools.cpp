@@ -32,14 +32,14 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 
     if (!filesRead.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("Adding games failed!"));
-        emit newLogEntry(tr("Adding games failed!\nError: %1 (%2)").arg(QString::number(filesRead.exitCode()), filesRead.errorString()));
+        emit newLogEntry(tr("Adding games failed!\nError: %1 (%2)").arg(QString::number(filesRead.exitCode()), filesRead.errorString()), Error);
         return model;
     }
 
     QByteArray bytes = filesRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
 
-    emit newLogEntry(QString(bytes));
+    emit newLogEntry(QString(bytes), Info);
 
     double count = 0;
     QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
@@ -149,14 +149,14 @@ QStandardItemModel* WiTools::getDVDGameListModel(QStandardItemModel *model, QStr
 
     if (!dvdRead.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("Loading disc failed!"));
-        emit newLogEntry(tr("Loading disc failed!\nError: %1 (%2)").arg(QString::number(dvdRead.exitCode()), dvdRead.errorString()));
+        emit newLogEntry(tr("Loading disc failed!\nError: %1 (%2)").arg(QString::number(dvdRead.exitCode()), dvdRead.errorString()), Error);
         return model;
     }
 
     QByteArray bytes = dvdRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
 
-    emit newLogEntry(QString(bytes));
+    emit newLogEntry(QString(bytes), Info);
 
     QList<QStandardItem *> game;
 
@@ -289,6 +289,7 @@ QStandardItemModel* WiTools::getDVDGameListModel(QStandardItemModel *model, QStr
 QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
     QStringList arguments;
     arguments.append("LIST-L");
+
     if (wbfsPath.isEmpty()) {
         arguments.append("--auto");
     }
@@ -303,14 +304,14 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
 
     if (!wbfsRead.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("Listing games failed!"));
-        emit newLogEntry(tr("Listing games failed!\nError: %1 (%2)").arg(QString::number(wbfsRead.exitCode()), wbfsRead.errorString()));
+        emit newLogEntry(tr("Listing games failed!\nError: %1 (%2)").arg(QString::number(wbfsRead.exitCode()), wbfsRead.errorString()), Error);
         return model;
     }
 
     QByteArray bytes = wbfsRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
 
-    emit newLogEntry(QString(bytes));
+    emit newLogEntry(QString(bytes), Info);
 
     int free, total;
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
@@ -479,6 +480,7 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     QStringList arguments;
     arguments.append("ADD");
+
     if (wbfsPath.isEmpty()) {
         arguments.append("--auto");
     }
@@ -486,7 +488,9 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
         arguments.append("--part");
         arguments.append(wbfsPath);
     }
+
     arguments.append(paths);
+    arguments.append(standardOptions());
     arguments.append("--progress");
 
     witProcess = new QProcess();
@@ -513,15 +517,15 @@ void WiTools::transferGamesToWBFS_readyReadStandardOutput() {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(line.remove(0, 5));
+        emit newLogEntry(line.remove(0, 5), Info);
     }
     else if (line.contains("disc added.") || line.contains("discs added.")) {
-        emit newLogEntry(line);
+        emit newLogEntry(line, Info);
     }
 }
 
 void WiTools::transferGamesToWBFS_readyReadStandardError() {
-    emit newLogEntry(witProcess->readAllStandardError().constData());
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
 void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -556,6 +560,7 @@ void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath,
 
     QStringList arguments;
     arguments.append("EXTRACT");
+
     if (wbfsPath.isEmpty()) {
         arguments.append("--auto");
     }
@@ -563,10 +568,12 @@ void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath,
         arguments.append("--part");
         arguments.append(wbfsPath);
     }
+
     arguments.append(paths);
     arguments.append(QString("--").append(format));
     arguments.append("--dest");
     arguments.append(directory);
+    arguments.append(standardOptions());
     arguments.append("--progress");
 
     witProcess = new QProcess();
@@ -592,15 +599,15 @@ void WiTools::transferGamesFromWBFS_readyReadStandardOutput() {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(line.remove(0, 5));
+        emit newLogEntry(line.remove(0, 5), Info);
     }
     else if (line.contains("disc extracted.") || line.contains("discs extracted.")) {
-        emit newLogEntry(line);
+        emit newLogEntry(line, Info);
     }
 }
 
 void WiTools::transferGamesFromWBFS_readyReadStandardError() {
-    emit newLogEntry(witProcess->readAllStandardError().constData());
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
 void WiTools::transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -625,6 +632,7 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
 
     QStringList arguments;
     arguments.append("ADD");
+
     if (wbfsPath.isEmpty()) {
         arguments.append("--auto");
     }
@@ -632,7 +640,9 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
         arguments.append("--part");
         arguments.append(wbfsPath);
     }
+
     arguments.append(drivePath);
+    arguments.append(standardOptions());
     arguments.append("--progress");
 
     witProcess = new QProcess();
@@ -658,15 +668,15 @@ void WiTools::transferGameFromDVDToWBFS_readyReadStandardOutput() {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(line.remove(0, 5));
+        emit newLogEntry(line.remove(0, 5), Info);
     }
     else if (line.contains("disc added.") || line.contains("discs added.")) {
-        emit newLogEntry(line);
+        emit newLogEntry(line, Info);
     }
 }
 
 void WiTools::transferGameFromDVDToWBFS_readyReadStandardError() {
-    emit newLogEntry(witProcess->readAllStandardError().constData());
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
 void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -697,6 +707,7 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     QStringList arguments;
     arguments.append("REMOVE");
+
     if (wbfsPath.isEmpty()) {
         arguments.append("--auto");
     }
@@ -704,7 +715,13 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
         arguments.append("--part");
         arguments.append(wbfsPath);
     }
+
     arguments.append(ids);
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Force", QVariant(false)).toBool())
+        arguments.append("--force");
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Test", QVariant(false)).toBool())
+        arguments.append("--test");
 
     QProcess *wwtREMOVEProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -721,21 +738,27 @@ void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus ex
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
         QString message(tr("Games removed successfully!"));
         emit newStatusBarMessage(message);
-        emit newLogEntry(message);
+        emit newLogEntry(message, Info);
         emit removeGamesFromWBFS_successfully();
     }
     else {
         QString message(tr("Games removed failed!"));
         emit newStatusBarMessage(message);
-        emit newLogEntry(message);
+        emit newLogEntry(message, Info);
     }
 }
 
 void WiTools::checkWBFS(QString wbfsPath) {
-    emit newStatusBarMessage(tr("Checking WBFS..."));
+    if (QSettings("WiiBaFu", "wiibafu").value("CheckWBFS/Repair", QVariant(true)).toBool()) {
+        emit newStatusBarMessage(tr("Checking and repairing WBFS..."));
+    }
+    else {
+        emit newStatusBarMessage(tr("Checking WBFS..."));
+    }
 
     QStringList arguments;
     arguments.append("CHECK");
+
     if (wbfsPath.isEmpty()) {
         arguments.append("--auto");
     }
@@ -743,8 +766,48 @@ void WiTools::checkWBFS(QString wbfsPath) {
         arguments.append("--part");
         arguments.append(wbfsPath);
     }
-    //arguments.append("--repair"); //TODO: Via settings
-    //arguments.append("ALL"); //TODO: Via settings
+
+    if (QSettings("WiiBaFu", "wiibafu").value("CheckWBFS/Repair", QVariant(true)).toBool()) {
+        arguments.append("--repair");
+
+        QString repairModes;
+
+        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/FBT", QVariant(true)).toBool()) {
+            repairModes.append("FBT,");
+        }
+        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/INODES", QVariant(true)).toBool()) {
+            repairModes.append("INODES,");
+        }
+        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-ALL", QVariant(true)).toBool()) {
+            repairModes.append("RM-ALL,");
+        }
+        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool()) {
+            repairModes.append("RM-EMPTY,");
+        }
+        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-FREE", QVariant(true)).toBool()) {
+            repairModes.append("RM-FREE,");
+        }
+        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-INVALID", QVariant(true)).toBool()) {
+            repairModes.append("RM-INVALID,");
+        }
+        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool()) {
+            repairModes.append("RM-OVERLAP,");
+        }
+        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/STANDARD", QVariant(true)).toBool()) {
+            repairModes.append("STANDARD");
+        }
+
+        if (repairModes.endsWith(",")) {
+            repairModes.remove(repairModes.length() - 1, 1);
+        }
+
+        arguments.append(repairModes);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("CheckWBFS/Test", QVariant(true)).toBool()) {
+        arguments.append("--test");
+    }
+
     arguments.append("--long");
 
     QProcess wwtCHECKProcess;
@@ -752,12 +815,38 @@ void WiTools::checkWBFS(QString wbfsPath) {
 
     if (!wwtCHECKProcess.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("WBFS check failed!"));
-        emit newLogEntry(tr("WBFS check failed!\nError: %1 (%2)").arg(QString::number(wwtCHECKProcess.exitCode()), wwtCHECKProcess.errorString()));
+        emit newLogEntry(tr("WBFS check failed!\nError: %1 (%2)").arg(QString::number(wwtCHECKProcess.exitCode()), wwtCHECKProcess.errorString()), Error);
     }
     else {
         emit newStatusBarMessage(tr("WBFS check successfully!"));
     }
 
     arguments.clear();
-    emit newLogEntry(QString(wwtCHECKProcess.readAll()));
+    emit newLogEntry(QString(wwtCHECKProcess.readAll()), Info);
+}
+
+QStringList WiTools::standardOptions() {
+    QStringList standardOptions;
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Force", QVariant(false)).toBool()) {
+        standardOptions.append("--force");
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Test", QVariant(false)).toBool()) {
+        standardOptions.append("--test");
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Newer", QVariant(true)).toBool()) {
+        standardOptions.append("--newer");
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Update", QVariant(true)).toBool()) {
+        standardOptions.append("--update");
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Overwrite", QVariant(false)).toBool()) {
+        standardOptions.append("--overwrite");
+    }
+
+    return standardOptions;
 }

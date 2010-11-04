@@ -24,7 +24,7 @@
 #include <QtGui>
 #include <QMetaType>
 
-#include"witools.h"
+#include "witools.h"
 #include "wiibafudialog.h"
 #include "settings.h"
 #include "common.h"
@@ -109,7 +109,8 @@ private slots:
     void setWBFSProgressBar(int min, int max, int value, QString format);
     void setMainProgressBar(int value, QString format);
     void setStatusBarText(QString text);
-    void addEntryToLog(QString entry);
+    void addEntryToLog(QString entry, WiTools::LogType type);
+    QString wbfsPath();
 
     void showAboutBox();
 };

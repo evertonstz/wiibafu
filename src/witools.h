@@ -28,6 +28,11 @@ class WiTools : public QObject {
     Q_OBJECT
 
 public:
+    enum LogType {
+        Info = 0x0,
+        Error = 0x1
+    };
+
     explicit WiTools(QObject *parent = 0);
 
     QStandardItemModel *getFilesGameListModel(QStandardItemModel *model, QString path);
@@ -43,12 +48,14 @@ public:
 private:
     QProcess *witProcess;
 
+    QStringList standardOptions();
+
 signals:
     void setMainProgressBarVisible(bool visible);
     void setMainProgressBar(int value, QString format);
     void setProgressBarWBFS(int min, int max, int value, QString text);
 
-    void newLogEntry(QString entry);
+    void newLogEntry(QString entry, WiTools::LogType type);
     void newStatusBarMessage(QString message);
 
     void transferGamesToWBFScanceled(bool discExitst);

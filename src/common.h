@@ -24,6 +24,8 @@
 #include <QtGui>
 #include <QtNetwork>
 
+#include "witools.h"
+
 class Common : public QObject {
     Q_OBJECT
 
@@ -51,7 +53,7 @@ signals:
     void newGameFullHQCover(QImage *gameFullHQCover);
     void newGameDiscCover(QImage *gameDiscCover);
     void showStatusBarMessage(QString message);
-    void newLogEntry(QString entry);
+    void newLogEntry(QString entry, WiTools::LogType);
 
 private slots:
     void loadGameCover_responseHeaderReceived(const QHttpResponseHeader &resp);

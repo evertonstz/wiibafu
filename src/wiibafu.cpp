@@ -34,7 +34,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     ui->setupUi(this);
     setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
     setStatusBarText(tr("Ready."));
-    addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.\n").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()));
+    addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.\n").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()), WiTools::Info);
     setupMainProgressBar();
     setupConnections();
 
@@ -45,6 +45,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 
 void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
+    qRegisterMetaType<WiTools::LogType>("WiTools::LogType");
 
     connect(this, SIGNAL(cancelTransferGamesToWBFS()), wiTools, SLOT(transferGamesToWBFS_cancel()));
     connect(this, SIGNAL(cancelTransferGamesFromWBFS()), wiTools, SLOT(transferGamesFromWBFS_cancel()));
@@ -55,7 +56,7 @@ void WiiBaFu::setupConnections() {
 
     connect(wiTools, SIGNAL(setProgressBarWBFS(int, int, int, QString)), this, SLOT(setWBFSProgressBar(int, int, int, QString)));
     connect(wiTools, SIGNAL(newStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
-    connect(wiTools, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
+    connect(wiTools, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
 
     connect(wiTools, SIGNAL(transferGamesToWBFSsuccessfully()), this, SLOT(transferGamesToWBFSsuccesfully()));
     connect(wiTools, SIGNAL(transferGamesToWBFScanceled(bool)), this, SLOT(transferGamesToWBFScanceled(bool)));
@@ -69,7 +70,7 @@ void WiiBaFu::setupConnections() {
     connect(common, SIGNAL(newGameFullHQCover(QImage*)), this, SLOT(showGameFullHQCover(QImage*)));
     connect(common, SIGNAL(newGameDiscCover(QImage*)), this, SLOT(showGameDiscCover(QImage*)));
     connect(common, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
-    connect(common, SIGNAL(newLogEntry(QString)), this, SLOT(addEntryToLog(QString)));
+    connect(common, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
 
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAboutBox()));
     connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
@@ -93,28 +94,49 @@ void WiiBaFu::setMainProgressBarVisible(bool visible) {
 }
 
 void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
-        gameTableView->setShowGrid(false);
-        gameTableView->setAlternatingRowColors(true);
-        gameTableView->verticalHeader()->setDefaultSectionSize(20);
-        gameTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    QSettings wiiBaFuSettings("WiiBaFu", "wiibafu");
+
+    gameTableView->setShowGrid(wiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
+    gameTableView->setAlternatingRowColors(wiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
+    gameTableView->verticalHeader()->setDefaultSectionSize(20);
+    gameTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    if (wiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QAbstractItemView::ScrollPerPixel)).toInt() == 0) {
+        gameTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerItem);
+        gameTableView->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
+    }
+    else {
         gameTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
         gameTableView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+    }
 
-        QHeaderView *headerView = gameTableView->horizontalHeader();
-        QHeaderView::ResizeMode resizeMode;
-
-        if (gameTableView != ui->dvdTab_tableView) {
-            gameTableView->verticalHeader()->hide();
-            gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-            resizeMode = QHeaderView::ResizeToContents;
-            headerView->setResizeMode(resizeMode);
-        }
-        else {
-            gameTableView->horizontalHeader()->hide();
-            gameTableView->setSelectionMode(QAbstractItemView::NoSelection);
+    QHeaderView *headerView = gameTableView->horizontalHeader();
+    QHeaderView::ResizeMode resizeMode;
+    switch (wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt()) {
+        case 0:
+            resizeMode = QHeaderView::Interactive;
+            break;
+        case 1:
             resizeMode = QHeaderView::Stretch;
-            headerView->setResizeMode(resizeMode);
-        }
+            break;
+        case 2:
+            resizeMode = QHeaderView::Fixed;
+            break;
+        case 3:
+            resizeMode = QHeaderView::ResizeToContents;
+            break;
+    }
+
+    if (gameTableView != ui->dvdTab_tableView) {
+        gameTableView->verticalHeader()->hide();
+        gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        headerView->setResizeMode(resizeMode);
+    }
+    else {
+        gameTableView->horizontalHeader()->hide();
+        gameTableView->setSelectionMode(QAbstractItemView::NoSelection);
+        headerView->setResizeMode(QHeaderView::Stretch);
+    }
 }
 
 void WiiBaFu::on_filesTab_pushButton_Add_clicked() {
@@ -144,7 +166,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
     if (ui->filesTab_pushButton_TransferToWBFS->text() != tr("Cancel transfering")) {
         if (ui->filesTab_tableView->selectionModel() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             ui->filesTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
-            QtConcurrent::run(wiTools, &WiTools::transferGamesToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+            QtConcurrent::run(wiTools, &WiTools::transferGamesToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), wbfsPath());
         }
     }
     else {
@@ -158,11 +180,11 @@ void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
 
 void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
     dvdListModel->clear();
-    QString drive("/dev/sr0"); //TODO: Via settings!
+    QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
 
-    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getDVDGameListModel, dvdListModel, drive);
+    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getDVDGameListModel, dvdListModel, dvdPath);
     ui->dvdTab_tableView->setModel(future.result());
-    ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(drive));
+    ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
     common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::GameCoverDisc);
 }
 
@@ -170,7 +192,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
     if (ui->dvdTab_pushButton_TransferToWBFS->text() != tr("Cancel transfering")) {
         if (dvdListModel->rowCount() != 0) {
             ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
-            QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToWBFS, dvdListModel->index(15, 0).data().toString(), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+            QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToWBFS, dvdListModel->index(15, 0).data().toString(), wbfsPath());
         }
     }
     else {
@@ -181,7 +203,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 void WiiBaFu::on_wbfsTab_pushButton_List_clicked() {
     setStatusBarText(tr("Loading games..."));
 
-    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel, QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel, wbfsPath());
 
     wbfsListModel->clear();
     ui->wbfsTab_tableView->setModel(future.result());
@@ -207,10 +229,9 @@ void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
             int result = wiibafudialog->exec();
             QString directory = wiibafudialog->imageDirectory();
             QString format = wiibafudialog->imageFormat();
-
             if (result == QDialog::Accepted && !directory.isEmpty() && !format.isEmpty()) {
                 ui->wbfsTab_pushButton_Transfer->setText(tr("Cancel transfering"));
-                QtConcurrent::run(wiTools, &WiTools::transferGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QString("/home/kai/wii.wbfs"), format, directory); //TODO: User sets the wbfs path!
+                QtConcurrent::run(wiTools, &WiTools::transferGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), format, directory);
             }
         }
     }
@@ -223,7 +244,7 @@ void WiiBaFu::on_wbfsTab_pushButton_Remove_clicked() {
     if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
         int result = QMessageBox::question(this, tr("Remove games"), tr("Are you sure that you want to delete the selected games?"), QMessageBox::Ok, QMessageBox::Cancel);
         if (result == QMessageBox::Ok) {
-            QtConcurrent::run(wiTools, &WiTools::removeGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+            QtConcurrent::run(wiTools, &WiTools::removeGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath());
         }
     }
 }
@@ -235,7 +256,7 @@ void WiiBaFu::on_wbfsTab_pushButton_ShowInfo_clicked() {
 void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
     int result = QMessageBox::question(this, tr("Check/Repair WBFS"), tr("Are you sure that you want to check/repair the wbfs?"), QMessageBox::Ok, QMessageBox::Cancel);
     if (result == QMessageBox::Ok) {
-        QtConcurrent::run(wiTools, &WiTools::checkWBFS, QString("/home/kai/wii.wbfs")); //TODO: User sets the wbfs path!
+        QtConcurrent::run(wiTools, &WiTools::checkWBFS, wbfsPath());
     }
 }
 
@@ -275,6 +296,10 @@ void WiiBaFu::on_logTab_pushButton_Save_clicked() {
 
 void WiiBaFu::on_menuOptions_Settings_triggered() {
     settings->exec();
+
+    setGameListAttributes(ui->filesTab_tableView);
+    setGameListAttributes(ui->dvdTab_tableView);
+    setGameListAttributes(ui->wbfsTab_tableView);
 }
 
 void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
@@ -342,12 +367,12 @@ void WiiBaFu::transferGamesToWBFSsuccesfully() {
 void WiiBaFu::transferGamesToWBFScanceled(bool discExitst) {
     if (discExitst) {
         ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
-        addEntryToLog(tr("Disc already exists!"));
+        addEntryToLog(tr("Disc already exists!"), WiTools::Info);
         setStatusBarText(tr("Disc already exists!"));
     }
     else {
         ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
-        addEntryToLog(tr("Transfer canceled!"));
+        addEntryToLog(tr("Transfer canceled!"), WiTools::Info);
         setStatusBarText(tr("Transfer canceled!"));
     }
 }
@@ -361,12 +386,12 @@ void WiiBaFu::transferGameFromDVDToWBFSsuccesfully() {
 void WiiBaFu::transferGameFromDVDToWBFScanceled(bool discExitst) {
     if (discExitst) {
         ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
-        addEntryToLog(tr("Disc already exists!"));
+        addEntryToLog(tr("Disc already exists!"), WiTools::Info);
         setStatusBarText(tr("Disc already exists!"));
     }
     else {
         ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
-        addEntryToLog(tr("Transfer canceled!"));
+        addEntryToLog(tr("Transfer canceled!"), WiTools::Info);
         setStatusBarText(tr("Transfer canceled!"));
     }
 }
@@ -379,7 +404,7 @@ void WiiBaFu::transferGamesFromWBFSsuccesfully() {
 
 void WiiBaFu::transferGamesFromWBFScanceled() {
     ui->wbfsTab_pushButton_Transfer->setText(tr("Transfer"));
-    addEntryToLog(tr("Transfer canceled!"));
+    addEntryToLog(tr("Transfer canceled!"), WiTools::Info);
     setStatusBarText(tr("Transfer canceled!"));
 }
 
@@ -399,8 +424,17 @@ void WiiBaFu::setStatusBarText(QString text) {
     ui->statusBar->showMessage(text);
 }
 
-void WiiBaFu::addEntryToLog(QString entry) {
-    ui->logTab_plainTextEdit_Log->appendPlainText(entry);
+void WiiBaFu::addEntryToLog(QString entry, WiTools::LogType type) {
+    switch (QSettings("WiiBaFu", "wiibafu").value("Main/Logging", QVariant(0)).toInt()) {
+    case 0:
+            ui->logTab_plainTextEdit_Log->appendPlainText(entry);
+            break;
+    case 1:
+            if (type == WiTools::Error) {
+                ui->logTab_plainTextEdit_Log->appendPlainText(entry);
+            }
+            break;
+    }
 }
 
 QString WiiBaFu::getCurrentCoverLanguage() {
@@ -438,6 +472,15 @@ QString WiiBaFu::getCurrentCoverLanguage() {
         case 15: return "ZH-cn";
                  break;
         default: return "EN";
+    }
+}
+
+QString WiiBaFu::wbfsPath() {
+    if (QSettings("WiiBaFu", "wiibafu").value("Main/Auto", QVariant(true)).toBool()) {
+        return QString("");
+    }
+    else {
+        return QSettings("WiiBaFu", "wiibafu").value("Main/WBFSPath", QVariant("")).toString();
     }
 }
 
