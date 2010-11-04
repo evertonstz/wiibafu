@@ -26,6 +26,7 @@
 
 #include"witools.h"
 #include "wiibafudialog.h"
+#include "settings.h"
 #include "common.h"
 
 namespace Ui {
@@ -43,6 +44,7 @@ private:
     Ui::WiiBaFu *ui;
     WiTools *wiTools;
     WiiBaFuDialog *wiibafudialog;
+    Settings *settings;
     Common *common;
 
     QStringList filesGamePaths;
@@ -88,6 +90,7 @@ private slots:
     void on_logTab_pushButton_Copy_clicked();
     void on_logTab_pushButton_Save_clicked();
 
+    void on_menuOptions_Settings_triggered();
     void on_menuTools_CheckWBFS_triggered();
 
     void showGameDiscCover(QImage *gameCover);

@@ -24,6 +24,7 @@
 WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     wiibafudialog = new WiiBaFuDialog(this);
     wiTools = new WiTools(this);
+    settings = new Settings(this);
     common = new Common(this);
 
     filesListModel = new QStandardItemModel(this);
@@ -272,6 +273,10 @@ void WiiBaFu::on_logTab_pushButton_Save_clicked() {
     }
 }
 
+void WiiBaFu::on_menuOptions_Settings_triggered() {
+    settings->exec();
+}
+
 void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
     on_wbfsTab_pushButton_Check_clicked();
 }
@@ -453,6 +458,7 @@ void WiiBaFu::showAboutBox() {
 WiiBaFu::~WiiBaFu() {
     delete wiibafudialog;
     delete wiTools;
+    delete settings;
     delete common;
     delete filesListModel;
     delete dvdListModel;

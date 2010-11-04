@@ -1071,9 +1071,6 @@
      <height>21</height>
     </rect>
    </property>
-   <property name="mouseTracking">
-    <bool>false</bool>
-   </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>&amp;File</string>
@@ -1084,6 +1081,7 @@
     <property name="title">
      <string>Options</string>
     </property>
+    <addaction name="menuOptions_Settings"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -1122,6 +1120,11 @@
   <action name="menuTools_CheckWBFS">
    <property name="text">
     <string>Check WBFS</string>
+   </property>
+  </action>
+  <action name="menuOptions_Settings">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>
