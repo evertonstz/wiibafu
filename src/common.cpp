@@ -27,13 +27,15 @@ Common::Common(QObject *parent) : QObject(parent) {
 }
 
 void Common::requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt) {
-    if (gameCoverArt == GameCoverDisc) {
+    emit showStatusBarMessage(tr("Loading game cover..."));
+
+    if (gameCoverArt == Disc) {
         url = QString("http://wiitdb.com/wiitdb/artwork/disc/%1/%2.png").arg(language, gameID);
     }
-    else if (gameCoverArt == GameCover3D) {
+    else if (gameCoverArt == ThreeD) {
         url = QString("http://wiitdb.com/wiitdb/artwork/cover3D/%1/%2.png").arg(language, gameID);
     }
-    else if (gameCoverArt == GameCoverHQ) {
+    else if (gameCoverArt == HighQuality) {
         url = QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/%1/%2.png").arg(language, gameID);
     }
 
@@ -56,13 +58,13 @@ void Common::loadGameCover_done(bool error) {
         if (!image->isNull()) {
             emit showStatusBarMessage(tr("Ready."));
 
-            if (currentGameCoverArt == GameCoverHQ) {
+            if (currentGameCoverArt == HighQuality) {
                 emit newGameFullHQCover(image);
             }
-            else if (currentGameCoverArt == GameCover3D) {
+            else if (currentGameCoverArt == ThreeD) {
                 emit newGame3DCover(image);
             }
-            else if (currentGameCoverArt == GameCoverDisc) {
+            else if (currentGameCoverArt == Disc) {
                 emit newGameDiscCover(image);
             }
         }

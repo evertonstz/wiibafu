@@ -185,7 +185,7 @@ void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
     QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getDVDGameListModel, dvdListModel, dvdPath);
     ui->dvdTab_tableView->setModel(future.result());
     ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
-    common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::GameCoverDisc);
+    common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
 }
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
@@ -262,12 +262,12 @@ void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
 
 void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty())
-        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::GameCover3D);
+        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::ThreeD);
 }
 
 void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty())
-        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::GameCoverHQ);
+        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::HighQuality);
 }
 
 void WiiBaFu::on_logTab_pushButton_Clear_clicked() {

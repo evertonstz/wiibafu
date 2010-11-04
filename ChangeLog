@@ -1,5 +1,7 @@
 2010-11-04 Kai Heitkamp <dynup@ymail.com>
   * Settings are used now.
+  * Some little improvements.
+  * Version number increase to: 0.6
 
 2010-11-03 Kai Heitkamp <dynup@ymail.com>
   * Some memory optimizations.

@@ -31,9 +31,9 @@ class Common : public QObject {
 
 public:
     enum GameCoverArt {
-        GameCoverDisc = 0x0,
-        GameCover3D = 0x1,
-        GameCoverHQ = 0x2
+        Disc = 0x0,
+        ThreeD = 0x1,
+        HighQuality = 0x2
     };
 
     explicit Common(QObject *parent = 0);
