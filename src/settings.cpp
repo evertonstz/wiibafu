@@ -101,7 +101,7 @@ void Settings::load() {
     ui->main_checkBox_Auto->setChecked(wiiBaFuSettings.value("Main/Auto", QVariant(true)).toBool());
     ui->main_lineEdit_WBFSPath->setText(wiiBaFuSettings.value("Main/WBFSPath", QVariant("")).toString());
     ui->main_lineEdit_DVDDrivePath->setText(wiiBaFuSettings.value("Main/DVDDrivePath", QVariant("")).toString());
-    ui->main_comboBox_LogOutput->setCurrentIndex(wiiBaFuSettings.value("Main/LogOutput", QVariant(0)).toInt());
+    ui->main_comboBox_Logging->setCurrentIndex(wiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
 
     ui->gameLists_checkBox_ShowGrid->setChecked(wiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
     ui->gameLists_checkBox_AlternatingRowColors->setChecked(wiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
@@ -149,7 +149,7 @@ void Settings::save() {
     wiiBaFuSettings.setValue("Main/Auto", ui->main_checkBox_Auto->checkState());
     wiiBaFuSettings.setValue("Main/WBFSPath", ui->main_lineEdit_WBFSPath->text());
     wiiBaFuSettings.setValue("Main/DVDDrivePath", ui->main_lineEdit_DVDDrivePath->text());
-    wiiBaFuSettings.setValue("Main/LogOutput", ui->main_comboBox_LogOutput->currentIndex());
+    wiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
 
     wiiBaFuSettings.setValue("GameLists/ShowGrid", ui->gameLists_checkBox_ShowGrid->checkState());
     wiiBaFuSettings.setValue("GameLists/AlternatingRowColors", ui->gameLists_checkBox_AlternatingRowColors->checkState());
@@ -195,7 +195,7 @@ void Settings::restoreDefaults(int index) {
         case 0:
                 ui->main_checkBox_Auto->setChecked(true);
                 ui->main_lineEdit_DVDDrivePath->setText("/cdrom");
-                ui->main_comboBox_LogOutput->setCurrentIndex(0);
+                ui->main_comboBox_Logging->setCurrentIndex(0);
                 break;
         case 1:
                 ui->gameLists_checkBox_AlternatingRowColors->setChecked(true);
