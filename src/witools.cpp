@@ -312,7 +312,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
 
     emit newLogEntry(QString(bytes), Info);
 
-    int free = 0, total = 0;
+    int current = 0, max = 0;
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
     QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, containers, wbfsslots, filenames;
 
@@ -344,16 +344,16 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
         }
         else if (line.startsWith("used_mib")) {
             usedMB = tr("Used MiB: %1").arg(line.section("=", 1));
+            current = line.section("=", 1).toInt();
             continue;
         }
         else if (line.startsWith("free_mib=")) {
             freeMB = tr("Free MiB: %1").arg(line.section("=", 1));
-            free = line.section("=", 1).toInt();
             continue;
         }
         else if (line.startsWith("total_mib=")) {
             totalMB = tr("Total MiB: %1").arg(line.section("=", 1));
-            total = line.section("=", 1).toInt();
+            max = line.section("=", 1).toInt();
             continue;
         }
 
@@ -461,10 +461,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     wbfsslots.clear();
     filenames.clear();
 
-    // total - free = workaround for wwts 'used_mib' calculate bug
-    usedMB = tr("Used MiB: %1").arg(total - free);
-    emit setProgressBarWBFS(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
-
+    emit setProgressBarWBFS(0, max, current, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
     emit newWBFSGameListModel();
 }
 
