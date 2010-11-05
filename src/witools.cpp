@@ -24,7 +24,7 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
 
 }
 
-QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QString path) {
+void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path) {
     emit newStatusBarMessage(tr("Loading games..."));
 
     QProcess filesRead;
@@ -33,7 +33,6 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     if (!filesRead.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("Adding games failed!"));
         emit newLogEntry(tr("Adding games failed!\nError: %1 (%2)").arg(QString::number(filesRead.exitCode()), filesRead.errorString()), Error);
-        return model;
     }
 
     QByteArray bytes = filesRead.readAllStandardOutput();
@@ -49,7 +48,6 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
 
         if (line.contains("total-discs=0")) {
             emit newStatusBarMessage(tr("No games found!"));
-            return model;
             break;
         }
         else if (line.isEmpty())
@@ -139,10 +137,10 @@ QStandardItemModel* WiTools::getFilesGameListModel(QStandardItemModel *model, QS
     filetypes.clear();
     filenames.clear();
 
-    return model;
+    emit newFilesGameListModel();
 }
 
-QStandardItemModel* WiTools::getDVDGameListModel(QStandardItemModel *model, QString path) {
+void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     emit newStatusBarMessage(tr("Loading disc..."));
 
     QProcess dvdRead;
@@ -151,7 +149,6 @@ QStandardItemModel* WiTools::getDVDGameListModel(QStandardItemModel *model, QStr
     if (!dvdRead.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("Loading disc failed!"));
         emit newLogEntry(tr("Loading disc failed!\nError: %1 (%2)").arg(QString::number(dvdRead.exitCode()), dvdRead.errorString()), Error);
-        return model;
     }
 
     QByteArray bytes = dvdRead.readAllStandardOutput();
@@ -162,9 +159,10 @@ QStandardItemModel* WiTools::getDVDGameListModel(QStandardItemModel *model, QStr
     QList<QStandardItem *> game;
 
     foreach (QString line, lines) {
+        line.remove("\r");
+
         if (line.contains("total-discs=0")) {
             emit newStatusBarMessage(tr("No game found!"));
-            return model;
             break;
         }
         else if (line.isEmpty())
@@ -283,10 +281,12 @@ QStandardItemModel* WiTools::getDVDGameListModel(QStandardItemModel *model, QStr
 
     game.clear();
 
-    return model;
+    emit newDVDGameListModel();
 }
 
-QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
+void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
+    emit newStatusBarMessage(tr("Loading games..."));
+
     QStringList arguments;
     arguments.append("LIST-L");
 
@@ -305,7 +305,6 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
     if (!wbfsRead.waitForFinished(-1)) {
         emit newStatusBarMessage(tr("Loading games failed!"));
         emit newLogEntry(tr("Loading games failed!\nError: %1 (%2)").arg(QString::number(wbfsRead.exitCode()), wbfsRead.errorString()), Error);
-        return model;
     }
 
     QByteArray bytes = wbfsRead.readAllStandardOutput();
@@ -318,14 +317,14 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
     QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, containers, wbfsslots, filenames;
 
     foreach (QString line, lines) {
+        line.remove("\r");
+
         if (line.contains("text=No WBFS found")) {
             emit newStatusBarMessage(tr("No WBFS partitions found!"));
-            return model;
             break;
         }
         else if (line.contains("used_discs=0")) {
             emit newStatusBarMessage(tr("No games found!"));
-            return model;
             break;
         }
         else if (line.isEmpty())
@@ -466,7 +465,7 @@ QStandardItemModel* WiTools::getWBFSGameListModel(QStandardItemModel *model, QSt
     usedMB = tr("Used MiB: %1").arg(total - free);
     emit setProgressBarWBFS(0, total, total - free, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
 
-    return model;
+    emit newWBFSGameListModel();
 }
 
 void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {

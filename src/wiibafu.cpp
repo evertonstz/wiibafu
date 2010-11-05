@@ -58,6 +58,10 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(newStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
 
+    connect(wiTools, SIGNAL(newFilesGameListModel()), this, SLOT(setFilesGameListModel()));
+    connect(wiTools, SIGNAL(newDVDGameListModel()), this, SLOT(setDVDGameListModel()));
+    connect(wiTools, SIGNAL(newWBFSGameListModel()), this, SLOT(setWBFSGameListModel()));
+
     connect(wiTools, SIGNAL(transferGamesToWBFSsuccessfully()), this, SLOT(transferGamesToWBFSsuccesfully()));
     connect(wiTools, SIGNAL(transferGamesToWBFScanceled(bool)), this, SLOT(transferGamesToWBFScanceled(bool)));
     connect(wiTools, SIGNAL(transferGameFromDVDToWBFSsuccessfully()), this, SLOT(transferGameFromDVDToWBFSsuccesfully()));
@@ -143,13 +147,7 @@ void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
-        QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getFilesGameListModel, filesListModel, directory);
-
-        if (future.result()->rowCount() > 0 ) {
-            ui->filesTab_tableView->setModel(future.result());
-            ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
-            setStatusBarText(tr("Ready."));
-        }
+        QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory);
     }
 }
 
@@ -181,16 +179,9 @@ void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
 }
 
 void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
-    dvdListModel->clear();
     QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
 
-    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getDVDGameListModel, dvdListModel, dvdPath);
-
-    if (future.result()->rowCount() > 0) {
-        ui->dvdTab_tableView->setModel(future.result());
-        ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
-        common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
-    }
+    QtConcurrent::run(wiTools, &WiTools::requestDVDGameListModel, dvdListModel, dvdPath);
 }
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
@@ -206,15 +197,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_Load_clicked() {
-    setStatusBarText(tr("Loading games..."));
-
-    QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel, wbfsPath());
-
-    if (future.result()->rowCount() > 0) {
-        ui->wbfsTab_tableView->setModel(future.result());
-        ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
-        setStatusBarText(tr("Ready."));
-    }
+    QtConcurrent::run(wiTools, &WiTools::requestWBFSGameListModel, wbfsListModel, wbfsPath());
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
@@ -362,6 +345,34 @@ void WiiBaFu::showGame3DCover(QImage *gameCover) {
 void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
     gameFullHQCover->save(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
     QDesktopServices::openUrl(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
+}
+
+void WiiBaFu::setFilesGameListModel() {
+    if (filesListModel->rowCount() > 0 ) {
+        ui->filesTab_tableView->setModel(filesListModel);
+        ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
+
+        setStatusBarText(tr("Ready."));
+    }
+}
+
+void WiiBaFu::setDVDGameListModel() {
+    if (dvdListModel->rowCount() > 0) {
+        QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
+
+        ui->dvdTab_tableView->setModel(dvdListModel);
+        ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
+
+        common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
+    }
+}
+
+void WiiBaFu::setWBFSGameListModel() {
+    if (wbfsListModel->rowCount() > 0) {
+        ui->wbfsTab_tableView->setModel(wbfsListModel);
+        ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
+        setStatusBarText(tr("Ready."));
+    }
 }
 
 void WiiBaFu::transferGamesToWBFSsuccesfully() {

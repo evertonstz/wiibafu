@@ -35,9 +35,9 @@ public:
 
     explicit WiTools(QObject *parent = 0);
 
-    QStandardItemModel *getFilesGameListModel(QStandardItemModel *model, QString path);
-    QStandardItemModel *getDVDGameListModel(QStandardItemModel *model, QString path);
-    QStandardItemModel *getWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
+    void requestFilesGameListModel(QStandardItemModel *model, QString path);
+    void requestDVDGameListModel(QStandardItemModel *model, QString path);
+    void requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
 
     void transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath);
     void transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
@@ -55,6 +55,10 @@ signals:
 
     void newLogEntry(QString entry, WiTools::LogType type);
     void newStatusBarMessage(QString message);
+
+    void newFilesGameListModel();
+    void newDVDGameListModel();
+    void newWBFSGameListModel();
 
     void transferGamesToWBFScanceled(bool discExitst);
     void transferGamesToWBFSsuccessfully();

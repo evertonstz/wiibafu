@@ -97,6 +97,10 @@ private slots:
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
 
+    void setFilesGameListModel();
+    void setDVDGameListModel();
+    void setWBFSGameListModel();
+
     void transferGamesToWBFSsuccesfully();
     void transferGamesToWBFScanceled(bool discExitst);
 
