@@ -255,16 +255,16 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="wbfsTab_pushButton_ShowInfo">
+            <widget class="QPushButton" name="wbfsTab_pushButton_Check">
              <property name="text">
-              <string>Show info</string>
+              <string>Check</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="wbfsTab_pushButton_Check">
+            <widget class="QPushButton" name="wbfsTab_pushButton_ShowInfo">
              <property name="text">
-              <string>Check</string>
+              <string>Show info</string>
              </property>
             </widget>
            </item>
