@@ -113,32 +113,15 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         gameTableView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     }
 
-    QHeaderView *headerView = gameTableView->horizontalHeader();
-    QHeaderView::ResizeMode resizeMode;
-    switch (wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt()) {
-        case 0:
-            resizeMode = QHeaderView::Interactive;
-            break;
-        case 1:
-            resizeMode = QHeaderView::Stretch;
-            break;
-        case 2:
-            resizeMode = QHeaderView::Fixed;
-            break;
-        case 3:
-            resizeMode = QHeaderView::ResizeToContents;
-            break;
-    }
-
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-        headerView->setResizeMode(resizeMode);
+        gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
     }
     else {
         gameTableView->horizontalHeader()->hide();
         gameTableView->setSelectionMode(QAbstractItemView::NoSelection);
-        headerView->setResizeMode(QHeaderView::Stretch);
+        gameTableView->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
     }
 }
 

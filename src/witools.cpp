@@ -312,7 +312,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
 
     emit newLogEntry(QString(bytes), Info);
 
-    int free, total;
+    int free = 0, total = 0;
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
     QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, containers, wbfsslots, filenames;
 
