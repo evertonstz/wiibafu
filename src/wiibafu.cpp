@@ -250,6 +250,7 @@ void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
 
 void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty())
+        ui->infoTab_label_GameCover->clear();
         common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::ThreeD);
 }
 
@@ -339,7 +340,7 @@ void WiiBaFu::showGameDiscCover(QImage *gameCover) {
 }
 
 void WiiBaFu::showGame3DCover(QImage *gameCover) {
-    ui->label_GameCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
+    ui->infoTab_label_GameCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
 }
 
 void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {

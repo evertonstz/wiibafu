@@ -664,7 +664,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QLabel" name="label_GameCover">
+                <widget class="QLabel" name="infoTab_label_GameCover">
                  <property name="minimumSize">
                   <size>
                    <width>180</width>

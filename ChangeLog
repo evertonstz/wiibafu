@@ -1,4 +1,5 @@
 2010-11-05 Kai Heitkamp <dynup@ymail.com>
+  * Remove cover, if requesting a new one.
   * Fill game list models in a new thread.
   * Some little improvements and bug fixes. (0.6.1)
   * Version number increase to: 0.6.1
