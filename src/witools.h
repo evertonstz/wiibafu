@@ -48,8 +48,6 @@ public:
 private:
     QProcess *witProcess;
 
-    QStringList standardOptions();
-
 signals:
     void setMainProgressBarVisible(bool visible);
     void setMainProgressBar(int value, QString format);

@@ -68,7 +68,7 @@ signals:
 private slots:
     void setMainProgressBarVisible(bool visible);
 
-    void on_filesTab_pushButton_Add_clicked();
+    void on_filesTab_pushButton_Load_clicked();
     void on_filesTab_pushButton_SelectAll_clicked();
     void on_filesTab_pushButton_TransferToWBFS_clicked();
     void on_filesTab_pushButton_ShowInfo_clicked();
@@ -76,7 +76,7 @@ private slots:
     void on_dvdTab_pushButton_Load_clicked();
     void on_dvdTab_pushButton_TransferToWBFS_clicked();
 
-    void on_wbfsTab_pushButton_List_clicked();
+    void on_wbfsTab_pushButton_Load_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
     void on_wbfsTab_pushButton_Transfer_clicked();
     void on_wbfsTab_pushButton_Remove_clicked();

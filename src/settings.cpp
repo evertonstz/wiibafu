@@ -123,7 +123,6 @@ void Settings::load() {
 
     ui->WBFSToFiles_checkBox_Force->setChecked(wiiBaFuSettings.value("WBFStoFiles/Force", QVariant(false)).toBool());
     ui->WBFSToFiles_checkBox_Test->setChecked(wiiBaFuSettings.value("WBFStoFiles/Test", QVariant(false)).toBool());
-    ui->WBFSToFiles_checkBox_Newer->setChecked(wiiBaFuSettings.value("WBFStoFiles/Newer", QVariant(true)).toBool());
     ui->WBFSToFiles_checkBox_Update->setChecked(wiiBaFuSettings.value("WBFStoFiles/Update", QVariant(true)).toBool());
     ui->WBFSToFiles_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("WBFStoFiles/Overwrite", QVariant(false)).toBool());
 
@@ -170,7 +169,6 @@ void Settings::save() {
 
     wiiBaFuSettings.setValue("WBFStoFiles/Force", ui->WBFSToFiles_checkBox_Force->checkState());
     wiiBaFuSettings.setValue("WBFStoFiles/Test", ui->WBFSToFiles_checkBox_Test->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/Newer", ui->WBFSToFiles_checkBox_Newer->checkState());
     wiiBaFuSettings.setValue("WBFStoFiles/Update", ui->WBFSToFiles_checkBox_Update->checkState());
     wiiBaFuSettings.setValue("WBFStoFiles/Overwrite", ui->WBFSToFiles_checkBox_Overwrite->checkState());
 
@@ -220,7 +218,6 @@ void Settings::restoreDefaults(int index) {
         case 4:
                 ui->WBFSToFiles_checkBox_Force->setChecked(false);
                 ui->WBFSToFiles_checkBox_Test->setChecked(false);
-                ui->WBFSToFiles_checkBox_Newer->setChecked(true);
                 ui->WBFSToFiles_checkBox_Update->setChecked(true);
                 ui->WBFSToFiles_checkBox_Overwrite->setChecked(false);
                 break;

@@ -64,7 +64,7 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(transferGameFromDVDToWBFScanceled(bool)), this, SLOT(transferGameFromDVDToWBFScanceled(bool)));
     connect(wiTools, SIGNAL(transferGamesFromWBFSsuccessfully()), this, SLOT(transferGamesFromWBFSsuccesfully()));
     connect(wiTools, SIGNAL(transferGamesFromWBFScanceled()), this, SLOT(transferGamesFromWBFScanceled()));
-    connect(wiTools, SIGNAL(removeGamesFromWBFS_successfully()), this, SLOT(on_wbfsTab_pushButton_List_clicked()));
+    connect(wiTools, SIGNAL(removeGamesFromWBFS_successfully()), this, SLOT(on_wbfsTab_pushButton_Load_clicked()));
 
     connect(common, SIGNAL(newGame3DCover(QImage*)), this, SLOT(showGame3DCover(QImage*)));
     connect(common, SIGNAL(newGameFullHQCover(QImage*)), this, SLOT(showGameFullHQCover(QImage*)));
@@ -139,15 +139,17 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
     }
 }
 
-void WiiBaFu::on_filesTab_pushButton_Add_clicked() {
+void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
-        filesListModel->clear();
-
         QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getFilesGameListModel, filesListModel, directory);
-        ui->filesTab_tableView->setModel(future.result());
-        ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
+
+        if (future.result()->rowCount() > 0 ) {
+            ui->filesTab_tableView->setModel(future.result());
+            ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
+            setStatusBarText(tr("Ready."));
+        }
     }
 }
 
@@ -183,9 +185,12 @@ void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
     QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
 
     QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getDVDGameListModel, dvdListModel, dvdPath);
-    ui->dvdTab_tableView->setModel(future.result());
-    ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
-    common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
+
+    if (future.result()->rowCount() > 0) {
+        ui->dvdTab_tableView->setModel(future.result());
+        ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
+        common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
+    }
 }
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
@@ -200,16 +205,16 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
     }
 }
 
-void WiiBaFu::on_wbfsTab_pushButton_List_clicked() {
+void WiiBaFu::on_wbfsTab_pushButton_Load_clicked() {
     setStatusBarText(tr("Loading games..."));
 
     QFuture<QStandardItemModel*> future = QtConcurrent::run(wiTools, &WiTools::getWBFSGameListModel, wbfsListModel, wbfsPath());
 
-    wbfsListModel->clear();
-    ui->wbfsTab_tableView->setModel(future.result());
-    ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
-
-    setStatusBarText(tr("Ready."));
+    if (future.result()->rowCount() > 0) {
+        ui->wbfsTab_tableView->setModel(future.result());
+        ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
+        setStatusBarText(tr("Ready."));
+    }
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
@@ -361,7 +366,7 @@ void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
 
 void WiiBaFu::transferGamesToWBFSsuccesfully() {
     ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
-    on_wbfsTab_pushButton_List_clicked();
+    on_wbfsTab_pushButton_Load_clicked();
 }
 
 void WiiBaFu::transferGamesToWBFScanceled(bool discExitst) {
@@ -380,7 +385,7 @@ void WiiBaFu::transferGamesToWBFScanceled(bool discExitst) {
 
 void WiiBaFu::transferGameFromDVDToWBFSsuccesfully() {
     ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
-    on_wbfsTab_pushButton_List_clicked();
+    on_wbfsTab_pushButton_Load_clicked();
 }
 
 void WiiBaFu::transferGameFromDVDToWBFScanceled(bool discExitst) {

@@ -63,9 +63,9 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QPushButton" name="filesTab_pushButton_Add">
+            <widget class="QPushButton" name="filesTab_pushButton_Load">
              <property name="text">
-              <string>Add</string>
+              <string>Load</string>
              </property>
             </widget>
            </item>
@@ -227,9 +227,9 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QPushButton" name="wbfsTab_pushButton_List">
+            <widget class="QPushButton" name="wbfsTab_pushButton_Load">
              <property name="text">
-              <string>List</string>
+              <string>Load</string>
              </property>
             </widget>
            </item>
