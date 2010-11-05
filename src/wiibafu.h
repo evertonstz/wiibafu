@@ -116,7 +116,7 @@ private slots:
     void addEntryToLog(QString entry, WiTools::LogType type);
     QString wbfsPath();
 
-    void showAboutBox();
+    void on_menuHelp_About_triggered();
 };
 
 #endif // WIIBAFU_H

@@ -1075,7 +1075,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="actionExit"/>
+    <addaction name="menuFile_Exit"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
@@ -1093,8 +1093,8 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
-    <addaction name="actionAbout_Qt"/>
+    <addaction name="menuHelp_About"/>
+    <addaction name="menuHelp_About_Qt"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOptions"/>
@@ -1102,17 +1102,17 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionAbout">
+  <action name="menuHelp_About">
    <property name="text">
     <string>About...</string>
    </property>
   </action>
-  <action name="actionExit">
+  <action name="menuFile_Exit">
    <property name="text">
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionAbout_Qt">
+  <action name="menuHelp_About_Qt">
    <property name="text">
     <string>About Qt...</string>
    </property>

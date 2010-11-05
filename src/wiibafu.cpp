@@ -76,9 +76,8 @@ void WiiBaFu::setupConnections() {
     connect(common, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(common, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
 
-    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAboutBox()));
-    connect(ui->actionAbout_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-    connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
+    connect(ui->menuHelp_About_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+    connect(ui->menuFile_Exit, SIGNAL(triggered()), this, SLOT(close()));
 }
 
 void WiiBaFu::setupMainProgressBar() {
@@ -501,7 +500,7 @@ QString WiiBaFu::wbfsPath() {
     }
 }
 
-void WiiBaFu::showAboutBox() {
+void WiiBaFu::on_menuHelp_About_triggered() {
     QMessageBox::about(this, tr("About Wii Backup Fusion"),
         QString("<h2>Wii Backup Fusion %1</h2>").arg(QCoreApplication::applicationVersion()) +
         tr("<p><b><i>The complete and simply to use backup solution for Wii games</b></i>"
