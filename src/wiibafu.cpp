@@ -33,14 +33,18 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 
     ui->setupUi(this);
     setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
-    setStatusBarText(tr("Ready."));
-    addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.\n").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()), WiTools::Info);
     setupMainProgressBar();
     setupConnections();
 
     setGameListAttributes(ui->filesTab_tableView);
     setGameListAttributes(ui->dvdTab_tableView);
     setGameListAttributes(ui->wbfsTab_tableView);
+
+    setStatusBarText(tr("Ready."));
+
+    addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()), WiTools::Info);
+    addEntryToLog(wiTools->witVersion(), WiTools::Info);
+    addEntryToLog(wiTools->wwtVersion(), WiTools::Info);
 }
 
 void WiiBaFu::setupConnections() {

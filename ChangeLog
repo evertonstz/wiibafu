@@ -1,3 +1,7 @@
+2010-11-06 Kai Heitkamp <dynup@ymail.com>
+  * Autosearch for wit/wwt added.
+  * Better error handling.
+
 2010-11-05 Kai Heitkamp <dynup@ymail.com>
   * Remove cover, if requesting a new one.
   * Fill game list models in a new thread.

@@ -42,11 +42,18 @@ public:
     void transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath);
     void transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
     void transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath);
+
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
     void checkWBFS(QString wbfsPath);
 
+    QString witVersion();
+    QString wwtVersion();
+
 private:
+    QString wit, wwt;
     QProcess *witProcess;
+
+    void setWit();
 
 signals:
     void setMainProgressBarVisible(bool visible);
