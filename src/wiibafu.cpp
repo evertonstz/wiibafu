@@ -98,13 +98,15 @@ void WiiBaFu::setupMainProgressBar() {
 }
 
 void WiiBaFu::setupGeometry() {
-    QRect rect;
-    rect.setX(QSettings("WiiBaFu", "wiibafu").value("MainWindow/x", QVariant(0)).toInt());
-    rect.setY(QSettings("WiiBaFu", "wiibafu").value("MainWindow/y", QVariant(0)).toInt());
-    rect.setWidth(QSettings("WiiBaFu", "wiibafu").value("MainWindow/width", QVariant(800)).toInt());
-    rect.setHeight(QSettings("WiiBaFu", "wiibafu").value("MainWindow/height", QVariant(600)).toInt());
+    if (QSettings("WiiBaFu", "wiibafu").contains("MainWindow/x")) {
+        QRect rect;
+        rect.setX(QSettings("WiiBaFu", "wiibafu").value("MainWindow/x", QVariant(0)).toInt());
+        rect.setY(QSettings("WiiBaFu", "wiibafu").value("MainWindow/y", QVariant(0)).toInt());
+        rect.setWidth(QSettings("WiiBaFu", "wiibafu").value("MainWindow/width", QVariant(800)).toInt());
+        rect.setHeight(QSettings("WiiBaFu", "wiibafu").value("MainWindow/height", QVariant(600)).toInt());
 
-    this->setGeometry(rect);
+        this->setGeometry(rect);
+    }
 }
 
 void WiiBaFu::setMainProgressBarVisible(bool visible) {
