@@ -55,6 +55,7 @@ private:
 
     void setupConnections();
     void setupMainProgressBar();
+    void setupGeometry();
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
 

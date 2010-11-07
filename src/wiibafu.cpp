@@ -35,6 +35,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
     setupMainProgressBar();
     setupConnections();
+    setupGeometry();
 
     setGameListAttributes(ui->filesTab_tableView);
     setGameListAttributes(ui->dvdTab_tableView);
@@ -94,6 +95,16 @@ void WiiBaFu::setupMainProgressBar() {
 
     progressBar_Main->setMaximumHeight(16);
     ui->statusBar->addPermanentWidget(progressBar_Main);
+}
+
+void WiiBaFu::setupGeometry() {
+    QRect rect;
+    rect.setX(QSettings("WiiBaFu", "wiibafu").value("MainWindow/x", QVariant(0)).toInt());
+    rect.setY(QSettings("WiiBaFu", "wiibafu").value("MainWindow/y", QVariant(0)).toInt());
+    rect.setWidth(QSettings("WiiBaFu", "wiibafu").value("MainWindow/width", QVariant(800)).toInt());
+    rect.setHeight(QSettings("WiiBaFu", "wiibafu").value("MainWindow/height", QVariant(600)).toInt());
+
+    this->setGeometry(rect);
 }
 
 void WiiBaFu::setMainProgressBarVisible(bool visible) {
@@ -330,8 +341,8 @@ void WiiBaFu::showGame3DCover(QImage *gameCover) {
 }
 
 void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
-    gameFullHQCover->save(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
-    QDesktopServices::openUrl(QDir::tempPath().append("/WiiBaFu_gameCoverFullHQ.png"));
+    gameFullHQCover->save(QDir::tempPath().append("/WiiBaFu_GameCoverFullHQ.png"));
+    QDesktopServices::openUrl(QDir::tempPath().append("/WiiBaFu_GameCoverFullHQ.png"));
 }
 
 void WiiBaFu::setFilesGameListModel() {
@@ -502,6 +513,11 @@ void WiiBaFu::on_menuHelp_About_triggered() {
 }
 
 WiiBaFu::~WiiBaFu() {
+    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/x", this->geometry().x());
+    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/y", this->geometry().y());
+    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/width", this->geometry().width());
+    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/height", this->geometry().height());
+
     delete wiibafudialog;
     delete wiTools;
     delete settings;
