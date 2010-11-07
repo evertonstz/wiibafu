@@ -119,14 +119,8 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
     gameTableView->verticalHeader()->setDefaultSectionSize(20);
     gameTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    if (wiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QAbstractItemView::ScrollPerPixel)).toInt() == 0) {
-        gameTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerItem);
-        gameTableView->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
-    }
-    else {
-        gameTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
-        gameTableView->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-    }
+    gameTableView->setHorizontalScrollMode((QHeaderView::ScrollMode)wiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
+    gameTableView->setVerticalScrollMode((QHeaderView::ScrollMode)wiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
 
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();

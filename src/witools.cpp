@@ -909,8 +909,14 @@ void WiTools::checkWBFS(QString wbfsPath) {
 
 void WiTools::setWit() {
     QDir::setSearchPaths("wit", QStringList() << QDir::currentPath() + "/wit" << "/usr/local/bin");
-    wit = QFile("wit:wit").fileName();
-    wwt = QFile("wit:wwt").fileName();
+
+    #ifdef WIN32
+        wit = QFile("wit:wit.exe").fileName();
+        wwt = QFile("wit:wwt.exe").fileName();
+    #else
+        wit = QFile("wit:wit").fileName();
+        wwt = QFile("wit:wwt").fileName();
+    #endif
 }
 
 QString WiTools::witVersion() {
@@ -927,7 +933,11 @@ QString WiTools::witVersion() {
         }
     }
 
-    return QString(witCheckProcess.readLine()).remove("\n");
+    #ifdef WIN32
+        return QString(witCheckProcess.readLine()).remove("\r\n");
+    #else
+        return QString(witCheckProcess.readLine()).remove("\n");
+    #endif
 }
 
 QString WiTools::wwtVersion() {
@@ -944,5 +954,9 @@ QString WiTools::wwtVersion() {
         }
     }
 
-    return QString(wwtCheckProcess.readLine()).remove("\n");
+    #ifdef WIN32
+        return QString(wwtCheckProcess.readLine()).remove("\r\n");
+    #else
+        return QString(wwtCheckProcess.readLine()).remove("\n");
+    #endif
 }

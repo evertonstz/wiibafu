@@ -7,19 +7,16 @@ TEMPLATE     = app
 TARGET       = WiiBaFu
 CONFIG      += qt warn_on debug
 QT          += core gui network
-DESTDIR     += bin
-INCLUDEPATH += src
-MOC_DIR     += build/moc
-UI_DIR      += build/ui
-RCC_DIR     += build/rcc
+DESTDIR      = bin
+INCLUDEPATH  = src
+OBJECTS_DIR  = build
+UI_DIR       = build
+MOC_DIR      = build
+RCC_DIR      = build
 
 macx {
-  ICON        += resources/images/wiibafu.icns
-  OBJECTS_DIR += build/o/mac
+  ICON              += resources/images/appicon.icns
+  QMAKE_INFO_PLIST  += Info.plist
+  CONFIG            += x86 ppc
 }
-unix {
-  OBJECTS_DIR += build/o/unix
-}
-win32 {
-  OBJECTS_DIR += build/o/win32
-}
+
