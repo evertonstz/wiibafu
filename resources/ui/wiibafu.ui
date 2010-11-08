@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>641</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -286,348 +286,292 @@
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_39">
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <item>
-                <widget class="QLabel" name="label">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Game ID:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_ID">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Game ID:</string>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Game title:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_Name">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_ID">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_7">
-               <item>
-                <widget class="QLabel" name="label_3">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Original title:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_Title">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Game title:</string>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
-               <item>
-                <widget class="QLabel" name="label_4">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Region:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_Region">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_Name">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_9">
-               <item>
-                <widget class="QLabel" name="label_5">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Size:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_Size">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Original title:</string>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_36">
-               <item>
-                <widget class="QLabel" name="label_22">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Used blocks:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_UsedBlocks">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_Title">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_10">
-               <item>
-                <widget class="QLabel" name="label_6">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Insertion:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_Insertion">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Region:</string>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_15">
-               <item>
-                <widget class="QLabel" name="label_8">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Last modification:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_LastModification">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_Region">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_19">
-               <item>
-                <widget class="QLabel" name="label_9">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Last status change:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_LastStatusChange">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Size:</string>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_20">
-               <item>
-                <widget class="QLabel" name="label_10">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Last access:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_LastAccess">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_Size">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_11">
-               <item>
-                <widget class="QLabel" name="label_7">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Type:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_Type">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_22">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Used blocks:</string>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_37">
-               <item>
-                <widget class="QLabel" name="label_21">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Container:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_Container">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_UsedBlocks">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_38">
-               <item>
-                <widget class="QLabel" name="label_23">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>WBFS slot:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_WBFSSlot">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Insertion:</string>
+               </property>
+              </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_12">
-               <item>
-                <widget class="QLabel" name="lanel_8">
-                 <property name="minimumSize">
-                  <size>
-                   <width>110</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>File/Partition:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="infoTab_lineEdit_FileName">
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="6" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_Insertion">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Last modification:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_LastModification">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Last status change:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_LastStatusChange">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_10">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Last access:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_LastAccess">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Type:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_Type">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_21">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Container:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_Container">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="label_23">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>WBFS slot:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_WBFSSlot">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
+              <widget class="QLabel" name="lanel_8">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>File/Partition:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="1">
+              <widget class="QLineEdit" name="infoTab_lineEdit_FileName">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
-           <item>
+           <item row="0" column="1">
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
               <spacer name="verticalSpacer_2">
@@ -1068,7 +1012,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
