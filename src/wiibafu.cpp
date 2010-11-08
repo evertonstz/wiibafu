@@ -22,10 +22,11 @@
 #include "ui_wiibafu.h"
 
 WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
-    wiibafudialog = new WiiBaFuDialog(this);
     wiTools = new WiTools(this);
-    settings = new Settings(this);
     common = new Common(this);
+    settings = new Settings(this);
+    wiibafudialog = new WiiBaFuDialog(this);
+    coverViewDialog = new CoverViewDialog(this);
 
     filesListModel = new QStandardItemModel(this);
     dvdListModel = new QStandardItemModel(this);
@@ -337,8 +338,8 @@ void WiiBaFu::showGame3DCover(QImage *gameCover) {
 }
 
 void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
-    gameFullHQCover->save(QDir::tempPath().append("/WiiBaFu_GameCoverFullHQ.png"));
-    QDesktopServices::openUrl(QDir::tempPath().append("/WiiBaFu_GameCoverFullHQ.png"));
+    coverViewDialog->setCover(gameFullHQCover, ui->infoTab_lineEdit_ID->text());
+    coverViewDialog->show();
 }
 
 void WiiBaFu::setFilesGameListModel() {
@@ -514,10 +515,11 @@ WiiBaFu::~WiiBaFu() {
     QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/width", this->geometry().width());
     QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/height", this->geometry().height());
 
-    delete wiibafudialog;
     delete wiTools;
-    delete settings;
     delete common;
+    delete settings;
+    delete wiibafudialog;
+    delete coverViewDialog;
     delete filesListModel;
     delete dvdListModel;
     delete wbfsListModel;

@@ -25,9 +25,10 @@
 #include <QMetaType>
 
 #include "witools.h"
-#include "wiibafudialog.h"
-#include "settings.h"
 #include "common.h"
+#include "settings.h"
+#include "wiibafudialog.h"
+#include "coverviewdialog.h"
 
 namespace Ui {
     class WiiBaFu;
@@ -43,9 +44,10 @@ public:
 private:
     Ui::WiiBaFu *ui;
     WiTools *wiTools;
-    WiiBaFuDialog *wiibafudialog;
-    Settings *settings;
     Common *common;
+    Settings *settings;
+    WiiBaFuDialog *wiibafudialog;
+    CoverViewDialog *coverViewDialog;
 
     QStringList filesGamePaths;
     QProgressBar *progressBar_Main;
