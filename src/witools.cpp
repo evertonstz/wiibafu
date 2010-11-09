@@ -543,8 +543,8 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGamesToWBFS_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGamesToWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
     connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToWBFS_finished(int, QProcess::ExitStatus)));
 
     witProcess->start(wwt, arguments);
@@ -552,35 +552,6 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     arguments.clear();
     emit setMainProgressBarVisible(false);
-}
-
-void WiTools::transferGamesToWBFS_readyReadStandardOutput() {
-    QString line = witProcess->readAllStandardOutput().constData();
-
-    if (line.contains("ADD")) {
-        #ifdef Q_OS_MAC
-            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
-            emit newStatusBarMessage(gameCountText);
-        #else
-            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
-        #endif
-    }
-    else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
-        #ifdef Q_OS_MAC
-                emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
-        #endif
-    }
-    else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(line.remove(0, 5), Info);
-    }
-    else if (line.contains("disc added.") || line.contains("discs added.")) {
-        emit newLogEntry(line, Info);
-    }
-}
-
-void WiTools::transferGamesToWBFS_readyReadStandardError() {
-    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
 void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -597,10 +568,6 @@ void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus ex
     }
 
     delete witProcess;
-}
-
-void WiTools::transferGamesToWBFS_cancel() {
-    witProcess->kill();
 }
 
 void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory) {
@@ -649,8 +616,8 @@ void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath,
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGamesFromWBFS_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGamesFromWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
     connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesFromWBFS_finished(int, QProcess::ExitStatus)));
 
     witProcess->start(wwt, arguments);
@@ -658,35 +625,6 @@ void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath,
 
     arguments.clear();
     emit setMainProgressBarVisible(false);
-}
-
-void WiTools::transferGamesFromWBFS_readyReadStandardOutput() {
-    QString line = witProcess->readAllStandardOutput().constData();
-
-    if (line.contains("EXTRACT")) {
-        #ifdef Q_OS_MAC
-            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
-            emit newStatusBarMessage(gameCountText);
-        #else
-            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
-        #endif
-    }
-    else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
-        #ifdef Q_OS_MAC
-                emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
-        #endif
-    }
-    else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(line.remove(0, 5), Info);
-    }
-    else if (line.contains("disc extracted.") || line.contains("discs extracted.")) {
-        emit newLogEntry(line, Info);
-    }
-}
-
-void WiTools::transferGamesFromWBFS_readyReadStandardError() {
-    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
 void WiTools::transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -698,10 +636,6 @@ void WiTools::transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus 
     }
 
     delete witProcess;
-}
-
-void WiTools::transferGamesFromWBFS_cancel() {
-    witProcess->kill();
 }
 
 void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
@@ -746,8 +680,8 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferGameFromDVDToWBFS_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferGameFromDVDToWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
     connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGameFromDVDToWBFS_finished(int, QProcess::ExitStatus)));
 
     witProcess->start(wwt, arguments);
@@ -755,35 +689,6 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
 
     arguments.clear();
     emit setMainProgressBarVisible(false);
-}
-
-void WiTools::transferGameFromDVDToWBFS_readyReadStandardOutput() {
-    QString line = witProcess->readAllStandardOutput().constData();
-
-    if (line.contains("ADD")) {
-        #ifdef Q_OS_MAC
-            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("[") + 1, (line.lastIndexOf("]") - line.indexOf("[")) - 1));
-            emit newStatusBarMessage(gameCountText);
-        #else
-            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("[") + 1, (line.lastIndexOf("]") - line.indexOf("[")) - 1)));
-        #endif
-    }
-    else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
-        #ifdef Q_OS_MAC
-                emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
-        #endif
-    }
-    else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(line.remove(0, 5), Info);
-    }
-    else if (line.contains("disc added.") || line.contains("discs added.")) {
-        emit newLogEntry(line, Info);
-    }
-}
-
-void WiTools::transferGameFromDVDToWBFS_readyReadStandardError() {
-    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
 void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -802,7 +707,48 @@ void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitSta
     delete witProcess;
 }
 
-void WiTools::transferGameFromDVDToWBFS_cancel() {
+void WiTools::transfer_readyReadStandardOutput() {
+    QString line = witProcess->readAllStandardOutput().constData();
+
+    if (line.contains("ADD")) {
+        #ifdef Q_OS_MAC
+            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
+            emit newStatusBarMessage(gameCountText);
+        #else
+            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
+        #endif
+    }
+    else if (line.contains("EXTRACT")) {
+        #ifdef Q_OS_MAC
+            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
+            emit newStatusBarMessage(gameCountText);
+        #else
+            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
+        #endif
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+
+        #ifdef Q_OS_MAC
+                emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5), Info);
+    }
+    else if (line.contains("disc added.") || line.contains("discs added.")) {
+        emit newLogEntry(line, Info);
+    }
+    else if (line.contains("disc extracted.") || line.contains("discs extracted.")) {
+        emit newLogEntry(line, Info);
+    }
+}
+
+void WiTools::transfer_readyReadStandardError() {
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
+}
+
+void WiTools::transfer_cancel() {
     witProcess->kill();
 }
 

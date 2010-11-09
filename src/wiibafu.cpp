@@ -53,9 +53,9 @@ void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
     qRegisterMetaType<WiTools::LogType>("WiTools::LogType");
 
-    connect(this, SIGNAL(cancelTransferGamesToWBFS()), wiTools, SLOT(transferGamesToWBFS_cancel()));
-    connect(this, SIGNAL(cancelTransferGamesFromWBFS()), wiTools, SLOT(transferGamesFromWBFS_cancel()));
-    connect(this, SIGNAL(cancelTransferGameFromDVDToWBFS()), wiTools, SLOT(transferGameFromDVDToWBFS_cancel()));
+    connect(this, SIGNAL(cancelTransferGamesToWBFS()), wiTools, SLOT(transfer_cancel()));
+    connect(this, SIGNAL(cancelTransferGamesFromWBFS()), wiTools, SLOT(transfer_cancel()));
+    connect(this, SIGNAL(cancelTransferGameFromDVDToWBFS()), wiTools, SLOT(transfer_cancel()));
 
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));

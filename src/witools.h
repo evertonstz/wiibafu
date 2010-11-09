@@ -84,20 +84,13 @@ signals:
     void removeGamesFromWBFS_successfully();
 
 private slots:
-    void transferGamesToWBFS_readyReadStandardOutput();
-    void transferGamesToWBFS_readyReadStandardError();
     void transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void transferGamesToWBFS_cancel();
-
-    void transferGamesFromWBFS_readyReadStandardOutput();
-    void transferGamesFromWBFS_readyReadStandardError();
     void transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void transferGamesFromWBFS_cancel();
-
-    void transferGameFromDVDToWBFS_readyReadStandardOutput();
-    void transferGameFromDVDToWBFS_readyReadStandardError();
     void transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void transferGameFromDVDToWBFS_cancel();
+
+    void transfer_readyReadStandardOutput();
+    void transfer_readyReadStandardError();
+    void transfer_cancel();
 
     void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 };
