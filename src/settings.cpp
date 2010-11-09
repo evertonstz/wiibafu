@@ -111,23 +111,23 @@ void Settings::load() {
 
     ui->filesToWBFS_checkBox_Force->setChecked(wiiBaFuSettings.value("FilesToWBFS/Force", QVariant(false)).toBool());
     ui->filesToWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("FilesToWBFS/Test", QVariant(false)).toBool());
-    ui->filesToWBFS_checkBox_Newer->setChecked(wiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(true)).toBool());
-    ui->filesToWBFS_checkBox_Update->setChecked(wiiBaFuSettings.value("FilesToWBFS/Update", QVariant(true)).toBool());
+    ui->filesToWBFS_checkBox_Newer->setChecked(wiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(false)).toBool());
+    ui->filesToWBFS_checkBox_Update->setChecked(wiiBaFuSettings.value("FilesToWBFS/Update", QVariant(false)).toBool());
     ui->filesToWBFS_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("FilesToWBFS/Overwrite", QVariant(false)).toBool());
 
     ui->dvdToWBFS_checkBox_Force->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool());
     ui->dvdToWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Newer->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(true)).toBool());
-    ui->dvdToWBFS_checkBox_Update->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(true)).toBool());
+    ui->dvdToWBFS_checkBox_Newer->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(false)).toBool());
+    ui->dvdToWBFS_checkBox_Update->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(false)).toBool());
     ui->dvdToWBFS_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Overwrite", QVariant(false)).toBool());
 
     ui->WBFSToFiles_checkBox_Force->setChecked(wiiBaFuSettings.value("WBFStoFiles/Force", QVariant(false)).toBool());
     ui->WBFSToFiles_checkBox_Test->setChecked(wiiBaFuSettings.value("WBFStoFiles/Test", QVariant(false)).toBool());
-    ui->WBFSToFiles_checkBox_Update->setChecked(wiiBaFuSettings.value("WBFStoFiles/Update", QVariant(true)).toBool());
+    ui->WBFSToFiles_checkBox_Update->setChecked(wiiBaFuSettings.value("WBFStoFiles/Update", QVariant(false)).toBool());
     ui->WBFSToFiles_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("WBFStoFiles/Overwrite", QVariant(false)).toBool());
 
     ui->removeFromWBFS_checkBox_Force->setChecked(wiiBaFuSettings.value("RemoveFromWBFS/Force", QVariant(false)).toBool());
-    ui->removeFromWBFS_checkBox_Test->setCheckable(wiiBaFuSettings.value("RemoveFromWBFS/Test", QVariant(false)).toBool());
+    ui->removeFromWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("RemoveFromWBFS/Test", QVariant(false)).toBool());
 
     ui->checkWBFS_checkBox_Repair->setChecked(wiiBaFuSettings.value("CheckWBFS/Repair", QVariant(true)).toBool());
     ui->checkWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("CheckWBFS/Test", QVariant(false)).toBool());
@@ -192,7 +192,7 @@ void Settings::restoreDefaults(int index) {
     switch (index) {
         case 0:
                 ui->main_checkBox_Auto->setChecked(true);
-                ui->main_lineEdit_DVDDrivePath->setText("/cdrom");
+                ui->main_lineEdit_DVDDrivePath->setText("/dev/sr0");
                 ui->main_comboBox_Logging->setCurrentIndex(0);
                 break;
         case 1:
@@ -204,21 +204,21 @@ void Settings::restoreDefaults(int index) {
         case 2:
                 ui->filesToWBFS_checkBox_Force->setChecked(false);
                 ui->filesToWBFS_checkBox_Test->setChecked(false);
-                ui->filesToWBFS_checkBox_Newer->setChecked(true);
-                ui->filesToWBFS_checkBox_Update->setChecked(true);
+                ui->filesToWBFS_checkBox_Newer->setChecked(false);
+                ui->filesToWBFS_checkBox_Update->setChecked(false);
                 ui->filesToWBFS_checkBox_Overwrite->setChecked(false);
                 break;
         case 3:
                 ui->dvdToWBFS_checkBox_Force->setChecked(false);
                 ui->dvdToWBFS_checkBox_Test->setChecked(false);
-                ui->dvdToWBFS_checkBox_Newer->setChecked(true);
-                ui->dvdToWBFS_checkBox_Update->setChecked(true);
+                ui->dvdToWBFS_checkBox_Newer->setChecked(false);
+                ui->dvdToWBFS_checkBox_Update->setChecked(false);
                 ui->dvdToWBFS_checkBox_Overwrite->setChecked(false);
                 break;
         case 4:
                 ui->WBFSToFiles_checkBox_Force->setChecked(false);
                 ui->WBFSToFiles_checkBox_Test->setChecked(false);
-                ui->WBFSToFiles_checkBox_Update->setChecked(true);
+                ui->WBFSToFiles_checkBox_Update->setChecked(false);
                 ui->WBFSToFiles_checkBox_Overwrite->setChecked(false);
                 break;
         case 5:
