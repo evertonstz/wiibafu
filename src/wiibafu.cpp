@@ -126,7 +126,6 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 
     gameTableView->setShowGrid(wiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
     gameTableView->setAlternatingRowColors(wiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
-    gameTableView->verticalHeader()->setDefaultSectionSize(20);
     gameTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     gameTableView->setHorizontalScrollMode((QHeaderView::ScrollMode)wiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
@@ -134,13 +133,15 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();
-        gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
+        gameTableView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+        gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     }
     else {
         gameTableView->horizontalHeader()->hide();
-        gameTableView->setSelectionMode(QAbstractItemView::NoSelection);
         gameTableView->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+        gameTableView->verticalHeader()->setResizeMode(QHeaderView::Stretch);
+        gameTableView->setSelectionMode(QAbstractItemView::NoSelection);
     }
 }
 
