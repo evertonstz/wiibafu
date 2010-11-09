@@ -60,6 +60,7 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
 
+    connect(wiTools, SIGNAL(setInfoTextWBFS(QString)), this, SLOT(setWBFSInfoText(QString)));
     connect(wiTools, SIGNAL(setProgressBarWBFS(int, int, int, QString)), this, SLOT(setWBFSProgressBar(int, int, int, QString)));
     connect(wiTools, SIGNAL(newStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
@@ -96,6 +97,12 @@ void WiiBaFu::setupMainProgressBar() {
 
     progressBar_Main->setMaximumHeight(16);
     ui->statusBar->addPermanentWidget(progressBar_Main);
+
+    #ifdef Q_OS_MAC
+        ui->wbfsTab_label_Info->setVisible(true);
+    #else
+        ui->wbfsTab_label_Info->setVisible(false);
+    #endif
 }
 
 void WiiBaFu::setupGeometry() {
@@ -422,6 +429,10 @@ void WiiBaFu::transferGamesFromWBFScanceled() {
 void WiiBaFu::setMainProgressBar(int value, QString format) {
     progressBar_Main->setValue(value);
     progressBar_Main->setFormat(format);
+}
+
+void WiiBaFu::setWBFSInfoText(QString text) {
+    ui->wbfsTab_label_Info->setText(text);
 }
 
 void WiiBaFu::setWBFSProgressBar(int min, int max, int value, QString format) {

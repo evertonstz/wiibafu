@@ -113,6 +113,7 @@ private slots:
     void transferGamesFromWBFSsuccesfully();
     void transferGamesFromWBFScanceled();
 
+    void setWBFSInfoText(QString text);
     void setWBFSProgressBar(int min, int max, int value, QString format);
     void setMainProgressBar(int value, QString format);
     void setStatusBarText(QString text);

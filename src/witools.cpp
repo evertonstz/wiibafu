@@ -485,7 +485,14 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     wbfsslots.clear();
     filenames.clear();
 
-    emit setProgressBarWBFS(0, max, current, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
+    #ifdef Q_OS_MAC
+        emit setProgressBarWBFS(0, max, current, "%p%");
+        emit setInfoTextWBFS(QString("%1 - %2 - %3 - %4 (%5%) - %6 - %7").arg(file, usedDiscs, totalDiscs, usedMB, QString::number(current * 100 / max, 'f', 0), freeMB, totalMB));
+    #else
+        emit setProgressBarWBFS(0, max, current, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
+    #endif
+
+
     emit newWBFSGameListModel();
 }
 
@@ -551,10 +558,18 @@ void WiTools::transferGamesToWBFS_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("ADD")) {
-        emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
+        #ifdef Q_OS_MAC
+            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
+            emit newStatusBarMessage(gameCountText);
+        #else
+            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
+        #endif
     }
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+        #ifdef Q_OS_MAC
+                emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
         emit newLogEntry(line.remove(0, 5), Info);
@@ -649,10 +664,18 @@ void WiTools::transferGamesFromWBFS_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("EXTRACT")) {
-        emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
+        #ifdef Q_OS_MAC
+            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
+            emit newStatusBarMessage(gameCountText);
+        #else
+            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
+        #endif
     }
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+        #ifdef Q_OS_MAC
+                emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
         emit newLogEntry(line.remove(0, 5), Info);
@@ -738,10 +761,18 @@ void WiTools::transferGameFromDVDToWBFS_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("ADD")) {
-        emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("[") + 1, (line.lastIndexOf("]") - line.indexOf("[")) - 1)));
+        #ifdef Q_OS_MAC
+            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("[") + 1, (line.lastIndexOf("]") - line.indexOf("[")) - 1));
+            emit newStatusBarMessage(gameCountText);
+        #else
+            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("[") + 1, (line.lastIndexOf("]") - line.indexOf("[")) - 1)));
+        #endif
     }
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+        #ifdef Q_OS_MAC
+                emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
         emit newLogEntry(line.remove(0, 5), Info);

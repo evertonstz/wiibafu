@@ -53,11 +53,16 @@ private:
     QString wit, wwt;
     QProcess *witProcess;
 
+    #ifdef Q_OS_MAC
+        QString gameCountText;
+    #endif
+
     void setWit();
 
 signals:
     void setMainProgressBarVisible(bool visible);
     void setMainProgressBar(int value, QString format);
+    void setInfoTextWBFS(QString text);
     void setProgressBarWBFS(int min, int max, int value, QString text);
 
     void newLogEntry(QString entry, WiTools::LogType type);

@@ -199,6 +199,16 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
+            <widget class="QLabel" name="wbfsTab_label_Info">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QProgressBar" name="wbfsTab_progressBar">
              <property name="value">
               <number>0</number>
