@@ -16,6 +16,6 @@ RCC_DIR      = build
 
 macx {
   ICON              += resources/images/appicon.icns
-  QMAKE_INFO_PLIST  += Info.plist
+  QMAKE_INFO_PLIST  += mac/Info.plist
   CONFIG            += x86 ppc
 }
