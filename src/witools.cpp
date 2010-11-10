@@ -885,12 +885,20 @@ void WiTools::checkWBFS(QString wbfsPath) {
 }
 
 void WiTools::setWit() {
-    QDir::setSearchPaths("wit", QStringList() << QDir::currentPath() + "/wit" << "/usr/local/bin");
+    #ifdef Q_OS_UNIX
+        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/bin");
+        wit = QFile("wit:wit").fileName();
+        wwt = QFile("wit:wwt").fileName();
+    #endif
 
-    #ifdef WIN32
+    #ifdef Q_OS_WIN32
+        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit"));
         wit = QFile("wit:wit.exe").fileName();
         wwt = QFile("wit:wwt.exe").fileName();
-    #else
+    #endif
+
+    #ifdef Q_OS_MAC
+        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/WiiBaFu.app/Contents/wit") << "/usr/local/bin");
         wit = QFile("wit:wit").fileName();
         wwt = QFile("wit:wwt").fileName();
     #endif
@@ -910,7 +918,7 @@ QString WiTools::witVersion() {
         }
     }
 
-    #ifdef WIN32
+    #ifdef Q_OS_WIN32
         return QString(witCheckProcess.readLine()).remove("\r\n");
     #else
         return QString(witCheckProcess.readLine()).remove("\n");
@@ -931,7 +939,7 @@ QString WiTools::wwtVersion() {
         }
     }
 
-    #ifdef WIN32
+    #ifdef Q_OS_WIN32
         return QString(wwtCheckProcess.readLine()).remove("\r\n");
     #else
         return QString(wwtCheckProcess.readLine()).remove("\n");
