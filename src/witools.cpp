@@ -889,7 +889,7 @@ void WiTools::checkWBFS(QString wbfsPath) {
 }
 
 void WiTools::setWit() {
-    #ifdef Q_OS_UNIX
+    #ifdef Q_OS_LINUX
         QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/bin");
         wit = QFile("wit:wit").fileName();
         wwt = QFile("wit:wwt").fileName();
@@ -951,7 +951,7 @@ QString WiTools::wwtVersion() {
 }
 
 QString WiTools::witTitlesPath() {
-    #ifdef Q_OS_UNIX
+    #ifdef Q_OS_LINUX
         QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit");
         return QFile("witTitles:titles.txt").fileName();
     #endif
