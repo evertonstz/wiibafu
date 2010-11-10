@@ -363,7 +363,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Game ID:</string>
+                <string>ID:</string>
                </property>
               </widget>
              </item>
@@ -383,7 +383,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Game title:</string>
+                <string>Name:</string>
                </property>
               </widget>
              </item>
@@ -403,7 +403,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Original title:</string>
+                <string>Title:</string>
                </property>
               </widget>
              </item>

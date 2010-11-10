@@ -121,9 +121,9 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     model->appendColumn(filetypes);
     model->appendColumn(filenames);
 
-    model->setHeaderData(0, Qt::Horizontal, tr("Game ID"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Game title (%1 / %2 GB)").arg(QString::number(ids.count()), QString::number((count / 1073741824), 'f', 2)));
-    model->setHeaderData(2, Qt::Horizontal, tr("Original title"));
+    model->setHeaderData(0, Qt::Horizontal, tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Name (%1 / %2 GB)").arg(QString::number(ids.count()), QString::number((count / 1073741824), 'f', 2)));
+    model->setHeaderData(2, Qt::Horizontal, tr("Title"));
     model->setHeaderData(3, Qt::Horizontal, tr("Region"));
     model->setHeaderData(4, Qt::Horizontal, tr("Size"));
     model->setHeaderData(5, Qt::Horizontal, tr("Insertion"));
@@ -277,9 +277,9 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     model->clear();
     model->appendColumn(game);
 
-    model->setHeaderData(0, Qt::Vertical, tr("Game ID:"));
-    model->setHeaderData(1, Qt::Vertical, tr("Game title:"));
-    model->setHeaderData(2, Qt::Vertical, tr("Original title:"));
+    model->setHeaderData(0, Qt::Vertical, tr("ID:"));
+    model->setHeaderData(1, Qt::Vertical, tr("Name:"));
+    model->setHeaderData(2, Qt::Vertical, tr("Title:"));
     model->setHeaderData(3, Qt::Vertical, tr("Region:"));
     model->setHeaderData(4, Qt::Vertical, tr("Size:"));
     model->setHeaderData(5, Qt::Vertical, tr("Insertion:"));
@@ -459,9 +459,9 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     model->appendColumn(wbfsslots);
     model->appendColumn(filenames);
 
-    model->setHeaderData(0, Qt::Horizontal, tr("Game ID"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Game title"));
-    model->setHeaderData(2, Qt::Horizontal, tr("Original title"));
+    model->setHeaderData(0, Qt::Horizontal, tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Name"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Title"));
     model->setHeaderData(3, Qt::Horizontal, tr("Region"));
     model->setHeaderData(4, Qt::Horizontal, tr("Size"));
     model->setHeaderData(5, Qt::Horizontal, tr("Used blocks"));
