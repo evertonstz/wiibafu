@@ -217,11 +217,17 @@ void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
     if (ui->wbfsTab_pushButton_Transfer->text() != tr("Cancel transfering")) {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             int result = wiibafudialog->exec();
-            QString directory = wiibafudialog->imageDirectory();
+            QDir path = wiibafudialog->imageDirectory();
             QString format = wiibafudialog->imageFormat();
-            if (result == QDialog::Accepted && !directory.isEmpty() && !format.isEmpty()) {
-                ui->wbfsTab_pushButton_Transfer->setText(tr("Cancel transfering"));
-                QtConcurrent::run(wiTools, &WiTools::transferGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), format, directory);
+
+            if (result == QDialog::Accepted) {
+                if (!path.exists()) {
+                    QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
+                }
+                else {
+                    ui->wbfsTab_pushButton_Transfer->setText(tr("Cancel transfering"));
+                    QtConcurrent::run(wiTools, &WiTools::transferGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), format, path.absolutePath());
+                }
             }
         }
     }
