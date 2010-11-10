@@ -58,6 +58,7 @@ private:
     #endif
 
     void setWit();
+    QString witTitlesPath();
 
 signals:
     void setMainProgressBarVisible(bool visible);

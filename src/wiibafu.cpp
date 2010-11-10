@@ -134,7 +134,7 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();
         gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
-        gameTableView->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+        gameTableView->verticalHeader()->setDefaultSectionSize(20);
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     }
     else {

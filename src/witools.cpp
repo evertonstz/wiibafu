@@ -28,7 +28,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     emit newStatusBarMessage(tr("Loading games..."));
 
     QProcess filesRead;
-    filesRead.start(wit, QStringList() << "LIST" << "--section" << "--recurse" << path);
+    filesRead.start(wit, QStringList() << "LIST" << "--titles" << witTitlesPath() << "--section" << "--recurse" << path);
 
     if (!filesRead.waitForFinished(-1)) {
         if (filesRead.errorString().contains("No such file or directory")) {
@@ -152,7 +152,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     emit newStatusBarMessage(tr("Loading disc..."));
 
     QProcess dvdRead;
-    dvdRead.start(wit, QStringList() << "LIST-LL" << path << "--section"); //Windows: 0 games found, in admin mode too!?
+    dvdRead.start(wit, QStringList() << "LIST-LL" << path << "--titles" << witTitlesPath() << "--section"); //Windows: 0 games found, in admin mode too!?
 
     if (!dvdRead.waitForFinished(-1)) {
         if (dvdRead.errorString().contains("No such file or directory")) {
@@ -313,6 +313,10 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
         arguments.append("--part");
         arguments.append(wbfsPath);
     }
+
+    arguments.append("--titles");
+    arguments.append(witTitlesPath());
+
     arguments.append("--section");
 
     QProcess wbfsRead;
@@ -943,5 +947,22 @@ QString WiTools::wwtVersion() {
         return QString(wwtCheckProcess.readLine()).remove("\r\n");
     #else
         return QString(wwtCheckProcess.readLine()).remove("\n");
+    #endif
+}
+
+QString WiTools::witTitlesPath() {
+    #ifdef Q_OS_UNIX
+        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit");
+        return QFile("witTitles:titles.txt").fileName();
+    #endif
+
+    #ifdef Q_OS_WIN32
+        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit"));
+        return QFile("witTitles:titles.txt").fileName();
+    #endif
+
+    #ifdef Q_OS_MAC
+        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/WiiBaFu.app/Contents/wit"));
+        return QFile("witTitles:titles.txt").fileName();
     #endif
 }
