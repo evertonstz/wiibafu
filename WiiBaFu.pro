@@ -5,7 +5,7 @@ RESOURCES   += resources/wiibafu.qrc
 
 TEMPLATE     = app
 TARGET       = WiiBaFu
-CONFIG      += qt warn_on debug
+CONFIG      += qt warn_on
 QT          += core gui network
 DESTDIR      = bin
 INCLUDEPATH  = src
