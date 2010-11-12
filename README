@@ -12,5 +12,16 @@ Use Qt's own setting editor 'qtconfig', it's in "<Qt-Dir>/qt/bin/"!
 WBFS partitions/hdds
 ====================
 
-WiiBaFu needs admin permissions to access WBFS hdds/partitions! Please start
-WiiBaFu with 'sudo WiiBaFu'!
+WiiBaFu needs root/admin permissions to access WBFS hdds/partitions!
+If WiiBaFu don't work with your user permissions, start WiiBaFu with
+'sudo WiiBaFu' or in admin mode!
+
+
+DVD drive
+=========
+
+The dvd drive path is platform specific. For Linux use /dev/sr0 for the
+first S-ATA drive (must be adapted to your drive), for Mac OS X use normally
+/dev/disk2 (Mac with integrated hdd and dvd drive). On Windows, WIT use cygwin
+to access the drive, the drive letters doesn't work! Use /dev/sr0 for the
+first S-ATA drive (must be adapted to your drive).
