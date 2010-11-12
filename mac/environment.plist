@@ -3,8 +3,8 @@
 <plist version="0.9">
 <dict>
 	<key>PATH</key>
-	<string>//usr/local/bin</string>
+	<string>/usr/local/bin</string>
 	<key>WIT-TITLES</key>
-	<string>//usr/local/share/wit</string>
+	<string>/usr/local/share/wit</string>
 </dict>
 </plist>
