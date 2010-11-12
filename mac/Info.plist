@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>WiiBaFu</string>
+	<string>Wii Backup Fusion</string>
 	<key>CFBundleGetInfoString</key>
 	<string>0.7</string>
 	<key>CFBundleIconFile</key>

@@ -17,5 +17,6 @@ RCC_DIR      = build
 macx {
   ICON              += resources/images/appicon.icns
   QMAKE_INFO_PLIST  += mac/Info.plist
+  TARGET             = "Wii Backup Fusion"
   CONFIG            += x86 ppc
 }
