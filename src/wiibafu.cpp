@@ -305,6 +305,12 @@ void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
 
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
+
+        if (!ui->infoTab_lineEdit_ID->text().contains(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text())) {
+            ui->infoTab_label_GameCover->clear();
+            common->requestGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text(), getCurrentCoverLanguage(), Common::ThreeD);
+        }
+
         if (tableView == ui->wbfsTab_tableView) {
             ui->infoTab_lineEdit_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
             ui->infoTab_lineEdit_Name->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(1).first())->text());
@@ -338,7 +344,6 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             ui->infoTab_lineEdit_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
         }
 
-        on_infoTab_pushButton_Load3DCover_clicked();
         ui->tabWidget->setCurrentIndex(3);
     }
 }
