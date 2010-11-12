@@ -1,3 +1,10 @@
+2010-11-12 Kai Heitkamp <dynup@ymail.com>
+  * Platform specific fixes.
+  * Game cover viewer added.
+  * Transfer improved.
+  * Autosearch for WIT added.
+  * Some little fixes.
+
 2010-11-06 Kai Heitkamp <dynup@ymail.com>
   * Autosearch for wit/wwt added.
   * Better error handling.
