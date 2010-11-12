@@ -98,7 +98,7 @@ void WiiBaFu::setupMainProgressBar() {
     progressBar_Main->setMaximumHeight(16);
     ui->statusBar->addPermanentWidget(progressBar_Main);
 
-    #ifdef Q_OS_MAC
+    #ifdef Q_OS_MACX
         ui->wbfsTab_label_Info->setVisible(true);
     #else
         ui->wbfsTab_label_Info->setVisible(false);

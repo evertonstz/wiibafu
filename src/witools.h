@@ -53,7 +53,7 @@ private:
     QString wit, wwt;
     QProcess *witProcess;
 
-    #ifdef Q_OS_MAC
+    #ifdef Q_OS_MACX
         QString gameCountText;
     #endif
 

@@ -5,7 +5,7 @@ What you need
 
 Make sure you get the following stuff:
 
-  * Qt library (currently 4.7.0)
+  * Qt library (4.7.x highly recommended)
 
 It is important that you compile AND INSTALL the above packages!
 
@@ -65,6 +65,7 @@ download only is free!
 
 For Windows you need the MinGW compiler tools: http://www.mingw.org
 
+
 Common problems
 ===============
 
@@ -73,7 +74,8 @@ if your system has more version of Qt installed. So it can be that after some
 struggle to get QTDIR setup correctly your setup is actually correct,
 but old -incorrect- settings are still lying around.
 
-Double check LD_LIBRARY_PATH points first to $QTDIR/lib
+Check LD_LIBRARY_PATH points first to $QTDIR/lib
+Check it with ldd WiiBaFu
 
 Problems?
 
@@ -86,5 +88,31 @@ of Qt.
 If you still have problems look at the WiiBaFu website or send me an email:
 dynup@ymail.com
 
+
+Path to WIT and titles
+======================
+
+WiiBaFu comes with wit. If you delete it in the WiiBaFu package, because you have it already installed,
+you need to add the WIT path to the 'PATH' environment variable! WIT titles (titles.txt, titles-de.txt, ...)
+are in the same directory. They are differences between the platforms! WiiBaFu searches in the following paths:
+
+Linux:
+- WIT: <PathToWiiBaFu>/wit, in the PATH environment variable
+- Titles: <PathToWiiBaFu>/wit, in the PATH environment variable, /usr/local/share/wit
+
+Windows:
+- WIT: <PathToWiiBaFu>/wit, in the PATH environment variable
+- Titles: <PathToWiiBaFu>/wit, in the PATH environment variable
+
+Mac OS X:
+- WIT: <PathToWiiBaFu>/WiiBaFu.app/Contents/wit, in the PATH environment variable
+- Titles: <PathToWiiBaFu>/WiiBaFu.app/Contents/wit in the PATH environment variable, in the WIT-TITLES
+environment variable, /usr/local/share/wit
+
+On Mac OS X you can use 'environment.plist' to set WIT-TITLES environment variable for all GUI applications.
+Copy it to ~/.MacOSX
+
+
+
 Have fun!
-dynup
+Kai

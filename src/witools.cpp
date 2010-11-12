@@ -489,7 +489,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     wbfsslots.clear();
     filenames.clear();
 
-    #ifdef Q_OS_MAC
+    #ifdef Q_OS_MACX
         emit setProgressBarWBFS(0, max, current, "%p%");
         emit setInfoTextWBFS(QString("%1 - %2 - %3 - %4 (%5%) - %6 - %7").arg(file, usedDiscs, totalDiscs, usedMB, QString::number(current * 100 / max, 'f', 0), freeMB, totalMB));
     #else
@@ -715,7 +715,7 @@ void WiTools::transfer_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("ADD")) {
-        #ifdef Q_OS_MAC
+        #ifdef Q_OS_MACX
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
             emit newStatusBarMessage(gameCountText);
         #else
@@ -723,7 +723,7 @@ void WiTools::transfer_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("EXTRACT")) {
-        #ifdef Q_OS_MAC
+        #ifdef Q_OS_MACX
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
             emit newStatusBarMessage(gameCountText);
         #else
@@ -733,7 +733,7 @@ void WiTools::transfer_readyReadStandardOutput() {
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
 
-        #ifdef Q_OS_MAC
+        #ifdef Q_OS_MACX
                 emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
         #endif
     }
@@ -890,19 +890,19 @@ void WiTools::checkWBFS(QString wbfsPath) {
 
 void WiTools::setWit() {
     #ifdef Q_OS_LINUX
-        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/bin");
+        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(":"));
         wit = QFile("wit:wit").fileName();
         wwt = QFile("wit:wwt").fileName();
     #endif
 
     #ifdef Q_OS_WIN32
-        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit"));
+        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(";"));
         wit = QFile("wit:wit.exe").fileName();
         wwt = QFile("wit:wwt.exe").fileName();
     #endif
 
-    #ifdef Q_OS_MAC
-        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/WiiBaFu.app/Contents/wit") << "/usr/local/bin");
+    #ifdef Q_OS_MACX
+        QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/WiiBaFu.app/Contents/wit") << QString(getenv("PATH")).split(":"));
         wit = QFile("wit:wit").fileName();
         wwt = QFile("wit:wwt").fileName();
     #endif
@@ -952,17 +952,17 @@ QString WiTools::wwtVersion() {
 
 QString WiTools::witTitlesPath() {
     #ifdef Q_OS_LINUX
-        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit");
+        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(":") << "/usr/local/share/wit");
         return QFile("witTitles:titles.txt").fileName();
     #endif
 
     #ifdef Q_OS_WIN32
-        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit"));
+        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(";"));
         return QFile("witTitles:titles.txt").fileName();
     #endif
 
-    #ifdef Q_OS_MAC
-        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/WiiBaFu.app/Contents/wit"));
+    #ifdef Q_OS_MACX
+        QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/WiiBaFu.app/Contents/wit") << QString(getenv("PATH")).split(":") << QString(getenv("WIT-TITLES")).split(":") << "/usr/local/share/wit");
         return QFile("witTitles:titles.txt").fileName();
     #endif
 }
