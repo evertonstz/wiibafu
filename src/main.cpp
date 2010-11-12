@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationDomain("wiibafu.codeplex.com");
     QCoreApplication::setOrganizationName("Kai Heitkamp");
     QCoreApplication::setApplicationName("Wii Backup Fusion");
-    QCoreApplication::setApplicationVersion("0.6.1");
+    QCoreApplication::setApplicationVersion("0.7");
 
     WiiBaFu wiibafu;
     wiibafu.show();
