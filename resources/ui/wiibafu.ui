@@ -72,7 +72,7 @@
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_SelectAll">
              <property name="text">
-              <string>Select all</string>
+              <string>Select all / none</string>
              </property>
             </widget>
            </item>
@@ -301,7 +301,7 @@
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_SelectAll">
              <property name="text">
-              <string>Select all</string>
+              <string>Select all / none</string>
              </property>
             </widget>
            </item>
