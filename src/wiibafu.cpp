@@ -147,9 +147,10 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 }
 
 void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
-    QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
+    QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QSettings("WiiBaFu", "wiibafu").value("Main/LastFilesPath", QVariant(QDir::homePath()).toString()).toString(), QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
+        QSettings("WiiBaFu", "wiibafu").setValue("Main/LastFilesPath", directory);
         QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory);
     }
 }
