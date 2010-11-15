@@ -54,12 +54,18 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     foreach (QString line, lines) {
         line.remove("\r");
 
-        if (line.contains("total-discs=0")) {
+        if (line.isEmpty()) {
+            continue;
+        }
+        else if (line.contains("total-discs=0")) {
             emit newStatusBarMessage(tr("No games found!"));
             break;
         }
-        else if (line.isEmpty())
+        else if (line.contains("total-size=")) {
+            emit newStatusBarMessage(tr("No games found!"));
+            count += line.section("=", 1).toDouble();
             continue;
+        }
 
         if (line.startsWith("id=")) {
             ids.append(new QStandardItem(line.section("=", 1)));
@@ -79,7 +85,6 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
         }
         else if (line.startsWith("size=")) {
             sizes.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
-            count = count + line.section("=", 1).toDouble();
             continue;
         }
         else if (line.startsWith("itime=")) {
@@ -177,12 +182,13 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     foreach (QString line, lines) {
         line.remove("\r");
 
-        if (line.contains("total-discs=0")) {
+        if (line.isEmpty()) {
+            continue;
+        }
+        else if (line.contains("total-discs=0")) {
             emit newStatusBarMessage(tr("No game found!"));
             break;
         }
-        else if (line.isEmpty())
-            continue;
 
         if (line.startsWith("id=")) {
             game.append(new QStandardItem(line.section("=", 1)));
@@ -347,7 +353,10 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     foreach (QString line, lines) {
         line.remove("\r");
 
-        if (line.contains("text=No WBFS found")) {
+        if (line.isEmpty()) {
+            continue;
+        }
+        else if (line.contains("text=No WBFS found")) {
             emit newStatusBarMessage(tr("No WBFS partitions found!"));
             break;
         }
@@ -355,8 +364,6 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
             emit newStatusBarMessage(tr("No games found!"));
             break;
         }
-        else if (line.isEmpty())
-            continue;
 
         if (line.startsWith("file=")) {
             file = tr("%1").arg(line.section("=", 1));
