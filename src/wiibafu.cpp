@@ -136,6 +136,7 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        gameTableView->setSortingEnabled(true);
     }
     else {
         gameTableView->horizontalHeader()->hide();
@@ -323,9 +324,8 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             ui->infoTab_lineEdit_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
             ui->infoTab_lineEdit_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
             ui->infoTab_lineEdit_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
-            ui->infoTab_lineEdit_Container->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(11).first())->text());
-            ui->infoTab_lineEdit_WBFSSlot->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(12).first())->text());
-            ui->infoTab_lineEdit_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(13).first())->text());
+            ui->infoTab_lineEdit_WBFSSlot->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(11).first())->text());
+            ui->infoTab_lineEdit_Source->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(12).first())->text());
         }
         else {
             ui->infoTab_lineEdit_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
@@ -339,9 +339,8 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             ui->infoTab_lineEdit_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
             ui->infoTab_lineEdit_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
             ui->infoTab_lineEdit_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
-            ui->infoTab_lineEdit_Container->setText("--");
             ui->infoTab_lineEdit_WBFSSlot->setText("--");
-            ui->infoTab_lineEdit_FileName->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
+            ui->infoTab_lineEdit_Source->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
         }
 
         ui->tabWidget->setCurrentIndex(3);

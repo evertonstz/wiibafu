@@ -342,7 +342,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
 
     int current = 0, max = 0;
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
-    QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, containers, wbfsslots, filenames;
+    QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, wbfsslots, filenames;
 
     foreach (QString line, lines) {
         line.remove("\r");
@@ -429,10 +429,6 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
             filetypes.append(new QStandardItem(line.section("=", 1)));
             continue;
         }
-        else if (line.startsWith("container=")) {
-            containers.append(new QStandardItem(line.section("=", 1)));
-            continue;
-        }
         else if (line.startsWith("wbfs_slot=")) {
             wbfsslots.append(new QStandardItem(line.section("=", 1)));
             continue;
@@ -455,7 +451,6 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     model->appendColumn(ctimes);
     model->appendColumn(atimes);
     model->appendColumn(filetypes);
-    model->appendColumn(containers);
     model->appendColumn(wbfsslots);
     model->appendColumn(filenames);
 
@@ -470,9 +465,8 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     model->setHeaderData(8, Qt::Horizontal, tr("Last status change"));
     model->setHeaderData(9, Qt::Horizontal, tr("Last access"));
     model->setHeaderData(10, Qt::Horizontal, tr("Type"));
-    model->setHeaderData(11, Qt::Horizontal, tr("Container"));
-    model->setHeaderData(12, Qt::Horizontal, tr("WBFS slot"));
-    model->setHeaderData(13, Qt::Horizontal, tr("File/Partition"));
+    model->setHeaderData(11, Qt::Horizontal, tr("WBFS slot"));
+    model->setHeaderData(12, Qt::Horizontal, tr("File/Partition"));
 
     ids.clear();
     names.clear();
@@ -485,7 +479,6 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     ctimes.clear();
     atimes.clear();
     filetypes.clear();
-    containers.clear();
     wbfsslots.clear();
     filenames.clear();
 
