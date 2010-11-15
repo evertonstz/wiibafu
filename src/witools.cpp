@@ -131,7 +131,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     model->setHeaderData(7, Qt::Horizontal, tr("Last status change"));
     model->setHeaderData(8, Qt::Horizontal, tr("Last access"));
     model->setHeaderData(9, Qt::Horizontal, tr("Type"));
-    model->setHeaderData(10, Qt::Horizontal, tr("File name"));
+    model->setHeaderData(10, Qt::Horizontal, tr("Source"));
 
     ids.clear();
     names.clear();
@@ -466,7 +466,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     model->setHeaderData(9, Qt::Horizontal, tr("Last access"));
     model->setHeaderData(10, Qt::Horizontal, tr("Type"));
     model->setHeaderData(11, Qt::Horizontal, tr("WBFS slot"));
-    model->setHeaderData(12, Qt::Horizontal, tr("File/Partition"));
+    model->setHeaderData(12, Qt::Horizontal, tr("Source"));
 
     ids.clear();
     names.clear();
