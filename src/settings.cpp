@@ -26,8 +26,26 @@ Settings::Settings(QWidget *parent) : QDialog(parent), ui(new Ui::Settings) {
     load();
 }
 
+void Settings::on_main_pushButton_PathToWITOpen_clicked() {
+    QString path;
+
+    if (!ui->main_lineEdit_PathToWIT->text().isEmpty()) {
+        path = ui->main_lineEdit_PathToWIT->text();
+    }
+    else {
+        path = QDir::homePath();
+    }
+
+    QString witPath = QFileDialog::getExistingDirectory(this, tr("Open path to WIT"), path, QFileDialog::ShowDirsOnly);
+
+    if (!witPath.isEmpty()) {
+        ui->main_lineEdit_PathToWIT->setText(witPath);
+    }
+}
+
 void Settings::on_main_pushButton_WBFSOpenFile_clicked() {
     QString path;
+
     if (!ui->main_lineEdit_WBFSPath->text().isEmpty()) {
         path = ui->main_lineEdit_WBFSPath->text();
     }
@@ -44,6 +62,7 @@ void Settings::on_main_pushButton_WBFSOpenFile_clicked() {
 
 void Settings::on_main_pushButton_WBFSOpenDirectory_clicked() {
     QString path;
+
     if (!ui->main_lineEdit_WBFSPath->text().isEmpty()) {
         path = ui->main_lineEdit_WBFSPath->text();
     }
@@ -60,6 +79,7 @@ void Settings::on_main_pushButton_WBFSOpenDirectory_clicked() {
 
 void Settings::on_main_pushButton_DVDDriveOpenDirectory_clicked() {
     QString path;
+
     if (!ui->main_lineEdit_DVDDrivePath->text().isEmpty()) {
         path = ui->main_lineEdit_DVDDrivePath->text();
     }
@@ -98,6 +118,7 @@ void Settings::apply() {
 void Settings::load() {
     QSettings wiiBaFuSettings("WiiBaFu", "wiibafu");
 
+    ui->main_lineEdit_PathToWIT->setText(wiiBaFuSettings.value("Main/PathToWIT", QVariant("")).toString());
     ui->main_checkBox_Auto->setChecked(wiiBaFuSettings.value("Main/Auto", QVariant(true)).toBool());
     ui->main_lineEdit_WBFSPath->setText(wiiBaFuSettings.value("Main/WBFSPath", QVariant("")).toString());
     ui->main_lineEdit_DVDDrivePath->setText(wiiBaFuSettings.value("Main/DVDDrivePath", QVariant("")).toString());
@@ -145,6 +166,7 @@ void Settings::load() {
 void Settings::save() {
     QSettings wiiBaFuSettings("WiiBaFu", "wiibafu");
 
+    wiiBaFuSettings.setValue("Main/PathToWIT", ui->main_lineEdit_PathToWIT->text());
     wiiBaFuSettings.setValue("Main/Auto", ui->main_checkBox_Auto->checkState());
     wiiBaFuSettings.setValue("Main/WBFSPath", ui->main_lineEdit_WBFSPath->text());
     wiiBaFuSettings.setValue("Main/DVDDrivePath", ui->main_lineEdit_DVDDrivePath->text());
@@ -191,6 +213,7 @@ void Settings::save() {
 void Settings::restoreDefaults(int index) {
     switch (index) {
         case 0:
+                ui->main_lineEdit_PathToWIT->setText("/usr/local/bin");
                 ui->main_checkBox_Auto->setChecked(true);
                 ui->main_lineEdit_DVDDrivePath->setText("/dev/sr0");
                 ui->main_comboBox_Logging->setCurrentIndex(0);
