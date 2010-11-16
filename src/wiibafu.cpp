@@ -366,6 +366,12 @@ void WiiBaFu::setFilesGameListModel() {
         ui->filesTab_tableView->setModel(filesListModel);
         ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
 
+        if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
+            for (int i = 0; ui->filesTab_tableView->horizontalHeader()->count() > i; i++) {
+                ui->filesTab_tableView->setColumnWidth(i, QSettings("WiiBaFu", "wiibafu").value(QString("FilesGameList/ColumnWidth%1").arg(i), QVariant(100).toInt()).toInt());
+            }
+        }
+
         setStatusBarText(tr("Ready."));
     }
 }
@@ -385,6 +391,13 @@ void WiiBaFu::setWBFSGameListModel() {
     if (wbfsListModel->rowCount() > 0) {
         ui->wbfsTab_tableView->setModel(wbfsListModel);
         ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
+
+        if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
+            for (int i = 0; ui->wbfsTab_tableView->horizontalHeader()->count() > i; i++) {
+                ui->wbfsTab_tableView->setColumnWidth(i, QSettings("WiiBaFu", "wiibafu").value(QString("WBFSGameList/ColumnWidth%1").arg(i), QVariant(100).toInt()).toInt());
+            }
+        }
+
         setStatusBarText(tr("Ready."));
     }
 }
@@ -518,6 +531,27 @@ QString WiiBaFu::wbfsPath() {
     }
 }
 
+void WiiBaFu::saveMainWindowGeometry() {
+    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/x", this->geometry().x());
+    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/y", this->geometry().y());
+    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/width", this->geometry().width());
+    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/height", this->geometry().height());
+}
+
+void WiiBaFu::saveGameListColumnWidths() {
+    if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
+        QSettings("WiiBaFu", "wiibafu").remove("FilesGameList");
+        for (int i = 0; ui->filesTab_tableView->horizontalHeader()->count() > i; i++) {
+            QSettings("WiiBaFu", "wiibafu").setValue(QString("FilesGameList/ColumnWidth%1").arg(i), ui->filesTab_tableView->columnWidth(i));
+        }
+
+        QSettings("WiiBaFu", "wiibafu").remove("WBFSGameList");
+        for (int i = 0; ui->wbfsTab_tableView->horizontalHeader()->count() > i; i++) {
+            QSettings("WiiBaFu", "wiibafu").setValue(QString("WBFSGameList/ColumnWidth%1").arg(i), ui->wbfsTab_tableView->columnWidth(i));
+        }
+    }
+}
+
 void WiiBaFu::on_menuHelp_About_triggered() {
     QMessageBox::about(this, tr("About Wii Backup Fusion"),
         QString("<h2>Wii Backup Fusion %1</h2>").arg(QCoreApplication::applicationVersion()) +
@@ -533,10 +567,8 @@ void WiiBaFu::on_menuHelp_About_triggered() {
 }
 
 WiiBaFu::~WiiBaFu() {
-    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/x", this->geometry().x());
-    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/y", this->geometry().y());
-    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/width", this->geometry().width());
-    QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/height", this->geometry().height());
+    saveMainWindowGeometry();
+    saveGameListColumnWidths();
 
     delete wiTools;
     delete common;

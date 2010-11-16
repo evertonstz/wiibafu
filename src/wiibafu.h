@@ -62,6 +62,10 @@ private:
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
 
     QString getCurrentCoverLanguage();
+    QString wbfsPath();
+
+    void saveMainWindowGeometry();
+    void saveGameListColumnWidths();
 
 signals:
     void cancelTransferGamesToWBFS();
@@ -118,7 +122,6 @@ private slots:
     void setMainProgressBar(int value, QString format);
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry, WiTools::LogType type);
-    QString wbfsPath();
 
     void on_menuHelp_About_triggered();
 };

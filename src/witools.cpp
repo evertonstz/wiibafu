@@ -62,7 +62,6 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
             break;
         }
         else if (line.contains("total-size=")) {
-            emit newStatusBarMessage(tr("No games found!"));
             count += line.section("=", 1).toDouble();
             continue;
         }
