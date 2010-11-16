@@ -53,9 +53,7 @@ void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
     qRegisterMetaType<WiTools::LogType>("WiTools::LogType");
 
-    connect(this, SIGNAL(cancelTransferGamesToWBFS()), wiTools, SLOT(transfer_cancel()));
-    connect(this, SIGNAL(cancelTransferGamesFromWBFS()), wiTools, SLOT(transfer_cancel()));
-    connect(this, SIGNAL(cancelTransferGameFromDVDToWBFS()), wiTools, SLOT(transfer_cancel()));
+    connect(this, SIGNAL(cancelTransfer()), wiTools, SLOT(transfer_cancel()));
 
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
@@ -176,7 +174,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
         }
     }
     else {
-        emit cancelTransferGamesToWBFS();
+        emit cancelTransfer();
     }
 }
 
@@ -198,7 +196,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
         }
     }
     else {
-        emit cancelTransferGameFromDVDToWBFS();
+        emit cancelTransfer();
     }
 }
 
@@ -236,7 +234,7 @@ void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
         }
     }
     else {
-        emit cancelTransferGamesFromWBFS();
+        emit cancelTransfer();
     }
 }
 

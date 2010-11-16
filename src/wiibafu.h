@@ -68,9 +68,7 @@ private:
     void saveGameListHeaderStates();
 
 signals:
-    void cancelTransferGamesToWBFS();
-    void cancelTransferGamesFromWBFS();
-    void cancelTransferGameFromDVDToWBFS();
+    void cancelTransfer();
 
 private slots:
     void setMainProgressBarVisible(bool visible);
