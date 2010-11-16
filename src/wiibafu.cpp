@@ -133,10 +133,11 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();
-        gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
+        gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         gameTableView->setSortingEnabled(true);
+        gameTableView->setTabKeyNavigation(false);
     }
     else {
         gameTableView->horizontalHeader()->hide();
@@ -368,7 +369,7 @@ void WiiBaFu::setFilesGameListModel() {
 
         if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
             for (int i = 0; ui->filesTab_tableView->horizontalHeader()->count() > i; i++) {
-                ui->filesTab_tableView->setColumnWidth(i, QSettings("WiiBaFu", "wiibafu").value(QString("FilesGameList/ColumnWidth%1").arg(i), QVariant(100).toInt()).toInt());
+                ui->filesTab_tableView->setColumnWidth(i, QSettings("WiiBaFu", "wiibafu").value(QString("FilesGameList_ColumnWidths/%1").arg(i), QVariant(100).toInt()).toInt());
             }
         }
 
@@ -394,7 +395,7 @@ void WiiBaFu::setWBFSGameListModel() {
 
         if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
             for (int i = 0; ui->wbfsTab_tableView->horizontalHeader()->count() > i; i++) {
-                ui->wbfsTab_tableView->setColumnWidth(i, QSettings("WiiBaFu", "wiibafu").value(QString("WBFSGameList/ColumnWidth%1").arg(i), QVariant(100).toInt()).toInt());
+                ui->wbfsTab_tableView->setColumnWidth(i, QSettings("WiiBaFu", "wiibafu").value(QString("WBFSGameList_ColumnWidths/%1").arg(i), QVariant(100).toInt()).toInt());
             }
         }
 
@@ -540,14 +541,14 @@ void WiiBaFu::saveMainWindowGeometry() {
 
 void WiiBaFu::saveGameListColumnWidths() {
     if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
-        QSettings("WiiBaFu", "wiibafu").remove("FilesGameList");
+        QSettings("WiiBaFu", "wiibafu").remove("FilesGameList_ColumnWidths");
         for (int i = 0; ui->filesTab_tableView->horizontalHeader()->count() > i; i++) {
-            QSettings("WiiBaFu", "wiibafu").setValue(QString("FilesGameList/ColumnWidth%1").arg(i), ui->filesTab_tableView->columnWidth(i));
+            QSettings("WiiBaFu", "wiibafu").setValue(QString("FilesGameList_ColumnWidths/%1").arg(i), ui->filesTab_tableView->columnWidth(i));
         }
 
-        QSettings("WiiBaFu", "wiibafu").remove("WBFSGameList");
+        QSettings("WiiBaFu", "wiibafu").remove("WBFSGameList_ColumnWidths");
         for (int i = 0; ui->wbfsTab_tableView->horizontalHeader()->count() > i; i++) {
-            QSettings("WiiBaFu", "wiibafu").setValue(QString("WBFSGameList/ColumnWidth%1").arg(i), ui->wbfsTab_tableView->columnWidth(i));
+            QSettings("WiiBaFu", "wiibafu").setValue(QString("WBFSGameList_ColumnWidths/%1").arg(i), ui->wbfsTab_tableView->columnWidth(i));
         }
     }
 }
