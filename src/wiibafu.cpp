@@ -133,6 +133,7 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();
+        gameTableView->horizontalHeader()->setMovable(true);
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
         gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -366,12 +367,7 @@ void WiiBaFu::setFilesGameListModel() {
     if (filesListModel->rowCount() > 0 ) {
         ui->filesTab_tableView->setModel(filesListModel);
         ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
-
-        if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
-            for (int i = 0; ui->filesTab_tableView->horizontalHeader()->count() > i; i++) {
-                ui->filesTab_tableView->setColumnWidth(i, QSettings("WiiBaFu", "wiibafu").value(QString("FilesGameList_ColumnWidths/%1").arg(i), QVariant(100).toInt()).toInt());
-            }
-        }
+        ui->filesTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/Files_HeaderStates").toByteArray());
 
         setStatusBarText(tr("Ready."));
     }
@@ -392,12 +388,7 @@ void WiiBaFu::setWBFSGameListModel() {
     if (wbfsListModel->rowCount() > 0) {
         ui->wbfsTab_tableView->setModel(wbfsListModel);
         ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
-
-        if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
-            for (int i = 0; ui->wbfsTab_tableView->horizontalHeader()->count() > i; i++) {
-                ui->wbfsTab_tableView->setColumnWidth(i, QSettings("WiiBaFu", "wiibafu").value(QString("WBFSGameList_ColumnWidths/%1").arg(i), QVariant(100).toInt()).toInt());
-            }
-        }
+        ui->wbfsTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/WBFS_HeaderStates").toByteArray());
 
         setStatusBarText(tr("Ready."));
     }
@@ -539,17 +530,13 @@ void WiiBaFu::saveMainWindowGeometry() {
     QSettings("WiiBaFu", "wiibafu").setValue("MainWindow/height", this->geometry().height());
 }
 
-void WiiBaFu::saveGameListColumnWidths() {
-    if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)) == QHeaderView::Interactive) {
-        QSettings("WiiBaFu", "wiibafu").remove("FilesGameList_ColumnWidths");
-        for (int i = 0; ui->filesTab_tableView->horizontalHeader()->count() > i; i++) {
-            QSettings("WiiBaFu", "wiibafu").setValue(QString("FilesGameList_ColumnWidths/%1").arg(i), ui->filesTab_tableView->columnWidth(i));
-        }
+void WiiBaFu::saveGameListHeaderStates() {
+    if (ui->filesTab_tableView->horizontalHeader()->count() > 0 ) {
+        QSettings("WiiBaFu", "wiibafu").setValue("GameLists/Files_HeaderStates", ui->filesTab_tableView->horizontalHeader()->saveState());
+    }
 
-        QSettings("WiiBaFu", "wiibafu").remove("WBFSGameList_ColumnWidths");
-        for (int i = 0; ui->wbfsTab_tableView->horizontalHeader()->count() > i; i++) {
-            QSettings("WiiBaFu", "wiibafu").setValue(QString("WBFSGameList_ColumnWidths/%1").arg(i), ui->wbfsTab_tableView->columnWidth(i));
-        }
+    if (ui->wbfsTab_tableView->horizontalHeader()->count() > 0 ) {
+        QSettings("WiiBaFu", "wiibafu").setValue("GameLists/WBFS_HeaderStates", ui->wbfsTab_tableView->horizontalHeader()->saveState());
     }
 }
 
@@ -569,7 +556,7 @@ void WiiBaFu::on_menuHelp_About_triggered() {
 
 WiiBaFu::~WiiBaFu() {
     saveMainWindowGeometry();
-    saveGameListColumnWidths();
+    saveGameListHeaderStates();
 
     delete wiTools;
     delete common;

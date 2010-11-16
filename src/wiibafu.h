@@ -65,7 +65,7 @@ private:
     QString wbfsPath();
 
     void saveMainWindowGeometry();
-    void saveGameListColumnWidths();
+    void saveGameListHeaderStates();
 
 signals:
     void cancelTransferGamesToWBFS();
