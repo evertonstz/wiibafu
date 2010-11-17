@@ -60,7 +60,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
         else if (line.contains("total-discs=0")) {
             emit newStatusBarMessage(tr("No games found!"));
             emit stopBusy();
-            break;
+            return;
         }
         else if (line.contains("total-size=")) {
             count += line.section("=", 1).toDouble();
@@ -187,12 +187,12 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
         else if (line.contains("name=CAN'T OPEN FILE")) {
             emit newStatusBarMessage(tr("Can't open file!"));
             emit stopBusy();
-            break;
+            return;
         }
         else if (line.contains("total-discs=0")) {
             emit newStatusBarMessage(tr("No game found!"));
             emit stopBusy();
-            break;
+            return;
         }
         else if (line.startsWith("id=")) {
             game.append(new QStandardItem(line.section("=", 1)));
@@ -356,7 +356,6 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
 
     foreach (QString line, lines) {
         line.remove("\r");
-        qDebug() << line;
 
         if (line.isEmpty()) {
             continue;
@@ -364,12 +363,12 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
         else if (line.contains("name=NO WBFS FOUND")) {
             emit newStatusBarMessage(tr("No WBFS partitions found!"));
             emit stopBusy();
-            break;
+            return;
         }
         else if (line.contains("used_discs=0")) {
             emit newStatusBarMessage(tr("No games found!"));
             emit stopBusy();
-            break;
+            return;
         }
         else if (line.startsWith("file=")) {
             file = tr("%1").arg(line.section("=", 1));
@@ -494,14 +493,12 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     wbfsslots.clear();
     filenames.clear();
 
-    if (max > 0) {
-        #ifdef Q_OS_MACX
-            emit setProgressBarWBFS(0, max, current, "%p%");
-            emit setInfoTextWBFS(QString("%1 - %2 - %3 - %4 (%5%) - %6 - %7").arg(file, usedDiscs, totalDiscs, usedMB, QString::number(current * 100 / max, 'f', 0), freeMB, totalMB));
-        #else
-            emit setProgressBarWBFS(0, max, current, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
-        #endif
-    }
+    #ifdef Q_OS_MACX
+        emit setProgressBarWBFS(0, max, current, "%p%");
+        emit setInfoTextWBFS(QString("%1 - %2 - %3 - %4 (%5%) - %6 - %7").arg(file, usedDiscs, totalDiscs, usedMB, QString::number(current * 100 / max, 'f', 0), freeMB, totalMB));
+    #else
+        emit setProgressBarWBFS(0, max, current, QString("%1 - %2 - %3 - %4 (%p%) - %5 - %6").arg(file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB));
+    #endif
 
     emit newWBFSGameListModel();
 }
