@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>506</width>
-    <height>335</height>
+    <width>500</width>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -271,19 +271,6 @@
         </layout>
        </item>
        <item>
-        <widget class="Line" name="line">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QGroupBox" name="gameLists_groupBox_ScrollMode">
          <property name="locale">
           <locale language="English" country="UnitedStates"/>
@@ -307,19 +294,6 @@
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="Line" name="line_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
         </widget>
        </item>
        <item>
@@ -410,7 +384,7 @@
          </layout>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
           <string>Game list columns:</string>
@@ -494,13 +468,6 @@
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="Line" name="line_7">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
         </widget>
        </item>
       </layout>
@@ -595,7 +562,7 @@
          </layout>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
           <string>Game list columns:</string>
@@ -695,13 +662,6 @@
          </layout>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="Line" name="line_8">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="RemoveFrmWBFS">
@@ -760,13 +720,6 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="Line" name="line_5">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
         <widget class="QGroupBox" name="checkWBFS_groupBox_RepairOptions">
          <property name="title">
           <string>Repair options:</string>
