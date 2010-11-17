@@ -135,6 +135,17 @@ void Settings::load() {
     ui->filesToWBFS_checkBox_Newer->setChecked(wiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(false)).toBool());
     ui->filesToWBFS_checkBox_Update->setChecked(wiiBaFuSettings.value("FilesToWBFS/Update", QVariant(false)).toBool());
     ui->filesToWBFS_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("FilesToWBFS/Overwrite", QVariant(false)).toBool());
+    ui->filesColumn_checkBox_ID->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnID", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Name->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnName", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Title->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnTitle", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Region->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnRegion", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Size->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnSize", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Insertion->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnInsertion", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_LastModification->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnLastModification", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_LastStatusChange->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnLastStatusChange", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_LastAccess->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnLastAccess", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Type->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnType", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Source->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnSource", QVariant(true)).toBool());
 
     ui->dvdToWBFS_checkBox_Force->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool());
     ui->dvdToWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool());
@@ -146,6 +157,19 @@ void Settings::load() {
     ui->WBFSToFiles_checkBox_Test->setChecked(wiiBaFuSettings.value("WBFStoFiles/Test", QVariant(false)).toBool());
     ui->WBFSToFiles_checkBox_Update->setChecked(wiiBaFuSettings.value("WBFStoFiles/Update", QVariant(false)).toBool());
     ui->WBFSToFiles_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("WBFStoFiles/Overwrite", QVariant(false)).toBool());
+    ui->wbfsColumn_checkBox_ID->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnID", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Name->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnName", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Title->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnTitle", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Region->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnRegion", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Size->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnSize", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_UsedBlocks->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnUsedBlocks", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Insertion->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnInsertion", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_LastModification->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnLastModification", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_LastStatusChange->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnLastStatusChange", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_LastAccess->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnLastAccess", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Type->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnType", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_WBFSSlot->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnWBFSSlot", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Source->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnSource", QVariant(true)).toBool());
 
     ui->removeFromWBFS_checkBox_Force->setChecked(wiiBaFuSettings.value("RemoveFromWBFS/Force", QVariant(false)).toBool());
     ui->removeFromWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("RemoveFromWBFS/Test", QVariant(false)).toBool());
@@ -183,6 +207,18 @@ void Settings::save() {
     wiiBaFuSettings.setValue("FilesToWBFS/Update", ui->filesToWBFS_checkBox_Update->checkState());
     wiiBaFuSettings.setValue("FilesToWBFS/Overwrite", ui->filesToWBFS_checkBox_Overwrite->checkState());
 
+    wiiBaFuSettings.setValue("FilesToWBFS/columnID", ui->filesColumn_checkBox_ID->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnName", ui->filesColumn_checkBox_Name->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnTitle", ui->filesColumn_checkBox_Title->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnRegion", ui->filesColumn_checkBox_Region->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnSize", ui->filesColumn_checkBox_Size->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnInsertion", ui->filesColumn_checkBox_Insertion->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnLastModification", ui->filesColumn_checkBox_LastModification->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnLastStatusChange", ui->filesColumn_checkBox_LastStatusChange->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnLastAccess", ui->filesColumn_checkBox_LastAccess->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnType", ui->filesColumn_checkBox_Type->checkState());
+    wiiBaFuSettings.setValue("FilesToWBFS/columnSource", ui->filesColumn_checkBox_Source->checkState());
+
     wiiBaFuSettings.setValue("DVDtoWBFS/Force", ui->dvdToWBFS_checkBox_Force->checkState());
     wiiBaFuSettings.setValue("DVDtoWBFS/Test", ui->dvdToWBFS_checkBox_Test->checkState());
     wiiBaFuSettings.setValue("DVDtoWBFS/Newer", ui->dvdToWBFS_checkBox_Newer->checkState());
@@ -193,6 +229,20 @@ void Settings::save() {
     wiiBaFuSettings.setValue("WBFStoFiles/Test", ui->WBFSToFiles_checkBox_Test->checkState());
     wiiBaFuSettings.setValue("WBFStoFiles/Update", ui->WBFSToFiles_checkBox_Update->checkState());
     wiiBaFuSettings.setValue("WBFStoFiles/Overwrite", ui->WBFSToFiles_checkBox_Overwrite->checkState());
+
+    wiiBaFuSettings.setValue("WBFStoFiles/columnID", ui->wbfsColumn_checkBox_ID->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnName", ui->wbfsColumn_checkBox_Name->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnTitle", ui->wbfsColumn_checkBox_Title->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnRegion", ui->wbfsColumn_checkBox_Region->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnSize", ui->wbfsColumn_checkBox_Size->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnUsedBlocks", ui->wbfsColumn_checkBox_UsedBlocks->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnInsertion", ui->wbfsColumn_checkBox_Insertion->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnLastModification", ui->wbfsColumn_checkBox_LastModification->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnLastStatusChange", ui->wbfsColumn_checkBox_LastStatusChange->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnLastAccess", ui->wbfsColumn_checkBox_LastAccess->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnType", ui->wbfsColumn_checkBox_Type->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnWBFSSlot", ui->wbfsColumn_checkBox_WBFSSlot->checkState());
+    wiiBaFuSettings.setValue("WBFStoFiles/columnSource", ui->wbfsColumn_checkBox_Source->checkState());
 
     wiiBaFuSettings.setValue("RemoveFromWBFS/Force", ui->removeFromWBFS_checkBox_Force->checkState());
     wiiBaFuSettings.setValue("RemoveFromWBFS/Test", ui->removeFromWBFS_checkBox_Test->checkState());
@@ -230,6 +280,17 @@ void Settings::restoreDefaults(int index) {
                 ui->filesToWBFS_checkBox_Newer->setChecked(false);
                 ui->filesToWBFS_checkBox_Update->setChecked(false);
                 ui->filesToWBFS_checkBox_Overwrite->setChecked(false);
+                ui->filesColumn_checkBox_ID->setChecked(true);
+                ui->filesColumn_checkBox_Name->setChecked(true);
+                ui->filesColumn_checkBox_Title->setChecked(true);
+                ui->filesColumn_checkBox_Region->setChecked(true);
+                ui->filesColumn_checkBox_Size->setChecked(true);
+                ui->filesColumn_checkBox_Insertion->setChecked(true);
+                ui->filesColumn_checkBox_LastModification->setChecked(true);
+                ui->filesColumn_checkBox_LastStatusChange->setChecked(true);
+                ui->filesColumn_checkBox_LastAccess->setChecked(true);
+                ui->filesColumn_checkBox_Type->setChecked(true);
+                ui->filesColumn_checkBox_Source->setChecked(true);
                 break;
         case 3:
                 ui->dvdToWBFS_checkBox_Force->setChecked(false);
@@ -243,6 +304,19 @@ void Settings::restoreDefaults(int index) {
                 ui->WBFSToFiles_checkBox_Test->setChecked(false);
                 ui->WBFSToFiles_checkBox_Update->setChecked(false);
                 ui->WBFSToFiles_checkBox_Overwrite->setChecked(false);
+                ui->wbfsColumn_checkBox_ID->setChecked(true);
+                ui->wbfsColumn_checkBox_Name->setChecked(true);
+                ui->wbfsColumn_checkBox_Title->setChecked(true);
+                ui->wbfsColumn_checkBox_Region->setChecked(true);
+                ui->wbfsColumn_checkBox_Size->setChecked(true);
+                ui->wbfsColumn_checkBox_UsedBlocks->setChecked(true);
+                ui->wbfsColumn_checkBox_Insertion->setChecked(true);
+                ui->wbfsColumn_checkBox_LastModification->setChecked(true);
+                ui->wbfsColumn_checkBox_LastStatusChange->setChecked(true);
+                ui->wbfsColumn_checkBox_LastAccess->setChecked(true);
+                ui->wbfsColumn_checkBox_Type->setChecked(true);
+                ui->wbfsColumn_checkBox_WBFSSlot->setChecked(true);
+                ui->wbfsColumn_checkBox_Source->setChecked(true);
                 break;
         case 5:
                 ui->removeFromWBFS_checkBox_Force->setChecked(false);

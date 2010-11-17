@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>305</height>
+    <width>506</width>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,17 +37,17 @@
      </item>
      <item>
       <property name="text">
-       <string>Files to WBFS</string>
+       <string>Files</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>DVD to WBFS</string>
+       <string>DVD</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>WBFS to Files</string>
+       <string>WBFS</string>
       </property>
      </item>
      <item>
@@ -60,6 +60,19 @@
        <string>Check/Repair WBFS</string>
       </property>
      </item>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="locale">
+      <locale language="English" country="UnitedStates"/>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
+     </property>
     </widget>
    </item>
    <item row="0" column="1">
@@ -356,7 +369,7 @@
        <item row="0" column="0">
         <widget class="QGroupBox" name="filesToWBFS_groupBox_Options">
          <property name="title">
-          <string>Files to WBFS - Options:</string>
+          <string>Files to WBFS transfer options:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
@@ -366,28 +379,28 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="filesToWBFS_checkBox_Test">
-            <property name="text">
-             <string>Test</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QCheckBox" name="filesToWBFS_checkBox_Newer">
             <property name="text">
              <string>Newer</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="filesToWBFS_checkBox_Test">
+            <property name="text">
+             <string>Test</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
            <widget class="QCheckBox" name="filesToWBFS_checkBox_Update">
             <property name="text">
              <string>Update</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="1" column="1">
            <widget class="QCheckBox" name="filesToWBFS_checkBox_Overwrite">
             <property name="text">
              <string>Overwrite</string>
@@ -397,6 +410,99 @@
          </layout>
         </widget>
        </item>
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Game list columns:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_14">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="filesColumn_checkBox_ID">
+            <property name="text">
+             <string>ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="filesColumn_checkBox_Size">
+            <property name="text">
+             <string>Size</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="filesColumn_checkBox_LastAccess">
+            <property name="text">
+             <string>Last access</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="filesColumn_checkBox_Name">
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="filesColumn_checkBox_Insertion">
+            <property name="text">
+             <string>Insertion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="filesColumn_checkBox_Type">
+            <property name="text">
+             <string>Type</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="filesColumn_checkBox_Title">
+            <property name="text">
+             <string>Title</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="filesColumn_checkBox_LastModification">
+            <property name="text">
+             <string>Last modification</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QCheckBox" name="filesColumn_checkBox_Source">
+            <property name="text">
+             <string>Source</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="filesColumn_checkBox_Region">
+            <property name="text">
+             <string>Region</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QCheckBox" name="filesColumn_checkBox_LastStatusChange">
+            <property name="text">
+             <string>Last status change</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="Line" name="line_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="DVD">
@@ -404,7 +510,7 @@
        <item row="0" column="0">
         <widget class="QGroupBox" name="DVDToWBFS_groupBox_Options_3">
          <property name="title">
-          <string>DVD to WBFS - Options:</string>
+          <string>DVD to WBFS transfer options:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="0">
@@ -414,28 +520,28 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="dvdToWBFS_checkBox_Test">
-            <property name="text">
-             <string>Test</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QCheckBox" name="dvdToWBFS_checkBox_Newer">
             <property name="text">
              <string>Newer</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="dvdToWBFS_checkBox_Test">
+            <property name="text">
+             <string>Test</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
            <widget class="QCheckBox" name="dvdToWBFS_checkBox_Update">
             <property name="text">
              <string>Update</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="1" column="1">
            <widget class="QCheckBox" name="dvdToWBFS_checkBox_Overwrite">
             <property name="text">
              <string>Overwrite</string>
@@ -455,7 +561,7 @@
           <locale language="English" country="UnitedStates"/>
          </property>
          <property name="title">
-          <string>WBFS to Files - Options:</string>
+          <string>WBFS to Files transfer options:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0">
@@ -465,14 +571,14 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="1" column="0">
            <widget class="QCheckBox" name="WBFSToFiles_checkBox_Test">
             <property name="text">
              <string>Test</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="0" column="1">
            <widget class="QCheckBox" name="WBFSToFiles_checkBox_Update">
             <property name="text">
              <string>Update</string>
@@ -489,6 +595,113 @@
          </layout>
         </widget>
        </item>
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Game list columns:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_15">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_ID">
+            <property name="text">
+             <string>ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_Name">
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_Title">
+            <property name="text">
+             <string>Title</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_Region">
+            <property name="text">
+             <string>Region</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_Size">
+            <property name="text">
+             <string>Size</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_UsedBlocks">
+            <property name="text">
+             <string>Used blocks</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_Insertion">
+            <property name="text">
+             <string>Insertion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_LastModification">
+            <property name="text">
+             <string>Last modification</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_LastStatusChange">
+            <property name="text">
+             <string>Last status change</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_LastAccess">
+            <property name="text">
+             <string>Last access</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_Type">
+            <property name="text">
+             <string>Type</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_WBFSSlot">
+            <property name="text">
+             <string>WBFS-Slot</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QCheckBox" name="wbfsColumn_checkBox_Source">
+            <property name="text">
+             <string>Source</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="Line" name="line_8">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="RemoveFrmWBFS">
@@ -499,7 +712,7 @@
           <locale language="English" country="UnitedStates"/>
          </property>
          <property name="title">
-          <string>Remove from WBFS - Options:</string>
+          <string>Remove from WBFS options:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_10">
           <item row="0" column="0">
@@ -526,7 +739,7 @@
        <item row="0" column="0">
         <widget class="QGroupBox" name="checkWBFS_groupBox_Options">
          <property name="title">
-          <string>Check WBFS - Options:</string>
+          <string>Check WBFS pptions:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
@@ -620,19 +833,6 @@
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="locale">
-      <locale language="English" country="UnitedStates"/>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
-     </property>
     </widget>
    </item>
   </layout>

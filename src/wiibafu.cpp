@@ -294,11 +294,14 @@ void WiiBaFu::on_logTab_pushButton_Save_clicked() {
 }
 
 void WiiBaFu::on_menuOptions_Settings_triggered() {
-    settings->exec();
+    if (settings->exec() == QDialog::Accepted) {
+        setGameListAttributes(ui->filesTab_tableView);
+        setGameListAttributes(ui->dvdTab_tableView);
+        setGameListAttributes(ui->wbfsTab_tableView);
 
-    setGameListAttributes(ui->filesTab_tableView);
-    setGameListAttributes(ui->dvdTab_tableView);
-    setGameListAttributes(ui->wbfsTab_tableView);
+        setFilesColumns();
+        setWBFSColumns();
+    }
 }
 
 void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
@@ -365,7 +368,9 @@ void WiiBaFu::setFilesGameListModel() {
     if (filesListModel->rowCount() > 0 ) {
         ui->filesTab_tableView->setModel(filesListModel);
         ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
+
         ui->filesTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/Files_HeaderStates").toByteArray());
+        setFilesColumns();
 
         setStatusBarText(tr("Ready."));
     }
@@ -386,7 +391,9 @@ void WiiBaFu::setWBFSGameListModel() {
     if (wbfsListModel->rowCount() > 0) {
         ui->wbfsTab_tableView->setModel(wbfsListModel);
         ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
+
         ui->wbfsTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/WBFS_HeaderStates").toByteArray());
+        setWBFSColumns();
 
         setStatusBarText(tr("Ready."));
     }
@@ -535,6 +542,178 @@ void WiiBaFu::saveGameListHeaderStates() {
 
     if (ui->wbfsTab_tableView->horizontalHeader()->count() > 0 ) {
         QSettings("WiiBaFu", "wiibafu").setValue("GameLists/WBFS_HeaderStates", ui->wbfsTab_tableView->horizontalHeader()->saveState());
+    }
+}
+
+void WiiBaFu::setFilesColumns() {
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnID", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(0);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(0);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnName", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(1);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(1);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnTitle", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(2);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(2);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnRegion", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(3);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(3);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnSize", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(4);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(4);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnInsertion", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(5);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(5);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnLastModification", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(6);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(6);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnLastStatusChange", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(7);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(7);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnLastAccess", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(8);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(8);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnType", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(9);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(9);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/columnSource", QVariant(true)).toBool()) {
+        ui->filesTab_tableView->showColumn(10);
+    }
+    else {
+        ui->filesTab_tableView->hideColumn(10);
+    }
+}
+
+void WiiBaFu::setWBFSColumns() {
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnID", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(0);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(0);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnName", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(1);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(1);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnTitle", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(2);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(2);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnRegion", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(3);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(3);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnSize", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(4);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(4);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnUsedBlocks", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(5);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(5);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnInsertion", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(6);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(6);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnLastModification", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(7);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(7);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnLastStatusChange", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(8);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(8);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnLastAccess", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(9);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(9);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnType", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(10);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(10);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnWBFSSlot", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(11);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(11);
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("WBFStoFiles/columnSource", QVariant(true)).toBool()) {
+        ui->wbfsTab_tableView->showColumn(12);
+    }
+    else {
+        ui->wbfsTab_tableView->hideColumn(12);
     }
 }
 

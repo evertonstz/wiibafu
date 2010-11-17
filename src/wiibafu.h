@@ -66,6 +66,8 @@ private:
 
     void saveMainWindowGeometry();
     void saveGameListHeaderStates();
+    void setFilesColumns();
+    void setWBFSColumns();
 
 signals:
     void cancelTransfer();
