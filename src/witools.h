@@ -61,6 +61,8 @@ private:
     QString witTitlesPath();
 
 signals:
+    void stopBusy();
+
     void setMainProgressBarVisible(bool visible);
     void setMainProgressBar(int value, QString format);
     void setInfoTextWBFS(QString text);

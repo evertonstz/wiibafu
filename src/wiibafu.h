@@ -49,6 +49,7 @@ private:
     WiiBaFuDialog *wiibafudialog;
     CoverViewDialog *coverViewDialog;
 
+    QTimer *timer;
     QStringList filesGamePaths;
     QProgressBar *progressBar_Main;
     QStandardItemModel *filesListModel;
@@ -71,6 +72,8 @@ private:
 
 signals:
     void cancelTransfer();
+    void startBusy();
+    void stopBusy();
 
 private slots:
     void setMainProgressBarVisible(bool visible);
@@ -119,7 +122,12 @@ private slots:
 
     void setWBFSInfoText(QString text);
     void setWBFSProgressBar(int min, int max, int value, QString format);
+
     void setMainProgressBar(int value, QString format);
+    void showMainProgressBarBusy();
+    void startMainProgressBarBusy();
+    void stopMainProgressBarBusy();
+
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry, WiTools::LogType type);
 

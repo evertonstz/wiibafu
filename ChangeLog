@@ -1,3 +1,12 @@
+2010-11-17 Kai Heitkamp <dynup@ymail.com>
+  * WIT path configurable in settings
+  * Save last path in Files/Load
+  * Sort game lists
+  * Save column width
+  * Sequenz of columns changeable
+  * Set indicated columns in settings
+  * Busy status added
+
 2010-11-12 Kai Heitkamp <dynup@ymail.com>
   * Platform specific fixes.
   * Game cover viewer added.

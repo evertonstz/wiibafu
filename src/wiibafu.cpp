@@ -28,6 +28,8 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     wiibafudialog = new WiiBaFuDialog(this);
     coverViewDialog = new CoverViewDialog(this);
 
+    timer = new QTimer(this);
+
     filesListModel = new QStandardItemModel(this);
     dvdListModel = new QStandardItemModel(this);
     wbfsListModel = new QStandardItemModel(this);
@@ -54,6 +56,11 @@ void WiiBaFu::setupConnections() {
     qRegisterMetaType<WiTools::LogType>("WiTools::LogType");
 
     connect(this, SIGNAL(cancelTransfer()), wiTools, SLOT(transfer_cancel()));
+
+    connect(this, SIGNAL(startBusy()), this, SLOT(startMainProgressBarBusy()));
+    connect(this, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
+    connect(wiTools, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(showMainProgressBarBusy()));
 
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
     connect(wiTools, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
@@ -150,6 +157,7 @@ void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QSettings("WiiBaFu", "wiibafu").value("Main/LastFilesPath", QVariant(QDir::homePath()).toString()).toString(), QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
+        emit startBusy();
         QSettings("WiiBaFu", "wiibafu").setValue("Main/LastFilesPath", directory);
         QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory);
     }
@@ -183,8 +191,9 @@ void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
 }
 
 void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
-    QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
+    emit startBusy();
 
+    QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
     QtConcurrent::run(wiTools, &WiTools::requestDVDGameListModel, dvdListModel, dvdPath);
 }
 
@@ -201,6 +210,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_Load_clicked() {
+    emit startBusy();
     QtConcurrent::run(wiTools, &WiTools::requestWBFSGameListModel, wbfsListModel, wbfsPath());
 }
 
@@ -372,6 +382,7 @@ void WiiBaFu::setFilesGameListModel() {
         ui->filesTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/Files_HeaderStates").toByteArray());
         setFilesColumns();
 
+        emit stopBusy();
         setStatusBarText(tr("Ready."));
     }
 }
@@ -383,6 +394,7 @@ void WiiBaFu::setDVDGameListModel() {
         ui->dvdTab_tableView->setModel(dvdListModel);
         ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
 
+        emit stopBusy();
         common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
     }
 }
@@ -395,6 +407,7 @@ void WiiBaFu::setWBFSGameListModel() {
         ui->wbfsTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/WBFS_HeaderStates").toByteArray());
         setWBFSColumns();
 
+        emit stopBusy();
         setStatusBarText(tr("Ready."));
     }
 }
@@ -448,11 +461,6 @@ void WiiBaFu::transferGamesFromWBFScanceled() {
     setStatusBarText(tr("Transfer canceled!"));
 }
 
-void WiiBaFu::setMainProgressBar(int value, QString format) {
-    progressBar_Main->setValue(value);
-    progressBar_Main->setFormat(format);
-}
-
 void WiiBaFu::setWBFSInfoText(QString text) {
     ui->wbfsTab_label_Info->setText(text);
 }
@@ -462,6 +470,35 @@ void WiiBaFu::setWBFSProgressBar(int min, int max, int value, QString format) {
     ui->wbfsTab_progressBar->setMaximum(max);
     ui->wbfsTab_progressBar->setValue(value);
     ui->wbfsTab_progressBar->setFormat(format);
+}
+
+void WiiBaFu::setMainProgressBar(int value, QString format) {
+    progressBar_Main->setValue(value);
+    progressBar_Main->setFormat(format);
+}
+
+void WiiBaFu::startMainProgressBarBusy() {
+    timer->start(1000);
+}
+
+void WiiBaFu::showMainProgressBarBusy() {
+    setMainProgressBarVisible(true);
+
+    progressBar_Main->setMinimum(0);
+    progressBar_Main->setMaximum(0);
+    progressBar_Main->setValue(0);
+}
+
+void WiiBaFu::stopMainProgressBarBusy() {
+    if (timer->isActive()) {
+        timer->stop();
+    }
+
+    setMainProgressBarVisible(false);
+
+    progressBar_Main->setMinimum(0);
+    progressBar_Main->setMaximum(100);
+    progressBar_Main->setValue(0);
 }
 
 void WiiBaFu::setStatusBarText(QString text) {
@@ -744,5 +781,6 @@ WiiBaFu::~WiiBaFu() {
     delete dvdListModel;
     delete wbfsListModel;
     delete progressBar_Main;
+    delete timer;
     delete ui;
 }
