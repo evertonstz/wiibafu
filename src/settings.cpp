@@ -123,6 +123,7 @@ void Settings::load() {
     ui->main_lineEdit_WBFSPath->setText(wiiBaFuSettings.value("Main/WBFSPath", QVariant("")).toString());
     ui->main_lineEdit_DVDDrivePath->setText(wiiBaFuSettings.value("Main/DVDDrivePath", QVariant("")).toString());
     ui->main_comboBox_Logging->setCurrentIndex(wiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
+    ui->main_comboBox_Language->setCurrentIndex(wiiBaFuSettings.value("Main/Language", QVariant(0)).toInt());
 
     ui->gameLists_checkBox_ShowGrid->setChecked(wiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
     ui->gameLists_checkBox_AlternatingRowColors->setChecked(wiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
@@ -195,6 +196,7 @@ void Settings::save() {
     wiiBaFuSettings.setValue("Main/WBFSPath", ui->main_lineEdit_WBFSPath->text());
     wiiBaFuSettings.setValue("Main/DVDDrivePath", ui->main_lineEdit_DVDDrivePath->text());
     wiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
+    wiiBaFuSettings.setValue("Main/Language", ui->main_comboBox_Language->currentIndex());
 
     wiiBaFuSettings.setValue("GameLists/ShowGrid", ui->gameLists_checkBox_ShowGrid->checkState());
     wiiBaFuSettings.setValue("GameLists/AlternatingRowColors", ui->gameLists_checkBox_AlternatingRowColors->checkState());
@@ -267,6 +269,7 @@ void Settings::restoreDefaults(int index) {
                 ui->main_checkBox_Auto->setChecked(true);
                 ui->main_lineEdit_DVDDrivePath->setText("/dev/sr0");
                 ui->main_comboBox_Logging->setCurrentIndex(0);
+                ui->main_comboBox_Language->setCurrentIndex(0);
                 break;
         case 1:
                 ui->gameLists_checkBox_AlternatingRowColors->setChecked(true);

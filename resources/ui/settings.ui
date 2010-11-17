@@ -221,7 +221,7 @@
          <item>
           <widget class="QComboBox" name="main_comboBox_Logging">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -239,6 +239,109 @@
            <item>
             <property name="text">
              <string>None</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Language:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="main_comboBox_Language">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>English</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>France</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>German</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Spain</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Italy</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Netherland</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Portuguese</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Northern Sami</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Denmark</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Norway</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Finland</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Russia</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Japan</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Korea</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Taiwan</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>China</string>
             </property>
            </item>
           </widget>

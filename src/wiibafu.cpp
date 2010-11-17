@@ -311,6 +311,8 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
 
         setFilesColumns();
         setWBFSColumns();
+
+        ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(QSettings("WiiBaFu", "wiibafu").value("Main/Language", QVariant(0)).toInt());
     }
 }
 
