@@ -577,7 +577,7 @@ void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus ex
     delete witProcess;
 }
 
-void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory) {
+void WiTools::transferGamesToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString directory) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit newStatusBarMessage(tr("Preparing transfer..."));
@@ -625,7 +625,7 @@ void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath,
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
     connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
     connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesFromWBFS_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToImage_finished(int, QProcess::ExitStatus)));
 
     witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
@@ -634,12 +634,12 @@ void WiTools::transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath,
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::transferGamesToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
-        emit transferGamesFromWBFSsuccessfully();
+        emit transferGamesToImageSuccessfully();
     }
     else {
-        emit transferGamesFromWBFScanceled();
+        emit transferGamesToImageCanceled();
     }
 
     delete witProcess;

@@ -84,6 +84,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="filesTab_pushButton_TransferToImage">
+             <property name="text">
+              <string>Transfer to image</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="filesTab_pushButton_ShowInfo">
              <property name="text">
               <string>Show info</string>

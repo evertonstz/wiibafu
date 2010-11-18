@@ -51,7 +51,7 @@ public:
     void requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
 
     void transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath);
-    void transferGamesFromWBFS(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
+    void transferGamesToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
     void transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath);
 
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
@@ -90,8 +90,8 @@ signals:
     void transferGamesToWBFScanceled(bool discExitst);
     void transferGamesToWBFSsuccessfully();
 
-    void transferGamesFromWBFScanceled();
-    void transferGamesFromWBFSsuccessfully();
+    void transferGamesToImageCanceled();
+    void transferGamesToImageSuccessfully();
 
     void transferGameFromDVDToWBFScanceled(bool discExitst);
     void transferGameFromDVDToWBFSsuccessfully();
@@ -100,7 +100,7 @@ signals:
 
 private slots:
     void transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void transferGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferGamesToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
     void transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 
     void transfer_readyReadStandardOutput();

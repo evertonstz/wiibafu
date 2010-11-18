@@ -85,6 +85,7 @@ private slots:
     void on_filesTab_pushButton_Load_clicked();
     void on_filesTab_pushButton_SelectAll_clicked();
     void on_filesTab_pushButton_TransferToWBFS_clicked();
+    void on_filesTab_pushButton_TransferToImage_clicked();
     void on_filesTab_pushButton_ShowInfo_clicked();
 
     void on_dvdTab_pushButton_Load_clicked();
@@ -118,8 +119,8 @@ private slots:
     void transferGameFromDVDToWBFSsuccesfully();
     void transferGameFromDVDToWBFScanceled(bool discExitst);
 
-    void transferGamesFromWBFSsuccesfully();
-    void transferGamesFromWBFScanceled();
+    void transferGamesToImageSuccesfully();
+    void transferGamesToImageCanceled();
 
     void setWBFSInfoText(QString text);
     void setWBFSProgressBar(int min, int max, int value, QString format);
