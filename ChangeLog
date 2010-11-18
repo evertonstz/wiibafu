@@ -1,3 +1,9 @@
+2010-11-18 Kai Heitkamp <dynup@ymail.com>
+  * Titles and Cover language global in settings
+  * Convert Files (images) to another format
+  * Format WBFS partition
+  * Create WBFS file
+
 2010-11-17 Kai Heitkamp <dynup@ymail.com>
   * WIT path configurable in settings
   * Save last path in Files/Load
