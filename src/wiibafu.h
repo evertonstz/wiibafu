@@ -29,6 +29,7 @@
 #include "settings.h"
 #include "wiibafudialog.h"
 #include "coverviewdialog.h"
+#include "wbfsdialog.h"
 
 namespace Ui {
     class WiiBaFu;
@@ -48,6 +49,7 @@ private:
     Settings *settings;
     WiiBaFuDialog *wiibafudialog;
     CoverViewDialog *coverViewDialog;
+    WBFSDialog *wbfsDialog;
 
     QTimer *timer;
     QStringList filesGamePaths;
@@ -76,7 +78,9 @@ signals:
     void stopBusy();
 
 private slots:
-    void setMainProgressBarVisible(bool visible);
+    void on_menuOptions_Settings_triggered();
+    void on_menuTools_CheckWBFS_triggered();
+    void on_menuTools_CreateWBFS_triggered();
 
     void on_filesTab_pushButton_Load_clicked();
     void on_filesTab_pushButton_SelectAll_clicked();
@@ -100,9 +104,6 @@ private slots:
     void on_logTab_pushButton_Copy_clicked();
     void on_logTab_pushButton_Save_clicked();
 
-    void on_menuOptions_Settings_triggered();
-    void on_menuTools_CheckWBFS_triggered();
-
     void showGameDiscCover(QImage *gameCover);
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
@@ -123,6 +124,7 @@ private slots:
     void setWBFSInfoText(QString text);
     void setWBFSProgressBar(int min, int max, int value, QString format);
 
+    void setMainProgressBarVisible(bool visible);
     void setMainProgressBar(int value, QString format);
     void showMainProgressBarBusy();
     void startMainProgressBarBusy();

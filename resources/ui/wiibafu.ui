@@ -1077,6 +1077,7 @@
      <string>Tools</string>
     </property>
     <addaction name="menuTools_CheckWBFS"/>
+    <addaction name="menuTools_CreateWBFS"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -1114,6 +1115,16 @@
   <action name="menuOptions_Settings">
    <property name="text">
     <string>Settings...</string>
+   </property>
+  </action>
+  <action name="menuTools_CreateWBFS">
+   <property name="text">
+    <string>Create WBFS</string>
+   </property>
+  </action>
+  <action name="menuTools_FormatWBFSPartition">
+   <property name="text">
+    <string>Format WBFS partition</string>
    </property>
   </action>
  </widget>

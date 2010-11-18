@@ -11,9 +11,9 @@
 
 + Titles and Cover language global in settings
 - Convert Files (images) to another format
-- Format WBFS partitions
-- Create new WBFS file
++ Format WBFS partition
++ Create WBFS file
+
 - Compare Files and WBFS
 - Files/WBFS/Infos alterable
-
 - Localisation

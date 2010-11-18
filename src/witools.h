@@ -33,6 +33,17 @@ public:
         Error = 0x1
     };
 
+    struct CreateWBFSParameters {
+        QString Path;
+        QString Size;
+        QString SplitSize;
+        QString HDSectorSize;
+        QString WBFSSectorSize;
+        bool Recover;
+        bool Inode;
+        bool Test;
+    };
+
     explicit WiTools(QObject *parent = 0);
 
     void requestFilesGameListModel(QStandardItemModel *model, QString path);
@@ -45,6 +56,7 @@ public:
 
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
     void checkWBFS(QString wbfsPath);
+    void createWBFS(CreateWBFSParameters parameters);
 
     QString witVersion();
     QString wwtVersion();

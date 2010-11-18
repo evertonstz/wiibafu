@@ -27,6 +27,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     settings = new Settings(this);
     wiibafudialog = new WiiBaFuDialog(this);
     coverViewDialog = new CoverViewDialog(this);
+    wbfsDialog = new WBFSDialog(this);
 
     timer = new QTimer(this);
 
@@ -153,11 +154,47 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
     }
 }
 
+void WiiBaFu::on_menuOptions_Settings_triggered() {
+    if (settings->exec() == QDialog::Accepted) {
+        setGameListAttributes(ui->filesTab_tableView);
+        setGameListAttributes(ui->dvdTab_tableView);
+        setGameListAttributes(ui->wbfsTab_tableView);
+
+        setFilesColumns();
+        setWBFSColumns();
+
+        ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(QSettings("WiiBaFu", "wiibafu").value("Main/Language", QVariant(0)).toInt());
+    }
+}
+
+void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
+    on_wbfsTab_pushButton_Check_clicked();
+}
+
+void WiiBaFu::on_menuTools_CreateWBFS_triggered() {
+    if (wbfsDialog->exec() == QDialog::Accepted) {
+        emit startBusy();
+
+        WiTools::CreateWBFSParameters parameters;
+        parameters.Path = wbfsDialog->path();
+        parameters.Size = wbfsDialog->size();
+        parameters.SplitSize = wbfsDialog->splitSize();
+        parameters.HDSectorSize = wbfsDialog->hdSectorSize();
+        parameters.WBFSSectorSize = wbfsDialog->wbfsSectorSize();
+        parameters.Recover = wbfsDialog->recover();
+        parameters.Inode = wbfsDialog->inode();
+        parameters.Test = wbfsDialog->test();
+
+        QtConcurrent::run(wiTools, &WiTools::createWBFS, parameters);
+    }
+}
+
 void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QSettings("WiiBaFu", "wiibafu").value("Main/LastFilesPath", QVariant(QDir::homePath()).toString()).toString(), QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
         emit startBusy();
+
         QSettings("WiiBaFu", "wiibafu").setValue("Main/LastFilesPath", directory);
         QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory);
     }
@@ -178,6 +215,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
     if (ui->filesTab_pushButton_TransferToWBFS->text() != tr("Cancel transfering")) {
         if (ui->filesTab_tableView->selectionModel() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             ui->filesTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
+
             QtConcurrent::run(wiTools, &WiTools::transferGamesToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), wbfsPath());
         }
     }
@@ -201,6 +239,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
     if (ui->dvdTab_pushButton_TransferToWBFS->text() != tr("Cancel transfering")) {
         if (dvdListModel->rowCount() != 0) {
             ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
+
             QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToWBFS, dvdListModel->index(15, 0).data().toString(), wbfsPath());
         }
     }
@@ -211,6 +250,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 
 void WiiBaFu::on_wbfsTab_pushButton_Load_clicked() {
     emit startBusy();
+
     QtConcurrent::run(wiTools, &WiTools::requestWBFSGameListModel, wbfsListModel, wbfsPath());
 }
 
@@ -301,23 +341,6 @@ void WiiBaFu::on_logTab_pushButton_Save_clicked() {
 
         file.close();
     }
-}
-
-void WiiBaFu::on_menuOptions_Settings_triggered() {
-    if (settings->exec() == QDialog::Accepted) {
-        setGameListAttributes(ui->filesTab_tableView);
-        setGameListAttributes(ui->dvdTab_tableView);
-        setGameListAttributes(ui->wbfsTab_tableView);
-
-        setFilesColumns();
-        setWBFSColumns();
-
-        ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(QSettings("WiiBaFu", "wiibafu").value("Main/Language", QVariant(0)).toInt());
-    }
-}
-
-void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
-    on_wbfsTab_pushButton_Check_clicked();
 }
 
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
@@ -779,6 +802,7 @@ WiiBaFu::~WiiBaFu() {
     delete settings;
     delete wiibafudialog;
     delete coverViewDialog;
+    delete wbfsDialog;
     delete filesListModel;
     delete dvdListModel;
     delete wbfsListModel;

@@ -891,6 +891,61 @@ void WiTools::checkWBFS(QString wbfsPath) {
     emit newLogEntry(QString(wwtCHECKProcess.readAll()), Info);
 }
 
+void WiTools::createWBFS(CreateWBFSParameters parameters) {
+    emit newStatusBarMessage(tr("Creating WBFS..."));
+
+    QStringList arguments;
+    arguments.append("FORMAT");
+    arguments.append(parameters.Path);
+    arguments.append("--size");
+    arguments.append(parameters.Size);
+
+    if (!parameters.SplitSize.isEmpty()) {
+        arguments.append("--split-size");
+        arguments.append(parameters.SplitSize);
+    }
+
+    if (!parameters.HDSectorSize.isEmpty()) {
+        arguments.append("--hss");
+        arguments.append(parameters.HDSectorSize);
+    }
+
+    if (!parameters.WBFSSectorSize.isEmpty()) {
+        arguments.append("--wss");
+        arguments.append(parameters.WBFSSectorSize);
+    }
+
+    if (parameters.Recover) {
+        arguments.append("--recover");
+    }
+
+    if (parameters.Inode) {
+        arguments.append("--inode");
+    }
+
+    if (parameters.Test) {
+        arguments.append("--test");
+    }
+
+    arguments.append("--force");
+    arguments.append("--verbose");
+
+    QProcess wwtFORMATProcess;
+    wwtFORMATProcess.start(wwt, arguments);
+
+    if (!wwtFORMATProcess.waitForFinished(-1)) {
+        emit newStatusBarMessage(tr("Create WBFS failed!"));
+        emit newLogEntry(wwtFORMATProcess.readAllStandardError(), Error);
+    }
+    else {
+        emit newStatusBarMessage(tr("Create WBFS successfully!"));
+    }
+
+    arguments.clear();
+    emit newLogEntry(QString(wwtFORMATProcess.readAll()), Info);
+    emit stopBusy();
+}
+
 void WiTools::setWit() {
     if (QSettings("WiiBaFu", "wiibafu").value("Main/PathToWIT", QVariant("")).toString().isEmpty()) {
         #ifdef Q_OS_LINUX
