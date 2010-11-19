@@ -1037,13 +1037,13 @@ QString WiTools::witTitlesPath() {
                  break;
         case 6:  titles = "titles-pt";
                  break;
-        case 7:  titles = "titles";
+        case 7:  titles = "titles-se";
                  break;
-        case 8:  titles = "titles";
+        case 8:  titles = "titles-dk";
                  break;
-        case 9:  titles = "titles";
+        case 9:  titles = "titles-no";
                  break;
-        case 10: titles = "titles";
+        case 10: titles = "titles-fi";
                  break;
         case 11: titles = "titles-ru";
                  break;

@@ -1085,6 +1085,8 @@
     </property>
     <addaction name="menuTools_CheckWBFS"/>
     <addaction name="menuTools_CreateWBFS"/>
+    <addaction name="separator"/>
+    <addaction name="menuTools_UpdateTitles"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -1132,6 +1134,11 @@
   <action name="menuTools_FormatWBFSPartition">
    <property name="text">
     <string>Format WBFS partition</string>
+   </property>
+  </action>
+  <action name="menuTools_UpdateTitles">
+   <property name="text">
+    <string>Update titles</string>
    </property>
   </action>
  </widget>

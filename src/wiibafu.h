@@ -81,6 +81,7 @@ private slots:
     void on_menuOptions_Settings_triggered();
     void on_menuTools_CheckWBFS_triggered();
     void on_menuTools_CreateWBFS_triggered();
+    void on_menuTools_UpdateTitles_triggered();
 
     void on_filesTab_pushButton_Load_clicked();
     void on_filesTab_pushButton_SelectAll_clicked();

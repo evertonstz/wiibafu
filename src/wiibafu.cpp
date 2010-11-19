@@ -60,7 +60,6 @@ void WiiBaFu::setupConnections() {
 
     connect(this, SIGNAL(startBusy()), this, SLOT(startMainProgressBarBusy()));
     connect(this, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
-    connect(wiTools, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
     connect(timer, SIGNAL(timeout()), this, SLOT(showMainProgressBarBusy()));
 
     connect(wiTools, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
@@ -83,11 +82,15 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(transferGamesToImageCanceled()), this, SLOT(transferGamesToImageCanceled()));
     connect(wiTools, SIGNAL(removeGamesFromWBFS_successfully()), this, SLOT(on_wbfsTab_pushButton_Load_clicked()));
 
+    connect(wiTools, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
+
     connect(common, SIGNAL(newGame3DCover(QImage*)), this, SLOT(showGame3DCover(QImage*)));
     connect(common, SIGNAL(newGameFullHQCover(QImage*)), this, SLOT(showGameFullHQCover(QImage*)));
     connect(common, SIGNAL(newGameDiscCover(QImage*)), this, SLOT(showGameDiscCover(QImage*)));
     connect(common, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(common, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
+    connect(common, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
+    connect(common, SIGNAL(setMainProgressBar(int,QString)), this, SLOT(setMainProgressBar(int,QString)));
 
     connect(ui->menuHelp_About_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(ui->menuFile_Exit, SIGNAL(triggered()), this, SLOT(close()));
@@ -187,6 +190,10 @@ void WiiBaFu::on_menuTools_CreateWBFS_triggered() {
 
         QtConcurrent::run(wiTools, &WiTools::createWBFS, parameters);
     }
+}
+
+void WiiBaFu::on_menuTools_UpdateTitles_triggered() {
+    QtConcurrent::run(common, &Common::updateTitles);
 }
 
 void WiiBaFu::on_filesTab_pushButton_Load_clicked() {

@@ -24,6 +24,9 @@ Common::Common(QObject *parent) : QObject(parent) {
     http = new QHttp(this);
     connect(http, SIGNAL(done(bool)), this, SLOT(loadGameCover_done(bool)));
     connect(http, SIGNAL(responseHeaderReceived(QHttpResponseHeader)), this, SLOT(loadGameCover_responseHeaderReceived(QHttpResponseHeader)));
+
+    wiiTDBLanguages = QStringList() << "EN" << "FR" << "DE" << "ES" << "IT" << "NL" << "PT" << "SE" << "DK" << "NO" << "FI" << "RU" << "JA" << "KO" << "ZHTW" << "ZHCN";
+    titlesExtensions = QStringList() << ".txt"  << "-fr.txt" << "-de.txt" << "-es.txt" << "-it.txt" << "-nl.txt" << "-pt.txt" << "-se.txt" << "-dk.txt" << "-no.txt" << "-fi.txt" << "-ru.txt" << "-ja.txt" << "-ko.txt" << "-zhtw.txt" << "-zhcn.txt";
 }
 
 void Common::requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt) {
@@ -79,6 +82,61 @@ void Common::loadGameCover_done(bool error) {
         emit showStatusBarMessage(http->errorString());
         emit newLogEntry(http->errorString().append("\n"), WiTools::Error);
     }
+}
+
+void Common::updateTitles() {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+
+    bool error = false;
+    QDir witPath = QDir::currentPath().append("/wit");
+    QString wiiTDBUrl = "http://wiitdb.com/titles.txt?LANG=";
+    QString fileName = QDir::currentPath().append("/wit/titles");
+
+    if (!witPath.exists()) {
+        witPath.mkpath(witPath.path());
+    }
+
+    for (int i = 0; i < 16; i++) {
+        emit showStatusBarMessage(tr("Downloading titles%1...").arg(titlesExtensions.at(i)));
+        emit newLogEntry(tr("Downloading titles%1...").arg(titlesExtensions.at(i)), WiTools::Info);
+
+        if (getTitle(QString(wiiTDBUrl).append(wiiTDBLanguages.at(i)), QString(fileName).append(titlesExtensions.at(i))) != QNetworkReply::NoError) {
+            emit newLogEntry(tr("Download of titles%1 failed!").arg(titlesExtensions.at(i)), WiTools::Error);
+            error = true;
+        }
+
+        emit setMainProgressBar(i * 100 / 15, "%p%");
+    }
+
+    if (error) {
+        emit showStatusBarMessage("Download titles failed!");
+    }
+    else {
+        emit showStatusBarMessage("Download titles successfully!");
+    }
+
+    emit setMainProgressBarVisible(false);
+}
+
+QNetworkReply::NetworkError Common::getTitle(QString wiitdbPath, QString fileName) {
+    QEventLoop loop;
+    QNetworkAccessManager manager;
+    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl(wiitdbPath)));
+
+    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+
+    if (reply->error() != 0) {
+        emit newLogEntry(reply->errorString(), WiTools::Error);
+    }
+
+    QFile file(fileName);
+    file.open(QIODevice::WriteOnly);
+    file.write(reply->readAll());
+    file.close();
+
+    return reply->error();
 }
 
 Common::~Common() {

@@ -40,13 +40,17 @@ public:
     ~Common();
 
     void requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt);
+    void updateTitles();
 
 private:
     QHttp *http;
     QUrl url;
     GameCoverArt currentGameCoverArt;
+    QStringList wiiTDBLanguages;
+    QStringList titlesExtensions;
 
     void getGameCover(QString gameID, QString language);
+    QNetworkReply::NetworkError getTitle(QString wiitdbPath, QString fileName);
 
 signals:
     void newGame3DCover(QImage *game3DCover);
@@ -54,6 +58,8 @@ signals:
     void newGameDiscCover(QImage *gameDiscCover);
     void showStatusBarMessage(QString message);
     void newLogEntry(QString entry, WiTools::LogType);
+    void setMainProgressBarVisible(bool visible);
+    void setMainProgressBar(int value, QString format);
 
 private slots:
     void loadGameCover_responseHeaderReceived(const QHttpResponseHeader &resp);
