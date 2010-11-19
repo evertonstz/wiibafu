@@ -76,8 +76,12 @@ void WiiBaFu::setupConnections() {
 
     connect(wiTools, SIGNAL(transferGamesToWBFSsuccessfully()), this, SLOT(transferGamesToWBFSsuccesfully()));
     connect(wiTools, SIGNAL(transferGamesToWBFScanceled(bool)), this, SLOT(transferGamesToWBFScanceled(bool)));
+
     connect(wiTools, SIGNAL(transferGameFromDVDToWBFSsuccessfully()), this, SLOT(transferGameFromDVDToWBFSsuccesfully()));
     connect(wiTools, SIGNAL(transferGameFromDVDToWBFScanceled(bool)), this, SLOT(transferGameFromDVDToWBFScanceled(bool)));
+    connect(wiTools, SIGNAL(transferGameFromDVDToImageSuccessfully()), this, SLOT(transferGameFromDVDToImageSuccesfully()));
+    connect(wiTools, SIGNAL(transferGameFromDVDToImageCanceled(bool)), this, SLOT(transferGameFromDVDToImageCanceled(bool)));
+
     connect(wiTools, SIGNAL(transferGamesToImageSuccessfully()), this, SLOT(transferGamesToImageSuccesfully()));
     connect(wiTools, SIGNAL(transferGamesToImageCanceled()), this, SLOT(transferGamesToImageCanceled()));
     connect(wiTools, SIGNAL(removeGamesFromWBFS_successfully()), this, SLOT(on_wbfsTab_pushButton_Load_clicked()));
@@ -271,6 +275,28 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
             ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
 
             QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToWBFS, dvdListModel->index(15, 0).data().toString(), wbfsPath());
+        }
+    }
+    else {
+        emit cancelTransfer();
+    }
+}
+
+void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
+    if (ui->dvdTab_pushButton_TransferToImage->text() != tr("Cancel transfering")) {
+        int result = wiibafudialog->exec();
+        QDir path = wiibafudialog->imageDirectory();
+        QString format = wiibafudialog->imageFormat();
+
+        if (result == QDialog::Accepted) {
+            if (!path.exists()) {
+                QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
+            }
+            else {
+                ui->dvdTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
+                QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
+                QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToImage, dvdPath, format, path.absolutePath());
+            }
         }
     }
     else {
@@ -485,7 +511,6 @@ void WiiBaFu::transferGamesToWBFScanceled(bool discExitst) {
     }
 }
 
-
 void WiiBaFu::transferGameFromDVDToWBFSsuccesfully() {
     ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
     on_wbfsTab_pushButton_Load_clicked();
@@ -504,6 +529,23 @@ void WiiBaFu::transferGameFromDVDToWBFScanceled(bool discExitst) {
     }
 }
 
+void WiiBaFu::transferGameFromDVDToImageSuccesfully() {
+    ui->dvdTab_pushButton_TransferToImage->setText(tr("Transfer to image"));
+    setStatusBarText(tr("Ready."));
+}
+
+void WiiBaFu::transferGameFromDVDToImageCanceled(bool discExitst) {
+    if (discExitst) {
+        ui->dvdTab_pushButton_TransferToImage->setText(tr("Transfer to image"));
+        addEntryToLog(tr("Disc already exists!"), WiTools::Info);
+        setStatusBarText(tr("Disc already exists!"));
+    }
+    else {
+        ui->dvdTab_pushButton_TransferToImage->setText(tr("Transfer to image"));
+        addEntryToLog(tr("Transfer canceled!"), WiTools::Info);
+        setStatusBarText(tr("Transfer canceled!"));
+    }
+}
 
 void WiiBaFu::transferGamesToImageSuccesfully() {
     if (ui->wbfsTab_pushButton_Transfer->text().contains(tr("Cancel transfering"))) {

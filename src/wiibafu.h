@@ -91,6 +91,7 @@ private slots:
 
     void on_dvdTab_pushButton_Load_clicked();
     void on_dvdTab_pushButton_TransferToWBFS_clicked();
+    void on_dvdTab_pushButton_TransferToImage_clicked();
 
     void on_wbfsTab_pushButton_Load_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
@@ -119,6 +120,8 @@ private slots:
 
     void transferGameFromDVDToWBFSsuccesfully();
     void transferGameFromDVDToWBFScanceled(bool discExitst);
+    void transferGameFromDVDToImageSuccesfully();
+    void transferGameFromDVDToImageCanceled(bool discExitst);
 
     void transferGamesToImageSuccesfully();
     void transferGamesToImageCanceled();

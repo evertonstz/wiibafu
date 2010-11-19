@@ -278,10 +278,6 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
             game.append(new QStandardItem(line.section("=", 1)));
             continue;
         }
-        else if (line.startsWith("filename=")) {
-            game.append(new QStandardItem(line.section("=", 1)));
-            continue;
-        }
     }
 
     model->clear();
@@ -303,7 +299,6 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     model->setHeaderData(13, Qt::Vertical, tr("Partition info:"));
     model->setHeaderData(14, Qt::Vertical, tr("WBFS slot:"));
     model->setHeaderData(15, Qt::Vertical, tr("Source:"));
-    model->setHeaderData(16, Qt::Vertical, tr("File name:"));
 
     game.clear();
 
@@ -698,6 +693,68 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
     emit setMainProgressBarVisible(false);
 }
 
+void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QString directory) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit newStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList arguments;
+    arguments.append("COPY");
+    arguments.append(drivePath);
+    arguments.append(directory);
+    arguments.append(QString("--").append(format));
+
+    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Force", QVariant(false)).toBool()) {
+        arguments.append("--force");
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Test", QVariant(false)).toBool()) {
+        arguments.append("--test");
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Newer", QVariant(true)).toBool()) {
+        arguments.append("--newer");
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Update", QVariant(true)).toBool()) {
+        arguments.append("--update");
+    }
+
+    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Overwrite", QVariant(false)).toBool()) {
+        arguments.append("--overwrite");
+    }
+
+    arguments.append("--progress");
+
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGameFromDVDToImage_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(wit, arguments);
+    witProcess->waitForFinished(-1);
+
+    arguments.clear();
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::transferGameFromDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit) {
+        if (exitCode == 0) {
+            emit transferGameFromDVDToImageSuccessfully();
+        }
+        else if (exitCode == 4) {
+            emit transferGameFromDVDToImageCanceled(true);
+        }
+    }
+    else {
+        emit transferGameFromDVDToImageCanceled(false);
+    }
+
+    delete witProcess;
+}
+
 void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit) {
         if (exitCode == 0) {
@@ -723,6 +780,14 @@ void WiTools::transfer_readyReadStandardOutput() {
             emit newStatusBarMessage(gameCountText);
         #else
             emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
+        #endif
+    }
+    else if (line.contains("COPY")) {
+        #ifdef Q_OS_MACX
+            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1));
+            emit newStatusBarMessage(gameCountText);
+        #else
+            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1)));
         #endif
     }
     else if (line.contains("EXTRACT")) {
