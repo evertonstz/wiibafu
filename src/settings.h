@@ -48,6 +48,9 @@ private:
     int scrollMode();
     int resizeMode();
 
+    void setupGeometry();
+    void saveGeometry();
+
 private slots:
     void on_listWidget_itemSelectionChanged();
 

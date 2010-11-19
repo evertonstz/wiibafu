@@ -23,6 +23,7 @@
 
 Settings::Settings(QWidget *parent) : QDialog(parent), ui(new Ui::Settings) {
     ui->setupUi(this);
+    setupGeometry();
     load();
 }
 
@@ -410,6 +411,26 @@ void Settings::on_checkWBFS_checkBox_Repair_stateChanged(int state) {
     state ? ui->repairWBFS_checkBox_STANDARD->setChecked(true) : ui->repairWBFS_checkBox_STANDARD->setChecked(false);
 }
 
+void Settings::setupGeometry() {
+    if (QSettings("WiiBaFu", "wiibafu").contains("Settings/x")) {
+        QRect rect;
+        rect.setX(QSettings("WiiBaFu", "wiibafu").value("Settings/x", QVariant(0)).toInt());
+        rect.setY(QSettings("WiiBaFu", "wiibafu").value("Settings/y", QVariant(0)).toInt());
+        rect.setWidth(QSettings("WiiBaFu", "wiibafu").value("Settings/width", QVariant(800)).toInt());
+        rect.setHeight(QSettings("WiiBaFu", "wiibafu").value("Settings/height", QVariant(600)).toInt());
+
+        this->setGeometry(rect);
+    }
+}
+
+void Settings::saveGeometry() {
+    QSettings("WiiBaFu", "wiibafu").setValue("Settings/x", this->geometry().x());
+    QSettings("WiiBaFu", "wiibafu").setValue("Settings/y", this->geometry().y());
+    QSettings("WiiBaFu", "wiibafu").setValue("Settings/width", this->geometry().width());
+    QSettings("WiiBaFu", "wiibafu").setValue("Settings/height", this->geometry().height());
+}
+
 Settings::~Settings() {
+    saveGeometry();
     delete ui;
 }
