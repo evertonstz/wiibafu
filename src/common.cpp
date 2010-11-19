@@ -105,6 +105,9 @@ void Common::updateTitles() {
             emit newLogEntry(tr("Download of titles%1 failed!").arg(titlesExtensions.at(i)), WiTools::Error);
             error = true;
         }
+        else {
+            emit newLogEntry(tr("Download titles%1 successfully!").arg(titlesExtensions.at(i)), WiTools::Info);
+        }
 
         emit setMainProgressBar(i * 100 / 15, "%p%");
     }
