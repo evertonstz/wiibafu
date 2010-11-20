@@ -91,14 +91,24 @@ void Common::updateTitles() {
     bool error = false;
     QDir witPath = QDir::currentPath().append("/wit");
     QString wiiTDBUrl = "http://wiitdb.com/titles.txt?LANG=";
-    QString fileName = QDir::currentPath().append("/wit/titles");
+
+    #ifdef Q_OS_MACX
+        QString fileName = QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit");
+    #else
+        QString fileName = QDir::currentPath().append("/wit/titles");
+    #endif
 
     if (!witPath.exists()) {
         witPath.mkpath(witPath.path());
     }
 
     for (int i = 0; i < 16; i++) {
-        emit showStatusBarMessage(tr("Downloading titles%1...").arg(titlesExtensions.at(i)));
+        #ifdef Q_OS_MACX
+            emit newStatusBarMessage(tr("Downloading titles%1... (%2)").arg(titlesExtensions.at(i), QString::number((i + 1) * 100 / 15)));
+        #else
+            emit showStatusBarMessage(tr("Downloading titles%1...").arg(titlesExtensions.at(i)));
+        #endif
+
         emit newLogEntry(tr("Downloading titles%1...").arg(titlesExtensions.at(i)), WiTools::Info);
 
         if (getTitle(QString(wiiTDBUrl).append(wiiTDBLanguages.at(i)), QString(fileName).append(titlesExtensions.at(i))) != QNetworkReply::NoError) {
@@ -109,7 +119,7 @@ void Common::updateTitles() {
             emit newLogEntry(tr("Download titles%1 successfully!").arg(titlesExtensions.at(i)), WiTools::Info);
         }
 
-        emit setMainProgressBar(i * 100 / 15, "%p%");
+        emit setMainProgressBar((i + 1) * 100 / 15, "%p%");
     }
 
     if (error) {

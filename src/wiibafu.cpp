@@ -880,7 +880,7 @@ void WiiBaFu::on_menuHelp_About_triggered() {
         "<br>you must have the original and it's for your private use only!</font color>"
         "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit"
         "<br>and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools!"
-        "<p><i>Dedicated to my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>"));
+        "<p><i>Dedicated in memory of my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>"));
 }
 
 WiiBaFu::~WiiBaFu() {

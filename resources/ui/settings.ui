@@ -795,7 +795,7 @@
        <item row="0" column="0">
         <widget class="QGroupBox" name="checkWBFS_groupBox_Options">
          <property name="title">
-          <string>Check WBFS pptions:</string>
+          <string>Check WBFS options:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">

@@ -802,7 +802,7 @@ void WiTools::transfer_readyReadStandardOutput() {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
 
         #ifdef Q_OS_MACX
-                emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+            emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
         #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
