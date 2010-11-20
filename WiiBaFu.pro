@@ -14,6 +14,10 @@ UI_DIR       = build
 MOC_DIR      = build
 RCC_DIR      = build
 
+win32 {
+  RC_FILE			 = win/appicon.rc
+}
+
 macx {
   ICON              += resources/images/appicon.icns
   QMAKE_INFO_PLIST  += mac/Info.plist
