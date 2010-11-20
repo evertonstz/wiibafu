@@ -25,18 +25,18 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
 }
 
 void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path) {
-    emit newStatusBarMessage(tr("Loading games..."));
+    emit showStatusBarMessage(tr("Loading games..."));
 
     QProcess filesRead;
     filesRead.start(wit, QStringList() << "LIST" << "--titles" << witTitlesPath() << "--section" << "--recurse" << path);
 
     if (!filesRead.waitForFinished(-1)) {
         if (filesRead.errorString().contains("No such file or directory")) {
-            emit newStatusBarMessage(tr("Wiimms ISO Tool not found!"));
+            emit showStatusBarMessage(tr("Wiimms ISO Tool not found!"));
             emit newLogEntry(tr("Wiimms ISO Tool not found!"), Error);
         }
         else {
-            emit newStatusBarMessage(tr("Loading games failed!"));
+            emit showStatusBarMessage(tr("Loading games failed!"));
             emit newLogEntry(tr("Loading games failed! (status: %1, code: %2,  %3)").arg(QString::number(filesRead.exitStatus()), QString::number(filesRead.exitCode()), filesRead.errorString()), Error);
         }
 
@@ -58,7 +58,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
             continue;
         }
         else if (line.contains("total-discs=0")) {
-            emit newStatusBarMessage(tr("No games found!"));
+            emit showStatusBarMessage(tr("No games found!"));
             emit stopBusy();
             return;
         }
@@ -153,18 +153,18 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
 }
 
 void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
-    emit newStatusBarMessage(tr("Loading disc..."));
+    emit showStatusBarMessage(tr("Loading disc..."));
 
     QProcess dvdRead;
     dvdRead.start(wit, QStringList() << "LIST-LL" << path << "--titles" << witTitlesPath() << "--section"); //Windows: 0 games found, in admin mode too!?
 
     if (!dvdRead.waitForFinished(-1)) {
         if (dvdRead.errorString().contains("No such file or directory")) {
-            emit newStatusBarMessage(tr("Wiimms ISO Tool not found!"));
+            emit showStatusBarMessage(tr("Wiimms ISO Tool not found!"));
             emit newLogEntry(tr("Wiimms ISO Tool not found!"), Error);
         }
         else {
-            emit newStatusBarMessage(tr("Loading game disc failed!"));
+            emit showStatusBarMessage(tr("Loading game disc failed!"));
             emit newLogEntry(tr("Loading game disc failed! (status: %1, code: %2,  %3)").arg(QString::number(dvdRead.exitStatus()), QString::number(dvdRead.exitCode()), dvdRead.errorString()), Error);
         }
 
@@ -185,12 +185,12 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
             continue;
         }
         else if (line.contains("name=CAN'T OPEN FILE")) {
-            emit newStatusBarMessage(tr("Can't open file!"));
+            emit showStatusBarMessage(tr("Can't open file!"));
             emit stopBusy();
             return;
         }
         else if (line.contains("total-discs=0")) {
-            emit newStatusBarMessage(tr("No game found!"));
+            emit showStatusBarMessage(tr("No game found!"));
             emit stopBusy();
             return;
         }
@@ -306,7 +306,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
 }
 
 void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
-    emit newStatusBarMessage(tr("Loading games..."));
+    emit showStatusBarMessage(tr("Loading games..."));
 
     QStringList arguments;
     arguments.append("LIST-L");
@@ -329,11 +329,11 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
 
     if (!wbfsRead.waitForFinished(-1)) {
         if (wbfsRead.errorString().contains("No such file or directory")) {
-            emit newStatusBarMessage(tr("Wiimms WBFS Tool not found!"));
+            emit showStatusBarMessage(tr("Wiimms WBFS Tool not found!"));
             emit newLogEntry(tr("Wiimms WBFS Tool not found!"), Error);
         }
         else {
-            emit newStatusBarMessage(tr("Loading games failed!"));
+            emit showStatusBarMessage(tr("Loading games failed!"));
             emit newLogEntry(tr("Loading games failed! (status: %1, code: %2,  %3)").arg(QString::number(wbfsRead.exitStatus()), QString::number(wbfsRead.exitCode()), wbfsRead.errorString()), Error);
         }
 
@@ -356,12 +356,12 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
             continue;
         }
         else if (line.contains("name=NO WBFS FOUND")) {
-            emit newStatusBarMessage(tr("No WBFS partitions found!"));
+            emit showStatusBarMessage(tr("No WBFS partitions found!"));
             emit stopBusy();
             return;
         }
         else if (line.contains("used_discs=0")) {
-            emit newStatusBarMessage(tr("No games found!"));
+            emit showStatusBarMessage(tr("No games found!"));
             emit stopBusy();
             return;
         }
@@ -501,7 +501,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
 void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit newStatusBarMessage(tr("Preparing transfer..."));
+    emit showStatusBarMessage(tr("Preparing transfer..."));
 
     QStringList paths;
     foreach (QModelIndex index, indexList) {
@@ -575,7 +575,7 @@ void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus ex
 void WiTools::transferGamesToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString directory) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit newStatusBarMessage(tr("Preparing transfer..."));
+    emit showStatusBarMessage(tr("Preparing transfer..."));
 
     QStringList paths;
     foreach (QModelIndex index, indexList) {
@@ -643,7 +643,7 @@ void WiTools::transferGamesToImage_finished(int exitCode, QProcess::ExitStatus e
 void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit newStatusBarMessage(tr("Preparing transfer..."));
+    emit showStatusBarMessage(tr("Preparing transfer..."));
 
     QStringList arguments;
     arguments.append("ADD");
@@ -696,7 +696,7 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
 void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QString filePath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit newStatusBarMessage(tr("Preparing transfer..."));
+    emit showStatusBarMessage(tr("Preparing transfer..."));
 
     QStringList arguments;
     arguments.append("COPY");
@@ -779,7 +779,7 @@ void WiTools::transfer_readyReadStandardOutput() {
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
             emit newStatusBarMessage(gameCountText);
         #else
-            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
+            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
         #endif
     }
     else if (line.contains("COPY")) {
@@ -787,7 +787,7 @@ void WiTools::transfer_readyReadStandardOutput() {
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1));
             emit newStatusBarMessage(gameCountText);
         #else
-            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1)));
+            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1)));
         #endif
     }
     else if (line.contains("EXTRACT")) {
@@ -795,7 +795,7 @@ void WiTools::transfer_readyReadStandardOutput() {
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
             emit newStatusBarMessage(gameCountText);
         #else
-            emit newStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
+            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
         #endif
     }
     else if (line.contains("% copied")) {
@@ -862,23 +862,23 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
 void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
         QString message(tr("Games removed successfully!"));
-        emit newStatusBarMessage(message);
+        emit showStatusBarMessage(message);
         emit newLogEntry(message, Info);
         emit removeGamesFromWBFS_successfully();
     }
     else {
         QString message(tr("Games removed failed!"));
-        emit newStatusBarMessage(message);
+        emit showStatusBarMessage(message);
         emit newLogEntry(message, Info);
     }
 }
 
 void WiTools::checkWBFS(QString wbfsPath) {
     if (QSettings("WiiBaFu", "wiibafu").value("CheckWBFS/Repair", QVariant(true)).toBool()) {
-        emit newStatusBarMessage(tr("Checking and repairing WBFS..."));
+        emit showStatusBarMessage(tr("Checking and repairing WBFS..."));
     }
     else {
-        emit newStatusBarMessage(tr("Checking WBFS..."));
+        emit showStatusBarMessage(tr("Checking WBFS..."));
     }
 
     QStringList arguments;
@@ -940,16 +940,16 @@ void WiTools::checkWBFS(QString wbfsPath) {
 
     if (!wwtCHECKProcess.waitForFinished(-1)) {
         if (wwtCHECKProcess.errorString().contains("No such file or directory")) {
-            emit newStatusBarMessage(tr("Wiimms WBFS Tool not found!"));
+            emit showStatusBarMessage(tr("Wiimms WBFS Tool not found!"));
             emit newLogEntry(tr("Wiimms WBFS Tool not found!"), Error);
         }
         else {
-            emit newStatusBarMessage(tr("WBFS check failed!"));
+            emit showStatusBarMessage(tr("WBFS check failed!"));
             emit newLogEntry(tr("WBFS check failed! (status: %1, code: %2,  %3)").arg(QString::number(wwtCHECKProcess.exitStatus()), QString::number(wwtCHECKProcess.exitCode()), wwtCHECKProcess.errorString()), Error);
         }
     }
     else {
-        emit newStatusBarMessage(tr("WBFS check successfully!"));
+        emit showStatusBarMessage(tr("WBFS check successfully!"));
     }
 
     arguments.clear();
@@ -957,7 +957,7 @@ void WiTools::checkWBFS(QString wbfsPath) {
 }
 
 void WiTools::createWBFS(CreateWBFSParameters parameters) {
-    emit newStatusBarMessage(tr("Creating WBFS..."));
+    emit showStatusBarMessage(tr("Creating WBFS..."));
 
     QStringList arguments;
     arguments.append("FORMAT");
@@ -999,11 +999,11 @@ void WiTools::createWBFS(CreateWBFSParameters parameters) {
     wwtFORMATProcess.start(wwt, arguments);
 
     if (!wwtFORMATProcess.waitForFinished(-1)) {
-        emit newStatusBarMessage(tr("Create WBFS failed!"));
+        emit showStatusBarMessage(tr("Create WBFS failed!"));
         emit newLogEntry(wwtFORMATProcess.readAllStandardError(), Error);
     }
     else {
-        emit newStatusBarMessage(tr("Create WBFS successfully!"));
+        emit showStatusBarMessage(tr("Create WBFS successfully!"));
     }
 
     arguments.clear();
@@ -1048,7 +1048,7 @@ QString WiTools::witVersion() {
 
     if (!witCheckProcess.waitForFinished(-1)) {
         if (witCheckProcess.errorString().contains("No such file or directory")) {
-            emit newStatusBarMessage(tr("Wiimms ISO Tool not found!"));
+            emit showStatusBarMessage(tr("Wiimms ISO Tool not found!"));
             return QString(tr("Wiimms ISO Tool not found!"));
         }
         else {
@@ -1069,7 +1069,7 @@ QString WiTools::wwtVersion() {
 
     if (!wwtCheckProcess.waitForFinished(-1)) {
         if (wwtCheckProcess.errorString().contains("No such file or directory")) {
-            emit newStatusBarMessage(tr("Wiimms WBFS Tool not found!"));
+            emit showStatusBarMessage(tr("Wiimms WBFS Tool not found!"));
             return QString(tr("Wiimms WBFS Tool not found!"));
         }
         else {

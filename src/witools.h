@@ -82,7 +82,7 @@ signals:
     void setProgressBarWBFS(int min, int max, int value, QString text);
 
     void newLogEntry(QString entry, WiTools::LogType type);
-    void newStatusBarMessage(QString message);
+    void showStatusBarMessage(QString message);
 
     void newFilesGameListModel();
     void newDVDGameListModel();

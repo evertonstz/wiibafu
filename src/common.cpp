@@ -104,7 +104,7 @@ void Common::updateTitles() {
 
     for (int i = 0; i < 16; i++) {
         #ifdef Q_OS_MACX
-            emit newStatusBarMessage(tr("Downloading titles%1... (%2)").arg(titlesExtensions.at(i), QString::number((i + 1) * 100 / 15)));
+            emit showStatusBarMessage(tr("Downloading titles%1... (%2)").arg(titlesExtensions.at(i), QString::number((i + 1) * 100 / 15)));
         #else
             emit showStatusBarMessage(tr("Downloading titles%1...").arg(titlesExtensions.at(i)));
         #endif
