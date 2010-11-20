@@ -119,7 +119,7 @@ void Common::updateTitles() {
             emit newLogEntry(tr("Download titles%1 successfully!").arg(titlesExtensions.at(i)), WiTools::Info);
         }
 
-        emit setMainProgressBar((i + 1) * 100 / 15, "%p%");
+        emit setMainProgressBar((i + 1) * 100 / 16, "%p%");
     }
 
     if (error) {
