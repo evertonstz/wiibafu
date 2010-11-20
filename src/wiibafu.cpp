@@ -400,6 +400,13 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
 
         if (!ui->infoTab_lineEdit_ID->text().contains(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text())) {
+            if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("PAL") || model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("RF")) {
+                ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(QSettings("WiiBaFu", "wiibafu").value("Main/Language", QVariant(0)).toInt());
+            }
+            else if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("NTSC")) {
+                ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(1);
+            }
+
             ui->infoTab_label_GameCover->clear();
             common->requestGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text(), getCurrentCoverLanguage(), Common::ThreeD);
         }
@@ -628,35 +635,37 @@ QString WiiBaFu::getCurrentCoverLanguage() {
     switch (ui->infoTab_comboBox_CoverLanguages->currentIndex()) {
         case 0:  return "EN";
                  break;
-        case 1:  return "FR";
+        case 1:  return "US";
                  break;
-        case 2:  return "DE";
+        case 2:  return "FR";
                  break;
-        case 3:  return "ES";
+        case 3:  return "DE";
                  break;
-        case 4:  return "IT";
+        case 4:  return "ES";
                  break;
-        case 5:  return "NL";
+        case 5:  return "IT";
                  break;
-        case 6:  return "PT";
+        case 6:  return "NL";
                  break;
-        case 7:  return "SE";
+        case 7:  return "PT";
                  break;
-        case 8:  return "DK";
+        case 8:  return "SE";
                  break;
-        case 9:  return "NO";
+        case 9:  return "DK";
                  break;
-        case 10: return "FI";
+        case 10:  return "NO";
                  break;
-        case 11: return "RU";
+        case 11: return "FI";
                  break;
-        case 12: return "JA";
+        case 12: return "RU";
                  break;
-        case 13: return "KO";
+        case 13: return "JA";
                  break;
-        case 14: return "ZH-tw";
+        case 14: return "KO";
                  break;
-        case 15: return "ZH-cn";
+        case 15: return "ZH-tw";
+                 break;
+        case 16: return "ZH-cn";
                  break;
         default: return "EN";
     }

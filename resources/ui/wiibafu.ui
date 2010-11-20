@@ -770,6 +770,11 @@
                  </item>
                  <item>
                   <property name="text">
+                   <string>American</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
                    <string>France</string>
                   </property>
                  </item>
