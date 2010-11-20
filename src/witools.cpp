@@ -693,7 +693,7 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QString directory) {
+void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QString filePath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit newStatusBarMessage(tr("Preparing transfer..."));
@@ -701,7 +701,7 @@ void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QStr
     QStringList arguments;
     arguments.append("COPY");
     arguments.append(drivePath);
-    arguments.append(directory);
+    arguments.append(filePath);
     arguments.append(QString("--").append(format));
 
     if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Force", QVariant(false)).toBool()) {

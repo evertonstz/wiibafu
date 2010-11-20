@@ -30,12 +30,39 @@ WiiBaFuDialog::WiiBaFuDialog(QWidget *parent) : QDialog(parent), ui(new Ui::WiiB
 void WiiBaFuDialog::on_pushButton_Open_clicked() {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
 
-    if (!directory.isEmpty())
+    if (!directory.isEmpty()) {
         ui->lineEdit_Directory->setText(directory);
+    }
+}
+
+void WiiBaFuDialog::on_pushButton_OpenFile_clicked() {
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Open file"), QDir::homePath(), tr("Wii Plain ISO *.iso;;Wii Compact ISO *.ciso;;Wii Disc Format *.wdf;;Wii Backup File System Container *.wbfs"));
+
+    if (!filePath.isEmpty()) {
+        ui->lineEdit_FilePath->setText(filePath);
+
+        QString extension = filePath.right(filePath.length() - filePath.indexOf("."));
+        if (extension.contains(".iso")) {
+            ui->comboBox_ImageFormat->setCurrentIndex(0);
+        }
+        else if (extension.contains(".ciso")) {
+            ui->comboBox_ImageFormat->setCurrentIndex(1);
+        }
+        else if (extension.contains(".wdf")) {
+            ui->comboBox_ImageFormat->setCurrentIndex(2);
+        }
+        else if (extension.contains(".wbfs")) {
+            ui->comboBox_ImageFormat->setCurrentIndex(3);
+        }
+    }
 }
 
 QString WiiBaFuDialog::imageDirectory() {
     return ui->lineEdit_Directory->text();
+}
+
+QString WiiBaFuDialog::imageFilePath() {
+    return ui->lineEdit_FilePath->text();
 }
 
 QString WiiBaFuDialog::imageFormat() {
@@ -50,6 +77,30 @@ QString WiiBaFuDialog::imageFormat() {
                     break;
         default:    return QString("");
     }
+}
+
+void WiiBaFuDialog::setOpenDirectory() {
+    this->setWindowTitle(tr("Open directory"));
+
+    ui->label_Directory->setVisible(true);
+    ui->lineEdit_Directory->setVisible(true);
+    ui->pushButton_Open->setVisible(true);
+
+    ui->label_FilePath->setVisible(false);
+    ui->lineEdit_FilePath->setVisible(false);
+    ui->pushButton_OpenFile->setVisible(false);
+}
+
+void WiiBaFuDialog::setOpenFile() {
+    this->setWindowTitle(tr("Open file"));
+
+    ui->label_FilePath->setVisible(true);
+    ui->lineEdit_FilePath->setVisible(true);
+    ui->pushButton_OpenFile->setVisible(true);
+
+    ui->label_Directory->setVisible(false);
+    ui->lineEdit_Directory->setVisible(false);
+    ui->pushButton_Open->setVisible(false);
 }
 
 WiiBaFuDialog::~WiiBaFuDialog() {

@@ -238,7 +238,9 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
 void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
     if (ui->filesTab_pushButton_TransferToImage->text() != tr("Cancel transfering")) {
         if (ui->filesTab_tableView->model() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+            wiibafudialog->setOpenDirectory();
             int result = wiibafudialog->exec();
+
             QDir path = wiibafudialog->imageDirectory();
             QString format = wiibafudialog->imageFormat();
 
@@ -284,20 +286,15 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
     if (ui->dvdTab_pushButton_TransferToImage->text() != tr("Cancel transfering")) {
-        int result = wiibafudialog->exec();
-        QDir path = wiibafudialog->imageDirectory();
+        wiibafudialog->setOpenFile();
+        wiibafudialog->exec();
+
+        QString filePath = wiibafudialog->imageFilePath();
         QString format = wiibafudialog->imageFormat();
 
-        if (result == QDialog::Accepted) {
-            if (!path.exists()) {
-                QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
-            }
-            else {
-                ui->dvdTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
-                QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
-                QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToImage, dvdPath, format, path.absolutePath());
-            }
-        }
+        ui->dvdTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
+        QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
+        QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToImage, dvdPath, format, filePath);
     }
     else {
         emit cancelTransfer();

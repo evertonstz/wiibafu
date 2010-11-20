@@ -35,13 +35,17 @@ public:
     ~WiiBaFuDialog();
 
     QString imageDirectory();
+    QString imageFilePath();
     QString imageFormat();
+    void setOpenDirectory();
+    void setOpenFile();
 
 private:
     Ui::WiiBaFuDialog *ui;
 
 private slots:
     void on_pushButton_Open_clicked();
+    void on_pushButton_OpenFile_clicked();
 };
 
 #endif // WIIBAFUDIALOG_H
