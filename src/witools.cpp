@@ -777,7 +777,7 @@ void WiTools::transfer_readyReadStandardOutput() {
     if (line.contains("ADD")) {
         #ifdef Q_OS_MACX
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
-            emit newStatusBarMessage(gameCountText);
+            emit showStatusBarMessage(gameCountText);
         #else
             emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
         #endif
@@ -785,7 +785,7 @@ void WiTools::transfer_readyReadStandardOutput() {
     else if (line.contains("COPY")) {
         #ifdef Q_OS_MACX
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1));
-            emit newStatusBarMessage(gameCountText);
+            emit showStatusBarMessage(gameCountText);
         #else
             emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1)));
         #endif
@@ -793,7 +793,7 @@ void WiTools::transfer_readyReadStandardOutput() {
     else if (line.contains("EXTRACT")) {
         #ifdef Q_OS_MACX
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
-            emit newStatusBarMessage(gameCountText);
+            emit showStatusBarMessage(gameCountText);
         #else
             emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
         #endif
@@ -802,7 +802,7 @@ void WiTools::transfer_readyReadStandardOutput() {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
 
         #ifdef Q_OS_MACX
-            emit newStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, line));
         #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
