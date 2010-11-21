@@ -128,6 +128,7 @@ void Settings::load() {
 
     ui->gameLists_checkBox_ShowGrid->setChecked(wiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
     ui->gameLists_checkBox_AlternatingRowColors->setChecked(wiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
+    ui->gameLists_checkBox_ToolTips->setChecked(wiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool());
 
     setScrollMode(wiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QAbstractItemView::ScrollPerPixel)).toInt());
     setResizeMode(wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
@@ -201,6 +202,7 @@ void Settings::save() {
 
     wiiBaFuSettings.setValue("GameLists/ShowGrid", ui->gameLists_checkBox_ShowGrid->checkState());
     wiiBaFuSettings.setValue("GameLists/AlternatingRowColors", ui->gameLists_checkBox_AlternatingRowColors->checkState());
+    wiiBaFuSettings.setValue("GameLists/ToolTips", ui->gameLists_checkBox_ToolTips->checkState());
     wiiBaFuSettings.setValue("GameLists/ScrollMode", scrollMode());
     wiiBaFuSettings.setValue("GameLists/ResizeMode", resizeMode());
 
@@ -275,6 +277,7 @@ void Settings::restoreDefaults(int index) {
         case 1:
                 ui->gameLists_checkBox_AlternatingRowColors->setChecked(true);
                 ui->gameLists_checkBox_ShowGrid->setChecked(false);
+                ui->gameLists_checkBox_ToolTips->setChecked(false);
                 ui->gameLists_radioButton_ScrollPerPixel->setChecked(true);
                 ui->gameLists_radioButton_ResizeToContents->setChecked(true);
                 break;

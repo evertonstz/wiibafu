@@ -15,7 +15,7 @@ MOC_DIR      = build
 RCC_DIR      = build
 
 win32 {
-  RC_FILE			 = win/appicon.rc
+  RC_FILE            = win/appicon.rc
 }
 
 macx {

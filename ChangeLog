@@ -1,3 +1,7 @@
+2010-11-21 Kai Heitkamp <dynup@ymail.com>
+  * Tool tips for name/title
+  * Busy mode set to 3000 ms
+
 2010-11-20 Kai Heitkamp <dynup@ymail.com>
   * Transfer DVD to a specific image file
   * Cover region bug fixed

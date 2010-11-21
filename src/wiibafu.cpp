@@ -396,6 +396,67 @@ void WiiBaFu::on_logTab_pushButton_Save_clicked() {
     }
 }
 
+void WiiBaFu::setFilesGameListModel() {
+    if (filesListModel->rowCount() > 0 ) {
+        ui->filesTab_tableView->setModel(filesListModel);
+        ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
+
+        ui->filesTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/Files_HeaderStates").toByteArray());
+
+        setFilesColumns();
+        if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ToolTips", QVariant(false)).toBool()) {
+            setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
+        }
+
+        emit stopBusy();
+        setStatusBarText(tr("Ready."));
+    }
+}
+
+void WiiBaFu::setDVDGameListModel() {
+    if (dvdListModel->rowCount() > 0) {
+        QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
+
+        ui->dvdTab_tableView->setModel(dvdListModel);
+        ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
+
+        emit stopBusy();
+        common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
+    }
+}
+
+void WiiBaFu::setWBFSGameListModel() {
+    if (wbfsListModel->rowCount() > 0) {
+        ui->wbfsTab_tableView->setModel(wbfsListModel);
+        ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
+
+        ui->wbfsTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/WBFS_HeaderStates").toByteArray());
+
+        setWBFSColumns();
+        if (QSettings("WiiBaFu", "wiibafu").value("GameLists/ToolTips", QVariant(false)).toBool()) {
+            setToolTips(ui->wbfsTab_tableView, wbfsListModel, tr("Title"), tr("Name"));
+        }
+
+        emit stopBusy();
+        setStatusBarText(tr("Ready."));
+    }
+}
+
+void WiiBaFu::setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName) {
+    if (tableView->isColumnHidden(headerIndex(model, firstColumnName, Qt::Horizontal))) {
+        for (int i = 0; i < model->rowCount(); i++) {
+            QString toolTip = model->item(i, headerIndex(model, firstColumnName, Qt::Horizontal))->text();
+            model->item(i, headerIndex(model, secondColumnName, Qt::Horizontal))->setToolTip(toolTip);
+        }
+    }
+    else if (tableView->isColumnHidden(headerIndex(model, secondColumnName, Qt::Horizontal))) {
+        for (int i = 0; i < model->rowCount(); i++) {
+            QString toolTip = model->item(i, headerIndex(model, secondColumnName, Qt::Horizontal))->text();
+            model->item(i, headerIndex(model, firstColumnName, Qt::Horizontal))->setToolTip(toolTip);
+        }
+    }
+}
+
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
 
@@ -457,44 +518,6 @@ void WiiBaFu::showGame3DCover(QImage *gameCover) {
 void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
     coverViewDialog->setCover(gameFullHQCover, ui->infoTab_lineEdit_ID->text());
     coverViewDialog->show();
-}
-
-void WiiBaFu::setFilesGameListModel() {
-    if (filesListModel->rowCount() > 0 ) {
-        ui->filesTab_tableView->setModel(filesListModel);
-        ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
-
-        ui->filesTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/Files_HeaderStates").toByteArray());
-        setFilesColumns();
-
-        emit stopBusy();
-        setStatusBarText(tr("Ready."));
-    }
-}
-
-void WiiBaFu::setDVDGameListModel() {
-    if (dvdListModel->rowCount() > 0) {
-        QString dvdPath = QSettings("WiiBaFu", "wiibafu").value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
-
-        ui->dvdTab_tableView->setModel(dvdListModel);
-        ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
-
-        emit stopBusy();
-        common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
-    }
-}
-
-void WiiBaFu::setWBFSGameListModel() {
-    if (wbfsListModel->rowCount() > 0) {
-        ui->wbfsTab_tableView->setModel(wbfsListModel);
-        ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
-
-        ui->wbfsTab_tableView->horizontalHeader()->restoreState(QSettings("WiiBaFu", "wiibafu").value("GameLists/WBFS_HeaderStates").toByteArray());
-        setWBFSColumns();
-
-        emit stopBusy();
-        setStatusBarText(tr("Ready."));
-    }
 }
 
 void WiiBaFu::transferGamesToWBFSsuccesfully() {
@@ -591,7 +614,7 @@ void WiiBaFu::setMainProgressBar(int value, QString format) {
 }
 
 void WiiBaFu::startMainProgressBarBusy() {
-    timer->start(2000);
+    timer->start(3000);
 }
 
 void WiiBaFu::showMainProgressBarBusy() {
@@ -678,6 +701,16 @@ QString WiiBaFu::wbfsPath() {
     else {
         return QSettings("WiiBaFu", "wiibafu").value("Main/WBFSPath", QVariant("")).toString();
     }
+}
+
+int WiiBaFu::headerIndex(QAbstractItemModel *model, QString text, Qt::Orientation orientation) {
+    for (int i = 0; i < model->columnCount(); i++) {
+        if (model->headerData(i, orientation).toString().contains(text)) {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 void WiiBaFu::saveMainWindowGeometry() {

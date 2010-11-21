@@ -63,9 +63,11 @@ private:
     void setupGeometry();
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
+    void setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName);
 
     QString getCurrentCoverLanguage();
     QString wbfsPath();
+    int headerIndex(QAbstractItemModel *model, QString text, Qt::Orientation orientation);
 
     void saveMainWindowGeometry();
     void saveGameListHeaderStates();
@@ -107,13 +109,13 @@ private slots:
     void on_logTab_pushButton_Copy_clicked();
     void on_logTab_pushButton_Save_clicked();
 
-    void showGameDiscCover(QImage *gameCover);
-    void showGame3DCover(QImage *gameCover);
-    void showGameFullHQCover(QImage *gameFullHQCover);
-
     void setFilesGameListModel();
     void setDVDGameListModel();
     void setWBFSGameListModel();
+
+    void showGameDiscCover(QImage *gameCover);
+    void showGame3DCover(QImage *gameCover);
+    void showGameFullHQCover(QImage *gameFullHQCover);
 
     void transferGamesToWBFSsuccesfully();
     void transferGamesToWBFScanceled(bool discExitst);
