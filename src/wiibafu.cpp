@@ -451,13 +451,21 @@ void WiiBaFu::setToolTips(QTableView *tableView, QStandardItemModel *model, QStr
     if (tableView->isColumnHidden(headerIndex(model, firstColumnName, Qt::Horizontal))) {
         for (int i = 0; i < model->rowCount(); i++) {
             QString toolTip = model->item(i, headerIndex(model, firstColumnName, Qt::Horizontal))->text();
+            model->item(i, headerIndex(model, firstColumnName, Qt::Horizontal))->setToolTip("");
             model->item(i, headerIndex(model, secondColumnName, Qt::Horizontal))->setToolTip(toolTip);
         }
     }
     else if (tableView->isColumnHidden(headerIndex(model, secondColumnName, Qt::Horizontal))) {
         for (int i = 0; i < model->rowCount(); i++) {
             QString toolTip = model->item(i, headerIndex(model, secondColumnName, Qt::Horizontal))->text();
+            model->item(i, headerIndex(model, secondColumnName, Qt::Horizontal))->setToolTip("");
             model->item(i, headerIndex(model, firstColumnName, Qt::Horizontal))->setToolTip(toolTip);
+        }
+    }
+    else {
+        for (int i = 0; i < model->rowCount(); i++) {
+            model->item(i, headerIndex(model, firstColumnName, Qt::Horizontal))->setToolTip("");
+            model->item(i, headerIndex(model, secondColumnName, Qt::Horizontal))->setToolTip("");
         }
     }
 }
