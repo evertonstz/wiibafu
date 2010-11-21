@@ -1,4 +1,4 @@
-HEADERS     += src/wiibafu.h src/wiibafudialog.h src/witools.h src/common.h src/settings.h src/coverviewdialog.h src/wbfsdialog.h
+HEADERS     += src/global.h src/wiibafu.h src/wiibafudialog.h src/witools.h src/common.h src/settings.h src/coverviewdialog.h src/wbfsdialog.h
 SOURCES     += src/main.cpp src/wiibafu.cpp src/wiibafudialog.cpp src/witools.cpp src/common.cpp src/settings.cpp src/coverviewdialog.cpp src/wbfsdialog.cpp
 FORMS       += resources/ui/wiibafu.ui resources/ui/wiibafudialog.ui resources/ui/settings.ui resources/ui/coverviewdialog.ui resources/ui/wbfsdialog.ui
 RESOURCES   += resources/wiibafu.qrc

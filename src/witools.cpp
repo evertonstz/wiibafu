@@ -521,23 +521,23 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     arguments.append(paths);
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Force", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("FilesToWBFS/Force", QVariant(false)).toBool()) {
         arguments.append("--force");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Test", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("FilesToWBFS/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Newer", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(true)).toBool()) {
         arguments.append("--newer");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Update", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesToWBFS/Update", QVariant(true)).toBool()) {
         arguments.append("--update");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Overwrite", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("FilesToWBFS/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
     }
 
@@ -598,19 +598,19 @@ void WiTools::transferGamesToImage(QModelIndexList indexList, QString wbfsPath, 
     arguments.append("--dest");
     arguments.append(directory);
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesFromWBFS/Force", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("FilesFromWBFS/Force", QVariant(false)).toBool()) {
         arguments.append("--force");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesFromWBFS/Test", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("FilesFromWBFS/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesFromWBFS/Update", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesFromWBFS/Update", QVariant(true)).toBool()) {
         arguments.append("--update");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesFromWBFS/Overwrite", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("FilesFromWBFS/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
     }
 
@@ -658,23 +658,23 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
 
     arguments.append(drivePath);
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Force", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool()) {
         arguments.append("--force");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Test", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Newer", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(true)).toBool()) {
         arguments.append("--newer");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Update", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(true)).toBool()) {
         arguments.append("--update");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Overwrite", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
     }
 
@@ -704,23 +704,23 @@ void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QStr
     arguments.append(filePath);
     arguments.append(QString("--").append(format));
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Force", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool()) {
         arguments.append("--force");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Test", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Newer", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(true)).toBool()) {
         arguments.append("--newer");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Update", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(true)).toBool()) {
         arguments.append("--update");
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("DVDtoWBFS/Overwrite", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
     }
 
@@ -843,9 +843,9 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     arguments.append(ids);
 
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Force", QVariant(false)).toBool())
+    if (WiiBaFuSettings.value("FilesToWBFS/Force", QVariant(false)).toBool())
         arguments.append("--force");
-    if (QSettings("WiiBaFu", "wiibafu").value("FilesToWBFS/Test", QVariant(false)).toBool())
+    if (WiiBaFuSettings.value("FilesToWBFS/Test", QVariant(false)).toBool())
         arguments.append("--test");
 
     QProcess *wwtREMOVEProcess = new QProcess();
@@ -874,7 +874,7 @@ void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus ex
 }
 
 void WiTools::checkWBFS(QString wbfsPath) {
-    if (QSettings("WiiBaFu", "wiibafu").value("CheckWBFS/Repair", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("CheckWBFS/Repair", QVariant(true)).toBool()) {
         emit showStatusBarMessage(tr("Checking and repairing WBFS..."));
     }
     else {
@@ -892,33 +892,33 @@ void WiTools::checkWBFS(QString wbfsPath) {
         arguments.append(wbfsPath);
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("CheckWBFS/Repair", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("CheckWBFS/Repair", QVariant(true)).toBool()) {
         arguments.append("--repair");
 
         QString repairModes;
 
-        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/FBT", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/FBT", QVariant(true)).toBool()) {
             repairModes.append("FBT,");
         }
-        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/INODES", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/INODES", QVariant(true)).toBool()) {
             repairModes.append("INODES,");
         }
-        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-ALL", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-ALL", QVariant(true)).toBool()) {
             repairModes.append("RM-ALL,");
         }
-        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool()) {
             repairModes.append("RM-EMPTY,");
         }
-        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-FREE", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-FREE", QVariant(true)).toBool()) {
             repairModes.append("RM-FREE,");
         }
-        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-INVALID", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-INVALID", QVariant(true)).toBool()) {
             repairModes.append("RM-INVALID,");
         }
-        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool()) {
             repairModes.append("RM-OVERLAP,");
         }
-        if (QSettings("WiiBaFu", "wiibafu").value("RepairWBFS/STANDARD", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/STANDARD", QVariant(true)).toBool()) {
             repairModes.append("STANDARD");
         }
 
@@ -929,7 +929,7 @@ void WiTools::checkWBFS(QString wbfsPath) {
         arguments.append(repairModes);
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("CheckWBFS/Test", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("CheckWBFS/Test", QVariant(true)).toBool()) {
         arguments.append("--test");
     }
 
@@ -1012,7 +1012,7 @@ void WiTools::createWBFS(CreateWBFSParameters parameters) {
 }
 
 void WiTools::setWit() {
-    if (QSettings("WiiBaFu", "wiibafu").value("Main/PathToWIT", QVariant("")).toString().isEmpty()) {
+    if (WiiBaFuSettings.value("Main/PathToWIT", QVariant("")).toString().isEmpty()) {
         #ifdef Q_OS_LINUX
             QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(":"));
             wit = QFile("wit:wit").fileName();
@@ -1033,11 +1033,11 @@ void WiTools::setWit() {
     }
     else {
         #ifdef Q_OS_WIN32
-            wit = QSettings("WiiBaFu", "wiibafu").value("Main/PathToWIT").toString().append("/wit.exe");
-            wwt = QSettings("WiiBaFu", "wiibafu").value("Main/PathToWIT").toString().append("/wwt.exe");
+            wit = WiiBaFuSettings.value("Main/PathToWIT").toString().append("/wit.exe");
+            wwt = WiiBaFuSettings.value("Main/PathToWIT").toString().append("/wwt.exe");
         #else
-            wit = QSettings("WiiBaFu", "wiibafu").value("Main/PathToWIT").toString().append("/wit");
-            wwt = QSettings("WiiBaFu", "wiibafu").value("Main/PathToWIT").toString().append("/wwt");
+            wit = WiiBaFuSettings.value("Main/PathToWIT").toString().append("/wit");
+            wwt = WiiBaFuSettings.value("Main/PathToWIT").toString().append("/wwt");
         #endif
     }
 }
@@ -1087,7 +1087,7 @@ QString WiTools::wwtVersion() {
 QString WiTools::witTitlesPath() {
     QString titles;
 
-    switch (QSettings("WiiBaFu", "wiibafu").value("Main/Language", QVariant(0)).toInt()) {
+    switch (WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt()) {
         case 0:  titles = "titles";
                  break;
         case 1:  titles = "titles";
@@ -1125,7 +1125,7 @@ QString WiTools::witTitlesPath() {
         default: titles = "titles";
     }
 
-    if (QSettings("WiiBaFu", "wiibafu").value("Main/PathToWIT", QVariant("")).toString().isEmpty()) {
+    if (WiiBaFuSettings.value("Main/PathToWIT", QVariant("")).toString().isEmpty()) {
         #ifdef Q_OS_LINUX
             QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(":") << "/usr/local/share/wit");
             return QFile(QString("witTitles:%1.txt").arg(titles)).fileName();
@@ -1142,6 +1142,6 @@ QString WiTools::witTitlesPath() {
         #endif
     }
     else {
-        return QSettings("WiiBaFu", "wiibafu").value("Main/PathToWIT").toString().append(QString("/%1.txt").arg(titles));
+        return WiiBaFuSettings.value("Main/PathToWIT").toString().append(QString("/%1.txt").arg(titles));
     }
 }

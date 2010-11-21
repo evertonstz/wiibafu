@@ -117,152 +117,148 @@ void Settings::apply() {
 }
 
 void Settings::load() {
-    QSettings wiiBaFuSettings("WiiBaFu", "wiibafu");
+    ui->main_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("Main/PathToWIT", QVariant("")).toString());
+    ui->main_checkBox_Auto->setChecked(WiiBaFuSettings.value("Main/Auto", QVariant(true)).toBool());
+    ui->main_lineEdit_WBFSPath->setText(WiiBaFuSettings.value("Main/WBFSPath", QVariant("")).toString());
+    ui->main_lineEdit_DVDDrivePath->setText(WiiBaFuSettings.value("Main/DVDDrivePath", QVariant("")).toString());
+    ui->main_comboBox_Logging->setCurrentIndex(WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
+    ui->main_comboBox_Language->setCurrentIndex(WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt());
 
-    ui->main_lineEdit_PathToWIT->setText(wiiBaFuSettings.value("Main/PathToWIT", QVariant("")).toString());
-    ui->main_checkBox_Auto->setChecked(wiiBaFuSettings.value("Main/Auto", QVariant(true)).toBool());
-    ui->main_lineEdit_WBFSPath->setText(wiiBaFuSettings.value("Main/WBFSPath", QVariant("")).toString());
-    ui->main_lineEdit_DVDDrivePath->setText(wiiBaFuSettings.value("Main/DVDDrivePath", QVariant("")).toString());
-    ui->main_comboBox_Logging->setCurrentIndex(wiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
-    ui->main_comboBox_Language->setCurrentIndex(wiiBaFuSettings.value("Main/Language", QVariant(0)).toInt());
+    ui->gameLists_checkBox_ShowGrid->setChecked(WiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
+    ui->gameLists_checkBox_AlternatingRowColors->setChecked(WiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
+    ui->gameLists_checkBox_ToolTips->setChecked(WiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool());
 
-    ui->gameLists_checkBox_ShowGrid->setChecked(wiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
-    ui->gameLists_checkBox_AlternatingRowColors->setChecked(wiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
-    ui->gameLists_checkBox_ToolTips->setChecked(wiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool());
+    setScrollMode(WiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QAbstractItemView::ScrollPerPixel)).toInt());
+    setResizeMode(WiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
 
-    setScrollMode(wiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QAbstractItemView::ScrollPerPixel)).toInt());
-    setResizeMode(wiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
+    ui->filesToWBFS_checkBox_Force->setChecked(WiiBaFuSettings.value("FilesToWBFS/Force", QVariant(false)).toBool());
+    ui->filesToWBFS_checkBox_Test->setChecked(WiiBaFuSettings.value("FilesToWBFS/Test", QVariant(false)).toBool());
+    ui->filesToWBFS_checkBox_Newer->setChecked(WiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(false)).toBool());
+    ui->filesToWBFS_checkBox_Update->setChecked(WiiBaFuSettings.value("FilesToWBFS/Update", QVariant(false)).toBool());
+    ui->filesToWBFS_checkBox_Overwrite->setChecked(WiiBaFuSettings.value("FilesToWBFS/Overwrite", QVariant(false)).toBool());
+    ui->filesColumn_checkBox_ID->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnID", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Name->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnName", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Title->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnTitle", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Region->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnRegion", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Size->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnSize", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Insertion->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnInsertion", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_LastModification->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnLastModification", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_LastStatusChange->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnLastStatusChange", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_LastAccess->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnLastAccess", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Type->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnType", QVariant(true)).toBool());
+    ui->filesColumn_checkBox_Source->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnSource", QVariant(true)).toBool());
 
-    ui->filesToWBFS_checkBox_Force->setChecked(wiiBaFuSettings.value("FilesToWBFS/Force", QVariant(false)).toBool());
-    ui->filesToWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("FilesToWBFS/Test", QVariant(false)).toBool());
-    ui->filesToWBFS_checkBox_Newer->setChecked(wiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(false)).toBool());
-    ui->filesToWBFS_checkBox_Update->setChecked(wiiBaFuSettings.value("FilesToWBFS/Update", QVariant(false)).toBool());
-    ui->filesToWBFS_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("FilesToWBFS/Overwrite", QVariant(false)).toBool());
-    ui->filesColumn_checkBox_ID->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnID", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_Name->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnName", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_Title->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnTitle", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_Region->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnRegion", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_Size->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnSize", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_Insertion->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnInsertion", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_LastModification->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnLastModification", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_LastStatusChange->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnLastStatusChange", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_LastAccess->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnLastAccess", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_Type->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnType", QVariant(true)).toBool());
-    ui->filesColumn_checkBox_Source->setChecked(wiiBaFuSettings.value("FilesToWBFS/columnSource", QVariant(true)).toBool());
+    ui->dvdToWBFS_checkBox_Force->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool());
+    ui->dvdToWBFS_checkBox_Test->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool());
+    ui->dvdToWBFS_checkBox_Newer->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(false)).toBool());
+    ui->dvdToWBFS_checkBox_Update->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(false)).toBool());
+    ui->dvdToWBFS_checkBox_Overwrite->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Overwrite", QVariant(false)).toBool());
 
-    ui->dvdToWBFS_checkBox_Force->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Newer->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Update->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("DVDtoWBFS/Overwrite", QVariant(false)).toBool());
+    ui->WBFSToFiles_checkBox_Force->setChecked(WiiBaFuSettings.value("WBFStoFiles/Force", QVariant(false)).toBool());
+    ui->WBFSToFiles_checkBox_Test->setChecked(WiiBaFuSettings.value("WBFStoFiles/Test", QVariant(false)).toBool());
+    ui->WBFSToFiles_checkBox_Update->setChecked(WiiBaFuSettings.value("WBFStoFiles/Update", QVariant(false)).toBool());
+    ui->WBFSToFiles_checkBox_Overwrite->setChecked(WiiBaFuSettings.value("WBFStoFiles/Overwrite", QVariant(false)).toBool());
+    ui->wbfsColumn_checkBox_ID->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnID", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Name->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnName", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Title->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnTitle", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Region->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnRegion", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Size->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnSize", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_UsedBlocks->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnUsedBlocks", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Insertion->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnInsertion", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_LastModification->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnLastModification", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_LastStatusChange->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnLastStatusChange", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_LastAccess->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnLastAccess", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Type->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnType", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_WBFSSlot->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnWBFSSlot", QVariant(true)).toBool());
+    ui->wbfsColumn_checkBox_Source->setChecked(WiiBaFuSettings.value("WBFStoFiles/columnSource", QVariant(true)).toBool());
 
-    ui->WBFSToFiles_checkBox_Force->setChecked(wiiBaFuSettings.value("WBFStoFiles/Force", QVariant(false)).toBool());
-    ui->WBFSToFiles_checkBox_Test->setChecked(wiiBaFuSettings.value("WBFStoFiles/Test", QVariant(false)).toBool());
-    ui->WBFSToFiles_checkBox_Update->setChecked(wiiBaFuSettings.value("WBFStoFiles/Update", QVariant(false)).toBool());
-    ui->WBFSToFiles_checkBox_Overwrite->setChecked(wiiBaFuSettings.value("WBFStoFiles/Overwrite", QVariant(false)).toBool());
-    ui->wbfsColumn_checkBox_ID->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnID", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_Name->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnName", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_Title->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnTitle", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_Region->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnRegion", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_Size->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnSize", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_UsedBlocks->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnUsedBlocks", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_Insertion->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnInsertion", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_LastModification->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnLastModification", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_LastStatusChange->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnLastStatusChange", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_LastAccess->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnLastAccess", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_Type->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnType", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_WBFSSlot->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnWBFSSlot", QVariant(true)).toBool());
-    ui->wbfsColumn_checkBox_Source->setChecked(wiiBaFuSettings.value("WBFStoFiles/columnSource", QVariant(true)).toBool());
+    ui->removeFromWBFS_checkBox_Force->setChecked(WiiBaFuSettings.value("RemoveFromWBFS/Force", QVariant(false)).toBool());
+    ui->removeFromWBFS_checkBox_Test->setChecked(WiiBaFuSettings.value("RemoveFromWBFS/Test", QVariant(false)).toBool());
 
-    ui->removeFromWBFS_checkBox_Force->setChecked(wiiBaFuSettings.value("RemoveFromWBFS/Force", QVariant(false)).toBool());
-    ui->removeFromWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("RemoveFromWBFS/Test", QVariant(false)).toBool());
+    ui->checkWBFS_checkBox_Repair->setChecked(WiiBaFuSettings.value("CheckWBFS/Repair", QVariant(true)).toBool());
+    ui->checkWBFS_checkBox_Test->setChecked(WiiBaFuSettings.value("CheckWBFS/Test", QVariant(false)).toBool());
 
-    ui->checkWBFS_checkBox_Repair->setChecked(wiiBaFuSettings.value("CheckWBFS/Repair", QVariant(true)).toBool());
-    ui->checkWBFS_checkBox_Test->setChecked(wiiBaFuSettings.value("CheckWBFS/Test", QVariant(false)).toBool());
-
-    ui->repairWBFS_checkBox_FBT->setChecked(wiiBaFuSettings.value("RepairWBFS/FBT", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_INODES->setChecked(wiiBaFuSettings.value("RepairWBFS/INODES", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMALL->setChecked(wiiBaFuSettings.value("RepairWBFS/RM-ALL", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMEMPTY->setChecked(wiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMFREE->setChecked(wiiBaFuSettings.value("RepairWBFS/RM-FREE", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMINVALID->setChecked(wiiBaFuSettings.value("RepairWBFS/RM-INVALID", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMOVERLAP->setChecked(wiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_STANDARD->setChecked(wiiBaFuSettings.value("RepairWBFS/STANDARD", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_FBT->setChecked(WiiBaFuSettings.value("RepairWBFS/FBT", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_INODES->setChecked(WiiBaFuSettings.value("RepairWBFS/INODES", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_RMALL->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-ALL", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_RMEMPTY->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_RMFREE->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-FREE", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_RMINVALID->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-INVALID", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_RMOVERLAP->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_STANDARD->setChecked(WiiBaFuSettings.value("RepairWBFS/STANDARD", QVariant(true)).toBool());
 }
 
 void Settings::save() {
-    QSettings wiiBaFuSettings("WiiBaFu", "wiibafu");
+    WiiBaFuSettings.setValue("Main/PathToWIT", ui->main_lineEdit_PathToWIT->text());
+    WiiBaFuSettings.setValue("Main/Auto", ui->main_checkBox_Auto->checkState());
+    WiiBaFuSettings.setValue("Main/WBFSPath", ui->main_lineEdit_WBFSPath->text());
+    WiiBaFuSettings.setValue("Main/DVDDrivePath", ui->main_lineEdit_DVDDrivePath->text());
+    WiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
+    WiiBaFuSettings.setValue("Main/Language", ui->main_comboBox_Language->currentIndex());
 
-    wiiBaFuSettings.setValue("Main/PathToWIT", ui->main_lineEdit_PathToWIT->text());
-    wiiBaFuSettings.setValue("Main/Auto", ui->main_checkBox_Auto->checkState());
-    wiiBaFuSettings.setValue("Main/WBFSPath", ui->main_lineEdit_WBFSPath->text());
-    wiiBaFuSettings.setValue("Main/DVDDrivePath", ui->main_lineEdit_DVDDrivePath->text());
-    wiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
-    wiiBaFuSettings.setValue("Main/Language", ui->main_comboBox_Language->currentIndex());
+    WiiBaFuSettings.setValue("GameLists/ShowGrid", ui->gameLists_checkBox_ShowGrid->checkState());
+    WiiBaFuSettings.setValue("GameLists/AlternatingRowColors", ui->gameLists_checkBox_AlternatingRowColors->checkState());
+    WiiBaFuSettings.setValue("GameLists/ToolTips", ui->gameLists_checkBox_ToolTips->checkState());
+    WiiBaFuSettings.setValue("GameLists/ScrollMode", scrollMode());
+    WiiBaFuSettings.setValue("GameLists/ResizeMode", resizeMode());
 
-    wiiBaFuSettings.setValue("GameLists/ShowGrid", ui->gameLists_checkBox_ShowGrid->checkState());
-    wiiBaFuSettings.setValue("GameLists/AlternatingRowColors", ui->gameLists_checkBox_AlternatingRowColors->checkState());
-    wiiBaFuSettings.setValue("GameLists/ToolTips", ui->gameLists_checkBox_ToolTips->checkState());
-    wiiBaFuSettings.setValue("GameLists/ScrollMode", scrollMode());
-    wiiBaFuSettings.setValue("GameLists/ResizeMode", resizeMode());
+    WiiBaFuSettings.setValue("FilesToWBFS/Force", ui->filesToWBFS_checkBox_Force->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/Test", ui->filesToWBFS_checkBox_Test->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/Newer", ui->filesToWBFS_checkBox_Newer->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/Update", ui->filesToWBFS_checkBox_Update->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/Overwrite", ui->filesToWBFS_checkBox_Overwrite->checkState());
 
-    wiiBaFuSettings.setValue("FilesToWBFS/Force", ui->filesToWBFS_checkBox_Force->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/Test", ui->filesToWBFS_checkBox_Test->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/Newer", ui->filesToWBFS_checkBox_Newer->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/Update", ui->filesToWBFS_checkBox_Update->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/Overwrite", ui->filesToWBFS_checkBox_Overwrite->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnID", ui->filesColumn_checkBox_ID->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnName", ui->filesColumn_checkBox_Name->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnTitle", ui->filesColumn_checkBox_Title->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnRegion", ui->filesColumn_checkBox_Region->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnSize", ui->filesColumn_checkBox_Size->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnInsertion", ui->filesColumn_checkBox_Insertion->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnLastModification", ui->filesColumn_checkBox_LastModification->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnLastStatusChange", ui->filesColumn_checkBox_LastStatusChange->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnLastAccess", ui->filesColumn_checkBox_LastAccess->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnType", ui->filesColumn_checkBox_Type->checkState());
+    WiiBaFuSettings.setValue("FilesToWBFS/columnSource", ui->filesColumn_checkBox_Source->checkState());
 
-    wiiBaFuSettings.setValue("FilesToWBFS/columnID", ui->filesColumn_checkBox_ID->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnName", ui->filesColumn_checkBox_Name->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnTitle", ui->filesColumn_checkBox_Title->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnRegion", ui->filesColumn_checkBox_Region->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnSize", ui->filesColumn_checkBox_Size->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnInsertion", ui->filesColumn_checkBox_Insertion->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnLastModification", ui->filesColumn_checkBox_LastModification->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnLastStatusChange", ui->filesColumn_checkBox_LastStatusChange->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnLastAccess", ui->filesColumn_checkBox_LastAccess->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnType", ui->filesColumn_checkBox_Type->checkState());
-    wiiBaFuSettings.setValue("FilesToWBFS/columnSource", ui->filesColumn_checkBox_Source->checkState());
+    WiiBaFuSettings.setValue("DVDtoWBFS/Force", ui->dvdToWBFS_checkBox_Force->checkState());
+    WiiBaFuSettings.setValue("DVDtoWBFS/Test", ui->dvdToWBFS_checkBox_Test->checkState());
+    WiiBaFuSettings.setValue("DVDtoWBFS/Newer", ui->dvdToWBFS_checkBox_Newer->checkState());
+    WiiBaFuSettings.setValue("DVDtoWBFS/Update", ui->dvdToWBFS_checkBox_Update->checkState());
+    WiiBaFuSettings.setValue("DVDtoWBFS/Overwrite", ui->dvdToWBFS_checkBox_Overwrite->checkState());
 
-    wiiBaFuSettings.setValue("DVDtoWBFS/Force", ui->dvdToWBFS_checkBox_Force->checkState());
-    wiiBaFuSettings.setValue("DVDtoWBFS/Test", ui->dvdToWBFS_checkBox_Test->checkState());
-    wiiBaFuSettings.setValue("DVDtoWBFS/Newer", ui->dvdToWBFS_checkBox_Newer->checkState());
-    wiiBaFuSettings.setValue("DVDtoWBFS/Update", ui->dvdToWBFS_checkBox_Update->checkState());
-    wiiBaFuSettings.setValue("DVDtoWBFS/Overwrite", ui->dvdToWBFS_checkBox_Overwrite->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/Force", ui->WBFSToFiles_checkBox_Force->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/Test", ui->WBFSToFiles_checkBox_Test->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/Update", ui->WBFSToFiles_checkBox_Update->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/Overwrite", ui->WBFSToFiles_checkBox_Overwrite->checkState());
 
-    wiiBaFuSettings.setValue("WBFStoFiles/Force", ui->WBFSToFiles_checkBox_Force->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/Test", ui->WBFSToFiles_checkBox_Test->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/Update", ui->WBFSToFiles_checkBox_Update->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/Overwrite", ui->WBFSToFiles_checkBox_Overwrite->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnID", ui->wbfsColumn_checkBox_ID->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnName", ui->wbfsColumn_checkBox_Name->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnTitle", ui->wbfsColumn_checkBox_Title->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnRegion", ui->wbfsColumn_checkBox_Region->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnSize", ui->wbfsColumn_checkBox_Size->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnUsedBlocks", ui->wbfsColumn_checkBox_UsedBlocks->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnInsertion", ui->wbfsColumn_checkBox_Insertion->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnLastModification", ui->wbfsColumn_checkBox_LastModification->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnLastStatusChange", ui->wbfsColumn_checkBox_LastStatusChange->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnLastAccess", ui->wbfsColumn_checkBox_LastAccess->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnType", ui->wbfsColumn_checkBox_Type->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnWBFSSlot", ui->wbfsColumn_checkBox_WBFSSlot->checkState());
+    WiiBaFuSettings.setValue("WBFStoFiles/columnSource", ui->wbfsColumn_checkBox_Source->checkState());
 
-    wiiBaFuSettings.setValue("WBFStoFiles/columnID", ui->wbfsColumn_checkBox_ID->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnName", ui->wbfsColumn_checkBox_Name->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnTitle", ui->wbfsColumn_checkBox_Title->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnRegion", ui->wbfsColumn_checkBox_Region->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnSize", ui->wbfsColumn_checkBox_Size->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnUsedBlocks", ui->wbfsColumn_checkBox_UsedBlocks->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnInsertion", ui->wbfsColumn_checkBox_Insertion->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnLastModification", ui->wbfsColumn_checkBox_LastModification->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnLastStatusChange", ui->wbfsColumn_checkBox_LastStatusChange->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnLastAccess", ui->wbfsColumn_checkBox_LastAccess->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnType", ui->wbfsColumn_checkBox_Type->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnWBFSSlot", ui->wbfsColumn_checkBox_WBFSSlot->checkState());
-    wiiBaFuSettings.setValue("WBFStoFiles/columnSource", ui->wbfsColumn_checkBox_Source->checkState());
+    WiiBaFuSettings.setValue("RemoveFromWBFS/Force", ui->removeFromWBFS_checkBox_Force->checkState());
+    WiiBaFuSettings.setValue("RemoveFromWBFS/Test", ui->removeFromWBFS_checkBox_Test->checkState());
 
-    wiiBaFuSettings.setValue("RemoveFromWBFS/Force", ui->removeFromWBFS_checkBox_Force->checkState());
-    wiiBaFuSettings.setValue("RemoveFromWBFS/Test", ui->removeFromWBFS_checkBox_Test->checkState());
+    WiiBaFuSettings.setValue("CheckWBFS/Repair", ui->checkWBFS_checkBox_Repair->checkState());
+    WiiBaFuSettings.setValue("CheckWBFS/Test", ui->checkWBFS_checkBox_Test->checkState());
 
-    wiiBaFuSettings.setValue("CheckWBFS/Repair", ui->checkWBFS_checkBox_Repair->checkState());
-    wiiBaFuSettings.setValue("CheckWBFS/Test", ui->checkWBFS_checkBox_Test->checkState());
-
-    wiiBaFuSettings.setValue("RepairWBFS/FBT", ui->repairWBFS_checkBox_FBT->checkState());
-    wiiBaFuSettings.setValue("RepairWBFS/INODES", ui->repairWBFS_checkBox_INODES->checkState());
-    wiiBaFuSettings.setValue("RepairWBFS/RM-ALL", ui->repairWBFS_checkBox_RMALL->checkState());
-    wiiBaFuSettings.setValue("RepairWBFS/RM-EMTPY", ui->repairWBFS_checkBox_RMEMPTY->checkState());
-    wiiBaFuSettings.setValue("RepairWBFS/RM-FREE", ui->repairWBFS_checkBox_RMFREE->checkState());
-    wiiBaFuSettings.setValue("RepairWBFS/RM-INVALID", ui->repairWBFS_checkBox_RMINVALID->checkState());
-    wiiBaFuSettings.setValue("RepairWBFS/RM-OVERLAP", ui->repairWBFS_checkBox_RMOVERLAP->checkState());
-    wiiBaFuSettings.setValue("RepairWBFS/STANDARD", ui->repairWBFS_checkBox_STANDARD->checkState());
+    WiiBaFuSettings.setValue("RepairWBFS/FBT", ui->repairWBFS_checkBox_FBT->checkState());
+    WiiBaFuSettings.setValue("RepairWBFS/INODES", ui->repairWBFS_checkBox_INODES->checkState());
+    WiiBaFuSettings.setValue("RepairWBFS/RM-ALL", ui->repairWBFS_checkBox_RMALL->checkState());
+    WiiBaFuSettings.setValue("RepairWBFS/RM-EMTPY", ui->repairWBFS_checkBox_RMEMPTY->checkState());
+    WiiBaFuSettings.setValue("RepairWBFS/RM-FREE", ui->repairWBFS_checkBox_RMFREE->checkState());
+    WiiBaFuSettings.setValue("RepairWBFS/RM-INVALID", ui->repairWBFS_checkBox_RMINVALID->checkState());
+    WiiBaFuSettings.setValue("RepairWBFS/RM-OVERLAP", ui->repairWBFS_checkBox_RMOVERLAP->checkState());
+    WiiBaFuSettings.setValue("RepairWBFS/STANDARD", ui->repairWBFS_checkBox_STANDARD->checkState());
 }
 
 void Settings::restoreDefaults(int index) {
@@ -415,22 +411,22 @@ void Settings::on_checkWBFS_checkBox_Repair_stateChanged(int state) {
 }
 
 void Settings::setupGeometry() {
-    if (QSettings("WiiBaFu", "wiibafu").contains("Settings/x")) {
+    if (WiiBaFuSettings.contains("Settings/x")) {
         QRect rect;
-        rect.setX(QSettings("WiiBaFu", "wiibafu").value("Settings/x", QVariant(0)).toInt());
-        rect.setY(QSettings("WiiBaFu", "wiibafu").value("Settings/y", QVariant(0)).toInt());
-        rect.setWidth(QSettings("WiiBaFu", "wiibafu").value("Settings/width", QVariant(800)).toInt());
-        rect.setHeight(QSettings("WiiBaFu", "wiibafu").value("Settings/height", QVariant(600)).toInt());
+        rect.setX(WiiBaFuSettings.value("Settings/x", QVariant(0)).toInt());
+        rect.setY(WiiBaFuSettings.value("Settings/y", QVariant(0)).toInt());
+        rect.setWidth(WiiBaFuSettings.value("Settings/width", QVariant(800)).toInt());
+        rect.setHeight(WiiBaFuSettings.value("Settings/height", QVariant(600)).toInt());
 
         this->setGeometry(rect);
     }
 }
 
 void Settings::saveGeometry() {
-    QSettings("WiiBaFu", "wiibafu").setValue("Settings/x", this->geometry().x());
-    QSettings("WiiBaFu", "wiibafu").setValue("Settings/y", this->geometry().y());
-    QSettings("WiiBaFu", "wiibafu").setValue("Settings/width", this->geometry().width());
-    QSettings("WiiBaFu", "wiibafu").setValue("Settings/height", this->geometry().height());
+    WiiBaFuSettings.setValue("Settings/x", this->geometry().x());
+    WiiBaFuSettings.setValue("Settings/y", this->geometry().y());
+    WiiBaFuSettings.setValue("Settings/width", this->geometry().width());
+    WiiBaFuSettings.setValue("Settings/height", this->geometry().height());
 }
 
 Settings::~Settings() {

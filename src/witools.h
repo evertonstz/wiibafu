@@ -24,6 +24,8 @@
 #include <QObject>
 #include <QtGui>
 
+#include "global.h"
+
 class WiTools : public QObject {
     Q_OBJECT
 

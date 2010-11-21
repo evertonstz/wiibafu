@@ -24,6 +24,7 @@
 #include <QtGui>
 #include <QMetaType>
 
+#include "global.h"
 #include "witools.h"
 #include "common.h"
 #include "settings.h"
