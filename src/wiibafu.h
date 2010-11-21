@@ -105,6 +105,7 @@ private slots:
 
     void on_infoTab_pushButton_Load3DCover_clicked();
     void on_infoTab_pushButton_LoadFullHQCover_clicked();
+    void on_infoTab_pushButton_Reset_clicked();
 
     void on_logTab_pushButton_Clear_clicked();
     void on_logTab_pushButton_Copy_clicked();

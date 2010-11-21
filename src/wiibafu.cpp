@@ -377,6 +377,24 @@ void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
         common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::HighQuality);
 }
 
+void WiiBaFu::on_infoTab_pushButton_Reset_clicked() {
+    ui->infoTab_lineEdit_ID->clear();
+    ui->infoTab_lineEdit_Name->clear();
+    ui->infoTab_lineEdit_Title->clear();
+    ui->infoTab_lineEdit_Region->clear();
+    ui->infoTab_lineEdit_Size->clear();
+    ui->infoTab_lineEdit_UsedBlocks->clear();
+    ui->infoTab_lineEdit_Insertion->clear();
+    ui->infoTab_lineEdit_LastModification->clear();
+    ui->infoTab_lineEdit_LastStatusChange->clear();
+    ui->infoTab_lineEdit_LastAccess->clear();
+    ui->infoTab_lineEdit_Type->clear();
+    ui->infoTab_lineEdit_WBFSSlot->clear();
+    ui->infoTab_lineEdit_Source->clear();
+
+    ui->infoTab_label_GameCover->clear();
+}
+
 void WiiBaFu::on_logTab_pushButton_Clear_clicked() {
     ui->logTab_plainTextEdit_Log->clear();
 }
