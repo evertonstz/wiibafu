@@ -168,6 +168,13 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
         setFilesColumns();
         setWBFSColumns();
 
+        if (WiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool()) {
+            setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
+            setToolTips(ui->wbfsTab_tableView, wbfsListModel, tr("Title"), tr("Name"));
+            ui->filesTab_tableView->update();
+            ui->wbfsTab_tableView->update();
+        }
+
         ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt());
     }
 }
