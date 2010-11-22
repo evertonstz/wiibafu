@@ -65,8 +65,10 @@ private:
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
     void setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName);
+    void updateTitles();
 
-    QString getCurrentCoverLanguage();
+    QString currentCoverLanguage();
+    QString titleFromDB(QString gameID);
     QString wbfsPath();
     int headerIndex(QAbstractItemModel *model, QString text, Qt::Orientation orientation);
 

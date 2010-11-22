@@ -63,6 +63,7 @@ public:
 
     QString witVersion();
     QString wwtVersion();
+    QString witTitlesPath();
 
 private:
     QString wit, wwt;
@@ -73,7 +74,6 @@ private:
     #endif
 
     void setWit();
-    QString witTitlesPath();
 
 signals:
     void stopBusy();

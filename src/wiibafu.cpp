@@ -160,6 +160,8 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 }
 
 void WiiBaFu::on_menuOptions_Settings_triggered() {
+    int language = WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt();
+
     if (settings->exec() == QDialog::Accepted) {
         setGameListAttributes(ui->filesTab_tableView);
         setGameListAttributes(ui->dvdTab_tableView);
@@ -167,6 +169,10 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
 
         setFilesColumns();
         setWBFSColumns();
+
+        if (WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt() != language) {
+            updateTitles();
+        }
 
         if (WiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
@@ -369,12 +375,12 @@ void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
 void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty())
         ui->infoTab_label_GameCover->clear();
-        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::ThreeD);
+        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), currentCoverLanguage(), Common::ThreeD);
 }
 
 void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty())
-        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), getCurrentCoverLanguage(), Common::HighQuality);
+        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), currentCoverLanguage(), Common::HighQuality);
 }
 
 void WiiBaFu::on_infoTab_pushButton_Reset_clicked() {
@@ -465,6 +471,24 @@ void WiiBaFu::setWBFSGameListModel() {
     }
 }
 
+void WiiBaFu::updateTitles() {
+    if (filesListModel->rowCount() > 0) {
+        for (int i = 0; i < filesListModel->rowCount(); i++) {
+            filesListModel->item(i, 2)->setText(titleFromDB(filesListModel->item(i, 0)->text()));
+        }
+
+        ui->filesTab_tableView->update();
+    }
+
+    if (wbfsListModel->rowCount() > 0) {
+        for (int i = 0; i < wbfsListModel->rowCount(); i++) {
+            wbfsListModel->item(i, 2)->setText(titleFromDB(wbfsListModel->item(i, 0)->text()));
+        }
+
+        ui->wbfsTab_tableView->update();
+    }
+}
+
 void WiiBaFu::setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName) {
     if (tableView->isColumnHidden(headerIndex(model, firstColumnName, Qt::Horizontal))) {
         for (int i = 0; i < model->rowCount(); i++) {
@@ -500,7 +524,7 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             }
 
             ui->infoTab_label_GameCover->clear();
-            common->requestGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text(), getCurrentCoverLanguage(), Common::ThreeD);
+            common->requestGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text(), currentCoverLanguage(), Common::ThreeD);
         }
 
         if (tableView == ui->wbfsTab_tableView) {
@@ -685,7 +709,7 @@ void WiiBaFu::addEntryToLog(QString entry, WiTools::LogType type) {
     }
 }
 
-QString WiiBaFu::getCurrentCoverLanguage() {
+QString WiiBaFu::currentCoverLanguage() {
     switch (ui->infoTab_comboBox_CoverLanguages->currentIndex()) {
         case 0:  return "EN";
                  break;
@@ -723,6 +747,23 @@ QString WiiBaFu::getCurrentCoverLanguage() {
                  break;
         default: return "EN";
     }
+}
+
+QString WiiBaFu::titleFromDB(QString gameID) {
+    QFile file(wiTools->witTitlesPath());
+    QString title;
+
+    file.open(QIODevice::ReadOnly);
+    while (!file.atEnd()) {
+        QString line = file.readLine().data();
+            if (line.contains(gameID)) {
+                title = line.right(line.length() - line.indexOf("=") - 2).remove("\r");
+                break;
+            }
+    }
+
+    file.close();
+    return title;
 }
 
 QString WiiBaFu::wbfsPath() {
