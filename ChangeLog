@@ -1,23 +1,17 @@
-2010-11-21 Kai Heitkamp <dynup@ymail.com>
+2010-11-22 Kai Heitkamp <dynup@ymail.com>
+  * Tool tips for name/title fixed
+  * Update titles after language change
   * Tool tips for name/title
   * Busy mode set to 3000 ms
-
-2010-11-20 Kai Heitkamp <dynup@ymail.com>
   * Transfer DVD to a specific image file
   * Cover region bug fixed
-
-2010-11-19 Kai Heitkamp <dynup@ymail.com>
   * Download titles from wiitdb.com
   * Save Settings geometry
   * Transfer DVD to image
-
-2010-11-18 Kai Heitkamp <dynup@ymail.com>
   * Titles and Cover language global in settings
   * Convert Files (images) to another format
   * Format WBFS partition
   * Create WBFS file
-
-2010-11-17 Kai Heitkamp <dynup@ymail.com>
   * WIT path configurable in settings
   * Save last path in Files/Load
   * Sort game lists
@@ -27,81 +21,68 @@
   * Busy status added
 
 2010-11-12 Kai Heitkamp <dynup@ymail.com>
+ Version 0.7
   * Platform specific fixes.
   * Game cover viewer added.
   * Transfer improved.
   * Autosearch for WIT added.
   * Some little fixes.
-  * Version number increase to: 0.7
-
-2010-11-06 Kai Heitkamp <dynup@ymail.com>
   * Autosearch for wit/wwt added.
   * Better error handling.
 
 2010-11-05 Kai Heitkamp <dynup@ymail.com>
-  * Remove cover, if requesting a new one.
-  * Fill game list models in a new thread.
-  * Some little improvements and bug fixes. (0.6.1)
-  * Version number increase to: 0.6.1
+ Version 0.6.1
+  * Some little improvements and bug fixes.
 
 2010-11-04 Kai Heitkamp <dynup@ymail.com>
+ Version 0.6
   * Settings are used now.
   * Some little improvements.
-  * Version number increase to: 0.6
+  * Remove cover, if requesting a new one.
+  * Fill game list models in a new thread.
 
 2010-11-03 Kai Heitkamp <dynup@ymail.com>
+ Version 0.5.1
   * Some memory optimizations.
   * Sort functions.
   * Workaround for wwts calculate bug.
-  * Version number increase to: 0.5.1
 
 2010-11-02 Kai Heitkamp <dynup@ymail.com>
+ Version 0.5
   * Transfer WBFS to image extended.
   * List game infos (incl. disc cover) from DVD.
   * Transfer game from DVD to WBFS.
-  * Version number increase to: 0.5
 
 2010-11-01 Kai Heitkamp <dynup@ymail.com>
-  * Transfer WBFS to image added.
+ Version 0.4.1
   * Some improvements.
+  * More improvements for canceling.
 
 2010-10-31 Kai Heitkamp <dynup@ymail.com>
-  * Cancel possibility for wbfs transfer added. (0.4)
-  * More improvements for canceling. (0.4.1)
-  * Version number increase to: 0.4.1
+ Version 0.4
+  * Transfer WBFS to image added.
+  * Cancel possibility for wbfs transfer added.
 
 2010-10-30 Kai Heitkamp <dynup@ymail.com>
+ Version 0.3
   * Transfer to wbfs added.
-
-2010-10-28 Kai Heitkamp <dynup@ymail.com>
   * Progress bar in WBFS tab for additional and compact infos.
-
-2010-10-27 Kai Heitkamp <dynup@ymail.com>
   * Load game covers in different languages.
   * HQ game cover functionality added.
   * Total infos for game images and wbfs.
-  * Switch version number to: 0.3
 
 2010-10-26 Kai Heitkamp <dynup@ymail.com>
+ Version 0.2
   * List games in seperate threads.
-
-2010-10-25 Kai Heitkamp <dynup@ymail.com>
   * List games from WBFS partitions and view infos.
   * StatusBar functionality added.
-
-2010-10-24 Kai Heitkamp <dynup@ymail.com>
   * Game info functionality added.
-
-2010-10-23 Kai Heitkamp <dynup@ymail.com>
   * Log functionality added.
-
-2010-10-21 Kai Heitkamp <dynup@ymail.com>
   * Add all game images from a directory and view infos about the game(s).
-  * Switch version number to: 0.2
 
 2010-10-15 Kai Heitkamp <dynup@ymail.com>
+ Version 0.1
   * Starting project with the great Qt library.
-  * Switch version number to: 0.1
 
 2010-10-10 Kai Heitkamp <dynup@ymail.com>
   * Idea and planing a gui for wimms iso tools.
