@@ -45,6 +45,7 @@ public:
 private:
     QHttp *http;
     QUrl url;
+    WiTools *wiTools;
     GameCoverArt currentGameCoverArt;
     QStringList wiiTDBLanguages;
     QStringList titlesExtensions;

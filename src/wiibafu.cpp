@@ -50,6 +50,14 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()), WiTools::Info);
     addEntryToLog(wiTools->witVersion(), WiTools::Info);
     addEntryToLog(wiTools->wwtVersion(), WiTools::Info);
+
+    QString witPath = wiTools->witTitlesPath().remove("titles.txt");
+    if (witPath.contains("witTitles:")) {
+        addEntryToLog(tr("Titles not found!"), WiTools::Info);
+    }
+    else {
+        addEntryToLog(tr("Titles found in: %1").arg(witPath), WiTools::Info);
+    }
 }
 
 void WiiBaFu::setupConnections() {
@@ -208,7 +216,15 @@ void WiiBaFu::on_menuTools_CreateWBFS_triggered() {
 }
 
 void WiiBaFu::on_menuTools_UpdateTitles_triggered() {
-    QtConcurrent::run(common, &Common::updateTitles);
+    QDir path(wiTools->witTitlesPath().remove("/titles.txt"));
+
+    if (path.exists()) {
+        QtConcurrent::run(common, &Common::updateTitles);
+    }
+    else {
+        setStatusBarText(tr("Titles update failed!"));
+        addEntryToLog(tr("Titles update failed: Path not found!"), WiTools::Error);
+    }
 }
 
 void WiiBaFu::on_filesTab_pushButton_Load_clicked() {

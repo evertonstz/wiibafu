@@ -25,6 +25,8 @@ Common::Common(QObject *parent) : QObject(parent) {
     connect(http, SIGNAL(done(bool)), this, SLOT(loadGameCover_done(bool)));
     connect(http, SIGNAL(responseHeaderReceived(QHttpResponseHeader)), this, SLOT(loadGameCover_responseHeaderReceived(QHttpResponseHeader)));
 
+    wiTools = new WiTools(this);
+
     wiiTDBLanguages = QStringList() << "EN" << "FR" << "DE" << "ES" << "IT" << "NL" << "PT" << "SE" << "DK" << "NO" << "FI" << "RU" << "JA" << "KO" << "ZHTW" << "ZHCN";
     titlesExtensions = QStringList() << ".txt"  << "-fr.txt" << "-de.txt" << "-es.txt" << "-it.txt" << "-nl.txt" << "-pt.txt" << "-se.txt" << "-dk.txt" << "-no.txt" << "-fi.txt" << "-ru.txt" << "-ja.txt" << "-ko.txt" << "-zhtw.txt" << "-zhcn.txt";
 }
@@ -88,19 +90,10 @@ void Common::updateTitles() {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
 
+
     bool error = false;
-    QDir witPath = QDir::currentPath().append("/wit");
     QString wiiTDBUrl = "http://wiitdb.com/titles.txt?LANG=";
-
-    #ifdef Q_OS_MACX
-        QString fileName = QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit");
-    #else
-        QString fileName = QDir::currentPath().append("/wit/titles");
-    #endif
-
-    if (!witPath.exists()) {
-        witPath.mkpath(witPath.path());
-    }
+    QString fileName = wiTools->witTitlesPath().remove(".txt");
 
     for (int i = 0; i < 16; i++) {
         #ifdef Q_OS_MACX
@@ -154,4 +147,5 @@ QNetworkReply::NetworkError Common::getTitle(QString wiitdbPath, QString fileNam
 
 Common::~Common() {
     delete http;
+    delete wiTools;
 }
