@@ -817,6 +817,7 @@ void WiTools::transfer_readyReadStandardOutput() {
 }
 
 void WiTools::transfer_readyReadStandardError() {
+    emit showStatusBarMessage(tr("Transfer failed!"));
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
