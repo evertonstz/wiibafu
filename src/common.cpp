@@ -93,7 +93,8 @@ void Common::updateTitles() {
 
     bool error = false;
     QString wiiTDBUrl = "http://wiitdb.com/titles.txt?LANG=";
-    QString fileName = wiTools->witTitlesPath().remove(".txt");
+    QString titlesPath = wiTools->witTitlesPath();
+    QString fileName = titlesPath.left(titlesPath.lastIndexOf("titles") + 6);
 
     for (int i = 0; i < 16; i++) {
         #ifdef Q_OS_MACX
