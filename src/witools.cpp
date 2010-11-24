@@ -783,12 +783,26 @@ void WiTools::transfer_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("COPY")) {
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1));
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1)));
-        #endif
+        if (line.contains("/dev/")) {
+            #ifdef Q_OS_MACX
+                gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1));
+                emit showStatusBarMessage(gameCountText);
+            #else
+                emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1)));
+            #endif
+        }
+        else {
+            QString file = line.mid(line.indexOf(":") + 1, line.indexOf("->") - line.indexOf(":") - 2);
+            QString from = file.mid(file.lastIndexOf("/") + 1, file.length() - file.lastIndexOf("/"));
+            QString to = line.mid(line.indexOf("->") + 3, line.lastIndexOf(":") - line.indexOf("->") - 3);
+
+            #ifdef Q_OS_MACX
+                gameCountText = tr("Transfering game %1 -> %2...").arg(from, to);
+                emit showStatusBarMessage(gameCountText);
+            #else
+                emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(from, to));
+            #endif
+        }
     }
     else if (line.contains("EXTRACT")) {
         #ifdef Q_OS_MACX
@@ -823,6 +837,55 @@ void WiTools::transfer_readyReadStandardError() {
 
 void WiTools::transfer_cancel() {
     witProcess->kill();
+}
+
+void WiTools::convertGameImages(QModelIndexList indexList, QString format, QString directory) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit showStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList paths;
+    foreach (QModelIndex index, indexList) {
+        paths.append(index.data().toString());
+    }
+
+    QStringList arguments;
+    arguments.append("COPY");
+
+    arguments.append(paths);
+    arguments.append(QString("--").append(format));
+    arguments.append("--dest");
+    arguments.append(directory);
+
+    if (WiiBaFuSettings.value("FilesFromWBFS/Force", QVariant(false)).toBool()) {
+        arguments.append("--force");
+    }
+
+    if (WiiBaFuSettings.value("FilesFromWBFS/Test", QVariant(false)).toBool()) {
+        arguments.append("--test");
+    }
+
+    if (WiiBaFuSettings.value("FilesFromWBFS/Update", QVariant(false)).toBool()) {
+        arguments.append("--update");
+    }
+
+    if (WiiBaFuSettings.value("FilesFromWBFS/Overwrite", QVariant(false)).toBool()) {
+        arguments.append("--overwrite");
+    }
+
+    arguments.append("--progress");
+
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToImage_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(wit, arguments);
+    witProcess->waitForFinished(-1);
+
+    arguments.clear();
+    emit setMainProgressBarVisible(false);
 }
 
 void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {

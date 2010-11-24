@@ -269,7 +269,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
                 }
                 else {
                     ui->filesTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
-                    QtConcurrent::run(wiTools, &WiTools::transferGamesToImage, ui->filesTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), format, path.absolutePath());
+                    QtConcurrent::run(wiTools, &WiTools::convertGameImages, ui->filesTab_tableView->selectionModel()->selectedRows(10), format, path.absolutePath());
                 }
             }
         }
