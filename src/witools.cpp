@@ -912,15 +912,15 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
     if (WiiBaFuSettings.value("FilesToWBFS/Test", QVariant(false)).toBool())
         arguments.append("--test");
 
-    QProcess *wwtREMOVEProcess = new QProcess();
+    witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(wwtREMOVEProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(removeGamesFromWBFS_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(removeGamesFromWBFS_finished(int, QProcess::ExitStatus)));
 
-    wwtREMOVEProcess->start(wwt, arguments);
-    wwtREMOVEProcess->waitForFinished(-1);
+    witProcess->start(wwt, arguments);
+    witProcess->waitForFinished(-1);
 
     arguments.clear();
-    delete wwtREMOVEProcess;
+    delete witProcess;
 }
 
 void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
@@ -999,25 +999,27 @@ void WiTools::checkWBFS(QString wbfsPath) {
 
     arguments.append("--long");
 
-    QProcess wwtCHECKProcess;
-    wwtCHECKProcess.start(wwt, arguments);
+    witProcess = new QProcess();
+    witProcess->start(wwt, arguments);
 
-    if (!wwtCHECKProcess.waitForFinished(-1)) {
-        if (wwtCHECKProcess.errorString().contains("No such file or directory")) {
+    if (!witProcess->waitForFinished(-1)) {
+        if (witProcess->errorString().contains("No such file or directory")) {
             emit showStatusBarMessage(tr("Wiimms WBFS Tool not found!"));
             emit newLogEntry(tr("Wiimms WBFS Tool not found!"), Error);
         }
         else {
             emit showStatusBarMessage(tr("WBFS check failed!"));
-            emit newLogEntry(tr("WBFS check failed! (status: %1, code: %2,  %3)").arg(QString::number(wwtCHECKProcess.exitStatus()), QString::number(wwtCHECKProcess.exitCode()), wwtCHECKProcess.errorString()), Error);
+            emit newLogEntry(tr("WBFS check failed! (status: %1, code: %2,  %3)").arg(QString::number(witProcess->exitStatus()), QString::number(witProcess->exitCode()), witProcess->errorString()), Error);
         }
     }
     else {
         emit showStatusBarMessage(tr("WBFS check successfully!"));
     }
 
+    emit newLogEntry(QString(witProcess->readAll().data()), Info);
+
     arguments.clear();
-    emit newLogEntry(QString(wwtCHECKProcess.readAll().data()), Info);
+    delete witProcess;
 }
 
 void WiTools::createWBFS(CreateWBFSParameters parameters) {
@@ -1059,19 +1061,22 @@ void WiTools::createWBFS(CreateWBFSParameters parameters) {
     arguments.append("--force");
     arguments.append("--verbose");
 
-    QProcess wwtFORMATProcess;
-    wwtFORMATProcess.start(wwt, arguments);
+    witProcess = new QProcess();
+    witProcess->start(wwt, arguments);
 
-    if (!wwtFORMATProcess.waitForFinished(-1)) {
+    if (!witProcess->waitForFinished(-1)) {
         emit showStatusBarMessage(tr("Create WBFS failed!"));
-        emit newLogEntry(wwtFORMATProcess.readAllStandardError(), Error);
+        emit newLogEntry(witProcess->readAllStandardError(), Error);
     }
     else {
         emit showStatusBarMessage(tr("Create WBFS successfully!"));
     }
 
+    emit newLogEntry(QString(witProcess->readAll()), Info);
+
     arguments.clear();
-    emit newLogEntry(QString(wwtFORMATProcess.readAll()), Info);
+    delete witProcess;
+
     emit stopBusy();
 }
 
