@@ -242,7 +242,7 @@ void WiiBaFu::on_filesTab_pushButton_SelectAll_clicked() {
 }
 
 void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
-    if (ui->filesTab_pushButton_TransferToWBFS->text() != tr("Cancel transfering")) {
+    if (!ui->filesTab_pushButton_TransferToWBFS->text().contains(tr("Cancel transfering"))) {
         if (ui->filesTab_tableView->selectionModel() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             ui->filesTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
 
@@ -255,7 +255,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
 }
 
 void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
-    if (ui->filesTab_pushButton_TransferToImage->text() != tr("Cancel transfering")) {
+    if (!ui->filesTab_pushButton_TransferToImage->text().contains(tr("Cancel transfering"))) {
         if (ui->filesTab_tableView->model() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenDirectory();
             int result = wiibafudialog->exec();
@@ -291,7 +291,7 @@ void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
 }
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
-    if (ui->dvdTab_pushButton_TransferToWBFS->text() != tr("Cancel transfering")) {
+    if (!ui->dvdTab_pushButton_TransferToWBFS->text().contains(tr("Cancel transfering"))) {
         if (dvdListModel->rowCount() != 0) {
             ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
 
@@ -304,7 +304,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 }
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
-    if (ui->dvdTab_pushButton_TransferToImage->text() != tr("Cancel transfering")) {
+    if (!ui->dvdTab_pushButton_TransferToImage->text().contains(tr("Cancel transfering"))) {
         wiibafudialog->setOpenFile();
         wiibafudialog->exec();
 
@@ -338,7 +338,7 @@ void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
-    if (ui->wbfsTab_pushButton_Transfer->text() != tr("Cancel transfering")) {
+    if (!ui->wbfsTab_pushButton_Transfer->text().contains(tr("Cancel transfering"))) {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             int result = wiibafudialog->exec();
             QDir path = wiibafudialog->imageDirectory();
