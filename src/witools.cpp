@@ -954,7 +954,7 @@ void WiTools::checkWBFS(QString wbfsPath) {
     }
 
     arguments.clear();
-    emit newLogEntry(QString(wwtCHECKProcess.readAll()), Info);
+    emit newLogEntry(QString(wwtCHECKProcess.readAll().data()), Info);
 }
 
 void WiTools::createWBFS(CreateWBFSParameters parameters) {
