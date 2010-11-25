@@ -346,7 +346,7 @@
      <widget class="QWidget" name="GameLists">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="gameLists_groupBox_VisualApperances">
          <property name="title">
           <string>Visual appearances:</string>
          </property>
@@ -493,7 +493,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="filesToWBFS_groupBox_GameListColumns">
          <property name="title">
           <string>Files game list columns:</string>
          </property>
@@ -583,7 +583,7 @@
      <widget class="QWidget" name="DVD">
       <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="0">
-        <widget class="QGroupBox" name="DVDToWBFS_groupBox_Options_3">
+        <widget class="QGroupBox" name="transferToImage_groupBox_Options">
          <property name="title">
           <string>Transfer (image/DVD) to image options:</string>
          </property>
@@ -617,7 +617,7 @@
      <widget class="QWidget" name="WBFS">
       <layout class="QGridLayout" name="gridLayout_9">
        <item row="0" column="0">
-        <widget class="QGroupBox" name="WBFSToFiles_groupBox_Options">
+        <widget class="QGroupBox" name="wbfsToFiles_groupBox_Options">
          <property name="locale">
           <locale language="English" country="UnitedStates"/>
          </property>
@@ -657,7 +657,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QGroupBox" name="groupBox_2">
+        <widget class="QGroupBox" name="wbfsToFiles_groupBox_GameListColumns">
          <property name="title">
           <string>WBFS game list columns:</string>
          </property>
