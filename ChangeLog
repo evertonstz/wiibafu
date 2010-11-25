@@ -1,4 +1,7 @@
 2010-11-25 Kai Heitkamp <dynup@ymail.com>
+ Version 0.8.5
+  * WBFS repair default options fixed
+
  Version 0.8.4
   * Settings ui widget names fixed
 

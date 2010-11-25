@@ -949,22 +949,22 @@ void WiTools::checkWBFS(QString wbfsPath) {
 
         QString repairModes;
 
-        if (WiiBaFuSettings.value("RepairWBFS/FBT", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/FBT", QVariant(false)).toBool()) {
             repairModes.append("FBT,");
         }
-        if (WiiBaFuSettings.value("RepairWBFS/INODES", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/INODES", QVariant(false)).toBool()) {
             repairModes.append("INODES,");
         }
-        if (WiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(false)).toBool()) {
             repairModes.append("RM-EMPTY,");
         }
-        if (WiiBaFuSettings.value("RepairWBFS/RM-FREE", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-FREE", QVariant(false)).toBool()) {
             repairModes.append("RM-FREE,");
         }
-        if (WiiBaFuSettings.value("RepairWBFS/RM-INVALID", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-INVALID", QVariant(false)).toBool()) {
             repairModes.append("RM-INVALID,");
         }
-        if (WiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool()) {
+        if (WiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(false)).toBool()) {
             repairModes.append("RM-OVERLAP,");
         }
 
