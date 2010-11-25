@@ -46,7 +46,7 @@
      </item>
      <item>
       <property name="text">
-       <string>DVD</string>
+       <string>Transfer to image</string>
       </property>
      </item>
      <item>
@@ -346,32 +346,37 @@
      <widget class="QWidget" name="GameLists">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QGridLayout" name="gridLayout_16">
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="gameLists_checkBox_ShowGrid">
-           <property name="text">
-            <string>Show grid</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QCheckBox" name="gameLists_checkBox_AlternatingRowColors">
-           <property name="locale">
-            <locale language="English" country="UnitedStates"/>
-           </property>
-           <property name="text">
-            <string>Alternating row colors</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="gameLists_checkBox_ToolTips">
-           <property name="text">
-            <string>Tool tips</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Visual appearances:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_16">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="gameLists_checkBox_ShowGrid">
+            <property name="text">
+             <string>Show grid</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="gameLists_checkBox_AlternatingRowColors">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="text">
+             <string>Alternating row colors</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="gameLists_checkBox_ToolTips">
+            <property name="text">
+             <string>Tool tips</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
         <widget class="QGroupBox" name="gameLists_groupBox_ScrollMode">
@@ -490,7 +495,7 @@
        <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Game list columns:</string>
+          <string>Files game list columns:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_14">
           <item row="0" column="0">
@@ -580,39 +585,25 @@
        <item row="0" column="0">
         <widget class="QGroupBox" name="DVDToWBFS_groupBox_Options_3">
          <property name="title">
-          <string>DVD to WBFS transfer options:</string>
+          <string>Transfer (image/DVD) to image options:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="0">
-           <widget class="QCheckBox" name="dvdToWBFS_checkBox_Force">
+           <widget class="QCheckBox" name="gamesToImage_checkBox_Test">
             <property name="text">
-             <string>Force</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="dvdToWBFS_checkBox_Newer">
-            <property name="text">
-             <string>Newer</string>
+             <string>Test (use this option is unsure!)</string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QCheckBox" name="dvdToWBFS_checkBox_Test">
-            <property name="text">
-             <string>Test</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="dvdToWBFS_checkBox_Update">
+           <widget class="QCheckBox" name="gamesToImage_checkBox_Update">
             <property name="text">
              <string>Update</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="dvdToWBFS_checkBox_Overwrite">
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="gamesToImage_checkBox_Overwrite">
             <property name="text">
              <string>Overwrite</string>
             </property>
@@ -668,7 +659,7 @@
        <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string>Game list columns:</string>
+          <string>WBFS game list columns:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_15">
           <item row="0" column="0">

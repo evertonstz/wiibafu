@@ -704,23 +704,15 @@ void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QStr
     arguments.append(filePath);
     arguments.append(QString("--").append(format));
 
-    if (WiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool()) {
-        arguments.append("--force");
-    }
-
-    if (WiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("GamesToImage/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
     }
 
-    if (WiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(true)).toBool()) {
-        arguments.append("--newer");
-    }
-
-    if (WiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("GamesToImage/Update", QVariant(false)).toBool()) {
         arguments.append("--update");
     }
 
-    if (WiiBaFuSettings.value("DVDtoWBFS/Overwrite", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("GamesToImage/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
     }
 
@@ -857,19 +849,15 @@ void WiTools::convertGameImages(QModelIndexList indexList, QString format, QStri
     arguments.append("--dest");
     arguments.append(directory);
 
-    if (WiiBaFuSettings.value("FilesFromWBFS/Force", QVariant(false)).toBool()) {
-        arguments.append("--force");
-    }
-
-    if (WiiBaFuSettings.value("FilesFromWBFS/Test", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("GamesToImage/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
     }
 
-    if (WiiBaFuSettings.value("FilesFromWBFS/Update", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("GamesToImage/Update", QVariant(false)).toBool()) {
         arguments.append("--update");
     }
 
-    if (WiiBaFuSettings.value("FilesFromWBFS/Overwrite", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("GamesToImage/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
     }
 

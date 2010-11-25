@@ -148,11 +148,9 @@ void Settings::load() {
     ui->filesColumn_checkBox_Type->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnType", QVariant(true)).toBool());
     ui->filesColumn_checkBox_Source->setChecked(WiiBaFuSettings.value("FilesToWBFS/columnSource", QVariant(true)).toBool());
 
-    ui->dvdToWBFS_checkBox_Force->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Test->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Newer->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Update->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(false)).toBool());
-    ui->dvdToWBFS_checkBox_Overwrite->setChecked(WiiBaFuSettings.value("DVDtoWBFS/Overwrite", QVariant(false)).toBool());
+    ui->gamesToImage_checkBox_Test->setChecked(WiiBaFuSettings.value("GamesToImage/Test", QVariant(false)).toBool());
+    ui->gamesToImage_checkBox_Update->setChecked(WiiBaFuSettings.value("GamesToImage/Update", QVariant(false)).toBool());
+    ui->gamesToImage_checkBox_Overwrite->setChecked(WiiBaFuSettings.value("GamesToImage/Overwrite", QVariant(false)).toBool());
 
     ui->WBFSToFiles_checkBox_Force->setChecked(WiiBaFuSettings.value("WBFStoFiles/Force", QVariant(false)).toBool());
     ui->WBFSToFiles_checkBox_Test->setChecked(WiiBaFuSettings.value("WBFStoFiles/Test", QVariant(false)).toBool());
@@ -220,11 +218,9 @@ void Settings::save() {
     WiiBaFuSettings.setValue("FilesToWBFS/columnType", ui->filesColumn_checkBox_Type->checkState());
     WiiBaFuSettings.setValue("FilesToWBFS/columnSource", ui->filesColumn_checkBox_Source->checkState());
 
-    WiiBaFuSettings.setValue("DVDtoWBFS/Force", ui->dvdToWBFS_checkBox_Force->checkState());
-    WiiBaFuSettings.setValue("DVDtoWBFS/Test", ui->dvdToWBFS_checkBox_Test->checkState());
-    WiiBaFuSettings.setValue("DVDtoWBFS/Newer", ui->dvdToWBFS_checkBox_Newer->checkState());
-    WiiBaFuSettings.setValue("DVDtoWBFS/Update", ui->dvdToWBFS_checkBox_Update->checkState());
-    WiiBaFuSettings.setValue("DVDtoWBFS/Overwrite", ui->dvdToWBFS_checkBox_Overwrite->checkState());
+    WiiBaFuSettings.setValue("GamesToImage/Test", ui->gamesToImage_checkBox_Test->checkState());
+    WiiBaFuSettings.setValue("GamesToImage/Update", ui->gamesToImage_checkBox_Update->checkState());
+    WiiBaFuSettings.setValue("GamesToImage/Overwrite", ui->gamesToImage_checkBox_Overwrite->checkState());
 
     WiiBaFuSettings.setValue("WBFStoFiles/Force", ui->WBFSToFiles_checkBox_Force->checkState());
     WiiBaFuSettings.setValue("WBFStoFiles/Test", ui->WBFSToFiles_checkBox_Test->checkState());
@@ -296,11 +292,9 @@ void Settings::restoreDefaults(int index) {
                 ui->filesColumn_checkBox_Source->setChecked(true);
                 break;
         case 3:
-                ui->dvdToWBFS_checkBox_Force->setChecked(false);
-                ui->dvdToWBFS_checkBox_Test->setChecked(false);
-                ui->dvdToWBFS_checkBox_Newer->setChecked(false);
-                ui->dvdToWBFS_checkBox_Update->setChecked(false);
-                ui->dvdToWBFS_checkBox_Overwrite->setChecked(false);
+                ui->gamesToImage_checkBox_Test->setChecked(false);
+                ui->gamesToImage_checkBox_Update->setChecked(false);
+                ui->gamesToImage_checkBox_Overwrite->setChecked(false);
                 break;
         case 4:
                 ui->WBFSToFiles_checkBox_Force->setChecked(false);
