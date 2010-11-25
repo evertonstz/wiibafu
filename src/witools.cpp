@@ -529,11 +529,11 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
         arguments.append("--test");
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(false)).toBool()) {
         arguments.append("--newer");
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/Update", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesToWBFS/Update", QVariant(false)).toBool()) {
         arguments.append("--update");
     }
 
@@ -606,7 +606,7 @@ void WiTools::transferGamesToImage(QModelIndexList indexList, QString wbfsPath, 
         arguments.append("--test");
     }
 
-    if (WiiBaFuSettings.value("FilesFromWBFS/Update", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesFromWBFS/Update", QVariant(false)).toBool()) {
         arguments.append("--update");
     }
 
@@ -666,11 +666,11 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
         arguments.append("--test");
     }
 
-    if (WiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(false)).toBool()) {
         arguments.append("--newer");
     }
 
-    if (WiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(false)).toBool()) {
         arguments.append("--update");
     }
 
