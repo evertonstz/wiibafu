@@ -955,9 +955,6 @@ void WiTools::checkWBFS(QString wbfsPath) {
         if (WiiBaFuSettings.value("RepairWBFS/INODES", QVariant(true)).toBool()) {
             repairModes.append("INODES,");
         }
-        if (WiiBaFuSettings.value("RepairWBFS/RM-ALL", QVariant(true)).toBool()) {
-            repairModes.append("RM-ALL,");
-        }
         if (WiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool()) {
             repairModes.append("RM-EMPTY,");
         }
@@ -969,9 +966,6 @@ void WiTools::checkWBFS(QString wbfsPath) {
         }
         if (WiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool()) {
             repairModes.append("RM-OVERLAP,");
-        }
-        if (WiiBaFuSettings.value("RepairWBFS/STANDARD", QVariant(true)).toBool()) {
-            repairModes.append("STANDARD");
         }
 
         if (repairModes.endsWith(",")) {

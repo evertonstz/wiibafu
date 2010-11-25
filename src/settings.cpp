@@ -178,12 +178,10 @@ void Settings::load() {
 
     ui->repairWBFS_checkBox_FBT->setChecked(WiiBaFuSettings.value("RepairWBFS/FBT", QVariant(true)).toBool());
     ui->repairWBFS_checkBox_INODES->setChecked(WiiBaFuSettings.value("RepairWBFS/INODES", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMALL->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-ALL", QVariant(true)).toBool());
     ui->repairWBFS_checkBox_RMEMPTY->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool());
     ui->repairWBFS_checkBox_RMFREE->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-FREE", QVariant(true)).toBool());
     ui->repairWBFS_checkBox_RMINVALID->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-INVALID", QVariant(true)).toBool());
     ui->repairWBFS_checkBox_RMOVERLAP->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_STANDARD->setChecked(WiiBaFuSettings.value("RepairWBFS/STANDARD", QVariant(true)).toBool());
 }
 
 void Settings::save() {
@@ -249,12 +247,10 @@ void Settings::save() {
 
     WiiBaFuSettings.setValue("RepairWBFS/FBT", ui->repairWBFS_checkBox_FBT->checkState());
     WiiBaFuSettings.setValue("RepairWBFS/INODES", ui->repairWBFS_checkBox_INODES->checkState());
-    WiiBaFuSettings.setValue("RepairWBFS/RM-ALL", ui->repairWBFS_checkBox_RMALL->checkState());
     WiiBaFuSettings.setValue("RepairWBFS/RM-EMTPY", ui->repairWBFS_checkBox_RMEMPTY->checkState());
     WiiBaFuSettings.setValue("RepairWBFS/RM-FREE", ui->repairWBFS_checkBox_RMFREE->checkState());
     WiiBaFuSettings.setValue("RepairWBFS/RM-INVALID", ui->repairWBFS_checkBox_RMINVALID->checkState());
     WiiBaFuSettings.setValue("RepairWBFS/RM-OVERLAP", ui->repairWBFS_checkBox_RMOVERLAP->checkState());
-    WiiBaFuSettings.setValue("RepairWBFS/STANDARD", ui->repairWBFS_checkBox_STANDARD->checkState());
 }
 
 void Settings::restoreDefaults(int index) {
@@ -325,12 +321,10 @@ void Settings::restoreDefaults(int index) {
                 ui->checkWBFS_checkBox_Repair->setChecked(true);
                 ui->repairWBFS_checkBox_FBT->setChecked(true);
                 ui->repairWBFS_checkBox_INODES->setChecked(true);
-                ui->repairWBFS_checkBox_RMALL->setChecked(true);
-                ui->repairWBFS_checkBox_RMEMPTY->setChecked(true);
-                ui->repairWBFS_checkBox_RMFREE->setChecked(true);
-                ui->repairWBFS_checkBox_RMINVALID->setChecked(true);
-                ui->repairWBFS_checkBox_RMOVERLAP->setChecked(true);
-                ui->repairWBFS_checkBox_STANDARD->setChecked(true);
+                ui->repairWBFS_checkBox_RMEMPTY->setChecked(false);
+                ui->repairWBFS_checkBox_RMFREE->setChecked(false);
+                ui->repairWBFS_checkBox_RMINVALID->setChecked(false);
+                ui->repairWBFS_checkBox_RMOVERLAP->setChecked(false);
                 break;
     }
 }
@@ -396,12 +390,10 @@ void Settings::on_main_checkBox_Auto_stateChanged(int state) {
 void Settings::on_checkWBFS_checkBox_Repair_stateChanged(int state) {
     state ? ui->repairWBFS_checkBox_FBT->setChecked(true) : ui->repairWBFS_checkBox_FBT->setChecked(false);
     state ? ui->repairWBFS_checkBox_INODES->setChecked(true) : ui->repairWBFS_checkBox_INODES->setChecked(false);
-    state ? ui->repairWBFS_checkBox_RMALL->setChecked(true) : ui->repairWBFS_checkBox_RMALL->setChecked(false);
-    state ? ui->repairWBFS_checkBox_RMEMPTY->setChecked(true) : ui->repairWBFS_checkBox_RMEMPTY->setChecked(false);
-    state ? ui->repairWBFS_checkBox_RMFREE->setChecked(true) : ui->repairWBFS_checkBox_RMFREE->setChecked(false);
-    state ? ui->repairWBFS_checkBox_RMINVALID->setChecked(true) : ui->repairWBFS_checkBox_RMINVALID->setChecked(false);
-    state ? ui->repairWBFS_checkBox_RMOVERLAP->setChecked(true) : ui->repairWBFS_checkBox_RMOVERLAP->setChecked(false);
-    state ? ui->repairWBFS_checkBox_STANDARD->setChecked(true) : ui->repairWBFS_checkBox_STANDARD->setChecked(false);
+    ui->repairWBFS_checkBox_RMEMPTY->setChecked(false);
+    ui->repairWBFS_checkBox_RMFREE->setChecked(false);
+    ui->repairWBFS_checkBox_RMINVALID->setChecked(false);
+    ui->repairWBFS_checkBox_RMOVERLAP->setChecked(false);
 }
 
 void Settings::setupGeometry() {

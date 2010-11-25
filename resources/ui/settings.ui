@@ -819,59 +819,63 @@
           <string>Repair options:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_12">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="repairWBFS_checkBox_FBT">
-            <property name="text">
-             <string>FBT</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="repairWBFS_checkBox_INODES">
-            <property name="text">
-             <string>INODES</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="repairWBFS_checkBox_STANDARD">
-            <property name="text">
-             <string>STANDARD</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="repairWBFS_checkBox_RMINVALID">
-            <property name="text">
-             <string>RM-INVALID</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="repairWBFS_checkBox_RMOVERLAP">
-            <property name="text">
-             <string>RM-OVERLAP</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
+          <item row="5" column="1">
            <widget class="QCheckBox" name="repairWBFS_checkBox_RMFREE">
+            <property name="toolTip">
+             <string>Remove discs with free marked blocks</string>
+            </property>
             <property name="text">
              <string>RM-FREE</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="repairWBFS_checkBox_RMINVALID">
+            <property name="toolTip">
+             <string>Remove discs with invalid blocks</string>
+            </property>
+            <property name="text">
+             <string>RM-INVALID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="repairWBFS_checkBox_RMOVERLAP">
+            <property name="toolTip">
+             <string>Remove discs with overlaped blocks</string>
+            </property>
+            <property name="text">
+             <string>RM-OVERLAP</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
            <widget class="QCheckBox" name="repairWBFS_checkBox_RMEMPTY">
+            <property name="toolTip">
+             <string>Remove discs without any valid blocks</string>
+            </property>
             <property name="text">
              <string>RM-EMPTY</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QCheckBox" name="repairWBFS_checkBox_RMALL">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="repairWBFS_checkBox_FBT">
+            <property name="toolTip">
+             <string>Repair free blocks table</string>
+            </property>
             <property name="text">
-             <string>RM-ALL</string>
+             <string>FBT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="repairWBFS_checkBox_INODES">
+            <property name="toolTip">
+             <string>Repair invalid inode infos (time stamps etc.)</string>
+            </property>
+            <property name="text">
+             <string>INODES</string>
             </property>
            </widget>
           </item>
