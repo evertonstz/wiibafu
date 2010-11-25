@@ -1,3 +1,9 @@
+2010-11-25 Kai Heitkamp <dynup@ymail.com>
+ Version 0.8.3
+  * Transfer to image fixed
+  * WBFS repair options fixed
+  * Some little bug fixes
+
 2010-11-23 Kai Heitkamp <dynup@ymail.com>
  Version 0.8.2
   * Update titles fixed
