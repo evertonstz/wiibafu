@@ -219,6 +219,14 @@ void WiiBaFu::on_menuTools_UpdateTitles_triggered() {
     QtConcurrent::run(common, &Common::updateTitles);
 }
 
+void WiiBaFu::on_filesTab_tableView_doubleClicked(QModelIndex) {
+    setGameInfo(ui->filesTab_tableView, filesListModel);
+}
+
+void WiiBaFu::on_wbfsTab_tableView_doubleClicked(QModelIndex) {
+    setGameInfo(ui->wbfsTab_tableView, wbfsListModel);
+}
+
 void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), WiiBaFuSettings.value("Main/LastFilesPath", QVariant(QDir::homePath()).toString()).toString(), QFileDialog::ShowDirsOnly);
 

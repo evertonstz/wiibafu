@@ -88,6 +88,9 @@ private slots:
     void on_menuTools_CreateWBFS_triggered();
     void on_menuTools_UpdateTitles_triggered();
 
+    void on_filesTab_tableView_doubleClicked(QModelIndex);
+    void on_wbfsTab_tableView_doubleClicked(QModelIndex);
+
     void on_filesTab_pushButton_Load_clicked();
     void on_filesTab_pushButton_SelectAll_clicked();
     void on_filesTab_pushButton_TransferToWBFS_clicked();
