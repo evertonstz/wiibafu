@@ -348,7 +348,9 @@ void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
 void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
     if (!ui->wbfsTab_pushButton_Transfer->text().contains(tr("Cancel transfering"))) {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+            wiibafudialog->setOpenDirectory();
             int result = wiibafudialog->exec();
+
             QDir path = wiibafudialog->imageDirectory();
             QString format = wiibafudialog->imageFormat();
 

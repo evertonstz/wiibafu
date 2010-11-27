@@ -46,7 +46,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     QByteArray bytes = filesRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
 
-    emit newLogEntry(QString(bytes), Info);
+    emit newLogEntry(QString::fromUtf8(bytes), Info);
 
     double count = 0;
     QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
@@ -71,11 +71,11 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
             continue;
         }
         else if (line.startsWith("name=")) {
-            names.append(new QStandardItem(line.section("=", 1)));
+            names.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
         else if (line.startsWith("title=")) {
-            titles.append(new QStandardItem(line.section("=", 1)));
+            titles.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
         else if (line.startsWith("region=")) {
@@ -107,7 +107,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
             continue;
         }
         else if (line.startsWith("filename=")) {
-            filenames.append(new QStandardItem(line.section("=", 1)));
+            filenames.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
     }
@@ -174,7 +174,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     QByteArray bytes = dvdRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
 
-    emit newLogEntry(QString(bytes), Info);
+    emit newLogEntry(QString::fromUtf8(bytes), Info);
 
     QList<QStandardItem *> game;
 
@@ -199,11 +199,11 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
             continue;
         }
         else if (line.startsWith("name=")) {
-            game.append(new QStandardItem(line.section("=", 1)));
+            game.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
         else if (line.startsWith("title=")) {
-            game.append(new QStandardItem(line.section("=", 1)));
+            game.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
         else if (line.startsWith("region=")) {
@@ -275,7 +275,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
             continue;
         }
         else if (line.startsWith("source=")) {
-            game.append(new QStandardItem(line.section("=", 1)));
+            game.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
     }
@@ -343,7 +343,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     QByteArray bytes = wbfsRead.readAllStandardOutput();
     QStringList lines = QString(bytes).split("\n");
 
-    emit newLogEntry(QString(bytes), Info);
+    emit newLogEntry(QString::fromUtf8(bytes), Info);
 
     int current = 0, max = 0;
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
@@ -396,11 +396,11 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
             continue;
         }
         else if (line.startsWith("name=")) {
-            names.append(new QStandardItem(line.section("=", 1)));
+            names.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
         else if (line.startsWith("title=")) {
-            titles.append(new QStandardItem(line.section("=", 1)));
+            titles.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
         else if (line.startsWith("region=")) {
@@ -440,7 +440,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
             continue;
         }
         else if (line.startsWith("filename=")) {
-            filenames.append(new QStandardItem(line.section("=", 1)));
+            filenames.append(new QStandardItem(QString::fromUtf8(line.section("=", 1).toLatin1())));
             continue;
         }
     }
@@ -789,10 +789,10 @@ void WiTools::transfer_readyReadStandardOutput() {
             QString to = line.mid(line.indexOf("->") + 3, line.lastIndexOf(":") - line.indexOf("->") - 3);
 
             #ifdef Q_OS_MACX
-                gameCountText = tr("Transfering game %1 -> %2...").arg(from, to);
+                gameCountText = tr("Transfering game %1 -> %2...").arg(QString::fromUtf8(from.toLatin1()), to);
                 emit showStatusBarMessage(gameCountText);
             #else
-                emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(from, to));
+                emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(QString::fromUtf8(from.toLatin1()), to));
             #endif
         }
     }

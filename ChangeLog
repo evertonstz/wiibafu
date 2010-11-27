@@ -1,4 +1,6 @@
-2010-11-27 Kai Heitkamp <dynup@ymail.com>
+2010-11-28 Kai Heitkamp <dynup@ymail.com>
+  * WBFS transfer image dialog fixed
+  * UTF-8 support
   * Proxy support for cover and title download
   * Double click on game shows infos
 
