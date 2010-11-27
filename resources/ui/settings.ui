@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>326</height>
+    <width>580</width>
+    <height>331</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,6 +32,11 @@
      <item>
       <property name="text">
        <string>Main</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>WIT</string>
       </property>
      </item>
      <item>
@@ -77,269 +82,436 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="Main">
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Path to WIT:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="main_lineEdit_PathToWIT"/>
-         </item>
-         <item>
-          <widget class="QPushButton" name="main_pushButton_PathToWITOpen">
-           <property name="text">
-            <string>Open</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="Line" name="line_6">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+     <widget class="QWidget" name="Settings">
+      <layout class="QGridLayout" name="gridLayout_19">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="main_groupBox_mainOptions">
+         <property name="title">
+          <string>Main options:</string>
          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QCheckBox" name="main_checkBox_useProxy">
+            <property name="text">
+             <string>Use proxy for cover download</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_17">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Host:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="main_lineEdit_proxyHost">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Port:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="main_lineEdit_proxyPort">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>User:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="main_lineEdit_proxyUser">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>If you don't need a user name, leave it blank!</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Password:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="main_lineEdit_proxyPassword">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>If you don't need a password, leave it blank!</string>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::Password</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Proxy type:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="main_comboBox_proxyType">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="currentIndex">
+               <number>3</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Default proxy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Socks5 proxy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>No proxy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Http proxy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Http caching proxy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ftp caching proxy</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_4">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Logging mode:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="main_comboBox_Logging">
+                <item>
+                 <property name="text">
+                  <string>All</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Errors only</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>None</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="Line" name="line">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Language for titles/covers:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="main_comboBox_Language">
+                <item>
+                 <property name="text">
+                  <string>English</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>American</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>France</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>German</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Spain</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Italy</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Netherland</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Portuguese</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Northern Sami</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Denmark</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Norway</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Finland</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Russia</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Japan</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Korea</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Taiwan</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>China</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item>
-        <widget class="QCheckBox" name="main_checkBox_Auto">
-         <property name="text">
-          <string>Auto (search for WBFS partitions/hard disks on system)</string>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="WIT">
+      <layout class="QGridLayout" name="gridLayout_18">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="wit_groupBox_witOptions">
+         <property name="title">
+          <string>WIT options:</string>
          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Path to WIT:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="wit_lineEdit_PathToWIT"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="wit_pushButton_PathToWITOpen">
+              <property name="text">
+               <string>Open</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="wit_checkBox_Auto">
+            <property name="text">
+             <string>Auto (search for WBFS partitions/hard disks on system)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Path to WBFS (partition or file):</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="wit_lineEdit_WBFSPath"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QPushButton" name="wit_pushButton_WBFSOpenDirectory">
+              <property name="text">
+               <string>Open</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="wit_pushButton_WBFSOpenFile">
+              <property name="text">
+               <string>Open file</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Path to DVD drive:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="wit_lineEdit_DVDDrivePath">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="wit_pushButton_DVDDriveOpenDirectory">
+              <property name="text">
+               <string>Open</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Path to WBFS (partition or file):</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="main_lineEdit_WBFSPath"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QPushButton" name="main_pushButton_WBFSOpenDirectory">
-           <property name="text">
-            <string>Open</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="main_pushButton_WBFSOpenFile">
-           <property name="text">
-            <string>Open file</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="Line" name="line_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Path to DVD drive:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="main_lineEdit_DVDDrivePath">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="main_pushButton_DVDDriveOpenDirectory">
-           <property name="text">
-            <string>Open</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="Line" name="line_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Logging mode:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="main_comboBox_Logging">
-             <item>
-              <property name="text">
-               <string>All</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Errors only</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>None</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Language for titles/covers:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="main_comboBox_Language">
-             <item>
-              <property name="text">
-               <string>English</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>American</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>France</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>German</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Spain</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Italy</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Netherland</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Portuguese</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Northern Sami</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Denmark</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Norway</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Finland</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Russia</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Japan</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Korea</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Taiwan</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>China</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
        </item>
       </layout>
      </widget>
@@ -808,6 +980,9 @@
             <property name="text">
              <string>Repair</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>
@@ -867,6 +1042,9 @@
             <property name="text">
              <string>FBT</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="2" column="0">
@@ -876,6 +1054,9 @@
             </property>
             <property name="text">
              <string>INODES</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -901,6 +1082,80 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>listWidget</tabstop>
+  <tabstop>main_checkBox_useProxy</tabstop>
+  <tabstop>main_lineEdit_proxyHost</tabstop>
+  <tabstop>main_lineEdit_proxyPort</tabstop>
+  <tabstop>main_lineEdit_proxyUser</tabstop>
+  <tabstop>main_lineEdit_proxyPassword</tabstop>
+  <tabstop>main_comboBox_Logging</tabstop>
+  <tabstop>main_comboBox_Language</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>wit_lineEdit_PathToWIT</tabstop>
+  <tabstop>wit_pushButton_PathToWITOpen</tabstop>
+  <tabstop>wit_checkBox_Auto</tabstop>
+  <tabstop>wit_lineEdit_WBFSPath</tabstop>
+  <tabstop>wit_pushButton_WBFSOpenDirectory</tabstop>
+  <tabstop>wit_pushButton_WBFSOpenFile</tabstop>
+  <tabstop>wit_lineEdit_DVDDrivePath</tabstop>
+  <tabstop>wit_pushButton_DVDDriveOpenDirectory</tabstop>
+  <tabstop>gameLists_checkBox_ShowGrid</tabstop>
+  <tabstop>gameLists_checkBox_AlternatingRowColors</tabstop>
+  <tabstop>gameLists_checkBox_ToolTips</tabstop>
+  <tabstop>gameLists_radioButton_ScrollPerPixel</tabstop>
+  <tabstop>gameLists_radioButton_ScrollPerItem</tabstop>
+  <tabstop>gameLists_radioButton_Interactive</tabstop>
+  <tabstop>gameLists_radioButton_Sretch</tabstop>
+  <tabstop>gameLists_radioButton_ResizeToContents</tabstop>
+  <tabstop>gameLists_radioButton_Fixed</tabstop>
+  <tabstop>filesToWBFS_checkBox_Force</tabstop>
+  <tabstop>filesToWBFS_checkBox_Newer</tabstop>
+  <tabstop>filesToWBFS_checkBox_Test</tabstop>
+  <tabstop>filesToWBFS_checkBox_Update</tabstop>
+  <tabstop>filesToWBFS_checkBox_Overwrite</tabstop>
+  <tabstop>filesColumn_checkBox_ID</tabstop>
+  <tabstop>filesColumn_checkBox_Size</tabstop>
+  <tabstop>filesColumn_checkBox_LastAccess</tabstop>
+  <tabstop>filesColumn_checkBox_Name</tabstop>
+  <tabstop>filesColumn_checkBox_Insertion</tabstop>
+  <tabstop>filesColumn_checkBox_Type</tabstop>
+  <tabstop>filesColumn_checkBox_Title</tabstop>
+  <tabstop>filesColumn_checkBox_LastModification</tabstop>
+  <tabstop>filesColumn_checkBox_Source</tabstop>
+  <tabstop>filesColumn_checkBox_Region</tabstop>
+  <tabstop>filesColumn_checkBox_LastStatusChange</tabstop>
+  <tabstop>gamesToImage_checkBox_Test</tabstop>
+  <tabstop>gamesToImage_checkBox_Update</tabstop>
+  <tabstop>gamesToImage_checkBox_Overwrite</tabstop>
+  <tabstop>WBFSToFiles_checkBox_Force</tabstop>
+  <tabstop>WBFSToFiles_checkBox_Test</tabstop>
+  <tabstop>WBFSToFiles_checkBox_Update</tabstop>
+  <tabstop>WBFSToFiles_checkBox_Overwrite</tabstop>
+  <tabstop>wbfsColumn_checkBox_ID</tabstop>
+  <tabstop>wbfsColumn_checkBox_Name</tabstop>
+  <tabstop>wbfsColumn_checkBox_Title</tabstop>
+  <tabstop>wbfsColumn_checkBox_Region</tabstop>
+  <tabstop>wbfsColumn_checkBox_Size</tabstop>
+  <tabstop>wbfsColumn_checkBox_UsedBlocks</tabstop>
+  <tabstop>wbfsColumn_checkBox_Insertion</tabstop>
+  <tabstop>wbfsColumn_checkBox_LastModification</tabstop>
+  <tabstop>wbfsColumn_checkBox_LastStatusChange</tabstop>
+  <tabstop>wbfsColumn_checkBox_LastAccess</tabstop>
+  <tabstop>wbfsColumn_checkBox_Type</tabstop>
+  <tabstop>wbfsColumn_checkBox_WBFSSlot</tabstop>
+  <tabstop>wbfsColumn_checkBox_Source</tabstop>
+  <tabstop>removeFromWBFS_checkBox_Force</tabstop>
+  <tabstop>removeFromWBFS_checkBox_Test</tabstop>
+  <tabstop>checkWBFS_checkBox_Test</tabstop>
+  <tabstop>checkWBFS_checkBox_Repair</tabstop>
+  <tabstop>repairWBFS_checkBox_RMFREE</tabstop>
+  <tabstop>repairWBFS_checkBox_RMINVALID</tabstop>
+  <tabstop>repairWBFS_checkBox_RMOVERLAP</tabstop>
+  <tabstop>repairWBFS_checkBox_RMEMPTY</tabstop>
+  <tabstop>repairWBFS_checkBox_FBT</tabstop>
+  <tabstop>repairWBFS_checkBox_INODES</tabstop>
+ </tabstops>
  <resources>
   <include location="../wiibafu.qrc"/>
  </resources>

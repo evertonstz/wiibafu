@@ -294,7 +294,7 @@ void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
 void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
     emit startBusy();
 
-    QString dvdPath = WiiBaFuSettings.value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
+    QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
     QtConcurrent::run(wiTools, &WiTools::requestDVDGameListModel, dvdListModel, dvdPath);
 }
 
@@ -320,7 +320,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
         QString format = wiibafudialog->imageFormat();
 
         ui->dvdTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
-        QString dvdPath = WiiBaFuSettings.value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
+        QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
         QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToImage, dvdPath, format, filePath);
     }
     else {
@@ -460,7 +460,7 @@ void WiiBaFu::setFilesGameListModel() {
 
 void WiiBaFu::setDVDGameListModel() {
     if (dvdListModel->rowCount() > 0) {
-        QString dvdPath = WiiBaFuSettings.value("Main/DVDDrivePath", QVariant("/cdrom")).toString();
+        QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
 
         ui->dvdTab_tableView->setModel(dvdListModel);
         ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
@@ -783,11 +783,11 @@ QString WiiBaFu::titleFromDB(QString gameID) {
 }
 
 QString WiiBaFu::wbfsPath() {
-    if (WiiBaFuSettings.value("Main/Auto", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool()) {
         return QString("");
     }
     else {
-        return WiiBaFuSettings.value("Main/WBFSPath", QVariant("")).toString();
+        return WiiBaFuSettings.value("WIT/WBFSPath", QVariant("")).toString();
     }
 }
 

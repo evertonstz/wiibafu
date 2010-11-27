@@ -46,6 +46,7 @@ void Common::requestGameCover(QString gameID, QString language, GameCoverArt gam
 
     currentGameCoverArt = gameCoverArt;
 
+    http->setProxy(proxy());
     http->setHost(url.host());
     http->get(url.path());
 }
@@ -128,8 +129,11 @@ void Common::updateTitles() {
 
 QNetworkReply::NetworkError Common::getTitle(QString wiitdbPath, QString fileName) {
     QEventLoop loop;
+    QNetworkReply *reply;
     QNetworkAccessManager manager;
-    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl(wiitdbPath)));
+
+    manager.setProxy(proxy());
+    reply = manager.get(QNetworkRequest(QUrl(wiitdbPath)));
 
     connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
@@ -144,6 +148,20 @@ QNetworkReply::NetworkError Common::getTitle(QString wiitdbPath, QString fileNam
     file.close();
 
     return reply->error();
+}
+
+QNetworkProxy Common::proxy() {
+    QNetworkProxy proxy;
+
+    if (WiiBaFuSettings.value("Main/UseProxy", QVariant(false)).toBool()) {
+        proxy.setType((QNetworkProxy::ProxyType)WiiBaFuSettings.value("Main/ProxyType", QVariant(3)).toInt());
+        proxy.setHostName(WiiBaFuSettings.value("Main/ProxyHost", QVariant("")).toString());
+        proxy.setPort(WiiBaFuSettings.value("Main/ProxyPort", QVariant(0)).toInt());
+        proxy.setUser(WiiBaFuSettings.value("Main/ProxyUser", QVariant("")).toString());
+        proxy.setPassword(WiiBaFuSettings.value("Main/ProxyPassword", QVariant("")).toString());
+    }
+
+    return proxy;
 }
 
 Common::~Common() {

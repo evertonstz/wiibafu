@@ -27,11 +27,11 @@ Settings::Settings(QWidget *parent) : QDialog(parent), ui(new Ui::Settings) {
     load();
 }
 
-void Settings::on_main_pushButton_PathToWITOpen_clicked() {
+void Settings::on_wit_pushButton_PathToWITOpen_clicked() {
     QString path;
 
-    if (!ui->main_lineEdit_PathToWIT->text().isEmpty()) {
-        path = ui->main_lineEdit_PathToWIT->text();
+    if (!ui->wit_lineEdit_PathToWIT->text().isEmpty()) {
+        path = ui->wit_lineEdit_PathToWIT->text();
     }
     else {
         path = QDir::homePath();
@@ -40,15 +40,15 @@ void Settings::on_main_pushButton_PathToWITOpen_clicked() {
     QString witPath = QFileDialog::getExistingDirectory(this, tr("Open path to WIT"), path, QFileDialog::ShowDirsOnly);
 
     if (!witPath.isEmpty()) {
-        ui->main_lineEdit_PathToWIT->setText(witPath);
+        ui->wit_lineEdit_PathToWIT->setText(witPath);
     }
 }
 
-void Settings::on_main_pushButton_WBFSOpenFile_clicked() {
+void Settings::on_wit_pushButton_WBFSOpenFile_clicked() {
     QString path;
 
-    if (!ui->main_lineEdit_WBFSPath->text().isEmpty()) {
-        path = ui->main_lineEdit_WBFSPath->text();
+    if (!ui->wit_lineEdit_WBFSPath->text().isEmpty()) {
+        path = ui->wit_lineEdit_WBFSPath->text();
     }
     else {
         path = QDir::homePath();
@@ -57,15 +57,15 @@ void Settings::on_main_pushButton_WBFSOpenFile_clicked() {
     QString wbfsFile = QFileDialog::getOpenFileName(this, tr("Open WBFS file"), path, "WBFS files (*.wbfs)");
 
     if (!wbfsFile.isEmpty()) {
-        ui->main_lineEdit_WBFSPath->setText(wbfsFile);
+        ui->wit_lineEdit_WBFSPath->setText(wbfsFile);
     }
 }
 
-void Settings::on_main_pushButton_WBFSOpenDirectory_clicked() {
+void Settings::on_wit_pushButton_WBFSOpenDirectory_clicked() {
     QString path;
 
-    if (!ui->main_lineEdit_WBFSPath->text().isEmpty()) {
-        path = ui->main_lineEdit_WBFSPath->text();
+    if (!ui->wit_lineEdit_WBFSPath->text().isEmpty()) {
+        path = ui->wit_lineEdit_WBFSPath->text();
     }
     else {
         path = QDir::homePath();
@@ -74,15 +74,15 @@ void Settings::on_main_pushButton_WBFSOpenDirectory_clicked() {
     QString wbfsDirectory = QFileDialog::getExistingDirectory(this, tr("Open WBFS directory"), path, QFileDialog::ShowDirsOnly);
 
     if (!wbfsDirectory.isEmpty()) {
-        ui->main_lineEdit_WBFSPath->setText(wbfsDirectory);
+        ui->wit_lineEdit_WBFSPath->setText(wbfsDirectory);
     }
 }
 
-void Settings::on_main_pushButton_DVDDriveOpenDirectory_clicked() {
+void Settings::on_wit_pushButton_DVDDriveOpenDirectory_clicked() {
     QString path;
 
-    if (!ui->main_lineEdit_DVDDrivePath->text().isEmpty()) {
-        path = ui->main_lineEdit_DVDDrivePath->text();
+    if (!ui->wit_lineEdit_DVDDrivePath->text().isEmpty()) {
+        path = ui->wit_lineEdit_DVDDrivePath->text();
     }
     else {
         path = QDir::homePath();
@@ -91,7 +91,7 @@ void Settings::on_main_pushButton_DVDDriveOpenDirectory_clicked() {
     QString dvdPath = QFileDialog::getExistingDirectory(this, tr("Open DVD path"), path, QFileDialog::ShowDirsOnly);
 
     if (!dvdPath.isEmpty()) {
-        ui->main_lineEdit_DVDDrivePath->setText(dvdPath);
+        ui->wit_lineEdit_DVDDrivePath->setText(dvdPath);
     }
 }
 
@@ -117,12 +117,19 @@ void Settings::apply() {
 }
 
 void Settings::load() {
-    ui->main_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("Main/PathToWIT", QVariant("")).toString());
-    ui->main_checkBox_Auto->setChecked(WiiBaFuSettings.value("Main/Auto", QVariant(true)).toBool());
-    ui->main_lineEdit_WBFSPath->setText(WiiBaFuSettings.value("Main/WBFSPath", QVariant("")).toString());
-    ui->main_lineEdit_DVDDrivePath->setText(WiiBaFuSettings.value("Main/DVDDrivePath", QVariant("")).toString());
+    ui->main_checkBox_useProxy->setChecked(WiiBaFuSettings.value("Main/UseProxy", QVariant(false)).toBool());
+    ui->main_lineEdit_proxyHost->setText(WiiBaFuSettings.value("Main/ProxyHost", QVariant("")).toString());
+    ui->main_lineEdit_proxyPort->setText(WiiBaFuSettings.value("Main/ProxyPort", QVariant("")).toString());
+    ui->main_lineEdit_proxyUser->setText(WiiBaFuSettings.value("Main/ProxyUser", QVariant("")).toString());
+    ui->main_lineEdit_proxyPassword->setText(WiiBaFuSettings.value("Main/ProxyPassword", QVariant("")).toString());
+    ui->main_comboBox_proxyType->setCurrentIndex(WiiBaFuSettings.value("Main/ProxyType", QVariant(0)).toInt());
     ui->main_comboBox_Logging->setCurrentIndex(WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
     ui->main_comboBox_Language->setCurrentIndex(WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt());
+
+    ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(QDir::currentPath().append("/wit"))).toString());
+    ui->wit_checkBox_Auto->setChecked(WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool());
+    ui->wit_lineEdit_WBFSPath->setText(WiiBaFuSettings.value("WIT/WBFSPath", QVariant("")).toString());
+    ui->wit_lineEdit_DVDDrivePath->setText(WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString());
 
     ui->gameLists_checkBox_ShowGrid->setChecked(WiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
     ui->gameLists_checkBox_AlternatingRowColors->setChecked(WiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
@@ -178,19 +185,26 @@ void Settings::load() {
 
     ui->repairWBFS_checkBox_FBT->setChecked(WiiBaFuSettings.value("RepairWBFS/FBT", QVariant(true)).toBool());
     ui->repairWBFS_checkBox_INODES->setChecked(WiiBaFuSettings.value("RepairWBFS/INODES", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMEMPTY->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMFREE->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-FREE", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMINVALID->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-INVALID", QVariant(true)).toBool());
-    ui->repairWBFS_checkBox_RMOVERLAP->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(true)).toBool());
+    ui->repairWBFS_checkBox_RMEMPTY->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-EMTPY", QVariant(false)).toBool());
+    ui->repairWBFS_checkBox_RMFREE->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-FREE", QVariant(false)).toBool());
+    ui->repairWBFS_checkBox_RMINVALID->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-INVALID", QVariant(false)).toBool());
+    ui->repairWBFS_checkBox_RMOVERLAP->setChecked(WiiBaFuSettings.value("RepairWBFS/RM-OVERLAP", QVariant(false)).toBool());
 }
 
 void Settings::save() {
-    WiiBaFuSettings.setValue("Main/PathToWIT", ui->main_lineEdit_PathToWIT->text());
-    WiiBaFuSettings.setValue("Main/Auto", ui->main_checkBox_Auto->checkState());
-    WiiBaFuSettings.setValue("Main/WBFSPath", ui->main_lineEdit_WBFSPath->text());
-    WiiBaFuSettings.setValue("Main/DVDDrivePath", ui->main_lineEdit_DVDDrivePath->text());
+    WiiBaFuSettings.setValue("Main/UseProxy", ui->main_checkBox_useProxy->checkState());
+    WiiBaFuSettings.setValue("Main/ProxyHost", ui->main_lineEdit_proxyHost->text());
+    WiiBaFuSettings.setValue("Main/ProxyPort", ui->main_lineEdit_proxyPort->text());
+    WiiBaFuSettings.setValue("Main/ProxyUser", ui->main_lineEdit_proxyUser->text());
+    WiiBaFuSettings.setValue("Main/ProxyPassword", ui->main_lineEdit_proxyPassword->text());
+    WiiBaFuSettings.setValue("Main/ProxyType", ui->main_comboBox_proxyType->currentIndex());
     WiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
     WiiBaFuSettings.setValue("Main/Language", ui->main_comboBox_Language->currentIndex());
+
+    WiiBaFuSettings.setValue("WIT/PathToWIT", ui->wit_lineEdit_PathToWIT->text());
+    WiiBaFuSettings.setValue("WIT/Auto", ui->wit_checkBox_Auto->checkState());
+    WiiBaFuSettings.setValue("WIT/WBFSPath", ui->wit_lineEdit_WBFSPath->text());
+    WiiBaFuSettings.setValue("WIT/DVDDrivePath", ui->wit_lineEdit_DVDDrivePath->text());
 
     WiiBaFuSettings.setValue("GameLists/ShowGrid", ui->gameLists_checkBox_ShowGrid->checkState());
     WiiBaFuSettings.setValue("GameLists/AlternatingRowColors", ui->gameLists_checkBox_AlternatingRowColors->checkState());
@@ -256,20 +270,28 @@ void Settings::save() {
 void Settings::restoreDefaults(int index) {
     switch (index) {
         case 0:
-                ui->main_lineEdit_PathToWIT->setText("/usr/local/bin");
-                ui->main_checkBox_Auto->setChecked(true);
-                ui->main_lineEdit_DVDDrivePath->setText("/dev/sr0");
+                ui->main_checkBox_useProxy->setChecked(false);
+                ui->main_lineEdit_proxyHost->setEnabled(false);
+                ui->main_lineEdit_proxyPort->setEnabled(false);
+                ui->main_lineEdit_proxyUser->setEnabled(false);
+                ui->main_lineEdit_proxyPassword->setEnabled(false);
+                ui->main_comboBox_proxyType->setCurrentIndex(3);
                 ui->main_comboBox_Logging->setCurrentIndex(0);
                 ui->main_comboBox_Language->setCurrentIndex(0);
                 break;
         case 1:
+                ui->wit_lineEdit_PathToWIT->setText(QDir::currentPath().append("/wit"));
+                ui->wit_checkBox_Auto->setChecked(true);
+                ui->wit_lineEdit_DVDDrivePath->setText("/dev/sr0");
+                break;
+        case 2:
                 ui->gameLists_checkBox_AlternatingRowColors->setChecked(true);
                 ui->gameLists_checkBox_ShowGrid->setChecked(false);
                 ui->gameLists_checkBox_ToolTips->setChecked(false);
                 ui->gameLists_radioButton_ScrollPerPixel->setChecked(true);
                 ui->gameLists_radioButton_ResizeToContents->setChecked(true);
                 break;
-        case 2:
+        case 3:
                 ui->filesToWBFS_checkBox_Force->setChecked(false);
                 ui->filesToWBFS_checkBox_Test->setChecked(false);
                 ui->filesToWBFS_checkBox_Newer->setChecked(false);
@@ -287,12 +309,12 @@ void Settings::restoreDefaults(int index) {
                 ui->filesColumn_checkBox_Type->setChecked(true);
                 ui->filesColumn_checkBox_Source->setChecked(true);
                 break;
-        case 3:
+        case 4:
                 ui->gamesToImage_checkBox_Test->setChecked(false);
                 ui->gamesToImage_checkBox_Update->setChecked(false);
                 ui->gamesToImage_checkBox_Overwrite->setChecked(false);
                 break;
-        case 4:
+        case 5:
                 ui->WBFSToFiles_checkBox_Force->setChecked(false);
                 ui->WBFSToFiles_checkBox_Test->setChecked(false);
                 ui->WBFSToFiles_checkBox_Update->setChecked(false);
@@ -311,11 +333,11 @@ void Settings::restoreDefaults(int index) {
                 ui->wbfsColumn_checkBox_WBFSSlot->setChecked(true);
                 ui->wbfsColumn_checkBox_Source->setChecked(true);
                 break;
-        case 5:
+        case 6:
                 ui->removeFromWBFS_checkBox_Force->setChecked(false);
                 ui->removeFromWBFS_checkBox_Test->setChecked(false);
                 break;
-        case 6:
+        case 7:
                 ui->checkWBFS_groupBox_RepairOptions->setEnabled(true);
                 ui->checkWBFS_checkBox_Test->setChecked(false);
                 ui->checkWBFS_checkBox_Repair->setChecked(true);
@@ -381,10 +403,18 @@ int Settings::resizeMode() {
     }
 }
 
-void Settings::on_main_checkBox_Auto_stateChanged(int state) {
-    state ? ui->main_lineEdit_WBFSPath->setEnabled(false) : ui->main_lineEdit_WBFSPath->setEnabled(true);
-    state ? ui->main_pushButton_WBFSOpenFile->setEnabled(false) : ui->main_pushButton_WBFSOpenFile->setEnabled(true);
-    state ? ui->main_pushButton_WBFSOpenDirectory->setEnabled(false) : ui->main_pushButton_WBFSOpenDirectory->setEnabled(true);
+void Settings::on_main_checkBox_useProxy_stateChanged(int state) {
+    state ? ui->main_lineEdit_proxyHost->setEnabled(true) : ui->main_lineEdit_proxyHost->setEnabled(false);
+    state ? ui->main_lineEdit_proxyPort->setEnabled(true) : ui->main_lineEdit_proxyPort->setEnabled(false);
+    state ? ui->main_lineEdit_proxyUser->setEnabled(true) : ui->main_lineEdit_proxyUser->setEnabled(false);
+    state ? ui->main_lineEdit_proxyPassword->setEnabled(true) : ui->main_lineEdit_proxyPassword->setEnabled(false);
+    state ? ui->main_comboBox_proxyType->setEnabled(true) : ui->main_comboBox_proxyType->setEnabled(false);
+}
+
+void Settings::on_wit_checkBox_Auto_stateChanged(int state) {
+    state ? ui->wit_lineEdit_WBFSPath->setEnabled(false) : ui->wit_lineEdit_WBFSPath->setEnabled(true);
+    state ? ui->wit_pushButton_WBFSOpenFile->setEnabled(false) : ui->wit_pushButton_WBFSOpenFile->setEnabled(true);
+    state ? ui->wit_pushButton_WBFSOpenDirectory->setEnabled(false) : ui->wit_pushButton_WBFSOpenDirectory->setEnabled(true);
 }
 
 void Settings::on_checkWBFS_checkBox_Repair_stateChanged(int state) {

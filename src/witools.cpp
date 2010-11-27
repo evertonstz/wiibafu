@@ -1063,7 +1063,7 @@ void WiTools::createWBFS(CreateWBFSParameters parameters) {
 }
 
 void WiTools::setWit() {
-    if (WiiBaFuSettings.value("Main/PathToWIT", QVariant("")).toString().isEmpty()) {
+    if (WiiBaFuSettings.value("WIT/PathToWIT", QVariant("")).toString().isEmpty()) {
         #ifdef Q_OS_LINUX
             QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(":"));
             wit = QFile("wit:wit").fileName();
@@ -1084,11 +1084,11 @@ void WiTools::setWit() {
     }
     else {
         #ifdef Q_OS_WIN32
-            wit = WiiBaFuSettings.value("Main/PathToWIT").toString().append("/wit.exe");
-            wwt = WiiBaFuSettings.value("Main/PathToWIT").toString().append("/wwt.exe");
+            wit = WiiBaFuSettings.value("WIT/PathToWIT").toString().append("/wit.exe");
+            wwt = WiiBaFuSettings.value("WIT/PathToWIT").toString().append("/wwt.exe");
         #else
-            wit = WiiBaFuSettings.value("Main/PathToWIT").toString().append("/wit");
-            wwt = WiiBaFuSettings.value("Main/PathToWIT").toString().append("/wwt");
+            wit = WiiBaFuSettings.value("WIT/PathToWIT").toString().append("/wit");
+            wwt = WiiBaFuSettings.value("WIT/PathToWIT").toString().append("/wwt");
         #endif
     }
 }
@@ -1176,7 +1176,7 @@ QString WiTools::witTitlesPath() {
         default: titles = "titles";
     }
 
-    if (WiiBaFuSettings.value("Main/PathToWIT", QVariant("")).toString().isEmpty()) {
+    if (WiiBaFuSettings.value("WIT/PathToWIT", QVariant("")).toString().isEmpty()) {
         #ifdef Q_OS_LINUX
             QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(":") << "/usr/local/share/wit");
             return QFile(QString("witTitles:%1.txt").arg(titles)).fileName();
@@ -1193,6 +1193,6 @@ QString WiTools::witTitlesPath() {
         #endif
     }
     else {
-        return WiiBaFuSettings.value("Main/PathToWIT").toString().append(QString("/%1.txt").arg(titles));
+        return WiiBaFuSettings.value("WIT/PathToWIT").toString().append(QString("/%1.txt").arg(titles));
     }
 }

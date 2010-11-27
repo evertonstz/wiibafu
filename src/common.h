@@ -52,6 +52,7 @@ private:
 
     void getGameCover(QString gameID, QString language);
     QNetworkReply::NetworkError getTitle(QString wiitdbPath, QString fileName);
+    QNetworkProxy proxy();
 
 signals:
     void newGame3DCover(QImage *game3DCover);
