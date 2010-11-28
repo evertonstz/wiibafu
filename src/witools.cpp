@@ -776,8 +776,6 @@ void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitSta
 void WiTools::transfer_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
-    qDebug() << line;
-
     if (line.contains("ADD")) {
         #ifdef Q_OS_MACX
             gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
