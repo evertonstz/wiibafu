@@ -36,24 +36,11 @@ void WiiBaFuDialog::on_pushButton_Open_clicked() {
 }
 
 void WiiBaFuDialog::on_pushButton_OpenFile_clicked() {
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Open file"), QDir::homePath(), tr("Wii Plain ISO *.iso;;Wii Compact ISO *.ciso;;Wii Disc Format *.wdf;;Wii Backup File System Container *.wbfs"));
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Open file"), QDir::homePath(), tr("Wii Plain ISO *.iso;;Wii Compact ISO *.ciso;;Wii ISO Archive *.wia;;Wii Disc Format *.wdf;;Wii Backup File System Container *.wbfs"));
 
     if (!filePath.isEmpty()) {
         ui->lineEdit_FilePath->setText(filePath);
-
-        QString extension = filePath.right(filePath.length() - filePath.indexOf("."));
-        if (extension.contains(".iso")) {
-            ui->comboBox_ImageFormat->setCurrentIndex(0);
-        }
-        else if (extension.contains(".ciso")) {
-            ui->comboBox_ImageFormat->setCurrentIndex(1);
-        }
-        else if (extension.contains(".wdf")) {
-            ui->comboBox_ImageFormat->setCurrentIndex(2);
-        }
-        else if (extension.contains(".wbfs")) {
-            ui->comboBox_ImageFormat->setCurrentIndex(3);
-        }
+        setCurrentImageFormat(filePath);
     }
 }
 
@@ -66,16 +53,131 @@ QString WiiBaFuDialog::imageFilePath() {
 }
 
 QString WiiBaFuDialog::imageFormat() {
+    QString format;
+    setCurrentImageFormat(ui->lineEdit_FilePath->text());
+
     switch (ui->comboBox_ImageFormat->currentIndex()) {
-        case 0:     return QString("iso");
+        case 0:     format = QString("iso");
                     break;
-        case 1:     return QString("ciso");
+        case 1:     format = QString("ciso");
                     break;
-        case 2:     return QString("wdf");
+        case 2:     format = QString("wia");
                     break;
-        case 3:     return QString("wbfs");
+        case 3:     format = QString("wdf");
                     break;
-        default:    return QString("");
+        case 4:     format = QString("wbfs");
+                    break;
+        default:    format = QString("");
+    }
+
+    return format;
+}
+
+QString WiiBaFuDialog::compression() {
+    QString compression;
+
+    if (ui->comboBox_ImageFormat->currentIndex() != 2) {
+        compression = "";
+    }
+    else {
+        switch (ui->comboBox_compressionDefaults->currentIndex()) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                    compression = ui->comboBox_compressionDefaults->currentText().toUpper();
+                    break;
+            case 4:
+                    compression = QString("%1.%2@%3").arg(ui->comboBox_compressionMethod->currentText().toUpper(), ui->comboBox_compressionLevel->currentText().mid(0, 1), ui->lineEdit_compressionFactor->text());
+                    break;
+            default:
+                    compression = "DEFAULT";
+        }
+    }
+
+    return compression;
+}
+
+void WiiBaFuDialog::setCurrentImageFormat(QString path) {
+    QString extension = path.right(path.length() - path.lastIndexOf("."));
+
+    if (extension.contains(".iso")) {
+        ui->comboBox_ImageFormat->setCurrentIndex(0);
+    }
+    else if (extension.contains(".ciso")) {
+        ui->comboBox_ImageFormat->setCurrentIndex(1);
+    }
+    else if (extension.contains(".wia")) {
+        ui->comboBox_ImageFormat->setCurrentIndex(2);
+    }
+    else if (extension.contains(".wdf")) {
+        ui->comboBox_ImageFormat->setCurrentIndex(3);
+    }
+    else if (extension.contains(".wbfs")) {
+        ui->comboBox_ImageFormat->setCurrentIndex(4);
+    }
+}
+
+void WiiBaFuDialog::on_comboBox_ImageFormat_currentIndexChanged(int index) {
+    if (index == 2) {
+        ui->comboBox_compressionDefaults->setEnabled(true);
+        ui->frame_compressionMethod->setEnabled(true);
+    }
+    else {
+        ui->comboBox_compressionDefaults->setEnabled(false);
+        ui->frame_compressionMethod->setEnabled(false);
+    }
+}
+
+void WiiBaFuDialog::on_comboBox_compressionDefaults_currentIndexChanged(int index) {
+    switch (index) {
+        case 0:
+                ui->comboBox_compressionMethod->setCurrentIndex(3);
+                ui->comboBox_compressionLevel->setCurrentIndex(5);
+                ui->lineEdit_compressionFactor->setText("20");
+                ui->comboBox_compressionMethod->setEnabled(false);
+                ui->comboBox_compressionLevel->setEnabled(false);
+                ui->lineEdit_compressionFactor->setEnabled(false);
+                break;
+        case 1:
+                ui->comboBox_compressionMethod->setCurrentIndex(2);
+                ui->comboBox_compressionLevel->setCurrentIndex(3);
+                ui->lineEdit_compressionFactor->setText("10");
+                ui->comboBox_compressionMethod->setEnabled(false);
+                ui->comboBox_compressionLevel->setEnabled(false);
+                ui->lineEdit_compressionFactor->setEnabled(false);
+                break;
+        case 2:
+                ui->comboBox_compressionMethod->setCurrentIndex(3);
+                ui->comboBox_compressionLevel->setCurrentIndex(5);
+                ui->lineEdit_compressionFactor->setText("20");
+                ui->comboBox_compressionMethod->setEnabled(false);
+                ui->comboBox_compressionLevel->setEnabled(false);
+                ui->lineEdit_compressionFactor->setEnabled(false);
+                break;
+        case 3:
+                ui->comboBox_compressionMethod->setCurrentIndex(3);
+                ui->comboBox_compressionLevel->setCurrentIndex(7);
+                ui->lineEdit_compressionFactor->setText("50");
+                ui->comboBox_compressionMethod->setEnabled(false);
+                ui->comboBox_compressionLevel->setEnabled(false);
+                ui->lineEdit_compressionFactor->setEnabled(false);
+                break;
+        case 4:
+                ui->comboBox_compressionMethod->setCurrentIndex(3);
+                ui->comboBox_compressionLevel->setCurrentIndex(5);
+                ui->lineEdit_compressionFactor->setText("20");
+                ui->comboBox_compressionMethod->setEnabled(true);
+                ui->comboBox_compressionLevel->setEnabled(true);
+                ui->lineEdit_compressionFactor->setEnabled(true);
+                break;
+        default:
+                ui->comboBox_compressionMethod->setCurrentIndex(3);
+                ui->comboBox_compressionLevel->setCurrentIndex(5);
+                ui->lineEdit_compressionFactor->setText("20");
+                ui->comboBox_compressionMethod->setEnabled(false);
+                ui->comboBox_compressionLevel->setEnabled(false);
+                ui->lineEdit_compressionFactor->setEnabled(false);
     }
 }
 

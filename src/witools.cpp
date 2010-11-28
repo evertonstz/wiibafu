@@ -693,7 +693,7 @@ void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QString filePath) {
+void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QString compression, QString filePath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -703,6 +703,11 @@ void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QStr
     arguments.append(drivePath);
     arguments.append(filePath);
     arguments.append(QString("--").append(format));
+
+    if (!compression.isEmpty()) {
+        arguments.append("--compression");
+        arguments.append(compression);
+    }
 
     if (WiiBaFuSettings.value("GamesToImage/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
@@ -831,7 +836,7 @@ void WiTools::transfer_cancel() {
     witProcess->kill();
 }
 
-void WiTools::convertGameImages(QModelIndexList indexList, QString format, QString directory) {
+void WiTools::convertGameImages(QModelIndexList indexList, QString format, QString compression, QString directory) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -846,6 +851,12 @@ void WiTools::convertGameImages(QModelIndexList indexList, QString format, QStri
 
     arguments.append(paths);
     arguments.append(QString("--").append(format));
+
+    if (!compression.isEmpty()) {
+        arguments.append("--compression");
+        arguments.append(compression);
+    }
+
     arguments.append("--dest");
     arguments.append(directory);
 

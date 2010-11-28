@@ -37,15 +37,19 @@ public:
     QString imageDirectory();
     QString imageFilePath();
     QString imageFormat();
+    QString compression();
     void setOpenDirectory();
     void setOpenFile();
 
 private:
     Ui::WiiBaFuDialog *ui;
+    void setCurrentImageFormat(QString path);
 
 private slots:
     void on_pushButton_Open_clicked();
     void on_pushButton_OpenFile_clicked();
+    void on_comboBox_ImageFormat_currentIndexChanged(int index);
+    void on_comboBox_compressionDefaults_currentIndexChanged(int index);
 };
 
 #endif // WIIBAFUDIALOG_H

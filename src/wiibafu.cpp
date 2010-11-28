@@ -266,18 +266,18 @@ void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
     if (!ui->filesTab_pushButton_TransferToImage->text().contains(tr("Cancel transfering"))) {
         if (ui->filesTab_tableView->model() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenDirectory();
-            int result = wiibafudialog->exec();
 
-            QDir path = wiibafudialog->imageDirectory();
-            QString format = wiibafudialog->imageFormat();
+            if (wiibafudialog->exec() == QDialog::Accepted) {
+                QDir path = wiibafudialog->imageDirectory();
+                QString format = wiibafudialog->imageFormat();
+                QString compression = wiibafudialog->compression();
 
-            if (result == QDialog::Accepted) {
                 if (!path.exists()) {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
                     ui->filesTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
-                    QtConcurrent::run(wiTools, &WiTools::convertGameImages, ui->filesTab_tableView->selectionModel()->selectedRows(10), format, path.absolutePath());
+                    QtConcurrent::run(wiTools, &WiTools::convertGameImages, ui->filesTab_tableView->selectionModel()->selectedRows(10), format, compression, path.absolutePath());
                 }
             }
         }
@@ -313,15 +313,20 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
     if (!ui->dvdTab_pushButton_TransferToImage->text().contains(tr("Cancel transfering"))) {
-        wiibafudialog->setOpenFile();
-        wiibafudialog->exec();
+        if (dvdListModel->rowCount() != 0) {
+            wiibafudialog->setOpenFile();
 
-        QString filePath = wiibafudialog->imageFilePath();
-        QString format = wiibafudialog->imageFormat();
+            if (wiibafudialog->exec() == QDialog::Accepted) {
+                QString filePath = wiibafudialog->imageFilePath();
+                QString format = wiibafudialog->imageFormat();
+                QString compression = wiibafudialog->compression();
 
-        ui->dvdTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
-        QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
-        QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToImage, dvdPath, format, filePath);
+                ui->dvdTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
+                QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
+
+                QtConcurrent::run(wiTools, &WiTools::transferGameFromDVDToImage, dvdPath, format, compression, filePath);
+            }
+        }
     }
     else {
         emit cancelTransfer();
@@ -349,14 +354,16 @@ void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
     if (!ui->wbfsTab_pushButton_Transfer->text().contains(tr("Cancel transfering"))) {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenDirectory();
-            int result = wiibafudialog->exec();
 
-            QDir path = wiibafudialog->imageDirectory();
-            QString format = wiibafudialog->imageFormat();
+            if (wiibafudialog->exec() == QDialog::Accepted) {
+                QDir path = wiibafudialog->imageDirectory();
+                QString format = wiibafudialog->imageFormat();
 
-            if (result == QDialog::Accepted) {
                 if (!path.exists()) {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
+                }
+                else if (format.contains("wia")) {
+                    QMessageBox::critical(this, tr("Error"), tr("Transfer WBFS to image doesn't support 'Wii ISO Archive' format!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
                     ui->wbfsTab_pushButton_Transfer->setText(tr("Cancel transfering"));

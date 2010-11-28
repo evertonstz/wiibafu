@@ -1,4 +1,5 @@
 2010-11-28 Kai Heitkamp <dynup@ymail.com>
+  * Support for Wii ISO Archive (wia) format
   * WBFS transfer image dialog fixed
   * UTF-8 support
   * Proxy support for cover and title download

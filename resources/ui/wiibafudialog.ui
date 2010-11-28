@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>470</width>
-    <height>161</height>
+    <width>442</width>
+    <height>211</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,9 +20,12 @@
    <iconset resource="../wiibafu.qrc">
     <normaloff>:/appicon/images/appicon.png</normaloff>:/appicon/images/appicon.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
     <widget class="QFrame" name="frame">
+     <property name="locale">
+      <locale language="English" country="UnitedStates"/>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
@@ -32,30 +35,76 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="label_Directory">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
         <property name="text">
          <string>Directory:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_Directory"/>
+       <widget class="QLineEdit" name="lineEdit_Directory">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="pushButton_Open">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
         <property name="text">
          <string>Open</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_FilePath">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="text">
+         <string>File:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_FilePath">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="pushButton_OpenFile">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="text">
+         <string>Open file</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
        <widget class="QLabel" name="label_2">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
         <property name="text">
          <string>Image format:</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="2" column="1">
        <widget class="QComboBox" name="comboBox_ImageFormat">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
         <item>
          <property name="text">
           <string>Wii Plain ISO (*.iso)</string>
@@ -64,6 +113,11 @@
         <item>
          <property name="text">
           <string>Wii Compact ISO (*.ciso)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Wii ISO Archive (*.wia)</string>
          </property>
         </item>
         <item>
@@ -78,28 +132,46 @@
         </item>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit_FilePath"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_FilePath">
-        <property name="text">
-         <string>File path:</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="2">
-       <widget class="QPushButton" name="pushButton_OpenFile">
-        <property name="text">
-         <string>Open file</string>
+       <widget class="QComboBox" name="comboBox_compressionDefaults">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
+        <item>
+         <property name="text">
+          <string>Default</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Fast</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Good</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Best</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Other</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item>
+   <item row="2" column="0">
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="locale">
+      <locale language="English" country="UnitedStates"/>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -108,8 +180,199 @@
      </property>
     </widget>
    </item>
+   <item row="1" column="0">
+    <widget class="QFrame" name="frame_compressionMethod">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>44</height>
+      </size>
+     </property>
+     <property name="locale">
+      <locale language="English" country="UnitedStates"/>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="text">
+         <string>Method:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_compressionMethod">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="currentIndex">
+         <number>3</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>None</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Purge</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Bzip2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>LZMA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>LZMA2</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="text">
+         <string>Level:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_compressionLevel">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="currentIndex">
+         <number>5</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>0 (None)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1 (Fast)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>5 (Good)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>9 (Best)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="text">
+         <string>Factor:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_compressionFactor">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="locale">
+         <locale language="English" country="UnitedStates"/>
+        </property>
+        <property name="text">
+         <string>20</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_Directory</tabstop>
+  <tabstop>pushButton_Open</tabstop>
+  <tabstop>lineEdit_FilePath</tabstop>
+  <tabstop>pushButton_OpenFile</tabstop>
+  <tabstop>comboBox_ImageFormat</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../wiibafu.qrc"/>
  </resources>
