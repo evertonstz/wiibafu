@@ -38,6 +38,7 @@ public:
     QString imageFilePath();
     QString imageFormat();
     QString compression();
+    void setOpenExistingDirectory();
     void setOpenDirectory();
     void setOpenFile();
 

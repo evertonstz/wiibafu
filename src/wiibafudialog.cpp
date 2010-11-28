@@ -181,8 +181,25 @@ void WiiBaFuDialog::on_comboBox_compressionDefaults_currentIndexChanged(int inde
     }
 }
 
+void WiiBaFuDialog::setOpenExistingDirectory() {
+    this->setWindowTitle(tr("Open directory (target directory must exist!)"));
+
+    ui->label_Directory->setVisible(true);
+    ui->lineEdit_Directory->setVisible(true);
+    ui->pushButton_Open->setVisible(true);
+
+    ui->label_ImageFormat->setVisible(true);
+    ui->comboBox_ImageFormat->setVisible(true);
+    ui->comboBox_compressionDefaults->setVisible(true);
+    ui->frame_compressionMethod->setVisible(true);
+
+    ui->label_FilePath->setVisible(false);
+    ui->lineEdit_FilePath->setVisible(false);
+    ui->pushButton_OpenFile->setVisible(false);
+}
+
 void WiiBaFuDialog::setOpenDirectory() {
-    this->setWindowTitle(tr("Open directory"));
+    this->setWindowTitle(tr("Open directory (target directory may not exist!)"));
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -191,6 +208,11 @@ void WiiBaFuDialog::setOpenDirectory() {
     ui->label_FilePath->setVisible(false);
     ui->lineEdit_FilePath->setVisible(false);
     ui->pushButton_OpenFile->setVisible(false);
+
+    ui->label_ImageFormat->setVisible(false);
+    ui->comboBox_ImageFormat->setVisible(false);
+    ui->comboBox_compressionDefaults->setVisible(false);
+    ui->frame_compressionMethod->setVisible(false);
 }
 
 void WiiBaFuDialog::setOpenFile() {
@@ -203,6 +225,11 @@ void WiiBaFuDialog::setOpenFile() {
     ui->label_Directory->setVisible(false);
     ui->lineEdit_Directory->setVisible(false);
     ui->pushButton_Open->setVisible(false);
+
+    ui->label_ImageFormat->setVisible(true);
+    ui->comboBox_ImageFormat->setVisible(true);
+    ui->comboBox_compressionDefaults->setVisible(true);
+    ui->frame_compressionMethod->setVisible(true);
 }
 
 WiiBaFuDialog::~WiiBaFuDialog() {

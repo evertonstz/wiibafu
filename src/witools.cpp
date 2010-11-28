@@ -739,14 +739,19 @@ void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QStr
 void WiTools::transferGameFromDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit) {
         if (exitCode == 0) {
-            emit transferGameFromDVDToImageSuccessfully();
+            if (witProcess->error() == 5) {
+                emit transferGameFromDVDToImageCanceled(5);
+            }
+            else {
+                emit transferGameFromDVDToImageSuccessfully();
+            }
         }
         else if (exitCode == 4) {
-            emit transferGameFromDVDToImageCanceled(true);
+            emit transferGameFromDVDToImageCanceled(4);
         }
     }
     else {
-        emit transferGameFromDVDToImageCanceled(false);
+        emit transferGameFromDVDToImageCanceled(0);
     }
 
     delete witProcess;
@@ -770,6 +775,8 @@ void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitSta
 
 void WiTools::transfer_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
+
+    qDebug() << line;
 
     if (line.contains("ADD")) {
         #ifdef Q_OS_MACX
@@ -802,11 +809,20 @@ void WiTools::transfer_readyReadStandardOutput() {
         }
     }
     else if (line.contains("EXTRACT")) {
+        QString statusBarText;
+
+        if (line.contains("EXTRACT ISO:")) {
+            statusBarText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.indexOf("\n") - line.indexOf("EXTRACT") - 8));
+        }
+        else {
+            statusBarText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
+        }
+
         #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
+            gameCountText = statusBarText;
             emit showStatusBarMessage(gameCountText);
         #else
-            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8)));
+            emit showStatusBarMessage(statusBarText);
         #endif
     }
     else if (line.contains("% copied")) {

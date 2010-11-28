@@ -99,7 +99,7 @@ signals:
 
     void transferGameFromDVDToWBFScanceled(bool discExitst);
     void transferGameFromDVDToWBFSsuccessfully();
-    void transferGameFromDVDToImageCanceled(bool discExitst);
+    void transferGameFromDVDToImageCanceled(int status);
     void transferGameFromDVDToImageSuccessfully();
 
     void removeGamesFromWBFS_successfully();
