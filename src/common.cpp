@@ -164,6 +164,23 @@ QNetworkProxy Common::proxy() {
     return proxy;
 }
 
+QString Common::titleFromDB(QString gameID) {
+    QFile file(wiTools->witTitlesPath());
+    QString title;
+
+    file.open(QIODevice::ReadOnly);
+    while (!file.atEnd()) {
+        QString line = file.readLine().data();
+            if (line.contains(gameID)) {
+                title = QString::fromUtf8(line.right(line.length() - line.indexOf("=") - 2).remove("\r").toLatin1());
+                break;
+            }
+    }
+
+    file.close();
+    return title;
+}
+
 Common::~Common() {
     delete http;
     delete wiTools;

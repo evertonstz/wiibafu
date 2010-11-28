@@ -68,7 +68,6 @@ private:
     void updateTitles();
 
     QString currentCoverLanguage();
-    QString titleFromDB(QString gameID);
     QString wbfsPath();
     int headerIndex(QAbstractItemModel *model, QString text, Qt::Orientation orientation);
 

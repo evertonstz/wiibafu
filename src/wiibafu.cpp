@@ -492,7 +492,7 @@ void WiiBaFu::setWBFSGameListModel() {
 void WiiBaFu::updateTitles() {
     if (filesListModel->rowCount() > 0) {
         for (int i = 0; i < filesListModel->rowCount(); i++) {
-            filesListModel->item(i, 2)->setText(titleFromDB(filesListModel->item(i, 0)->text()));
+            filesListModel->item(i, 2)->setText(common->titleFromDB(filesListModel->item(i, 0)->text()));
         }
 
         ui->filesTab_tableView->update();
@@ -500,7 +500,7 @@ void WiiBaFu::updateTitles() {
 
     if (wbfsListModel->rowCount() > 0) {
         for (int i = 0; i < wbfsListModel->rowCount(); i++) {
-            wbfsListModel->item(i, 2)->setText(titleFromDB(wbfsListModel->item(i, 0)->text()));
+            wbfsListModel->item(i, 2)->setText(common->titleFromDB(wbfsListModel->item(i, 0)->text()));
         }
 
         ui->wbfsTab_tableView->update();
@@ -765,23 +765,6 @@ QString WiiBaFu::currentCoverLanguage() {
                  break;
         default: return "EN";
     }
-}
-
-QString WiiBaFu::titleFromDB(QString gameID) {
-    QFile file(wiTools->witTitlesPath());
-    QString title;
-
-    file.open(QIODevice::ReadOnly);
-    while (!file.atEnd()) {
-        QString line = file.readLine().data();
-            if (line.contains(gameID)) {
-                title = line.right(line.length() - line.indexOf("=") - 2).remove("\r");
-                break;
-            }
-    }
-
-    file.close();
-    return title;
 }
 
 QString WiiBaFu::wbfsPath() {

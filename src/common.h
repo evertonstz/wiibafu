@@ -41,6 +41,7 @@ public:
 
     void requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt);
     void updateTitles();
+    QString titleFromDB(QString gameID);
 
 private:
     QHttp *http;
