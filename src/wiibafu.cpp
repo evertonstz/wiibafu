@@ -110,7 +110,7 @@ void WiiBaFu::setupConnections() {
 
 void WiiBaFu::setupMainProgressBar() {
     progressBar_Main = new QProgressBar(this);
-    progressBar_Main->setObjectName(QString::fromUtf8("progressBarMain"));
+    progressBar_Main->setObjectName("progressBarMain");
     progressBar_Main->setVisible(false);
     progressBar_Main->setMinimum(0);
     progressBar_Main->setMaximum(100);

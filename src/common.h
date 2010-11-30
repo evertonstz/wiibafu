@@ -43,6 +43,8 @@ public:
     void updateTitles();
     QString titleFromDB(QString gameID);
 
+    static QString fromUtf8(QString string);
+
 private:
     QHttp *http;
     QUrl url;

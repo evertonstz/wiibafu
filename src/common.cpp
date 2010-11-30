@@ -172,13 +172,21 @@ QString Common::titleFromDB(QString gameID) {
     while (!file.atEnd()) {
         QString line = file.readLine().data();
             if (line.contains(gameID)) {
-                title = QString::fromUtf8(line.right(line.length() - line.indexOf("=") - 2).remove("\r").toLatin1());
+                title = fromUtf8(line.right(line.length() - line.indexOf("=") - 2).remove("\r"));
                 break;
             }
     }
 
     file.close();
     return title;
+}
+
+QString Common::fromUtf8(QString string) {
+    #ifdef Q_OS_WIN32
+        return string;
+    #else
+        return QString::fromUtf8(string.toLatin1());
+    #endif
 }
 
 Common::~Common() {
