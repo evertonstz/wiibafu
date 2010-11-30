@@ -503,6 +503,7 @@ void WiTools::transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
+    emit newLogEntry(tr("Preparing transfer files to WBFS."), Info);
 
     QStringList paths;
     foreach (QModelIndex index, indexList) {
@@ -624,6 +625,13 @@ void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QS
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
+    if (!compression.isEmpty()) {
+        emit newLogEntry(tr("Starting transfer files to image in format '%1' with compression '%2'.").arg(format, compression), Info);
+    }
+    else {
+        emit newLogEntry(tr("Starting transfer files to image in format '%1'.").arg(format), Info);
+    }
+
     QStringList paths;
     foreach (QModelIndex index, indexList) {
         paths.append(index.data().toString());
@@ -721,6 +729,7 @@ void WiTools::transferFilesToFileSystem(QModelIndexList indexList, QString desti
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
+    emit newLogEntry(tr("Starting transfer files to file system."), Info);
 
     QStringList arguments;
     arguments.append("COPY");
@@ -827,6 +836,7 @@ void WiTools::transferDVDToWBFS(QString dvdPath, QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
+    emit newLogEntry(tr("Starting transfer DVD to WBFS."), Info);
 
     QStringList arguments;
     arguments.append("ADD");
@@ -943,6 +953,13 @@ void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compre
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
+    if (!compression.isEmpty()) {
+        emit newLogEntry(tr("Starting transfer DVD to image in format '%1' with compression '%2'.").arg(format, compression), Info);
+    }
+    else {
+        emit newLogEntry(tr("Starting transfer DVD to image in format '%1'.").arg(format), Info);
+    }
+
     QStringList arguments;
     arguments.append("COPY");
 
@@ -1034,6 +1051,7 @@ void WiTools::transferDVDToFileSystem(QString dvdPath, QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
+    emit newLogEntry(tr("Starting transfer DVD to file system."), Info);
 
     QStringList arguments;
     arguments.append("COPY");
@@ -1137,6 +1155,13 @@ void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, Q
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
+
+    if (!compression.isEmpty()) {
+        emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with compression '%2'.").arg(format, compression), Info);
+    }
+    else {
+        emit newLogEntry(tr("Starting transfer WBFS to image in format '%1'.").arg(format), Info);
+    }
 
     QStringList paths;
     foreach (QModelIndex index, indexList) {

@@ -1,4 +1,5 @@
 2010-11-30 Kai Heitkamp <dynup@ymail.com>
+  * Transfer infos for log
   * UTF-8 support improved
   * Settings adapted
   * All transfer routines re-written
