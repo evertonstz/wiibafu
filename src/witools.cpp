@@ -498,7 +498,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     emit newWBFSGameListModel();
 }
 
-void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
+void WiTools::transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -521,23 +521,23 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     arguments.append(paths);
 
-    if (WiiBaFuSettings.value("FilesToWBFS/Force", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("TransferToWBFS/Force", QVariant(false)).toBool()) {
         arguments.append("--force");
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/Test", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("TransferToWBFS/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/Newer", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("TransferToWBFS/Newer", QVariant(false)).toBool()) {
         arguments.append("--newer");
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/Update", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("TransferToWBFS/Update", QVariant(false)).toBool()) {
         arguments.append("--update");
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/Overwrite", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("TransferToWBFS/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
     }
 
@@ -545,9 +545,9 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToWBFS_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferFilesToWBFS_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferFilesToWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferFilesToWBFS_finished(int, QProcess::ExitStatus)));
 
     witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
@@ -556,23 +556,583 @@ void WiTools::transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::transferFilesToWBFS_readyReadStandardOutput() {
+    QString line = witProcess->readAllStandardOutput().constData();
+
+    if (line.contains("ADD")) {
+        #ifdef Q_OS_MACX
+            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
+            emit showStatusBarMessage(gameCountText);
+        #else
+            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
+        #endif
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+
+        #ifdef Q_OS_MACX
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
+    }
+    else if (line.contains("already exists")) {
+        emit newLogEntry(line, Error);
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5), Info);
+    }
+    else if (line.contains("disc added.") || line.contains("discs added.")) {
+        emit newLogEntry(line, Info);
+    }
+}
+
+void WiTools::transferFilesToWBFS_readyReadStandardError() {
+    emit showStatusBarMessage(tr("Transfer failed!"));
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
+}
+
+void WiTools::transferFilesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit) {
         if (exitCode == 0) {
-            emit transferGamesToWBFSsuccessfully();
+            emit newLogEntry(tr("Transfer successfully!"), Info);
+            emit transferFilesToWBFS_finished(WiTools::Ok);
         }
         else if (exitCode == 4) {
-            emit transferGamesToWBFScanceled(true);
+            emit showStatusBarMessage(tr("Disc already exists!"));
+            emit transferFilesToWBFS_finished(WiTools::DiscAlreadyExists);
+        }
+        else {
+            emit newLogEntry(tr("Error %1: %2").arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
+            emit transferFilesToWBFS_finished(WiTools::UnknownError);
         }
     }
+    else if (exitStatus == QProcess::CrashExit){
+        emit newLogEntry(tr("Transfer canceled!"), Error);
+        emit showStatusBarMessage(tr("Transfer canceled!"));
+        emit transferFilesToWBFS_finished(WiTools::TransferCanceled);
+    }
     else {
-        emit transferGamesToWBFScanceled(false);
+        emit newLogEntry(tr("Error %1: %2").arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
+        emit transferFilesToWBFS_finished(WiTools::UnknownError);
     }
 
     delete witProcess;
 }
 
-void WiTools::transferGamesToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString directory) {
+void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QString compression, QString directory) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit showStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList paths;
+    foreach (QModelIndex index, indexList) {
+        paths.append(index.data().toString());
+    }
+
+    QStringList arguments;
+    arguments.append("COPY");
+
+    arguments.append(paths);
+    arguments.append(QString("--").append(format));
+
+    if (!compression.isEmpty()) {
+        arguments.append("--compression");
+        arguments.append(compression);
+    }
+
+    arguments.append("--dest");
+    arguments.append(directory);
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Test", QVariant(false)).toBool()) {
+        arguments.append("--test");
+    }
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Update", QVariant(false)).toBool()) {
+        arguments.append("--update");
+    }
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Overwrite", QVariant(false)).toBool()) {
+        arguments.append("--overwrite");
+    }
+
+    arguments.append("--progress");
+
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferFilesToImage_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferFilesToImage_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferFilesToImage_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(wit, arguments);
+    witProcess->waitForFinished(-1);
+
+    arguments.clear();
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::transferFilesToImage_readyReadStandardOutput() {
+    QString line = witProcess->readAllStandardOutput().constData();
+
+    if (line.contains("COPY")) {
+        QString file = line.mid(line.indexOf(":") + 1, line.indexOf("->") - line.indexOf(":") - 2);
+        QString from = file.mid(file.lastIndexOf("/") + 1, file.length() - file.lastIndexOf("/"));
+        QString to = line.mid(line.indexOf("->") + 3, line.lastIndexOf(":") - line.indexOf("->") - 3);
+
+        #ifdef Q_OS_MACX
+            gameCountText = tr("Transfering game %1 -> %2...").arg(QString::fromUtf8(from.toLatin1()), to);
+            emit showStatusBarMessage(gameCountText);
+        #else
+            emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(QString::fromUtf8(from.toLatin1()), to));
+        #endif
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+
+        #ifdef Q_OS_MACX
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5), Info);
+    }
+}
+
+void WiTools::transferFilesToImage_readyReadStandardError() {
+    emit showStatusBarMessage(tr("Transfer failed!"));
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
+}
+
+void WiTools::transferFilesToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        emit newLogEntry(tr("Transfer successfully!"), Info);
+        emit showStatusBarMessage(tr("Ready."));
+        emit transferFilesToImage_finished(WiTools::Ok);
+    }
+    else {
+        emit newLogEntry(tr("Transfer canceled!"), Error);
+        emit showStatusBarMessage(tr("Transfer canceled!"));
+        emit transferFilesToImage_finished(WiTools::TransferCanceled);
+    }
+
+    delete witProcess;
+}
+
+void WiTools::transferFilesToFileSystem(QModelIndexList indexList, QString destination) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit showStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList arguments;
+    arguments.append("COPY");
+
+    arguments.append(indexList.first().data().toString());
+
+    arguments.append("--fst");
+
+    arguments.append("--dest");
+    arguments.append(destination);
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Test", QVariant(false)).toBool()) {
+        arguments.append("--test");
+    }
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Update", QVariant(false)).toBool()) {
+        arguments.append("--update");
+    }
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Overwrite", QVariant(false)).toBool()) {
+        arguments.append("--overwrite");
+    }
+
+    arguments.append("--progress");
+
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferFilesToFileSystem_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferFilesToFileSystem_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferFilesToFileSystem_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(wit, arguments);
+    witProcess->waitForFinished(-1);
+
+    arguments.clear();
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::transferFilesToFileSystem_readyReadStandardOutput() {
+    QString line = witProcess->readAllStandardOutput().constData();
+
+    if (line.contains("EXTRACT")) {
+        QString tmp = line.mid(line.indexOf(":/") + 1, line.indexOf("\n") - line.indexOf(":/")).remove("\n");
+        QString source = tmp.mid(0, tmp.indexOf("->") - 1);
+        QString from = source.mid(source.lastIndexOf("/") + 1, source.length());
+        QString to = tmp.mid(tmp.indexOf("->") + 3, tmp.length() - tmp.indexOf("->"));
+
+        #ifdef Q_OS_MACX
+            gameCountText = tr("Transfering game %1 -> %2...").arg(QString::fromUtf8(from.toLatin1()), QString::fromUtf8(to.toLatin1()));
+            emit showStatusBarMessage(gameCountText);
+        #else
+            emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(QString::fromUtf8(from.toLatin1()), QString::fromUtf8(to.toLatin1())));
+        #endif
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+
+        #ifdef Q_OS_MACX
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5), Info);
+    }
+}
+
+void WiTools::transferFilesToFileSystem_readyReadStandardError() {
+    QString error = witProcess->readAllStandardError().constData();
+
+    emit newLogEntry(error, Error);
+
+    if (error.contains("Destination already exists")) {
+        emit showStatusBarMessage(tr("Destination already exists!"));
+        emit transferFilesToFileSystem_finished(WiTools::DestinationAlreadyExists);
+        witProcessStatus = DestinationAlreadyExists;
+    }
+}
+
+void WiTools::transferFilesToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
+        emit newLogEntry(tr("Transfer canceled!"), Error);
+        emit showStatusBarMessage(tr("Transfer canceled!"));
+        emit transferFilesToFileSystem_finished(WiTools::TransferCanceled);
+    }
+    else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
+        if (witProcessStatus != DestinationAlreadyExists) {
+            emit newLogEntry(tr("Transfer successfully!"), Error);
+            emit showStatusBarMessage(tr("Ready."));
+            emit transferFilesToFileSystem_finished(WiTools::Ok);
+        }
+
+        witProcessStatus = Ok;
+    }
+    else {
+        emit newLogEntry(QString(tr("Error %1: %2")).arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
+        emit showStatusBarMessage(tr("Transfer failed!"));
+        emit transferFilesToFileSystem_finished(WiTools::UnknownError);
+    }
+
+    delete witProcess;
+}
+
+void WiTools::transferDVDToWBFS(QString dvdPath, QString wbfsPath) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit showStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList arguments;
+    arguments.append("ADD");
+
+    if (wbfsPath.isEmpty()) {
+        arguments.append("--auto");
+    }
+    else {
+        arguments.append("--part");
+        arguments.append(wbfsPath);
+    }
+
+    arguments.append(dvdPath);
+
+    if (WiiBaFuSettings.value("TransferToWBFS/Force", QVariant(false)).toBool()) {
+        arguments.append("--force");
+    }
+
+    if (WiiBaFuSettings.value("TransferToWBFS/Test", QVariant(false)).toBool()) {
+        arguments.append("--test");
+    }
+
+    if (WiiBaFuSettings.value("TransferToWBFS/Newer", QVariant(false)).toBool()) {
+        arguments.append("--newer");
+    }
+
+    if (WiiBaFuSettings.value("TransferToWBFS/Update", QVariant(false)).toBool()) {
+        arguments.append("--update");
+    }
+
+    if (WiiBaFuSettings.value("TransferToWBFS/Overwrite", QVariant(false)).toBool()) {
+        arguments.append("--overwrite");
+    }
+
+    arguments.append("--progress");
+
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferDVDToWBFS_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferDVDToWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferDVDToWBFS_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(wwt, arguments);
+    witProcess->waitForFinished(-1);
+
+    arguments.clear();
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::transferDVDToWBFS_readyReadStandardOutput() {
+    QString line = witProcess->readAllStandardOutput().constData();
+
+    if (line.contains("ADD")) {
+        #ifdef Q_OS_MACX
+            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
+            emit showStatusBarMessage(gameCountText);
+        #else
+            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
+        #endif
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+
+        #ifdef Q_OS_MACX
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
+    }
+    else if (line.contains("already exists")) {
+        emit newLogEntry(line, Error);
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5), Info);
+    }
+    else if (line.contains("disc added.") || line.contains("discs added.")) {
+        emit newLogEntry(line, Info);
+    }
+}
+
+void WiTools::transferDVDToWBFS_readyReadStandardError() {
+    emit showStatusBarMessage(tr("Transfer failed!"));
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
+}
+
+void WiTools::transferDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit) {
+        if (exitCode == 0) {
+            emit newLogEntry(tr("Transfer successfully!"), Info);
+            emit transferDVDToWBFS_finished(WiTools::Ok);
+        }
+        else if (exitCode == 4) {
+            emit showStatusBarMessage(tr("Disc already exists!"));
+            emit transferDVDToWBFS_finished(WiTools::DiscAlreadyExists);
+        }
+        else {
+            emit newLogEntry(tr("Error %1: %2").arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
+            emit transferDVDToWBFS_finished(WiTools::UnknownError);
+        }
+    }
+    else if (exitStatus == QProcess::CrashExit){
+        emit newLogEntry(tr("Transfer canceled!"), Error);
+        emit showStatusBarMessage(tr("Transfer canceled!"));
+        emit transferDVDToWBFS_finished(WiTools::TransferCanceled);
+    }
+    else {
+        emit newLogEntry(tr("Error %1: %2").arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
+        emit transferDVDToWBFS_finished(WiTools::UnknownError);
+    }
+
+    delete witProcess;
+}
+
+void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit showStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList arguments;
+    arguments.append("COPY");
+
+    arguments.append(dvdPath);
+    arguments.append(QString("--").append(format));
+
+    if (!compression.isEmpty()) {
+        arguments.append("--compression");
+        arguments.append(compression);
+    }
+
+    arguments.append("--dest");
+    arguments.append(directory);
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Test", QVariant(false)).toBool()) {
+        arguments.append("--test");
+    }
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Update", QVariant(false)).toBool()) {
+        arguments.append("--update");
+    }
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Overwrite", QVariant(false)).toBool()) {
+        arguments.append("--overwrite");
+    }
+
+    arguments.append("--progress");
+
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferDVDToImage_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferDVDToImage_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferDVDToImage_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(wit, arguments);
+    witProcess->waitForFinished(-1);
+
+    arguments.clear();
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::transferDVDToImage_readyReadStandardOutput() {
+    QString line = witProcess->readAllStandardOutput().constData();
+
+    if (line.contains("COPY")) {
+        QString from = line.mid(line.indexOf(":") + 1, line.indexOf("->") - line.indexOf(":") - 2);
+        QString to = line.mid(line.indexOf("->") + 3, line.lastIndexOf(":") - line.indexOf("->") - 3);
+
+        #ifdef Q_OS_MACX
+            gameCountText = tr("Transfering game %1 -> %2...").arg(from), to);
+            emit showStatusBarMessage(gameCountText);
+        #else
+            emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(from, to));
+        #endif
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+
+        #ifdef Q_OS_MACX
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5), Info);
+    }
+}
+
+void WiTools::transferDVDToImage_readyReadStandardError() {
+    emit showStatusBarMessage(tr("Transfer failed!"));
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
+}
+
+void WiTools::transferDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        emit newLogEntry(tr("Transfer successfully!"), Info);
+        emit showStatusBarMessage(tr("Ready."));
+        emit transferDVDToImage_finished(WiTools::Ok);
+    }
+    else {
+        emit newLogEntry(tr("Transfer canceled!"), Error);
+        emit showStatusBarMessage(tr("Transfer canceled!"));
+        emit transferDVDToImage_finished(WiTools::TransferCanceled);
+    }
+
+    delete witProcess;
+}
+
+void WiTools::transferDVDToFileSystem(QString dvdPath, QString destination) {
+    emit setMainProgressBarVisible(true);
+    emit setMainProgressBar(0, "%p%");
+    emit showStatusBarMessage(tr("Preparing transfer..."));
+
+    QStringList arguments;
+    arguments.append("COPY");
+
+    arguments.append(dvdPath);
+
+    arguments.append("--fst");
+
+    arguments.append("--dest");
+    arguments.append(destination);
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Test", QVariant(false)).toBool()) {
+        arguments.append("--test");
+    }
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Update", QVariant(false)).toBool()) {
+        arguments.append("--update");
+    }
+
+    if (WiiBaFuSettings.value("TransferToImageFST/Overwrite", QVariant(false)).toBool()) {
+        arguments.append("--overwrite");
+    }
+
+    arguments.append("--progress");
+
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferDVDToFileSystem_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferDVDToFileSystem_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferDVDToFileSystem_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(wit, arguments);
+    witProcess->waitForFinished(-1);
+
+    arguments.clear();
+    emit setMainProgressBarVisible(false);
+}
+
+void WiTools::transferDVDToFileSystem_readyReadStandardOutput() {
+    QString line = witProcess->readAllStandardOutput().constData();
+
+    if (line.contains("EXTRACT")) {
+        QString str = line.mid(line.indexOf(":/") + 1, line.indexOf("\n") - line.indexOf(":/")).remove("\n");
+
+        #ifdef Q_OS_MACX
+            gameCountText = tr("Transfering game %1...").arg(QString::fromUtf8(str.toLatin1()));
+            emit showStatusBarMessage(gameCountText);
+        #else
+            emit showStatusBarMessage(tr("Transfering game %1...").arg(QString::fromUtf8(str.toLatin1())));
+        #endif
+    }
+    else if (line.contains("% copied")) {
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
+
+        #ifdef Q_OS_MACX
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, line));
+        #endif
+    }
+    else if (line.contains("copied") && !line.contains("%")) {
+        emit newLogEntry(line.remove(0, 5), Info);
+    }
+}
+
+void WiTools::transferDVDToFileSystem_readyReadStandardError() {
+    QString error = witProcess->readAllStandardError().constData();
+
+    emit newLogEntry(error, Error);
+
+    if (error.contains("Destination already exists")) {
+        emit showStatusBarMessage(tr("Destination already exists!"));
+        emit transferDVDToFileSystem_finished(WiTools::DestinationAlreadyExists);
+        witProcessStatus = DestinationAlreadyExists;
+    }
+}
+
+void WiTools::transferDVDToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
+        emit newLogEntry(tr("Transfer canceled!"), Error);
+        emit showStatusBarMessage(tr("Transfer canceled!"));
+        emit transferDVDToFileSystem_finished(WiTools::TransferCanceled);
+    }
+    else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
+        if (witProcessStatus != DestinationAlreadyExists) {
+            emit newLogEntry(tr("Transfer successfully!"), Error);
+            emit showStatusBarMessage(tr("Ready."));
+            emit transferDVDToFileSystem_finished(WiTools::Ok);
+        }
+
+        witProcessStatus = Ok;
+    }
+    else {
+        emit newLogEntry(QString(tr("Error %1: %2")).arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
+        emit showStatusBarMessage(tr("Transfer failed!"));
+        emit transferDVDToFileSystem_finished(WiTools::UnknownError);
+    }
+
+    delete witProcess;
+}
+
+void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString compression, QString directory) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -595,129 +1155,28 @@ void WiTools::transferGamesToImage(QModelIndexList indexList, QString wbfsPath, 
 
     arguments.append(paths);
     arguments.append(QString("--").append(format));
-    arguments.append("--dest");
-    arguments.append(directory);
-
-    if (WiiBaFuSettings.value("FilesFromWBFS/Force", QVariant(false)).toBool()) {
-        arguments.append("--force");
-    }
-
-    if (WiiBaFuSettings.value("FilesFromWBFS/Test", QVariant(false)).toBool()) {
-        arguments.append("--test");
-    }
-
-    if (WiiBaFuSettings.value("FilesFromWBFS/Update", QVariant(false)).toBool()) {
-        arguments.append("--update");
-    }
-
-    if (WiiBaFuSettings.value("FilesFromWBFS/Overwrite", QVariant(false)).toBool()) {
-        arguments.append("--overwrite");
-    }
-
-    arguments.append("--progress");
-
-    witProcess = new QProcess();
-    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToImage_finished(int, QProcess::ExitStatus)));
-
-    witProcess->start(wwt, arguments);
-    witProcess->waitForFinished(-1);
-
-    arguments.clear();
-    emit setMainProgressBarVisible(false);
-}
-
-void WiTools::transferGamesToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
-    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
-        emit transferGamesToImageSuccessfully();
-    }
-    else {
-        emit transferGamesToImageCanceled();
-    }
-
-    delete witProcess;
-}
-
-void WiTools::transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath) {
-    emit setMainProgressBarVisible(true);
-    emit setMainProgressBar(0, "%p%");
-    emit showStatusBarMessage(tr("Preparing transfer..."));
-
-    QStringList arguments;
-    arguments.append("ADD");
-
-    if (wbfsPath.isEmpty()) {
-        arguments.append("--auto");
-    }
-    else {
-        arguments.append("--part");
-        arguments.append(wbfsPath);
-    }
-
-    arguments.append(drivePath);
-
-    if (WiiBaFuSettings.value("DVDtoWBFS/Force", QVariant(false)).toBool()) {
-        arguments.append("--force");
-    }
-
-    if (WiiBaFuSettings.value("DVDtoWBFS/Test", QVariant(false)).toBool()) {
-        arguments.append("--test");
-    }
-
-    if (WiiBaFuSettings.value("DVDtoWBFS/Newer", QVariant(false)).toBool()) {
-        arguments.append("--newer");
-    }
-
-    if (WiiBaFuSettings.value("DVDtoWBFS/Update", QVariant(false)).toBool()) {
-        arguments.append("--update");
-    }
-
-    if (WiiBaFuSettings.value("DVDtoWBFS/Overwrite", QVariant(false)).toBool()) {
-        arguments.append("--overwrite");
-    }
-
-    arguments.append("--progress");
-
-    witProcess = new QProcess();
-    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGameFromDVDToWBFS_finished(int, QProcess::ExitStatus)));
-
-    witProcess->start(wwt, arguments);
-    witProcess->waitForFinished(-1);
-
-    arguments.clear();
-    emit setMainProgressBarVisible(false);
-}
-
-void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QString compression, QString filePath) {
-    emit setMainProgressBarVisible(true);
-    emit setMainProgressBar(0, "%p%");
-    emit showStatusBarMessage(tr("Preparing transfer..."));
-
-    QStringList arguments;
-    arguments.append("COPY");
-    arguments.append(drivePath);
-    arguments.append(filePath);
-    arguments.append(QString("--").append(format));
 
     if (!compression.isEmpty()) {
         arguments.append("--compression");
         arguments.append(compression);
     }
 
-    if (WiiBaFuSettings.value("GamesToImage/Test", QVariant(false)).toBool()) {
+    arguments.append("--dest");
+    arguments.append(directory);
+
+    if (WiiBaFuSettings.value("TransferFromWBFS/Force", QVariant(false)).toBool()) {
+        arguments.append("--force");
+    }
+
+    if (WiiBaFuSettings.value("TransferFromWBFS/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
     }
 
-    if (WiiBaFuSettings.value("GamesToImage/Update", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("TransferFromWBFS/Update", QVariant(false)).toBool()) {
         arguments.append("--update");
     }
 
-    if (WiiBaFuSettings.value("GamesToImage/Overwrite", QVariant(false)).toBool()) {
+    if (WiiBaFuSettings.value("TransferFromWBFS/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
     }
 
@@ -725,96 +1184,22 @@ void WiTools::transferGameFromDVDToImage(QString drivePath, QString format, QStr
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGameFromDVDToImage_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferWBFSToImage_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferWBFSToImage_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferWBFSToImage_finished(int, QProcess::ExitStatus)));
 
-    witProcess->start(wit, arguments);
+    witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
 
     arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::transferGameFromDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
-    if (exitStatus == QProcess::NormalExit) {
-        if (exitCode == 0) {
-            if (witProcess->error() == 5) {
-                emit transferGameFromDVDToImageCanceled(5);
-            }
-            else {
-                emit transferGameFromDVDToImageSuccessfully();
-            }
-        }
-        else if (exitCode == 4) {
-            emit transferGameFromDVDToImageCanceled(4);
-        }
-    }
-    else {
-        emit transferGameFromDVDToImageCanceled(0);
-    }
-
-    delete witProcess;
-}
-
-void WiTools::transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
-    if (exitStatus == QProcess::NormalExit) {
-        if (exitCode == 0) {
-            emit transferGameFromDVDToWBFSsuccessfully();
-        }
-        else if (exitCode == 4) {
-            emit transferGameFromDVDToWBFScanceled(true);
-        }
-    }
-    else {
-        emit transferGameFromDVDToWBFScanceled(false);
-    }
-
-    delete witProcess;
-}
-
-void WiTools::transfer_readyReadStandardOutput() {
+void WiTools::transferWBFSToImage_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
-    if (line.contains("ADD")) {
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
-        #endif
-    }
-    else if (line.contains("COPY")) {
-        if (line.contains("/dev/")) {
-            #ifdef Q_OS_MACX
-                gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1));
-                emit showStatusBarMessage(gameCountText);
-            #else
-                emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ISO:") + 4, line.lastIndexOf(":") - line.indexOf(":") - 1)));
-            #endif
-        }
-        else {
-            QString file = line.mid(line.indexOf(":") + 1, line.indexOf("->") - line.indexOf(":") - 2);
-            QString from = file.mid(file.lastIndexOf("/") + 1, file.length() - file.lastIndexOf("/"));
-            QString to = line.mid(line.indexOf("->") + 3, line.lastIndexOf(":") - line.indexOf("->") - 3);
-
-            #ifdef Q_OS_MACX
-                gameCountText = tr("Transfering game %1 -> %2...").arg(QString::fromUtf8(from.toLatin1()), to);
-                emit showStatusBarMessage(gameCountText);
-            #else
-                emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(QString::fromUtf8(from.toLatin1()), to));
-            #endif
-        }
-    }
-    else if (line.contains("EXTRACT")) {
-        QString statusBarText;
-
-        if (line.contains("EXTRACT ISO:")) {
-            statusBarText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.indexOf("\n") - line.indexOf("EXTRACT") - 8));
-        }
-        else {
-            statusBarText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
-        }
+    if (line.contains("EXTRACT")) {
+        QString statusBarText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
 
         #ifdef Q_OS_MACX
             gameCountText = statusBarText;
@@ -833,72 +1218,38 @@ void WiTools::transfer_readyReadStandardOutput() {
     else if (line.contains("copied") && !line.contains("%")) {
         emit newLogEntry(line.remove(0, 5), Info);
     }
-    else if (line.contains("disc added.") || line.contains("discs added.")) {
-        emit newLogEntry(line, Info);
-    }
     else if (line.contains("disc extracted.") || line.contains("discs extracted.")) {
         emit newLogEntry(line, Info);
     }
 }
 
-void WiTools::transfer_readyReadStandardError() {
+void WiTools::transferWBFSToImage_readyReadStandardError() {
     emit showStatusBarMessage(tr("Transfer failed!"));
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
-void WiTools::transfer_cancel() {
-    witProcess->kill();
+void WiTools::transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        emit newLogEntry(tr("Transfer successfully!"), Info);
+        emit showStatusBarMessage(tr("Ready."));
+        emit transferWBFSToImage_finished(WiTools::Ok);
+    }
+    else if (exitCode == 22) {
+        emit newLogEntry(tr("File already exists!"), Error);
+        emit showStatusBarMessage(tr("File already exists!"));
+        emit transferWBFSToImage_finished(WiTools::FileAlreadyExists);
+    }
+    else {
+        emit newLogEntry(tr("Transfer canceled!"), Error);
+        emit showStatusBarMessage(tr("Transfer canceled!"));
+        emit transferWBFSToImage_finished(WiTools::TransferCanceled);
+    }
+
+    delete witProcess;
 }
 
-void WiTools::convertGameImages(QModelIndexList indexList, QString format, QString compression, QString directory) {
-    emit setMainProgressBarVisible(true);
-    emit setMainProgressBar(0, "%p%");
-    emit showStatusBarMessage(tr("Preparing transfer..."));
-
-    QStringList paths;
-    foreach (QModelIndex index, indexList) {
-        paths.append(index.data().toString());
-    }
-
-    QStringList arguments;
-    arguments.append("COPY");
-
-    arguments.append(paths);
-    arguments.append(QString("--").append(format));
-
-    if (!compression.isEmpty()) {
-        arguments.append("--compression");
-        arguments.append(compression);
-    }
-
-    arguments.append("--dest");
-    arguments.append(directory);
-
-    if (WiiBaFuSettings.value("GamesToImage/Test", QVariant(false)).toBool()) {
-        arguments.append("--test");
-    }
-
-    if (WiiBaFuSettings.value("GamesToImage/Update", QVariant(false)).toBool()) {
-        arguments.append("--update");
-    }
-
-    if (WiiBaFuSettings.value("GamesToImage/Overwrite", QVariant(false)).toBool()) {
-        arguments.append("--overwrite");
-    }
-
-    arguments.append("--progress");
-
-    witProcess = new QProcess();
-    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transfer_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transfer_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferGamesToImage_finished(int, QProcess::ExitStatus)));
-
-    witProcess->start(wit, arguments);
-    witProcess->waitForFinished(-1);
-
-    arguments.clear();
-    emit setMainProgressBarVisible(false);
+void WiTools::cancelTransfer() {
+    witProcess->kill();
 }
 
 void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {

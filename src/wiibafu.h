@@ -94,6 +94,7 @@ private slots:
     void on_filesTab_pushButton_SelectAll_clicked();
     void on_filesTab_pushButton_TransferToWBFS_clicked();
     void on_filesTab_pushButton_TransferToImage_clicked();
+    void on_filesTab_pushButton_TransferToFileSystem_clicked();
     void on_filesTab_pushButton_ShowInfo_clicked();
 
     void on_dvdTab_pushButton_Load_clicked();
@@ -103,7 +104,7 @@ private slots:
 
     void on_wbfsTab_pushButton_Load_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
-    void on_wbfsTab_pushButton_Transfer_clicked();
+    void on_wbfsTab_pushButton_TransferToImage_clicked();
     void on_wbfsTab_pushButton_Remove_clicked();
     void on_wbfsTab_pushButton_Check_clicked();
     void on_wbfsTab_pushButton_ShowInfo_clicked();
@@ -120,20 +121,19 @@ private slots:
     void setDVDGameListModel();
     void setWBFSGameListModel();
 
+    void transferFilesToWBFS_finished(WiTools::WitStatus status);
+    void transferFilesToImage_finished(WiTools::WitStatus);
+    void transferFilesToFileSystem_finished(WiTools::WitStatus);
+
+    void transferDVDToWBFS_finished(WiTools::WitStatus status);
+    void transferDVDToImage_finished(WiTools::WitStatus);
+    void transferDVDToFileSystem_finished(WiTools::WitStatus);
+
+    void transferWBFSToImage_finished(WiTools::WitStatus);
+
     void showGameDiscCover(QImage *gameCover);
     void showGame3DCover(QImage *gameCover);
     void showGameFullHQCover(QImage *gameFullHQCover);
-
-    void transferGamesToWBFSsuccesfully();
-    void transferGamesToWBFScanceled(bool discExitst);
-
-    void transferGameFromDVDToWBFSsuccesfully();
-    void transferGameFromDVDToWBFScanceled(bool discExitst);
-    void transferGameFromDVDToImageSuccesfully();
-    void transferGameFromDVDToImageCanceled(int status);
-
-    void transferGamesToImageSuccesfully();
-    void transferGamesToImageCanceled();
 
     void setWBFSInfoText(QString text);
     void setWBFSProgressBar(int min, int max, int value, QString format);

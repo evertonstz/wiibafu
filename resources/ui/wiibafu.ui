@@ -91,6 +91,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="filesTab_pushButton_TransferToFileSystem">
+             <property name="text">
+              <string>Transfer to file system</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="filesTab_pushButton_ShowInfo">
              <property name="text">
               <string>Show info</string>
@@ -327,9 +334,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="wbfsTab_pushButton_Transfer">
+            <widget class="QPushButton" name="wbfsTab_pushButton_TransferToImage">
              <property name="text">
-              <string>Transfer</string>
+              <string>Transfer to image</string>
              </property>
             </widget>
            </item>

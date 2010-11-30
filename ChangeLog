@@ -1,3 +1,7 @@
+2010-11-30 Kai Heitkamp <dynup@ymail.com>
+  * Settings adapted
+  * All transfer routines re-written
+
 2010-11-28 Kai Heitkamp <dynup@ymail.com>
   * Transfer DVD to file system (fst)
   * Support for Wii ISO Archive (wia) format

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>580</width>
-    <height>331</height>
+    <width>600</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,32 +41,22 @@
      </item>
      <item>
       <property name="text">
-       <string>Game lists</string>
+       <string>Game list behavior</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Files</string>
+       <string>Game list columns</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Transfer to image</string>
+       <string>Transfer options</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>WBFS</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Remove from WBFS</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Check/Repair WBFS</string>
+       <string>WBFS options</string>
       </property>
      </item>
     </widget>
@@ -82,7 +72,7 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="Settings">
+     <widget class="QWidget" name="Main">
       <layout class="QGridLayout" name="gridLayout_19">
        <item row="0" column="0">
         <widget class="QGroupBox" name="main_groupBox_mainOptions">
@@ -618,53 +608,9 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Files">
-      <layout class="QGridLayout" name="gridLayout_5">
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="filesToWBFS_groupBox_Options">
-         <property name="title">
-          <string>Files to WBFS transfer options:</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="filesToWBFS_checkBox_Force">
-            <property name="text">
-             <string>Force</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="filesToWBFS_checkBox_Newer">
-            <property name="text">
-             <string>Newer</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="filesToWBFS_checkBox_Test">
-            <property name="text">
-             <string>Test</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="filesToWBFS_checkBox_Update">
-            <property name="text">
-             <string>Update</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="filesToWBFS_checkBox_Overwrite">
-            <property name="text">
-             <string>Overwrite</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="1" column="0">
+     <widget class="QWidget" name="page">
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
         <widget class="QGroupBox" name="filesToWBFS_groupBox_GameListColumns">
          <property name="title">
           <string>Files game list columns:</string>
@@ -750,85 +696,7 @@
          </layout>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="DVD">
-      <layout class="QGridLayout" name="gridLayout_7">
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="transferToImage_groupBox_Options">
-         <property name="title">
-          <string>Transfer (image/DVD) to image options:</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="gamesToImage_checkBox_Test">
-            <property name="text">
-             <string>Test (use this option is unsure!)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="gamesToImage_checkBox_Update">
-            <property name="text">
-             <string>Update</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="gamesToImage_checkBox_Overwrite">
-            <property name="text">
-             <string>Overwrite</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="WBFS">
-      <layout class="QGridLayout" name="gridLayout_9">
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="wbfsToFiles_groupBox_Options">
-         <property name="locale">
-          <locale language="English" country="UnitedStates"/>
-         </property>
-         <property name="title">
-          <string>WBFS to Files transfer options:</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="WBFSToFiles_checkBox_Force">
-            <property name="text">
-             <string>Force</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="WBFSToFiles_checkBox_Test">
-            <property name="text">
-             <string>Test</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="WBFSToFiles_checkBox_Update">
-            <property name="text">
-             <string>Update</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="WBFSToFiles_checkBox_Overwrite">
-            <property name="text">
-             <string>Overwrite</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="1" column="0">
+       <item>
         <widget class="QGroupBox" name="wbfsToFiles_groupBox_GameListColumns">
          <property name="title">
           <string>WBFS game list columns:</string>
@@ -930,28 +798,119 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="RemoveFrmWBFS">
-      <layout class="QGridLayout" name="gridLayout_11">
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="removeFromWBFS_groupBox_Options">
-         <property name="locale">
-          <locale language="English" country="UnitedStates"/>
-         </property>
+     <widget class="QWidget" name="Files">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QGroupBox" name="filesToWBFS_groupBox_Options">
          <property name="title">
-          <string>Remove from WBFS options:</string>
+          <string>To WBFS transfer options:</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_10">
+         <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
-           <widget class="QCheckBox" name="removeFromWBFS_checkBox_Force">
+           <widget class="QCheckBox" name="transferToWBFS_checkBox_Force">
             <property name="text">
              <string>Force</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="removeFromWBFS_checkBox_Test">
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="transferToWBFS_checkBox_Newer">
+            <property name="text">
+             <string>Newer</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="transferToWBFS_checkBox_Test">
             <property name="text">
              <string>Test</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="transferToWBFS_checkBox_Update">
+            <property name="text">
+             <string>Update</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="transferToWBFS_checkBox_Overwrite">
+            <property name="text">
+             <string>Overwrite</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="transferToImage_groupBox_Options">
+         <property name="title">
+          <string>To image / file system transfer options:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="transferToImageFST_checkBox_Test">
+            <property name="toolTip">
+             <string>Use this option is unsure!</string>
+            </property>
+            <property name="text">
+             <string>Test</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="transferToImageFST_checkBox_Update">
+            <property name="text">
+             <string>Update</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="transferToImageFST_checkBox_Overwrite">
+            <property name="text">
+             <string>Overwrite</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="wbfsToFiles_groupBox_Options">
+         <property name="locale">
+          <locale language="English" country="UnitedStates"/>
+         </property>
+         <property name="title">
+          <string>From WBFS transfer options:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="transferFromWBFS_checkBox_Force">
+            <property name="text">
+             <string>Force</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="transferFromWBFS_checkBox_Test">
+            <property name="text">
+             <string>Test</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="transferFromWBFS_checkBox_Update">
+            <property name="text">
+             <string>Update</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="transferFromWBFS_checkBox_Overwrite">
+            <property name="text">
+             <string>Overwrite</string>
             </property>
            </widget>
           </item>
@@ -961,8 +920,8 @@
       </layout>
      </widget>
      <widget class="QWidget" name="CheckWBFS">
-      <layout class="QGridLayout" name="gridLayout_13">
-       <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
         <widget class="QGroupBox" name="checkWBFS_groupBox_Options">
          <property name="title">
           <string>Check WBFS options:</string>
@@ -988,10 +947,10 @@
          </layout>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item>
         <widget class="QGroupBox" name="checkWBFS_groupBox_RepairOptions">
          <property name="title">
-          <string>Repair options:</string>
+          <string>Repair WBFS options:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_12">
           <item row="5" column="1">
@@ -1063,6 +1022,32 @@
          </layout>
         </widget>
        </item>
+       <item>
+        <widget class="QGroupBox" name="removeFromWBFS_groupBox_Options">
+         <property name="locale">
+          <locale language="English" country="UnitedStates"/>
+         </property>
+         <property name="title">
+          <string>Remove from WBFS options:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="removeFromWBFS_checkBox_Force">
+            <property name="text">
+             <string>Force</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="removeFromWBFS_checkBox_Test">
+            <property name="text">
+             <string>Test</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -1109,44 +1094,11 @@
   <tabstop>gameLists_radioButton_Sretch</tabstop>
   <tabstop>gameLists_radioButton_ResizeToContents</tabstop>
   <tabstop>gameLists_radioButton_Fixed</tabstop>
-  <tabstop>filesToWBFS_checkBox_Force</tabstop>
-  <tabstop>filesToWBFS_checkBox_Newer</tabstop>
-  <tabstop>filesToWBFS_checkBox_Test</tabstop>
-  <tabstop>filesToWBFS_checkBox_Update</tabstop>
-  <tabstop>filesToWBFS_checkBox_Overwrite</tabstop>
-  <tabstop>filesColumn_checkBox_ID</tabstop>
-  <tabstop>filesColumn_checkBox_Size</tabstop>
-  <tabstop>filesColumn_checkBox_LastAccess</tabstop>
-  <tabstop>filesColumn_checkBox_Name</tabstop>
-  <tabstop>filesColumn_checkBox_Insertion</tabstop>
-  <tabstop>filesColumn_checkBox_Type</tabstop>
-  <tabstop>filesColumn_checkBox_Title</tabstop>
-  <tabstop>filesColumn_checkBox_LastModification</tabstop>
-  <tabstop>filesColumn_checkBox_Source</tabstop>
-  <tabstop>filesColumn_checkBox_Region</tabstop>
-  <tabstop>filesColumn_checkBox_LastStatusChange</tabstop>
-  <tabstop>gamesToImage_checkBox_Test</tabstop>
-  <tabstop>gamesToImage_checkBox_Update</tabstop>
-  <tabstop>gamesToImage_checkBox_Overwrite</tabstop>
-  <tabstop>WBFSToFiles_checkBox_Force</tabstop>
-  <tabstop>WBFSToFiles_checkBox_Test</tabstop>
-  <tabstop>WBFSToFiles_checkBox_Update</tabstop>
-  <tabstop>WBFSToFiles_checkBox_Overwrite</tabstop>
-  <tabstop>wbfsColumn_checkBox_ID</tabstop>
-  <tabstop>wbfsColumn_checkBox_Name</tabstop>
-  <tabstop>wbfsColumn_checkBox_Title</tabstop>
-  <tabstop>wbfsColumn_checkBox_Region</tabstop>
-  <tabstop>wbfsColumn_checkBox_Size</tabstop>
-  <tabstop>wbfsColumn_checkBox_UsedBlocks</tabstop>
-  <tabstop>wbfsColumn_checkBox_Insertion</tabstop>
-  <tabstop>wbfsColumn_checkBox_LastModification</tabstop>
-  <tabstop>wbfsColumn_checkBox_LastStatusChange</tabstop>
-  <tabstop>wbfsColumn_checkBox_LastAccess</tabstop>
-  <tabstop>wbfsColumn_checkBox_Type</tabstop>
-  <tabstop>wbfsColumn_checkBox_WBFSSlot</tabstop>
-  <tabstop>wbfsColumn_checkBox_Source</tabstop>
-  <tabstop>removeFromWBFS_checkBox_Force</tabstop>
-  <tabstop>removeFromWBFS_checkBox_Test</tabstop>
+  <tabstop>transferToWBFS_checkBox_Force</tabstop>
+  <tabstop>transferToWBFS_checkBox_Newer</tabstop>
+  <tabstop>transferToWBFS_checkBox_Test</tabstop>
+  <tabstop>transferToWBFS_checkBox_Update</tabstop>
+  <tabstop>transferToWBFS_checkBox_Overwrite</tabstop>
   <tabstop>checkWBFS_checkBox_Test</tabstop>
   <tabstop>checkWBFS_checkBox_Repair</tabstop>
   <tabstop>repairWBFS_checkBox_RMFREE</tabstop>

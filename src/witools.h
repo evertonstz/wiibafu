@@ -30,6 +30,15 @@ class WiTools : public QObject {
     Q_OBJECT
 
 public:
+    enum WitStatus {
+        Ok = 0x0,
+        UnknownError = 0x01,
+        TransferCanceled = 0x02,
+        DiscAlreadyExists = 0x03,
+        FileAlreadyExists = 0x04,
+        DestinationAlreadyExists = 0x05
+    };
+
     enum LogType {
         Info = 0x0,
         Error = 0x1
@@ -52,11 +61,15 @@ public:
     void requestDVDGameListModel(QStandardItemModel *model, QString path);
     void requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
 
-    void transferGamesToWBFS(QModelIndexList indexList, QString wbfsPath);
-    void transferGamesToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString directory);
-    void transferGameFromDVDToWBFS(QString drivePath, QString wbfsPath);
-    void transferGameFromDVDToImage(QString drivePath, QString format, QString compression, QString filePath);
-    void convertGameImages(QModelIndexList indexList, QString format, QString compression, QString directory);
+    void transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath);
+    void transferFilesToImage(QModelIndexList indexList, QString format, QString compression, QString directory);
+    void transferFilesToFileSystem(QModelIndexList indexList, QString destination);
+
+    void transferDVDToWBFS(QString dvdPath, QString wbfsPath);
+    void transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory);
+    void transferDVDToFileSystem(QString dvdPath, QString destination);
+
+    void transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString compression, QString directory);
 
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
     void checkWBFS(QString wbfsPath);
@@ -69,6 +82,7 @@ public:
 private:
     QString wit, wwt;
     QProcess *witProcess;
+    WitStatus witProcessStatus;
 
     #ifdef Q_OS_MACX
         QString gameCountText;
@@ -91,28 +105,49 @@ signals:
     void newDVDGameListModel();
     void newWBFSGameListModel();
 
-    void transferGamesToWBFScanceled(bool discExitst);
-    void transferGamesToWBFSsuccessfully();
+    void transferFilesToWBFS_finished(WiTools::WitStatus);
+    void transferFilesToImage_finished(WiTools::WitStatus);
+    void transferFilesToFileSystem_finished(WiTools::WitStatus);
 
-    void transferGamesToImageCanceled();
-    void transferGamesToImageSuccessfully();
+    void transferDVDToWBFS_finished(WiTools::WitStatus);
+    void transferDVDToImage_finished(WiTools::WitStatus);
+    void transferDVDToFileSystem_finished(WiTools::WitStatus);
 
-    void transferGameFromDVDToWBFScanceled(bool discExitst);
-    void transferGameFromDVDToWBFSsuccessfully();
-    void transferGameFromDVDToImageCanceled(int status);
-    void transferGameFromDVDToImageSuccessfully();
+    void transferWBFSToImage_finished(WiTools::WitStatus);
 
     void removeGamesFromWBFS_successfully();
 
-private slots:
-    void transferGamesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void transferGamesToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void transferGameFromDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
-    void transferGameFromDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
+public slots:
+    void cancelTransfer();
 
-    void transfer_readyReadStandardOutput();
-    void transfer_readyReadStandardError();
-    void transfer_cancel();
+private slots:
+    void transferFilesToWBFS_readyReadStandardOutput();
+    void transferFilesToWBFS_readyReadStandardError();
+    void transferFilesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
+    void transferFilesToImage_readyReadStandardOutput();
+    void transferFilesToImage_readyReadStandardError();
+    void transferFilesToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
+    void transferFilesToFileSystem_readyReadStandardOutput();
+    void transferFilesToFileSystem_readyReadStandardError();
+    void transferFilesToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
+    void transferDVDToWBFS_readyReadStandardOutput();
+    void transferDVDToWBFS_readyReadStandardError();
+    void transferDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
+    void transferDVDToImage_readyReadStandardOutput();
+    void transferDVDToImage_readyReadStandardError();
+    void transferDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
+    void transferDVDToFileSystem_readyReadStandardOutput();
+    void transferDVDToFileSystem_readyReadStandardError();
+    void transferDVDToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
+    void transferWBFSToImage_readyReadStandardOutput();
+    void transferWBFSToImage_readyReadStandardError();
+    void transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
 
     void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 };
