@@ -1297,9 +1297,10 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
 
     arguments.append(ids);
 
-    if (WiiBaFuSettings.value("FilesToWBFS/Force", QVariant(false)).toBool())
+    if (WiiBaFuSettings.value("RemoveFromWBFS/Force", QVariant(false)).toBool())
         arguments.append("--force");
-    if (WiiBaFuSettings.value("FilesToWBFS/Test", QVariant(false)).toBool())
+
+    if (WiiBaFuSettings.value("RemoveFromWBFS/Test", QVariant(false)).toBool())
         arguments.append("--test");
 
     witProcess = new QProcess();

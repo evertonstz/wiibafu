@@ -143,18 +143,18 @@ void WiiBaFu::setMainProgressBarVisible(bool visible) {
 }
 
 void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
-    gameTableView->setShowGrid(WiiBaFuSettings.value("GameLists/ShowGrid", QVariant(false)).toBool());
-    gameTableView->setAlternatingRowColors(WiiBaFuSettings.value("GameLists/AlternatingRowColors", QVariant(true)).toBool());
+    gameTableView->setShowGrid(WiiBaFuSettings.value("GameListBehavior/ShowGrid", QVariant(false)).toBool());
+    gameTableView->setAlternatingRowColors(WiiBaFuSettings.value("GameListBehavior/AlternatingRowColors", QVariant(true)).toBool());
     gameTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    gameTableView->setHorizontalScrollMode((QHeaderView::ScrollMode)WiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
-    gameTableView->setVerticalScrollMode((QHeaderView::ScrollMode)WiiBaFuSettings.value("GameLists/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
+    gameTableView->setHorizontalScrollMode((QHeaderView::ScrollMode)WiiBaFuSettings.value("GameListBehavior/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
+    gameTableView->setVerticalScrollMode((QHeaderView::ScrollMode)WiiBaFuSettings.value("GameListBehavior/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
 
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();
         gameTableView->horizontalHeader()->setMovable(true);
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
-        gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)WiiBaFuSettings.value("GameLists/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
+        gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)WiiBaFuSettings.value("GameListBehavior/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         gameTableView->setSortingEnabled(true);
         gameTableView->setTabKeyNavigation(false);
