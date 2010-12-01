@@ -62,6 +62,7 @@ private:
     void setupConnections();
     void setupMainProgressBar();
     void setupGeometry();
+
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
     void setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName);
@@ -111,6 +112,7 @@ private slots:
 
     void on_infoTab_pushButton_Load3DCover_clicked();
     void on_infoTab_pushButton_LoadFullHQCover_clicked();
+    void on_infoTab_pushButton_viewInBrowser_clicked();
     void on_infoTab_pushButton_Reset_clicked();
 
     void on_logTab_pushButton_Clear_clicked();

@@ -42,6 +42,7 @@ public:
     void requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt);
     void updateTitles();
     QString titleFromDB(QString gameID);
+    void viewInBrowser(QString gameID);
 
     static QString fromUtf8(QString string);
 

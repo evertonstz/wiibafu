@@ -433,14 +433,22 @@ void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
 }
 
 void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
-    if (!ui->infoTab_lineEdit_ID->text().isEmpty())
+    if (!ui->infoTab_lineEdit_ID->text().isEmpty()) {
         ui->infoTab_label_GameCover->clear();
         common->requestGameCover(ui->infoTab_lineEdit_ID->text(), currentCoverLanguage(), Common::ThreeD);
+    }
 }
 
 void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
-    if (!ui->infoTab_lineEdit_ID->text().isEmpty())
+    if (!ui->infoTab_lineEdit_ID->text().isEmpty()) {
         common->requestGameCover(ui->infoTab_lineEdit_ID->text(), currentCoverLanguage(), Common::HighQuality);
+    }
+}
+
+void WiiBaFu::on_infoTab_pushButton_viewInBrowser_clicked() {
+    if (!ui->infoTab_lineEdit_ID->text().isEmpty()) {
+        common->viewInBrowser(ui->infoTab_lineEdit_ID->text());
+    }
 }
 
 void WiiBaFu::on_infoTab_pushButton_Reset_clicked() {

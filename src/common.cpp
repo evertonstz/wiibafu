@@ -181,6 +181,10 @@ QString Common::titleFromDB(QString gameID) {
     return title;
 }
 
+void Common::viewInBrowser(QString gameID) {
+    QDesktopServices::openUrl(QUrl(QString("http://wiitdb.com/Game/%1").arg(gameID), QUrl::StrictMode));
+}
+
 QString Common::fromUtf8(QString string) {
     #ifdef Q_OS_WIN32
         return string;

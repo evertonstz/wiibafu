@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>605</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -48,7 +48,7 @@
          <widget class="QTableView" name="filesTab_tableView"/>
         </item>
         <item>
-         <widget class="QFrame" name="frame_Files">
+         <widget class="QFrame" name="filesTab_frame_buttons">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -217,7 +217,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="frame_DVD">
+         <widget class="QFrame" name="dvdTab_frame_buttons">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -305,7 +305,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="frame_HDD">
+         <widget class="QFrame" name="wbfsTab_frame_buttons">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -949,7 +949,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -1066,7 +1066,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -1092,7 +1092,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -1127,7 +1127,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -1153,7 +1153,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -1188,7 +1188,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -1197,20 +1197,65 @@
               </layout>
              </item>
              <item>
-              <spacer name="verticalSpacer_18">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <property name="topMargin">
+                <number>5</number>
                </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Preferred</enum>
+               <property name="bottomMargin">
+                <number>5</number>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
+               <item>
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Preferred</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>10</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="infoTab_pushButton_viewInBrowser">
+                 <property name="minimumSize">
+                  <size>
+                   <width>160</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>160</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>View in browser</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_14">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Preferred</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>10</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </item>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -1224,7 +1269,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -1234,13 +1279,13 @@
                 <widget class="QPushButton" name="infoTab_pushButton_Reset">
                  <property name="minimumSize">
                   <size>
-                   <width>160</width>
+                   <width>180</width>
                    <height>0</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>160</width>
+                   <width>180</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -1259,7 +1304,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>10</width>
                    <height>20</height>
                   </size>
                  </property>
