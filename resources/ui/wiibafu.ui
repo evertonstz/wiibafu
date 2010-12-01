@@ -65,42 +65,45 @@
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_Load">
              <property name="text">
-              <string>Load</string>
+              <string>&amp;Load</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+L</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_SelectAll">
              <property name="text">
-              <string>Select all / none</string>
+              <string>&amp;Select all / none</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_TransferToWBFS">
              <property name="text">
-              <string>Transfer to WBFS</string>
+              <string>Transfer to &amp;WBFS</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_TransferToImage">
              <property name="text">
-              <string>Transfer to image</string>
+              <string>Transfer to &amp;image</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_TransferToFileSystem">
              <property name="text">
-              <string>Transfer to file system</string>
+              <string>Transfer to file s&amp;ystem</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_ShowInfo">
              <property name="text">
-              <string>Show info</string>
+              <string>Show i&amp;nfo</string>
              </property>
             </widget>
            </item>
@@ -234,28 +237,31 @@
            <item>
             <widget class="QPushButton" name="dvdTab_pushButton_Load">
              <property name="text">
-              <string>Load</string>
+              <string>&amp;Load</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+L</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="dvdTab_pushButton_TransferToWBFS">
              <property name="text">
-              <string>Transfer to WBFS</string>
+              <string>Transfer to &amp;WBFS</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="dvdTab_pushButton_TransferToImage">
              <property name="text">
-              <string>Transfer to image</string>
+              <string>Transfer to &amp;image</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="dvdTab_pushButton_TransferToFileSystem">
              <property name="text">
-              <string>Transfer to file system</string>
+              <string>Transfer to file s&amp;ystem</string>
              </property>
             </widget>
            </item>
@@ -322,42 +328,45 @@
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_Load">
              <property name="text">
-              <string>Load</string>
+              <string>&amp;Load</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+L</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_SelectAll">
              <property name="text">
-              <string>Select all / none</string>
+              <string>&amp;Select all / none</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_TransferToImage">
              <property name="text">
-              <string>Transfer to image</string>
+              <string>Transfer to &amp;image</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_Remove">
              <property name="text">
-              <string>Remove</string>
+              <string>&amp;Remove</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_Check">
              <property name="text">
-              <string>Check</string>
+              <string>&amp;Check</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_ShowInfo">
              <property name="text">
-              <string>Show info</string>
+              <string>Show i&amp;nfo</string>
              </property>
             </widget>
            </item>
@@ -1115,6 +1124,9 @@
                  <property name="text">
                   <string>Load 3D cover</string>
                  </property>
+                 <property name="shortcut">
+                  <string>Ctrl+3</string>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -1175,6 +1187,9 @@
                  </property>
                  <property name="text">
                   <string>Load full HQ cover</string>
+                 </property>
+                 <property name="shortcut">
+                  <string>Ctrl+H</string>
                  </property>
                 </widget>
                </item>
@@ -1237,6 +1252,9 @@
                  <property name="text">
                   <string>View in browser</string>
                  </property>
+                 <property name="shortcut">
+                  <string>Ctrl+V</string>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -1291,6 +1309,9 @@
                  </property>
                  <property name="text">
                   <string>Reset</string>
+                 </property>
+                 <property name="shortcut">
+                  <string>Ctrl+R</string>
                  </property>
                 </widget>
                </item>
@@ -1365,21 +1386,30 @@
            <item>
             <widget class="QPushButton" name="logTab_pushButton_Clear">
              <property name="text">
-              <string>Clear</string>
+              <string>Clea&amp;r</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+R</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="logTab_pushButton_Copy">
              <property name="text">
-              <string>Copy</string>
+              <string>&amp;Copy</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+C</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="logTab_pushButton_Save">
              <property name="text">
-              <string>Save</string>
+              <string>&amp;Save</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+S</string>
              </property>
             </widget>
            </item>
@@ -1409,13 +1439,13 @@
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
-     <string>Options</string>
+     <string>&amp;Options</string>
     </property>
     <addaction name="menuOptions_Settings"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>Tools</string>
+     <string>&amp;Tools</string>
     </property>
     <addaction name="menuTools_CheckWBFS"/>
     <addaction name="menuTools_CreateWBFS"/>
@@ -1424,7 +1454,7 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
     <addaction name="menuHelp_About"/>
     <addaction name="menuHelp_About_Qt"/>
@@ -1437,32 +1467,35 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="menuHelp_About">
    <property name="text">
-    <string>About...</string>
+    <string>&amp;About...</string>
    </property>
   </action>
   <action name="menuFile_Exit">
    <property name="text">
-    <string>Exit</string>
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="menuHelp_About_Qt">
    <property name="text">
-    <string>About Qt...</string>
+    <string>About &amp;Qt...</string>
    </property>
   </action>
   <action name="menuTools_CheckWBFS">
    <property name="text">
-    <string>Check WBFS</string>
+    <string>&amp;Check WBFS</string>
    </property>
   </action>
   <action name="menuOptions_Settings">
    <property name="text">
-    <string>Settings...</string>
+    <string>&amp;Settings...</string>
    </property>
   </action>
   <action name="menuTools_CreateWBFS">
    <property name="text">
-    <string>Create WBFS</string>
+    <string>C&amp;reate WBFS</string>
    </property>
   </action>
   <action name="menuTools_FormatWBFSPartition">
@@ -1472,7 +1505,7 @@
   </action>
   <action name="menuTools_UpdateTitles">
    <property name="text">
-    <string>Update titles</string>
+    <string>&amp;Update titles</string>
    </property>
   </action>
  </widget>

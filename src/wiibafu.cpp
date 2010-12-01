@@ -498,7 +498,7 @@ void WiiBaFu::setFilesGameListModel() {
         ui->filesTab_tableView->setModel(filesListModel);
         ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
 
-        ui->filesTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("GameLists/Files_HeaderStates").toByteArray());
+        ui->filesTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("FilesGameList/HeaderStates").toByteArray());
 
         setFilesColumns();
         if (WiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool()) {
@@ -527,7 +527,7 @@ void WiiBaFu::setWBFSGameListModel() {
         ui->wbfsTab_tableView->setModel(wbfsListModel);
         ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
 
-        ui->wbfsTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("GameLists/WBFS_HeaderStates").toByteArray());
+        ui->wbfsTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("WBFSGameList/HeaderStates").toByteArray());
 
         setWBFSColumns();
         if (WiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool()) {
@@ -804,86 +804,86 @@ void WiiBaFu::saveMainWindowGeometry() {
 
 void WiiBaFu::saveGameListHeaderStates() {
     if (ui->filesTab_tableView->horizontalHeader()->count() > 0 ) {
-        WiiBaFuSettings.setValue("GameLists/Files_HeaderStates", ui->filesTab_tableView->horizontalHeader()->saveState());
+        WiiBaFuSettings.setValue("FilesGameList/HeaderStates", ui->filesTab_tableView->horizontalHeader()->saveState());
     }
 
     if (ui->wbfsTab_tableView->horizontalHeader()->count() > 0 ) {
-        WiiBaFuSettings.setValue("GameLists/WBFS_HeaderStates", ui->wbfsTab_tableView->horizontalHeader()->saveState());
+        WiiBaFuSettings.setValue("WBFSGameList/HeaderStates", ui->wbfsTab_tableView->horizontalHeader()->saveState());
     }
 }
 
 void WiiBaFu::setFilesColumns() {
-    if (WiiBaFuSettings.value("FilesToWBFS/columnID", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnID", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(0);
     }
     else {
         ui->filesTab_tableView->hideColumn(0);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnName", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnName", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(1);
     }
     else {
         ui->filesTab_tableView->hideColumn(1);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnTitle", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnTitle", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(2);
     }
     else {
         ui->filesTab_tableView->hideColumn(2);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnRegion", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnRegion", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(3);
     }
     else {
         ui->filesTab_tableView->hideColumn(3);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnSize", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnSize", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(4);
     }
     else {
         ui->filesTab_tableView->hideColumn(4);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnInsertion", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnInsertion", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(5);
     }
     else {
         ui->filesTab_tableView->hideColumn(5);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnLastModification", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnLastModification", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(6);
     }
     else {
         ui->filesTab_tableView->hideColumn(6);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnLastStatusChange", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnLastStatusChange", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(7);
     }
     else {
         ui->filesTab_tableView->hideColumn(7);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnLastAccess", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnLastAccess", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(8);
     }
     else {
         ui->filesTab_tableView->hideColumn(8);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnType", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnType", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(9);
     }
     else {
         ui->filesTab_tableView->hideColumn(9);
     }
 
-    if (WiiBaFuSettings.value("FilesToWBFS/columnSource", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("FilesGameList/columnSource", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(10);
     }
     else {
@@ -892,91 +892,91 @@ void WiiBaFu::setFilesColumns() {
 }
 
 void WiiBaFu::setWBFSColumns() {
-    if (WiiBaFuSettings.value("WBFStoFiles/columnID", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnID", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(0);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(0);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnName", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnName", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(1);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(1);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnTitle", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnTitle", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(2);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(2);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnRegion", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnRegion", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(3);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(3);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnSize", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnSize", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(4);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(4);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnUsedBlocks", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnUsedBlocks", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(5);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(5);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnInsertion", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnInsertion", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(6);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(6);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnLastModification", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnLastModification", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(7);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(7);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnLastStatusChange", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnLastStatusChange", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(8);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(8);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnLastAccess", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnLastAccess", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(9);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(9);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnType", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnType", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(10);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(10);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnWBFSSlot", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnWBFSSlot", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(11);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(11);
     }
 
-    if (WiiBaFuSettings.value("WBFStoFiles/columnSource", QVariant(true)).toBool()) {
+    if (WiiBaFuSettings.value("WBFSGameList/columnSource", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(12);
     }
     else {
