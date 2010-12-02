@@ -357,7 +357,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     int current = 0, max = 0;
     QStandardItem *item;
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
-    QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, wbfsslots, filenames;
+    QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, wbfsslots, sources;
 
     foreach (QString line, lines) {
         line.remove("\r");
@@ -461,8 +461,8 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
             wbfsslots.append(item);
             continue;
         }
-        else if (line.startsWith("filename=")) {
-            filenames.append(new QStandardItem(Common::fromUtf8(line.section("=", 1))));
+        else if (line.startsWith("source=")) {
+            sources.append(new QStandardItem(line.section("=", 1)));
             continue;
         }
     }
@@ -480,7 +480,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     model->appendColumn(atimes);
     model->appendColumn(filetypes);
     model->appendColumn(wbfsslots);
-    model->appendColumn(filenames);
+    model->appendColumn(sources);
 
     model->setHeaderData(0, Qt::Horizontal, tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, tr("Name"));
