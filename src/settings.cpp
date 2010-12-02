@@ -124,7 +124,7 @@ void Settings::load() {
     ui->main_lineEdit_proxyPassword->setText(WiiBaFuSettings.value("Main/ProxyPassword", QVariant("")).toString());
     ui->main_comboBox_proxyType->setCurrentIndex(WiiBaFuSettings.value("Main/ProxyType", QVariant(0)).toInt());
     ui->main_comboBox_Logging->setCurrentIndex(WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
-    ui->main_comboBox_Language->setCurrentIndex(WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt());
+    ui->main_comboBox_Language->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
 
     ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(QDir::currentPath().append("/wit"))).toString());
     ui->wit_checkBox_Auto->setChecked(WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool());
@@ -200,7 +200,7 @@ void Settings::save() {
     WiiBaFuSettings.setValue("Main/ProxyPassword", ui->main_lineEdit_proxyPassword->text());
     WiiBaFuSettings.setValue("Main/ProxyType", ui->main_comboBox_proxyType->currentIndex());
     WiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
-    WiiBaFuSettings.setValue("Main/Language", ui->main_comboBox_Language->currentIndex());
+    WiiBaFuSettings.setValue("Main/GameLanguage", ui->main_comboBox_Language->currentIndex());
 
     WiiBaFuSettings.setValue("WIT/PathToWIT", ui->wit_lineEdit_PathToWIT->text());
     WiiBaFuSettings.setValue("WIT/Auto", ui->wit_checkBox_Auto->checkState());

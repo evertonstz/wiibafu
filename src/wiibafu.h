@@ -68,8 +68,9 @@ private:
     void setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName);
     void updateTitles();
 
-    QString currentCoverLanguage();
+    QString currentGameLanguage();
     QString wbfsPath();
+    QLocale locale();
     int headerIndex(QAbstractItemModel *model, QString text, Qt::Orientation orientation);
 
     void saveMainWindowGeometry();

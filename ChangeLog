@@ -1,4 +1,6 @@
-2010-12-01 Kai Heitkamp <dynup@ymail.com>
+2010-12-02 Kai Heitkamp <dynup@ymail.com>
+  * Localization for dates
+  * WBFS used blocks sorting fixed
   * Shortcuts added
   * View game infos in browser
   * Transfer infos for log

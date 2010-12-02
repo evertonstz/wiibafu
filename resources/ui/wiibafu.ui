@@ -965,7 +965,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QComboBox" name="infoTab_comboBox_CoverLanguages">
+                <widget class="QComboBox" name="infoTab_comboBox_GameLanguages">
                  <property name="minimumSize">
                   <size>
                    <width>100</width>

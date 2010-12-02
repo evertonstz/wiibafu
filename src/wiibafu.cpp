@@ -165,10 +165,12 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         gameTableView->verticalHeader()->setResizeMode(QHeaderView::Stretch);
         gameTableView->setSelectionMode(QAbstractItemView::NoSelection);
     }
+
+    gameTableView->setLocale(locale());
 }
 
 void WiiBaFu::on_menuOptions_Settings_triggered() {
-    int language = WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt();
+    int language = WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt();
 
     if (settings->exec() == QDialog::Accepted) {
         setGameListAttributes(ui->filesTab_tableView);
@@ -178,7 +180,7 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
         setFilesColumns();
         setWBFSColumns();
 
-        if (WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt() != language) {
+        if (WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt() != language) {
             updateTitles();
         }
 
@@ -189,7 +191,7 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
             ui->wbfsTab_tableView->update();
         }
 
-        ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt());
+        ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
     }
 }
 
@@ -435,13 +437,13 @@ void WiiBaFu::on_wbfsTab_pushButton_Check_clicked() {
 void WiiBaFu::on_infoTab_pushButton_Load3DCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty()) {
         ui->infoTab_label_GameCover->clear();
-        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), currentCoverLanguage(), Common::ThreeD);
+        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), currentGameLanguage(), Common::ThreeD);
     }
 }
 
 void WiiBaFu::on_infoTab_pushButton_LoadFullHQCover_clicked() {
     if (!ui->infoTab_lineEdit_ID->text().isEmpty()) {
-        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), currentCoverLanguage(), Common::HighQuality);
+        common->requestGameCover(ui->infoTab_lineEdit_ID->text(), currentGameLanguage(), Common::HighQuality);
     }
 }
 
@@ -621,14 +623,14 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
 
         if (!ui->infoTab_lineEdit_ID->text().contains(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text())) {
             if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("PAL") || model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("RF")) {
-                ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt());
+                ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
             }
             else if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("NTSC")) {
-                ui->infoTab_comboBox_CoverLanguages->setCurrentIndex(1);
+                ui->infoTab_comboBox_GameLanguages->setCurrentIndex(1);
             }
 
             ui->infoTab_label_GameCover->clear();
-            common->requestGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text(), currentCoverLanguage(), Common::ThreeD);
+            common->requestGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text(), currentGameLanguage(), Common::ThreeD);
         }
 
         if (tableView == ui->wbfsTab_tableView) {
@@ -736,8 +738,8 @@ void WiiBaFu::addEntryToLog(QString entry, WiTools::LogType type) {
     }
 }
 
-QString WiiBaFu::currentCoverLanguage() {
-    switch (ui->infoTab_comboBox_CoverLanguages->currentIndex()) {
+QString WiiBaFu::currentGameLanguage() {
+    switch (ui->infoTab_comboBox_GameLanguages->currentIndex()) {
         case 0:  return "EN";
                  break;
         case 1:  return "US";
@@ -758,7 +760,7 @@ QString WiiBaFu::currentCoverLanguage() {
                  break;
         case 9:  return "DK";
                  break;
-        case 10:  return "NO";
+        case 10: return "NO";
                  break;
         case 11: return "FI";
                  break;
@@ -774,6 +776,50 @@ QString WiiBaFu::currentCoverLanguage() {
                  break;
         default: return "EN";
     }
+}
+
+QLocale WiiBaFu::locale() {
+    QLocale locale;
+
+    switch (WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt()) {
+        case 0:  locale = QLocale(QLocale::English, QLocale::UnitedKingdom);
+                 break;
+        case 1:  locale = QLocale(QLocale::English, QLocale::UnitedStates);
+                 break;
+        case 2:  locale = QLocale(QLocale::French, QLocale::France);
+                 break;
+        case 3:  locale = QLocale(QLocale::German, QLocale::Germany);
+                 break;
+        case 4:  locale = QLocale(QLocale::Spanish, QLocale::Spain);
+                 break;
+        case 5:  locale = QLocale(QLocale::Italian, QLocale::Italy);
+                 break;
+        case 6:  locale = QLocale(QLocale::Dutch, QLocale::Netherlands);
+                 break;
+        case 7:  locale = QLocale(QLocale::Portuguese, QLocale::Portugal);
+                 break;
+        case 8:  locale = QLocale(QLocale::Swedish, QLocale::Sweden);
+                 break;
+        case 9:  locale = QLocale(QLocale::Danish, QLocale::Denmark);
+                 break;
+        case 10: locale = QLocale(QLocale::NorthernSami, QLocale::Norway);
+                 break;
+        case 11: locale = QLocale(QLocale::Finnish, QLocale::Finland);
+                 break;
+        case 12: locale = QLocale(QLocale::Russian, QLocale::RussianFederation);
+                 break;
+        case 13: locale = QLocale(QLocale::Japanese, QLocale::Japan);
+                 break;
+        case 14: locale = QLocale(QLocale::Korean, QLocale::DemocraticRepublicOfKorea);
+                 break;
+        case 15: locale = QLocale(QLocale::Chinese, QLocale::Taiwan);
+                 break;
+        case 16: locale = QLocale(QLocale::Chinese, QLocale::China);
+                 break;
+        default: locale = QLocale(QLocale::English, QLocale::UnitedKingdom);
+    }
+
+    return locale;
 }
 
 QString WiiBaFu::wbfsPath() {

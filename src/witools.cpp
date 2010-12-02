@@ -50,6 +50,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     emit newLogEntry(Common::fromUtf8(bytes), Info);
 
     double count = 0;
+    QStandardItem *item;
     QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
 
     foreach (QString line, lines) {
@@ -88,19 +89,27 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
             continue;
         }
         else if (line.startsWith("itime=")) {
-            itimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            itimes.append(item);
             continue;
         }
         else if (line.startsWith("mtime=")) {
-            mtimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            mtimes.append(item);
             continue;
         }
         else if (line.startsWith("ctime=")) {
-            ctimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            ctimes.append(item);
             continue;
         }
         else if (line.startsWith("atime=")) {
-            atimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            atimes.append(item);
             continue;
         }
         else if (line.startsWith("filetype=")) {
@@ -126,6 +135,8 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     model->appendColumn(filetypes);
     model->appendColumn(filenames);
 
+    delete item;
+
     model->setHeaderData(0, Qt::Horizontal, tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, tr("Name (%1 / %2 GB)").arg(QString::number(ids.count()), QString::number((count / 1073741824), 'f', 2)));
     model->setHeaderData(2, Qt::Horizontal, tr("Title"));
@@ -137,18 +148,6 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     model->setHeaderData(8, Qt::Horizontal, tr("Last access"));
     model->setHeaderData(9, Qt::Horizontal, tr("Type"));
     model->setHeaderData(10, Qt::Horizontal, tr("Source"));
-
-    ids.clear();
-    names.clear();
-    titles.clear();
-    regions.clear();
-    sizes.clear();
-    itimes.clear();
-    mtimes.clear();
-    ctimes.clear();
-    atimes.clear();
-    filetypes.clear();
-    filenames.clear();
 
     emit newFilesGameListModel();
 }
@@ -177,6 +176,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
 
     emit newLogEntry(Common::fromUtf8(bytes), Info);
 
+    QStandardItem *item;
     QList<QStandardItem *> game;
 
     foreach (QString line, lines) {
@@ -217,7 +217,9 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
         }
         else if (line.startsWith("itime=")) {
             if (line.section("=", 1).section(" ", 1) != "") {
-                game.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+                item = new QStandardItem();
+                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+                game.append(item);
             }
             else {
                 game.append(new QStandardItem("--"));
@@ -226,7 +228,9 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
         }
         else if (line.startsWith("mtime=")) {
             if (line.section("=", 1).section(" ", 1) != "") {
-                game.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+                item = new QStandardItem();
+                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+                game.append(item);
             }
             else {
                 game.append(new QStandardItem("--"));
@@ -235,7 +239,9 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
         }
         else if (line.startsWith("ctime=")) {
             if (line.section("=", 1).section(" ", 1) != "") {
-                game.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+                item = new QStandardItem();
+                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+                game.append(item);
             }
             else {
                 game.append(new QStandardItem("--"));
@@ -244,7 +250,9 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
         }
         else if (line.startsWith("atime=")) {
             if (line.section("=", 1).section(" ", 1) != "") {
-                game.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+                item = new QStandardItem();
+                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+                game.append(item);
             }
             else {
                 game.append(new QStandardItem("--"));
@@ -301,7 +309,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     model->setHeaderData(14, Qt::Vertical, tr("WBFS slot:"));
     model->setHeaderData(15, Qt::Vertical, tr("Source:"));
 
-    game.clear();
+    delete item;
 
     emit newDVDGameListModel();
 }
@@ -347,6 +355,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     emit newLogEntry(Common::fromUtf8(bytes), Info);
 
     int current = 0, max = 0;
+    QStandardItem *item;
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
     QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, wbfsslots, filenames;
 
@@ -413,23 +422,33 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
             continue;
         }
         else if (line.startsWith("used_blocks=")) {
-            usedblocks.append(new QStandardItem(line.section("=", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(line.section("=", 1).toInt()), Qt::DisplayRole);
+            usedblocks.append(item);
             continue;
         }
         else if (line.startsWith("itime=")) {
-            itimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            itimes.append(item);
             continue;
         }
         else if (line.startsWith("mtime=")) {
-            mtimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            mtimes.append(item);
             continue;
         }
         else if (line.startsWith("ctime=")) {
-            ctimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            ctimes.append(item);
             continue;
         }
         else if (line.startsWith("atime=")) {
-            atimes.append(new QStandardItem(line.section("=", 1).section(" ", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            atimes.append(item);
             continue;
         }
         else if (line.startsWith("filetype=")) {
@@ -437,7 +456,9 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
             continue;
         }
         else if (line.startsWith("wbfs_slot=")) {
-            wbfsslots.append(new QStandardItem(line.section("=", 1)));
+            item = new QStandardItem();
+            item->setData(QVariant(line.section("=", 1).toInt()), Qt::DisplayRole);
+            wbfsslots.append(item);
             continue;
         }
         else if (line.startsWith("filename=")) {
@@ -475,19 +496,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     model->setHeaderData(11, Qt::Horizontal, tr("WBFS slot"));
     model->setHeaderData(12, Qt::Horizontal, tr("Source"));
 
-    ids.clear();
-    names.clear();
-    titles.clear();
-    regions.clear();
-    sizes.clear();
-    usedblocks.clear();
-    itimes.clear();
-    mtimes.clear();
-    ctimes.clear();
-    atimes.clear();
-    filetypes.clear();
-    wbfsslots.clear();
-    filenames.clear();
+    delete item;
 
     #ifdef Q_OS_MACX
         emit setProgressBarWBFS(0, max, current, "%p%");
@@ -1541,7 +1550,7 @@ QString WiTools::wwtVersion() {
 QString WiTools::witTitlesPath() {
     QString titles;
 
-    switch (WiiBaFuSettings.value("Main/Language", QVariant(0)).toInt()) {
+    switch (WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt()) {
         case 0:  titles = "titles";
                  break;
         case 1:  titles = "titles";
