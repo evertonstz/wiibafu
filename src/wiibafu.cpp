@@ -518,12 +518,15 @@ void WiiBaFu::setFilesGameListModel() {
 
         emit stopBusy();
         ui->filesTab_pushButton_Load->setText(tr("&Load"));
+        ui->filesTab_pushButton_Load->setShortcut(tr("Ctrl+L"));
         setStatusBarText(tr("Ready."));
     }
 }
 
 void WiiBaFu::loadingGamesCanceled() {
     ui->filesTab_pushButton_Load->setText(tr("&Load"));
+    ui->filesTab_pushButton_Load->setShortcut(tr("Ctrl+L"));
+
     setStatusBarText(tr("Loading canceled!"));
     emit stopBusy();
 }
@@ -531,6 +534,7 @@ void WiiBaFu::loadingGamesCanceled() {
 void WiiBaFu::loadingGamesFailed(WiTools::WitStatus) {
     emit stopBusy();
     ui->filesTab_pushButton_Load->setText(tr("&Load"));
+    ui->filesTab_pushButton_Load->setShortcut(tr("Ctrl+L"));
 }
 
 void WiiBaFu::setDVDGameListModel() {

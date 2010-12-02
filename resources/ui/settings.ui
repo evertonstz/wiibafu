@@ -532,6 +532,9 @@
           </item>
           <item row="1" column="0">
            <widget class="QCheckBox" name="gameLists_checkBox_ToolTips">
+            <property name="toolTip">
+             <string>Tools tips for Name or Title, if one of this columns hidden</string>
+            </property>
             <property name="text">
              <string>Tool tips</string>
             </property>

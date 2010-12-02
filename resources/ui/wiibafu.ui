@@ -1250,7 +1250,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>View in browser</string>
+                  <string>View game in browser</string>
                  </property>
                  <property name="shortcut">
                   <string>Ctrl+V</string>
