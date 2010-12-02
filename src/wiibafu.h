@@ -80,6 +80,7 @@ private:
 
 signals:
     void cancelTransfer();
+    void cancelLoading();
     void startBusy();
     void stopBusy();
 
@@ -121,6 +122,8 @@ private slots:
     void on_logTab_pushButton_Save_clicked();
 
     void setFilesGameListModel();
+    void loadingGamesCanceled();
+    void loadingGamesFailed(WiTools::WitStatus);
     void setDVDGameListModel();
     void setWBFSGameListModel();
 

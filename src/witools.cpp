@@ -28,128 +28,164 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
 void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path) {
     emit showStatusBarMessage(tr("Loading games..."));
 
-    QProcess filesRead;
-    filesRead.start(wit, QStringList() << "LIST" << "--titles" << witTitlesPath() << "--section" << "--recurse" << path);
+    witModel = model;
 
-    if (!filesRead.waitForFinished(-1)) {
-        if (filesRead.errorString().contains("No such file or directory")) {
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(requestFilesGameListModel_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(requestFilesGameListModel_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(requestFilesGameListModel_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(wit, QStringList() << "LIST" << "--titles" << witTitlesPath() << "--section" << "--recurse" << path << "--progress");
+
+    if (!witProcess->waitForFinished(-1)) {
+        if (witProcess->errorString().contains("No such file or directory")) {
             emit showStatusBarMessage(tr("Wiimms ISO Tool not found!"));
             emit newLogEntry(tr("Wiimms ISO Tool not found!"), Error);
+            emit loadingGamesFailed(NoSuchFileOrDirectory);
         }
         else {
             emit showStatusBarMessage(tr("Loading games failed!"));
-            emit newLogEntry(tr("Loading games failed! (status: %1, code: %2,  %3)").arg(QString::number(filesRead.exitStatus()), QString::number(filesRead.exitCode()), filesRead.errorString()), Error);
+            emit newLogEntry(tr("Loading games failed! (status: %1, code: %2,  %3)").arg(QString::number(witProcess->exitStatus()), QString::number(witProcess->exitCode()), witProcess->errorString()), Error);
+            emit loadingGamesFailed(UnknownError);
         }
 
         return;
     }
+}
 
-    QByteArray bytes = filesRead.readAllStandardOutput();
-    QStringList lines = QString(bytes).split("\n");
+void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
+    QString line = QString(witProcess->readLine().constData()).remove("\r").remove("\n");
 
-    emit newLogEntry(Common::fromUtf8(bytes), Info);
+    if (!line.isEmpty() && line.contains("scanned")) {
+        emit showStatusBarMessage(line);
+        emit newLogEntry(line, Info);
+    }
+}
 
-    double count = 0;
-    QStandardItem *item;
-    QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
+void WiTools::requestFilesGameListModel_readyReadStandardError() {
+    emit showStatusBarMessage(tr("Loading games failed!"));
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
+}
 
-    foreach (QString line, lines) {
-        line.remove("\r");
+void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::CrashExit) {
+        emit newLogEntry(tr("Loading games canceled!"), Info);
+        emit loadingGamesCanceled();
+    }
+    else if (exitCode != 0) {
+        emit newLogEntry(tr("Loading failed!"), Error);
+    }
+    else if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        QByteArray bytes = witProcess->readAllStandardOutput();
+        QStringList lines = QString(bytes).split("\n");
 
-        if (line.isEmpty()) {
-            continue;
+        emit newLogEntry(Common::fromUtf8(bytes), Info);
+
+        double count = 0;
+        QStandardItem *item;
+        QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
+
+        foreach (QString line, lines) {
+            line.remove("\r");
+
+            if (line.isEmpty()) {
+                continue;
+            }
+            else if (line.contains("total-discs=0")) {
+                emit showStatusBarMessage(tr("No games found!"));
+                emit loadingGamesFailed(NoGamesFound);
+                return;
+            }
+            else if (line.contains("total-size=")) {
+                count += line.section("=", 1).toDouble();
+                continue;
+            }
+            else if (line.startsWith("id=")) {
+                ids.append(new QStandardItem(line.section("=", 1)));
+                continue;
+            }
+            else if (line.startsWith("name=")) {
+                names.append(new QStandardItem(Common::fromUtf8(line.section("=", 1))));
+                continue;
+            }
+            else if (line.startsWith("title=")) {
+                titles.append(new QStandardItem(Common::fromUtf8(line.section("=", 1))));
+                continue;
+            }
+            else if (line.startsWith("region=")) {
+                regions.append(new QStandardItem(line.section("=", 1)));
+                continue;
+            }
+            else if (line.startsWith("size=")) {
+                sizes.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
+                continue;
+            }
+            else if (line.startsWith("itime=")) {
+                item = new QStandardItem();
+                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+                itimes.append(item);
+                continue;
+            }
+            else if (line.startsWith("mtime=")) {
+                item = new QStandardItem();
+                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+                mtimes.append(item);
+                continue;
+            }
+            else if (line.startsWith("ctime=")) {
+                item = new QStandardItem();
+                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+                ctimes.append(item);
+                continue;
+            }
+            else if (line.startsWith("atime=")) {
+                item = new QStandardItem();
+                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+                atimes.append(item);
+                continue;
+            }
+            else if (line.startsWith("filetype=")) {
+                filetypes.append(new QStandardItem(line.section("=", 1)));
+                continue;
+            }
+            else if (line.startsWith("filename=")) {
+                filenames.append(new QStandardItem(Common::fromUtf8(line.section("=", 1))));
+                continue;
+            }
         }
-        else if (line.contains("total-discs=0")) {
-            emit showStatusBarMessage(tr("No games found!"));
-            emit stopBusy();
-            return;
-        }
-        else if (line.contains("total-size=")) {
-            count += line.section("=", 1).toDouble();
-            continue;
-        }
-        else if (line.startsWith("id=")) {
-            ids.append(new QStandardItem(line.section("=", 1)));
-            continue;
-        }
-        else if (line.startsWith("name=")) {
-            names.append(new QStandardItem(Common::fromUtf8(line.section("=", 1))));
-            continue;
-        }
-        else if (line.startsWith("title=")) {
-            titles.append(new QStandardItem(Common::fromUtf8(line.section("=", 1))));
-            continue;
-        }
-        else if (line.startsWith("region=")) {
-            regions.append(new QStandardItem(line.section("=", 1)));
-            continue;
-        }
-        else if (line.startsWith("size=")) {
-            sizes.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
-            continue;
-        }
-        else if (line.startsWith("itime=")) {
-            item = new QStandardItem();
-            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
-            itimes.append(item);
-            continue;
-        }
-        else if (line.startsWith("mtime=")) {
-            item = new QStandardItem();
-            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
-            mtimes.append(item);
-            continue;
-        }
-        else if (line.startsWith("ctime=")) {
-            item = new QStandardItem();
-            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
-            ctimes.append(item);
-            continue;
-        }
-        else if (line.startsWith("atime=")) {
-            item = new QStandardItem();
-            item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
-            atimes.append(item);
-            continue;
-        }
-        else if (line.startsWith("filetype=")) {
-            filetypes.append(new QStandardItem(line.section("=", 1)));
-            continue;
-        }
-        else if (line.startsWith("filename=")) {
-            filenames.append(new QStandardItem(Common::fromUtf8(line.section("=", 1))));
-            continue;
-        }
+
+        witModel->clear();
+        witModel->appendColumn(ids);
+        witModel->appendColumn(names);
+        witModel->appendColumn(titles);
+        witModel->appendColumn(regions);
+        witModel->appendColumn(sizes);
+        witModel->appendColumn(itimes);
+        witModel->appendColumn(mtimes);
+        witModel->appendColumn(ctimes);
+        witModel->appendColumn(atimes);
+        witModel->appendColumn(filetypes);
+        witModel->appendColumn(filenames);
+
+        delete item;
+
+        witModel->setHeaderData(0, Qt::Horizontal, tr("ID"));
+        witModel->setHeaderData(1, Qt::Horizontal, tr("Name (%1 / %2 GB)").arg(QString::number(ids.count()), QString::number((count / 1073741824), 'f', 2)));
+        witModel->setHeaderData(2, Qt::Horizontal, tr("Title"));
+        witModel->setHeaderData(3, Qt::Horizontal, tr("Region"));
+        witModel->setHeaderData(4, Qt::Horizontal, tr("Size"));
+        witModel->setHeaderData(5, Qt::Horizontal, tr("Insertion"));
+        witModel->setHeaderData(6, Qt::Horizontal, tr("Last modification"));
+        witModel->setHeaderData(7, Qt::Horizontal, tr("Last status change"));
+        witModel->setHeaderData(8, Qt::Horizontal, tr("Last access"));
+        witModel->setHeaderData(9, Qt::Horizontal, tr("Type"));
+        witModel->setHeaderData(10, Qt::Horizontal, tr("Source"));
+
+        emit newFilesGameListModel();
     }
 
-    model->clear();
-    model->appendColumn(ids);
-    model->appendColumn(names);
-    model->appendColumn(titles);
-    model->appendColumn(regions);
-    model->appendColumn(sizes);
-    model->appendColumn(itimes);
-    model->appendColumn(mtimes);
-    model->appendColumn(ctimes);
-    model->appendColumn(atimes);
-    model->appendColumn(filetypes);
-    model->appendColumn(filenames);
-
-    delete item;
-
-    model->setHeaderData(0, Qt::Horizontal, tr("ID"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Name (%1 / %2 GB)").arg(QString::number(ids.count()), QString::number((count / 1073741824), 'f', 2)));
-    model->setHeaderData(2, Qt::Horizontal, tr("Title"));
-    model->setHeaderData(3, Qt::Horizontal, tr("Region"));
-    model->setHeaderData(4, Qt::Horizontal, tr("Size"));
-    model->setHeaderData(5, Qt::Horizontal, tr("Insertion"));
-    model->setHeaderData(6, Qt::Horizontal, tr("Last modification"));
-    model->setHeaderData(7, Qt::Horizontal, tr("Last status change"));
-    model->setHeaderData(8, Qt::Horizontal, tr("Last access"));
-    model->setHeaderData(9, Qt::Horizontal, tr("Type"));
-    model->setHeaderData(10, Qt::Horizontal, tr("Source"));
-
-    emit newFilesGameListModel();
+    delete witProcess;
 }
 
 void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
@@ -1284,6 +1320,10 @@ void WiTools::transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus ex
 }
 
 void WiTools::cancelTransfer() {
+    witProcess->kill();
+}
+
+void WiTools::cancelLoading() {
     witProcess->kill();
 }
 

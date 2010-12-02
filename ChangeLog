@@ -1,4 +1,6 @@
 2010-12-02 Kai Heitkamp <dynup@ymail.com>
+  * Cancel possibility for loading games process
+  * Progress infos while loading games
   * Localization for dates
   * WBFS used blocks sorting fixed
   * Shortcuts added

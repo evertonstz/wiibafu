@@ -36,7 +36,9 @@ public:
         TransferCanceled = 0x02,
         DiscAlreadyExists = 0x03,
         FileAlreadyExists = 0x04,
-        DestinationAlreadyExists = 0x05
+        DestinationAlreadyExists = 0x05,
+        NoSuchFileOrDirectory = 0x06,
+        NoGamesFound = 0x07
     };
 
     enum LogType {
@@ -83,6 +85,7 @@ private:
     QString wit, wwt;
     QProcess *witProcess;
     WitStatus witProcessStatus;
+    QStandardItemModel *witModel;
 
     #ifdef Q_OS_MACX
         QString gameCountText;
@@ -104,6 +107,8 @@ signals:
     void newFilesGameListModel();
     void newDVDGameListModel();
     void newWBFSGameListModel();
+    void loadingGamesCanceled();
+    void loadingGamesFailed(WiTools::WitStatus);
 
     void transferFilesToWBFS_finished(WiTools::WitStatus);
     void transferFilesToImage_finished(WiTools::WitStatus);
@@ -119,8 +124,13 @@ signals:
 
 public slots:
     void cancelTransfer();
+    void cancelLoading();
 
 private slots:
+    void requestFilesGameListModel_readyReadStandardOutput();
+    void requestFilesGameListModel_readyReadStandardError();
+    void requestFilesGameListModel_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
     void transferFilesToWBFS_readyReadStandardOutput();
     void transferFilesToWBFS_readyReadStandardError();
     void transferFilesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);

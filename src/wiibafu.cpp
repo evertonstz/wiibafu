@@ -65,6 +65,7 @@ void WiiBaFu::setupConnections() {
     qRegisterMetaType<WiTools::LogType>("WiTools::LogType");
 
     connect(this, SIGNAL(cancelTransfer()), wiTools, SLOT(cancelTransfer()));
+    connect(this, SIGNAL(cancelLoading()), wiTools, SLOT(cancelLoading()));
 
     connect(this, SIGNAL(startBusy()), this, SLOT(startMainProgressBarBusy()));
     connect(this, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
@@ -79,6 +80,8 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
 
     connect(wiTools, SIGNAL(newFilesGameListModel()), this, SLOT(setFilesGameListModel()));
+    connect(wiTools, SIGNAL(loadingGamesCanceled()), this, SLOT(loadingGamesCanceled()));
+    connect(wiTools, SIGNAL(loadingGamesFailed(WiTools::WitStatus)), this, SLOT(loadingGamesFailed(WiTools::WitStatus)));
     connect(wiTools, SIGNAL(newDVDGameListModel()), this, SLOT(setDVDGameListModel()));
     connect(wiTools, SIGNAL(newWBFSGameListModel()), this, SLOT(setWBFSGameListModel()));
 
@@ -230,13 +233,19 @@ void WiiBaFu::on_wbfsTab_tableView_doubleClicked(QModelIndex) {
 }
 
 void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
-    QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), WiiBaFuSettings.value("Main/LastFilesPath", QVariant(QDir::homePath()).toString()).toString(), QFileDialog::ShowDirsOnly);
+    if (!ui->filesTab_pushButton_Load->text().contains(tr("&Cancel loading"))) {
+        QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), WiiBaFuSettings.value("Main/LastFilesPath", QVariant(QDir::homePath()).toString()).toString(), QFileDialog::ShowDirsOnly);
 
-    if (!directory.isEmpty()) {
-        emit startBusy();
+        if (!directory.isEmpty()) {
+            emit startBusy();
 
-        WiiBaFuSettings.setValue("Main/LastFilesPath", directory);
-        QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory);
+            ui->filesTab_pushButton_Load->setText(tr("&Cancel loading"));
+            WiiBaFuSettings.setValue("Main/LastFilesPath", directory);
+            QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory);
+        }
+    }
+    else {
+        emit cancelLoading();
     }
 }
 
@@ -508,8 +517,20 @@ void WiiBaFu::setFilesGameListModel() {
         }
 
         emit stopBusy();
+        ui->filesTab_pushButton_Load->setText(tr("&Load"));
         setStatusBarText(tr("Ready."));
     }
+}
+
+void WiiBaFu::loadingGamesCanceled() {
+    ui->filesTab_pushButton_Load->setText(tr("&Load"));
+    setStatusBarText(tr("Loading canceled!"));
+    emit stopBusy();
+}
+
+void WiiBaFu::loadingGamesFailed(WiTools::WitStatus) {
+    emit stopBusy();
+    ui->filesTab_pushButton_Load->setText(tr("&Load"));
 }
 
 void WiiBaFu::setDVDGameListModel() {
