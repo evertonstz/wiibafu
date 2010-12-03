@@ -550,11 +550,6 @@ void WiTools::transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     emit showStatusBarMessage(tr("Preparing transfer..."));
     emit newLogEntry(tr("Preparing transfer files to WBFS."), Info);
 
-    QStringList paths;
-    foreach (QModelIndex index, indexList) {
-        paths.append(index.data().toString());
-    }
-
     QStringList arguments;
     arguments.append("ADD");
 
@@ -566,7 +561,9 @@ void WiTools::transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath) {
         arguments.append(wbfsPath);
     }
 
-    arguments.append(paths);
+    foreach (QModelIndex index, indexList) {
+        arguments.append(index.data().toString());
+    }
 
     if (WiiBaFuSettings.value("TransferToWBFS/Force", QVariant(false)).toBool()) {
         arguments.append("--force");
@@ -677,15 +674,13 @@ void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QS
         emit newLogEntry(tr("Starting transfer files to image in format '%1'.").arg(format), Info);
     }
 
-    QStringList paths;
-    foreach (QModelIndex index, indexList) {
-        paths.append(index.data().toString());
-    }
-
     QStringList arguments;
     arguments.append("COPY");
 
-    arguments.append(paths);
+    foreach (QModelIndex index, indexList) {
+        arguments.append(index.data().toString());
+    }
+
     arguments.append(QString("--").append(format));
 
     if (!compression.isEmpty()) {
