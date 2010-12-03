@@ -187,7 +187,7 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
             updateTitles();
         }
 
-        if (WiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool()) {
+        if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
             setToolTips(ui->wbfsTab_tableView, wbfsListModel, tr("Title"), tr("Name"));
             ui->filesTab_tableView->update();
@@ -512,7 +512,7 @@ void WiiBaFu::setFilesGameListModel() {
         ui->filesTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("FilesGameList/HeaderStates").toByteArray());
 
         setFilesColumns();
-        if (WiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool()) {
+        if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
         }
 
@@ -557,7 +557,7 @@ void WiiBaFu::setWBFSGameListModel() {
         ui->wbfsTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("WBFSGameList/HeaderStates").toByteArray());
 
         setWBFSColumns();
-        if (WiiBaFuSettings.value("GameLists/ToolTips", QVariant(false)).toBool()) {
+        if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->wbfsTab_tableView, wbfsListModel, tr("Title"), tr("Name"));
         }
 
