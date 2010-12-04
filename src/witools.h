@@ -87,6 +87,8 @@ private:
     WitStatus witProcessStatus;
     QStandardItemModel *witModel;
 
+    double totalGameSize;
+
     #ifdef Q_OS_MACX
         QString gameCountText;
     #endif

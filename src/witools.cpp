@@ -29,6 +29,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     emit showStatusBarMessage(tr("Loading games..."));
 
     witModel = model;
+    totalGameSize = 0;
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -61,6 +62,9 @@ void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
         emit showStatusBarMessage(line);
         emit newLogEntry(line, Info);
     }
+    else if (line.contains("total-size=")) {
+        totalGameSize = line.section("=", 1).toDouble();
+    }
 }
 
 void WiTools::requestFilesGameListModel_readyReadStandardError() {
@@ -77,7 +81,6 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
         emit newLogEntry(tr("Loading failed!"), Error);
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0) {
-        double count = 0;
         QStandardItem *item = 0;
         QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
 
@@ -96,8 +99,7 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
                 return;
             }
             else if (line.contains("total-size=")) {
-                count += line.section("=", 1).toDouble();
-                continue;
+                totalGameSize = line.section("=", 1).toDouble();
             }
             else if (line.startsWith("id=")) {
                 ids.append(new QStandardItem(line.section("=", 1)));
@@ -172,7 +174,7 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
         witModel->appendColumn(filenames);
 
         witModel->setHeaderData(0, Qt::Horizontal, tr("ID"));
-        witModel->setHeaderData(1, Qt::Horizontal, tr("Name (%1 / %2 GB)").arg(QString::number(ids.count()), QString::number((count / 1073741824), 'f', 2)));
+        witModel->setHeaderData(1, Qt::Horizontal, tr("Name (%1 / %2 GB)").arg(QString::number(ids.count()), QString::number((totalGameSize / 1073741824), 'f', 2)));
         witModel->setHeaderData(2, Qt::Horizontal, tr("Title"));
         witModel->setHeaderData(3, Qt::Horizontal, tr("Region"));
         witModel->setHeaderData(4, Qt::Horizontal, tr("Size"));
