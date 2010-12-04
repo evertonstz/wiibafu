@@ -63,6 +63,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 void WiiBaFu::setupConnections() {
     qRegisterMetaType<Qt::Orientation>("Qt::Orientation");
     qRegisterMetaType<WiTools::LogType>("WiTools::LogType");
+    qRegisterMetaType<WiTools::WitStatus>("WiTools::WitStatus");
 
     connect(this, SIGNAL(cancelTransfer()), wiTools, SLOT(cancelTransfer()));
     connect(this, SIGNAL(cancelLoading()), wiTools, SLOT(cancelLoading()));
