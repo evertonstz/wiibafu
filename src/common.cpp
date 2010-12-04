@@ -186,11 +186,7 @@ void Common::viewInBrowser(QString gameID) {
 }
 
 QString Common::fromUtf8(QString string) {
-    #ifdef Q_OS_WIN32
-        return string;
-    #else
-        return QString::fromUtf8(string.toLatin1());
-    #endif
+    return QString::fromUtf8(string.toLatin1());
 }
 
 Common::~Common() {
