@@ -82,11 +82,11 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0) {
         QStandardItem *item = 0;
+        QTextStream textStream(witProcess);
         QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
 
-        QTextStream streamIn(witProcess);
-        while (!streamIn.atEnd()) {
-            QString line = streamIn.readLine();
+        while (!textStream.atEnd()) {
+            QString line = textStream.readLine();
 
             emit newLogEntry(line, Info);
 
@@ -185,8 +185,6 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
         witModel->setHeaderData(9, Qt::Horizontal, tr("Type"));
         witModel->setHeaderData(10, Qt::Horizontal, tr("Source"));
 
-        delete item;
-
         emit newFilesGameListModel();
     }
 
@@ -214,10 +212,10 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
 
     QStandardItem *item = 0;
     QList<QStandardItem *> game;
+    QTextStream textStream(&dvdRead);
 
-    QTextStream streamIn(&dvdRead);
-    while (!streamIn.atEnd()) {
-        QString line = streamIn.readLine();
+    while (!textStream.atEnd()) {
+        QString line = textStream.readLine();
 
         emit newLogEntry(line, Info);
 
@@ -348,8 +346,6 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     model->setHeaderData(14, Qt::Vertical, tr("WBFS slot:"));
     model->setHeaderData(15, Qt::Vertical, tr("Source:"));
 
-    delete item;
-
     emit newDVDGameListModel();
 }
 
@@ -390,12 +386,12 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
 
     int current = 0, max = 0;
     QStandardItem *item = 0;
+    QTextStream textStream(&wbfsRead);
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
     QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, wbfsslots, sources;
 
-    QTextStream streamIn(&wbfsRead);
-    while (!streamIn.atEnd()) {
-        QString line = streamIn.readLine();
+    while (!textStream.atEnd()) {
+        QString line = textStream.readLine();
 
         emit newLogEntry(line, Info);
 
@@ -532,8 +528,6 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     model->setHeaderData(10, Qt::Horizontal, tr("Type"));
     model->setHeaderData(11, Qt::Horizontal, tr("WBFS slot"));
     model->setHeaderData(12, Qt::Horizontal, tr("Source"));
-
-    delete item;
 
     #ifdef Q_OS_MACX
         emit setProgressBarWBFS(0, max, current, "%p%");
