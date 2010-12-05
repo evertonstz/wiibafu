@@ -186,6 +186,15 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
 
         if (WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt() != language) {
             updateTitles();
+
+            if (!ui->infoTab_lineEdit_ID->text().isEmpty()) {
+                if (ui->infoTab_lineEdit_UsedBlocks->text().contains("--")) {
+                    setGameInfoDateTimes(ui->filesTab_tableView, filesListModel);
+                }
+                else {
+                    setGameInfoDateTimes(ui->wbfsTab_tableView, wbfsListModel);
+                }
+            }
         }
 
         if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
@@ -666,10 +675,7 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             ui->infoTab_lineEdit_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
             ui->infoTab_lineEdit_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
             ui->infoTab_lineEdit_UsedBlocks->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
-            ui->infoTab_lineEdit_Insertion->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
-            ui->infoTab_lineEdit_LastModification->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
-            ui->infoTab_lineEdit_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
-            ui->infoTab_lineEdit_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
+            setGameInfoDateTimes(ui->wbfsTab_tableView, wbfsListModel);
             ui->infoTab_lineEdit_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
             ui->infoTab_lineEdit_WBFSSlot->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(11).first())->text());
             ui->infoTab_lineEdit_Source->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(12).first())->text());
@@ -681,16 +687,45 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             ui->infoTab_lineEdit_Region->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text());
             ui->infoTab_lineEdit_Size->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(4).first())->text());
             ui->infoTab_lineEdit_UsedBlocks->setText("--");
-            ui->infoTab_lineEdit_Insertion->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->text());
-            ui->infoTab_lineEdit_LastModification->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->text());
-            ui->infoTab_lineEdit_LastStatusChange->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->text());
-            ui->infoTab_lineEdit_LastAccess->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->text());
+            setGameInfoDateTimes(ui->filesTab_tableView, filesListModel);
             ui->infoTab_lineEdit_Type->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->text());
             ui->infoTab_lineEdit_WBFSSlot->setText("--");
             ui->infoTab_lineEdit_Source->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
         }
 
         ui->tabWidget->setCurrentIndex(3);
+    }
+}
+
+void WiiBaFu::setGameInfoDateTimes(QTableView *tableView, QStandardItemModel *model) {
+    QDateTime dateTime;
+    QString dateTimeFormat = locale().dateTimeFormat(QLocale::ShortFormat);
+
+    if (tableView == ui->wbfsTab_tableView) {
+        dateTime = model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->data(Qt::DisplayRole).value<QDateTime>();
+        ui->infoTab_lineEdit_Insertion->setText(dateTime.toString(dateTimeFormat));
+
+        dateTime = model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->data(Qt::DisplayRole).value<QDateTime>();
+        ui->infoTab_lineEdit_LastModification->setText(dateTime.toString(dateTimeFormat));
+
+        dateTime = model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->data(Qt::DisplayRole).value<QDateTime>();
+        ui->infoTab_lineEdit_LastStatusChange->setText(dateTime.toString(dateTimeFormat));
+
+        dateTime = model->itemFromIndex(tableView->selectionModel()->selectedRows(9).first())->data(Qt::DisplayRole).value<QDateTime>();
+        ui->infoTab_lineEdit_LastAccess->setText(dateTime.toString(dateTimeFormat));
+    }
+    else {
+        dateTime = model->itemFromIndex(tableView->selectionModel()->selectedRows(5).first())->data(Qt::DisplayRole).value<QDateTime>();
+        ui->infoTab_lineEdit_Insertion->setText(dateTime.toString(dateTimeFormat));
+
+        dateTime = model->itemFromIndex(tableView->selectionModel()->selectedRows(6).first())->data(Qt::DisplayRole).value<QDateTime>();
+        ui->infoTab_lineEdit_LastModification->setText(dateTime.toString(dateTimeFormat));
+
+        dateTime = model->itemFromIndex(tableView->selectionModel()->selectedRows(7).first())->data(Qt::DisplayRole).value<QDateTime>();
+        ui->infoTab_lineEdit_LastStatusChange->setText(dateTime.toString(dateTimeFormat));
+
+        dateTime = model->itemFromIndex(tableView->selectionModel()->selectedRows(8).first())->data(Qt::DisplayRole).value<QDateTime>();
+        ui->infoTab_lineEdit_LastAccess->setText(dateTime.toString(dateTimeFormat));
     }
 }
 

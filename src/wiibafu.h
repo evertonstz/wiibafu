@@ -65,6 +65,7 @@ private:
 
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
+    void setGameInfoDateTimes(QTableView *tableView, QStandardItemModel *model);
     void setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName);
     void updateTitles();
 
