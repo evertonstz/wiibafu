@@ -9,8 +9,7 @@
   * View game infos in browser
   * Transfer infos for log
   * All transfer routines rewritten
-  * Support for file system (fst)
-    (At this time not for WBFS!)
+  * Support for extract to file system (fst)
   * Support for Wii ISO Archive (wia) format
   * Proxy support for cover and title download
     (Caution: Password will be saved plain in config!)

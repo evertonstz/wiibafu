@@ -72,6 +72,7 @@ public:
     void transferDVDToFileSystem(QString dvdPath, QString destination);
 
     void transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString compression, QString directory);
+    void transferWBFSToFileSystem(QModelIndexList indexList, QString wbfsPath, QString destination);
 
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
     void checkWBFS(QString wbfsPath);
@@ -123,6 +124,7 @@ signals:
     void transferDVDToFileSystem_finished(WiTools::WitStatus);
 
     void transferWBFSToImage_finished(WiTools::WitStatus);
+    void transferWBFSToFileSystem_finished(WiTools::WitStatus);
 
     void removeGamesFromWBFS_successfully();
 
@@ -162,6 +164,10 @@ private slots:
     void transferWBFSToImage_readyReadStandardOutput();
     void transferWBFSToImage_readyReadStandardError();
     void transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
+    void transferWBFSToFileSystem_readyReadStandardOutput();
+    void transferWBFSToFileSystem_readyReadStandardError();
+    void transferWBFSToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus);
 
     void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 };

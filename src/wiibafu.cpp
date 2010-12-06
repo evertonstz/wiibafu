@@ -97,6 +97,7 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(transferDVDToFileSystem_finished(WiTools::WitStatus)), this, SLOT(transferDVDToFileSystem_finished(WiTools::WitStatus)));
 
     connect(wiTools, SIGNAL(transferWBFSToImage_finished(WiTools::WitStatus)), this, SLOT(transferWBFSToImage_finished(WiTools::WitStatus)));
+    connect(wiTools, SIGNAL(transferWBFSToFileSystem_finished(WiTools::WitStatus)), this, SLOT(transferWBFSToFileSystem_finished(WiTools::WitStatus)));
 
     connect(wiTools, SIGNAL(removeGamesFromWBFS_successfully()), this, SLOT(on_wbfsTab_pushButton_Load_clicked()));
 
@@ -290,7 +291,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
         if (ui->filesTab_tableView->model() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenExistingDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted) {
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
                 QDir path = wiibafudialog->imageDirectory();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
@@ -315,7 +316,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToFileSystem_clicked() {
         if (filesListModel->rowCount() > 0 && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted) {
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
                 ui->filesTab_pushButton_TransferToFileSystem->setText(tr("Cancel transfering"));
                 QtConcurrent::run(wiTools, &WiTools::transferFilesToFileSystem, ui->filesTab_tableView->selectionModel()->selectedRows(10), wiibafudialog->imageDirectory());
             }
@@ -355,7 +356,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
         if (dvdListModel->rowCount() > 0) {
             wiibafudialog->setOpenFile();
 
-            if (wiibafudialog->exec() == QDialog::Accepted) {
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageFilePath().isEmpty()) {
                 QString filePath = wiibafudialog->imageFilePath();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
@@ -376,7 +377,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToFileSystem_clicked() {
         if (dvdListModel->rowCount() > 0) {
             wiibafudialog->setOpenDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted) {
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
                 QString directory = wiibafudialog->imageDirectory();
                 QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
 
@@ -412,18 +413,34 @@ void WiiBaFu::on_wbfsTab_pushButton_TransferToImage_clicked() {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenExistingDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted) {
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
                 QDir path = wiibafudialog->imageDirectory();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
 
-                if (!path.exists()) {
+                if (!path.exists() && !wiibafudialog->imageDirectory().isEmpty()) {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
                     ui->wbfsTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
                     QtConcurrent::run(wiTools, &WiTools::transferWBFSToImage, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), format, compression, path.absolutePath());
                 }
+            }
+        }
+    }
+    else {
+        emit cancelTransfer();
+    }
+}
+
+void WiiBaFu::on_wbfsTab_pushButton_TransferToFileSystem_clicked() {
+    if (!ui->wbfsTab_pushButton_TransferToFileSystem->text().contains(tr("Cancel transfering"))) {
+        if (wbfsListModel->rowCount() > 0 && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+            wiibafudialog->setOpenDirectory();
+
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
+                ui->wbfsTab_pushButton_TransferToFileSystem->setText(tr("Cancel transfering"));
+                QtConcurrent::run(wiTools, &WiTools::transferWBFSToFileSystem, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), wiibafudialog->imageDirectory());
             }
         }
     }
@@ -580,15 +597,15 @@ void WiiBaFu::transferFilesToWBFS_finished(WiTools::WitStatus status) {
         on_wbfsTab_pushButton_Load_clicked();
     }
 
-    ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
+    ui->filesTab_pushButton_TransferToWBFS->setText(tr("Transfer to &WBFS"));
 }
 
 void WiiBaFu::transferFilesToImage_finished(WiTools::WitStatus) {
-    ui->filesTab_pushButton_TransferToImage->setText(tr("Transfer to image"));
+    ui->filesTab_pushButton_TransferToImage->setText(tr("Transfer to &image"));
 }
 
 void WiiBaFu::transferFilesToFileSystem_finished(WiTools::WitStatus) {
-    ui->filesTab_pushButton_TransferToFileSystem->setText(tr("Transfer to file system"));
+    ui->filesTab_pushButton_TransferToFileSystem->setText(tr("Transfer to file s&ystem"));
 }
 
 void WiiBaFu::transferDVDToWBFS_finished(WiTools::WitStatus status) {
@@ -596,19 +613,23 @@ void WiiBaFu::transferDVDToWBFS_finished(WiTools::WitStatus status) {
         on_wbfsTab_pushButton_Load_clicked();
     }
 
-    ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Transfer to WBFS"));
+    ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Transfer to &WBFS"));
 }
 
 void WiiBaFu::transferDVDToImage_finished(WiTools::WitStatus) {
-    ui->dvdTab_pushButton_TransferToImage->setText(tr("Transfer to image"));
+    ui->dvdTab_pushButton_TransferToImage->setText(tr("Transfer to &image"));
 }
 
 void WiiBaFu::transferDVDToFileSystem_finished(WiTools::WitStatus) {
-    ui->dvdTab_pushButton_TransferToFileSystem->setText(tr("Transfer to file system"));
+    ui->dvdTab_pushButton_TransferToFileSystem->setText(tr("Transfer to file s&ystem"));
 }
 
 void WiiBaFu::transferWBFSToImage_finished(WiTools::WitStatus) {
-    ui->wbfsTab_pushButton_TransferToImage->setText(tr("Transfer to image"));
+    ui->wbfsTab_pushButton_TransferToImage->setText(tr("Transfer to &image"));
+}
+
+void WiiBaFu::transferWBFSToFileSystem_finished(WiTools::WitStatus) {
+    ui->wbfsTab_pushButton_TransferToFileSystem->setText(tr("Transfer to file s&ystem"));
 }
 
 void WiiBaFu::updateTitles() {

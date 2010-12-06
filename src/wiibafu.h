@@ -109,6 +109,7 @@ private slots:
     void on_wbfsTab_pushButton_Load_clicked();
     void on_wbfsTab_pushButton_SelectAll_clicked();
     void on_wbfsTab_pushButton_TransferToImage_clicked();
+    void on_wbfsTab_pushButton_TransferToFileSystem_clicked();
     void on_wbfsTab_pushButton_Remove_clicked();
     void on_wbfsTab_pushButton_Check_clicked();
     void on_wbfsTab_pushButton_ShowInfo_clicked();
@@ -137,6 +138,7 @@ private slots:
     void transferDVDToFileSystem_finished(WiTools::WitStatus);
 
     void transferWBFSToImage_finished(WiTools::WitStatus);
+    void transferWBFSToFileSystem_finished(WiTools::WitStatus);
 
     void showGameDiscCover(QImage *gameCover);
     void showGame3DCover(QImage *gameCover);

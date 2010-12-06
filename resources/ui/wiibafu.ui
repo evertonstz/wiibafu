@@ -332,6 +332,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="wbfsTab_pushButton_TransferToFileSystem">
+             <property name="text">
+              <string>Transfer to file s&amp;ystem</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_Remove">
              <property name="text">
               <string>&amp;Remove</string>
