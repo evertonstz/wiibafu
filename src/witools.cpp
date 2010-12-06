@@ -676,11 +676,18 @@ void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QS
         arguments.append(index.data().toString());
     }
 
-    arguments.append(QString("--").append(format));
+    if (format.contains("wia")) {
+        QString tmpstr = "--wia=";
 
-    if (!compression.isEmpty()) {
-        arguments.append("--compression");
-        arguments.append(compression);
+        if (compression.isEmpty()) {
+            arguments.append(tmpstr.append("DEFAULT"));
+        }
+        else {
+            arguments.append(tmpstr.append(compression));
+        }
+    }
+    else {
+        arguments.append(QString("--").append(format));
     }
 
     arguments.append("--dest");
@@ -999,11 +1006,19 @@ void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compre
     arguments.append("COPY");
 
     arguments.append(dvdPath);
-    arguments.append(QString("--").append(format));
 
-    if (!compression.isEmpty()) {
-        arguments.append("--compression");
-        arguments.append(compression);
+    if (format.contains("wia")) {
+        QString tmpstr = "--wia=";
+
+        if (compression.isEmpty()) {
+            arguments.append(tmpstr.append("DEFAULT"));
+        }
+        else {
+            arguments.append(tmpstr.append(compression));
+        }
+    }
+    else {
+        arguments.append(QString("--").append(format));
     }
 
     arguments.append("--dest");
@@ -1198,11 +1213,6 @@ void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, Q
         emit newLogEntry(tr("Starting transfer WBFS to image in format '%1'.").arg(format), Info);
     }
 
-    QStringList paths;
-    foreach (QModelIndex index, indexList) {
-        paths.append(index.data().toString());
-    }
-
     QStringList arguments;
     arguments.append("EXTRACT");
 
@@ -1214,12 +1224,22 @@ void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, Q
         arguments.append(wbfsPath);
     }
 
-    arguments.append(paths);
-    arguments.append(QString("--").append(format));
+    foreach (QModelIndex index, indexList) {
+        arguments.append(index.data().toString());
+    }
 
-    if (!compression.isEmpty()) {
-        arguments.append("--compression");
-        arguments.append(compression);
+    if (format.contains("wia")) {
+        QString tmpstr = "--wia=";
+
+        if (compression.isEmpty()) {
+            arguments.append(tmpstr.append("DEFAULT"));
+        }
+        else {
+            arguments.append(tmpstr.append(compression));
+        }
+    }
+    else {
+        arguments.append(QString("--").append(format));
     }
 
     arguments.append("--dest");

@@ -1,3 +1,7 @@
+- Transfer WBFS to file system (fst)
+- Transfer WBFS to WII Archive Format (wia)
+- Split game images while convert
 - Compare Files and WBFS
-- Files/WBFS/Infos alterable
+- Edit games
+- Patch games
 - Localization

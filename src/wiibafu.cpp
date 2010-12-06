@@ -418,9 +418,6 @@ void WiiBaFu::on_wbfsTab_pushButton_TransferToImage_clicked() {
                 if (!path.exists()) {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
-                else if (format.contains("wia")) {
-                    QMessageBox::critical(this, tr("Error"), tr("Transfer WBFS to image doesn't support 'Wii ISO Archive' format!"), QMessageBox::Ok, QMessageBox::NoButton);
-                }
                 else {
                     ui->wbfsTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
                     QtConcurrent::run(wiTools, &WiTools::transferWBFSToImage, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), format, compression, path.absolutePath());
