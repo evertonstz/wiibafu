@@ -12,7 +12,6 @@
   * Support for file system (fst)
     (At this time not for WBFS!)
   * Support for Wii ISO Archive (wia) format
-    (At this time not for WBFS!)
   * Proxy support for cover and title download
     (Caution: Password will be saved plain in config!)
   * Double click on game shows infos
