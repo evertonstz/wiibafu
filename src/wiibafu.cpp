@@ -53,10 +53,10 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 
     QString witPath = wiTools->witTitlesPath();
     if (witPath.contains("witTitles:")) {
-        addEntryToLog(tr("Titles not found!"), WiTools::Info);
+        addEntryToLog(tr("Titles not found!\n"), WiTools::Info);
     }
     else {
-        addEntryToLog(tr("Titles found in: %1").arg(witPath), WiTools::Info);
+        addEntryToLog(tr("Titles found in: %1\n").arg(witPath), WiTools::Info);
     }
 }
 
@@ -79,6 +79,8 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(setProgressBarWBFS(int, int, int, QString)), this, SLOT(setWBFSProgressBar(int, int, int, QString)));
     connect(wiTools, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
+    connect(wiTools, SIGNAL(newLogEntries(QStringList,WiTools::LogType)), this, SLOT(addEntriesToLog(QStringList,WiTools::LogType)));
+    connect(wiTools, SIGNAL(newWitCommandLineLogEntry(QString,QStringList)), this, SLOT(addWitCommandLineToLog(QString,QStringList)));
 
     connect(wiTools, SIGNAL(newFilesGameListModel()), this, SLOT(setFilesGameListModel()));
     connect(wiTools, SIGNAL(loadingGamesCanceled()), this, SLOT(loadingGamesCanceled()));
@@ -793,6 +795,23 @@ void WiiBaFu::addEntryToLog(QString entry, WiTools::LogType type) {
                 ui->logTab_plainTextEdit_Log->appendPlainText(entry);
             }
             break;
+    }
+}
+
+void WiiBaFu::addEntriesToLog(QStringList entries, WiTools::LogType type) {
+    QString tmpstr;
+
+    foreach (QString entry, entries) {
+        tmpstr.append(entry);
+        tmpstr.append(" ");
+    }
+
+    addEntryToLog(tmpstr, type);
+}
+
+void WiiBaFu::addWitCommandLineToLog(QString wit, QStringList arguments) {
+    if (WiiBaFuSettings.value("Main/LogWitCommandLine", QVariant(true)).toBool()) {
+        addEntriesToLog(QStringList() << tr("WIT command line:\n%1").arg(wit) << arguments << "\n" , WiTools::Info);
     }
 }
 

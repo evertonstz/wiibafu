@@ -153,6 +153,8 @@ private slots:
 
     void setStatusBarText(QString text);
     void addEntryToLog(QString entry, WiTools::LogType type);
+    void addEntriesToLog(QStringList entries, WiTools::LogType type);
+    void addWitCommandLineToLog(QString wit, QStringList arguments);
 
     void on_menuHelp_About_triggered();
 };

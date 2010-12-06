@@ -1,5 +1,6 @@
 2010-12-06 Kai Heitkamp <dynup@ymail.com>
  Version 0.9 (wit v1.23a.beta5)
+  * WIT command line for log (via settings)
   * Cancel possibility for loading games process
   * Progress infos while loading games
   * Localization for dates

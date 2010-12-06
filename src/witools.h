@@ -104,6 +104,8 @@ signals:
     void setProgressBarWBFS(int min, int max, int value, QString text);
 
     void newLogEntry(QString entry, WiTools::LogType type);
+    void newLogEntries(QStringList entries, WiTools::LogType type);
+    void newWitCommandLineLogEntry(QString wit, QStringList arguments);
     void showStatusBarMessage(QString message);
 
     void newFilesGameListModel();

@@ -27,6 +27,7 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
 
 void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path) {
     emit showStatusBarMessage(tr("Loading games..."));
+    emit newLogEntry(tr("Loading games from images...\n"), Info);
 
     witModel = model;
     totalGameSize = 0;
@@ -37,7 +38,10 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(requestFilesGameListModel_readyReadStandardError()));
     connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(requestFilesGameListModel_finished(int, QProcess::ExitStatus)));
 
-    witProcess->start(wit, QStringList() << "LIST" << "--titles" << witTitlesPath() << "--section" << "--recurse" << path << "--progress");
+    QStringList arguments = QStringList() << "LIST" << "--titles" << witTitlesPath() << "--recurse" << path << "--section" << "--progress";
+    emit newWitCommandLineLogEntry("wit", arguments);
+
+    witProcess->start(wit, arguments);
 
     if (!witProcess->waitForFinished(-1)) {
         if (witProcess->errorString().contains("No such file or directory")) {
@@ -193,9 +197,14 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
 
 void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     emit showStatusBarMessage(tr("Loading disc..."));
+    emit newLogEntry(tr("Loading disc...\n"), Info);
 
     QProcess dvdRead;
-    dvdRead.start(wit, QStringList() << "LIST-LL" << path << "--titles" << witTitlesPath() << "--section"); //Windows: 0 games found, in admin mode too!?
+
+    QStringList arguments = QStringList() << "LIST-LL" << path << "--titles" << witTitlesPath() << "--section";
+    emit newWitCommandLineLogEntry("wit", arguments);
+
+    dvdRead.start(wit, arguments);
 
     if (!dvdRead.waitForFinished(-1)) {
         if (dvdRead.errorString().contains("No such file or directory")) {
@@ -351,6 +360,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
 
 void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
     emit showStatusBarMessage(tr("Loading games..."));
+    emit newLogEntry(tr("Loading games from WBFS...\n"), Info);
 
     QStringList arguments;
     arguments.append("LIST-L");
@@ -367,6 +377,8 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     arguments.append(witTitlesPath());
 
     arguments.append("--section");
+
+    emit newWitCommandLineLogEntry("wwt", arguments);
 
     QProcess wbfsRead;
     wbfsRead.start(wwt, arguments);
@@ -543,7 +555,7 @@ void WiTools::transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
-    emit newLogEntry(tr("Preparing transfer files to WBFS."), Info);
+    emit newLogEntry(tr("Preparing transfer files to WBFS.\n"), Info);
 
     QStringList arguments;
     arguments.append("ADD");
@@ -581,6 +593,8 @@ void WiTools::transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath) {
     }
 
     arguments.append("--progress");
+
+    emit newWitCommandLineLogEntry("wwt", arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -663,10 +677,10 @@ void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QS
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (!compression.isEmpty()) {
-        emit newLogEntry(tr("Starting transfer files to image in format '%1' with compression '%2'.").arg(format, compression), Info);
+        emit newLogEntry(tr("Starting transfer files to image in format '%1' with compression '%2'.\n").arg(format, compression), Info);
     }
     else {
-        emit newLogEntry(tr("Starting transfer files to image in format '%1'.").arg(format), Info);
+        emit newLogEntry(tr("Starting transfer files to image in format '%1'.\n").arg(format), Info);
     }
 
     QStringList arguments;
@@ -706,6 +720,8 @@ void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QS
     }
 
     arguments.append("--progress");
+
+    emit newWitCommandLineLogEntry("wit", arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -771,7 +787,7 @@ void WiTools::transferFilesToFileSystem(QModelIndexList indexList, QString desti
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
-    emit newLogEntry(tr("Starting transfer files to file system."), Info);
+    emit newLogEntry(tr("Starting transfer files to file system.\n"), Info);
 
     QStringList arguments;
     arguments.append("COPY");
@@ -796,6 +812,8 @@ void WiTools::transferFilesToFileSystem(QModelIndexList indexList, QString desti
     }
 
     arguments.append("--progress");
+
+    emit newWitCommandLineLogEntry("wit", arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -878,7 +896,7 @@ void WiTools::transferDVDToWBFS(QString dvdPath, QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
-    emit newLogEntry(tr("Starting transfer DVD to WBFS."), Info);
+    emit newLogEntry(tr("Starting transfer DVD to WBFS.\n"), Info);
 
     QStringList arguments;
     arguments.append("ADD");
@@ -914,6 +932,8 @@ void WiTools::transferDVDToWBFS(QString dvdPath, QString wbfsPath) {
     }
 
     arguments.append("--progress");
+
+    emit newWitCommandLineLogEntry("wwt", arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -996,10 +1016,10 @@ void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compre
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (!compression.isEmpty()) {
-        emit newLogEntry(tr("Starting transfer DVD to image in format '%1' with compression '%2'.").arg(format, compression), Info);
+        emit newLogEntry(tr("Starting transfer DVD to image in format '%1' with compression '%2'.\n").arg(format, compression), Info);
     }
     else {
-        emit newLogEntry(tr("Starting transfer DVD to image in format '%1'.").arg(format), Info);
+        emit newLogEntry(tr("Starting transfer DVD to image in format '%1'.\n").arg(format), Info);
     }
 
     QStringList arguments;
@@ -1037,6 +1057,8 @@ void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compre
     }
 
     arguments.append("--progress");
+
+    emit newWitCommandLineLogEntry("wit", arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -1101,7 +1123,7 @@ void WiTools::transferDVDToFileSystem(QString dvdPath, QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
-    emit newLogEntry(tr("Starting transfer DVD to file system."), Info);
+    emit newLogEntry(tr("Starting transfer DVD to file system.\n"), Info);
 
     QStringList arguments;
     arguments.append("COPY");
@@ -1126,6 +1148,8 @@ void WiTools::transferDVDToFileSystem(QString dvdPath, QString destination) {
     }
 
     arguments.append("--progress");
+
+    emit newWitCommandLineLogEntry("wit", arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -1207,10 +1231,10 @@ void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, Q
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (!compression.isEmpty()) {
-        emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with compression '%2'.").arg(format, compression), Info);
+        emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with compression '%2'.\n").arg(format, compression), Info);
     }
     else {
-        emit newLogEntry(tr("Starting transfer WBFS to image in format '%1'.").arg(format), Info);
+        emit newLogEntry(tr("Starting transfer WBFS to image in format '%1'.\n").arg(format), Info);
     }
 
     QStringList arguments;
@@ -1262,6 +1286,8 @@ void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, Q
     }
 
     arguments.append("--progress");
+
+    emit newWitCommandLineLogEntry("wwt", arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -1338,11 +1364,6 @@ void WiTools::cancelLoading() {
 }
 
 void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
-    QStringList ids;
-    foreach (QModelIndex index, indexList) {
-        ids.append(index.data().toString());
-    }
-
     QStringList arguments;
     arguments.append("REMOVE");
 
@@ -1354,13 +1375,17 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
         arguments.append(wbfsPath);
     }
 
-    arguments.append(ids);
+    foreach (QModelIndex index, indexList) {
+        arguments.append(index.data().toString());
+    }
 
     if (WiiBaFuSettings.value("RemoveFromWBFS/Force", QVariant(false)).toBool())
         arguments.append("--force");
 
     if (WiiBaFuSettings.value("RemoveFromWBFS/Test", QVariant(false)).toBool())
         arguments.append("--test");
+
+    emit newWitCommandLineLogEntry("wwt", arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
@@ -1443,6 +1468,8 @@ void WiTools::checkWBFS(QString wbfsPath) {
 
     arguments.append("--long");
 
+    emit newWitCommandLineLogEntry("wwt", arguments);
+
     witProcess = new QProcess();
     witProcess->start(wwt, arguments);
 
@@ -1504,6 +1531,8 @@ void WiTools::createWBFS(CreateWBFSParameters parameters) {
 
     arguments.append("--force");
     arguments.append("--verbose");
+
+    emit newWitCommandLineLogEntry("wwt", arguments);
 
     witProcess = new QProcess();
     witProcess->start(wwt, arguments);

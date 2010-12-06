@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>380</height>
+    <width>627</width>
+    <height>385</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,13 +73,13 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="Main">
-      <layout class="QGridLayout" name="gridLayout_19">
+      <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0">
         <widget class="QGroupBox" name="main_groupBox_mainOptions">
          <property name="title">
           <string>Main options:</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <widget class="QCheckBox" name="main_checkBox_useProxy">
             <property name="text">
@@ -88,7 +88,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout_17">
+           <layout class="QGridLayout" name="gridLayout_7">
             <item row="0" column="0">
              <widget class="QLabel" name="label_6">
               <property name="text">
@@ -160,18 +160,14 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
+            <item row="3" column="0">
              <widget class="QLabel" name="label_10">
               <property name="text">
                <string>Proxy type:</string>
               </property>
              </widget>
             </item>
-            <item>
+            <item row="3" column="1">
              <widget class="QComboBox" name="main_comboBox_proxyType">
               <property name="enabled">
                <bool>false</bool>
@@ -235,141 +231,169 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_3">
-              <item>
-               <widget class="QLabel" name="label_3">
-                <property name="text">
-                 <string>Logging mode:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="main_comboBox_Logging">
-                <item>
-                 <property name="text">
-                  <string>All</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Errors only</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>None</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="Line" name="line">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Logging mode:</string>
               </property>
              </widget>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_2">
+             <widget class="QComboBox" name="main_comboBox_Logging">
               <item>
-               <widget class="QLabel" name="label_5">
-                <property name="text">
-                 <string>Language for titles/covers:</string>
-                </property>
-               </widget>
+               <property name="text">
+                <string>All</string>
+               </property>
               </item>
               <item>
-               <widget class="QComboBox" name="main_comboBox_Language">
-                <item>
-                 <property name="text">
-                  <string>English</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>American</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>France</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>German</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Spain</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Italy</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Netherland</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Portuguese</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Northern Sami</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Denmark</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Norway</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Finland</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Russia</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Japan</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Korea</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Taiwan</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>China</string>
-                 </property>
-                </item>
-               </widget>
+               <property name="text">
+                <string>Errors only</string>
+               </property>
               </item>
-             </layout>
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Preferred</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="main_checkBox_LogWitCommandLine">
+              <property name="text">
+               <string>WIT command line</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_5">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Language for titles and covers:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="main_comboBox_Language">
+              <item>
+               <property name="text">
+                <string>English</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>American</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>France</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>German</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Spain</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Italy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Netherland</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Portuguese</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Northern Sami</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Denmark</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Norway</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Finland</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Russia</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Japan</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Korea</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Taiwan</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>China</string>
+               </property>
+              </item>
+             </widget>
             </item>
            </layout>
           </item>
