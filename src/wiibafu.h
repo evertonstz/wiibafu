@@ -69,6 +69,7 @@ private:
     void setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName);
     void updateTitles();
 
+    QString buildPath(QString directory, QStandardItemModel *model, QTableView *tableView);
     QString currentGameLanguage();
     QString wbfsPath();
     QLocale locale();

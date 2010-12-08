@@ -69,7 +69,7 @@
          <locale language="English" country="UnitedStates"/>
         </property>
         <property name="text">
-         <string>File:</string>
+         <string>File path:</string>
         </property>
        </widget>
       </item>

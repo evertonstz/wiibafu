@@ -44,11 +44,11 @@ void WiiBaFuDialog::on_pushButton_OpenFile_clicked() {
     }
 }
 
-QString WiiBaFuDialog::imageDirectory() {
+QString WiiBaFuDialog::directory() {
     return ui->lineEdit_Directory->text();
 }
 
-QString WiiBaFuDialog::imageFilePath() {
+QString WiiBaFuDialog::filePath() {
     return ui->lineEdit_FilePath->text();
 }
 
@@ -181,8 +181,8 @@ void WiiBaFuDialog::on_comboBox_compressionDefaults_currentIndexChanged(int inde
     }
 }
 
-void WiiBaFuDialog::setOpenExistingDirectory() {
-    this->setWindowTitle(tr("Open directory (target directory must exist!)"));
+void WiiBaFuDialog::setOpenImageDirectory() {
+    this->setWindowTitle(tr("Open image directory"));
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -199,7 +199,7 @@ void WiiBaFuDialog::setOpenExistingDirectory() {
 }
 
 void WiiBaFuDialog::setOpenDirectory() {
-    this->setWindowTitle(tr("Open directory (target directory may not exist!)"));
+    this->setWindowTitle(tr("Open directory"));
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);

@@ -289,10 +289,10 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
 void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
     if (!ui->filesTab_pushButton_TransferToImage->text().contains(tr("&Cancel transfering"))) {
         if (ui->filesTab_tableView->model() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
-            wiibafudialog->setOpenExistingDirectory();
+            wiibafudialog->setOpenImageDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
-                QDir path = wiibafudialog->imageDirectory();
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
+                QDir path = wiibafudialog->directory();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
 
@@ -316,9 +316,9 @@ void WiiBaFu::on_filesTab_pushButton_ExtractImage_clicked() {
         if (filesListModel->rowCount() > 0 && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
                 ui->filesTab_pushButton_ExtractImage->setText(tr("&Cancel extracting"));
-                QtConcurrent::run(wiTools, &WiTools::extractImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), wiibafudialog->imageDirectory());
+                QtConcurrent::run(wiTools, &WiTools::extractImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), buildPath(wiibafudialog->directory(), filesListModel, ui->filesTab_tableView));
             }
         }
     }
@@ -356,8 +356,8 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
         if (dvdListModel->rowCount() > 0) {
             wiibafudialog->setOpenFile();
 
-            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageFilePath().isEmpty()) {
-                QString filePath = wiibafudialog->imageFilePath();
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->filePath().isEmpty()) {
+                QString filePath = wiibafudialog->filePath();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
                 QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
@@ -377,8 +377,8 @@ void WiiBaFu::on_dvdTab_pushButton_Extract_clicked() {
         if (dvdListModel->rowCount() > 0) {
             wiibafudialog->setOpenDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
-                QString directory = wiibafudialog->imageDirectory();
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
+                QString directory = buildPath(wiibafudialog->directory(), dvdListModel, ui->dvdTab_tableView);
                 QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
 
                 ui->dvdTab_pushButton_Extract->setText(tr("&Cancel extracting"));
@@ -411,14 +411,14 @@ void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
 void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
     if (!ui->wbfsTab_pushButton_Transfer->text().contains(tr("&Cancel transfering"))) {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
-            wiibafudialog->setOpenExistingDirectory();
+            wiibafudialog->setOpenImageDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
-                QDir path = wiibafudialog->imageDirectory();
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
+                QDir path = wiibafudialog->directory();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
 
-                if (!path.exists() && !wiibafudialog->imageDirectory().isEmpty()) {
+                if (!path.exists() && !wiibafudialog->directory().isEmpty()) {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
@@ -438,9 +438,9 @@ void WiiBaFu::on_wbfsTab_pushButton_Extract_clicked() {
         if (wbfsListModel->rowCount() > 0 && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenDirectory();
 
-            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
+            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
                 ui->wbfsTab_pushButton_Extract->setText(tr("&Cancel extracting"));
-                QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), wiibafudialog->imageDirectory());
+                QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), buildPath(wiibafudialog->directory(), wbfsListModel, ui->wbfsTab_tableView));
             }
         }
     }
@@ -648,6 +648,31 @@ void WiiBaFu::updateTitles() {
 
         ui->wbfsTab_tableView->update();
     }
+}
+
+QString WiiBaFu::buildPath(QString directory, QStandardItemModel *model, QTableView *tableView) {
+    QString path;
+    QString gameId;
+    QString gameTitle;
+    QDir dir(directory);
+
+    if (dir.exists()) {
+        if (tableView != ui->dvdTab_tableView) {
+            gameId = model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text();
+            gameTitle = model->itemFromIndex(tableView->selectionModel()->selectedRows(2).first())->text();
+        }
+        else {
+            gameId = model->index(0, 0).data(Qt::DisplayRole).toString();
+            gameTitle = model->index(2, 0).data(Qt::DisplayRole).toString();
+        }
+
+        path = dir.path().append("/").append(gameTitle).append(" [").append(gameId).append("]");
+    }
+    else {
+        path = dir.path();
+    }
+
+    return path;
 }
 
 void WiiBaFu::setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName) {

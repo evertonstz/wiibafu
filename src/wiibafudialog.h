@@ -34,11 +34,11 @@ public:
     explicit WiiBaFuDialog(QWidget *parent = 0);
     ~WiiBaFuDialog();
 
-    QString imageDirectory();
-    QString imageFilePath();
+    QString directory();
+    QString filePath();
     QString imageFormat();
     QString compression();
-    void setOpenExistingDirectory();
+    void setOpenImageDirectory();
     void setOpenDirectory();
     void setOpenFile();
 
