@@ -69,7 +69,7 @@ public:
 
     void transferDVDToWBFS(QString dvdPath, QString wbfsPath);
     void transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory);
-    void transferDVDToFileSystem(QString dvdPath, QString destination);
+    void extractDVD(QString dvdPath, QString destination);
 
     void transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString compression, QString directory);
     void extractWBFS(QModelIndexList indexList, QString wbfsPath, QString destination);
@@ -121,7 +121,7 @@ signals:
 
     void transferDVDToWBFS_finished(WiTools::WitStatus);
     void transferDVDToImage_finished(WiTools::WitStatus);
-    void transferDVDToFileSystem_finished(WiTools::WitStatus);
+    void extractDVD_finished(WiTools::WitStatus);
 
     void transferWBFSToImage_finished(WiTools::WitStatus);
     void extractWBFS_finished(WiTools::WitStatus);
@@ -157,9 +157,9 @@ private slots:
     void transferDVDToImage_readyReadStandardError();
     void transferDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
 
-    void transferDVDToFileSystem_readyReadStandardOutput();
-    void transferDVDToFileSystem_readyReadStandardError();
-    void transferDVDToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void extractDVD_readyReadStandardOutput();
+    void extractDVD_readyReadStandardError();
+    void extractDVD_finished(int exitCode, QProcess::ExitStatus exitStatus);
 
     void transferWBFSToImage_readyReadStandardOutput();
     void transferWBFSToImage_readyReadStandardError();

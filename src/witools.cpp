@@ -786,8 +786,8 @@ void WiTools::transferFilesToImage_finished(int exitCode, QProcess::ExitStatus e
 void WiTools::extractImage(QModelIndexList indexList, QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit showStatusBarMessage(tr("Preparing extract..."));
-    emit newLogEntry(tr("Starting extract image.\n"), Info);
+    emit showStatusBarMessage(tr("Preparing extraction..."));
+    emit newLogEntry(tr("Starting image extraction.\n"), Info);
 
     QStringList arguments;
     arguments.append("EXTRACT");
@@ -869,13 +869,13 @@ void WiTools::extractImage_readyReadStandardError() {
 
 void WiTools::extractImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
-        emit newLogEntry(tr("Extract canceled!"), Error);
-        emit showStatusBarMessage(tr("Extract canceled!"));
+        emit newLogEntry(tr("Extraction canceled!"), Error);
+        emit showStatusBarMessage(tr("Extraction canceled!"));
         emit extractImage_finished(WiTools::TransferCanceled);
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
-            emit newLogEntry(tr("Extract successfully!"), Error);
+            emit newLogEntry(tr("Extraction successfully!"), Error);
             emit showStatusBarMessage(tr("Ready."));
             emit extractImage_finished(WiTools::Ok);
         }
@@ -884,7 +884,7 @@ void WiTools::extractImage_finished(int exitCode, QProcess::ExitStatus exitStatu
     }
     else {
         emit newLogEntry(QString(tr("Error %1: %2")).arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
-        emit showStatusBarMessage(tr("Extract failed!"));
+        emit showStatusBarMessage(tr("Extraction failed!"));
         emit extractImage_finished(WiTools::UnknownError);
     }
 
@@ -1118,11 +1118,11 @@ void WiTools::transferDVDToImage_finished(int exitCode, QProcess::ExitStatus exi
     delete witProcess;
 }
 
-void WiTools::transferDVDToFileSystem(QString dvdPath, QString destination) {
+void WiTools::extractDVD(QString dvdPath, QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit showStatusBarMessage(tr("Preparing transfer..."));
-    emit newLogEntry(tr("Starting transfer DVD to file system.\n"), Info);
+    emit showStatusBarMessage(tr("Preparing extraction..."));
+    emit newLogEntry(tr("Starting DVD extraction.\n"), Info);
 
     QStringList arguments;
     arguments.append("COPY");
@@ -1152,9 +1152,9 @@ void WiTools::transferDVDToFileSystem(QString dvdPath, QString destination) {
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferDVDToFileSystem_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferDVDToFileSystem_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferDVDToFileSystem_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(extractDVD_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(extractDVD_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(extractDVD_finished(int, QProcess::ExitStatus)));
 
     witProcess->start(wit, arguments);
     witProcess->waitForFinished(-1);
@@ -1163,17 +1163,17 @@ void WiTools::transferDVDToFileSystem(QString dvdPath, QString destination) {
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::transferDVDToFileSystem_readyReadStandardOutput() {
+void WiTools::extractDVD_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("EXTRACT")) {
         QString str = line.mid(line.indexOf(":/") + 1, line.indexOf("\n") - line.indexOf(":/")).remove("\n");
 
         #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1...").arg(Common::fromUtf8(str));
+            gameCountText = tr("Extracting game %1...").arg(Common::fromUtf8(str));
             emit showStatusBarMessage(gameCountText);
         #else
-            emit showStatusBarMessage(tr("Transfering game %1...").arg(Common::fromUtf8(str)));
+            emit showStatusBarMessage(tr("Extracting game %1...").arg(Common::fromUtf8(str)));
         #endif
     }
     else if (line.contains("% copied")) {
@@ -1188,37 +1188,37 @@ void WiTools::transferDVDToFileSystem_readyReadStandardOutput() {
     }
 }
 
-void WiTools::transferDVDToFileSystem_readyReadStandardError() {
+void WiTools::extractDVD_readyReadStandardError() {
     QString error = witProcess->readAllStandardError().constData();
 
     emit newLogEntry(error, Error);
 
     if (error.contains("Destination already exists")) {
         emit showStatusBarMessage(tr("Destination already exists!"));
-        emit transferDVDToFileSystem_finished(WiTools::DestinationAlreadyExists);
+        emit extractDVD_finished(WiTools::DestinationAlreadyExists);
         witProcessStatus = DestinationAlreadyExists;
     }
 }
 
-void WiTools::transferDVDToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::extractDVD_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
-        emit newLogEntry(tr("Transfer canceled!"), Error);
-        emit showStatusBarMessage(tr("Transfer canceled!"));
-        emit transferDVDToFileSystem_finished(WiTools::TransferCanceled);
+        emit newLogEntry(tr("Extraction canceled!"), Error);
+        emit showStatusBarMessage(tr("Extraction canceled!"));
+        emit extractDVD_finished(WiTools::TransferCanceled);
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
-            emit newLogEntry(tr("Transfer successfully!"), Error);
+            emit newLogEntry(tr("Extraction successfully!"), Error);
             emit showStatusBarMessage(tr("Ready."));
-            emit transferDVDToFileSystem_finished(WiTools::Ok);
+            emit extractDVD_finished(WiTools::Ok);
         }
 
         witProcessStatus = Ok;
     }
     else {
         emit newLogEntry(QString(tr("Error %1: %2")).arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
-        emit showStatusBarMessage(tr("Transfer failed!"));
-        emit transferDVDToFileSystem_finished(WiTools::UnknownError);
+        emit showStatusBarMessage(tr("Extraction failed!"));
+        emit extractDVD_finished(WiTools::UnknownError);
     }
 
     delete witProcess;
@@ -1357,8 +1357,8 @@ void WiTools::transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus ex
 void WiTools::extractWBFS(QModelIndexList indexList, QString wbfsPath, QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit showStatusBarMessage(tr("Preparing extract..."));
-    emit newLogEntry(tr("Starting extract WBFS.\n"), Info);
+    emit showStatusBarMessage(tr("Preparing extraction..."));
+    emit newLogEntry(tr("Starting WBFS extraction.\n"), Info);
 
     QStringList arguments;
     arguments.append("EXTRACT");
@@ -1441,13 +1441,13 @@ void WiTools::extractWBFS_readyReadStandardError() {
 
 void WiTools::extractWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
-        emit newLogEntry(tr("Extract canceled!"), Error);
-        emit showStatusBarMessage(tr("Extract canceled!"));
+        emit newLogEntry(tr("Extraction canceled!"), Error);
+        emit showStatusBarMessage(tr("Extraction canceled!"));
         emit extractWBFS_finished(WiTools::TransferCanceled);
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
-            emit newLogEntry(tr("Extract successfully!"), Error);
+            emit newLogEntry(tr("Extraction successfully!"), Error);
             emit showStatusBarMessage(tr("Ready."));
             emit extractWBFS_finished(WiTools::Ok);
         }
@@ -1456,7 +1456,7 @@ void WiTools::extractWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus
     }
     else {
         emit newLogEntry(QString(tr("Error %1: %2")).arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
-        emit showStatusBarMessage(tr("Extract failed!"));
+        emit showStatusBarMessage(tr("Extraction failed!"));
         emit extractWBFS_finished(WiTools::UnknownError);
     }
 

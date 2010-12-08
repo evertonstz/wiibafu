@@ -94,7 +94,7 @@ void WiiBaFu::setupConnections() {
 
     connect(wiTools, SIGNAL(transferDVDToWBFS_finished(WiTools::WitStatus)), this, SLOT(transferDVDToWBFS_finished(WiTools::WitStatus)));
     connect(wiTools, SIGNAL(transferDVDToImage_finished(WiTools::WitStatus)), this, SLOT(transferDVDToImage_finished(WiTools::WitStatus)));
-    connect(wiTools, SIGNAL(transferDVDToFileSystem_finished(WiTools::WitStatus)), this, SLOT(transferDVDToFileSystem_finished(WiTools::WitStatus)));
+    connect(wiTools, SIGNAL(extractDVD_finished(WiTools::WitStatus)), this, SLOT(extractDVD_finished(WiTools::WitStatus)));
 
     connect(wiTools, SIGNAL(transferWBFSToImage_finished(WiTools::WitStatus)), this, SLOT(transferWBFSToImage_finished(WiTools::WitStatus)));
     connect(wiTools, SIGNAL(extractWBFS_finished(WiTools::WitStatus)), this, SLOT(extractWBFS_finished(WiTools::WitStatus)));
@@ -372,8 +372,8 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
     }
 }
 
-void WiiBaFu::on_dvdTab_pushButton_TransferToFileSystem_clicked() {
-    if (!ui->dvdTab_pushButton_TransferToFileSystem->text().contains(tr("Cancel transfering"))) {
+void WiiBaFu::on_dvdTab_pushButton_Extract_clicked() {
+    if (!ui->dvdTab_pushButton_Extract->text().contains(tr("Cancel extracting"))) {
         if (dvdListModel->rowCount() > 0) {
             wiibafudialog->setOpenDirectory();
 
@@ -381,8 +381,8 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToFileSystem_clicked() {
                 QString directory = wiibafudialog->imageDirectory();
                 QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
 
-                ui->dvdTab_pushButton_TransferToFileSystem->setText(tr("Cancel transfering"));
-                QtConcurrent::run(wiTools, &WiTools::transferDVDToFileSystem, dvdPath, directory);
+                ui->dvdTab_pushButton_Extract->setText(tr("Cancel extracting"));
+                QtConcurrent::run(wiTools, &WiTools::extractDVD, dvdPath, directory);
             }
         }
     }
@@ -620,8 +620,8 @@ void WiiBaFu::transferDVDToImage_finished(WiTools::WitStatus) {
     ui->dvdTab_pushButton_TransferToImage->setText(tr("Transfer to &image"));
 }
 
-void WiiBaFu::transferDVDToFileSystem_finished(WiTools::WitStatus) {
-    ui->dvdTab_pushButton_TransferToFileSystem->setText(tr("Transfer to file s&ystem"));
+void WiiBaFu::extractDVD_finished(WiTools::WitStatus) {
+    ui->dvdTab_pushButton_Extract->setText(tr("E&xtract"));
 }
 
 void WiiBaFu::transferWBFSToImage_finished(WiTools::WitStatus) {

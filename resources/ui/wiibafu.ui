@@ -247,7 +247,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="dvdTab_pushButton_TransferToFileSystem">
+            <widget class="QPushButton" name="dvdTab_pushButton_Extract">
              <property name="text">
               <string>E&amp;xtract</string>
              </property>
