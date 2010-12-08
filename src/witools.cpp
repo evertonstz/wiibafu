@@ -783,18 +783,16 @@ void WiTools::transferFilesToImage_finished(int exitCode, QProcess::ExitStatus e
     delete witProcess;
 }
 
-void WiTools::transferFilesToFileSystem(QModelIndexList indexList, QString destination) {
+void WiTools::extractImage(QModelIndexList indexList, QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit showStatusBarMessage(tr("Preparing transfer..."));
-    emit newLogEntry(tr("Starting transfer files to file system.\n"), Info);
+    emit showStatusBarMessage(tr("Preparing extract..."));
+    emit newLogEntry(tr("Starting extract image.\n"), Info);
 
     QStringList arguments;
-    arguments.append("COPY");
+    arguments.append("EXTRACT");
 
     arguments.append(indexList.first().data().toString());
-
-    arguments.append("--fst");
 
     arguments.append("--dest");
     arguments.append(destination);
@@ -817,9 +815,9 @@ void WiTools::transferFilesToFileSystem(QModelIndexList indexList, QString desti
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferFilesToFileSystem_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferFilesToFileSystem_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferFilesToFileSystem_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(extractImage_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(extractImage_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(extractImage_finished(int, QProcess::ExitStatus)));
 
     witProcess->start(wit, arguments);
     witProcess->waitForFinished(-1);
@@ -828,7 +826,7 @@ void WiTools::transferFilesToFileSystem(QModelIndexList indexList, QString desti
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::transferFilesToFileSystem_readyReadStandardOutput() {
+void WiTools::extractImage_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("EXTRACT")) {
@@ -838,10 +836,10 @@ void WiTools::transferFilesToFileSystem_readyReadStandardOutput() {
         QString to = tmp.mid(tmp.indexOf("->") + 3, tmp.length() - tmp.indexOf("->"));
 
         #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1 -> %2...").arg(Common::fromUtf8(from), Common::fromUtf8(to));
+            gameCountText = tr("Extracting game %1 -> %2...").arg(Common::fromUtf8(from), Common::fromUtf8(to));
             emit showStatusBarMessage(gameCountText);
         #else
-            emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(Common::fromUtf8(from), Common::fromUtf8(to)));
+            emit showStatusBarMessage(tr("Extracting game %1 -> %2...").arg(Common::fromUtf8(from), Common::fromUtf8(to)));
         #endif
     }
     else if (line.contains("% copied")) {
@@ -856,37 +854,38 @@ void WiTools::transferFilesToFileSystem_readyReadStandardOutput() {
     }
 }
 
-void WiTools::transferFilesToFileSystem_readyReadStandardError() {
+void WiTools::extractImage_readyReadStandardError() {
     QString error = witProcess->readAllStandardError().constData();
 
     emit newLogEntry(error, Error);
 
     if (error.contains("Destination already exists")) {
         emit showStatusBarMessage(tr("Destination already exists!"));
-        emit transferFilesToFileSystem_finished(WiTools::DestinationAlreadyExists);
+        emit extractImage_finished(WiTools::DestinationAlreadyExists);
+
         witProcessStatus = DestinationAlreadyExists;
     }
 }
 
-void WiTools::transferFilesToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::extractImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
-        emit newLogEntry(tr("Transfer canceled!"), Error);
-        emit showStatusBarMessage(tr("Transfer canceled!"));
-        emit transferFilesToFileSystem_finished(WiTools::TransferCanceled);
+        emit newLogEntry(tr("Extract canceled!"), Error);
+        emit showStatusBarMessage(tr("Extract canceled!"));
+        emit extractImage_finished(WiTools::TransferCanceled);
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
-            emit newLogEntry(tr("Transfer successfully!"), Error);
+            emit newLogEntry(tr("Extract successfully!"), Error);
             emit showStatusBarMessage(tr("Ready."));
-            emit transferFilesToFileSystem_finished(WiTools::Ok);
+            emit extractImage_finished(WiTools::Ok);
         }
 
         witProcessStatus = Ok;
     }
     else {
         emit newLogEntry(QString(tr("Error %1: %2")).arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
-        emit showStatusBarMessage(tr("Transfer failed!"));
-        emit transferFilesToFileSystem_finished(WiTools::UnknownError);
+        emit showStatusBarMessage(tr("Extract failed!"));
+        emit extractImage_finished(WiTools::UnknownError);
     }
 
     delete witProcess;
@@ -1355,11 +1354,11 @@ void WiTools::transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus ex
     delete witProcess;
 }
 
-void WiTools::transferWBFSToFileSystem(QModelIndexList indexList, QString wbfsPath, QString destination) {
+void WiTools::extractWBFS(QModelIndexList indexList, QString wbfsPath, QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
-    emit showStatusBarMessage(tr("Preparing transfer..."));
-    emit newLogEntry(tr("Starting transfer WBFS to file system.\n"), Info);
+    emit showStatusBarMessage(tr("Preparing extract..."));
+    emit newLogEntry(tr("Starting extract WBFS.\n"), Info);
 
     QStringList arguments;
     arguments.append("EXTRACT");
@@ -1392,9 +1391,9 @@ void WiTools::transferWBFSToFileSystem(QModelIndexList indexList, QString wbfsPa
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
-    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(transferWBFSToFileSystem_readyReadStandardOutput()));
-    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(transferWBFSToFileSystem_readyReadStandardError()));
-    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(transferWBFSToFileSystem_finished(int, QProcess::ExitStatus)));
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(extractWBFS_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(extractWBFS_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(extractWBFS_finished(int, QProcess::ExitStatus)));
 
     witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
@@ -1403,17 +1402,17 @@ void WiTools::transferWBFSToFileSystem(QModelIndexList indexList, QString wbfsPa
     emit setMainProgressBarVisible(false);
 }
 
-void WiTools::transferWBFSToFileSystem_readyReadStandardOutput() {
+void WiTools::extractWBFS_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("EXTRACT")) {
         QString tmp = line.mid(line.indexOf("EXTRACT") + 8, line.indexOf("[") - line.indexOf("EXTRACT") + 8).remove("\n");
 
         #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1...").arg(Common::fromUtf8(tmp));
+            gameCountText = tr("Extracting game %1...").arg(Common::fromUtf8(tmp));
             emit showStatusBarMessage(gameCountText);
         #else
-            emit showStatusBarMessage(tr("Transfering game %1...").arg(Common::fromUtf8(tmp)));
+            emit showStatusBarMessage(tr("Extracting game %1...").arg(Common::fromUtf8(tmp)));
         #endif
     }
     else if (line.contains("% copied")) {
@@ -1428,37 +1427,37 @@ void WiTools::transferWBFSToFileSystem_readyReadStandardOutput() {
     }
 }
 
-void WiTools::transferWBFSToFileSystem_readyReadStandardError() {
+void WiTools::extractWBFS_readyReadStandardError() {
     QString error = witProcess->readAllStandardError().constData();
 
     emit newLogEntry(error, Error);
 
     if (error.contains("Destination already exists")) {
         emit showStatusBarMessage(tr("Destination already exists!"));
-        emit transferWBFSToFileSystem_finished(WiTools::DestinationAlreadyExists);
+        emit extractWBFS_finished(WiTools::DestinationAlreadyExists);
         witProcessStatus = DestinationAlreadyExists;
     }
 }
 
-void WiTools::transferWBFSToFileSystem_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::extractWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
-        emit newLogEntry(tr("Transfer canceled!"), Error);
-        emit showStatusBarMessage(tr("Transfer canceled!"));
-        emit transferWBFSToFileSystem_finished(WiTools::TransferCanceled);
+        emit newLogEntry(tr("Extract canceled!"), Error);
+        emit showStatusBarMessage(tr("Extract canceled!"));
+        emit extractWBFS_finished(WiTools::TransferCanceled);
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
-            emit newLogEntry(tr("Transfer successfully!"), Error);
+            emit newLogEntry(tr("Extract successfully!"), Error);
             emit showStatusBarMessage(tr("Ready."));
-            emit transferWBFSToFileSystem_finished(WiTools::Ok);
+            emit extractWBFS_finished(WiTools::Ok);
         }
 
         witProcessStatus = Ok;
     }
     else {
         emit newLogEntry(QString(tr("Error %1: %2")).arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
-        emit showStatusBarMessage(tr("Transfer failed!"));
-        emit transferWBFSToFileSystem_finished(WiTools::UnknownError);
+        emit showStatusBarMessage(tr("Extract failed!"));
+        emit extractWBFS_finished(WiTools::UnknownError);
     }
 
     delete witProcess;

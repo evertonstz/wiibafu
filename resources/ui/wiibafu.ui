@@ -88,9 +88,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="filesTab_pushButton_TransferToFileSystem">
+            <widget class="QPushButton" name="filesTab_pushButton_ExtractImage">
              <property name="text">
-              <string>Transfer to file s&amp;ystem</string>
+              <string>E&amp;xtract image</string>
              </property>
             </widget>
            </item>
@@ -249,7 +249,7 @@
            <item>
             <widget class="QPushButton" name="dvdTab_pushButton_TransferToFileSystem">
              <property name="text">
-              <string>Transfer to file s&amp;ystem</string>
+              <string>E&amp;xtract</string>
              </property>
             </widget>
            </item>
@@ -325,16 +325,16 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="wbfsTab_pushButton_TransferToImage">
+            <widget class="QPushButton" name="wbfsTab_pushButton_Transfer">
              <property name="text">
-              <string>Transfer to &amp;image</string>
+              <string>&amp;Transfer</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="wbfsTab_pushButton_TransferToFileSystem">
+            <widget class="QPushButton" name="wbfsTab_pushButton_Extract">
              <property name="text">
-              <string>Transfer to file s&amp;ystem</string>
+              <string>E&amp;xtract</string>
              </property>
             </widget>
            </item>

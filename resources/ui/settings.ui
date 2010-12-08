@@ -440,8 +440,11 @@
           </item>
           <item>
            <widget class="QCheckBox" name="wit_checkBox_Auto">
+            <property name="toolTip">
+             <string>Search WBFS partitions using '/proc/partitions' or searching hard disks in '/dev/'</string>
+            </property>
             <property name="text">
-             <string>Auto (search for WBFS partitions/hard disks on system)</string>
+             <string>Auto (search for WBFS partitions/hdds on system)</string>
             </property>
            </widget>
           </item>
