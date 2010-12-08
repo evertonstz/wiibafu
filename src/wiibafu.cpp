@@ -56,7 +56,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
         addEntryToLog(tr("Titles not found!\n"), WiTools::Info);
     }
     else {
-        addEntryToLog(tr("Titles found in: %1\n").arg(witPath), WiTools::Info);
+        addEntryToLog(QDir::toNativeSeparators(tr("Titles found in: %1\n").arg(witPath)), WiTools::Info);
     }
 }
 

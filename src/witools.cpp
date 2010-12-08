@@ -868,10 +868,12 @@ void WiTools::extractImage_readyReadStandardError() {
 }
 
 void WiTools::extractImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
-    if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
-        emit newLogEntry(tr("Extraction canceled!"), Error);
-        emit showStatusBarMessage(tr("Extraction canceled!"));
-        emit extractImage_finished(WiTools::TransferCanceled);
+    if (exitStatus == QProcess::CrashExit) {
+        if ((exitCode == 0 && witProcess->error() == 1) || exitCode == 62097) {
+            emit newLogEntry(tr("Extraction canceled!"), Error);
+            emit showStatusBarMessage(tr("Extraction canceled!"));
+            emit extractImage_finished(WiTools::TransferCanceled);
+        }
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
@@ -1201,10 +1203,12 @@ void WiTools::extractDVD_readyReadStandardError() {
 }
 
 void WiTools::extractDVD_finished(int exitCode, QProcess::ExitStatus exitStatus) {
-    if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
-        emit newLogEntry(tr("Extraction canceled!"), Error);
-        emit showStatusBarMessage(tr("Extraction canceled!"));
-        emit extractDVD_finished(WiTools::TransferCanceled);
+    if (exitStatus == QProcess::CrashExit) {
+        if ((exitCode == 0 && witProcess->error() == 1) || exitCode == 62097) {
+            emit newLogEntry(tr("Extraction canceled!"), Error);
+            emit showStatusBarMessage(tr("Extraction canceled!"));
+            emit extractDVD_finished(WiTools::TransferCanceled);
+        }
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
@@ -1440,10 +1444,12 @@ void WiTools::extractWBFS_readyReadStandardError() {
 }
 
 void WiTools::extractWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
-    if (exitStatus == QProcess::CrashExit && exitCode == 0 && witProcess->error() == 1) {
-        emit newLogEntry(tr("Extraction canceled!"), Error);
-        emit showStatusBarMessage(tr("Extraction canceled!"));
-        emit extractWBFS_finished(WiTools::TransferCanceled);
+    if (exitStatus == QProcess::CrashExit) {
+        if ((exitCode == 0 && witProcess->error() == 1) || exitCode == 62097) {
+            emit newLogEntry(tr("Extraction canceled!"), Error);
+            emit showStatusBarMessage(tr("Extraction canceled!"));
+            emit extractWBFS_finished(WiTools::TransferCanceled);
+        }
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
