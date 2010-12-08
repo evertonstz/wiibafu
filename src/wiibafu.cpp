@@ -274,9 +274,9 @@ void WiiBaFu::on_filesTab_pushButton_SelectAll_clicked() {
 }
 
 void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
-    if (!ui->filesTab_pushButton_TransferToWBFS->text().contains(tr("Cancel transfering"))) {
+    if (!ui->filesTab_pushButton_TransferToWBFS->text().contains(tr("&Cancel transfering"))) {
         if (ui->filesTab_tableView->selectionModel() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
-            ui->filesTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
+            ui->filesTab_pushButton_TransferToWBFS->setText(tr("&Cancel transfering"));
 
             QtConcurrent::run(wiTools, &WiTools::transferFilesToWBFS, ui->filesTab_tableView->selectionModel()->selectedRows(10), wbfsPath());
         }
@@ -287,7 +287,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToWBFS_clicked() {
 }
 
 void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
-    if (!ui->filesTab_pushButton_TransferToImage->text().contains(tr("Cancel transfering"))) {
+    if (!ui->filesTab_pushButton_TransferToImage->text().contains(tr("&Cancel transfering"))) {
         if (ui->filesTab_tableView->model() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenExistingDirectory();
 
@@ -300,7 +300,7 @@ void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
-                    ui->filesTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
+                    ui->filesTab_pushButton_TransferToImage->setText(tr("&Cancel transfering"));
                     QtConcurrent::run(wiTools, &WiTools::transferFilesToImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), format, compression, path.absolutePath());
                 }
             }
@@ -312,12 +312,12 @@ void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
 }
 
 void WiiBaFu::on_filesTab_pushButton_ExtractImage_clicked() {
-    if (!ui->filesTab_pushButton_ExtractImage->text().contains(tr("Cancel extracting"))) {
+    if (!ui->filesTab_pushButton_ExtractImage->text().contains(tr("&Cancel extracting"))) {
         if (filesListModel->rowCount() > 0 && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenDirectory();
 
             if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
-                ui->filesTab_pushButton_ExtractImage->setText(tr("Cancel extracting"));
+                ui->filesTab_pushButton_ExtractImage->setText(tr("&Cancel extracting"));
                 QtConcurrent::run(wiTools, &WiTools::extractImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), wiibafudialog->imageDirectory());
             }
         }
@@ -339,9 +339,9 @@ void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
 }
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
-    if (!ui->dvdTab_pushButton_TransferToWBFS->text().contains(tr("Cancel transfering"))) {
+    if (!ui->dvdTab_pushButton_TransferToWBFS->text().contains(tr("&Cancel transfering"))) {
         if (dvdListModel->rowCount() > 0) {
-            ui->dvdTab_pushButton_TransferToWBFS->setText(tr("Cancel transfering"));
+            ui->dvdTab_pushButton_TransferToWBFS->setText(tr("&Cancel transfering"));
 
             QtConcurrent::run(wiTools, &WiTools::transferDVDToWBFS, dvdListModel->index(15, 0).data().toString(), wbfsPath());
         }
@@ -352,7 +352,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 }
 
 void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
-    if (!ui->dvdTab_pushButton_TransferToImage->text().contains(tr("Cancel transfering"))) {
+    if (!ui->dvdTab_pushButton_TransferToImage->text().contains(tr("&Cancel transfering"))) {
         if (dvdListModel->rowCount() > 0) {
             wiibafudialog->setOpenFile();
 
@@ -362,7 +362,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
                 QString compression = wiibafudialog->compression();
                 QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
 
-                ui->dvdTab_pushButton_TransferToImage->setText(tr("Cancel transfering"));
+                ui->dvdTab_pushButton_TransferToImage->setText(tr("&Cancel transfering"));
                 QtConcurrent::run(wiTools, &WiTools::transferDVDToImage, dvdPath, format, compression, filePath);
             }
         }
@@ -373,7 +373,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
 }
 
 void WiiBaFu::on_dvdTab_pushButton_Extract_clicked() {
-    if (!ui->dvdTab_pushButton_Extract->text().contains(tr("Cancel extracting"))) {
+    if (!ui->dvdTab_pushButton_Extract->text().contains(tr("&Cancel extracting"))) {
         if (dvdListModel->rowCount() > 0) {
             wiibafudialog->setOpenDirectory();
 
@@ -381,7 +381,7 @@ void WiiBaFu::on_dvdTab_pushButton_Extract_clicked() {
                 QString directory = wiibafudialog->imageDirectory();
                 QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
 
-                ui->dvdTab_pushButton_Extract->setText(tr("Cancel extracting"));
+                ui->dvdTab_pushButton_Extract->setText(tr("&Cancel extracting"));
                 QtConcurrent::run(wiTools, &WiTools::extractDVD, dvdPath, directory);
             }
         }
@@ -409,7 +409,7 @@ void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
-    if (!ui->wbfsTab_pushButton_Transfer->text().contains(tr("Cancel transfering"))) {
+    if (!ui->wbfsTab_pushButton_Transfer->text().contains(tr("&Cancel transfering"))) {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenExistingDirectory();
 
@@ -422,7 +422,7 @@ void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
-                    ui->wbfsTab_pushButton_Transfer->setText(tr("Cancel transfering"));
+                    ui->wbfsTab_pushButton_Transfer->setText(tr("&Cancel transfering"));
                     QtConcurrent::run(wiTools, &WiTools::transferWBFSToImage, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), format, compression, path.absolutePath());
                 }
             }
@@ -434,12 +434,12 @@ void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
 }
 
 void WiiBaFu::on_wbfsTab_pushButton_Extract_clicked() {
-    if (!ui->wbfsTab_pushButton_Extract->text().contains(tr("Cancel extracting"))) {
+    if (!ui->wbfsTab_pushButton_Extract->text().contains(tr("&Cancel extracting"))) {
         if (wbfsListModel->rowCount() > 0 && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             wiibafudialog->setOpenDirectory();
 
             if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->imageDirectory().isEmpty()) {
-                ui->wbfsTab_pushButton_Extract->setText(tr("Cancel extracting"));
+                ui->wbfsTab_pushButton_Extract->setText(tr("&Cancel extracting"));
                 QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), wiibafudialog->imageDirectory());
             }
         }

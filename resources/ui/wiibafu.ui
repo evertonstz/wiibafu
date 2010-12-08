@@ -348,7 +348,7 @@
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_Check">
              <property name="text">
-              <string>&amp;Check</string>
+              <string>Chec&amp;k</string>
              </property>
             </widget>
            </item>
