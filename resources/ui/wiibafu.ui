@@ -1206,12 +1206,14 @@
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>&amp;Tools</string>
+     <string>Too&amp;ls</string>
     </property>
     <addaction name="menuTools_CheckWBFS"/>
     <addaction name="menuTools_CreateWBFS"/>
     <addaction name="separator"/>
     <addaction name="menuTools_VerifyGame"/>
+    <addaction name="separator"/>
+    <addaction name="menuTools_Compare"/>
     <addaction name="separator"/>
     <addaction name="menuTools_UpdateTitles"/>
    </widget>
@@ -1248,7 +1250,7 @@
   </action>
   <action name="menuTools_CheckWBFS">
    <property name="text">
-    <string>&amp;Check WBFS</string>
+    <string>Chec&amp;k WBFS</string>
    </property>
   </action>
   <action name="menuOptions_Settings">
@@ -1274,6 +1276,11 @@
   <action name="menuTools_VerifyGame">
    <property name="text">
     <string>&amp;Verify game</string>
+   </property>
+  </action>
+  <action name="menuTools_Compare">
+   <property name="text">
+    <string>Com&amp;pare</string>
    </property>
   </action>
  </widget>

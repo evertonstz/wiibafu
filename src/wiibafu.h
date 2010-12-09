@@ -74,6 +74,7 @@ private:
     QString wbfsPath();
     QLocale locale();
     int headerIndex(QAbstractItemModel *model, QString text, Qt::Orientation orientation);
+    bool gameInList(QStandardItemModel *model, QString gameId);
 
     void saveMainWindowGeometry();
     void saveGameListHeaderStates();
@@ -92,6 +93,7 @@ private slots:
     void on_menuTools_CheckWBFS_triggered();
     void on_menuTools_CreateWBFS_triggered();
     void on_menuTools_VerifyGame_triggered();
+    void on_menuTools_Compare_triggered();
     void on_menuTools_UpdateTitles_triggered();
 
     void on_filesTab_tableView_doubleClicked(QModelIndex);

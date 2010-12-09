@@ -166,6 +166,7 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
         gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)WiiBaFuSettings.value("GameListBehavior/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        gameTableView->setSelectionMode(QAbstractItemView::MultiSelection);
         gameTableView->setSortingEnabled(true);
         gameTableView->setTabKeyNavigation(false);
     }
@@ -270,6 +271,36 @@ void WiiBaFu::on_menuTools_VerifyGame_triggered() {
     }
     else {
         emit cancelVerifying();
+    }
+}
+
+void WiiBaFu::on_menuTools_Compare_triggered() {
+    if ((filesListModel->rowCount() > 0 && wbfsListModel->rowCount() > 0) && (ui->tabWidget->currentIndex() == 0 || ui->tabWidget->currentIndex() == 2)) {
+        QTableView *tableView;
+        QStandardItemModel *sourceModel, *targetModel;
+
+        switch (ui->tabWidget->currentIndex()) {
+            case 0:
+                    tableView = ui->filesTab_tableView;
+                    sourceModel = filesListModel;
+                    targetModel = wbfsListModel;
+                    break;
+            case 2:
+                    tableView = ui->wbfsTab_tableView;
+                    sourceModel = wbfsListModel;
+                    targetModel = filesListModel;
+                    break;
+            default:
+                    return;
+        }
+
+        for (int i = 0; sourceModel->rowCount() > i; ++i) {
+            if (!gameInList(targetModel, sourceModel->item(i, 0)->text())) {
+                tableView->selectRow(i);
+            }
+        }
+
+        tableView->setFocus();
     }
 }
 
@@ -1008,6 +1039,16 @@ int WiiBaFu::headerIndex(QAbstractItemModel *model, QString text, Qt::Orientatio
     }
 
     return -1;
+}
+
+bool WiiBaFu::gameInList(QStandardItemModel *model, QString gameId) {
+    for (int i = 0; model->rowCount() > i; ++i) {
+        if (model->item(i, 0)->text().contains(gameId)) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void WiiBaFu::saveMainWindowGeometry() {

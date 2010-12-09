@@ -1,5 +1,6 @@
 2010-12-09 Kai Heitkamp <dynup@ymail.com>
  Version 0.9 (wit v1.23a.beta5)
+  * Compare Files <-> WBFS game lists
   * Verify game images/DVD/WBFS
   * WIT command line for log (via settings)
   * Cancel possibility for loading games process
