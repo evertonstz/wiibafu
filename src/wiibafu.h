@@ -83,6 +83,7 @@ private:
 signals:
     void cancelTransfer();
     void cancelLoading();
+    void cancelVerifying();
     void startBusy();
     void stopBusy();
 
@@ -90,6 +91,7 @@ private slots:
     void on_menuOptions_Settings_triggered();
     void on_menuTools_CheckWBFS_triggered();
     void on_menuTools_CreateWBFS_triggered();
+    void on_menuTools_VerifyGame_triggered();
     void on_menuTools_UpdateTitles_triggered();
 
     void on_filesTab_tableView_doubleClicked(QModelIndex);
@@ -140,6 +142,8 @@ private slots:
 
     void transferWBFSToImage_finished(WiTools::WitStatus);
     void extractWBFS_finished(WiTools::WitStatus);
+
+    void verifyGame_finished(WiTools::WitStatus);
 
     void showGameDiscCover(QImage *gameCover);
     void showGame3DCover(QImage *gameCover);

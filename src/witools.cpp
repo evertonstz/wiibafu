@@ -1667,6 +1667,82 @@ void WiTools::createWBFS(CreateWBFSParameters parameters) {
     emit stopBusy();
 }
 
+void WiTools::verifyGame(int index, QString wbfsPath, QString game) {
+    emit newLogEntry(tr("Starting game verification...\n"), Info);
+
+    QString witApp;
+    QStringList arguments;
+    arguments.append("VERIFY");
+
+    switch (index) {
+        case 0:
+                witApp = wit;
+                emit showStatusBarMessage(tr("Verifying game %1...").arg(game.mid(game.lastIndexOf("/") + 1, game.length() - game.lastIndexOf("/"))));
+                break;
+        case 1:
+                witApp = wit;
+                emit showStatusBarMessage(tr("Verifying game on drive %1...").arg(game));
+                break;
+        case 2:
+                if (wbfsPath.isEmpty()) {
+                    arguments.append("--auto");
+                }
+                else {
+                    arguments.append("--part");
+                    arguments.append(wbfsPath);
+                }
+
+                witApp = wwt;
+                emit showStatusBarMessage(tr("Verifying game %1 on WBFS...").arg(game));
+                break;
+    }
+
+    arguments.append(game);
+
+    emit newWitCommandLineLogEntry(witApp.mid(witApp.lastIndexOf("/") + 1, witApp.length() - witApp.lastIndexOf("/")), arguments);
+
+    witProcess = new QProcess();
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+    connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(verifyGame_readyReadStandardOutput()));
+    connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(verifyGame_readyReadStandardError()));
+    connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(verifyGame_finished(int, QProcess::ExitStatus)));
+
+    witProcess->start(witApp, arguments);
+    witProcess->waitForFinished(-1);
+
+    delete witProcess;
+}
+
+void WiTools::verifyGame_readyReadStandardOutput() {
+    emit newLogEntry(Common::fromUtf8(witProcess->readAllStandardOutput().constData()), Info);
+}
+
+void WiTools::verifyGame_readyReadStandardError() {
+    emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
+}
+
+void WiTools::verifyGame_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+    if (exitStatus == QProcess::CrashExit) {
+        emit newLogEntry(tr("Verification canceled!"), Error);
+        emit showStatusBarMessage(tr("Verification canceled!"));
+        emit verifyGame_finished(WiTools::VerificationCanceled);
+    }
+    else if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        emit newLogEntry(tr("Verification successfully!"), Error);
+        emit showStatusBarMessage(tr("Ready."));
+        emit verifyGame_finished(WiTools::Ok);
+    }
+    else {
+        emit newLogEntry(QString(tr("Error %1: %2")).arg(QString::number(witProcess->error()), witProcess->errorString()), Error);
+        emit showStatusBarMessage(tr("Verification failed!"));
+        emit verifyGame_finished(WiTools::UnknownError);
+    }
+}
+
+void WiTools::cancelVerifying() {
+    witProcess->kill();
+}
+
 void WiTools::setWit() {
     if (WiiBaFuSettings.value("WIT/PathToWIT", QVariant("")).toString().isEmpty()) {
         #ifdef Q_OS_LINUX

@@ -1061,15 +1061,12 @@
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
-               <height>50</height>
+               <height>40</height>
               </size>
              </property>
             </spacer>
            </item>
           </layout>
-          <zorder>infoTab_label_GameCover</zorder>
-          <zorder>infoTab_comboBox_GameLanguages</zorder>
-          <zorder>verticalSpacer_2</zorder>
          </widget>
         </item>
         <item row="1" column="0">
@@ -1214,6 +1211,8 @@
     <addaction name="menuTools_CheckWBFS"/>
     <addaction name="menuTools_CreateWBFS"/>
     <addaction name="separator"/>
+    <addaction name="menuTools_VerifyGame"/>
+    <addaction name="separator"/>
     <addaction name="menuTools_UpdateTitles"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -1270,6 +1269,11 @@
   <action name="menuTools_UpdateTitles">
    <property name="text">
     <string>&amp;Update titles</string>
+   </property>
+  </action>
+  <action name="menuTools_VerifyGame">
+   <property name="text">
+    <string>&amp;Verify game</string>
    </property>
   </action>
  </widget>

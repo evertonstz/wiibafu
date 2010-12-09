@@ -34,11 +34,12 @@ public:
         Ok = 0x0,
         UnknownError = 0x01,
         TransferCanceled = 0x02,
-        DiscAlreadyExists = 0x03,
-        FileAlreadyExists = 0x04,
-        DestinationAlreadyExists = 0x05,
-        NoSuchFileOrDirectory = 0x06,
-        NoGamesFound = 0x07
+        VerificationCanceled = 0x03,
+        DiscAlreadyExists = 0x04,
+        FileAlreadyExists = 0x05,
+        DestinationAlreadyExists = 0x06,
+        NoSuchFileOrDirectory = 0x07,
+        NoGamesFound = 0x08
     };
 
     enum LogType {
@@ -77,6 +78,7 @@ public:
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
     void checkWBFS(QString wbfsPath);
     void createWBFS(CreateWBFSParameters parameters);
+    void verifyGame(int index, QString wbfsPath, QString game);
 
     QString witVersion();
     QString wwtVersion();
@@ -128,9 +130,12 @@ signals:
 
     void removeGamesFromWBFS_successfully();
 
+    void verifyGame_finished(WiTools::WitStatus);
+
 public slots:
     void cancelTransfer();
     void cancelLoading();
+    void cancelVerifying();
 
 private slots:
     void requestFilesGameListModel_readyReadStandardOutput();
@@ -170,6 +175,10 @@ private slots:
     void extractWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
 
     void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+
+    void verifyGame_readyReadStandardOutput();
+    void verifyGame_readyReadStandardError();
+    void verifyGame_finished(int exitCode, QProcess::ExitStatus exitStatus);
 };
 
 #endif // WITOOLS_H

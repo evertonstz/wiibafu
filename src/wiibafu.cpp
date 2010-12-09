@@ -67,6 +67,7 @@ void WiiBaFu::setupConnections() {
 
     connect(this, SIGNAL(cancelTransfer()), wiTools, SLOT(cancelTransfer()));
     connect(this, SIGNAL(cancelLoading()), wiTools, SLOT(cancelLoading()));
+    connect(this, SIGNAL(cancelVerifying()), wiTools, SLOT(cancelVerifying()));
 
     connect(this, SIGNAL(startBusy()), this, SLOT(startMainProgressBarBusy()));
     connect(this, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
@@ -100,6 +101,8 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(extractWBFS_finished(WiTools::WitStatus)), this, SLOT(extractWBFS_finished(WiTools::WitStatus)));
 
     connect(wiTools, SIGNAL(removeGamesFromWBFS_successfully()), this, SLOT(on_wbfsTab_pushButton_Load_clicked()));
+
+    connect(wiTools, SIGNAL(verifyGame_finished(WiTools::WitStatus)), this, SLOT(verifyGame_finished(WiTools::WitStatus)));
 
     connect(wiTools, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
 
@@ -230,6 +233,43 @@ void WiiBaFu::on_menuTools_CreateWBFS_triggered() {
         parameters.Test = wbfsDialog->test();
 
         QtConcurrent::run(wiTools, &WiTools::createWBFS, parameters);
+    }
+}
+
+void WiiBaFu::on_menuTools_VerifyGame_triggered() {
+    if (!ui->menuTools_VerifyGame->text().contains(tr("&Cancel verifying"))) {
+        QString game;
+
+        switch (ui->tabWidget->currentIndex()) {
+            case 0:
+                    if (filesListModel->rowCount() > 0 && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+                        game = filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(10).first())->text();
+                    }
+                    break;
+            case 1:
+                    if (dvdListModel->rowCount() > 0) {
+                        game = dvdListModel->index(15, 0).data().toString();
+                    }
+                    break;
+            case 2:
+                    if (wbfsListModel->rowCount() > 0 && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+                        game = wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(0).first())->text();
+                    }
+                    break;
+        }
+
+        if (!game.isEmpty()) {
+            emit startBusy();
+            ui->menuTools_VerifyGame->setText(tr("&Cancel verifying"));
+            QtConcurrent::run(wiTools, &WiTools::verifyGame, ui->tabWidget->currentIndex(), wbfsPath(), game);
+        }
+        else {
+            setStatusBarText(tr("Error: No game!"));
+            addEntryToLog(tr("Verify error: No game!"), WiTools::Error);
+        }
+    }
+    else {
+        emit cancelVerifying();
     }
 }
 
@@ -630,6 +670,12 @@ void WiiBaFu::transferWBFSToImage_finished(WiTools::WitStatus) {
 
 void WiiBaFu::extractWBFS_finished(WiTools::WitStatus) {
     ui->wbfsTab_pushButton_Extract->setText(tr("E&xtract"));
+}
+
+void WiiBaFu::verifyGame_finished(WiTools::WitStatus) {
+    emit stopBusy();
+    ui->menuTools_VerifyGame->setText(tr("&Verify game"));
+    ui->tabWidget->setCurrentIndex(4);
 }
 
 void WiiBaFu::updateTitles() {
