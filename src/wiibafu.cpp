@@ -889,7 +889,7 @@ void WiiBaFu::showMainProgressBarBusy() {
 
     progressBar_Main->setMinimum(0);
     progressBar_Main->setMaximum(0);
-    progressBar_Main->setValue(0);
+    progressBar_Main->setValue(-1);
 }
 
 void WiiBaFu::stopMainProgressBarBusy() {
