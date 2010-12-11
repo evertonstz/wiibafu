@@ -137,6 +137,7 @@ void Settings::load() {
     ui->gameLists_checkBox_ToolTips->setChecked(WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool());
     setScrollMode(WiiBaFuSettings.value("GameListBehavior/ScrollMode", QVariant(QAbstractItemView::ScrollPerPixel)).toInt());
     setResizeMode(WiiBaFuSettings.value("GameListBehavior/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
+    ui->gameLists_comboBox_SelectionMode->setCurrentIndex(WiiBaFuSettings.value("GameListBehavior/SelectionMode", QVariant(3)).toInt());
 
     ui->filesColumn_checkBox_ID->setChecked(WiiBaFuSettings.value("FilesGameList/columnID", QVariant(true)).toBool());
     ui->filesColumn_checkBox_Name->setChecked(WiiBaFuSettings.value("FilesGameList/columnName", QVariant(true)).toBool());
@@ -214,6 +215,7 @@ void Settings::save() {
     WiiBaFuSettings.setValue("GameListBehavior/ToolTips", ui->gameLists_checkBox_ToolTips->checkState());
     WiiBaFuSettings.setValue("GameListBehavior/ScrollMode", scrollMode());
     WiiBaFuSettings.setValue("GameListBehavior/ResizeMode", resizeMode());
+    WiiBaFuSettings.setValue("GameListBehavior/SelectionMode", ui->gameLists_comboBox_SelectionMode->currentIndex());
 
     WiiBaFuSettings.setValue("FilesGameList/columnID", ui->filesColumn_checkBox_ID->checkState());
     WiiBaFuSettings.setValue("FilesGameList/columnName", ui->filesColumn_checkBox_Name->checkState());
@@ -294,6 +296,7 @@ void Settings::restoreDefaults(int index) {
                 ui->gameLists_checkBox_ToolTips->setChecked(false);
                 ui->gameLists_radioButton_ScrollPerPixel->setChecked(true);
                 ui->gameLists_radioButton_ResizeToContents->setChecked(true);
+                ui->gameLists_comboBox_SelectionMode->setCurrentIndex(3);
                 break;
         case 3: // Game list columns
                 ui->filesColumn_checkBox_ID->setChecked(true);

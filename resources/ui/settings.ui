@@ -636,6 +636,63 @@
          </layout>
         </widget>
        </item>
+       <item>
+        <widget class="QGroupBox" name="gameLists_groupBox_SelectionMode">
+         <property name="title">
+          <string>Selection mode:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0">
+           <widget class="QComboBox" name="gameLists_comboBox_SelectionMode">
+            <property name="currentIndex">
+             <number>3</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>No selection</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Single selection</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Multi selection</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Extended selection</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Contiguous selection</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="page">
