@@ -87,6 +87,7 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
     else if (exitStatus == QProcess::NormalExit && exitCode == 0) {
         QStandardItem *item = 0;
         QTextStream textStream(witProcess);
+        textStream.setCodec("UTF-8");
         QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
 
         while (!textStream.atEnd()) {
@@ -154,12 +155,7 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
                 continue;
             }
             else if (line.startsWith("filename=")) {
-                #ifdef Q_OS_WIN32
-                    filenames.append(new QStandardItem(Common::fromUtf8(line.section("=", 1))));
-                #else
-                    filenames.append(new QStandardItem(line.section("=", 1)));
-                #endif
-
+                filenames.append(new QStandardItem(line.section("=", 1)));
                 continue;
             }
         }
@@ -222,6 +218,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     QStandardItem *item = 0;
     QList<QStandardItem *> game;
     QTextStream textStream(&dvdRead);
+    textStream.setCodec("UTF-8");
 
     while (!textStream.atEnd()) {
         QString line = textStream.readLine();
@@ -399,6 +396,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     int current = 0, max = 0;
     QStandardItem *item = 0;
     QTextStream textStream(&wbfsRead);
+    textStream.setCodec("UTF-8");
     QString file, usedDiscs, totalDiscs, usedMB, freeMB, totalMB;
     QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, wbfsslots, sources;
 

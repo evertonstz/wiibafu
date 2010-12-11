@@ -1272,6 +1272,9 @@
    <property name="text">
     <string>&amp;Update titles</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
+   </property>
   </action>
   <action name="menuTools_VerifyGame">
    <property name="text">
@@ -1280,7 +1283,10 @@
   </action>
   <action name="menuTools_Compare">
    <property name="text">
-    <string>Com&amp;pare</string>
+    <string>Com&amp;pare Files/WBFS</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>
