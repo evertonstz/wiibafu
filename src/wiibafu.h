@@ -128,6 +128,9 @@ private slots:
     void on_logTab_pushButton_Copy_clicked();
     void on_logTab_pushButton_Save_clicked();
 
+    void filesTableView_selectionChanged(const QItemSelection selected, const QItemSelection deselected);
+    void wbfsTableView_selectionChanged(const QItemSelection selected, const QItemSelection deselected);
+
     void setFilesGameListModel();
     void loadingGamesCanceled();
     void loadingGamesFailed(WiTools::WitStatus);

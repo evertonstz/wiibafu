@@ -173,8 +173,8 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
         witModel->appendColumn(filetypes);
         witModel->appendColumn(filenames);
 
-        witModel->setHeaderData(0, Qt::Horizontal, tr("ID"));
-        witModel->setHeaderData(1, Qt::Horizontal, tr("Name (%1 / %2 GB)").arg(QString::number(ids.count()), QString::number((totalGameSize / 1073741824), 'f', 2)));
+        witModel->setHeaderData(0, Qt::Horizontal, tr("ID (0)"));
+        witModel->setHeaderData(1, Qt::Horizontal, tr("Name (%1 GB)").arg(QString::number((totalGameSize / 1073741824), 'f', 2)));
         witModel->setHeaderData(2, Qt::Horizontal, tr("Title"));
         witModel->setHeaderData(3, Qt::Horizontal, tr("Region"));
         witModel->setHeaderData(4, Qt::Horizontal, tr("Size"));
@@ -525,7 +525,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     model->appendColumn(wbfsslots);
     model->appendColumn(sources);
 
-    model->setHeaderData(0, Qt::Horizontal, tr("ID"));
+    model->setHeaderData(0, Qt::Horizontal, tr("ID (0)"));
     model->setHeaderData(1, Qt::Horizontal, tr("Name"));
     model->setHeaderData(2, Qt::Horizontal, tr("Title"));
     model->setHeaderData(3, Qt::Horizontal, tr("Region"));

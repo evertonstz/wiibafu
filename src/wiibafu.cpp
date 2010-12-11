@@ -81,7 +81,7 @@ void WiiBaFu::setupConnections() {
     connect(wiTools, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(wiTools, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
     connect(wiTools, SIGNAL(newLogEntries(QStringList,WiTools::LogType)), this, SLOT(addEntriesToLog(QStringList,WiTools::LogType)));
-    connect(wiTools, SIGNAL(newWitCommandLineLogEntry(QString,QStringList)), this, SLOT(addWitCommandLineToLog(QString,QStringList)));
+    connect(wiTools, SIGNAL(newWitCommandLineLogEntry(QString, QStringList)), this, SLOT(addWitCommandLineToLog(QString, QStringList)));
 
     connect(wiTools, SIGNAL(newFilesGameListModel()), this, SLOT(setFilesGameListModel()));
     connect(wiTools, SIGNAL(loadingGamesCanceled()), this, SLOT(loadingGamesCanceled()));
@@ -605,6 +605,14 @@ void WiiBaFu::on_logTab_pushButton_Save_clicked() {
     }
 }
 
+void WiiBaFu::filesTableView_selectionChanged(const QItemSelection, const QItemSelection) {
+    filesListModel->setHeaderData(0, Qt::Horizontal, tr("ID (%1)").arg(ui->filesTab_tableView->selectionModel()->selectedRows().count()));
+}
+
+void WiiBaFu::wbfsTableView_selectionChanged(const QItemSelection, const QItemSelection) {
+    wbfsListModel->setHeaderData(0, Qt::Horizontal, tr("ID (%1)").arg(ui->wbfsTab_tableView->selectionModel()->selectedRows().count()));
+}
+
 void WiiBaFu::setFilesGameListModel() {
     if (filesListModel->rowCount() > 0 ) {
         ui->filesTab_tableView->setModel(filesListModel);
@@ -616,6 +624,8 @@ void WiiBaFu::setFilesGameListModel() {
         if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
         }
+
+        connect(ui->filesTab_tableView->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(filesTableView_selectionChanged(QItemSelection, QItemSelection)));
 
         emit stopBusy();
         ui->filesTab_pushButton_Load->setText(tr("&Load"));
@@ -661,6 +671,8 @@ void WiiBaFu::setWBFSGameListModel() {
         if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->wbfsTab_tableView, wbfsListModel, tr("Title"), tr("Name"));
         }
+
+        connect(ui->wbfsTab_tableView->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(wbfsTableView_selectionChanged(QItemSelection, QItemSelection)));
 
         emit stopBusy();
         setStatusBarText(tr("Ready."));
