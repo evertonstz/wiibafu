@@ -166,7 +166,6 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
         gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)WiiBaFuSettings.value("GameListBehavior/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-        gameTableView->setSelectionMode(QAbstractItemView::MultiSelection);
         gameTableView->setSortingEnabled(true);
         gameTableView->setTabKeyNavigation(false);
     }
@@ -279,6 +278,7 @@ void WiiBaFu::on_menuTools_Compare_triggered() {
         QTableView *tableView;
         QStandardItemModel *sourceModel, *targetModel;
 
+
         switch (ui->tabWidget->currentIndex()) {
             case 0:
                     tableView = ui->filesTab_tableView;
@@ -294,6 +294,8 @@ void WiiBaFu::on_menuTools_Compare_triggered() {
                     return;
         }
 
+        tableView->setSelectionMode(QAbstractItemView::MultiSelection);
+
         for (int i = 0; sourceModel->rowCount() > i; ++i) {
             if (!gameInList(targetModel, sourceModel->item(i, 0)->text())) {
                 tableView->selectRow(i);
@@ -301,6 +303,7 @@ void WiiBaFu::on_menuTools_Compare_triggered() {
         }
 
         tableView->setFocus();
+        tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     }
 }
 
