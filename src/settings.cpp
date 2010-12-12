@@ -25,6 +25,16 @@ Settings::Settings(QWidget *parent) : QDialog(parent), ui(new Ui::Settings) {
     ui->setupUi(this);
     setupGeometry();
     load();
+
+    #ifdef Q_OS_MACX
+        ui->main_label_MacOSXStyle->setEnabled(true);
+        ui->main_radioButton_MacOSXStyle_Aqua->setEnabled(true);
+        ui->main_radioButton_MacOSXStyle_BrushedMetal->setEnabled(true);
+    #else
+        ui->main_label_MacOSXStyle->setEnabled(false);
+        ui->main_radioButton_MacOSXStyle_Aqua->setEnabled(false);
+        ui->main_radioButton_MacOSXStyle_BrushedMetal->setEnabled(false);
+    #endif
 }
 
 void Settings::on_wit_pushButton_PathToWITOpen_clicked() {
@@ -123,9 +133,18 @@ void Settings::load() {
     ui->main_lineEdit_proxyUser->setText(WiiBaFuSettings.value("Main/ProxyUser", QVariant("")).toString());
     ui->main_lineEdit_proxyPassword->setText(WiiBaFuSettings.value("Main/ProxyPassword", QVariant("")).toString());
     ui->main_comboBox_proxyType->setCurrentIndex(WiiBaFuSettings.value("Main/ProxyType", QVariant(0)).toInt());
+    ui->main_comboBox_Language->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
     ui->main_comboBox_Logging->setCurrentIndex(WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
     ui->main_checkBox_LogWitCommandLine->setChecked(WiiBaFuSettings.value("Main/LogWitCommandLine", QVariant(true)).toBool());
-    ui->main_comboBox_Language->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
+
+    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")) == "Aqua") {
+        ui->main_radioButton_MacOSXStyle_Aqua->setChecked(true);
+        ui->main_radioButton_MacOSXStyle_BrushedMetal->setChecked(false);
+    }
+    else if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")) == "BrushedMetal") {
+        ui->main_radioButton_MacOSXStyle_Aqua->setChecked(false);
+        ui->main_radioButton_MacOSXStyle_BrushedMetal->setChecked(true);
+    }
 
     ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(QDir::currentPath().append("/wit"))).toString());
     ui->wit_checkBox_Auto->setChecked(WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool());
@@ -201,9 +220,10 @@ void Settings::save() {
     WiiBaFuSettings.setValue("Main/ProxyUser", ui->main_lineEdit_proxyUser->text());
     WiiBaFuSettings.setValue("Main/ProxyPassword", ui->main_lineEdit_proxyPassword->text());
     WiiBaFuSettings.setValue("Main/ProxyType", ui->main_comboBox_proxyType->currentIndex());
+    WiiBaFuSettings.setValue("Main/GameLanguage", ui->main_comboBox_Language->currentIndex());
     WiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
     WiiBaFuSettings.setValue("Main/LogWitCommandLine", ui->main_checkBox_LogWitCommandLine->checkState());
-    WiiBaFuSettings.setValue("Main/GameLanguage", ui->main_comboBox_Language->currentIndex());
+    WiiBaFuSettings.setValue("Main/MacOSXStyle", macOSXStyle());
 
     WiiBaFuSettings.setValue("WIT/PathToWIT", ui->wit_lineEdit_PathToWIT->text());
     WiiBaFuSettings.setValue("WIT/Auto", ui->wit_checkBox_Auto->checkState());
@@ -281,9 +301,11 @@ void Settings::restoreDefaults(int index) {
                 ui->main_lineEdit_proxyUser->setEnabled(false);
                 ui->main_lineEdit_proxyPassword->setEnabled(false);
                 ui->main_comboBox_proxyType->setCurrentIndex(3);
+                ui->main_comboBox_Language->setCurrentIndex(0);
                 ui->main_comboBox_Logging->setCurrentIndex(0);
                 ui->main_checkBox_LogWitCommandLine->setChecked(true);
-                ui->main_comboBox_Language->setCurrentIndex(0);
+                ui->main_radioButton_MacOSXStyle_Aqua->setChecked(true);
+                ui->main_radioButton_MacOSXStyle_BrushedMetal->setChecked(false);
                 break;
         case 1: // WIT
                 ui->wit_lineEdit_PathToWIT->setText(QDir::currentPath().append("/wit"));
@@ -406,6 +428,18 @@ int Settings::resizeMode() {
     }
 }
 
+QString Settings::macOSXStyle() {
+    if (ui->main_radioButton_MacOSXStyle_Aqua->isChecked()) {
+        return "Aqua";
+    }
+    else if (ui->main_radioButton_MacOSXStyle_BrushedMetal->isChecked()) {
+        return "BrushedMetal";
+    }
+    else {
+        return "";
+    }
+}
+
 void Settings::on_main_checkBox_useProxy_stateChanged(int state) {
     state ? ui->main_lineEdit_proxyHost->setEnabled(true) : ui->main_lineEdit_proxyHost->setEnabled(false);
     state ? ui->main_lineEdit_proxyPort->setEnabled(true) : ui->main_lineEdit_proxyPort->setEnabled(false);
@@ -446,6 +480,15 @@ void Settings::saveGeometry() {
     WiiBaFuSettings.setValue("Settings/y", this->geometry().y());
     WiiBaFuSettings.setValue("Settings/width", this->geometry().width());
     WiiBaFuSettings.setValue("Settings/height", this->geometry().height());
+}
+
+void Settings::setMacOSXStyle() {
+    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+        this->setAttribute(Qt::WA_MacBrushedMetal, true);
+    }
+    else {
+        this->setAttribute(Qt::WA_MacBrushedMetal, false);
+    }
 }
 
 Settings::~Settings() {

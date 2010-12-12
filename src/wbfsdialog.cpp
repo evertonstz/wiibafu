@@ -65,6 +65,17 @@ bool WBFSDialog::test() {
     return ui->checkBox_Test->checkState();
 }
 
+void WBFSDialog::setMacOSXStyle() {
+    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+        ui->frame->setFrameShape(QFrame::NoFrame);
+        this->setAttribute(Qt::WA_MacBrushedMetal, true);
+    }
+    else {
+        ui->frame->setFrameShape(QFrame::StyledPanel);
+        this->setAttribute(Qt::WA_MacBrushedMetal, false);
+    }
+}
+
 WBFSDialog::~WBFSDialog() {
     delete ui;
 }

@@ -22,6 +22,7 @@
 #define COVERVIEWDIALOG_H
 
 #include <QtGui>
+#include "global.h"
 
 namespace Ui {
     class CoverViewDialog;
@@ -35,6 +36,7 @@ public:
     ~CoverViewDialog();
 
     void setCover(QImage *cover, QString id);
+    void setMacOSXStyle();
 
 private:
     Ui::CoverViewDialog *ui;

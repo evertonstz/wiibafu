@@ -48,6 +48,22 @@ void CoverViewDialog::finished(int) {
     ui->label_GameCover->clear();
 }
 
+void CoverViewDialog::setMacOSXStyle() {
+    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+        ui->frame_Cover->setFrameStyle(QFrame::NoFrame);
+        ui->frame_Buttons->setFrameStyle(QFrame::NoFrame);
+
+        this->setAttribute(Qt::WA_MacBrushedMetal, true);
+    }
+    else {
+        ui->frame_Cover->setFrameStyle(QFrame::StyledPanel);
+        ui->frame_Buttons->setFrameStyle(QFrame::Box);
+        ui->frame_Buttons->setFrameShadow(QFrame::Raised);
+
+        this->setAttribute(Qt::WA_MacBrushedMetal, false);
+    }
+}
+
 CoverViewDialog::~CoverViewDialog() {
     delete ui;
 }

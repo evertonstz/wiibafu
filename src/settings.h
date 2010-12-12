@@ -36,6 +36,8 @@ public:
     explicit Settings(QWidget *parent = 0);
     ~Settings();
 
+    void setMacOSXStyle();
+
 private:
     Ui::Settings *ui;
 
@@ -49,6 +51,7 @@ private:
     void setResizeMode(int mode);
     int scrollMode();
     int resizeMode();
+    QString macOSXStyle();
 
     void setupGeometry();
     void saveGeometry();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>640</height>
+    <width>846</width>
+    <height>761</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -48,7 +48,7 @@
          <widget class="QTableView" name="filesTab_tableView"/>
         </item>
         <item>
-         <widget class="QFrame" name="filesTab_frame_buttons">
+         <widget class="QFrame" name="filesTab_frame_Buttons">
           <property name="frameShape">
            <enum>QFrame::Box</enum>
           </property>
@@ -112,7 +112,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QFrame" name="frame_3">
+         <widget class="QFrame" name="dvdTab_frame_Info">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
@@ -214,7 +214,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="dvdTab_frame_buttons">
+         <widget class="QFrame" name="dvdTab_frame_Buttons">
           <property name="frameShape">
            <enum>QFrame::Box</enum>
           </property>
@@ -267,7 +267,7 @@
          <widget class="QTableView" name="wbfsTab_tableView"/>
         </item>
         <item>
-         <widget class="QFrame" name="frame_4">
+         <widget class="QFrame" name="wbfsTab_frame_Info">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
@@ -299,7 +299,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="wbfsTab_frame_buttons">
+         <widget class="QFrame" name="wbfsTab_frame_Buttons">
           <property name="frameShape">
            <enum>QFrame::Box</enum>
           </property>
@@ -370,9 +370,9 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
-         <widget class="QFrame" name="frame_2">
+         <widget class="QFrame" name="infoTab_frame_Infos">
           <property name="frameShape">
-           <enum>QFrame::Box</enum>
+           <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -1070,7 +1070,7 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QFrame" name="frame_5">
+         <widget class="QFrame" name="infoTab_frame_Buttons">
           <property name="frameShape">
            <enum>QFrame::Box</enum>
           </property>
@@ -1136,7 +1136,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="frame">
+         <widget class="QFrame" name="logTab_frame_Buttons">
           <property name="frameShape">
            <enum>QFrame::Box</enum>
           </property>
@@ -1188,8 +1188,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>21</height>
+     <width>846</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

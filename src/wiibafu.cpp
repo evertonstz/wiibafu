@@ -45,6 +45,14 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     setGameListAttributes(ui->dvdTab_tableView);
     setGameListAttributes(ui->wbfsTab_tableView);
 
+    #ifdef Q_OS_MACX
+        setMacOSXStyle();
+        settings->setMacOSXStyle();
+        coverViewDialog->setMacOSXStyle();
+        wbfsDialog->setMacOSXStyle();
+        wiibafudialog->setMacOSXStyle();
+    #endif
+
     setStatusBarText(tr("Ready."));
 
     addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()), WiTools::Info);
@@ -148,6 +156,33 @@ void WiiBaFu::setupGeometry() {
     }
 }
 
+void WiiBaFu::setMacOSXStyle() {
+    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+        ui->filesTab_frame_Buttons->setFrameShape(QFrame::NoFrame);
+        ui->dvdTab_frame_Info->setFrameShape(QFrame::NoFrame);
+        ui->dvdTab_frame_Buttons->setFrameShape(QFrame::NoFrame);
+        ui->wbfsTab_frame_Buttons->setFrameShape(QFrame::NoFrame);
+        ui->wbfsTab_frame_Info->setFrameShape(QFrame::NoFrame);
+        ui->infoTab_frame_Infos->setFrameShape(QFrame::NoFrame);
+        ui->infoTab_frame_Buttons->setFrameShape(QFrame::NoFrame);
+        ui->logTab_frame_Buttons->setFrameShape(QFrame::NoFrame);
+
+        this->setAttribute(Qt::WA_MacBrushedMetal, true);
+    }
+    else {
+        ui->filesTab_frame_Buttons->setFrameShape(QFrame::Box);
+        ui->dvdTab_frame_Info->setFrameShape(QFrame::StyledPanel);
+        ui->dvdTab_frame_Buttons->setFrameShape(QFrame::Box);
+        ui->wbfsTab_frame_Buttons->setFrameShape(QFrame::Box);
+        ui->wbfsTab_frame_Info->setFrameShape(QFrame::StyledPanel);
+        ui->infoTab_frame_Infos->setFrameShape(QFrame::StyledPanel);
+        ui->infoTab_frame_Buttons->setFrameShape(QFrame::Box);
+        ui->logTab_frame_Buttons->setFrameShape(QFrame::Box);
+
+        this->setAttribute(Qt::WA_MacBrushedMetal, false);
+    }
+}
+
 void WiiBaFu::setMainProgressBarVisible(bool visible) {
     progressBar_Main->setVisible(visible);
 }
@@ -183,6 +218,10 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 void WiiBaFu::on_menuOptions_Settings_triggered() {
     int language = WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt();
 
+    #ifdef Q_OS_MACX
+        QString macOSXStyle = WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString();
+    #endif
+
     if (settings->exec() == QDialog::Accepted) {
         setGameListAttributes(ui->filesTab_tableView);
         setGameListAttributes(ui->dvdTab_tableView);
@@ -204,6 +243,8 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
             }
         }
 
+        ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
+
         if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
             setToolTips(ui->wbfsTab_tableView, wbfsListModel, tr("Title"), tr("Name"));
@@ -211,7 +252,15 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
             ui->wbfsTab_tableView->update();
         }
 
-        ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
+        #ifdef Q_OS_MACX
+            if (macOSXStyle != WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString()) {
+                setMacOSXStyle();
+                settings->setMacOSXStyle();
+                coverViewDialog->setMacOSXStyle();
+                wbfsDialog->setMacOSXStyle();
+                wiibafudialog->setMacOSXStyle();
+            }
+        #endif
     }
 }
 

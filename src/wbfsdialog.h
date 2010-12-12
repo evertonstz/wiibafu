@@ -22,6 +22,7 @@
 #define WBFSDIALOG_H
 
 #include <QtGui>
+#include "global.h"
 
 namespace Ui {
     class WBFSDialog;
@@ -42,6 +43,7 @@ public:
     bool recover();
     bool inode();
     bool test();
+    void setMacOSXStyle();
 
 private:
     Ui::WBFSDialog *ui;

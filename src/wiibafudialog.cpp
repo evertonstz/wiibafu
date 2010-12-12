@@ -232,6 +232,21 @@ void WiiBaFuDialog::setOpenFile() {
     ui->frame_compressionMethod->setVisible(true);
 }
 
+void WiiBaFuDialog::setMacOSXStyle() {
+    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+        ui->frame->setFrameShape(QFrame::NoFrame);
+        ui->frame_compressionMethod->setFrameShape(QFrame::NoFrame);
+
+        this->setAttribute(Qt::WA_MacBrushedMetal, true);
+    }
+    else {
+        ui->frame->setFrameShape(QFrame::Box);
+        ui->frame_compressionMethod->setFrameShape(QFrame::Box);
+
+        this->setAttribute(Qt::WA_MacBrushedMetal, false);
+    }
+}
+
 WiiBaFuDialog::~WiiBaFuDialog() {
     delete ui;
 }

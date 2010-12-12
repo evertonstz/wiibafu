@@ -22,6 +22,7 @@
 #define WIIBAFUDIALOG_H
 
 #include <QDialog>
+#include "global.h"
 
 namespace Ui {
     class WiiBaFuDialog;
@@ -41,6 +42,7 @@ public:
     void setOpenImageDirectory();
     void setOpenDirectory();
     void setOpenFile();
+    void setMacOSXStyle();
 
 private:
     Ui::WiiBaFuDialog *ui;
