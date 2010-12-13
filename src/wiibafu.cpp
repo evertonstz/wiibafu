@@ -314,8 +314,8 @@ void WiiBaFu::on_menuTools_VerifyGame_triggered() {
             QtConcurrent::run(wiTools, &WiTools::verifyGame, ui->tabWidget->currentIndex(), wbfsPath(), game);
         }
         else {
-            setStatusBarText(tr("Error: No game!"));
-            addEntryToLog(tr("Verify error: No game!"), WiTools::Error);
+            setStatusBarText(tr("Verify error: No game selected!"));
+            addEntryToLog(tr("Verify error: No game selected!"), WiTools::Error);
         }
     }
     else {
@@ -1317,6 +1317,15 @@ void WiiBaFu::on_menuHelp_About_triggered() {
         "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit"
         "<br>and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools!"
         "<p><i>Dedicated in memory of my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>"));
+}
+
+bool WiiBaFu::event(QEvent *event) {
+    if (event->type() == QEvent::StatusTip) {
+        return false;
+    }
+    else {
+        return QMainWindow::event(event);
+    }
 }
 
 WiiBaFu::~WiiBaFu() {

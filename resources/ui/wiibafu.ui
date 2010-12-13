@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>846</width>
-    <height>761</height>
+    <width>800</width>
+    <height>640</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1188,8 +1188,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>846</width>
-     <height>22</height>
+     <width>800</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1205,6 +1205,9 @@
     <addaction name="menuOptions_Settings"/>
    </widget>
    <widget class="QMenu" name="menuTools">
+    <property name="statusTip">
+     <string>Tools</string>
+    </property>
     <property name="title">
      <string>Too&amp;ls</string>
     </property>
@@ -1239,6 +1242,9 @@
    <property name="text">
     <string>E&amp;xit</string>
    </property>
+   <property name="statusTip">
+    <string>Exits Wii Backup Fusion</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
@@ -1261,11 +1267,6 @@
   <action name="menuTools_CreateWBFS">
    <property name="text">
     <string>C&amp;reate WBFS</string>
-   </property>
-  </action>
-  <action name="menuTools_FormatWBFSPartition">
-   <property name="text">
-    <string>Format WBFS partition</string>
    </property>
   </action>
   <action name="menuTools_UpdateTitles">

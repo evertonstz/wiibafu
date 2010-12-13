@@ -82,6 +82,8 @@ private:
     void setFilesColumns();
     void setWBFSColumns();
 
+    bool event(QEvent *event);
+
 signals:
     void cancelTransfer();
     void cancelLoading();
