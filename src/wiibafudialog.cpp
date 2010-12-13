@@ -182,7 +182,7 @@ void WiiBaFuDialog::on_comboBox_compressionDefaults_currentIndexChanged(int inde
 }
 
 void WiiBaFuDialog::setOpenImageDirectory() {
-    this->setWindowTitle(tr("Open image directory"));
+    this->setWindowTitle(tr("Transfer games to image"));
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -199,7 +199,7 @@ void WiiBaFuDialog::setOpenImageDirectory() {
 }
 
 void WiiBaFuDialog::setOpenDirectory() {
-    this->setWindowTitle(tr("Open directory"));
+    this->setWindowTitle(tr("Extract game"));
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -216,7 +216,7 @@ void WiiBaFuDialog::setOpenDirectory() {
 }
 
 void WiiBaFuDialog::setOpenFile() {
-    this->setWindowTitle(tr("Open file"));
+    this->setWindowTitle(tr("Transfer game to image"));
 
     ui->label_FilePath->setVisible(true);
     ui->lineEdit_FilePath->setVisible(true);

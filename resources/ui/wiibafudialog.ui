@@ -13,9 +13,6 @@
     <height>211</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Transfer games to image</string>
-  </property>
   <property name="windowIcon">
    <iconset resource="../wiibafu.qrc">
     <normaloff>:/appicon/images/appicon.png</normaloff>:/appicon/images/appicon.png</iconset>
