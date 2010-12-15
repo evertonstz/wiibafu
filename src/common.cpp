@@ -37,6 +37,11 @@ void Common::requestGameCover(QString gameID, QString language, GameCoverArt gam
     if (gameCoverArt == Disc) {
         result = getCover(QString("http://wiitdb.com/wiitdb/artwork/disc/%1/%2.png").arg(language, gameID));
 
+        if (result != QNetworkReply::NoError && language != "EN") {
+            emit newLogEntry(tr("No game cover in selected language available! Trying to download the english one..."), WiTools::Info);
+            result = getCover(QString("http://wiitdb.com/wiitdb/artwork/disc/EN/%2.png").arg(gameID));
+        }
+
         if (result != QNetworkReply::NoError) {
             result = getCover(QString("http://www.wiiboxart.com/artwork/disc/%1.png").arg(gameID));
         }
@@ -52,6 +57,11 @@ void Common::requestGameCover(QString gameID, QString language, GameCoverArt gam
     else if (gameCoverArt == ThreeD) {
         result = getCover(QString("http://wiitdb.com/wiitdb/artwork/cover3D/%1/%2.png").arg(language, gameID));
 
+        if (result != QNetworkReply::NoError && language != "EN") {
+            emit newLogEntry(tr("No game cover in selected language available! Trying to download the english one..."), WiTools::Info);
+            result = getCover(QString("http://wiitdb.com/wiitdb/artwork/cover3D/EN/%2.png").arg(gameID));
+        }
+
         if (result != QNetworkReply::NoError) {
             result = getCover(QString("http://www.wiiboxart.com/artwork/cover3D/%1.png").arg(gameID));
         }
@@ -66,6 +76,11 @@ void Common::requestGameCover(QString gameID, QString language, GameCoverArt gam
     }
     else if (gameCoverArt == HighQuality) {
         result = getCover(QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/%1/%2.png").arg(language, gameID));
+
+        if (result != QNetworkReply::NoError && language != "EN") {
+            emit newLogEntry(tr("No game cover in selected language available! Trying to download the english one..."), WiTools::Info);
+            result = getCover(QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/EN/%2.png").arg(gameID));
+        }
 
         if (result != QNetworkReply::NoError) {
             result = getCover(QString("http://www.wiiboxart.com/artwork/coverfull/%1.png").arg(gameID));
