@@ -35,7 +35,7 @@ public:
     explicit CoverViewDialog(QWidget *parent = 0);
     ~CoverViewDialog();
 
-    void setCover(QImage *cover, QString id);
+    void setCover(QImage cover, QString id);
     void setMacOSXStyle();
 
 private:

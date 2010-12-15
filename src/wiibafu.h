@@ -153,9 +153,9 @@ private slots:
 
     void verifyGame_finished(WiTools::WitStatus);
 
-    void showGameDiscCover(QImage *gameCover);
-    void showGame3DCover(QImage *gameCover);
-    void showGameFullHQCover(QImage *gameFullHQCover);
+    void showGameDiscCover(QImage gameCover);
+    void showGame3DCover(QImage gameCover);
+    void showGameFullHQCover(QImage gameFullHQCover);
 
     void setWBFSInfoText(QString text);
     void setWBFSProgressBar(int min, int max, int value, QString format);

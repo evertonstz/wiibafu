@@ -27,9 +27,16 @@ CoverViewDialog::CoverViewDialog(QWidget *parent) : QDialog(parent), ui(new Ui::
     connect(this, SIGNAL(finished(int)), this, SLOT(finished(int)));
 }
 
-void CoverViewDialog::setCover(QImage *cover, QString id) {
+void CoverViewDialog::setCover(QImage cover, QString id) {
+    QDesktopWidget *desktop = QApplication::desktop();
     gameID = id;
-    ui->label_GameCover->setPixmap(QPixmap::fromImage(*cover, Qt::AutoColor));
+
+    if (cover.height() > (desktop->height() - 130)) {
+        ui->label_GameCover->setPixmap(QPixmap::fromImage(cover.scaledToHeight(desktop->height() - 130, Qt::FastTransformation), Qt::AutoColor));
+    }
+    else {
+        ui->label_GameCover->setPixmap(QPixmap::fromImage(cover, Qt::AutoColor));
+    }
 }
 
 void CoverViewDialog::on_pushButton_Save_clicked() {
@@ -42,10 +49,6 @@ void CoverViewDialog::on_pushButton_Save_clicked() {
 
 void CoverViewDialog::on_pushButton_OK_clicked() {
     close();
-}
-
-void CoverViewDialog::finished(int) {
-    ui->label_GameCover->clear();
 }
 
 void CoverViewDialog::setMacOSXStyle() {
@@ -62,6 +65,10 @@ void CoverViewDialog::setMacOSXStyle() {
 
         this->setAttribute(Qt::WA_MacBrushedMetal, false);
     }
+}
+
+void CoverViewDialog::finished(int) {
+    ui->label_GameCover->clear();
 }
 
 CoverViewDialog::~CoverViewDialog() {

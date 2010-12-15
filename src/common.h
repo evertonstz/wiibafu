@@ -29,6 +29,17 @@
 class Common : public QObject {
     Q_OBJECT
 
+private:
+    WiTools *wiTools;
+    QImage cover;
+    QTimer *timer;
+    QStringList wiiTDBLanguages;
+    QStringList titlesExtensions;
+
+    QNetworkReply::NetworkError getCover(QString url);
+    QNetworkReply::NetworkError getTitle(QString wiitdbPath, QString fileName);
+    QNetworkProxy proxy();
+
 public:
     enum GameCoverArt {
         Disc = 0x0,
@@ -46,30 +57,18 @@ public:
 
     static QString fromUtf8(QString string);
 
-private:
-    QHttp *http;
-    QUrl url;
-    WiTools *wiTools;
-    GameCoverArt currentGameCoverArt;
-    QStringList wiiTDBLanguages;
-    QStringList titlesExtensions;
-
-    void getGameCover(QString gameID, QString language);
-    QNetworkReply::NetworkError getTitle(QString wiitdbPath, QString fileName);
-    QNetworkProxy proxy();
-
 signals:
-    void newGame3DCover(QImage *game3DCover);
-    void newGameFullHQCover(QImage *gameFullHQCover);
-    void newGameDiscCover(QImage *gameDiscCover);
+    void newGame3DCover(QImage game3DCover);
+    void newGameFullHQCover(QImage gameFullHQCover);
+    void newGameDiscCover(QImage gameDiscCover);
     void showStatusBarMessage(QString message);
     void newLogEntry(QString entry, WiTools::LogType);
     void setMainProgressBarVisible(bool visible);
     void setMainProgressBar(int value, QString format);
 
 private slots:
-    void loadGameCover_responseHeaderReceived(const QHttpResponseHeader &resp);
-    void loadGameCover_done(bool error);
+    void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+    void getCover_timeOut();
 };
 
 #endif // COMMON_H

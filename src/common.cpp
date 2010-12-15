@@ -21,11 +21,10 @@
 #include "common.h"
 
 Common::Common(QObject *parent) : QObject(parent) {
-    http = new QHttp(this);
-    connect(http, SIGNAL(done(bool)), this, SLOT(loadGameCover_done(bool)));
-    connect(http, SIGNAL(responseHeaderReceived(QHttpResponseHeader)), this, SLOT(loadGameCover_responseHeaderReceived(QHttpResponseHeader)));
-
     wiTools = new WiTools(this);
+    timer = new QTimer(this);
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(getCover_timeOut()));
 
     wiiTDBLanguages = QStringList() << "EN" << "FR" << "DE" << "ES" << "IT" << "NL" << "PT" << "SE" << "DK" << "NO" << "FI" << "RU" << "JA" << "KO" << "ZHTW" << "ZHCN";
     titlesExtensions = QStringList() << ".txt"  << "-fr.txt" << "-de.txt" << "-es.txt" << "-it.txt" << "-nl.txt" << "-pt.txt" << "-se.txt" << "-dk.txt" << "-no.txt" << "-fi.txt" << "-ru.txt" << "-ja.txt" << "-ko.txt" << "-zhtw.txt" << "-zhcn.txt";
@@ -33,58 +32,95 @@ Common::Common(QObject *parent) : QObject(parent) {
 
 void Common::requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt) {
     emit showStatusBarMessage(tr("Loading game cover..."));
+    QNetworkReply::NetworkError result;
 
     if (gameCoverArt == Disc) {
-        url = QString("http://wiitdb.com/wiitdb/artwork/disc/%1/%2.png").arg(language, gameID);
-    }
-    else if (gameCoverArt == ThreeD) {
-        url = QString("http://wiitdb.com/wiitdb/artwork/cover3D/%1/%2.png").arg(language, gameID);
-    }
-    else if (gameCoverArt == HighQuality) {
-        url = QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/%1/%2.png").arg(language, gameID);
-    }
+        result = getCover(QString("http://wiitdb.com/wiitdb/artwork/disc/%1/%2.png").arg(language, gameID));
 
-    currentGameCoverArt = gameCoverArt;
+        if (result != QNetworkReply::NoError) {
+            result = getCover(QString("http://www.wiiboxart.com/artwork/disc/%1.png").arg(gameID));
+        }
 
-    http->setProxy(proxy());
-    http->setHost(url.host());
-    http->get(url.path());
-}
-
-void Common::loadGameCover_responseHeaderReceived(const QHttpResponseHeader &resp) {
-    emit newLogEntry(http->currentRequest().toString(), WiTools::Info);
-    emit newLogEntry(resp.toString().remove(" "), WiTools::Info);
-}
-
-void Common::loadGameCover_done(bool error) {
-    if (!error) {
-        QImage *image = new QImage();
-        image->loadFromData(http->readAll());
-
-        if (!image->isNull()) {
-            emit showStatusBarMessage(tr("Ready."));
-
-            if (currentGameCoverArt == HighQuality) {
-                emit newGameFullHQCover(image);
-            }
-            else if (currentGameCoverArt == ThreeD) {
-                emit newGame3DCover(image);
-            }
-            else if (currentGameCoverArt == Disc) {
-                emit newGameDiscCover(image);
-            }
+        if (result != QNetworkReply::NoError) {
+            emit showStatusBarMessage(tr("No game cover available!"));
         }
         else {
-            emit showStatusBarMessage(tr("No game cover available!"));
-            emit newLogEntry(tr("No game cover available!"), WiTools::Error);
+            emit showStatusBarMessage(tr("Ready."));
+            emit newGameDiscCover(cover);
+        }
+    }
+    else if (gameCoverArt == ThreeD) {
+        result = getCover(QString("http://wiitdb.com/wiitdb/artwork/cover3D/%1/%2.png").arg(language, gameID));
+
+        if (result != QNetworkReply::NoError) {
+            result = getCover(QString("http://www.wiiboxart.com/artwork/cover3D/%1.png").arg(gameID));
         }
 
-        delete image;
+        if (result != QNetworkReply::NoError) {
+            emit showStatusBarMessage(tr("No game cover available!"));
+        }
+        else {
+            emit showStatusBarMessage(tr("Ready."));
+            emit newGame3DCover(cover);
+        }
+    }
+    else if (gameCoverArt == HighQuality) {
+        result = getCover(QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/%1/%2.png").arg(language, gameID));
+
+        if (result != QNetworkReply::NoError) {
+            result = getCover(QString("http://www.wiiboxart.com/artwork/coverfull/%1.png").arg(gameID));
+        }
+
+        if (result != QNetworkReply::NoError) {
+            emit showStatusBarMessage(tr("No game cover available!"));
+        }
+        else {
+            emit showStatusBarMessage(tr("Ready."));
+            emit newGameFullHQCover(cover);
+        }
+    }
+}
+
+QNetworkReply::NetworkError Common::getCover(QString url) {
+    QEventLoop loop;
+    QNetworkReply *reply;
+    QNetworkAccessManager manager;
+
+    timer->start(3000);
+
+    emit setMainProgressBar(0, "%p%");
+    emit newLogEntry(tr("Loading game cover..."), WiTools::Info);
+
+    manager.setProxy(proxy());
+    reply = manager.get(QNetworkRequest(QUrl(url)));
+
+    connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(downloadProgress(qint64,qint64)));
+    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+
+    if (reply->error() != 0) {
+        emit newLogEntry(tr("Not found! (%1)").arg(url), WiTools::Error);
     }
     else {
-        emit showStatusBarMessage(http->errorString());
-        emit newLogEntry(http->errorString().append("\n"), WiTools::Error);
+        emit newLogEntry(tr("Done! (%1)").arg(url), WiTools::Info);
+        cover = QImage::fromData(reply->readAll());
     }
+
+    if (timer->isActive()) {
+        timer->stop();
+    }
+
+    emit setMainProgressBarVisible(false);
+
+    return reply->error();
+}
+
+void Common::downloadProgress(qint64 bytesReceived, qint64 bytesTotal) {
+    emit setMainProgressBar(bytesReceived * 100 / bytesTotal, "%p%");
+}
+
+void Common::getCover_timeOut() {
+    emit setMainProgressBarVisible(true);
 }
 
 void Common::updateTitles() {
@@ -190,6 +226,5 @@ QString Common::fromUtf8(QString string) {
 }
 
 Common::~Common() {
-    delete http;
     delete wiTools;
 }

@@ -114,13 +114,18 @@ void WiiBaFu::setupConnections() {
 
     connect(wiTools, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
 
-    connect(common, SIGNAL(newGame3DCover(QImage*)), this, SLOT(showGame3DCover(QImage*)));
-    connect(common, SIGNAL(newGameFullHQCover(QImage*)), this, SLOT(showGameFullHQCover(QImage*)));
-    connect(common, SIGNAL(newGameDiscCover(QImage*)), this, SLOT(showGameDiscCover(QImage*)));
+    connect(common, SIGNAL(newGame3DCover(QImage)), this, SLOT(showGame3DCover(QImage)));
+    connect(common, SIGNAL(newGameFullHQCover(QImage)), this, SLOT(showGameFullHQCover(QImage)));
+    connect(common, SIGNAL(newGameDiscCover(QImage)), this, SLOT(showGameDiscCover(QImage)));
+
     connect(common, SIGNAL(showStatusBarMessage(QString)), this, SLOT(setStatusBarText(QString)));
     connect(common, SIGNAL(newLogEntry(QString, WiTools::LogType)), this, SLOT(addEntryToLog(QString, WiTools::LogType)));
+
     connect(common, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
     connect(common, SIGNAL(setMainProgressBar(int,QString)), this, SLOT(setMainProgressBar(int,QString)));
+
+    connect(common, SIGNAL(setMainProgressBar(int, QString)), this, SLOT(setMainProgressBar(int,QString)));
+    connect(common, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
 
     connect(ui->menuHelp_About_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(ui->menuFile_Exit, SIGNAL(triggered()), this, SLOT(close()));
@@ -916,15 +921,15 @@ void WiiBaFu::setGameInfoDateTimes(QTableView *tableView, QStandardItemModel *mo
     }
 }
 
-void WiiBaFu::showGameDiscCover(QImage *gameCover) {
-    ui->dvdTab_label_DiscCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
+void WiiBaFu::showGameDiscCover(QImage gameCover) {
+    ui->dvdTab_label_DiscCover->setPixmap(QPixmap::fromImage(gameCover, Qt::AutoColor));
 }
 
-void WiiBaFu::showGame3DCover(QImage *gameCover) {
-    ui->infoTab_label_GameCover->setPixmap(QPixmap::fromImage(*gameCover, Qt::AutoColor));
+void WiiBaFu::showGame3DCover(QImage gameCover) {
+    ui->infoTab_label_GameCover->setPixmap(QPixmap::fromImage(gameCover, Qt::AutoColor));
 }
 
-void WiiBaFu::showGameFullHQCover(QImage *gameFullHQCover) {
+void WiiBaFu::showGameFullHQCover(QImage gameFullHQCover) {
     coverViewDialog->setCover(gameFullHQCover, ui->infoTab_lineEdit_ID->text());
     coverViewDialog->show();
 }
