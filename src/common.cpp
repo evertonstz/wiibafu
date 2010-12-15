@@ -89,7 +89,7 @@ QNetworkReply::NetworkError Common::getCover(QString url) {
     timer->start(3000);
 
     emit setMainProgressBar(0, "%p%");
-    emit newLogEntry(tr("Loading game cover..."), WiTools::Info);
+    emit newLogEntry(tr("Loading game cover from %1...").arg(QUrl(url).host()), WiTools::Info);
 
     manager.setProxy(proxy());
     reply = manager.get(QNetworkRequest(QUrl(url)));
