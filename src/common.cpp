@@ -94,15 +94,15 @@ QNetworkReply::NetworkError Common::getCover(QString url) {
     manager.setProxy(proxy());
     reply = manager.get(QNetworkRequest(QUrl(url)));
 
-    connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(downloadProgress(qint64,qint64)));
+    connect(reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(getCover_downloadProgress(qint64,qint64)));
     connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
 
     if (reply->error() != 0) {
-        emit newLogEntry(tr("Not found! (%1)").arg(url), WiTools::Error);
+        emit newLogEntry(tr("Error: %1, %2").arg(QString::number(reply->error()), reply->errorString()), WiTools::Error);
     }
     else {
-        emit newLogEntry(tr("Done! (%1)").arg(url), WiTools::Info);
+        emit newLogEntry(tr("Done! %1 successfully downloaded!").arg(url), WiTools::Info);
         cover = QImage::fromData(reply->readAll());
     }
 
@@ -115,8 +115,10 @@ QNetworkReply::NetworkError Common::getCover(QString url) {
     return reply->error();
 }
 
-void Common::downloadProgress(qint64 bytesReceived, qint64 bytesTotal) {
-    emit setMainProgressBar(bytesReceived * 100 / bytesTotal, "%p%");
+void Common::getCover_downloadProgress(qint64 bytesReceived, qint64 bytesTotal) {
+    if (bytesReceived > 0 && bytesTotal > 0) {
+        emit setMainProgressBar(bytesReceived * 100 / bytesTotal, "%p%");
+    }
 }
 
 void Common::getCover_timeOut() {

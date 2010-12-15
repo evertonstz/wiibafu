@@ -67,7 +67,7 @@ signals:
     void setMainProgressBar(int value, QString format);
 
 private slots:
-    void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+    void getCover_downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
     void getCover_timeOut();
 };
 
