@@ -749,6 +749,10 @@ void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QS
         arguments.append("--overwrite");
     }
 
+    if (WiiBaFuSettings.value("TransferToImageFST/Diff", QVariant(false)).toBool()) {
+        arguments.append("--diff");
+    }
+
     arguments.append("--psel");
 
     if (WiiBaFuSettings.value("Scrubbing/Raw", QVariant(false)).toBool()) {
@@ -813,7 +817,7 @@ void WiTools::transferFilesToImage_readyReadStandardOutput() {
             emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(Common::fromUtf8(from), to));
         #endif
     }
-    else if (line.contains("% copied")) {
+    else if (line.contains("% copied") || line.contains("% compared")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
 
         #ifdef Q_OS_MACX
@@ -1151,6 +1155,10 @@ void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compre
         arguments.append("--overwrite");
     }
 
+    if (WiiBaFuSettings.value("TransferToImageFST/Diff", QVariant(false)).toBool()) {
+        arguments.append("--diff");
+    }
+
     arguments.append("--progress");
 
     emit newWitCommandLineLogEntry("wit", arguments);
@@ -1182,7 +1190,7 @@ void WiTools::transferDVDToImage_readyReadStandardOutput() {
             emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(from, to));
         #endif
     }
-    else if (line.contains("% copied")) {
+    else if (line.contains("% copied") || line.contains("% compared")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), line);
 
         #ifdef Q_OS_MACX

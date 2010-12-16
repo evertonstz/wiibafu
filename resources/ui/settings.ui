@@ -1043,6 +1043,13 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="transferToImageFST_checkBox_Diff">
+            <property name="text">
+             <string>Diff images</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

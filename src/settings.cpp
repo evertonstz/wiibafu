@@ -194,6 +194,7 @@ void Settings::load() {
     ui->transferToImageFST_checkBox_Test->setChecked(WiiBaFuSettings.value("TransferToImageFST/Test", QVariant(false)).toBool());
     ui->transferToImageFST_checkBox_Update->setChecked(WiiBaFuSettings.value("TransferToImageFST/Update", QVariant(false)).toBool());
     ui->transferToImageFST_checkBox_Overwrite->setChecked(WiiBaFuSettings.value("TransferToImageFST/Overwrite", QVariant(false)).toBool());
+    ui->transferToImageFST_checkBox_Diff->setChecked(WiiBaFuSettings.value("TransferToImageFST/Diff", QVariant(false)).toBool());
 
     ui->transferFromWBFS_checkBox_Force->setChecked(WiiBaFuSettings.value("TransferFromWBFS/Force", QVariant(false)).toBool());
     ui->transferFromWBFS_checkBox_Test->setChecked(WiiBaFuSettings.value("TransferFromWBFS/Test", QVariant(false)).toBool());
@@ -280,6 +281,7 @@ void Settings::save() {
     WiiBaFuSettings.setValue("TransferToImageFST/Test", ui->transferToImageFST_checkBox_Test->checkState());
     WiiBaFuSettings.setValue("TransferToImageFST/Update", ui->transferToImageFST_checkBox_Update->checkState());
     WiiBaFuSettings.setValue("TransferToImageFST/Overwrite", ui->transferToImageFST_checkBox_Overwrite->checkState());
+    WiiBaFuSettings.setValue("TransferToImageFST/Diff", ui->transferToImageFST_checkBox_Diff->checkState());
 
     WiiBaFuSettings.setValue("TransferFromWBFS/Force", ui->transferFromWBFS_checkBox_Force->checkState());
     WiiBaFuSettings.setValue("TransferFromWBFS/Test", ui->transferFromWBFS_checkBox_Test->checkState());
@@ -370,6 +372,7 @@ void Settings::restoreDefaults(int index) {
                 ui->transferToImageFST_checkBox_Test->setChecked(false);
                 ui->transferToImageFST_checkBox_Update->setChecked(false);
                 ui->transferToImageFST_checkBox_Overwrite->setChecked(false);
+                ui->transferToImageFST_checkBox_Diff->setChecked(false);
                 ui->transferFromWBFS_checkBox_Force->setChecked(false);
                 ui->transferFromWBFS_checkBox_Test->setChecked(false);
                 ui->transferFromWBFS_checkBox_Update->setChecked(false);
