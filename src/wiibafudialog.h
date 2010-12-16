@@ -37,6 +37,8 @@ public:
 
     QString directory();
     QString filePath();
+    bool split();
+    QString splitSize();
     QString imageFormat();
     QString compression();
     void setOpenImageDirectory();
@@ -52,6 +54,7 @@ private slots:
     void on_pushButton_Open_clicked();
     void on_pushButton_OpenFile_clicked();
     void on_comboBox_ImageFormat_currentIndexChanged(int index);
+    void on_pushButton_Split_toggled(bool checked);
     void on_comboBox_compressionDefaults_currentIndexChanged(int index);
 };
 

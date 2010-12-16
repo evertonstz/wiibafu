@@ -52,6 +52,14 @@ QString WiiBaFuDialog::filePath() {
     return ui->lineEdit_FilePath->text();
 }
 
+bool WiiBaFuDialog::split() {
+    return ui->pushButton_Split->isChecked();
+}
+
+QString WiiBaFuDialog::splitSize() {
+    return ui->lineEdit_SplitSize->text();
+}
+
 QString WiiBaFuDialog::imageFormat() {
     QString format;
     setCurrentImageFormat(ui->lineEdit_FilePath->text());
@@ -129,6 +137,10 @@ void WiiBaFuDialog::on_comboBox_ImageFormat_currentIndexChanged(int index) {
     }
 }
 
+void WiiBaFuDialog::on_pushButton_Split_toggled(bool checked) {
+    checked ? ui->lineEdit_SplitSize->setEnabled(true) : ui->lineEdit_SplitSize->setEnabled(false);
+}
+
 void WiiBaFuDialog::on_comboBox_compressionDefaults_currentIndexChanged(int index) {
     switch (index) {
         case 0:
@@ -193,6 +205,10 @@ void WiiBaFuDialog::setOpenImageDirectory() {
     ui->comboBox_compressionDefaults->setVisible(true);
     ui->frame_compressionMethod->setVisible(true);
 
+    ui->label_SplitSize->setVisible(true);
+    ui->lineEdit_SplitSize->setVisible(true);
+    ui->pushButton_Split->setVisible(true);
+
     ui->label_FilePath->setVisible(false);
     ui->lineEdit_FilePath->setVisible(false);
     ui->pushButton_OpenFile->setVisible(false);
@@ -213,6 +229,10 @@ void WiiBaFuDialog::setOpenDirectory() {
     ui->comboBox_ImageFormat->setVisible(false);
     ui->comboBox_compressionDefaults->setVisible(false);
     ui->frame_compressionMethod->setVisible(false);
+
+    ui->label_SplitSize->setVisible(false);
+    ui->lineEdit_SplitSize->setVisible(false);
+    ui->pushButton_Split->setVisible(false);
 }
 
 void WiiBaFuDialog::setOpenFile() {
@@ -230,6 +250,10 @@ void WiiBaFuDialog::setOpenFile() {
     ui->comboBox_ImageFormat->setVisible(true);
     ui->comboBox_compressionDefaults->setVisible(true);
     ui->frame_compressionMethod->setVisible(true);
+
+    ui->label_SplitSize->setVisible(true);
+    ui->lineEdit_SplitSize->setVisible(true);
+    ui->pushButton_Split->setVisible(true);
 }
 
 void WiiBaFuDialog::setMacOSXStyle() {

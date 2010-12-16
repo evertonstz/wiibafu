@@ -65,14 +65,14 @@ public:
     void requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
 
     void transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath);
-    void transferFilesToImage(QModelIndexList indexList, QString format, QString compression, QString directory);
+    void transferFilesToImage(QModelIndexList indexList, QString format, QString compression, QString directory, QString splitSize);
     void extractImage(QModelIndexList indexList, QString destination);
 
     void transferDVDToWBFS(QString dvdPath, QString wbfsPath);
-    void transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory);
+    void transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory, QString splitSize);
     void extractDVD(QString dvdPath, QString destination);
 
-    void transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString compression, QString directory);
+    void transferWBFSToImage(QModelIndexList indexList, QStringList options);
     void extractWBFS(QModelIndexList indexList, QString wbfsPath, QString destination);
 
     void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);

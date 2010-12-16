@@ -701,7 +701,7 @@ void WiTools::transferFilesToWBFS_finished(int exitCode, QProcess::ExitStatus ex
     delete witProcess;
 }
 
-void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QString compression, QString directory) {
+void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QString compression, QString directory, QString splitSize) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -783,6 +783,12 @@ void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QS
         }
 
         arguments.append(pselModes);
+    }
+
+    if (!splitSize.isEmpty()) {
+        arguments.append("--split");
+        arguments.append("--split-size");
+        arguments.append(splitSize);
     }
 
     arguments.append("--progress");
@@ -1109,7 +1115,7 @@ void WiTools::transferDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exit
     delete witProcess;
 }
 
-void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory) {
+void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory, QString splitSize) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -1157,6 +1163,12 @@ void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compre
 
     if (WiiBaFuSettings.value("TransferToImageFST/Diff", QVariant(false)).toBool()) {
         arguments.append("--diff");
+    }
+
+    if (!splitSize.isEmpty()) {
+        arguments.append("--split");
+        arguments.append("--split-size");
+        arguments.append(splitSize);
     }
 
     arguments.append("--progress");
@@ -1330,10 +1342,16 @@ void WiTools::extractDVD_finished(int exitCode, QProcess::ExitStatus exitStatus)
     delete witProcess;
 }
 
-void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, QString format, QString compression, QString directory) {
+void WiTools::transferWBFSToImage(QModelIndexList indexList, QStringList options) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
+
+    QString wbfsPath = options.at(0);
+    QString format = options.at(1);
+    QString compression = options.at(2);
+    QString directory = options.at(3);
+    QString splitSize = options.at(4);
 
     if (!compression.isEmpty()) {
         emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with compression '%2'.\n").arg(format, compression), Info);
@@ -1420,6 +1438,12 @@ void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, Q
         }
 
         arguments.append(pselModes);
+    }
+
+    if (!splitSize.isEmpty()) {
+        arguments.append("--split");
+        arguments.append("--split-size");
+        arguments.append(splitSize);
     }
 
     arguments.append("--progress");

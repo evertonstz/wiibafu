@@ -326,7 +326,7 @@ void Settings::restoreDefaults(int index) {
         case 1: // WIT
                 ui->wit_lineEdit_PathToWIT->setText(QDir::currentPath().append("/wit"));
                 ui->wit_checkBox_Auto->setChecked(true);
-                ui->wit_lineEdit_DVDDrivePath->setText("/dev/sr0");
+                ui->wit_lineEdit_DVDDrivePath->setText("/cdrom");
                 ui->wit_spinBox_RecurseDepth->setValue(10);
                 break;
         case 2: // Game list behavior

@@ -424,13 +424,18 @@ void WiiBaFu::on_filesTab_pushButton_TransferToImage_clicked() {
                 QDir path = wiibafudialog->directory();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
+                QString splitSize = "";
+
+                if (wiibafudialog->split()) {
+                    splitSize = wiibafudialog->splitSize();
+                }
 
                 if (!path.exists()) {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
                     ui->filesTab_pushButton_TransferToImage->setText(tr("&Cancel transfering"));
-                    QtConcurrent::run(wiTools, &WiTools::transferFilesToImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), format, compression, path.absolutePath());
+                    QtConcurrent::run(wiTools, &WiTools::transferFilesToImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), format, compression, path.absolutePath(), splitSize);
                 }
             }
         }
@@ -490,9 +495,14 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
                 QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
+                QString splitSize = "";
+
+                if (wiibafudialog->split()) {
+                    splitSize = wiibafudialog->splitSize();
+                }
 
                 ui->dvdTab_pushButton_TransferToImage->setText(tr("&Cancel transfering"));
-                QtConcurrent::run(wiTools, &WiTools::transferDVDToImage, dvdPath, format, compression, filePath);
+                QtConcurrent::run(wiTools, &WiTools::transferDVDToImage, dvdPath, format, compression, filePath, splitSize);
             }
         }
     }
@@ -546,13 +556,18 @@ void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
                 QDir path = wiibafudialog->directory();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
+                QString splitSize = "";
+
+                if (wiibafudialog->split()) {
+                    splitSize = wiibafudialog->splitSize();
+                }
 
                 if (!path.exists() && !wiibafudialog->directory().isEmpty()) {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
                     ui->wbfsTab_pushButton_Transfer->setText(tr("&Cancel transfering"));
-                    QtConcurrent::run(wiTools, &WiTools::transferWBFSToImage, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), format, compression, path.absolutePath());
+                    QtConcurrent::run(wiTools, &WiTools::transferWBFSToImage, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QStringList() << wbfsPath() << format << compression << path.absolutePath() << splitSize);
                 }
             }
         }
