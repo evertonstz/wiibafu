@@ -200,6 +200,12 @@ void Settings::load() {
     ui->transferFromWBFS_checkBox_Update->setChecked(WiiBaFuSettings.value("TransferFromWBFS/Update", QVariant(false)).toBool());
     ui->transferFromWBFS_checkBox_Overwrite->setChecked(WiiBaFuSettings.value("TransferFromWBFS/Overwrite", QVariant(false)).toBool());
 
+    ui->transfer_checkBox_ScrubbingRaw->setChecked(WiiBaFuSettings.value("Scrubbing/Raw", QVariant(false)).toBool());
+    ui->transfer_checkBox_ScrubbingWhole->setChecked(WiiBaFuSettings.value("Scrubbing/Whole", QVariant(false)).toBool());
+    ui->transfer_checkBox_ScrubbingData->setChecked(WiiBaFuSettings.value("Scrubbing/Data", QVariant(false)).toBool());
+    ui->transfer_checkBox_ScrubbingUpdate->setChecked(WiiBaFuSettings.value("Scrubbing/Update", QVariant(false)).toBool());
+    ui->transfer_checkBox_ScrubbingChannel->setChecked(WiiBaFuSettings.value("Scrubbing/Channel", QVariant(false)).toBool());
+
     ui->checkWBFS_checkBox_Repair->setChecked(WiiBaFuSettings.value("CheckWBFS/Repair", QVariant(true)).toBool());
     ui->checkWBFS_checkBox_Test->setChecked(WiiBaFuSettings.value("CheckWBFS/Test", QVariant(false)).toBool());
 
@@ -279,6 +285,12 @@ void Settings::save() {
     WiiBaFuSettings.setValue("TransferFromWBFS/Test", ui->transferFromWBFS_checkBox_Test->checkState());
     WiiBaFuSettings.setValue("TransferFromWBFS/Update", ui->transferFromWBFS_checkBox_Update->checkState());
     WiiBaFuSettings.setValue("TransferFromWBFS/Overwrite", ui->transferFromWBFS_checkBox_Overwrite->checkState());
+
+    WiiBaFuSettings.setValue("Scrubbing/Raw", ui->transfer_checkBox_ScrubbingRaw->checkState());
+    WiiBaFuSettings.setValue("Scrubbing/Whole", ui->transfer_checkBox_ScrubbingWhole->checkState());
+    WiiBaFuSettings.setValue("Scrubbing/Data", ui->transfer_checkBox_ScrubbingData->checkState());
+    WiiBaFuSettings.setValue("Scrubbing/Update", ui->transfer_checkBox_ScrubbingUpdate->checkState());
+    WiiBaFuSettings.setValue("Scrubbing/Channel", ui->transfer_checkBox_ScrubbingChannel->checkState());
 
     WiiBaFuSettings.setValue("CheckWBFS/Repair", ui->checkWBFS_checkBox_Repair->checkState());
     WiiBaFuSettings.setValue("CheckWBFS/Test", ui->checkWBFS_checkBox_Test->checkState());
@@ -362,6 +374,11 @@ void Settings::restoreDefaults(int index) {
                 ui->transferFromWBFS_checkBox_Test->setChecked(false);
                 ui->transferFromWBFS_checkBox_Update->setChecked(false);
                 ui->transferFromWBFS_checkBox_Overwrite->setChecked(false);
+                ui->transfer_checkBox_ScrubbingRaw->setChecked(false);
+                ui->transfer_checkBox_ScrubbingWhole->setChecked(false);
+                ui->transfer_checkBox_ScrubbingData->setChecked(true);
+                ui->transfer_checkBox_ScrubbingUpdate->setChecked(true);
+                ui->transfer_checkBox_ScrubbingChannel->setChecked(true);
                 break;
         case 5: // WBFS options
                 ui->checkWBFS_groupBox_RepairOptions->setEnabled(true);
@@ -455,6 +472,32 @@ void Settings::on_wit_checkBox_Auto_stateChanged(int state) {
     state ? ui->wit_lineEdit_WBFSPath->setEnabled(false) : ui->wit_lineEdit_WBFSPath->setEnabled(true);
     state ? ui->wit_pushButton_WBFSOpenFile->setEnabled(false) : ui->wit_pushButton_WBFSOpenFile->setEnabled(true);
     state ? ui->wit_pushButton_WBFSOpenDirectory->setEnabled(false) : ui->wit_pushButton_WBFSOpenDirectory->setEnabled(true);
+}
+
+void Settings::on_transfer_checkBox_ScrubbingData_stateChanged(int state) {
+    if (state) {
+        ui->transfer_checkBox_ScrubbingRaw->setChecked(false);
+    }
+}
+
+void Settings::on_transfer_checkBox_ScrubbingUpdate_stateChanged(int state) {
+    if (state) {
+        ui->transfer_checkBox_ScrubbingRaw->setChecked(false);
+    }
+}
+
+void Settings::on_transfer_checkBox_ScrubbingChannel_stateChanged(int state) {
+    if (state) {
+        ui->transfer_checkBox_ScrubbingRaw->setChecked(false);
+    }
+}
+
+void Settings::on_transfer_checkBox_ScrubbingRaw_stateChanged(int state) {
+    if (state) {
+        ui->transfer_checkBox_ScrubbingData->setChecked(false);
+        ui->transfer_checkBox_ScrubbingUpdate->setChecked(false);
+        ui->transfer_checkBox_ScrubbingChannel->setChecked(false);
+    }
 }
 
 void Settings::on_checkWBFS_checkBox_Repair_stateChanged(int state) {

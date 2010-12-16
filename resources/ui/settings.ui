@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>627</width>
-    <height>421</height>
+    <height>452</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1080,6 +1080,83 @@
            <widget class="QCheckBox" name="transferFromWBFS_checkBox_Overwrite">
             <property name="text">
              <string>Overwrite</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="srubbing_groupBox_Options">
+         <property name="toolTip">
+          <string>Scrubbing is a method to remove unneeded data from Wii ISO discs
+and replace the data with the constant byte value '0x00'. This constant
+value is a good object for compressing. Wii Backup Fusion The file
+format 'WIA' is able to compress scrubbed files efficiently using
+'Bzip2' or 'LZMA' compressing algorithms.</string>
+         </property>
+         <property name="title">
+          <string>Scrubbing options:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="transfer_checkBox_ScrubbingData">
+            <property name="toolTip">
+             <string>Allow data (game) partition</string>
+            </property>
+            <property name="text">
+             <string>Data</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="transfer_checkBox_ScrubbingChannel">
+            <property name="toolTip">
+             <string>Allow channel partition</string>
+            </property>
+            <property name="text">
+             <string>Channel</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="transfer_checkBox_ScrubbingRaw">
+            <property name="toolTip">
+             <string>Ignore all other settings and copy the whole disc.
+This disables scrubbing at all!</string>
+            </property>
+            <property name="text">
+             <string>Raw</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="transfer_checkBox_ScrubbingUpdate">
+            <property name="toolTip">
+             <string>Allow update partition</string>
+            </property>
+            <property name="text">
+             <string>Update</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QCheckBox" name="transfer_checkBox_ScrubbingWhole">
+            <property name="toolTip">
+             <string>Don't analyse the partition filesystems to find unused sectors.
+The whole partition will be used! 'Whole' is ignored for overlayed partitions!</string>
+            </property>
+            <property name="text">
+             <string>Whole</string>
             </property>
            </widget>
           </item>

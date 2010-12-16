@@ -1,3 +1,12 @@
+2010-12-16 Kai Heitkamp <dynup@ymail.com>
+ Version 1.0 (wit v1.23b-r2096)
+  * Support for scrubbing modes
+  * Search functionality for log
+  * Recurse depth for Files/Load
+  * Show progress while downloading game cover
+  * Supports more databases for cover download
+  * Game cover loading routines improved
+
 2010-12-12 Kai Heitkamp <dynup@ymail.com>
  Version 0.9 (wit v1.23b-r2096)
   * Aqua or brushed metal style for Mac OS X

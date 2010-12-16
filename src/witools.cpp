@@ -590,6 +590,38 @@ void WiTools::transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath) {
         arguments.append("--overwrite");
     }
 
+    arguments.append("--psel");
+
+    if (WiiBaFuSettings.value("Scrubbing/Raw", QVariant(false)).toBool()) {
+        arguments.append("RAW");
+    }
+    else {
+        QString pselModes;
+
+        if (WiiBaFuSettings.value("Scrubbing/Data", QVariant(true)).toBool()) {
+            pselModes.append("DATA,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Update", QVariant(true)).toBool()) {
+            pselModes.append("UPDATE,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Channel", QVariant(true)).toBool()) {
+            pselModes.append("CHANNEL,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Whole", QVariant(false)).toBool()) {
+            pselModes.append("WHOLE,");
+        }
+
+        if (pselModes.endsWith(",")) {
+            pselModes.remove(pselModes.length() - 1, 1);
+        }
+
+        if (pselModes.isEmpty()) {
+            pselModes.append("ALL");
+        }
+
+        arguments.append(pselModes);
+    }
+
     arguments.append("--progress");
 
     emit newWitCommandLineLogEntry("wwt", arguments);
@@ -715,6 +747,38 @@ void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QS
 
     if (WiiBaFuSettings.value("TransferToImageFST/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
+    }
+
+    arguments.append("--psel");
+
+    if (WiiBaFuSettings.value("Scrubbing/Raw", QVariant(false)).toBool()) {
+        arguments.append("RAW");
+    }
+    else {
+        QString pselModes;
+
+        if (WiiBaFuSettings.value("Scrubbing/Data", QVariant(true)).toBool()) {
+            pselModes.append("DATA,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Update", QVariant(true)).toBool()) {
+            pselModes.append("UPDATE,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Channel", QVariant(true)).toBool()) {
+            pselModes.append("CHANNEL,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Whole", QVariant(false)).toBool()) {
+            pselModes.append("WHOLE,");
+        }
+
+        if (pselModes.endsWith(",")) {
+            pselModes.remove(pselModes.length() - 1, 1);
+        }
+
+        if (pselModes.isEmpty()) {
+            pselModes.append("ALL");
+        }
+
+        arguments.append(pselModes);
     }
 
     arguments.append("--progress");
@@ -928,6 +992,38 @@ void WiTools::transferDVDToWBFS(QString dvdPath, QString wbfsPath) {
 
     if (WiiBaFuSettings.value("TransferToWBFS/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
+    }
+
+    arguments.append("--psel");
+
+    if (WiiBaFuSettings.value("Scrubbing/Raw", QVariant(false)).toBool()) {
+        arguments.append("RAW");
+    }
+    else {
+        QString pselModes;
+
+        if (WiiBaFuSettings.value("Scrubbing/Data", QVariant(true)).toBool()) {
+            pselModes.append("DATA,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Update", QVariant(true)).toBool()) {
+            pselModes.append("UPDATE,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Channel", QVariant(true)).toBool()) {
+            pselModes.append("CHANNEL,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Whole", QVariant(false)).toBool()) {
+            pselModes.append("WHOLE,");
+        }
+
+        if (pselModes.endsWith(",")) {
+            pselModes.remove(pselModes.length() - 1, 1);
+        }
+
+        if (pselModes.isEmpty()) {
+            pselModes.append("ALL");
+        }
+
+        arguments.append(pselModes);
     }
 
     arguments.append("--progress");
@@ -1284,6 +1380,38 @@ void WiTools::transferWBFSToImage(QModelIndexList indexList, QString wbfsPath, Q
 
     if (WiiBaFuSettings.value("TransferFromWBFS/Overwrite", QVariant(false)).toBool()) {
         arguments.append("--overwrite");
+    }
+
+    arguments.append("--psel");
+
+    if (WiiBaFuSettings.value("Scrubbing/Raw", QVariant(false)).toBool()) {
+        arguments.append("RAW");
+    }
+    else {
+        QString pselModes;
+
+        if (WiiBaFuSettings.value("Scrubbing/Data", QVariant(true)).toBool()) {
+            pselModes.append("DATA,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Update", QVariant(true)).toBool()) {
+            pselModes.append("UPDATE,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Channel", QVariant(true)).toBool()) {
+            pselModes.append("CHANNEL,");
+        }
+        if (WiiBaFuSettings.value("Scrubbing/Whole", QVariant(false)).toBool()) {
+            pselModes.append("WHOLE,");
+        }
+
+        if (pselModes.endsWith(",")) {
+            pselModes.remove(pselModes.length() - 1, 1);
+        }
+
+        if (pselModes.isEmpty()) {
+            pselModes.append("ALL");
+        }
+
+        arguments.append(pselModes);
     }
 
     arguments.append("--progress");

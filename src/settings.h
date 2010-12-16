@@ -69,6 +69,10 @@ private slots:
 
     void on_main_checkBox_useProxy_stateChanged(int state);
     void on_wit_checkBox_Auto_stateChanged(int state);
+    void on_transfer_checkBox_ScrubbingData_stateChanged(int state);
+    void on_transfer_checkBox_ScrubbingUpdate_stateChanged(int state);
+    void on_transfer_checkBox_ScrubbingChannel_stateChanged(int state);
+    void on_transfer_checkBox_ScrubbingRaw_stateChanged(int state);
     void on_checkWBFS_checkBox_Repair_stateChanged(int state);
 };
 
