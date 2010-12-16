@@ -51,6 +51,7 @@ private:
     WiiBaFuDialog *wiibafudialog;
     CoverViewDialog *coverViewDialog;
     WBFSDialog *wbfsDialog;
+    bool logFindFirstTime;
 
     QTimer *timer;
     QStringList filesGamePaths;
@@ -129,6 +130,7 @@ private slots:
 
     void on_logTab_pushButton_Clear_clicked();
     void on_logTab_pushButton_Copy_clicked();
+    void on_logTab_pushButton_Find_clicked();
     void on_logTab_pushButton_Save_clicked();
 
     void filesTableView_selectionChanged(const QItemSelection selected, const QItemSelection deselected);

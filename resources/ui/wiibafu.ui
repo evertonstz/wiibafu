@@ -1133,6 +1133,9 @@
           <property name="readOnly">
            <bool>true</bool>
           </property>
+          <property name="textInteractionFlags">
+           <set>Qt::TextSelectableByMouse</set>
+          </property>
          </widget>
         </item>
         <item>
@@ -1161,6 +1164,16 @@
              </property>
              <property name="shortcut">
               <string>Ctrl+C</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="logTab_pushButton_Find">
+             <property name="text">
+              <string>&amp;Find</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+F</string>
              </property>
             </widget>
            </item>

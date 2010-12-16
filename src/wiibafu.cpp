@@ -53,6 +53,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
         wiibafudialog->setMacOSXStyle();
     #endif
 
+    logFindFirstTime = true;
     setStatusBarText(tr("Ready."));
 
     addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()), WiTools::Info);
@@ -641,6 +642,48 @@ void WiiBaFu::on_logTab_pushButton_Clear_clicked() {
 void WiiBaFu::on_logTab_pushButton_Copy_clicked() {
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(ui->logTab_plainTextEdit_Log->toPlainText());
+}
+
+void WiiBaFu::on_logTab_pushButton_Find_clicked() {
+    bool result;
+    QString lastSearchString = WiiBaFuSettings.value("Main/LastLogSearchString", QVariant("")).toString();
+    QString searchString = QInputDialog::getText(this, tr("Search log"), tr("Enter search string:"), QLineEdit::Normal, lastSearchString, &result);
+
+    if (result && !searchString.isEmpty()) {
+        WiiBaFuSettings.setValue("Main/LastLogSearchString", searchString);
+
+        bool found = false;
+
+        if (!logFindFirstTime) {
+            ui->logTab_plainTextEdit_Log->document()->undo();
+        }
+
+        QTextCursor highlightCursor(ui->logTab_plainTextEdit_Log->document());
+        QTextCursor cursor(ui->logTab_plainTextEdit_Log->document());
+        QTextCharFormat plainFormat(highlightCursor.charFormat());
+        QTextCharFormat colorFormat = plainFormat;
+        colorFormat.setForeground(Qt::red);
+
+        cursor.beginEditBlock();
+
+        while (!highlightCursor.isNull() && !highlightCursor.atEnd()) {
+            highlightCursor = ui->logTab_plainTextEdit_Log->document()->find(searchString, highlightCursor, QTextDocument::FindWholeWords);
+
+            if (!highlightCursor.isNull()) {
+                found = true;
+                highlightCursor.movePosition(QTextCursor::WordRight, QTextCursor::KeepAnchor);
+                highlightCursor.mergeCharFormat(colorFormat);
+            }
+        }
+
+        cursor.endEditBlock();
+        logFindFirstTime = false;
+
+        if (!found) {
+            setStatusBarText(tr("Nothing found!"));
+            logFindFirstTime = true;
+        }
+    }
 }
 
 void WiiBaFu::on_logTab_pushButton_Save_clicked() {
