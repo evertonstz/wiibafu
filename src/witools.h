@@ -60,7 +60,7 @@ public:
 
     explicit WiTools(QObject *parent = 0);
 
-    void requestFilesGameListModel(QStandardItemModel *model, QString path);
+    void requestFilesGameListModel(QStandardItemModel *model, QString path, int recurseDepth);
     void requestDVDGameListModel(QStandardItemModel *model, QString path);
     void requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
 

@@ -380,7 +380,9 @@ void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
 
             ui->filesTab_pushButton_Load->setText(tr("&Cancel loading"));
             WiiBaFuSettings.setValue("Main/LastFilesPath", directory);
-            QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory);
+            int depth = WiiBaFuSettings.value("WIT/RecurseDepth", QVariant(10)).toInt();
+
+            QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory, depth);
         }
     }
     else {

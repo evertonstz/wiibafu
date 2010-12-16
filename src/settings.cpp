@@ -150,6 +150,7 @@ void Settings::load() {
     ui->wit_checkBox_Auto->setChecked(WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool());
     ui->wit_lineEdit_WBFSPath->setText(WiiBaFuSettings.value("WIT/WBFSPath", QVariant("")).toString());
     ui->wit_lineEdit_DVDDrivePath->setText(WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString());
+    ui->wit_spinBox_RecurseDepth->setValue(WiiBaFuSettings.value("WIT/RecurseDepth", QVariant(10)).toInt());
 
     ui->gameLists_checkBox_ShowGrid->setChecked(WiiBaFuSettings.value("GameListBehavior/ShowGrid", QVariant(false)).toBool());
     ui->gameLists_checkBox_AlternatingRowColors->setChecked(WiiBaFuSettings.value("GameListBehavior/AlternatingRowColors", QVariant(true)).toBool());
@@ -229,6 +230,7 @@ void Settings::save() {
     WiiBaFuSettings.setValue("WIT/Auto", ui->wit_checkBox_Auto->checkState());
     WiiBaFuSettings.setValue("WIT/WBFSPath", ui->wit_lineEdit_WBFSPath->text());
     WiiBaFuSettings.setValue("WIT/DVDDrivePath", ui->wit_lineEdit_DVDDrivePath->text());
+    WiiBaFuSettings.setValue("WIT/RecurseDepth", ui->wit_spinBox_RecurseDepth->value());
 
     WiiBaFuSettings.setValue("GameListBehavior/ShowGrid", ui->gameLists_checkBox_ShowGrid->checkState());
     WiiBaFuSettings.setValue("GameListBehavior/AlternatingRowColors", ui->gameLists_checkBox_AlternatingRowColors->checkState());
@@ -311,6 +313,7 @@ void Settings::restoreDefaults(int index) {
                 ui->wit_lineEdit_PathToWIT->setText(QDir::currentPath().append("/wit"));
                 ui->wit_checkBox_Auto->setChecked(true);
                 ui->wit_lineEdit_DVDDrivePath->setText("/dev/sr0");
+                ui->wit_spinBox_RecurseDepth->setValue(10);
                 break;
         case 2: // Game list behavior
                 ui->gameLists_checkBox_AlternatingRowColors->setChecked(true);

@@ -25,7 +25,7 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
     setWit();
 }
 
-void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path) {
+void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path, int recurseDepth) {
     emit showStatusBarMessage(tr("Loading games..."));
     emit newLogEntry(tr("Loading games from images...\n"), Info);
 
@@ -38,7 +38,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path)
     connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(requestFilesGameListModel_readyReadStandardError()));
     connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(requestFilesGameListModel_finished(int, QProcess::ExitStatus)));
 
-    QStringList arguments = QStringList() << "LIST" << "--titles" << witTitlesPath() << "--recurse" << path << "--section" << "--progress";
+    QStringList arguments = QStringList() << "LIST" << "--titles" << witTitlesPath() << "--recurse" << path << "--rdepth" << QString::number(recurseDepth) << "--section" << "--progress";
     emit newWitCommandLineLogEntry("wit", arguments);
 
     witProcess->start(wit, arguments);
