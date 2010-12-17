@@ -251,7 +251,7 @@
               </item>
               <item>
                <property name="text">
-                <string>France</string>
+                <string>French</string>
                </property>
               </item>
               <item>
@@ -261,17 +261,17 @@
               </item>
               <item>
                <property name="text">
-                <string>Spain</string>
+                <string>Spanish</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Italy</string>
+                <string>Italian</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Netherland</string>
+                <string>Dutch</string>
                </property>
               </item>
               <item>
@@ -281,47 +281,47 @@
               </item>
               <item>
                <property name="text">
-                <string>Northern Sami</string>
+                <string>North Sami</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Denmark</string>
+                <string>Danish</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Norway</string>
+                <string>Norwegian</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Finland</string>
+                <string>Finnish</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Russia</string>
+                <string>Russian</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Japan</string>
+                <string>Japanese</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Korea</string>
+                <string>Korean</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Taiwan</string>
+                <string>Taiwanese</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>China</string>
+                <string>Chinese</string>
                </property>
               </item>
              </widget>

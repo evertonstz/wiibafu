@@ -963,91 +963,91 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <item>
-              <property name="text">
-               <string>English</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>American</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>France</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>German</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Spain</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Italy</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Netherland</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Portuguese</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Northern Sami</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Denmark</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Norway</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Finland</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Russia</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Japan</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Korea</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Taiwan</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>China</string>
-              </property>
-             </item>
+              <item>
+               <property name="text">
+                <string>English</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>American</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>French</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>German</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Spanish</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Italian</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Dutch</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Portuguese</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>North Sami</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Danish</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Norwegian</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Finnish</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Russian</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Japanese</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Korean</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Taiwanese</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Chinese</string>
+               </property>
+              </item>
             </widget>
            </item>
            <item row="0" column="3">
