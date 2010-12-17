@@ -149,7 +149,7 @@ void Settings::load() {
     ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(QDir::currentPath().append("/wit"))).toString());
     ui->wit_checkBox_Auto->setChecked(WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool());
     ui->wit_lineEdit_WBFSPath->setText(WiiBaFuSettings.value("WIT/WBFSPath", QVariant("")).toString());
-    ui->wit_lineEdit_DVDDrivePath->setText(WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString());
+    ui->wit_lineEdit_DVDDrivePath->setText(WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString());
     ui->wit_spinBox_RecurseDepth->setValue(WiiBaFuSettings.value("WIT/RecurseDepth", QVariant(10)).toInt());
 
     ui->gameLists_checkBox_ShowGrid->setChecked(WiiBaFuSettings.value("GameListBehavior/ShowGrid", QVariant(false)).toBool());

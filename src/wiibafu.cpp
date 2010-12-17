@@ -494,7 +494,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
                 QString filePath = wiibafudialog->filePath();
                 QString format = wiibafudialog->imageFormat();
                 QString compression = wiibafudialog->compression();
-                QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
+                QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
                 QString splitSize = "";
 
                 if (wiibafudialog->split()) {
@@ -518,7 +518,7 @@ void WiiBaFu::on_dvdTab_pushButton_Extract_clicked() {
 
             if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
                 QString directory = buildPath(wiibafudialog->directory(), dvdListModel, ui->dvdTab_tableView);
-                QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/dev/sr0")).toString();
+                QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
 
                 ui->dvdTab_pushButton_Extract->setText(tr("&Cancel extracting"));
                 QtConcurrent::run(wiTools, &WiTools::extractDVD, dvdPath, directory);
