@@ -105,7 +105,7 @@ void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
             continue;
         }
         else if (line.startsWith("size=")) {
-            fgl_sizes.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
+            fgl_sizes.append(new QStandardItem(Common::calculateSize(line.section("=", 1))));
             continue;
         }
         else if (line.startsWith("itime=")) {
@@ -264,7 +264,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, const QString p
             continue;
         }
         else if (line.startsWith("size=")) {
-            game.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
+            game.append(new QStandardItem(Common::calculateSize(line.section("=", 1))));
             continue;
         }
         else if (line.startsWith("itime=")) {
@@ -470,7 +470,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, const QString 
             continue;
         }
         else if (line.startsWith("size=")) {
-            sizes.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
+            sizes.append(new QStandardItem(Common::calculateSize(line.section("=", 1))));
             continue;
         }
         else if (line.startsWith("used_blocks=")) {

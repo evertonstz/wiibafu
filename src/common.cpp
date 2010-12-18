@@ -238,8 +238,47 @@ void Common::viewInBrowser(const QString gameID) {
     QDesktopServices::openUrl(QUrl(QString("http://wiitdb.com/Game/%1").arg(gameID), QUrl::StrictMode));
 }
 
-QString Common::fromUtf8(QString string) {
+QString Common::fromUtf8(const QString string) {
     return QString::fromUtf8(string.toLatin1());
+}
+
+QString Common::calculateSize(const double size) {
+    QString str;
+
+    if ( size >= 1073741824 ) {
+        str = QString::number(size / 1073741824, 'f', 2);
+
+        if (str.mid(str.indexOf(".") + 1, 2).contains("00")) {
+            str.remove(str.indexOf("."), 3);
+        }
+
+        return QString("%1 GiB").arg(str);
+    }
+    else if ( size >= 1048576 ) {
+        str = QString::number(size / 1048576, 'f', 2);
+
+        if (str.mid(str.indexOf(".") + 1, 2).contains("00")) {
+            str.remove(str.indexOf("."), 3);
+        }
+
+        return QString("%1 MiB").arg(str);
+    }
+    else if ( size >= 1024 ) {
+        str = QString::number(size / 1024, 'f', 2);
+
+        if (str.mid(str.indexOf(".") + 1, 2).contains("00")) {
+            str.remove(str.indexOf("."), 3);
+        }
+
+        return QString("%1 KiB").arg(str);
+    }
+    else {
+        return QString("%1 Bytes").arg(QString::number(size));
+    }
+}
+
+QString Common::calculateSize(const QString size) {
+    return calculateSize(size.toDouble());
 }
 
 Common::~Common() {

@@ -56,6 +56,8 @@ public:
     void viewInBrowser(const QString gameID);
 
     static QString fromUtf8(const QString string);
+    static QString calculateSize(const double size);
+    static QString calculateSize(const QString size);
 
 signals:
     void newGame3DCover(const QImage game3DCover);
