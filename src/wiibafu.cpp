@@ -904,17 +904,14 @@ void WiiBaFu::setToolTips(QTableView *tableView, QStandardItemModel *model, cons
 
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
+        ui->tabWidget->setCurrentIndex(3);
 
+        bool sameGame;
         if (!ui->infoTab_lineEdit_ID->text().contains(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text())) {
-            if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("PAL") || model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("RF")) {
-                ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
-            }
-            else if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("NTSC")) {
-                ui->infoTab_comboBox_GameLanguages->setCurrentIndex(1);
-            }
-
-            ui->infoTab_label_GameCover->clear();
-            common->requestGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text(), currentGameLanguage(), Common::ThreeD);
+            sameGame = false;
+        }
+        else {
+            sameGame = true;
         }
 
         if (tableView == ui->wbfsTab_tableView) {
@@ -942,7 +939,17 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             ui->infoTab_lineEdit_Source->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(10).first())->text());
         }
 
-        ui->tabWidget->setCurrentIndex(3);
+        if (!sameGame) {
+            if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("PAL") || model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("RF")) {
+                ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
+            }
+            else if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("NTSC")) {
+                ui->infoTab_comboBox_GameLanguages->setCurrentIndex(1);
+            }
+
+            ui->infoTab_label_GameCover->clear();
+            common->requestGameCover(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text(), currentGameLanguage(), Common::ThreeD);
+        }
     }
 }
 
