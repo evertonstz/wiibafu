@@ -35,7 +35,7 @@ public:
     explicit CoverViewDialog(QWidget *parent = 0);
     ~CoverViewDialog();
 
-    void setCover(QImage cover, QString id);
+    void setCover(const QImage cover, const QString id);
     void setMacOSXStyle();
 
 private:
@@ -45,7 +45,7 @@ private:
 private slots:
     void on_pushButton_Save_clicked();
     void on_pushButton_OK_clicked();
-    void finished(int);
+    void finished(const int);
 };
 
 #endif // COVERVIEWDIALOG_H

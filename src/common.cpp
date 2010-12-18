@@ -30,7 +30,7 @@ Common::Common(QObject *parent) : QObject(parent) {
     titlesExtensions = QStringList() << ".txt"  << "-fr.txt" << "-de.txt" << "-es.txt" << "-it.txt" << "-nl.txt" << "-pt.txt" << "-se.txt" << "-dk.txt" << "-no.txt" << "-fi.txt" << "-ru.txt" << "-ja.txt" << "-ko.txt" << "-zhtw.txt" << "-zhcn.txt";
 }
 
-void Common::requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt) {
+void Common::requestGameCover(const QString gameID, const QString language, const GameCoverArt gameCoverArt) {
     emit showStatusBarMessage(tr("Loading game cover..."));
     QNetworkReply::NetworkError result;
 
@@ -96,7 +96,7 @@ void Common::requestGameCover(QString gameID, QString language, GameCoverArt gam
     }
 }
 
-QNetworkReply::NetworkError Common::getCover(QString url) {
+QNetworkReply::NetworkError Common::getCover(const QString url) {
     QEventLoop loop;
     QNetworkReply *reply;
     QNetworkAccessManager manager;
@@ -130,7 +130,7 @@ QNetworkReply::NetworkError Common::getCover(QString url) {
     return reply->error();
 }
 
-void Common::getCover_downloadProgress(qint64 bytesReceived, qint64 bytesTotal) {
+void Common::getCover_downloadProgress(const qint64 bytesReceived, const qint64 bytesTotal) {
     if (bytesReceived > 0 && bytesTotal > 0) {
         emit setMainProgressBar(bytesReceived * 100 / bytesTotal, "%p%");
     }
@@ -180,7 +180,7 @@ void Common::updateTitles() {
     emit setMainProgressBarVisible(false);
 }
 
-QNetworkReply::NetworkError Common::getTitle(QString wiitdbPath, QString fileName) {
+QNetworkReply::NetworkError Common::getTitle(const QString wiitdbPath, const QString fileName) {
     QEventLoop loop;
     QNetworkReply *reply;
     QNetworkAccessManager manager;
@@ -217,7 +217,7 @@ QNetworkProxy Common::proxy() {
     return proxy;
 }
 
-QString Common::titleFromDB(QString gameID) {
+QString Common::titleFromDB(const QString gameID) {
     QFile file(wiTools->witTitlesPath());
     QString title;
 
@@ -234,7 +234,7 @@ QString Common::titleFromDB(QString gameID) {
     return title;
 }
 
-void Common::viewInBrowser(QString gameID) {
+void Common::viewInBrowser(const QString gameID) {
     QDesktopServices::openUrl(QUrl(QString("http://wiitdb.com/Game/%1").arg(gameID), QUrl::StrictMode));
 }
 

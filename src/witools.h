@@ -60,25 +60,25 @@ public:
 
     explicit WiTools(QObject *parent = 0);
 
-    void requestFilesGameListModel(QStandardItemModel *model, QString path, int recurseDepth);
-    void requestDVDGameListModel(QStandardItemModel *model, QString path);
-    void requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath);
+    void requestFilesGameListModel(QStandardItemModel *model, const QString path, const int recurseDepth);
+    void requestDVDGameListModel(QStandardItemModel *model, const QString path);
+    void requestWBFSGameListModel(QStandardItemModel *model, const QString wbfsPath);
 
-    void transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath);
-    void transferFilesToImage(QModelIndexList indexList, QString format, QString compression, QString directory, QString splitSize);
-    void extractImage(QModelIndexList indexList, QString destination);
+    void transferFilesToWBFS(const QModelIndexList indexList, const QString wbfsPath);
+    void transferFilesToImage(const QModelIndexList indexList, const QString format, const QString compression, const QString directory, const QString splitSize);
+    void extractImage(const QModelIndexList indexList, const QString destination);
 
-    void transferDVDToWBFS(QString dvdPath, QString wbfsPath);
-    void transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory, QString splitSize);
-    void extractDVD(QString dvdPath, QString destination);
+    void transferDVDToWBFS(const QString dvdPath, const QString wbfsPath);
+    void transferDVDToImage(const QString dvdPath, const QString format, const QString compression, const QString directory, const QString splitSize);
+    void extractDVD(const QString dvdPath, const QString destination);
 
-    void transferWBFSToImage(QModelIndexList indexList, QStringList options);
-    void extractWBFS(QModelIndexList indexList, QString wbfsPath, QString destination);
+    void transferWBFSToImage(const QModelIndexList indexList, const QStringList options);
+    void extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination);
 
-    void removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath);
-    void checkWBFS(QString wbfsPath);
-    void createWBFS(CreateWBFSParameters parameters);
-    void verifyGame(int index, QString wbfsPath, QString game);
+    void removeGamesFromWBFS(const QModelIndexList indexList, const QString wbfsPath);
+    void checkWBFS(const QString wbfsPath);
+    void createWBFS(const CreateWBFSParameters parameters);
+    void verifyGame(const int index, const QString wbfsPath, const QString game);
 
     QString witVersion();
     QString wwtVersion();
@@ -103,36 +103,36 @@ private:
 signals:
     void stopBusy();
 
-    void setMainProgressBarVisible(bool visible);
-    void setMainProgressBar(int value, QString format);
-    void setInfoTextWBFS(QString text);
-    void setProgressBarWBFS(int min, int max, int value, QString text);
+    void setMainProgressBarVisible(const bool visible);
+    void setMainProgressBar(const int value, const QString format);
+    void setInfoTextWBFS(const QString text);
+    void setProgressBarWBFS(const int min, const int max, const int value, const QString text);
 
-    void newLogEntry(QString entry, WiTools::LogType type);
-    void newLogEntries(QStringList entries, WiTools::LogType type);
-    void newWitCommandLineLogEntry(QString wit, QStringList arguments);
-    void showStatusBarMessage(QString message);
+    void newLogEntry(const QString entry, const WiTools::LogType type);
+    void newLogEntries(const QStringList entries, const WiTools::LogType type);
+    void newWitCommandLineLogEntry(const QString wit, const QStringList arguments);
+    void showStatusBarMessage(const QString message);
 
     void newFilesGameListModel();
     void newDVDGameListModel();
     void newWBFSGameListModel();
     void loadingGamesCanceled();
-    void loadingGamesFailed(WiTools::WitStatus);
+    void loadingGamesFailed(const WiTools::WitStatus);
 
-    void transferFilesToWBFS_finished(WiTools::WitStatus);
-    void transferFilesToImage_finished(WiTools::WitStatus);
-    void extractImage_finished(WiTools::WitStatus);
+    void transferFilesToWBFS_finished(const WiTools::WitStatus);
+    void transferFilesToImage_finished(const WiTools::WitStatus);
+    void extractImage_finished(const WiTools::WitStatus);
 
-    void transferDVDToWBFS_finished(WiTools::WitStatus);
-    void transferDVDToImage_finished(WiTools::WitStatus);
-    void extractDVD_finished(WiTools::WitStatus);
+    void transferDVDToWBFS_finished(const WiTools::WitStatus);
+    void transferDVDToImage_finished(const WiTools::WitStatus);
+    void extractDVD_finished(const WiTools::WitStatus);
 
-    void transferWBFSToImage_finished(WiTools::WitStatus);
-    void extractWBFS_finished(WiTools::WitStatus);
+    void transferWBFSToImage_finished(const WiTools::WitStatus);
+    void extractWBFS_finished(const WiTools::WitStatus);
 
     void removeGamesFromWBFS_successfully();
 
-    void verifyGame_finished(WiTools::WitStatus);
+    void verifyGame_finished(const WiTools::WitStatus);
 
 public slots:
     void cancelTransfer();
@@ -142,45 +142,45 @@ public slots:
 private slots:
     void requestFilesGameListModel_readyReadStandardOutput();
     void requestFilesGameListModel_readyReadStandardError();
-    void requestFilesGameListModel_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void requestFilesGameListModel_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void transferFilesToWBFS_readyReadStandardOutput();
     void transferFilesToWBFS_readyReadStandardError();
-    void transferFilesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferFilesToWBFS_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void transferFilesToImage_readyReadStandardOutput();
     void transferFilesToImage_readyReadStandardError();
-    void transferFilesToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferFilesToImage_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void extractImage_readyReadStandardOutput();
     void extractImage_readyReadStandardError();
-    void extractImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void extractImage_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void transferDVDToWBFS_readyReadStandardOutput();
     void transferDVDToWBFS_readyReadStandardError();
-    void transferDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferDVDToWBFS_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void transferDVDToImage_readyReadStandardOutput();
     void transferDVDToImage_readyReadStandardError();
-    void transferDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferDVDToImage_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void extractDVD_readyReadStandardOutput();
     void extractDVD_readyReadStandardError();
-    void extractDVD_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void extractDVD_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void transferWBFSToImage_readyReadStandardOutput();
     void transferWBFSToImage_readyReadStandardError();
-    void transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void transferWBFSToImage_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void extractWBFS_readyReadStandardOutput();
     void extractWBFS_readyReadStandardError();
-    void extractWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void extractWBFS_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
-    void removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void removeGamesFromWBFS_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 
     void verifyGame_readyReadStandardOutput();
     void verifyGame_readyReadStandardError();
-    void verifyGame_finished(int exitCode, QProcess::ExitStatus exitStatus);
+    void verifyGame_finished(const int exitCode, const QProcess::ExitStatus exitStatus);
 };
 
 #endif // WITOOLS_H

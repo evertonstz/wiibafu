@@ -68,15 +68,15 @@ private:
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
     void setGameInfoDateTimes(QTableView *tableView, QStandardItemModel *model);
-    void setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName);
+    void setToolTips(QTableView *tableView, QStandardItemModel *model, const QString firstColumnName, const QString secondColumnName);
     void updateTitles();
 
-    QString buildPath(QString directory, QStandardItemModel *model, QTableView *tableView);
+    QString buildPath(const QString directory, QStandardItemModel *model, QTableView *tableView);
     QString currentGameLanguage();
     QString wbfsPath();
     QLocale locale();
-    int headerIndex(QAbstractItemModel *model, QString text, Qt::Orientation orientation);
-    bool gameInList(QStandardItemModel *model, QString gameId);
+    int headerIndex(QAbstractItemModel *model, const QString text, const Qt::Orientation orientation);
+    bool gameInList(QStandardItemModel *model, const QString gameId);
 
     void saveMainWindowGeometry();
     void saveGameListHeaderStates();
@@ -155,23 +155,23 @@ private slots:
 
     void verifyGame_finished(WiTools::WitStatus);
 
-    void showGameDiscCover(QImage gameCover);
-    void showGame3DCover(QImage gameCover);
-    void showGameFullHQCover(QImage gameFullHQCover);
+    void showGameDiscCover(const QImage gameCover);
+    void showGame3DCover(const QImage gameCover);
+    void showGameFullHQCover(const QImage gameFullHQCover);
 
-    void setWBFSInfoText(QString text);
-    void setWBFSProgressBar(int min, int max, int value, QString format);
+    void setWBFSInfoText(const QString text);
+    void setWBFSProgressBar(const int min, const int max, const int value, const QString format);
 
-    void setMainProgressBarVisible(bool visible);
-    void setMainProgressBar(int value, QString format);
+    void setMainProgressBarVisible(const bool visible);
+    void setMainProgressBar(const int value, const QString format);
     void showMainProgressBarBusy();
     void startMainProgressBarBusy();
     void stopMainProgressBarBusy();
 
-    void setStatusBarText(QString text);
-    void addEntryToLog(QString entry, WiTools::LogType type);
-    void addEntriesToLog(QStringList entries, WiTools::LogType type);
-    void addWitCommandLineToLog(QString wit, QStringList arguments);
+    void setStatusBarText(const QString text);
+    void addEntryToLog(const QString entry, const WiTools::LogType type);
+    void addEntriesToLog(const QStringList entries, const WiTools::LogType type);
+    void addWitCommandLineToLog(const QString wit, const QStringList arguments);
 
     void on_menuHelp_About_triggered();
 };

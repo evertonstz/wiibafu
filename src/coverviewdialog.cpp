@@ -27,7 +27,7 @@ CoverViewDialog::CoverViewDialog(QWidget *parent) : QDialog(parent), ui(new Ui::
     connect(this, SIGNAL(finished(int)), this, SLOT(finished(int)));
 }
 
-void CoverViewDialog::setCover(QImage cover, QString id) {
+void CoverViewDialog::setCover(const QImage cover, const QString id) {
     QDesktopWidget *desktop = QApplication::desktop();
     gameID = id;
 
@@ -67,7 +67,7 @@ void CoverViewDialog::setMacOSXStyle() {
     }
 }
 
-void CoverViewDialog::finished(int) {
+void CoverViewDialog::finished(const int) {
     ui->label_GameCover->clear();
 }
 

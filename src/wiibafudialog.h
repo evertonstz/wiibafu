@@ -48,7 +48,7 @@ public:
 
 private:
     Ui::WiiBaFuDialog *ui;
-    void setCurrentImageFormat(QString path);
+    void setCurrentImageFormat(const QString path);
 
 private slots:
     void on_pushButton_Open_clicked();

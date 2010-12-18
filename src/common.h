@@ -36,8 +36,8 @@ private:
     QStringList wiiTDBLanguages;
     QStringList titlesExtensions;
 
-    QNetworkReply::NetworkError getCover(QString url);
-    QNetworkReply::NetworkError getTitle(QString wiitdbPath, QString fileName);
+    QNetworkReply::NetworkError getCover(const QString url);
+    QNetworkReply::NetworkError getTitle(const QString wiitdbPath, const QString fileName);
     QNetworkProxy proxy();
 
 public:
@@ -50,24 +50,24 @@ public:
     explicit Common(QObject *parent = 0);
     ~Common();
 
-    void requestGameCover(QString gameID, QString language, GameCoverArt gameCoverArt);
+    void requestGameCover(const QString gameID, const QString language, const GameCoverArt gameCoverArt);
     void updateTitles();
-    QString titleFromDB(QString gameID);
-    void viewInBrowser(QString gameID);
+    QString titleFromDB(const QString gameID);
+    void viewInBrowser(const QString gameID);
 
-    static QString fromUtf8(QString string);
+    static QString fromUtf8(const QString string);
 
 signals:
-    void newGame3DCover(QImage game3DCover);
-    void newGameFullHQCover(QImage gameFullHQCover);
-    void newGameDiscCover(QImage gameDiscCover);
-    void showStatusBarMessage(QString message);
-    void newLogEntry(QString entry, WiTools::LogType);
-    void setMainProgressBarVisible(bool visible);
-    void setMainProgressBar(int value, QString format);
+    void newGame3DCover(const QImage game3DCover);
+    void newGameFullHQCover(const QImage gameFullHQCover);
+    void newGameDiscCover(const QImage gameDiscCover);
+    void showStatusBarMessage(const QString message);
+    void newLogEntry(const QString entry, const WiTools::LogType);
+    void setMainProgressBarVisible(const bool visible);
+    void setMainProgressBar(const int value, const QString format);
 
 private slots:
-    void getCover_downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+    void getCover_downloadProgress(const qint64 bytesReceived, const qint64 bytesTotal);
     void getCover_timeOut();
 };
 

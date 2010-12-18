@@ -45,10 +45,10 @@ private:
     void load();
     void save();
 
-    void restoreDefaults(int index);
+    void restoreDefaults(const int index);
 
-    void setScrollMode(int mode);
-    void setResizeMode(int mode);
+    void setScrollMode(const int mode);
+    void setResizeMode(const int mode);
     int scrollMode();
     int resizeMode();
     QString macOSXStyle();

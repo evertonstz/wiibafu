@@ -186,7 +186,7 @@ void WiiBaFu::setMacOSXStyle() {
     }
 }
 
-void WiiBaFu::setMainProgressBarVisible(bool visible) {
+void WiiBaFu::setMainProgressBarVisible(const bool visible) {
     progressBar_Main->setVisible(visible);
 }
 
@@ -854,7 +854,7 @@ void WiiBaFu::updateTitles() {
     }
 }
 
-QString WiiBaFu::buildPath(QString directory, QStandardItemModel *model, QTableView *tableView) {
+QString WiiBaFu::buildPath(const QString directory, QStandardItemModel *model, QTableView *tableView) {
     QString path;
     QString gameId;
     QString gameTitle;
@@ -879,7 +879,7 @@ QString WiiBaFu::buildPath(QString directory, QStandardItemModel *model, QTableV
     return path;
 }
 
-void WiiBaFu::setToolTips(QTableView *tableView, QStandardItemModel *model, QString firstColumnName, QString secondColumnName) {
+void WiiBaFu::setToolTips(QTableView *tableView, QStandardItemModel *model, const QString firstColumnName, const QString secondColumnName) {
     if (tableView->isColumnHidden(headerIndex(model, firstColumnName, Qt::Horizontal))) {
         for (int i = 0; i < model->rowCount(); i++) {
             QString toolTip = model->item(i, headerIndex(model, firstColumnName, Qt::Horizontal))->text();
@@ -978,31 +978,31 @@ void WiiBaFu::setGameInfoDateTimes(QTableView *tableView, QStandardItemModel *mo
     }
 }
 
-void WiiBaFu::showGameDiscCover(QImage gameCover) {
+void WiiBaFu::showGameDiscCover(const QImage gameCover) {
     ui->dvdTab_label_DiscCover->setPixmap(QPixmap::fromImage(gameCover, Qt::AutoColor));
 }
 
-void WiiBaFu::showGame3DCover(QImage gameCover) {
+void WiiBaFu::showGame3DCover(const QImage gameCover) {
     ui->infoTab_label_GameCover->setPixmap(QPixmap::fromImage(gameCover, Qt::AutoColor));
 }
 
-void WiiBaFu::showGameFullHQCover(QImage gameFullHQCover) {
+void WiiBaFu::showGameFullHQCover(const QImage gameFullHQCover) {
     coverViewDialog->setCover(gameFullHQCover, ui->infoTab_lineEdit_ID->text());
     coverViewDialog->show();
 }
 
-void WiiBaFu::setWBFSInfoText(QString text) {
+void WiiBaFu::setWBFSInfoText(const QString text) {
     ui->wbfsTab_label_Info->setText(text);
 }
 
-void WiiBaFu::setWBFSProgressBar(int min, int max, int value, QString format) {
+void WiiBaFu::setWBFSProgressBar(const int min, const int max, const int value, const QString format) {
     ui->wbfsTab_progressBar->setMinimum(min);
     ui->wbfsTab_progressBar->setMaximum(max);
     ui->wbfsTab_progressBar->setValue(value);
     ui->wbfsTab_progressBar->setFormat(format);
 }
 
-void WiiBaFu::setMainProgressBar(int value, QString format) {
+void WiiBaFu::setMainProgressBar(const int value, const QString format) {
     progressBar_Main->setValue(value);
     progressBar_Main->setFormat(format);
 }
@@ -1031,11 +1031,11 @@ void WiiBaFu::stopMainProgressBarBusy() {
     progressBar_Main->setValue(0);
 }
 
-void WiiBaFu::setStatusBarText(QString text) {
+void WiiBaFu::setStatusBarText(const QString text) {
     ui->statusBar->showMessage(text);
 }
 
-void WiiBaFu::addEntryToLog(QString entry, WiTools::LogType type) {
+void WiiBaFu::addEntryToLog(const QString entry, const WiTools::LogType type) {
     switch (WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt()) {
     case 0:
             ui->logTab_plainTextEdit_Log->appendPlainText(entry);
@@ -1048,7 +1048,7 @@ void WiiBaFu::addEntryToLog(QString entry, WiTools::LogType type) {
     }
 }
 
-void WiiBaFu::addEntriesToLog(QStringList entries, WiTools::LogType type) {
+void WiiBaFu::addEntriesToLog(const QStringList entries, const WiTools::LogType type) {
     QString tmpstr;
 
     foreach (QString entry, entries) {
@@ -1059,7 +1059,7 @@ void WiiBaFu::addEntriesToLog(QStringList entries, WiTools::LogType type) {
     addEntryToLog(tmpstr, type);
 }
 
-void WiiBaFu::addWitCommandLineToLog(QString wit, QStringList arguments) {
+void WiiBaFu::addWitCommandLineToLog(const QString wit, const QStringList arguments) {
     if (WiiBaFuSettings.value("Main/LogWitCommandLine", QVariant(true)).toBool()) {
         addEntriesToLog(QStringList() << tr("WIT command line:\n%1").arg(wit) << arguments << "\n" , WiTools::Info);
     }
@@ -1158,7 +1158,7 @@ QString WiiBaFu::wbfsPath() {
     }
 }
 
-int WiiBaFu::headerIndex(QAbstractItemModel *model, QString text, Qt::Orientation orientation) {
+int WiiBaFu::headerIndex(QAbstractItemModel *model, const QString text, const Qt::Orientation orientation) {
     for (int i = 0; i < model->columnCount(); i++) {
         if (model->headerData(i, orientation).toString().contains(text)) {
             return i;
@@ -1168,7 +1168,7 @@ int WiiBaFu::headerIndex(QAbstractItemModel *model, QString text, Qt::Orientatio
     return -1;
 }
 
-bool WiiBaFu::gameInList(QStandardItemModel *model, QString gameId) {
+bool WiiBaFu::gameInList(QStandardItemModel *model, const QString gameId) {
     for (int i = 0; model->rowCount() > i; ++i) {
         if (model->item(i, 0)->text().contains(gameId)) {
             return true;

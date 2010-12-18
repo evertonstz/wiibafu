@@ -106,7 +106,7 @@ QString WiiBaFuDialog::compression() {
     return compression;
 }
 
-void WiiBaFuDialog::setCurrentImageFormat(QString path) {
+void WiiBaFuDialog::setCurrentImageFormat(const QString path) {
     QString extension = path.right(path.length() - path.lastIndexOf("."));
 
     if (extension.contains(".iso")) {

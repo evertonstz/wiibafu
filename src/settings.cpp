@@ -308,7 +308,7 @@ void Settings::save() {
     WiiBaFuSettings.setValue("RemoveFromWBFS/Test", ui->removeFromWBFS_checkBox_Test->checkState());
 }
 
-void Settings::restoreDefaults(int index) {
+void Settings::restoreDefaults(const int index) {
     switch (index) {
         case 0: // Main
                 ui->main_checkBox_useProxy->setChecked(false);
@@ -399,7 +399,7 @@ void Settings::restoreDefaults(int index) {
     }
 }
 
-void Settings::setScrollMode(int mode) {
+void Settings::setScrollMode(const int mode) {
     switch (mode) {
         case QAbstractItemView::ScrollPerPixel:
             ui->gameLists_radioButton_ScrollPerPixel->setChecked(true);
@@ -410,7 +410,7 @@ void Settings::setScrollMode(int mode) {
     }
 }
 
-void Settings::setResizeMode(int mode) {
+void Settings::setResizeMode(const int mode) {
     switch (mode) {
         case QHeaderView::Fixed:
             ui->gameLists_radioButton_Fixed->setChecked(true);

@@ -25,7 +25,7 @@ WiTools::WiTools(QObject *parent) : QObject(parent) {
     setWit();
 }
 
-void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path, int recurseDepth) {
+void WiTools::requestFilesGameListModel(QStandardItemModel *model, const QString path, const int recurseDepth) {
     emit showStatusBarMessage(tr("Loading games..."));
     emit newLogEntry(tr("Loading games from images...\n"), Info);
 
@@ -38,7 +38,7 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path,
     connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(requestFilesGameListModel_readyReadStandardError()));
     connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(requestFilesGameListModel_finished(int, QProcess::ExitStatus)));
 
-    QStringList arguments = QStringList() << "LIST" << "--titles" << witTitlesPath() << "--recurse" << path << "--rdepth" << QString::number(recurseDepth) << "--section" << "--progress";
+    const QStringList arguments = QStringList() << "LIST" << "--titles" << witTitlesPath() << "--recurse" << path << "--rdepth" << QString::number(recurseDepth) << "--section" << "--progress";
     emit newWitCommandLineLogEntry("wit", arguments);
 
     witProcess->start(wit, arguments);
@@ -60,10 +60,10 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path,
 }
 
 void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
-    QStringList dataList = QString(witProcess->readAllStandardOutput().constData()).split("\n");
+    const QStringList dataList = QString(witProcess->readAllStandardOutput().constData()).split("\n");
 
-    foreach (QString data, dataList) {
-        QString line = Common::fromUtf8(data);
+    foreach (const QString data, dataList) {
+        const QString line = Common::fromUtf8(data);
 
         emit newLogEntry(line, Info);
 
@@ -144,7 +144,7 @@ void WiTools::requestFilesGameListModel_readyReadStandardError() {
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
-void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::requestFilesGameListModel_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit) {
         emit newLogEntry(tr("Loading games canceled!"), Info);
         emit loadingGamesCanceled();
@@ -196,13 +196,13 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
     delete witProcess;
 }
 
-void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
+void WiTools::requestDVDGameListModel(QStandardItemModel *model, const QString path) {
     emit showStatusBarMessage(tr("Loading disc..."));
     emit newLogEntry(tr("Loading disc...\n"), Info);
 
     QProcess dvdRead;
 
-    QStringList arguments = QStringList() << "LIST-LL" << path << "--titles" << witTitlesPath() << "--section";
+    const QStringList arguments = QStringList() << "LIST-LL" << path << "--titles" << witTitlesPath() << "--section";
     emit newWitCommandLineLogEntry("wit", arguments);
 
     dvdRead.start(wit, arguments);
@@ -226,7 +226,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     textStream.setCodec("UTF-8");
 
     while (!textStream.atEnd()) {
-        QString line = textStream.readLine();
+        const QString line = textStream.readLine();
 
         emit newLogEntry(line, Info);
 
@@ -360,7 +360,7 @@ void WiTools::requestDVDGameListModel(QStandardItemModel *model, QString path) {
     emit newDVDGameListModel();
 }
 
-void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPath) {
+void WiTools::requestWBFSGameListModel(QStandardItemModel *model, const QString wbfsPath) {
     emit showStatusBarMessage(tr("Loading games..."));
     emit newLogEntry(tr("Loading games from WBFS...\n"), Info);
 
@@ -406,7 +406,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     QList<QStandardItem *> ids, names, titles, regions, sizes, usedblocks, itimes, mtimes, ctimes, atimes, filetypes, wbfsslots, sources;
 
     while (!textStream.atEnd()) {
-        QString line = textStream.readLine();
+        const QString line = textStream.readLine();
 
         emit newLogEntry(line, Info);
 
@@ -554,7 +554,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, QString wbfsPa
     emit newWBFSGameListModel();
 }
 
-void WiTools::transferFilesToWBFS(QModelIndexList indexList, QString wbfsPath) {
+void WiTools::transferFilesToWBFS(const QModelIndexList indexList, const QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -678,7 +678,7 @@ void WiTools::transferFilesToWBFS_readyReadStandardError() {
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
-void WiTools::transferFilesToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::transferFilesToWBFS_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit) {
         if (exitCode == 0) {
             emit newLogEntry(tr("Transfer successfully!"), Info);
@@ -706,7 +706,7 @@ void WiTools::transferFilesToWBFS_finished(int exitCode, QProcess::ExitStatus ex
     delete witProcess;
 }
 
-void WiTools::transferFilesToImage(QModelIndexList indexList, QString format, QString compression, QString directory, QString splitSize) {
+void WiTools::transferFilesToImage(const QModelIndexList indexList, const QString format, const QString compression, const QString directory, const QString splitSize) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -845,7 +845,7 @@ void WiTools::transferFilesToImage_readyReadStandardError() {
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
-void WiTools::transferFilesToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::transferFilesToImage_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
         emit newLogEntry(tr("Transfer successfully!"), Info);
         emit showStatusBarMessage(tr("Ready."));
@@ -860,7 +860,7 @@ void WiTools::transferFilesToImage_finished(int exitCode, QProcess::ExitStatus e
     delete witProcess;
 }
 
-void WiTools::extractImage(QModelIndexList indexList, QString destination) {
+void WiTools::extractImage(const QModelIndexList indexList, const QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing extraction..."));
@@ -964,7 +964,7 @@ void WiTools::extractImage_readyReadStandardOutput() {
 }
 
 void WiTools::extractImage_readyReadStandardError() {
-    QString error = witProcess->readAllStandardError().constData();
+    const QString error = witProcess->readAllStandardError().constData();
 
     emit newLogEntry(error, Error);
 
@@ -976,7 +976,7 @@ void WiTools::extractImage_readyReadStandardError() {
     }
 }
 
-void WiTools::extractImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::extractImage_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit) {
         if ((exitCode == 0 && witProcess->error() == 1) || exitCode == 62097) {
             emit newLogEntry(tr("Extraction canceled!"), Error);
@@ -1002,7 +1002,7 @@ void WiTools::extractImage_finished(int exitCode, QProcess::ExitStatus exitStatu
     delete witProcess;
 }
 
-void WiTools::transferDVDToWBFS(QString dvdPath, QString wbfsPath) {
+void WiTools::transferDVDToWBFS(const QString dvdPath, const QString wbfsPath) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -1124,7 +1124,7 @@ void WiTools::transferDVDToWBFS_readyReadStandardError() {
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
-void WiTools::transferDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::transferDVDToWBFS_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit) {
         if (exitCode == 0) {
             emit newLogEntry(tr("Transfer successfully!"), Info);
@@ -1152,7 +1152,7 @@ void WiTools::transferDVDToWBFS_finished(int exitCode, QProcess::ExitStatus exit
     delete witProcess;
 }
 
-void WiTools::transferDVDToImage(QString dvdPath, QString format, QString compression, QString directory, QString splitSize) {
+void WiTools::transferDVDToImage(const QString dvdPath, const QString format, const QString compression, const QString directory, const QString splitSize) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -1256,7 +1256,7 @@ void WiTools::transferDVDToImage_readyReadStandardError() {
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
-void WiTools::transferDVDToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::transferDVDToImage_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
         emit newLogEntry(tr("Transfer successfully!"), Info);
         emit showStatusBarMessage(tr("Ready."));
@@ -1271,7 +1271,7 @@ void WiTools::transferDVDToImage_finished(int exitCode, QProcess::ExitStatus exi
     delete witProcess;
 }
 
-void WiTools::extractDVD(QString dvdPath, QString destination) {
+void WiTools::extractDVD(const QString dvdPath, const QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing extraction..."));
@@ -1374,7 +1374,7 @@ void WiTools::extractDVD_readyReadStandardOutput() {
 }
 
 void WiTools::extractDVD_readyReadStandardError() {
-    QString error = witProcess->readAllStandardError().constData();
+    const QString error = witProcess->readAllStandardError().constData();
 
     emit newLogEntry(error, Error);
 
@@ -1385,7 +1385,7 @@ void WiTools::extractDVD_readyReadStandardError() {
     }
 }
 
-void WiTools::extractDVD_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::extractDVD_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit) {
         if ((exitCode == 0 && witProcess->error() == 1) || exitCode == 62097) {
             emit newLogEntry(tr("Extraction canceled!"), Error);
@@ -1411,16 +1411,16 @@ void WiTools::extractDVD_finished(int exitCode, QProcess::ExitStatus exitStatus)
     delete witProcess;
 }
 
-void WiTools::transferWBFSToImage(QModelIndexList indexList, QStringList options) {
+void WiTools::transferWBFSToImage(const QModelIndexList indexList, const QStringList options) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
-    QString wbfsPath = options.at(0);
-    QString format = options.at(1);
-    QString compression = options.at(2);
-    QString directory = options.at(3);
-    QString splitSize = options.at(4);
+    const QString wbfsPath = options.at(0);
+    const QString format = options.at(1);
+    const QString compression = options.at(2);
+    const QString directory = options.at(3);
+    const QString splitSize = options.at(4);
 
     if (!compression.isEmpty()) {
         emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with compression '%2'.\n").arg(format, compression), Info);
@@ -1565,7 +1565,7 @@ void WiTools::transferWBFSToImage_readyReadStandardError() {
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
-void WiTools::transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::transferWBFSToImage_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
         emit newLogEntry(tr("Transfer successfully!"), Info);
         emit showStatusBarMessage(tr("Ready."));
@@ -1585,7 +1585,7 @@ void WiTools::transferWBFSToImage_finished(int exitCode, QProcess::ExitStatus ex
     delete witProcess;
 }
 
-void WiTools::extractWBFS(QModelIndexList indexList, QString wbfsPath, QString destination) {
+void WiTools::extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing extraction..."));
@@ -1691,7 +1691,7 @@ void WiTools::extractWBFS_readyReadStandardOutput() {
 }
 
 void WiTools::extractWBFS_readyReadStandardError() {
-    QString error = witProcess->readAllStandardError().constData();
+    const QString error = witProcess->readAllStandardError().constData();
 
     emit newLogEntry(error, Error);
 
@@ -1702,7 +1702,7 @@ void WiTools::extractWBFS_readyReadStandardError() {
     }
 }
 
-void WiTools::extractWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::extractWBFS_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit) {
         if ((exitCode == 0 && witProcess->error() == 1) || exitCode == 62097) {
             emit newLogEntry(tr("Extraction canceled!"), Error);
@@ -1736,7 +1736,7 @@ void WiTools::cancelLoading() {
     witProcess->kill();
 }
 
-void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
+void WiTools::removeGamesFromWBFS(const QModelIndexList indexList, const QString wbfsPath) {
     QStringList arguments;
     arguments.append("REMOVE");
 
@@ -1771,7 +1771,7 @@ void WiTools::removeGamesFromWBFS(QModelIndexList indexList, QString wbfsPath) {
     delete witProcess;
 }
 
-void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::removeGamesFromWBFS_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
         QString message(tr("Games removed successfully!"));
         emit showStatusBarMessage(message);
@@ -1785,7 +1785,7 @@ void WiTools::removeGamesFromWBFS_finished(int exitCode, QProcess::ExitStatus ex
     }
 }
 
-void WiTools::checkWBFS(QString wbfsPath) {
+void WiTools::checkWBFS(const QString wbfsPath) {
     if (WiiBaFuSettings.value("CheckWBFS/Repair", QVariant(true)).toBool()) {
         emit showStatusBarMessage(tr("Checking and repairing WBFS..."));
     }
@@ -1866,7 +1866,7 @@ void WiTools::checkWBFS(QString wbfsPath) {
     delete witProcess;
 }
 
-void WiTools::createWBFS(CreateWBFSParameters parameters) {
+void WiTools::createWBFS(const CreateWBFSParameters parameters) {
     emit showStatusBarMessage(tr("Creating WBFS..."));
 
     QStringList arguments;
@@ -1926,7 +1926,7 @@ void WiTools::createWBFS(CreateWBFSParameters parameters) {
     emit stopBusy();
 }
 
-void WiTools::verifyGame(int index, QString wbfsPath, QString game) {
+void WiTools::verifyGame(const int index, const QString wbfsPath, const QString game) {
     emit newLogEntry(tr("Starting game verification...\n"), Info);
 
     QString witApp;
@@ -1980,7 +1980,7 @@ void WiTools::verifyGame_readyReadStandardError() {
     emit newLogEntry(witProcess->readAllStandardError().constData(), Error);
 }
 
-void WiTools::verifyGame_finished(int exitCode, QProcess::ExitStatus exitStatus) {
+void WiTools::verifyGame_finished(const int exitCode, const QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::CrashExit) {
         emit newLogEntry(tr("Verification canceled!"), Error);
         emit showStatusBarMessage(tr("Verification canceled!"));
