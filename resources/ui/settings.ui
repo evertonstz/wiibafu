@@ -83,7 +83,7 @@
           <item>
            <widget class="QCheckBox" name="main_checkBox_useProxy">
             <property name="text">
-             <string>Use proxy for cover download</string>
+             <string>Use proxy for cover and titles download</string>
             </property>
            </widget>
           </item>
