@@ -60,14 +60,82 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, QString path,
 }
 
 void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
-    QString line = QString(witProcess->readLine().constData()).remove("\r").remove("\n");
+    QStringList dataList = QString(witProcess->readAllStandardOutput().constData()).split("\n");
 
-    if (!line.isEmpty() && line.contains("scanned")) {
-        emit showStatusBarMessage(line);
+    foreach (QString data, dataList) {
+        QString line = Common::fromUtf8(data);
+
         emit newLogEntry(line, Info);
-    }
-    else if (line.contains("total-size=")) {
-        totalGameSize = line.section("=", 1).toDouble();
+
+        if (line.isEmpty()) {
+            continue;
+        }
+        else if (!line.isEmpty() && line.contains("scanned")) {
+            emit showStatusBarMessage(line);
+            emit newLogEntry(line, Info);
+            continue;
+        }
+        else if (line.contains("total-discs=0")) {
+            emit showStatusBarMessage(tr("No games found!"));
+            emit loadingGamesFailed(NoGamesFound);
+            return;
+        }
+        else if (line.contains("total-size=")) {
+            totalGameSize = line.section("=", 1).toDouble();
+            continue;
+        }
+        else if (line.startsWith("id=")) {
+            fgl_ids.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("name=")) {
+            fgl_names.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("title=")) {
+            fgl_titles.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("region=")) {
+            fgl_regions.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("size=")) {
+            fgl_sizes.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
+            continue;
+        }
+        else if (line.startsWith("itime=")) {
+            fgl_item = new QStandardItem();
+            fgl_item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            fgl_itimes.append(fgl_item);
+            continue;
+        }
+        else if (line.startsWith("mtime=")) {
+            fgl_item = new QStandardItem();
+            fgl_item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            fgl_mtimes.append(fgl_item);
+            continue;
+        }
+        else if (line.startsWith("ctime=")) {
+            fgl_item = new QStandardItem();
+            fgl_item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            fgl_ctimes.append(fgl_item);
+            continue;
+        }
+        else if (line.startsWith("atime=")) {
+            fgl_item = new QStandardItem();
+            fgl_item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
+            fgl_atimes.append(fgl_item);
+            continue;
+        }
+        else if (line.startsWith("filetype=")) {
+            fgl_filetypes.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
+        else if (line.startsWith("filename=")) {
+            fgl_filenames.append(new QStandardItem(line.section("=", 1)));
+            continue;
+        }
     }
 }
 
@@ -85,93 +153,18 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
         emit newLogEntry(tr("Loading failed!"), Error);
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0) {
-        QStandardItem *item = 0;
-        QTextStream textStream(witProcess);
-        textStream.setCodec("UTF-8");
-        QList<QStandardItem *> ids, names, titles, regions, sizes, itimes, mtimes, ctimes, atimes, filetypes, filenames;
-
-        while (!textStream.atEnd()) {
-            QString line = textStream.readLine();
-
-            emit newLogEntry(line, Info);
-
-            if (line.isEmpty()) {
-                continue;
-            }
-            else if (line.contains("total-discs=0")) {
-                emit showStatusBarMessage(tr("No games found!"));
-                emit loadingGamesFailed(NoGamesFound);
-                return;
-            }
-            else if (line.contains("total-size=")) {
-                totalGameSize = line.section("=", 1).toDouble();
-            }
-            else if (line.startsWith("id=")) {
-                ids.append(new QStandardItem(line.section("=", 1)));
-                continue;
-            }
-            else if (line.startsWith("name=")) {
-                names.append(new QStandardItem(line.section("=", 1)));
-                continue;
-            }
-            else if (line.startsWith("title=")) {
-                titles.append(new QStandardItem(line.section("=", 1)));
-                continue;
-            }
-            else if (line.startsWith("region=")) {
-                regions.append(new QStandardItem(line.section("=", 1)));
-                continue;
-            }
-            else if (line.startsWith("size=")) {
-                sizes.append(new QStandardItem(QString("%1 GB").arg(QString::number((line.section("=", 1).toDouble() / 1073741824), 'f', 2))));
-                continue;
-            }
-            else if (line.startsWith("itime=")) {
-                item = new QStandardItem();
-                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
-                itimes.append(item);
-                continue;
-            }
-            else if (line.startsWith("mtime=")) {
-                item = new QStandardItem();
-                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
-                mtimes.append(item);
-                continue;
-            }
-            else if (line.startsWith("ctime=")) {
-                item = new QStandardItem();
-                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
-                ctimes.append(item);
-                continue;
-            }
-            else if (line.startsWith("atime=")) {
-                item = new QStandardItem();
-                item->setData(QVariant(QDateTime::fromString(line.section("=", 1).section(" ", 1), "yyyy-MM-dd hh:mm:ss")), Qt::DisplayRole);
-                atimes.append(item);
-                continue;
-            }
-            else if (line.startsWith("filetype=")) {
-                filetypes.append(new QStandardItem(line.section("=", 1)));
-                continue;
-            }
-            else if (line.startsWith("filename=")) {
-                filenames.append(new QStandardItem(line.section("=", 1)));
-                continue;
-            }
-        }
-
         witModel->clear();
-        witModel->appendColumn(ids);
-        witModel->appendColumn(names);
-        witModel->appendColumn(titles);
-        witModel->appendColumn(regions);
-        witModel->appendColumn(sizes);
-        witModel->appendColumn(itimes);
-        witModel->appendColumn(mtimes);
-        witModel->appendColumn(ctimes);
-        witModel->appendColumn(atimes);
-        witModel->appendColumn(filetypes);
-        witModel->appendColumn(filenames);
+        witModel->appendColumn(fgl_ids);
+        witModel->appendColumn(fgl_names);
+        witModel->appendColumn(fgl_titles);
+        witModel->appendColumn(fgl_regions);
+        witModel->appendColumn(fgl_sizes);
+        witModel->appendColumn(fgl_itimes);
+        witModel->appendColumn(fgl_mtimes);
+        witModel->appendColumn(fgl_ctimes);
+        witModel->appendColumn(fgl_atimes);
+        witModel->appendColumn(fgl_filetypes);
+        witModel->appendColumn(fgl_filenames);
 
         witModel->setHeaderData(0, Qt::Horizontal, tr("ID (0)"));
         witModel->setHeaderData(1, Qt::Horizontal, tr("Name (%1 GB)").arg(QString::number((totalGameSize / 1073741824), 'f', 2)));
@@ -187,6 +180,18 @@ void WiTools::requestFilesGameListModel_finished(int exitCode, QProcess::ExitSta
 
         emit newFilesGameListModel();
     }
+
+    fgl_ids.clear();
+    fgl_names.clear();
+    fgl_titles.clear();
+    fgl_regions.clear();
+    fgl_sizes.clear();
+    fgl_itimes.clear();
+    fgl_mtimes.clear();
+    fgl_ctimes.clear();
+    fgl_atimes.clear();
+    fgl_filetypes.clear();
+    fgl_filenames.clear();
 
     delete witProcess;
 }

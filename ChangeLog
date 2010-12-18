@@ -1,5 +1,6 @@
-2010-12-16 Kai Heitkamp <dynup@ymail.com>
+2010-12-18 Kai Heitkamp <dynup@ymail.com>
  Version 1.0 (wit v1.23b-r2096)
+  * Load game images improved
   * Support for image splitting
   * Diff for images after transfer
   * Support for scrubbing modes

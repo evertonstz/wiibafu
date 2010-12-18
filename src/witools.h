@@ -91,6 +91,8 @@ private:
     QStandardItemModel *witModel;
 
     double totalGameSize;
+    QStandardItem *fgl_item;
+    QList<QStandardItem *> fgl_ids, fgl_names, fgl_titles, fgl_regions, fgl_sizes, fgl_itimes, fgl_mtimes, fgl_ctimes, fgl_atimes, fgl_filetypes, fgl_filenames;
 
     #ifdef Q_OS_MACX
         QString gameCountText;
