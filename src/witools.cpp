@@ -60,14 +60,11 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, const QString
 }
 
 void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
-    #ifdef Q_OS_WIN32
-        const QStringList dataList = QString(witProcess->readAllStandardOutput().constData()).split("\r\n");
-    #else
-        const QStringList dataList = QString(witProcess->readAllStandardOutput().constData()).split("\n");
-    #endif
+    QTextStream textStream(witProcess);
+    textStream.setCodec("UTF-8");
 
-    foreach (const QString data, dataList) {
-        const QString line = Common::fromUtf8(data);
+    while (!textStream.atEnd()) {
+        const QString line = textStream.readLine();
 
         emit newLogEntry(line, Info);
 

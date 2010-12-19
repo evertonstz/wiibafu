@@ -59,6 +59,8 @@ private:
 private slots:
     void on_listWidget_itemSelectionChanged();
 
+    void on_main_pushButton_OpenLogFile_clicked();
+
     void on_wit_pushButton_PathToWITOpen_clicked();
     void on_wit_pushButton_WBFSOpenFile_clicked();
     void on_wit_pushButton_WBFSOpenDirectory_clicked();

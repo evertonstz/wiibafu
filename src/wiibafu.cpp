@@ -53,7 +53,13 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
         wiibafudialog->setMacOSXStyle();
     #endif
 
+    if (!WiiBaFuSettings.value("Main/LogFile", QVariant("")).toString().isEmpty()) {
+        logFile.setFileName(WiiBaFuSettings.value("Main/LogFile", QVariant("")).toString());
+        logFile.open(QIODevice::WriteOnly);
+    }
+
     logFindFirstTime = true;
+
     setStatusBarText(tr("Ready."));
 
     addEntryToLog(tr("(%1) Wii Backup Fusion %2 started.").arg(QDateTime::currentDateTime().toString(), QCoreApplication::applicationVersion()), WiTools::Info);
@@ -1044,14 +1050,24 @@ void WiiBaFu::setStatusBarText(const QString text) {
 
 void WiiBaFu::addEntryToLog(const QString entry, const WiTools::LogType type) {
     switch (WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt()) {
-    case 0:
-            ui->logTab_plainTextEdit_Log->appendPlainText(entry);
-            break;
-    case 1:
-            if (type == WiTools::Error) {
+        case 0:
                 ui->logTab_plainTextEdit_Log->appendPlainText(entry);
-            }
-            break;
+
+                if (logFile.isOpen()) {
+                    logFile.write(entry.toLatin1().append("\n"));
+                }
+
+                break;
+        case 1:
+                if (type == WiTools::Error) {
+                    ui->logTab_plainTextEdit_Log->appendPlainText(entry);
+
+                    if (!logFile.isOpen()) {
+                        logFile.write(entry.toLatin1().append("\n"));
+                    }
+                }
+
+                break;
     }
 }
 
@@ -1400,6 +1416,8 @@ bool WiiBaFu::event(QEvent *event) {
 WiiBaFu::~WiiBaFu() {
     saveMainWindowGeometry();
     saveGameListHeaderStates();
+
+    logFile.close();
 
     delete wiTools;
     delete common;

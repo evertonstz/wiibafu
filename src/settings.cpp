@@ -37,6 +37,23 @@ Settings::Settings(QWidget *parent) : QDialog(parent), ui(new Ui::Settings) {
     #endif
 }
 
+void Settings::on_main_pushButton_OpenLogFile_clicked() {
+    QString path = WiiBaFuSettings.value("Main/LogFile", QVariant("")).toString();
+
+    if (path.isEmpty()) {
+        path = QDir::homePath().append("/WiiBaFu.log");
+    }
+    else {
+        path = ui->main_lineEdit_LogFile->text();
+    }
+
+    QString logFile = QFileDialog::getSaveFileName(this, tr("Save log file"), path, tr("WiiBaFu log file (*.log)"));
+
+    if (!logFile.isEmpty()) {
+        ui->main_lineEdit_LogFile->setText(logFile);
+    }
+}
+
 void Settings::on_wit_pushButton_PathToWITOpen_clicked() {
     QString path;
 
@@ -136,6 +153,7 @@ void Settings::load() {
     ui->main_comboBox_Language->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
     ui->main_comboBox_Logging->setCurrentIndex(WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
     ui->main_checkBox_LogWitCommandLine->setChecked(WiiBaFuSettings.value("Main/LogWitCommandLine", QVariant(true)).toBool());
+    ui->main_lineEdit_LogFile->setText(WiiBaFuSettings.value("Main/LogFile", QVariant("")).toString());
 
     if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")) == "Aqua") {
         ui->main_radioButton_MacOSXStyle_Aqua->setChecked(true);
@@ -231,6 +249,7 @@ void Settings::save() {
     WiiBaFuSettings.setValue("Main/GameLanguage", ui->main_comboBox_Language->currentIndex());
     WiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
     WiiBaFuSettings.setValue("Main/LogWitCommandLine", ui->main_checkBox_LogWitCommandLine->checkState());
+    WiiBaFuSettings.setValue("Main/LogFile", ui->main_lineEdit_LogFile->text());
     WiiBaFuSettings.setValue("Main/MacOSXStyle", macOSXStyle());
 
     WiiBaFuSettings.setValue("WIT/PathToWIT", ui->wit_lineEdit_PathToWIT->text());
@@ -320,6 +339,7 @@ void Settings::restoreDefaults(const int index) {
                 ui->main_comboBox_Language->setCurrentIndex(0);
                 ui->main_comboBox_Logging->setCurrentIndex(0);
                 ui->main_checkBox_LogWitCommandLine->setChecked(true);
+                ui->main_lineEdit_LogFile->setText("");
                 ui->main_radioButton_MacOSXStyle_Aqua->setChecked(true);
                 ui->main_radioButton_MacOSXStyle_BrushedMetal->setChecked(false);
                 break;

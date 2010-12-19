@@ -51,6 +51,7 @@ private:
     WiiBaFuDialog *wiibafudialog;
     CoverViewDialog *coverViewDialog;
     WBFSDialog *wbfsDialog;
+    QFile logFile;
     bool logFindFirstTime;
 
     QTimer *timer;
