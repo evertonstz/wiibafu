@@ -31,12 +31,7 @@ void CoverViewDialog::setCover(const QImage cover, const QString id) {
     QDesktopWidget *desktop = QApplication::desktop();
     gameID = id;
 
-    if (cover.height() > (desktop->height() - 130)) {
-        ui->label_GameCover->setPixmap(QPixmap::fromImage(cover.scaledToHeight(desktop->height() - 130, Qt::FastTransformation), Qt::AutoColor));
-    }
-    else {
-        ui->label_GameCover->setPixmap(QPixmap::fromImage(cover, Qt::AutoColor));
-    }
+    ui->label_GameCover->setPixmap(QPixmap::fromImage(cover, Qt::AutoColor));
 }
 
 void CoverViewDialog::on_pushButton_Save_clicked() {
