@@ -28,7 +28,6 @@ CoverViewDialog::CoverViewDialog(QWidget *parent) : QDialog(parent), ui(new Ui::
 }
 
 void CoverViewDialog::setCover(const QImage cover, const QString id) {
-    QDesktopWidget *desktop = QApplication::desktop();
     gameID = id;
 
     ui->label_GameCover->setPixmap(QPixmap::fromImage(cover, Qt::AutoColor));
