@@ -2134,6 +2134,6 @@ QString WiTools::witTitlesPath() {
         #endif
     }
     else {
-        return QDir::toNativeSeparators(WiiBaFuSettings.value("WIT/PathToWIT").toString().append(QString("/%1.txt").arg(titles)));
+        return WiiBaFuSettings.value("WIT/PathToWIT").toString().append(QString("/%1.txt").arg(titles));
     }
 }
