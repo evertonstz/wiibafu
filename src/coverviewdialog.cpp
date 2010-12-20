@@ -23,6 +23,7 @@
 
 CoverViewDialog::CoverViewDialog(QWidget *parent) : QDialog(parent), ui(new Ui::CoverViewDialog) {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::Dialog | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
 
     connect(this, SIGNAL(finished(int)), this, SLOT(finished(int)));
 }
