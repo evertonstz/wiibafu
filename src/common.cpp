@@ -171,10 +171,10 @@ void Common::updateTitles() {
     }
 
     if (error) {
-        emit showStatusBarMessage("Download titles failed!");
+        emit showStatusBarMessage(tr("Download titles failed!"));
     }
     else {
-        emit showStatusBarMessage("Download titles successfully!");
+        emit showStatusBarMessage(tr("Download titles successfully!"));
     }
 
     emit setMainProgressBarVisible(false);
