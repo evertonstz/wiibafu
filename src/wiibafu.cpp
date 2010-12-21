@@ -733,7 +733,7 @@ void WiiBaFu::wbfsTableView_selectionChanged(const QItemSelection, const QItemSe
 void WiiBaFu::setFilesGameListModel() {
     if (filesListModel->rowCount() > 0 ) {
         ui->filesTab_tableView->setModel(filesListModel);
-        ui->tabWidget->setTabText(0, QString("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
+        ui->tabWidget->setTabText(0, tr("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
 
         ui->filesTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("FilesGameList/HeaderStates").toByteArray());
 
