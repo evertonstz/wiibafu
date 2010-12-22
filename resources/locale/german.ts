@@ -1051,7 +1051,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     <message>
         <location filename="../../src/witools.cpp" line="252"/>
         <source>Can&apos;t open file!</source>
-        <translation>Kann Datei nicht öffnen!</translation>
+        <translation>Kann DVD nicht lesen!</translation>
     </message>
     <message>
         <location filename="../../src/witools.cpp" line="257"/>
