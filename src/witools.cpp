@@ -66,17 +66,31 @@ void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
     while (!textStream.atEnd()) {
         const QString line = textStream.readLine();
 
-        emit newLogEntry(line, Info);
-
         if (line.isEmpty()) {
             continue;
         }
-        else if (!line.isEmpty() && line.contains("scanned")) {
-            emit showStatusBarMessage(line);
-            emit newLogEntry(line, Info);
+        else if (line.contains("scanned")) {
+            const QString objects = line.mid(2, line.indexOf("object") - 3);
+            const QString directories = line.mid(line.indexOf(",") + 2, line.indexOf("dir") - line.indexOf(",") - 3);
+            QString discs;
+            QString message;
+
+            if (line.contains("directory")) {
+                discs = "0";
+                message = tr("%1 file scanned, %2 directory and %3 game found.").arg(objects, directories, discs);
+            }
+            else {
+                discs = line.mid(line.indexOf("and") + 4, line.indexOf("disc") - line.indexOf("and") - 5);
+                message = tr("%1 files scanned, %2 directories and %3 games found.").arg(objects, directories, discs);
+            }
+
+            emit showStatusBarMessage(message);
             continue;
         }
-        else if (line.contains("total-discs=0")) {
+
+        emit newLogEntry(line, Info);
+
+        if (line.contains("total-discs=0")) {
             emit showStatusBarMessage(tr("No games found!"));
             emit loadingGamesFailed(NoGamesFound);
             return;
