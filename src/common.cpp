@@ -281,6 +281,38 @@ QString Common::calculateSize(const QString size) {
     return calculateSize(size.toDouble());
 }
 
+QString Common::translatedTransferMessage(QString str) {
+    if (str.contains("copied")) {
+        str.replace("copied", tr("copied"));
+    }
+
+    if (str.contains("compared")) {
+        str.replace("compared", tr("compared"));
+    }
+
+    if (str.contains("sec")) {
+        str.replace("sec", tr("sec"));
+    }
+
+    if (str.contains("disc added")) {
+        str.replace("disc added", tr("disc added"));
+    }
+
+    if (str.contains("discs added")) {
+        str.replace("discs added", tr("discs added"));
+    }
+
+    if (str.contains("disc extracted")) {
+        str.replace("disc extracted", tr("disc extracted"));
+    }
+
+    if (str.contains("discs extracted")) {
+        str.replace("discs extracted", tr("discs extracted"));
+    }
+
+    return str;
+}
+
 Common::~Common() {
     delete wiTools;
 }

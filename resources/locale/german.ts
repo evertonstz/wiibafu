@@ -75,6 +75,41 @@
         <source>Download titles successfully!</source>
         <translation>Download der Titel erfolgreich!</translation>
     </message>
+    <message>
+        <location filename="../../src/common.cpp" line="286"/>
+        <source>copied</source>
+        <translation>kopiert</translation>
+    </message>
+    <message>
+        <location filename="../../src/common.cpp" line="290"/>
+        <source>compared</source>
+        <translation>verglichen</translation>
+    </message>
+    <message>
+        <location filename="../../src/common.cpp" line="294"/>
+        <source>sec</source>
+        <translation>Sek</translation>
+    </message>
+    <message>
+        <location filename="../../src/common.cpp" line="298"/>
+        <source>disc added</source>
+        <translation>Spiel hinzugefügt</translation>
+    </message>
+    <message>
+        <location filename="../../src/common.cpp" line="302"/>
+        <source>discs added</source>
+        <translation>Spiele hinzugefügt</translation>
+    </message>
+    <message>
+        <location filename="../../src/common.cpp" line="306"/>
+        <source>disc extracted</source>
+        <translation>Spiel extrahiert</translation>
+    </message>
+    <message>
+        <location filename="../../src/common.cpp" line="310"/>
+        <source>discs extracted</source>
+        <translation>Spiele extrahiert</translation>
+    </message>
 </context>
 <context>
     <name>CoverViewDialog</name>
@@ -1229,6 +1264,14 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1554"/>
         <source>Transfering game %1...</source>
         <translation>Transferiere Spiel %1...</translation>
+    </message>
+    <message>
+        <source>copied</source>
+        <translation type="obsolete">kopiert</translation>
+    </message>
+    <message>
+        <source>sec</source>
+        <translation type="obsolete">Sek</translation>
     </message>
     <message>
         <location filename="../../src/witools.cpp" line="692"/>
