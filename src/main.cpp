@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     QTranslator translator;
     QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
     translator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    translator.load("german", path);
+    translator.load(QLocale::system().languageToString(QLocale::system().language()).toLower(), path);
     app.installTranslator(&translator);
 
     WiiBaFu wiibafu;
