@@ -42,6 +42,10 @@ void Common::requestGameCover(const QString gameID, const QString language, cons
             result = getCover(QString("http://wiitdb.com/wiitdb/artwork/disc/EN/%2.png").arg(gameID));
         }
 
+        if (result != QNetworkReply::NoError && language != "US") {
+            result = getCover(QString("http://wiitdb.com/wiitdb/artwork/disc/US/%2.png").arg(gameID));
+        }
+
         if (result != QNetworkReply::NoError) {
             result = getCover(QString("http://www.wiiboxart.com/artwork/disc/%1.png").arg(gameID));
         }
@@ -62,6 +66,10 @@ void Common::requestGameCover(const QString gameID, const QString language, cons
             result = getCover(QString("http://wiitdb.com/wiitdb/artwork/cover3D/EN/%2.png").arg(gameID));
         }
 
+        if (result != QNetworkReply::NoError && language != "US") {
+            result = getCover(QString("http://wiitdb.com/wiitdb/artwork/cover3D/US/%2.png").arg(gameID));
+        }
+
         if (result != QNetworkReply::NoError) {
             result = getCover(QString("http://www.wiiboxart.com/artwork/cover3D/%1.png").arg(gameID));
         }
@@ -80,6 +88,10 @@ void Common::requestGameCover(const QString gameID, const QString language, cons
         if (result != QNetworkReply::NoError && language != "EN") {
             emit newLogEntry(tr("No game cover in selected language available! Trying to download the english one..."), WiTools::Info);
             result = getCover(QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/EN/%2.png").arg(gameID));
+        }
+
+        if (result != QNetworkReply::NoError && language != "US") {
+            result = getCover(QString("http://wiitdb.com/wiitdb/artwork/coverfullHQ/US/%2.png").arg(gameID));
         }
 
         if (result != QNetworkReply::NoError) {
