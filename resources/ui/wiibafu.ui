@@ -963,91 +963,91 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-              <item>
-               <property name="text">
-                <string>English</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>American</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>French</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>German</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Spanish</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Italian</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Dutch</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Portuguese</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>North Sami</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Danish</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Norwegian</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Finnish</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Russian</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Japanese</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Korean</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Taiwanese</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Chinese</string>
-               </property>
-              </item>
+             <item>
+              <property name="text">
+               <string>English</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>American</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>French</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>German</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Spanish</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Italian</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Dutch</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Portuguese</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>North Sami</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Danish</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Norwegian</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Finnish</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Russian</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Japanese</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Korean</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Taiwanese</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Chinese</string>
+              </property>
+             </item>
             </widget>
            </item>
            <item row="0" column="3">
@@ -1225,6 +1225,7 @@
      <string>Too&amp;ls</string>
     </property>
     <addaction name="menuTools_CheckWBFS"/>
+    <addaction name="menuTools_DumpWBFS"/>
     <addaction name="menuTools_CreateWBFS"/>
     <addaction name="separator"/>
     <addaction name="menuTools_VerifyGame"/>
@@ -1301,6 +1302,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="menuTools_DumpWBFS">
+   <property name="text">
+    <string>&amp;Dump WBFS</string>
    </property>
   </action>
  </widget>

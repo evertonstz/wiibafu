@@ -77,6 +77,7 @@ public:
 
     void removeGamesFromWBFS(const QModelIndexList indexList, const QString wbfsPath);
     void checkWBFS(const QString wbfsPath);
+    void dumpWBFS(const QString wbfsPath);
     void createWBFS(const CreateWBFSParameters parameters);
     void verifyGame(const int index, const QString wbfsPath, const QString game);
 

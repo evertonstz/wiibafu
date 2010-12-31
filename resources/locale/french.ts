@@ -951,8 +951,8 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
         <location filename="../../src/witools.cpp" line="49"/>
         <location filename="../../src/witools.cpp" line="227"/>
         <location filename="../../src/witools.cpp" line="228"/>
-        <location filename="../../src/witools.cpp" line="2057"/>
-        <location filename="../../src/witools.cpp" line="2058"/>
+        <location filename="../../src/witools.cpp" line="2098"/>
+        <location filename="../../src/witools.cpp" line="2099"/>
         <source>Wiimms ISO Tool not found!</source>
         <translation>Outils ISO Wiimms non trouvé!</translation>
     </message>
@@ -1182,8 +1182,10 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
         <location filename="../../src/witools.cpp" line="406"/>
         <location filename="../../src/witools.cpp" line="1866"/>
         <location filename="../../src/witools.cpp" line="1867"/>
-        <location filename="../../src/witools.cpp" line="2078"/>
-        <location filename="../../src/witools.cpp" line="2079"/>
+        <location filename="../../src/witools.cpp" line="1907"/>
+        <location filename="../../src/witools.cpp" line="1908"/>
+        <location filename="../../src/witools.cpp" line="2119"/>
+        <location filename="../../src/witools.cpp" line="2120"/>
         <source>Wiimms WBFS Tool not found!</source>
         <translation>Outils ISO Wiimms non trouvé!</translation>
     </message>
@@ -1293,7 +1295,7 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
         <location filename="../../src/witools.cpp" line="1163"/>
         <location filename="../../src/witools.cpp" line="1421"/>
         <location filename="../../src/witools.cpp" line="1738"/>
-        <location filename="../../src/witools.cpp" line="2010"/>
+        <location filename="../../src/witools.cpp" line="2051"/>
         <source>Error %1: %2</source>
         <translation>Erreur %1: %2</translation>
     </message>
@@ -1338,7 +1340,7 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
         <location filename="../../src/witools.cpp" line="1414"/>
         <location filename="../../src/witools.cpp" line="1586"/>
         <location filename="../../src/witools.cpp" line="1731"/>
-        <location filename="../../src/witools.cpp" line="2006"/>
+        <location filename="../../src/witools.cpp" line="2047"/>
         <source>Ready.</source>
         <translation>Prêt.</translation>
     </message>
@@ -1484,54 +1486,69 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
         <translation>Vérification WBFS terminée avec succès!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1885"/>
+        <location filename="../../src/witools.cpp" line="1911"/>
+        <source>WBFS dump failed!</source>
+        <translation>La décharge WBFS a échoué!</translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1912"/>
+        <source>WBFS dump failed! (status: %1, code: %2,  %3)</source>
+        <translation>La décharge WBFS a échoué! (status: %1, code: %2,  %3)</translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1916"/>
+        <source>WBFS dump successfully!</source>
+        <translation>Décharge WBFS terminée avec succès!</translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1926"/>
         <source>Creating WBFS...</source>
         <translation>Création WBFS...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1929"/>
+        <location filename="../../src/witools.cpp" line="1970"/>
         <source>Create WBFS failed!</source>
         <translation>Création WBFS a échoué!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1933"/>
+        <location filename="../../src/witools.cpp" line="1974"/>
         <source>Create WBFS successfully!</source>
         <translation>Création WBFS terminée avec succès!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1945"/>
+        <location filename="../../src/witools.cpp" line="1986"/>
         <source>Starting game verification...
 </source>
         <translation>Démarrage de la vérification du jeu...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1954"/>
+        <location filename="../../src/witools.cpp" line="1995"/>
         <source>Verifying game %1...</source>
         <translation>Vérification du jeu %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1958"/>
+        <location filename="../../src/witools.cpp" line="1999"/>
         <source>Verifying game on drive %1...</source>
         <translation>Vérification du jeu sur le lecteur %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1970"/>
+        <location filename="../../src/witools.cpp" line="2011"/>
         <source>Verifying game %1 on WBFS...</source>
         <translation>Vérification du jeu %1 sur WBFS...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2000"/>
-        <location filename="../../src/witools.cpp" line="2001"/>
+        <location filename="../../src/witools.cpp" line="2041"/>
+        <location filename="../../src/witools.cpp" line="2042"/>
         <source>Verification canceled!</source>
         <translation>Vérification annulée!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2005"/>
+        <location filename="../../src/witools.cpp" line="2046"/>
         <source>Verification successfully!</source>
         <translation>V&amp;rification terminée avec succès!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2011"/>
+        <location filename="../../src/witools.cpp" line="2052"/>
         <source>Verification failed!</source>
         <translation>Vérification échouée!</translation>
     </message>
@@ -1552,9 +1569,9 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
         <location filename="../ui/wiibafu.ui" line="62"/>
         <location filename="../ui/wiibafu.ui" line="228"/>
         <location filename="../ui/wiibafu.ui" line="313"/>
-        <location filename="../../src/wiibafu.cpp" line="748"/>
-        <location filename="../../src/wiibafu.cpp" line="755"/>
-        <location filename="../../src/wiibafu.cpp" line="764"/>
+        <location filename="../../src/wiibafu.cpp" line="752"/>
+        <location filename="../../src/wiibafu.cpp" line="759"/>
+        <location filename="../../src/wiibafu.cpp" line="768"/>
         <source>&amp;Load</source>
         <translation>&amp;Ouvrir</translation>
     </message>
@@ -1562,9 +1579,9 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
         <location filename="../ui/wiibafu.ui" line="65"/>
         <location filename="../ui/wiibafu.ui" line="231"/>
         <location filename="../ui/wiibafu.ui" line="316"/>
-        <location filename="../../src/wiibafu.cpp" line="749"/>
-        <location filename="../../src/wiibafu.cpp" line="756"/>
-        <location filename="../../src/wiibafu.cpp" line="765"/>
+        <location filename="../../src/wiibafu.cpp" line="753"/>
+        <location filename="../../src/wiibafu.cpp" line="760"/>
+        <location filename="../../src/wiibafu.cpp" line="769"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
@@ -1577,22 +1594,22 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
     <message>
         <location filename="../ui/wiibafu.ui" line="79"/>
         <location filename="../ui/wiibafu.ui" line="238"/>
-        <location filename="../../src/wiibafu.cpp" line="804"/>
-        <location filename="../../src/wiibafu.cpp" line="820"/>
+        <location filename="../../src/wiibafu.cpp" line="808"/>
+        <location filename="../../src/wiibafu.cpp" line="824"/>
         <source>Transfer to &amp;WBFS</source>
         <translation>Transférer vers &amp;WBFS</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="86"/>
         <location filename="../ui/wiibafu.ui" line="245"/>
-        <location filename="../../src/wiibafu.cpp" line="808"/>
-        <location filename="../../src/wiibafu.cpp" line="824"/>
+        <location filename="../../src/wiibafu.cpp" line="812"/>
+        <location filename="../../src/wiibafu.cpp" line="828"/>
         <source>Transfer to &amp;image</source>
         <translation>Transférer vers &amp;image</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="93"/>
-        <location filename="../../src/wiibafu.cpp" line="812"/>
+        <location filename="../../src/wiibafu.cpp" line="816"/>
         <source>E&amp;xtract image</source>
         <translation>E&amp;xtaire l&apos;image</translation>
     </message>
@@ -1610,8 +1627,8 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
     <message>
         <location filename="../ui/wiibafu.ui" line="252"/>
         <location filename="../ui/wiibafu.ui" line="337"/>
-        <location filename="../../src/wiibafu.cpp" line="828"/>
-        <location filename="../../src/wiibafu.cpp" line="836"/>
+        <location filename="../../src/wiibafu.cpp" line="832"/>
+        <location filename="../../src/wiibafu.cpp" line="840"/>
         <source>E&amp;xtract</source>
         <translation>E&amp;xtraire</translation>
     </message>
@@ -1622,7 +1639,7 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="330"/>
-        <location filename="../../src/wiibafu.cpp" line="832"/>
+        <location filename="../../src/wiibafu.cpp" line="836"/>
         <source>&amp;Transfer</source>
         <translation>&amp;Transférer</translation>
     </message>
@@ -1808,7 +1825,7 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="1097"/>
-        <location filename="../ui/wiibafu.ui" line="1290"/>
+        <location filename="../ui/wiibafu.ui" line="1291"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
@@ -1894,75 +1911,80 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
         <translation>Outi&amp;ls</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1238"/>
+        <location filename="../ui/wiibafu.ui" line="1239"/>
         <source>&amp;Help</source>
         <translation>&amp;Aide</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1251"/>
+        <location filename="../ui/wiibafu.ui" line="1252"/>
         <source>&amp;About...</source>
         <translation>&amp;Au Sujet...</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1256"/>
+        <location filename="../ui/wiibafu.ui" line="1257"/>
         <source>E&amp;xit</source>
         <translation>Q&amp;uitter</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1259"/>
+        <location filename="../ui/wiibafu.ui" line="1260"/>
         <source>Exits Wii Backup Fusion</source>
         <translation>Quitter Wii Backup Fusion</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1262"/>
+        <location filename="../ui/wiibafu.ui" line="1263"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1267"/>
+        <location filename="../ui/wiibafu.ui" line="1268"/>
         <source>About &amp;Qt...</source>
         <translation>Au Sujet de &amp;Qt...</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1272"/>
+        <location filename="../ui/wiibafu.ui" line="1273"/>
         <source>Chec&amp;k WBFS</source>
         <translation>Vérification WBFS</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1277"/>
+        <location filename="../ui/wiibafu.ui" line="1278"/>
         <source>&amp;Settings...</source>
         <translation>&amp;Réglages...</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1282"/>
+        <location filename="../ui/wiibafu.ui" line="1283"/>
         <source>C&amp;reate WBFS</source>
         <translation>C&amp;réer WBFS</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1287"/>
+        <location filename="../ui/wiibafu.ui" line="1288"/>
         <source>&amp;Update titles</source>
         <translation>&amp;Mise à jour des titres</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1295"/>
-        <location filename="../../src/wiibafu.cpp" line="841"/>
+        <location filename="../ui/wiibafu.ui" line="1296"/>
+        <location filename="../../src/wiibafu.cpp" line="845"/>
         <source>&amp;Verify game</source>
         <translation>&amp;Vérifier Jeu</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1300"/>
+        <location filename="../ui/wiibafu.ui" line="1301"/>
         <source>Com&amp;pare Files/WBFS</source>
         <translation>Com&amp;parer Fichiers/WBFS</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1303"/>
+        <location filename="../ui/wiibafu.ui" line="1304"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
+        <location filename="../ui/wiibafu.ui" line="1309"/>
+        <source>&amp;Dump WBFS</source>
+        <translation>&amp;Décharge WBFS</translation>
+    </message>
+    <message>
         <location filename="../../src/wiibafu.cpp" line="63"/>
-        <location filename="../../src/wiibafu.cpp" line="750"/>
-        <location filename="../../src/wiibafu.cpp" line="795"/>
+        <location filename="../../src/wiibafu.cpp" line="754"/>
+        <location filename="../../src/wiibafu.cpp" line="799"/>
         <source>Ready.</source>
         <translation>Prêt.</translation>
     </message>
@@ -1986,152 +2008,152 @@ La partition complète sera utilisé! «Tout» est ignoré pour les partitions s
     <message>
         <location filename="../../src/wiibafu.cpp" line="258"/>
         <location filename="../../src/wiibafu.cpp" line="259"/>
-        <location filename="../../src/wiibafu.cpp" line="742"/>
-        <location filename="../../src/wiibafu.cpp" line="789"/>
+        <location filename="../../src/wiibafu.cpp" line="746"/>
+        <location filename="../../src/wiibafu.cpp" line="793"/>
         <source>Title</source>
         <translation>Titre</translation>
     </message>
     <message>
         <location filename="../../src/wiibafu.cpp" line="258"/>
         <location filename="../../src/wiibafu.cpp" line="259"/>
-        <location filename="../../src/wiibafu.cpp" line="742"/>
-        <location filename="../../src/wiibafu.cpp" line="789"/>
+        <location filename="../../src/wiibafu.cpp" line="746"/>
+        <location filename="../../src/wiibafu.cpp" line="793"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="299"/>
-        <location filename="../../src/wiibafu.cpp" line="322"/>
+        <location filename="../../src/wiibafu.cpp" line="303"/>
+        <location filename="../../src/wiibafu.cpp" line="326"/>
         <source>&amp;Cancel verifying</source>
         <translation>&amp;Annuler la vérification</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="326"/>
-        <location filename="../../src/wiibafu.cpp" line="327"/>
+        <location filename="../../src/wiibafu.cpp" line="330"/>
+        <location filename="../../src/wiibafu.cpp" line="331"/>
         <source>Verify error: No game selected!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="382"/>
-        <location filename="../../src/wiibafu.cpp" line="388"/>
+        <location filename="../../src/wiibafu.cpp" line="386"/>
+        <location filename="../../src/wiibafu.cpp" line="392"/>
         <source>&amp;Cancel loading</source>
         <translation>&amp;Annuler le chargement</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="383"/>
+        <location filename="../../src/wiibafu.cpp" line="387"/>
         <source>Open directory</source>
         <translation>Ouvrir répetoire</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="412"/>
-        <location filename="../../src/wiibafu.cpp" line="414"/>
-        <location filename="../../src/wiibafu.cpp" line="425"/>
-        <location filename="../../src/wiibafu.cpp" line="443"/>
-        <location filename="../../src/wiibafu.cpp" line="482"/>
-        <location filename="../../src/wiibafu.cpp" line="484"/>
-        <location filename="../../src/wiibafu.cpp" line="495"/>
-        <location filename="../../src/wiibafu.cpp" line="510"/>
-        <location filename="../../src/wiibafu.cpp" line="557"/>
-        <location filename="../../src/wiibafu.cpp" line="575"/>
+        <location filename="../../src/wiibafu.cpp" line="416"/>
+        <location filename="../../src/wiibafu.cpp" line="418"/>
+        <location filename="../../src/wiibafu.cpp" line="429"/>
+        <location filename="../../src/wiibafu.cpp" line="447"/>
+        <location filename="../../src/wiibafu.cpp" line="486"/>
+        <location filename="../../src/wiibafu.cpp" line="488"/>
+        <location filename="../../src/wiibafu.cpp" line="499"/>
+        <location filename="../../src/wiibafu.cpp" line="514"/>
+        <location filename="../../src/wiibafu.cpp" line="561"/>
+        <location filename="../../src/wiibafu.cpp" line="579"/>
         <source>&amp;Cancel transfering</source>
         <translation>&amp;Annuler le transfert</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="440"/>
-        <location filename="../../src/wiibafu.cpp" line="572"/>
+        <location filename="../../src/wiibafu.cpp" line="444"/>
+        <location filename="../../src/wiibafu.cpp" line="576"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="440"/>
-        <location filename="../../src/wiibafu.cpp" line="572"/>
+        <location filename="../../src/wiibafu.cpp" line="444"/>
+        <location filename="../../src/wiibafu.cpp" line="576"/>
         <source>The directory doesn&apos;t exists!</source>
         <translation>Le répertoire n&apos;existe pas!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="455"/>
-        <location filename="../../src/wiibafu.cpp" line="460"/>
-        <location filename="../../src/wiibafu.cpp" line="521"/>
-        <location filename="../../src/wiibafu.cpp" line="529"/>
-        <location filename="../../src/wiibafu.cpp" line="587"/>
-        <location filename="../../src/wiibafu.cpp" line="592"/>
+        <location filename="../../src/wiibafu.cpp" line="459"/>
+        <location filename="../../src/wiibafu.cpp" line="464"/>
+        <location filename="../../src/wiibafu.cpp" line="525"/>
+        <location filename="../../src/wiibafu.cpp" line="533"/>
+        <location filename="../../src/wiibafu.cpp" line="591"/>
+        <location filename="../../src/wiibafu.cpp" line="596"/>
         <source>&amp;Cancel extracting</source>
         <translation>&amp;Annuler l&apos;extraction</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="604"/>
+        <location filename="../../src/wiibafu.cpp" line="608"/>
         <source>Remove games</source>
         <translation>Retirer les jeux</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="604"/>
+        <location filename="../../src/wiibafu.cpp" line="608"/>
         <source>Are you sure that you want to delete the selected games?</source>
         <translation>Etes-vous sûr de vouloir effacer les jeux sélectionnés?</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="616"/>
+        <location filename="../../src/wiibafu.cpp" line="620"/>
         <source>Check/Repair WBFS</source>
         <translation>Vérifier/réparer WBFS</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="616"/>
+        <location filename="../../src/wiibafu.cpp" line="620"/>
         <source>Are you sure that you want to check/repair the wbfs?</source>
         <translation>Etes-voussûr de vouloir vérifier/réparer la partition wbfs?</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="671"/>
+        <location filename="../../src/wiibafu.cpp" line="675"/>
         <source>Search log</source>
         <translation>Recherche Log</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="671"/>
+        <location filename="../../src/wiibafu.cpp" line="675"/>
         <source>Enter search string:</source>
         <translation>Entrer la chaine à rechercher:</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="704"/>
+        <location filename="../../src/wiibafu.cpp" line="708"/>
         <source>Nothing found!</source>
         <translation>Rien trouvé!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="711"/>
+        <location filename="../../src/wiibafu.cpp" line="715"/>
         <source>Save log file</source>
         <translation>Sauvegarder le fichier log</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="711"/>
+        <location filename="../../src/wiibafu.cpp" line="715"/>
         <source>WiiBaFu log file (*.log)</source>
         <translation>WiiBaFu fichier de log (*.log)</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="726"/>
         <location filename="../../src/wiibafu.cpp" line="730"/>
+        <location filename="../../src/wiibafu.cpp" line="734"/>
         <source>ID (%1)</source>
         <translation>ID (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="736"/>
+        <location filename="../../src/wiibafu.cpp" line="740"/>
         <source>Files (%1)</source>
         <translation>Fichiers (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="758"/>
+        <location filename="../../src/wiibafu.cpp" line="762"/>
         <source>Loading canceled!</source>
         <translation>Chargement annulé!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1087"/>
+        <location filename="../../src/wiibafu.cpp" line="1091"/>
         <source>WIT command line:
 %1</source>
         <translation>Ligne de commande WIT %1</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1394"/>
+        <location filename="../../src/wiibafu.cpp" line="1398"/>
         <source>About Wii Backup Fusion</source>
         <translation>Au Sujet de Wii Backup Fusion</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1396"/>
+        <location filename="../../src/wiibafu.cpp" line="1400"/>
         <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit&lt;br&gt;and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;&lt;i&gt;La solution complète et simple à utiliser pour la sauvegarde des jeux Wii&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;Je ne soutiens pas le piratage! Si vous copier les jeux avec ce logiciel,&lt;br&gt;vous devez avoir l&apos;original et c&apos;est pour votre usage privé uniquement!&lt;/font color&gt;&lt;p&gt;Remerciements à the trolls at Trolltech Norway pour son excellent Qt toolkit&lt;br&gt;et les gens de Nokia pour la suite, Merci à Dirk Clemens (Wiimm) pour son super outil pour les ISO!, Merci à Patrick pour la traduction française&lt;p&gt;&lt;i&gt;Dédicacé en mémoire de mon père G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</translation>
     </message>

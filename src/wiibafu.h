@@ -96,6 +96,7 @@ signals:
 private slots:
     void on_menuOptions_Settings_triggered();
     void on_menuTools_CheckWBFS_triggered();
+    void on_menuTools_DumpWBFS_triggered();
     void on_menuTools_CreateWBFS_triggered();
     void on_menuTools_VerifyGame_triggered();
     void on_menuTools_Compare_triggered();

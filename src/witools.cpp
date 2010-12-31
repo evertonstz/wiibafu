@@ -1875,7 +1875,48 @@ void WiTools::checkWBFS(const QString wbfsPath) {
         emit showStatusBarMessage(tr("WBFS check successfully!"));
     }
 
-    emit newLogEntry(QString(witProcess->readAll().data()), Info);
+    emit newLogEntry(QString(witProcess->readAll().constData()), Info);
+
+    arguments.clear();
+    delete witProcess;
+}
+
+void WiTools::dumpWBFS(const QString wbfsPath) {
+    QStringList arguments;
+    arguments.append("DUMP");
+
+    if (wbfsPath.isEmpty()) {
+        arguments.append("--auto");
+    }
+    else {
+        arguments.append("--part");
+        arguments.append(wbfsPath);
+    }
+
+    arguments.append("--all");
+    arguments.append("--inode");
+    arguments.append("-lll");
+
+    emit newWitCommandLineLogEntry("wwt", arguments);
+
+    witProcess = new QProcess();
+    witProcess->start(wwt, arguments);
+
+    if (!witProcess->waitForFinished(-1)) {
+        if (witProcess->errorString().contains("No such file or directory")) {
+            emit showStatusBarMessage(tr("Wiimms WBFS Tool not found!"));
+            emit newLogEntry(tr("Wiimms WBFS Tool not found!"), Error);
+        }
+        else {
+            emit showStatusBarMessage(tr("WBFS dump failed!"));
+            emit newLogEntry(tr("WBFS dump failed! (status: %1, code: %2,  %3)").arg(QString::number(witProcess->exitStatus()), QString::number(witProcess->exitCode()), witProcess->errorString()), Error);
+        }
+    }
+    else {
+        emit showStatusBarMessage(tr("WBFS dump successfully!"));
+    }
+
+    emit newLogEntry(QString(witProcess->readAll().constData()), Info);
 
     arguments.clear();
     delete witProcess;
@@ -1933,7 +1974,7 @@ void WiTools::createWBFS(const CreateWBFSParameters parameters) {
         emit showStatusBarMessage(tr("Create WBFS successfully!"));
     }
 
-    emit newLogEntry(QString(witProcess->readAll()), Info);
+    emit newLogEntry(QString(witProcess->readAll().constData()), Info);
 
     arguments.clear();
     delete witProcess;

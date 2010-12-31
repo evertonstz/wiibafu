@@ -277,6 +277,10 @@ void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
     on_wbfsTab_pushButton_Check_clicked();
 }
 
+void WiiBaFu::on_menuTools_DumpWBFS_triggered() {
+    QtConcurrent::run(wiTools, &WiTools::dumpWBFS, wbfsPath());
+}
+
 void WiiBaFu::on_menuTools_CreateWBFS_triggered() {
     if (wbfsDialog->exec() == QDialog::Accepted) {
         emit startBusy();
