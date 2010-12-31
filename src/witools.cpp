@@ -655,7 +655,6 @@ void WiTools::transferFilesToWBFS(const QModelIndexList indexList, const QString
     witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
@@ -824,7 +823,6 @@ void WiTools::transferFilesToImage(const QModelIndexList indexList, const QStrin
     witProcess->start(wit, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
@@ -946,7 +944,6 @@ void WiTools::extractImage(const QModelIndexList indexList, const QString destin
     witProcess->start(wit, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
@@ -1101,7 +1098,6 @@ void WiTools::transferDVDToWBFS(const QString dvdPath, const QString wbfsPath) {
     witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
@@ -1236,7 +1232,6 @@ void WiTools::transferDVDToImage(const QString dvdPath, const QString format, co
     witProcess->start(wit, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
@@ -1359,7 +1354,6 @@ void WiTools::extractDVD(const QString dvdPath, const QString destination) {
     witProcess->start(wit, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
@@ -1543,7 +1537,6 @@ void WiTools::transferWBFSToImage(const QModelIndexList indexList, const QString
     witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
@@ -1676,7 +1669,6 @@ void WiTools::extractWBFS(const QModelIndexList indexList, const QString wbfsPat
     witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     emit setMainProgressBarVisible(false);
 }
 
@@ -1782,7 +1774,6 @@ void WiTools::removeGamesFromWBFS(const QModelIndexList indexList, const QString
     witProcess->start(wwt, arguments);
     witProcess->waitForFinished(-1);
 
-    arguments.clear();
     delete witProcess;
 }
 
@@ -1877,7 +1868,6 @@ void WiTools::checkWBFS(const QString wbfsPath) {
 
     emit newLogEntry(QString(witProcess->readAll().constData()), Info);
 
-    arguments.clear();
     delete witProcess;
 }
 
@@ -1918,7 +1908,6 @@ void WiTools::dumpWBFS(const QString wbfsPath) {
 
     emit newLogEntry(QString(witProcess->readAll().constData()), Info);
 
-    arguments.clear();
     delete witProcess;
 }
 
@@ -1976,7 +1965,6 @@ void WiTools::createWBFS(const CreateWBFSParameters parameters) {
 
     emit newLogEntry(QString(witProcess->readAll().constData()), Info);
 
-    arguments.clear();
     delete witProcess;
 
     emit stopBusy();
