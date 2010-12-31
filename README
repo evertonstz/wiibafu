@@ -25,3 +25,11 @@ first S-ATA drive (must be adapted to your drive), for Mac OS X use normally
 /dev/disk2 (Mac with integrated hdd and dvd drive). On Windows, WIT use cygwin
 to access the drive, the drive letters doesn't work! Use /dev/sr0 for the
 first S-ATA drive (must be adapted to your drive).
+
+
+Languages
+=========
+
+Wii Backup Fusion supports different languages. It uses the system locale to
+switch the languages. For example, if your system is set to german (it is in
+german language), Wii Backup Fusion will be switch to german language also.
