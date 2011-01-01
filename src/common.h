@@ -58,7 +58,7 @@ public:
     static QString fromUtf8(const QString string);
     static QString calculateSize(const double size);
     static QString calculateSize(const QString size);
-    static QString translatedTransferMessage(QString str);
+    static QString translateTransferMessage(QString str);
 
 signals:
     void newGame3DCover(const QImage game3DCover);

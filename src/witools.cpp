@@ -670,20 +670,20 @@ void WiTools::transferFilesToWBFS_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translatedTransferMessage(line));
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
         #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translatedTransferMessage(line)));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
         #endif
     }
     else if (line.contains("already exists")) {
         emit newLogEntry(line, Error);
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
     else if (line.contains("disc added.") || line.contains("discs added.")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
 }
 
@@ -842,14 +842,14 @@ void WiTools::transferFilesToImage_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("% copied") || line.contains("% compared")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translatedTransferMessage(line));
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
         #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translatedTransferMessage(line)));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
         #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
 }
 
@@ -964,14 +964,14 @@ void WiTools::extractImage_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translatedTransferMessage(line));
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
         #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translatedTransferMessage(line)));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
         #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
 }
 
@@ -1113,20 +1113,20 @@ void WiTools::transferDVDToWBFS_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translatedTransferMessage(line));
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
         #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translatedTransferMessage(line)));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
         #endif
     }
     else if (line.contains("already exists")) {
         emit newLogEntry(line, Error);
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
     else if (line.contains("disc added.") || line.contains("discs added.")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
 }
 
@@ -1250,14 +1250,14 @@ void WiTools::transferDVDToImage_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("% copied") || line.contains("% compared")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translatedTransferMessage(line));
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
         #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translatedTransferMessage(line)));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
         #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
 }
 
@@ -1371,14 +1371,14 @@ void WiTools::extractDVD_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translatedTransferMessage(line));
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
         #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translatedTransferMessage(line)));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
         #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
 }
 
@@ -1554,17 +1554,17 @@ void WiTools::transferWBFSToImage_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translatedTransferMessage(line));
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
         #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translatedTransferMessage(line)));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
         #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
     else if (line.contains("disc extracted.") || line.contains("discs extracted.")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
 }
 
@@ -1686,14 +1686,14 @@ void WiTools::extractWBFS_readyReadStandardOutput() {
         #endif
     }
     else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translatedTransferMessage(line));
+        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
         #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translatedTransferMessage(line)));
+            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
         #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translatedTransferMessage(line), Info);
+        emit newLogEntry(Common::translateTransferMessage(line), Info);
     }
 }
 

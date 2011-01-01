@@ -293,7 +293,7 @@ QString Common::calculateSize(const QString size) {
     return calculateSize(size.toDouble());
 }
 
-QString Common::translatedTransferMessage(QString str) {
+QString Common::translateTransferMessage(QString str) {
     if (str.contains("copied")) {
         str.replace("copied", tr("copied"));
     }
