@@ -47,10 +47,6 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 
     #ifdef Q_OS_MACX
         setMacOSXStyle();
-        settings->setMacOSXStyle();
-        coverViewDialog->setMacOSXStyle();
-        wbfsDialog->setMacOSXStyle();
-        wiibafudialog->setMacOSXStyle();
     #endif
 
     if (!WiiBaFuSettings.value("Main/LogFile", QVariant("")).toString().isEmpty()) {

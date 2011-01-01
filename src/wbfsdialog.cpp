@@ -23,6 +23,10 @@
 
 WBFSDialog::WBFSDialog(QWidget *parent) : QDialog(parent), ui(new Ui::WBFSDialog) {
     ui->setupUi(this);
+
+    #ifdef Q_OS_MACX
+        setMacOSXStyle();
+    #endif
 }
 
 void WBFSDialog::on_pushButton_Open_clicked() {

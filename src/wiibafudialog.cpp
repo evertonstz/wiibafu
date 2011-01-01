@@ -25,6 +25,10 @@
 
 WiiBaFuDialog::WiiBaFuDialog(QWidget *parent) : QDialog(parent), ui(new Ui::WiiBaFuDialog) {
     ui->setupUi(this);
+
+    #ifdef Q_OS_MACX
+        setMacOSXStyle();
+    #endif
 }
 
 void WiiBaFuDialog::on_pushButton_Open_clicked() {

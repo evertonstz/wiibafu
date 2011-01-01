@@ -26,6 +26,10 @@ CoverViewDialog::CoverViewDialog(QWidget *parent) : QDialog(parent), ui(new Ui::
     this->setWindowFlags(Qt::Dialog | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
 
     connect(this, SIGNAL(finished(int)), this, SLOT(finished(int)));
+
+    #ifdef Q_OS_MACX
+        setMacOSXStyle();
+    #endif
 }
 
 void CoverViewDialog::setCover(const QImage cover, const QString id) {

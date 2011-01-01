@@ -27,6 +27,7 @@ Settings::Settings(QWidget *parent) : QDialog(parent), ui(new Ui::Settings) {
     load();
 
     #ifdef Q_OS_MACX
+        setMacOSXStyle();
         ui->main_label_MacOSXStyle->setEnabled(true);
         ui->main_radioButton_MacOSXStyle_Aqua->setEnabled(true);
         ui->main_radioButton_MacOSXStyle_BrushedMetal->setEnabled(true);
