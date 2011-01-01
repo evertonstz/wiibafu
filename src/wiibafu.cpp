@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2010 Kai Heitkamp                                       *
+ *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
  *   dynup@ymail.com | wiibafu.codeplex.com                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -1398,7 +1398,7 @@ void WiiBaFu::on_menuHelp_About_triggered() {
     QMessageBox::about(this, tr("About Wii Backup Fusion"),
         QString("<h2>Wii Backup Fusion %1</h2>").arg(QCoreApplication::applicationVersion()) +
         tr("<p><b><i>The complete and simply to use backup solution for Wii games</b></i>"
-        "<p>Copyright &copy; 2010 Kai Heitkamp"
+        "<p>Copyright &copy; 2010 - 2011 Kai Heitkamp"
         "<p><a href='mailto:dynup<dynup@ymail.com>?subject=WiiBaFu%20feedback'>dynup@ymail.com</a>"
         " | <a href='http://wiibafu.codeplex.com'>wiibafu.codeplex.com</a>"
         "<p><font color='red'>I don't support piracy! If you copy games with this software,"

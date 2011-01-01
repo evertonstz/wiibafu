@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2010 Kai Heitkamp                                       *
+ *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
  *   dynup@ymail.com | wiibafu.codeplex.com                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
