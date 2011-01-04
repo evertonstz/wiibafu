@@ -160,7 +160,15 @@ void Common::updateTitles() {
     bool error = false;
     QString wiiTDBUrl = "http://wiitdb.com/titles.txt?LANG=";
     QString titlesPath = wiTools->witTitlesPath();
-    QString fileName = titlesPath.left(titlesPath.lastIndexOf("titles") + 6);
+    if (titlesPath.contains("witTitles:")) {
+        if (!WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString().isEmpty() && !WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString().contains(DEFAULT_TITLES_PATH)) {
+            titlesPath = WiiBaFuSettings.value("WIT/PathToTitles").toString();
+        }
+        else {
+            titlesPath = DEFAULT_TITLES_PATH;
+        }
+    }
+    QString fileName = titlesPath.append("/titles");
 
     for (int i = 0; i < 16; i++) {
         #ifdef Q_OS_MACX
