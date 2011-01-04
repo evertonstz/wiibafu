@@ -2,7 +2,7 @@ HEADERS         += src/global.h src/wiibafu.h src/wiibafudialog.h src/witools.h 
 SOURCES         += src/main.cpp src/wiibafu.cpp src/wiibafudialog.cpp src/witools.cpp src/common.cpp src/settings.cpp src/coverviewdialog.cpp src/wbfsdialog.cpp
 FORMS           += resources/ui/wiibafu.ui resources/ui/wiibafudialog.ui resources/ui/settings.ui resources/ui/coverviewdialog.ui resources/ui/wbfsdialog.ui
 RESOURCES       += resources/wiibafu.qrc
-TRANSLATIONS    += resources/locale/german.ts resources/locale/french.ts resources/locale/norwegian.ts
+TRANSLATIONS    += resources/locale/english.ts resources/locale/german.ts resources/locale/french.ts resources/locale/norwegian.ts
 
 TEMPLATE         = app
 TARGET           = WiiBaFu

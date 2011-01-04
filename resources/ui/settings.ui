@@ -449,19 +449,36 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
+           <layout class="QGridLayout" name="gridLayout_13">
+            <item row="0" column="0">
              <widget class="QLabel" name="label_4">
               <property name="text">
                <string>Path to WIT:</string>
               </property>
              </widget>
             </item>
-            <item>
+            <item row="0" column="1">
              <widget class="QLineEdit" name="wit_lineEdit_PathToWIT"/>
             </item>
-            <item>
+            <item row="0" column="2">
              <widget class="QPushButton" name="wit_pushButton_PathToWITOpen">
+              <property name="text">
+               <string>Open</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Path to titles:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="wit_lineEdit_PathToTitles"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="wit_pushButton_PathToTitlesOpen">
               <property name="text">
                <string>Open</string>
               </property>

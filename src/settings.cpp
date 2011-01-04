@@ -20,6 +20,7 @@
 
 #include "settings.h"
 #include "ui_settings.h"
+#include "global.h"
 
 Settings::Settings(QWidget *parent) : QDialog(parent), ui(new Ui::Settings) {
     ui->setupUi(this);
@@ -69,6 +70,23 @@ void Settings::on_wit_pushButton_PathToWITOpen_clicked() {
 
     if (!witPath.isEmpty()) {
         ui->wit_lineEdit_PathToWIT->setText(witPath);
+    }
+}
+
+void Settings::on_wit_pushButton_PathToTitlesOpen_clicked() {
+    QString path;
+
+    if (!ui->wit_lineEdit_PathToTitles->text().isEmpty()) {
+        path = ui->wit_lineEdit_PathToTitles->text();
+    }
+    else {
+        path = QDir::homePath();
+    }
+
+    QString titlesPath = QFileDialog::getExistingDirectory(this, tr("Open path to titles"), path, QFileDialog::ShowDirsOnly);
+
+    if (!titlesPath.isEmpty()) {
+        ui->wit_lineEdit_PathToTitles->setText(titlesPath);
     }
 }
 
@@ -165,7 +183,14 @@ void Settings::load() {
         ui->main_radioButton_MacOSXStyle_BrushedMetal->setChecked(true);
     }
 
-    ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(QDir::currentPath().append("/wit"))).toString());
+    #ifdef Q_OS_WIN32
+        ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(DefaultWin32WitPath)).toString());
+        ui->wit_lineEdit_PathToTitles->setText(WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DefaultWin32TitlesPath)).toString());
+    #else
+        ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(DefaultWitPath)).toString());
+        ui->wit_lineEdit_PathToTitles->setText(WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DefaultTitlesPath)).toString());
+    #endif
+
     ui->wit_checkBox_Auto->setChecked(WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool());
     ui->wit_lineEdit_WBFSPath->setText(WiiBaFuSettings.value("WIT/WBFSPath", QVariant("")).toString());
     ui->wit_lineEdit_DVDDrivePath->setText(WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString());
@@ -254,6 +279,7 @@ void Settings::save() {
     WiiBaFuSettings.setValue("Main/MacOSXStyle", macOSXStyle());
 
     WiiBaFuSettings.setValue("WIT/PathToWIT", ui->wit_lineEdit_PathToWIT->text());
+    WiiBaFuSettings.setValue("WIT/PathToTitles", ui->wit_lineEdit_PathToTitles->text());
     WiiBaFuSettings.setValue("WIT/Auto", ui->wit_checkBox_Auto->checkState());
     WiiBaFuSettings.setValue("WIT/WBFSPath", ui->wit_lineEdit_WBFSPath->text());
     WiiBaFuSettings.setValue("WIT/DVDDrivePath", ui->wit_lineEdit_DVDDrivePath->text());
@@ -345,7 +371,13 @@ void Settings::restoreDefaults(const int index) {
                 ui->main_radioButton_MacOSXStyle_BrushedMetal->setChecked(false);
                 break;
         case 1: // WIT
-                ui->wit_lineEdit_PathToWIT->setText(QDir::currentPath().append("/wit"));
+                #ifdef Q_OS_WIN32
+                    ui->wit_lineEdit_PathToWIT->setText(DefaultWin32WitPath);
+                    ui->wit_lineEdit_PathToTitles->setText(DefaultWin32TitlesPath);
+                #else
+                    ui->wit_lineEdit_PathToWIT->setText(DefaultWitPath);
+                    ui->wit_lineEdit_PathToTitles->setText(DefaultTitlesPath);
+                #endif
                 ui->wit_checkBox_Auto->setChecked(true);
                 ui->wit_lineEdit_DVDDrivePath->setText("/cdrom");
                 ui->wit_spinBox_RecurseDepth->setValue(10);

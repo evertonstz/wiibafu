@@ -2047,34 +2047,23 @@ void WiTools::cancelVerifying() {
 }
 
 void WiTools::setWit() {
-    if (WiiBaFuSettings.value("WIT/PathToWIT", QVariant("")).toString().isEmpty()) {
-        #ifdef Q_OS_LINUX
-            QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(":"));
-            wit = QFile("wit:wit").fileName();
-            wwt = QFile("wit:wwt").fileName();
-        #endif
+    QString defaultWitPath;
 
-        #ifdef Q_OS_WIN32
-            QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(";"));
-            wit = QFile("wit:wit.exe").fileName();
-            wwt = QFile("wit:wwt.exe").fileName();
-        #endif
+    #ifdef Q_OS_WIN32
+        defaultWitPath = DefaultWin32WitPath;
+    #else
+        defaultWitPath = DefaultWitPath;
+    #endif
 
-        #ifdef Q_OS_MACX
-            QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":"));
-            wit = QFile("wit:wit").fileName();
-            wwt = QFile("wit:wwt").fileName();
-        #endif
-    }
-    else {
-        #ifdef Q_OS_WIN32
-            wit = WiiBaFuSettings.value("WIT/PathToWIT").toString().append("/wit.exe");
-            wwt = WiiBaFuSettings.value("WIT/PathToWIT").toString().append("/wwt.exe");
-        #else
-            wit = WiiBaFuSettings.value("WIT/PathToWIT").toString().append("/wit");
-            wwt = WiiBaFuSettings.value("WIT/PathToWIT").toString().append("/wwt");
-        #endif
-    }
+    QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WiiBaFuSettings.value("WIT/PathToWIT", QVariant(defaultWitPath)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":"));
+
+    #ifdef Q_OS_WIN32
+        wit = QFile("wit:wit.exe").fileName();
+        wwt = QFile("wit:wwt.exe").fileName();
+    #else
+        wit = QFile("wit:wit").fileName();
+        wwt = QFile("wit:wwt").fileName();
+    #endif
 }
 
 QString WiTools::witVersion() {
@@ -2143,7 +2132,7 @@ QString WiTools::witTitlesPath() {
                  break;
         case 9:  titles = "titles-dk";
                  break;
-        case 10:  titles = "titles-no";
+        case 10: titles = "titles-no";
                  break;
         case 11: titles = "titles-fi";
                  break;
@@ -2160,23 +2149,15 @@ QString WiTools::witTitlesPath() {
         default: titles = "titles";
     }
 
-    if (WiiBaFuSettings.value("WIT/PathToWIT", QVariant("")).toString().isEmpty()) {
-        #ifdef Q_OS_LINUX
-            QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(":") << "/usr/local/share/wit");
-            return QFile(QString("witTitles:%1.txt").arg(titles)).fileName();
-        #endif
+    QString defaultTitlesPath;
 
-        #ifdef Q_OS_WIN32
-            QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << QString(getenv("PATH")).split(";"));
-            return QFile(QString("witTitles:%1.txt").arg(titles)).fileName();
-        #endif
+    #ifdef Q_OS_WIN32
+        defaultTitlesPath = DefaultWin32TitlesPath;
+    #else
+        defaultTitlesPath = DefaultTitlesPath;
+    #endif
 
-        #ifdef Q_OS_MACX
-            QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":") << QString(getenv("WIT-TITLES")).split(":") << "/usr/local/share/wit");
-            return QFile(QString("witTitles:%1.txt").arg(titles)).fileName();
-        #endif
-    }
-    else {
-        return WiiBaFuSettings.value("WIT/PathToWIT").toString().append(QString("/%1.txt").arg(titles));
-    }
+    QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WiiBaFuSettings.value("WIT/PathToTitles", QVariant(defaultTitlesPath)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":") << QString(getenv("WIT-TITLES")).split(":"));
+
+    return QFile(QString("witTitles:%1.txt").arg(titles)).fileName();
 }

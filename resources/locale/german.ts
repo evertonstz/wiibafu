@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="de_DE">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>Common</name>
     <message>
@@ -129,12 +130,12 @@
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../src/coverviewdialog.cpp" line="38"/>
+        <location filename="../../src/coverviewdialog.cpp" line="42"/>
         <source>Save game cover</source>
         <translation>Spielecover speichern</translation>
     </message>
     <message>
-        <location filename="../../src/coverviewdialog.cpp" line="38"/>
+        <location filename="../../src/coverviewdialog.cpp" line="42"/>
         <source>Image file *.png</source>
         <translation>Bilddatei *png</translation>
     </message>
@@ -383,29 +384,30 @@
     </message>
     <message>
         <location filename="../ui/settings.ui" line="466"/>
-        <location filename="../ui/settings.ui" line="514"/>
-        <location filename="../ui/settings.ui" line="562"/>
+        <location filename="../ui/settings.ui" line="483"/>
+        <location filename="../ui/settings.ui" line="531"/>
+        <location filename="../ui/settings.ui" line="579"/>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="482"/>
+        <location filename="../ui/settings.ui" line="499"/>
         <source>Search WBFS partitions using &apos;/proc/partitions&apos; or searching hard disks in &apos;/dev/&apos;</source>
         <translation>Suche WBFS Partitionen in /proc/partitions oder suche Festplatten in /dev/</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="485"/>
+        <location filename="../ui/settings.ui" line="502"/>
         <source>Auto (search for WBFS partitions/hdds on system)</source>
         <translation>Auto (Suche WBFS Partitionen/Festplatten auf dem System)</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="500"/>
+        <location filename="../ui/settings.ui" line="517"/>
         <source>Path to WBFS (partition or file):</source>
         <translation>Pfad zu WBFS (Partition oder Datei):</translation>
     </message>
     <message>
         <location filename="../ui/settings.ui" line="424"/>
-        <location filename="../ui/settings.ui" line="521"/>
+        <location filename="../ui/settings.ui" line="538"/>
         <source>Open file</source>
         <translation>Öffne Datei</translation>
     </message>
@@ -435,264 +437,269 @@
         <translation>Möchten Sie keine Logdatei, lassen Sie dieses Feld leer!</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="545"/>
+        <location filename="../ui/settings.ui" line="473"/>
+        <source>Path to titles:</source>
+        <translation>Pfad zu Titel:</translation>
+    </message>
+    <message>
+        <location filename="../ui/settings.ui" line="562"/>
         <source>Path to DVD drive:</source>
         <translation>Pfad zum DVD-Laufwerk:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="580"/>
+        <location filename="../ui/settings.ui" line="597"/>
         <source>Recurse depth:</source>
         <translation>Tiefe für Rekursivsuche:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="587"/>
+        <location filename="../ui/settings.ui" line="604"/>
         <source>Set the maximum recurse depth for Files/Load. The default search depth is 10.</source>
         <translation>Setzt die maximale Rekursivtiefe für Datei/Laden. Die Standradtiefe ist 10.</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="619"/>
+        <location filename="../ui/settings.ui" line="636"/>
         <source>Visual appearances:</source>
         <translation>Visuelles Aussehen:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="625"/>
+        <location filename="../ui/settings.ui" line="642"/>
         <source>Show grid</source>
         <translation>Zeige Gitter</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="635"/>
+        <location filename="../ui/settings.ui" line="652"/>
         <source>Alternating row colors</source>
         <translation>Wechselnde Reihenfarben</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="642"/>
+        <location filename="../ui/settings.ui" line="659"/>
         <source>Tools tips for Name or Title, if one of this columns hidden</source>
         <translation>Tool-Tips für Name oder Titel, wenn einer der Spalten versteckt ist</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="645"/>
+        <location filename="../ui/settings.ui" line="662"/>
         <source>Tool tips</source>
         <translation>Tool-Tips</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="658"/>
+        <location filename="../ui/settings.ui" line="675"/>
         <source>Scroll mode:</source>
         <translation>Verschiebungsmodus:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="664"/>
+        <location filename="../ui/settings.ui" line="681"/>
         <source>Scroll per pixel</source>
         <translation>Verschieben pro Pixel</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="671"/>
+        <location filename="../ui/settings.ui" line="688"/>
         <source>Scroll per item</source>
         <translation>Verschieben pro Eintrag</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="684"/>
+        <location filename="../ui/settings.ui" line="701"/>
         <source>Resize mode:</source>
         <translation>Größenmodus:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="690"/>
+        <location filename="../ui/settings.ui" line="707"/>
         <source>Interactive</source>
         <translation>Interaktiv</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="697"/>
+        <location filename="../ui/settings.ui" line="714"/>
         <source>Stretch</source>
         <translation>Strecken</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="704"/>
+        <location filename="../ui/settings.ui" line="721"/>
         <source>Resize to contents</source>
         <translation>Dem Inhalt anpassen</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="711"/>
+        <location filename="../ui/settings.ui" line="728"/>
         <source>Fixed</source>
         <translation>Feste Größe</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="721"/>
+        <location filename="../ui/settings.ui" line="738"/>
         <source>Selection mode:</source>
         <translation>Selektiermodus:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="731"/>
+        <location filename="../ui/settings.ui" line="748"/>
         <source>No selection</source>
         <translation>Keine Selektierung</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="736"/>
+        <location filename="../ui/settings.ui" line="753"/>
         <source>Single selection</source>
         <translation>Einzelne Selektierung</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="741"/>
+        <location filename="../ui/settings.ui" line="758"/>
         <source>Multi selection</source>
         <translation>Multi Selektierung</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="746"/>
+        <location filename="../ui/settings.ui" line="763"/>
         <source>Extended selection</source>
         <translation>Erweiterte Auswahl</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="751"/>
+        <location filename="../ui/settings.ui" line="768"/>
         <source>Contiguous selection</source>
         <translation>Weiterführende Selektierung</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="782"/>
+        <location filename="../ui/settings.ui" line="799"/>
         <source>Files game list columns:</source>
         <translation>Dateien Spielelistespalten:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="788"/>
-        <location filename="../ui/settings.ui" line="874"/>
+        <location filename="../ui/settings.ui" line="805"/>
+        <location filename="../ui/settings.ui" line="891"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="795"/>
-        <location filename="../ui/settings.ui" line="902"/>
+        <location filename="../ui/settings.ui" line="812"/>
+        <location filename="../ui/settings.ui" line="919"/>
         <source>Size</source>
         <translation>Größe ändern</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="802"/>
-        <location filename="../ui/settings.ui" line="937"/>
+        <location filename="../ui/settings.ui" line="819"/>
+        <location filename="../ui/settings.ui" line="954"/>
         <source>Last access</source>
         <translation>Letzter Zugriff</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="809"/>
-        <location filename="../ui/settings.ui" line="881"/>
+        <location filename="../ui/settings.ui" line="826"/>
+        <location filename="../ui/settings.ui" line="898"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="816"/>
-        <location filename="../ui/settings.ui" line="916"/>
+        <location filename="../ui/settings.ui" line="833"/>
+        <location filename="../ui/settings.ui" line="933"/>
         <source>Insertion</source>
         <translation>Eingefügt</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="823"/>
-        <location filename="../ui/settings.ui" line="944"/>
+        <location filename="../ui/settings.ui" line="840"/>
+        <location filename="../ui/settings.ui" line="961"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="830"/>
-        <location filename="../ui/settings.ui" line="888"/>
+        <location filename="../ui/settings.ui" line="847"/>
+        <location filename="../ui/settings.ui" line="905"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="837"/>
-        <location filename="../ui/settings.ui" line="923"/>
+        <location filename="../ui/settings.ui" line="854"/>
+        <location filename="../ui/settings.ui" line="940"/>
         <source>Last modification</source>
         <translation>Letzte Modifizierung</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="844"/>
-        <location filename="../ui/settings.ui" line="958"/>
+        <location filename="../ui/settings.ui" line="861"/>
+        <location filename="../ui/settings.ui" line="975"/>
         <source>Source</source>
         <translation>Quelle</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="851"/>
-        <location filename="../ui/settings.ui" line="895"/>
+        <location filename="../ui/settings.ui" line="868"/>
+        <location filename="../ui/settings.ui" line="912"/>
         <source>Region</source>
         <translation>Region</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="858"/>
-        <location filename="../ui/settings.ui" line="930"/>
+        <location filename="../ui/settings.ui" line="875"/>
+        <location filename="../ui/settings.ui" line="947"/>
         <source>Last status change</source>
         <translation>Letzte Statusänderung</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="868"/>
+        <location filename="../ui/settings.ui" line="885"/>
         <source>WBFS game list columns:</source>
         <translation>WBFS Spielelistespalten:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="909"/>
+        <location filename="../ui/settings.ui" line="926"/>
         <source>Used blocks</source>
         <translation>Benutze Blöcke</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="951"/>
+        <location filename="../ui/settings.ui" line="968"/>
         <source>WBFS-Slot</source>
         <translation>WBFS Slot</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="972"/>
+        <location filename="../ui/settings.ui" line="989"/>
         <source>To WBFS transfer options:</source>
         <translation>Zu WBFS Transfer Optionen:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="978"/>
-        <location filename="../ui/settings.ui" line="1065"/>
-        <location filename="../ui/settings.ui" line="1287"/>
+        <location filename="../ui/settings.ui" line="995"/>
+        <location filename="../ui/settings.ui" line="1082"/>
+        <location filename="../ui/settings.ui" line="1304"/>
         <source>Force</source>
         <translation>Erzwingen</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="985"/>
+        <location filename="../ui/settings.ui" line="1002"/>
         <source>Newer</source>
         <translation>Neuer</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="992"/>
-        <location filename="../ui/settings.ui" line="1025"/>
-        <location filename="../ui/settings.ui" line="1072"/>
-        <location filename="../ui/settings.ui" line="1183"/>
-        <location filename="../ui/settings.ui" line="1294"/>
+        <location filename="../ui/settings.ui" line="1009"/>
+        <location filename="../ui/settings.ui" line="1042"/>
+        <location filename="../ui/settings.ui" line="1089"/>
+        <location filename="../ui/settings.ui" line="1200"/>
+        <location filename="../ui/settings.ui" line="1311"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="999"/>
-        <location filename="../ui/settings.ui" line="1032"/>
-        <location filename="../ui/settings.ui" line="1079"/>
-        <location filename="../ui/settings.ui" line="1149"/>
+        <location filename="../ui/settings.ui" line="1016"/>
+        <location filename="../ui/settings.ui" line="1049"/>
+        <location filename="../ui/settings.ui" line="1096"/>
+        <location filename="../ui/settings.ui" line="1166"/>
         <source>Update</source>
         <translation>Update</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1006"/>
-        <location filename="../ui/settings.ui" line="1039"/>
-        <location filename="../ui/settings.ui" line="1086"/>
+        <location filename="../ui/settings.ui" line="1023"/>
+        <location filename="../ui/settings.ui" line="1056"/>
+        <location filename="../ui/settings.ui" line="1103"/>
         <source>Overwrite</source>
         <translation>Überschreiben</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1016"/>
+        <location filename="../ui/settings.ui" line="1033"/>
         <source>To image / file system transfer options:</source>
         <translation>Zu Abbild / Dateisystem Transfer Optionen:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1022"/>
+        <location filename="../ui/settings.ui" line="1039"/>
         <source>Use this option is unsure!</source>
         <translation>Verwenden dieser Option ist unsicher!</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1046"/>
+        <location filename="../ui/settings.ui" line="1063"/>
         <source>Diff images</source>
         <translation>Abbilder vergleichen</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1059"/>
+        <location filename="../ui/settings.ui" line="1076"/>
         <source>From WBFS transfer options:</source>
         <translation>Von WBFS Transfer Optionen:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1096"/>
+        <location filename="../ui/settings.ui" line="1113"/>
         <source>Scrubbing is a method to remove unneeded data from Wii ISO discs
 and replace the data with the constant byte value &apos;0x00&apos;. This constant
 value is a good object for compressing. Wii Backup Fusion The file
@@ -705,166 +712,171 @@ der Lage, eine effizente Komprimierung mittels des &apos;Bzip2&apos; oder &apos;
 Komprimierungsalgorithmus durchzuführen.</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1103"/>
+        <location filename="../ui/settings.ui" line="1120"/>
         <source>Scrubbing options:</source>
         <translation>Scrubbing Optionen:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1109"/>
+        <location filename="../ui/settings.ui" line="1126"/>
         <source>Allow data (game) partition</source>
         <translation>Erlaube Daten (Spiele) Partition</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1112"/>
+        <location filename="../ui/settings.ui" line="1129"/>
         <source>Data</source>
         <translation>Daten</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1122"/>
+        <location filename="../ui/settings.ui" line="1139"/>
         <source>Allow channel partition</source>
         <translation>Erlaube Kanal-Partition</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1125"/>
+        <location filename="../ui/settings.ui" line="1142"/>
         <source>Channel</source>
         <translation>Kanal</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1135"/>
+        <location filename="../ui/settings.ui" line="1152"/>
         <source>Ignore all other settings and copy the whole disc.
 This disables scrubbing at all!</source>
         <translation>Ignoriert alle anderen Einstellungen und kopiert die gesamte Disk.
 Dies deaktiviert scrubbing!</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1139"/>
+        <location filename="../ui/settings.ui" line="1156"/>
         <source>Raw</source>
         <translation>Roh</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1146"/>
+        <location filename="../ui/settings.ui" line="1163"/>
         <source>Allow update partition</source>
         <translation>Erlaube Update-Partition</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1159"/>
+        <location filename="../ui/settings.ui" line="1176"/>
         <source>Don&apos;t analyse the partition filesystems to find unused sectors.
 The whole partition will be used! &apos;Whole&apos; is ignored for overlayed partitions!</source>
         <translation>Analysiert nicht die Partition Dateisystem um unbenutzte Sektoren zu finden.
 Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlagernde Partitionen ignoriert!</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1163"/>
+        <location filename="../ui/settings.ui" line="1180"/>
         <source>Whole</source>
         <translation>Vollständig</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1177"/>
+        <location filename="../ui/settings.ui" line="1194"/>
         <source>Check WBFS options:</source>
         <translation>Prüfe WBFS Optionen:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1190"/>
+        <location filename="../ui/settings.ui" line="1207"/>
         <source>Repair</source>
         <translation>Reparieren</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1203"/>
+        <location filename="../ui/settings.ui" line="1220"/>
         <source>Repair WBFS options:</source>
         <translation>Reparier WBFS Optionen:</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1209"/>
+        <location filename="../ui/settings.ui" line="1226"/>
         <source>Remove discs with free marked blocks</source>
         <translation>Entfernt Disks mit frei markierten Blöcken</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1212"/>
+        <location filename="../ui/settings.ui" line="1229"/>
         <source>RM-FREE</source>
         <translation>RM-FREE</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1219"/>
+        <location filename="../ui/settings.ui" line="1236"/>
         <source>Remove discs with invalid blocks</source>
         <translation>Entfernt Disks mit unzulässigen Blöcken</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1222"/>
+        <location filename="../ui/settings.ui" line="1239"/>
         <source>RM-INVALID</source>
         <translation>RM-INVALID</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1229"/>
+        <location filename="../ui/settings.ui" line="1246"/>
         <source>Remove discs with overlaped blocks</source>
         <translation>Entfernt Disks mit überlappenden Blöcken</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1232"/>
+        <location filename="../ui/settings.ui" line="1249"/>
         <source>RM-OVERLAP</source>
         <translation>RM-OVERLAp</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1239"/>
+        <location filename="../ui/settings.ui" line="1256"/>
         <source>Remove discs without any valid blocks</source>
         <translation>Entfernt Disks ohne irgendwelche gültige Blöcke</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1242"/>
+        <location filename="../ui/settings.ui" line="1259"/>
         <source>RM-EMPTY</source>
         <translation>RM-EMPTY</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1249"/>
+        <location filename="../ui/settings.ui" line="1266"/>
         <source>Repair free blocks table</source>
         <translation>Repariert Freie Blöcke Tabelle</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1252"/>
+        <location filename="../ui/settings.ui" line="1269"/>
         <source>FBT</source>
         <translation>FBT</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1262"/>
+        <location filename="../ui/settings.ui" line="1279"/>
         <source>Repair invalid inode infos (time stamps etc.)</source>
         <translation>Repariert unzulässige Inode Infos (Zeitstempel etc.)</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1265"/>
+        <location filename="../ui/settings.ui" line="1282"/>
         <source>INODES</source>
         <translation>INODES</translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1281"/>
+        <location filename="../ui/settings.ui" line="1298"/>
         <source>Remove from WBFS options:</source>
         <translation>Löschen von WBFS Optionen:</translation>
     </message>
     <message>
-        <location filename="../../src/settings.cpp" line="50"/>
+        <location filename="../../src/settings.cpp" line="52"/>
         <source>Save log file</source>
         <translation>Log als Datei speichern</translation>
     </message>
     <message>
-        <location filename="../../src/settings.cpp" line="50"/>
+        <location filename="../../src/settings.cpp" line="52"/>
         <source>WiiBaFu log file (*.log)</source>
         <translation>WiiBaFu Logdatei (*log)</translation>
     </message>
     <message>
-        <location filename="../../src/settings.cpp" line="67"/>
+        <location filename="../../src/settings.cpp" line="69"/>
         <source>Open path to WIT</source>
         <translation>Öffne Pfad zu WIT</translation>
     </message>
     <message>
-        <location filename="../../src/settings.cpp" line="84"/>
+        <location filename="../../src/settings.cpp" line="86"/>
+        <source>Open path to titles</source>
+        <translation>Öffne Pfad zu Titel</translation>
+    </message>
+    <message>
+        <location filename="../../src/settings.cpp" line="103"/>
         <source>Open WBFS file</source>
         <translation>Öffne WBFS Datei</translation>
     </message>
     <message>
-        <location filename="../../src/settings.cpp" line="101"/>
+        <location filename="../../src/settings.cpp" line="120"/>
         <source>Open WBFS directory</source>
         <translation>Öffne WBFS Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../../src/settings.cpp" line="118"/>
+        <location filename="../../src/settings.cpp" line="137"/>
         <source>Open DVD path</source>
         <translation>Öffne DVD Pfad</translation>
     </message>
@@ -922,12 +934,12 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <translation>Test</translation>
     </message>
     <message>
-        <location filename="../../src/wbfsdialog.cpp" line="29"/>
+        <location filename="../../src/wbfsdialog.cpp" line="33"/>
         <source>Create WBFS file</source>
         <translation>WBFS Datei erzeugen</translation>
     </message>
     <message>
-        <location filename="../../src/wbfsdialog.cpp" line="29"/>
+        <location filename="../../src/wbfsdialog.cpp" line="33"/>
         <source>WBFS file *.wbfs</source>
         <translation>WBFS Datei *wbfs</translation>
     </message>
@@ -952,8 +964,8 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="49"/>
         <location filename="../../src/witools.cpp" line="227"/>
         <location filename="../../src/witools.cpp" line="228"/>
-        <location filename="../../src/witools.cpp" line="2086"/>
-        <location filename="../../src/witools.cpp" line="2087"/>
+        <location filename="../../src/witools.cpp" line="2075"/>
+        <location filename="../../src/witools.cpp" line="2076"/>
         <source>Wiimms ISO Tool not found!</source>
         <translation>Wiimms ISO Tool nicht gefunden!</translation>
     </message>
@@ -1187,8 +1199,8 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1858"/>
         <location filename="../../src/witools.cpp" line="1897"/>
         <location filename="../../src/witools.cpp" line="1898"/>
-        <location filename="../../src/witools.cpp" line="2107"/>
-        <location filename="../../src/witools.cpp" line="2108"/>
+        <location filename="../../src/witools.cpp" line="2096"/>
+        <location filename="../../src/witools.cpp" line="2097"/>
         <source>Wiimms WBFS Tool not found!</source>
         <translation>Wimms WBFS Tool nicht gefunden!</translation>
     </message>
@@ -1584,9 +1596,9 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../ui/wiibafu.ui" line="62"/>
         <location filename="../ui/wiibafu.ui" line="228"/>
         <location filename="../ui/wiibafu.ui" line="313"/>
-        <location filename="../../src/wiibafu.cpp" line="752"/>
-        <location filename="../../src/wiibafu.cpp" line="759"/>
-        <location filename="../../src/wiibafu.cpp" line="768"/>
+        <location filename="../../src/wiibafu.cpp" line="748"/>
+        <location filename="../../src/wiibafu.cpp" line="755"/>
+        <location filename="../../src/wiibafu.cpp" line="764"/>
         <source>&amp;Load</source>
         <translation>&amp;Laden</translation>
     </message>
@@ -1594,9 +1606,9 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../ui/wiibafu.ui" line="65"/>
         <location filename="../ui/wiibafu.ui" line="231"/>
         <location filename="../ui/wiibafu.ui" line="316"/>
-        <location filename="../../src/wiibafu.cpp" line="753"/>
-        <location filename="../../src/wiibafu.cpp" line="760"/>
-        <location filename="../../src/wiibafu.cpp" line="769"/>
+        <location filename="../../src/wiibafu.cpp" line="749"/>
+        <location filename="../../src/wiibafu.cpp" line="756"/>
+        <location filename="../../src/wiibafu.cpp" line="765"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
@@ -1609,22 +1621,22 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     <message>
         <location filename="../ui/wiibafu.ui" line="79"/>
         <location filename="../ui/wiibafu.ui" line="238"/>
-        <location filename="../../src/wiibafu.cpp" line="808"/>
-        <location filename="../../src/wiibafu.cpp" line="824"/>
+        <location filename="../../src/wiibafu.cpp" line="804"/>
+        <location filename="../../src/wiibafu.cpp" line="820"/>
         <source>Transfer to &amp;WBFS</source>
         <translation>Transfer zu &amp;WBFS</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="86"/>
         <location filename="../ui/wiibafu.ui" line="245"/>
-        <location filename="../../src/wiibafu.cpp" line="812"/>
-        <location filename="../../src/wiibafu.cpp" line="828"/>
+        <location filename="../../src/wiibafu.cpp" line="808"/>
+        <location filename="../../src/wiibafu.cpp" line="824"/>
         <source>Transfer to &amp;image</source>
         <translation>Transfer zu A&amp;bbild</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="93"/>
-        <location filename="../../src/wiibafu.cpp" line="816"/>
+        <location filename="../../src/wiibafu.cpp" line="812"/>
         <source>E&amp;xtract image</source>
         <translation>Abbild e&amp;xtrahieren</translation>
     </message>
@@ -1642,8 +1654,8 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     <message>
         <location filename="../ui/wiibafu.ui" line="252"/>
         <location filename="../ui/wiibafu.ui" line="337"/>
-        <location filename="../../src/wiibafu.cpp" line="832"/>
-        <location filename="../../src/wiibafu.cpp" line="840"/>
+        <location filename="../../src/wiibafu.cpp" line="828"/>
+        <location filename="../../src/wiibafu.cpp" line="836"/>
         <source>E&amp;xtract</source>
         <translation>E&amp;xtrahieren</translation>
     </message>
@@ -1654,7 +1666,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="330"/>
-        <location filename="../../src/wiibafu.cpp" line="836"/>
+        <location filename="../../src/wiibafu.cpp" line="832"/>
         <source>&amp;Transfer</source>
         <translation>&amp;Transfer</translation>
     </message>
@@ -1982,7 +1994,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="1296"/>
-        <location filename="../../src/wiibafu.cpp" line="845"/>
+        <location filename="../../src/wiibafu.cpp" line="841"/>
         <source>&amp;Verify game</source>
         <translation>&amp;Überprüfe Spiel</translation>
     </message>
@@ -1997,181 +2009,181 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="63"/>
-        <location filename="../../src/wiibafu.cpp" line="754"/>
-        <location filename="../../src/wiibafu.cpp" line="799"/>
+        <location filename="../../src/wiibafu.cpp" line="59"/>
+        <location filename="../../src/wiibafu.cpp" line="750"/>
+        <location filename="../../src/wiibafu.cpp" line="795"/>
         <source>Ready.</source>
         <translation>Bereit.</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="65"/>
+        <location filename="../../src/wiibafu.cpp" line="61"/>
         <source>(%1) Wii Backup Fusion %2 started.</source>
         <translation>(%1) Wii Backup Fusion %2 gestartet.</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="71"/>
+        <location filename="../../src/wiibafu.cpp" line="67"/>
         <source>Titles not found!
 </source>
         <translation>Titel nicht gefunden!
 </translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="74"/>
+        <location filename="../../src/wiibafu.cpp" line="70"/>
         <source>Titles found in: %1
 </source>
         <translation>Titel gefunden in: %1
 </translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="258"/>
-        <location filename="../../src/wiibafu.cpp" line="259"/>
-        <location filename="../../src/wiibafu.cpp" line="746"/>
-        <location filename="../../src/wiibafu.cpp" line="793"/>
+        <location filename="../../src/wiibafu.cpp" line="254"/>
+        <location filename="../../src/wiibafu.cpp" line="255"/>
+        <location filename="../../src/wiibafu.cpp" line="742"/>
+        <location filename="../../src/wiibafu.cpp" line="789"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="258"/>
-        <location filename="../../src/wiibafu.cpp" line="259"/>
-        <location filename="../../src/wiibafu.cpp" line="746"/>
-        <location filename="../../src/wiibafu.cpp" line="793"/>
+        <location filename="../../src/wiibafu.cpp" line="254"/>
+        <location filename="../../src/wiibafu.cpp" line="255"/>
+        <location filename="../../src/wiibafu.cpp" line="742"/>
+        <location filename="../../src/wiibafu.cpp" line="789"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="303"/>
-        <location filename="../../src/wiibafu.cpp" line="326"/>
+        <location filename="../../src/wiibafu.cpp" line="299"/>
+        <location filename="../../src/wiibafu.cpp" line="322"/>
         <source>&amp;Cancel verifying</source>
         <translation>Überprüfung a&amp;bbrechen</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="330"/>
-        <location filename="../../src/wiibafu.cpp" line="331"/>
+        <location filename="../../src/wiibafu.cpp" line="326"/>
+        <location filename="../../src/wiibafu.cpp" line="327"/>
         <source>Verify error: No game selected!</source>
         <translation>Fehler beim Vergleichen: Kein Spiel ausgewählt!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="386"/>
-        <location filename="../../src/wiibafu.cpp" line="392"/>
+        <location filename="../../src/wiibafu.cpp" line="382"/>
+        <location filename="../../src/wiibafu.cpp" line="388"/>
         <source>&amp;Cancel loading</source>
         <translation>Laden a&amp;bbrechen</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="387"/>
+        <location filename="../../src/wiibafu.cpp" line="383"/>
         <source>Open directory</source>
         <translation>Verzeichnis öffnen</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="416"/>
-        <location filename="../../src/wiibafu.cpp" line="418"/>
-        <location filename="../../src/wiibafu.cpp" line="429"/>
-        <location filename="../../src/wiibafu.cpp" line="447"/>
-        <location filename="../../src/wiibafu.cpp" line="486"/>
-        <location filename="../../src/wiibafu.cpp" line="488"/>
-        <location filename="../../src/wiibafu.cpp" line="499"/>
-        <location filename="../../src/wiibafu.cpp" line="514"/>
-        <location filename="../../src/wiibafu.cpp" line="561"/>
-        <location filename="../../src/wiibafu.cpp" line="579"/>
+        <location filename="../../src/wiibafu.cpp" line="412"/>
+        <location filename="../../src/wiibafu.cpp" line="414"/>
+        <location filename="../../src/wiibafu.cpp" line="425"/>
+        <location filename="../../src/wiibafu.cpp" line="443"/>
+        <location filename="../../src/wiibafu.cpp" line="482"/>
+        <location filename="../../src/wiibafu.cpp" line="484"/>
+        <location filename="../../src/wiibafu.cpp" line="495"/>
+        <location filename="../../src/wiibafu.cpp" line="510"/>
+        <location filename="../../src/wiibafu.cpp" line="557"/>
+        <location filename="../../src/wiibafu.cpp" line="575"/>
         <source>&amp;Cancel transfering</source>
         <translation>Transfer a&amp;bbrechen</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="444"/>
-        <location filename="../../src/wiibafu.cpp" line="576"/>
+        <location filename="../../src/wiibafu.cpp" line="440"/>
+        <location filename="../../src/wiibafu.cpp" line="572"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="444"/>
-        <location filename="../../src/wiibafu.cpp" line="576"/>
+        <location filename="../../src/wiibafu.cpp" line="440"/>
+        <location filename="../../src/wiibafu.cpp" line="572"/>
         <source>The directory doesn&apos;t exists!</source>
         <translation>Das Verzeichnis existiert nicht!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="459"/>
-        <location filename="../../src/wiibafu.cpp" line="464"/>
-        <location filename="../../src/wiibafu.cpp" line="525"/>
-        <location filename="../../src/wiibafu.cpp" line="533"/>
-        <location filename="../../src/wiibafu.cpp" line="591"/>
-        <location filename="../../src/wiibafu.cpp" line="596"/>
+        <location filename="../../src/wiibafu.cpp" line="455"/>
+        <location filename="../../src/wiibafu.cpp" line="460"/>
+        <location filename="../../src/wiibafu.cpp" line="521"/>
+        <location filename="../../src/wiibafu.cpp" line="529"/>
+        <location filename="../../src/wiibafu.cpp" line="587"/>
+        <location filename="../../src/wiibafu.cpp" line="592"/>
         <source>&amp;Cancel extracting</source>
         <translation>Extrahierung a&amp;bbrechen</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="608"/>
+        <location filename="../../src/wiibafu.cpp" line="604"/>
         <source>Remove games</source>
         <translation>Spiele entfernen</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="608"/>
+        <location filename="../../src/wiibafu.cpp" line="604"/>
         <source>Are you sure that you want to delete the selected games?</source>
         <translation>Sind Sie sicher, dass Sie die ausgewählten Spiele löschen möchten?</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="620"/>
+        <location filename="../../src/wiibafu.cpp" line="616"/>
         <source>Check/Repair WBFS</source>
         <translation>WBFS überprüfen/reparieren</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="620"/>
+        <location filename="../../src/wiibafu.cpp" line="616"/>
         <source>Are you sure that you want to check/repair the wbfs?</source>
         <translation>Sind Sie sicher, dass Sie das WBFS überprüfen/reparieren möchten?</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="675"/>
+        <location filename="../../src/wiibafu.cpp" line="671"/>
         <source>Search log</source>
         <translation>Durchsuche Log</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="675"/>
+        <location filename="../../src/wiibafu.cpp" line="671"/>
         <source>Enter search string:</source>
         <translation>Eingabe Suchbegriff:</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="708"/>
+        <location filename="../../src/wiibafu.cpp" line="704"/>
         <source>Nothing found!</source>
         <translation>Nichts gefunden!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="715"/>
+        <location filename="../../src/wiibafu.cpp" line="711"/>
         <source>Save log file</source>
         <translation>Log als Datei speichern</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="715"/>
+        <location filename="../../src/wiibafu.cpp" line="711"/>
         <source>WiiBaFu log file (*.log)</source>
         <translation>WiiBaFu Logdatei (*log)</translation>
     </message>
     <message>
+        <location filename="../../src/wiibafu.cpp" line="726"/>
         <location filename="../../src/wiibafu.cpp" line="730"/>
-        <location filename="../../src/wiibafu.cpp" line="734"/>
         <source>ID (%1)</source>
         <translation>ID (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="740"/>
+        <location filename="../../src/wiibafu.cpp" line="736"/>
         <source>Files (%1)</source>
         <translation>Dateien (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="762"/>
+        <location filename="../../src/wiibafu.cpp" line="758"/>
         <source>Loading canceled!</source>
         <translation>Laden abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1091"/>
+        <location filename="../../src/wiibafu.cpp" line="1087"/>
         <source>WIT command line:
 %1</source>
         <translation>WIT Kommandozeile:
 %1</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1398"/>
+        <location filename="../../src/wiibafu.cpp" line="1394"/>
         <source>About Wii Backup Fusion</source>
         <translation>Über Wii Backup Fusion</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1400"/>
+        <location filename="../../src/wiibafu.cpp" line="1396"/>
         <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit&lt;br&gt;and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation! Thanks to Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;&lt;i&gt;Die komplette und einfach zu bedienende Backup-Lösung für Wii Spiele&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;Ich unterstütze keine Piraterie! Wenn Sie diese Software nutzen,&lt;br&gt;müssen Sie das Original besitzen und es ist nur für den privaten Gebrauch!&lt;/font color&gt;&lt;p&gt;Dickes dankeschön an die Trolle von Trolltech Norwegen für ihr exellentes Qt Toolkit und an die Jungs bei Nokia für die Weiterführung, danke an Dirk Clemens (Wiimm) für seine großartigen ISO Tools! Danke an Patrick für die französische Übersetzung! Danke an Michael Krause für die norwegische Übersetzung!&lt;p&gt;&lt;i&gt;Gewidmet in Erinnerung an meinen Vater G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</translation>
     </message>
@@ -2195,7 +2207,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     </message>
     <message>
         <location filename="../ui/wiibafudialog.ui" line="86"/>
-        <location filename="../../src/wiibafudialog.cpp" line="39"/>
+        <location filename="../../src/wiibafudialog.cpp" line="43"/>
         <source>Open file</source>
         <translation>Öffne Datei</translation>
     </message>
@@ -2371,27 +2383,27 @@ Default value is 4G</source>
         <translation>20</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="31"/>
+        <location filename="../../src/wiibafudialog.cpp" line="35"/>
         <source>Open directory</source>
         <translation>Verzeichnis öffnen</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="39"/>
+        <location filename="../../src/wiibafudialog.cpp" line="43"/>
         <source>Wii Plain ISO *.iso;;Wii Compact ISO *.ciso;;Wii ISO Archive *.wia;;Wii Disc Format *.wdf;;Wii Backup File System Container *.wbfs</source>
         <translation>Normale Wii ISO *iso;;Kompakte Wii ISO *.ciso;;Wii ISO Archiv *wia;;Wii Diskformat *.wdf;;Wii Sicherungsdateisystemcontainer *.wbfs</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="197"/>
+        <location filename="../../src/wiibafudialog.cpp" line="201"/>
         <source>Transfer games to image</source>
         <translation>Spiele zu Abbild transferieren</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="218"/>
+        <location filename="../../src/wiibafudialog.cpp" line="222"/>
         <source>Extract game</source>
         <translation>Spiel extrahieren</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="239"/>
+        <location filename="../../src/wiibafudialog.cpp" line="243"/>
         <source>Transfer game to image</source>
         <translation>Spiel zu Abbild transferieren</translation>
     </message>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="nb_NO">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>Common</name>
     <message>
@@ -672,6 +673,14 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     <message>
         <source>Open DVD path</source>
         <translation>Åpne DVD banen</translation>
+    </message>
+    <message>
+        <source>Path to titles:</source>
+        <translation>Sti til titler:</translation>
+    </message>
+    <message>
+        <source>Open path to titles</source>
+        <translation>Åpne vei til titler</translation>
     </message>
 </context>
 <context>
