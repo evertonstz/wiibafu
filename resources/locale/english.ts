@@ -957,8 +957,8 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
         <location filename="../../src/witools.cpp" line="49"/>
         <location filename="../../src/witools.cpp" line="227"/>
         <location filename="../../src/witools.cpp" line="228"/>
-        <location filename="../../src/witools.cpp" line="2075"/>
-        <location filename="../../src/witools.cpp" line="2076"/>
+        <location filename="../../src/witools.cpp" line="2067"/>
+        <location filename="../../src/witools.cpp" line="2068"/>
         <source>Wiimms ISO Tool not found!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1190,8 +1190,8 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
         <location filename="../../src/witools.cpp" line="1858"/>
         <location filename="../../src/witools.cpp" line="1897"/>
         <location filename="../../src/witools.cpp" line="1898"/>
-        <location filename="../../src/witools.cpp" line="2096"/>
-        <location filename="../../src/witools.cpp" line="2097"/>
+        <location filename="../../src/witools.cpp" line="2088"/>
+        <location filename="../../src/witools.cpp" line="2089"/>
         <source>Wiimms WBFS Tool not found!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1575,9 +1575,9 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
         <location filename="../ui/wiibafu.ui" line="62"/>
         <location filename="../ui/wiibafu.ui" line="228"/>
         <location filename="../ui/wiibafu.ui" line="313"/>
-        <location filename="../../src/wiibafu.cpp" line="748"/>
-        <location filename="../../src/wiibafu.cpp" line="755"/>
-        <location filename="../../src/wiibafu.cpp" line="764"/>
+        <location filename="../../src/wiibafu.cpp" line="749"/>
+        <location filename="../../src/wiibafu.cpp" line="756"/>
+        <location filename="../../src/wiibafu.cpp" line="765"/>
         <source>&amp;Load</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1585,9 +1585,9 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
         <location filename="../ui/wiibafu.ui" line="65"/>
         <location filename="../ui/wiibafu.ui" line="231"/>
         <location filename="../ui/wiibafu.ui" line="316"/>
-        <location filename="../../src/wiibafu.cpp" line="749"/>
-        <location filename="../../src/wiibafu.cpp" line="756"/>
-        <location filename="../../src/wiibafu.cpp" line="765"/>
+        <location filename="../../src/wiibafu.cpp" line="750"/>
+        <location filename="../../src/wiibafu.cpp" line="757"/>
+        <location filename="../../src/wiibafu.cpp" line="766"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1600,22 +1600,22 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
     <message>
         <location filename="../ui/wiibafu.ui" line="79"/>
         <location filename="../ui/wiibafu.ui" line="238"/>
-        <location filename="../../src/wiibafu.cpp" line="804"/>
-        <location filename="../../src/wiibafu.cpp" line="820"/>
+        <location filename="../../src/wiibafu.cpp" line="805"/>
+        <location filename="../../src/wiibafu.cpp" line="821"/>
         <source>Transfer to &amp;WBFS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="86"/>
         <location filename="../ui/wiibafu.ui" line="245"/>
-        <location filename="../../src/wiibafu.cpp" line="808"/>
-        <location filename="../../src/wiibafu.cpp" line="824"/>
+        <location filename="../../src/wiibafu.cpp" line="809"/>
+        <location filename="../../src/wiibafu.cpp" line="825"/>
         <source>Transfer to &amp;image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="93"/>
-        <location filename="../../src/wiibafu.cpp" line="812"/>
+        <location filename="../../src/wiibafu.cpp" line="813"/>
         <source>E&amp;xtract image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1633,8 +1633,8 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
     <message>
         <location filename="../ui/wiibafu.ui" line="252"/>
         <location filename="../ui/wiibafu.ui" line="337"/>
-        <location filename="../../src/wiibafu.cpp" line="828"/>
-        <location filename="../../src/wiibafu.cpp" line="836"/>
+        <location filename="../../src/wiibafu.cpp" line="829"/>
+        <location filename="../../src/wiibafu.cpp" line="837"/>
         <source>E&amp;xtract</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1645,7 +1645,7 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="330"/>
-        <location filename="../../src/wiibafu.cpp" line="832"/>
+        <location filename="../../src/wiibafu.cpp" line="833"/>
         <source>&amp;Transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1968,7 +1968,7 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="1296"/>
-        <location filename="../../src/wiibafu.cpp" line="841"/>
+        <location filename="../../src/wiibafu.cpp" line="842"/>
         <source>&amp;Verify game</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1989,8 +1989,8 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
     </message>
     <message>
         <location filename="../../src/wiibafu.cpp" line="59"/>
-        <location filename="../../src/wiibafu.cpp" line="750"/>
-        <location filename="../../src/wiibafu.cpp" line="795"/>
+        <location filename="../../src/wiibafu.cpp" line="751"/>
+        <location filename="../../src/wiibafu.cpp" line="796"/>
         <source>Ready.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2001,165 +2001,170 @@ The whole partition will be used! &apos;Whole&apos; is ignored for overlayed par
     </message>
     <message>
         <location filename="../../src/wiibafu.cpp" line="67"/>
+        <source>Titles not found!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="68"/>
         <source>Titles not found!
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="70"/>
+        <location filename="../../src/wiibafu.cpp" line="71"/>
         <source>Titles found in: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="254"/>
         <location filename="../../src/wiibafu.cpp" line="255"/>
-        <location filename="../../src/wiibafu.cpp" line="742"/>
-        <location filename="../../src/wiibafu.cpp" line="789"/>
+        <location filename="../../src/wiibafu.cpp" line="256"/>
+        <location filename="../../src/wiibafu.cpp" line="743"/>
+        <location filename="../../src/wiibafu.cpp" line="790"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="254"/>
         <location filename="../../src/wiibafu.cpp" line="255"/>
-        <location filename="../../src/wiibafu.cpp" line="742"/>
-        <location filename="../../src/wiibafu.cpp" line="789"/>
+        <location filename="../../src/wiibafu.cpp" line="256"/>
+        <location filename="../../src/wiibafu.cpp" line="743"/>
+        <location filename="../../src/wiibafu.cpp" line="790"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="299"/>
-        <location filename="../../src/wiibafu.cpp" line="322"/>
+        <location filename="../../src/wiibafu.cpp" line="300"/>
+        <location filename="../../src/wiibafu.cpp" line="323"/>
         <source>&amp;Cancel verifying</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="326"/>
         <location filename="../../src/wiibafu.cpp" line="327"/>
+        <location filename="../../src/wiibafu.cpp" line="328"/>
         <source>Verify error: No game selected!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="382"/>
-        <location filename="../../src/wiibafu.cpp" line="388"/>
+        <location filename="../../src/wiibafu.cpp" line="383"/>
+        <location filename="../../src/wiibafu.cpp" line="389"/>
         <source>&amp;Cancel loading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="383"/>
+        <location filename="../../src/wiibafu.cpp" line="384"/>
         <source>Open directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="412"/>
-        <location filename="../../src/wiibafu.cpp" line="414"/>
-        <location filename="../../src/wiibafu.cpp" line="425"/>
-        <location filename="../../src/wiibafu.cpp" line="443"/>
-        <location filename="../../src/wiibafu.cpp" line="482"/>
-        <location filename="../../src/wiibafu.cpp" line="484"/>
-        <location filename="../../src/wiibafu.cpp" line="495"/>
-        <location filename="../../src/wiibafu.cpp" line="510"/>
-        <location filename="../../src/wiibafu.cpp" line="557"/>
-        <location filename="../../src/wiibafu.cpp" line="575"/>
+        <location filename="../../src/wiibafu.cpp" line="413"/>
+        <location filename="../../src/wiibafu.cpp" line="415"/>
+        <location filename="../../src/wiibafu.cpp" line="426"/>
+        <location filename="../../src/wiibafu.cpp" line="444"/>
+        <location filename="../../src/wiibafu.cpp" line="483"/>
+        <location filename="../../src/wiibafu.cpp" line="485"/>
+        <location filename="../../src/wiibafu.cpp" line="496"/>
+        <location filename="../../src/wiibafu.cpp" line="511"/>
+        <location filename="../../src/wiibafu.cpp" line="558"/>
+        <location filename="../../src/wiibafu.cpp" line="576"/>
         <source>&amp;Cancel transfering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="440"/>
-        <location filename="../../src/wiibafu.cpp" line="572"/>
+        <location filename="../../src/wiibafu.cpp" line="441"/>
+        <location filename="../../src/wiibafu.cpp" line="573"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="440"/>
-        <location filename="../../src/wiibafu.cpp" line="572"/>
+        <location filename="../../src/wiibafu.cpp" line="441"/>
+        <location filename="../../src/wiibafu.cpp" line="573"/>
         <source>The directory doesn&apos;t exists!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="455"/>
-        <location filename="../../src/wiibafu.cpp" line="460"/>
-        <location filename="../../src/wiibafu.cpp" line="521"/>
-        <location filename="../../src/wiibafu.cpp" line="529"/>
-        <location filename="../../src/wiibafu.cpp" line="587"/>
-        <location filename="../../src/wiibafu.cpp" line="592"/>
+        <location filename="../../src/wiibafu.cpp" line="456"/>
+        <location filename="../../src/wiibafu.cpp" line="461"/>
+        <location filename="../../src/wiibafu.cpp" line="522"/>
+        <location filename="../../src/wiibafu.cpp" line="530"/>
+        <location filename="../../src/wiibafu.cpp" line="588"/>
+        <location filename="../../src/wiibafu.cpp" line="593"/>
         <source>&amp;Cancel extracting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="604"/>
+        <location filename="../../src/wiibafu.cpp" line="605"/>
         <source>Remove games</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="604"/>
+        <location filename="../../src/wiibafu.cpp" line="605"/>
         <source>Are you sure that you want to delete the selected games?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="616"/>
+        <location filename="../../src/wiibafu.cpp" line="617"/>
         <source>Check/Repair WBFS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="616"/>
+        <location filename="../../src/wiibafu.cpp" line="617"/>
         <source>Are you sure that you want to check/repair the wbfs?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="671"/>
+        <location filename="../../src/wiibafu.cpp" line="672"/>
         <source>Search log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="671"/>
+        <location filename="../../src/wiibafu.cpp" line="672"/>
         <source>Enter search string:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="704"/>
+        <location filename="../../src/wiibafu.cpp" line="705"/>
         <source>Nothing found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="711"/>
+        <location filename="../../src/wiibafu.cpp" line="712"/>
         <source>Save log file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="711"/>
+        <location filename="../../src/wiibafu.cpp" line="712"/>
         <source>WiiBaFu log file (*.log)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="726"/>
-        <location filename="../../src/wiibafu.cpp" line="730"/>
+        <location filename="../../src/wiibafu.cpp" line="727"/>
+        <location filename="../../src/wiibafu.cpp" line="731"/>
         <source>ID (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="736"/>
+        <location filename="../../src/wiibafu.cpp" line="737"/>
         <source>Files (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="758"/>
+        <location filename="../../src/wiibafu.cpp" line="759"/>
         <source>Loading canceled!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1087"/>
+        <location filename="../../src/wiibafu.cpp" line="1088"/>
         <source>WIT command line:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1394"/>
+        <location filename="../../src/wiibafu.cpp" line="1395"/>
         <source>About Wii Backup Fusion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1396"/>
+        <location filename="../../src/wiibafu.cpp" line="1397"/>
         <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit&lt;br&gt;and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation! Thanks to Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
         <translation type="unfinished"></translation>
     </message>

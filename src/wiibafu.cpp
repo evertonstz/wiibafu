@@ -64,6 +64,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
 
     QString witPath = wiTools->witTitlesPath();
     if (witPath.contains("witTitles:")) {
+        setStatusBarText(tr("Titles not found!"));
         addEntryToLog(tr("Titles not found!\n"), WiTools::Info);
     }
     else {
