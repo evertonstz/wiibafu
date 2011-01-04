@@ -2047,15 +2047,7 @@ void WiTools::cancelVerifying() {
 }
 
 void WiTools::setWit() {
-    QString defaultWitPath;
-
-    #ifdef Q_OS_WIN32
-        defaultWitPath = DEFAULT_WIT_PATH_WIN32;
-    #else
-        defaultWitPath = DEFAULT_WIT_PATH;
-    #endif
-
-    QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WiiBaFuSettings.value("WIT/PathToWIT", QVariant(defaultWitPath)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":"));
+    QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WiiBaFuSettings.value("WIT/PathToWIT", QVariant(DEFAULT_WIT_PATH)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":"));
 
     #ifdef Q_OS_WIN32
         wit = QFile("wit:wit.exe").fileName();
@@ -2149,15 +2141,7 @@ QString WiTools::witTitlesPath() {
         default: titles = "titles";
     }
 
-    QString defaultTitlesPath;
-
-    #ifdef Q_OS_WIN32
-        defaultTitlesPath = DEFAULT_TITLES_PATH_WIN32;
-    #else
-        defaultTitlesPath = DEFAULT_TITLES_PATH;
-    #endif
-
-    QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WiiBaFuSettings.value("WIT/PathToTitles", QVariant(defaultTitlesPath)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":") << QString(getenv("WIT-TITLES")).split(":"));
+    QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":") << QString(getenv("WIT-TITLES")).split(":"));
 
     return QFile(QString("witTitles:%1.txt").arg(titles)).fileName();
 }

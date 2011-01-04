@@ -23,10 +23,12 @@
 
 #define WiiBaFuSettings QSettings("WiiBaFu", "wiibafu")
 
-#define DEFAULT_WIT_PATH QString("/usr/local/bin")
-#define DEFAULT_TITLES_PATH QString("/usr/local/share/wit")
-
-#define DEFAULT_WIT_PATH_WIN32 QDir::homePath().append("/wit/bin")
-#define DEFAULT_TITLES_PATH_WIN32 QDir::homePath().append("/wit/bin")
+#ifdef Q_OS_WIN32
+    #define DEFAULT_WIT_PATH QDir::homePath().append("/wit/bin")
+    #define DEFAULT_TITLES_PATH QDir::homePath().append("/wit/bin")
+#else
+    #define DEFAULT_WIT_PATH QString("/usr/local/bin")
+    #define DEFAULT_TITLES_PATH QString("/usr/local/share/wit")
+#endif
 
 #endif // GLOBAL_H
