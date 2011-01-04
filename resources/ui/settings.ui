@@ -1341,39 +1341,88 @@ The whole partition will be used! 'Whole' is ignored for overlayed partitions!</
   <tabstop>main_lineEdit_proxyPort</tabstop>
   <tabstop>main_lineEdit_proxyUser</tabstop>
   <tabstop>main_lineEdit_proxyPassword</tabstop>
-  <tabstop>main_comboBox_Logging</tabstop>
+  <tabstop>main_comboBox_proxyType</tabstop>
   <tabstop>main_comboBox_Language</tabstop>
-  <tabstop>buttonBox</tabstop>
+  <tabstop>main_radioButton_MacOSXStyle_Aqua</tabstop>
+  <tabstop>main_radioButton_MacOSXStyle_BrushedMetal</tabstop>
+  <tabstop>main_comboBox_Logging</tabstop>
+  <tabstop>main_checkBox_LogWitCommandLine</tabstop>
+  <tabstop>main_lineEdit_LogFile</tabstop>
+  <tabstop>main_pushButton_OpenLogFile</tabstop>
   <tabstop>wit_lineEdit_PathToWIT</tabstop>
   <tabstop>wit_pushButton_PathToWITOpen</tabstop>
+  <tabstop>wit_lineEdit_PathToTitles</tabstop>
+  <tabstop>wit_pushButton_PathToTitlesOpen</tabstop>
   <tabstop>wit_checkBox_Auto</tabstop>
   <tabstop>wit_lineEdit_WBFSPath</tabstop>
   <tabstop>wit_pushButton_WBFSOpenDirectory</tabstop>
   <tabstop>wit_pushButton_WBFSOpenFile</tabstop>
   <tabstop>wit_lineEdit_DVDDrivePath</tabstop>
   <tabstop>wit_pushButton_DVDDriveOpenDirectory</tabstop>
+  <tabstop>wit_spinBox_RecurseDepth</tabstop>
   <tabstop>gameLists_checkBox_ShowGrid</tabstop>
-  <tabstop>gameLists_checkBox_AlternatingRowColors</tabstop>
   <tabstop>gameLists_checkBox_ToolTips</tabstop>
+  <tabstop>gameLists_checkBox_AlternatingRowColors</tabstop>
   <tabstop>gameLists_radioButton_ScrollPerPixel</tabstop>
   <tabstop>gameLists_radioButton_ScrollPerItem</tabstop>
   <tabstop>gameLists_radioButton_Interactive</tabstop>
-  <tabstop>gameLists_radioButton_Sretch</tabstop>
   <tabstop>gameLists_radioButton_ResizeToContents</tabstop>
+  <tabstop>gameLists_radioButton_Sretch</tabstop>
   <tabstop>gameLists_radioButton_Fixed</tabstop>
+  <tabstop>gameLists_comboBox_SelectionMode</tabstop>
+  <tabstop>filesColumn_checkBox_ID</tabstop>
+  <tabstop>filesColumn_checkBox_Name</tabstop>
+  <tabstop>filesColumn_checkBox_Title</tabstop>
+  <tabstop>filesColumn_checkBox_Region</tabstop>
+  <tabstop>filesColumn_checkBox_Size</tabstop>
+  <tabstop>filesColumn_checkBox_Insertion</tabstop>
+  <tabstop>filesColumn_checkBox_LastModification</tabstop>
+  <tabstop>filesColumn_checkBox_LastStatusChange</tabstop>
+  <tabstop>filesColumn_checkBox_LastAccess</tabstop>
+  <tabstop>filesColumn_checkBox_Type</tabstop>
+  <tabstop>filesColumn_checkBox_Source</tabstop>
+  <tabstop>wbfsColumn_checkBox_ID</tabstop>
+  <tabstop>wbfsColumn_checkBox_Name</tabstop>
+  <tabstop>wbfsColumn_checkBox_Title</tabstop>
+  <tabstop>wbfsColumn_checkBox_Region</tabstop>
+  <tabstop>wbfsColumn_checkBox_Size</tabstop>
+  <tabstop>wbfsColumn_checkBox_UsedBlocks</tabstop>
+  <tabstop>wbfsColumn_checkBox_Insertion</tabstop>
+  <tabstop>wbfsColumn_checkBox_LastModification</tabstop>
+  <tabstop>wbfsColumn_checkBox_LastStatusChange</tabstop>
+  <tabstop>wbfsColumn_checkBox_LastAccess</tabstop>
+  <tabstop>wbfsColumn_checkBox_Type</tabstop>
+  <tabstop>wbfsColumn_checkBox_WBFSSlot</tabstop>
+  <tabstop>wbfsColumn_checkBox_Source</tabstop>
   <tabstop>transferToWBFS_checkBox_Force</tabstop>
-  <tabstop>transferToWBFS_checkBox_Newer</tabstop>
   <tabstop>transferToWBFS_checkBox_Test</tabstop>
+  <tabstop>transferToWBFS_checkBox_Newer</tabstop>
   <tabstop>transferToWBFS_checkBox_Update</tabstop>
   <tabstop>transferToWBFS_checkBox_Overwrite</tabstop>
+  <tabstop>transferToImageFST_checkBox_Test</tabstop>
+  <tabstop>transferToImageFST_checkBox_Update</tabstop>
+  <tabstop>transferToImageFST_checkBox_Overwrite</tabstop>
+  <tabstop>transferToImageFST_checkBox_Diff</tabstop>
+  <tabstop>transferFromWBFS_checkBox_Force</tabstop>
+  <tabstop>transferFromWBFS_checkBox_Test</tabstop>
+  <tabstop>transferFromWBFS_checkBox_Update</tabstop>
+  <tabstop>transferFromWBFS_checkBox_Overwrite</tabstop>
+  <tabstop>transfer_checkBox_ScrubbingData</tabstop>
+  <tabstop>transfer_checkBox_ScrubbingUpdate</tabstop>
+  <tabstop>transfer_checkBox_ScrubbingChannel</tabstop>
+  <tabstop>transfer_checkBox_ScrubbingRaw</tabstop>
+  <tabstop>transfer_checkBox_ScrubbingWhole</tabstop>
   <tabstop>checkWBFS_checkBox_Test</tabstop>
   <tabstop>checkWBFS_checkBox_Repair</tabstop>
-  <tabstop>repairWBFS_checkBox_RMFREE</tabstop>
-  <tabstop>repairWBFS_checkBox_RMINVALID</tabstop>
-  <tabstop>repairWBFS_checkBox_RMOVERLAP</tabstop>
-  <tabstop>repairWBFS_checkBox_RMEMPTY</tabstop>
   <tabstop>repairWBFS_checkBox_FBT</tabstop>
   <tabstop>repairWBFS_checkBox_INODES</tabstop>
+  <tabstop>repairWBFS_checkBox_RMINVALID</tabstop>
+  <tabstop>repairWBFS_checkBox_RMOVERLAP</tabstop>
+  <tabstop>repairWBFS_checkBox_RMFREE</tabstop>
+  <tabstop>repairWBFS_checkBox_RMEMPTY</tabstop>
+  <tabstop>removeFromWBFS_checkBox_Force</tabstop>
+  <tabstop>removeFromWBFS_checkBox_Test</tabstop>
+  <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
   <include location="../wiibafu.qrc"/>

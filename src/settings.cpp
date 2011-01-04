@@ -184,11 +184,11 @@ void Settings::load() {
     }
 
     #ifdef Q_OS_WIN32
-        ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(DefaultWin32WitPath)).toString());
-        ui->wit_lineEdit_PathToTitles->setText(WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DefaultWin32TitlesPath)).toString());
+        ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(DEFAULT_WIT_PATH_WIN32)).toString());
+        ui->wit_lineEdit_PathToTitles->setText(WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH_WIN32)).toString());
     #else
-        ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(DefaultWitPath)).toString());
-        ui->wit_lineEdit_PathToTitles->setText(WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DefaultTitlesPath)).toString());
+        ui->wit_lineEdit_PathToWIT->setText(WiiBaFuSettings.value("WIT/PathToWIT", QVariant(DEFAULT_WIT_PATH)).toString());
+        ui->wit_lineEdit_PathToTitles->setText(WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString());
     #endif
 
     ui->wit_checkBox_Auto->setChecked(WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool());
@@ -372,11 +372,11 @@ void Settings::restoreDefaults(const int index) {
                 break;
         case 1: // WIT
                 #ifdef Q_OS_WIN32
-                    ui->wit_lineEdit_PathToWIT->setText(DefaultWin32WitPath);
-                    ui->wit_lineEdit_PathToTitles->setText(DefaultWin32TitlesPath);
+                    ui->wit_lineEdit_PathToWIT->setText(DEFAULT_WIT_PATH_WIN32);
+                    ui->wit_lineEdit_PathToTitles->setText(DEFAULT_TITLES_PATH_WIN32);
                 #else
-                    ui->wit_lineEdit_PathToWIT->setText(DefaultWitPath);
-                    ui->wit_lineEdit_PathToTitles->setText(DefaultTitlesPath);
+                    ui->wit_lineEdit_PathToWIT->setText(DEFAULT_WIT_PATH);
+                    ui->wit_lineEdit_PathToTitles->setText(DEFAULT_TITLES_PATH);
                 #endif
                 ui->wit_checkBox_Auto->setChecked(true);
                 ui->wit_lineEdit_DVDDrivePath->setText("/cdrom");
