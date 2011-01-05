@@ -165,9 +165,19 @@ void Common::updateTitles() {
             titlesPath = WiiBaFuSettings.value("WIT/PathToTitles").toString();
         }
         else {
-            titlesPath = DEFAULT_TITLES_PATH;
+            #ifdef Q_OS_MACX
+                titlesPath = QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit");
+            #else
+                titlesPath = QDir::currentPath().append("/wit");
+            #endif
         }
     }
+
+    QDir dir(titlesPath);
+    if (!dir.exists()) {
+        dir.mkpath(titlesPath);
+    }
+
     QString fileName = titlesPath.append("/titles");
 
     for (int i = 0; i < 16; i++) {
