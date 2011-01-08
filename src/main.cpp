@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationDomain("wiibafu.codeplex.com");
     QCoreApplication::setOrganizationName("Kai Heitkamp");
     QCoreApplication::setApplicationName("Wii Backup Fusion");
-    QCoreApplication::setApplicationVersion("1.0.1");
+    QCoreApplication::setApplicationVersion("1.1");
 
     QDir::setSearchPaths("TranslationPath", QStringList() << QDir::currentPath() << QDir::currentPath().append("/locale") << QDir::homePath().append("/WiiBaFu/resources/locale") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/Resources"));
     QString file = QFile("TranslationPath:german.qm").fileName();

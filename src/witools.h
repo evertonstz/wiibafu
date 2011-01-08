@@ -99,6 +99,10 @@ private:
         QString gameCountText;
     #endif
 
+    QString n_scanned;
+    QString n_directories;
+    QString n_found;
+
     void setWit();
 
 signals:

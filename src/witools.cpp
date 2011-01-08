@@ -32,13 +32,17 @@ void WiTools::requestFilesGameListModel(QStandardItemModel *model, const QString
     witModel = model;
     totalGameSize = 0;
 
+    n_scanned = "0";
+    n_directories = "0";
+    n_found = "0";
+
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
     connect(witProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(requestFilesGameListModel_readyReadStandardOutput()));
     connect(witProcess, SIGNAL(readyReadStandardError()), this, SLOT(requestFilesGameListModel_readyReadStandardError()));
     connect(witProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(requestFilesGameListModel_finished(int, QProcess::ExitStatus)));
 
-    const QStringList arguments = QStringList() << "LIST" << "--titles" << witTitlesPath() << "--recurse" << path << "--rdepth" << QString::number(recurseDepth) << "--section" << "--progress";
+    const QStringList arguments = QStringList() << "LIST-LLL" << "--titles" << witTitlesPath() << "--recurse" << path << "--rdepth" << QString::number(recurseDepth) << "--section" << "--verbose" << "--progress";
     emit newWitCommandLineLogEntry("wit", arguments);
 
     witProcess->start(wit, arguments);
@@ -66,31 +70,26 @@ void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
     while (!textStream.atEnd()) {
         const QString line = textStream.readLine();
 
-        if (line.isEmpty()) {
-            continue;
-        }
-        else if (line.contains("scanned")) {
-            const QString objects = line.mid(2, line.indexOf("object") - 3);
-            const QString directories = line.mid(line.indexOf(",") + 2, line.indexOf("dir") - line.indexOf(",") - 3);
-            QString discs;
-            QString message;
-
-            if (line.contains("directory")) {
-                discs = "0";
-                message = tr("%1 file scanned, %2 directory and %3 game found.").arg(objects, directories, discs);
-            }
-            else {
-                discs = line.mid(line.indexOf("and") + 4, line.indexOf("disc") - line.indexOf("and") - 5);
-                message = tr("%1 files scanned, %2 directories and %3 games found.").arg(objects, directories, discs);
-            }
-
-            emit showStatusBarMessage(message);
+        if (line.isEmpty() || line.contains("progress:scan")  || line.contains("found-name")) {
             continue;
         }
 
+        emit showStatusBarMessage(tr("%1 file(s) scanned, %2 directory(ies) and %3 game(s) found.").arg(n_scanned, n_directories, n_found));
         emit newLogEntry(line, Info);
 
-        if (line.contains("total-discs=0")) {
+        if (line.contains("n-scanned=")) {
+            n_scanned = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("n-directories=")) {
+            n_directories = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("n-found=")) {
+            n_found = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("total-discs=0")) {
             emit showStatusBarMessage(tr("No games found!"));
             emit loadingGamesFailed(NoGamesFound);
             return;
@@ -168,6 +167,14 @@ void WiTools::requestFilesGameListModel_finished(const int exitCode, const QProc
         emit newLogEntry(tr("Loading failed!"), Error);
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        #ifdef Q_OS_WIN32
+            newLogEntry("\r\n", Info);
+        #else
+            newLogEntry("\n", Info);
+        #endif
+
+        emit newLogEntry(tr("%1 file(s) scanned, %2 directory(ies) and %3 game(s) found.").arg(n_scanned, n_directories, n_found), Info);
+
         witModel->clear();
         witModel->appendColumn(fgl_ids);
         witModel->appendColumn(fgl_names);
