@@ -189,10 +189,6 @@ void WiiBaFu::setMacOSXStyle() {
     }
 }
 
-void WiiBaFu::setMainProgressBarVisible(const bool visible) {
-    progressBar_Main->setVisible(visible);
-}
-
 void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
     gameTableView->setShowGrid(WiiBaFuSettings.value("GameListBehavior/ShowGrid", QVariant(false)).toBool());
     gameTableView->setAlternatingRowColors(WiiBaFuSettings.value("GameListBehavior/AlternatingRowColors", QVariant(true)).toBool());
@@ -1016,9 +1012,23 @@ void WiiBaFu::setWBFSProgressBar(const int min, const int max, const int value, 
     ui->wbfsTab_progressBar->setFormat(format);
 }
 
+void WiiBaFu::setMainProgressBarVisible(const bool visible) {
+    progressBar_Main->setVisible(visible);
+
+    #ifdef Q_OS_MACX
+        if (!visible) {
+            setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
+        }
+    #endif
+}
+
 void WiiBaFu::setMainProgressBar(const int value, const QString format) {
     progressBar_Main->setValue(value);
     progressBar_Main->setFormat(format);
+
+    #ifdef Q_OS_MACX
+        setWindowTitle(QString(format).replace("%p%", QString::number(value).append("%")));
+    #endif
 }
 
 void WiiBaFu::startMainProgressBarBusy() {

@@ -95,13 +95,21 @@ private:
     QStandardItem *fgl_item;
     QList<QStandardItem *> fgl_ids, fgl_names, fgl_titles, fgl_regions, fgl_sizes, fgl_itimes, fgl_mtimes, fgl_ctimes, fgl_atimes, fgl_filetypes, fgl_filenames;
 
-    #ifdef Q_OS_MACX
-        QString gameCountText;
-    #endif
-
     QString n_scanned;
     QString n_directories;
     QString n_found;
+
+    QString job_counter;
+    QString job_total;
+    QString source_path;
+    QString dest_path;
+    QString dest_type;
+
+    QString percent;
+    QString elapsed_text;
+    QString eta_text;
+    QString mib_total;
+    QString mib_per_sec;
 
     void setWit();
 

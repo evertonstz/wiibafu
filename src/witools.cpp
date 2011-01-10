@@ -669,19 +669,10 @@ void WiTools::transferFilesToWBFS_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("ADD")) {
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
-        #endif
+        emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
     }
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
-
-        #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
-        #endif
     }
     else if (line.contains("already exists")) {
         emit newLogEntry(line, Error);
@@ -817,6 +808,7 @@ void WiTools::transferFilesToImage(const QModelIndexList indexList, const QStrin
         arguments.append(splitSize);
     }
 
+    arguments.append("--section");
     arguments.append("--progress");
 
     emit newWitCommandLineLogEntry("wit", arguments);
@@ -834,30 +826,59 @@ void WiTools::transferFilesToImage(const QModelIndexList indexList, const QStrin
 }
 
 void WiTools::transferFilesToImage_readyReadStandardOutput() {
-    QString line = witProcess->readAllStandardOutput().constData();
+    QTextStream textStream(witProcess);
+    textStream.setCodec("UTF-8");
 
-    if (line.contains("COPY")) {
-        QString file = line.mid(line.indexOf(":") + 1, line.indexOf("->") - line.indexOf(":") - 2);
-        QString from = file.mid(file.lastIndexOf("/") + 1, file.length() - file.lastIndexOf("/"));
-        QString to = line.mid(line.indexOf("->") + 3, line.lastIndexOf(":") - line.indexOf("->") - 3);
+    while (!textStream.atEnd()) {
+        const QString line = textStream.readLine();
 
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1 -> %2...").arg(Common::fromUtf8(from), to);
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(Common::fromUtf8(from), to));
-        #endif
+        if (line.isEmpty()) {
+            continue;
+        }
+        else if (line.contains("job-counter=")) {
+            job_counter = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("job-total=")) {
+            job_total = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("source-path=")) {
+            source_path = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("dest-path=")) {
+            dest_path = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("dest-type=")) {
+            dest_type = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("percent=")) {
+            percent = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("elapsed-text=")) {
+            elapsed_text = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("eta-text=")) {
+            eta_text = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("mib-total=")) {
+            mib_total = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("mib-per-sec=")) {
+            mib_per_sec = line.section("=", 1);
+            continue;
+        }
     }
-    else if (line.contains("% copied") || line.contains("% compared")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
-        #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
-        #endif
-    }
-    else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translateTransferMessage(line), Info);
-    }
+    emit showStatusBarMessage(tr("Transfering game [%1/%2] %3 -> %4...").arg(job_counter, job_total, source_path.mid(source_path.lastIndexOf("/") + 1, source_path.length() - source_path.lastIndexOf("/")), dest_type));
+    emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) copied in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
 void WiTools::transferFilesToImage_readyReadStandardError() {
@@ -938,6 +959,7 @@ void WiTools::extractImage(const QModelIndexList indexList, const QString destin
         arguments.append(pselModes);
     }
 
+    arguments.append("--section");
     arguments.append("--progress");
 
     emit newWitCommandLineLogEntry("wit", arguments);
@@ -955,31 +977,46 @@ void WiTools::extractImage(const QModelIndexList indexList, const QString destin
 }
 
 void WiTools::extractImage_readyReadStandardOutput() {
-    QString line = witProcess->readAllStandardOutput().constData();
+    QTextStream textStream(witProcess);
+    textStream.setCodec("UTF-8");
 
-    if (line.contains("EXTRACT")) {
-        QString tmp = line.mid(line.indexOf(":/") + 1, line.indexOf("\n") - line.indexOf(":/")).remove("\n");
-        QString source = tmp.mid(0, tmp.indexOf("->") - 1);
-        QString from = source.mid(source.lastIndexOf("/") + 1, source.length());
-        QString to = tmp.mid(tmp.indexOf("->") + 3, tmp.length() - tmp.indexOf("->"));
+    while (!textStream.atEnd()) {
+        const QString line = textStream.readLine();
 
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Extracting game %1 -> %2...").arg(Common::fromUtf8(from), Common::fromUtf8(to));
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(tr("Extracting game %1 -> %2...").arg(Common::fromUtf8(from), Common::fromUtf8(to)));
-        #endif
-    }
-    else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
+        if (line.isEmpty()) {
+            continue;
+        }
+        else if (line.contains("EXTRACT")) {
+            QString tmp = line.mid(line.indexOf(":/") + 1, line.indexOf("\n") - line.indexOf(":/")).remove("\n");
+            QString source = tmp.mid(0, tmp.indexOf("->") - 1);
+            QString from = source.mid(source.lastIndexOf("/") + 1, source.length());
+            QString to = tmp.mid(tmp.indexOf("->") + 3, tmp.length() - tmp.indexOf("->"));
 
-        #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
-        #endif
+            emit showStatusBarMessage(tr("Extracting game %1 -> %2...").arg(from, to));
+        }
+        else if (line.contains("percent=")) {
+            percent = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("elapsed-text=")) {
+            elapsed_text = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("eta-text=")) {
+            eta_text = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("mib-total=")) {
+            mib_total = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("mib-per-sec=")) {
+            mib_per_sec = line.section("=", 1);
+            continue;
+        }
     }
-    else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translateTransferMessage(line), Info);
-    }
+
+    emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) extracted in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
 void WiTools::extractImage_readyReadStandardError() {
@@ -1005,6 +1042,7 @@ void WiTools::extractImage_finished(const int exitCode, const QProcess::ExitStat
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
+            emit newLogEntry(tr("%1 MiB in %2 extracted (%3 MiB/sec)").arg(mib_total, elapsed_text, mib_per_sec), Info);
             emit newLogEntry(tr("Extraction successfully!"), Error);
             emit showStatusBarMessage(tr("Ready."));
             emit extractImage_finished(WiTools::Ok);
@@ -1112,19 +1150,10 @@ void WiTools::transferDVDToWBFS_readyReadStandardOutput() {
     QString line = witProcess->readAllStandardOutput().constData();
 
     if (line.contains("ADD")) {
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3));
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
-        #endif
+        emit showStatusBarMessage(tr("Transfering game %1...").arg(line.mid(line.indexOf("ADD ") + 4, (line.lastIndexOf("]") - line.indexOf("ADD ")) - 3)));
     }
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
-
-        #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
-        #endif
     }
     else if (line.contains("already exists")) {
         emit newLogEntry(line, Error);
@@ -1226,6 +1255,7 @@ void WiTools::transferDVDToImage(const QString dvdPath, const QString format, co
         arguments.append(splitSize);
     }
 
+    arguments.append("--section");
     arguments.append("--progress");
 
     emit newWitCommandLineLogEntry("wit", arguments);
@@ -1243,29 +1273,59 @@ void WiTools::transferDVDToImage(const QString dvdPath, const QString format, co
 }
 
 void WiTools::transferDVDToImage_readyReadStandardOutput() {
-    QString line = witProcess->readAllStandardOutput().constData();
+    QTextStream textStream(witProcess);
+    textStream.setCodec("UTF-8");
 
-    if (line.contains("COPY")) {
-        QString from = line.mid(line.indexOf(":/") + 1, line.indexOf("->") - line.indexOf(":/") - 2);
-        QString to = line.mid(line.indexOf("->") + 3, line.lastIndexOf(":") - line.indexOf("->") - 3);
+    while (!textStream.atEnd()) {
+        const QString line = textStream.readLine();
 
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Transfering game %1 -> %2...").arg(from, to);
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(tr("Transfering game %1 -> %2...").arg(from, to));
-        #endif
+        if (line.isEmpty()) {
+            continue;
+        }
+        else if (line.contains("job-counter=")) {
+            job_counter = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("job-total=")) {
+            job_total = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("source-path=")) {
+            source_path = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("dest-path=")) {
+            dest_path = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("dest-type=")) {
+            dest_type = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("percent=")) {
+            percent = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("elapsed-text=")) {
+            elapsed_text = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("eta-text=")) {
+            eta_text = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("mib-total=")) {
+            mib_total = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("mib-per-sec=")) {
+            mib_per_sec = line.section("=", 1);
+            continue;
+        }
     }
-    else if (line.contains("% copied") || line.contains("% compared")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
-        #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
-        #endif
-    }
-    else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translateTransferMessage(line), Info);
-    }
+    emit showStatusBarMessage(tr("Transfering game to %1...").arg(dest_path));
+    emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) copied in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
 void WiTools::transferDVDToImage_readyReadStandardError() {
@@ -1348,6 +1408,7 @@ void WiTools::extractDVD(const QString dvdPath, const QString destination) {
         arguments.append(pselModes);
     }
 
+    arguments.append("--section");
     arguments.append("--progress");
 
     emit newWitCommandLineLogEntry("wit", arguments);
@@ -1365,28 +1426,42 @@ void WiTools::extractDVD(const QString dvdPath, const QString destination) {
 }
 
 void WiTools::extractDVD_readyReadStandardOutput() {
-    QString line = witProcess->readAllStandardOutput().constData();
+    QTextStream textStream(witProcess);
+    textStream.setCodec("UTF-8");
 
-    if (line.contains("EXTRACT")) {
-        QString str = line.mid(line.indexOf(":/") + 1, line.indexOf("\n") - line.indexOf(":/")).remove("\n");
+    while (!textStream.atEnd()) {
+        const QString line = textStream.readLine();
 
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Extracting game %1...").arg(Common::fromUtf8(str));
-            emit showStatusBarMessage(gameCountText);
-        #else
+        if (line.isEmpty()) {
+            continue;
+        }
+        else if (line.contains("EXTRACT")) {
+            QString str = line.mid(line.indexOf(":/") + 1, line.indexOf("\n") - line.indexOf(":/")).remove("\n");
             emit showStatusBarMessage(tr("Extracting game %1...").arg(Common::fromUtf8(str)));
-        #endif
+        }
+        else if (line.contains("percent=")) {
+            percent = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("elapsed-text=")) {
+            elapsed_text = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("eta-text=")) {
+            eta_text = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("mib-total=")) {
+            mib_total = line.section("=", 1);
+            continue;
+        }
+        else if (line.contains("mib-per-sec=")) {
+            mib_per_sec = line.section("=", 1);
+            continue;
+        }
     }
-    else if (line.contains("% copied")) {
-        emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
 
-        #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
-        #endif
-    }
-    else if (line.contains("copied") && !line.contains("%")) {
-        emit newLogEntry(Common::translateTransferMessage(line), Info);
-    }
+    emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) extracted in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
 void WiTools::extractDVD_readyReadStandardError() {
@@ -1411,6 +1486,7 @@ void WiTools::extractDVD_finished(const int exitCode, const QProcess::ExitStatus
     }
     else if (exitStatus == QProcess::NormalExit && exitCode == 0 && witProcess->error() == 5) {
         if (witProcessStatus != DestinationAlreadyExists) {
+            emit newLogEntry(tr("%1 MiB in %2 extracted (%3 MiB/sec)").arg(mib_total, elapsed_text, mib_per_sec), Info);
             emit newLogEntry(tr("Extraction successfully!"), Error);
             emit showStatusBarMessage(tr("Ready."));
             emit extractDVD_finished(WiTools::Ok);
@@ -1552,20 +1628,10 @@ void WiTools::transferWBFSToImage_readyReadStandardOutput() {
 
     if (line.contains("EXTRACT")) {
         QString statusBarText = tr("Transfering game %1...").arg(line.mid(line.indexOf("EXTRACT") + 8, line.lastIndexOf(":") - line.indexOf("EXTRACT") - 8));
-
-        #ifdef Q_OS_MACX
-            gameCountText = statusBarText;
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(statusBarText);
-        #endif
+        emit showStatusBarMessage(statusBarText);
     }
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
-
-        #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
-        #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
         emit newLogEntry(Common::translateTransferMessage(line), Info);
@@ -1684,20 +1750,10 @@ void WiTools::extractWBFS_readyReadStandardOutput() {
 
     if (line.contains("EXTRACT")) {
         QString tmp = line.mid(line.indexOf("EXTRACT") + 8, line.indexOf("[") - line.indexOf("EXTRACT") + 8).remove("\n");
-
-        #ifdef Q_OS_MACX
-            gameCountText = tr("Extracting game %1...").arg(Common::fromUtf8(tmp));
-            emit showStatusBarMessage(gameCountText);
-        #else
-            emit showStatusBarMessage(tr("Extracting game %1...").arg(Common::fromUtf8(tmp)));
-        #endif
+        emit showStatusBarMessage(tr("Extracting game %1...").arg(Common::fromUtf8(tmp)));
     }
     else if (line.contains("% copied")) {
         emit setMainProgressBar(line.left(line.indexOf("%")).remove(" ").toInt(), Common::translateTransferMessage(line));
-
-        #ifdef Q_OS_MACX
-            emit showStatusBarMessage(QString("%1%2").arg(gameCountText, Common::translateTransferMessage(line)));
-        #endif
     }
     else if (line.contains("copied") && !line.contains("%")) {
         emit newLogEntry(Common::translateTransferMessage(line), Info);
