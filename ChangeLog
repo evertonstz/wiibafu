@@ -1,5 +1,6 @@
-2011-01-10 Kai Heitkamp <dynup@ymail.com>
- Version 1.1 (wit v1.25a r2133)
+2011-01-14 Kai Heitkamp <dynup@ymail.com>
+ Version 1.1 (wit v1.25b r2143)
+  * Edit game images
   * Progress infos in main window title on mac
   * Extract DVD progress infos adapted to new wit
   * Transfer DVD to image progress infos adapted to new wit

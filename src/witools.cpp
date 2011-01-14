@@ -2109,6 +2109,67 @@ void WiTools::cancelVerifying() {
     witProcess->kill();
 }
 
+void WiTools::editGameImage(const QString filePath, const WiTools::GameEditParameters parameters) {
+    emit newLogEntry(tr("Starting game editing...\n"), Info);
+
+    QStringList arguments;
+    arguments.append("EDIT");
+
+    arguments.append(filePath);
+
+    if (!parameters.ID.isEmpty()) {
+        arguments.append("--id");
+        arguments.append(parameters.ID);
+    }
+
+    if (!parameters.Name.isEmpty()) {
+        arguments.append("--name");
+        arguments.append(parameters.Name);
+    }
+
+    arguments.append("--region");
+    arguments.append(parameters.Region);
+
+    if (!parameters.IOS.isEmpty()) {
+        arguments.append("--ios");
+        arguments.append(parameters.IOS);
+    }
+
+    arguments.append("--modify");
+    arguments.append(parameters.Modify);
+
+    arguments.append("--enc");
+    arguments.append(parameters.EncodingMode);
+
+    arguments.append("--common-key");
+    arguments.append(parameters.CommonKey);
+
+    emit newWitCommandLineLogEntry("wit", arguments);
+
+    witProcess = new QProcess();
+    witProcess->start(wit, arguments);
+
+    if (!witProcess->waitForFinished(-1)) {
+        if (witProcess->errorString().contains("No such file or directory")) {
+            emit showStatusBarMessage(tr("Wiimms ISO Tool not found!"));
+            emit newLogEntry(tr("Wiimms ISO Tool not found!"), Error);
+            emit editGameImage_finished(WiTools::NoSuchFileOrDirectory);
+        }
+        else {
+            emit showStatusBarMessage(tr("Edit game image failed!"));
+            emit newLogEntry(tr("Edit game image failed! (status: %1, code: %2,  %3)").arg(QString::number(witProcess->exitStatus()), QString::number(witProcess->exitCode()), witProcess->errorString()), Error);
+            emit editGameImage_finished(WiTools::UnknownError);
+        }
+    }
+    else {
+        emit showStatusBarMessage(tr("Edit game image successfully!"));
+        emit newLogEntry(tr("Edit game image successfully!"), Info);
+        emit editGameImage_finished(WiTools::Ok);
+    }
+
+    delete witProcess;
+}
+
 void WiTools::setWit() {
     QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WiiBaFuSettings.value("WIT/PathToWIT", QVariant(DEFAULT_WIT_PATH)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":"));
 

@@ -44,6 +44,16 @@ public:
     void setOpenImageDirectory();
     void setOpenDirectory();
     void setOpenFile();
+    void setEditGame();
+    void setGameID(const QString gameID);
+    void setGameName(const QString gameName);
+    QString gameID();
+    QString gameName();
+    QString gameRegion();
+    QString gameIOS();
+    QString gameModify();
+    QString gameEncodingMode();
+    QString gameCommonKey();
     void setMacOSXStyle();
 
 private:
@@ -56,6 +66,7 @@ private slots:
     void on_comboBox_ImageFormat_currentIndexChanged(int index);
     void on_pushButton_Split_toggled(bool checked);
     void on_comboBox_compressionDefaults_currentIndexChanged(int index);
+    void on_comboBox_IOS_currentIndexChanged(int index);
 };
 
 #endif // WIIBAFUDIALOG_H

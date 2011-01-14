@@ -58,6 +58,16 @@ public:
         bool Test;
     };
 
+    struct GameEditParameters {
+        QString ID;
+        QString Name;
+        QString Region;
+        QString IOS;
+        QString Modify;
+        QString EncodingMode;
+        QString CommonKey;
+    };
+
     explicit WiTools(QObject *parent = 0);
 
     void requestFilesGameListModel(QStandardItemModel *model, const QString path, const int recurseDepth);
@@ -80,6 +90,8 @@ public:
     void dumpWBFS(const QString wbfsPath);
     void createWBFS(const CreateWBFSParameters parameters);
     void verifyGame(const int index, const QString wbfsPath, const QString game);
+
+    void editGameImage(const QString filePath, const WiTools::GameEditParameters parameters);
 
     QString witVersion();
     QString wwtVersion();
@@ -146,6 +158,8 @@ signals:
     void removeGamesFromWBFS_successfully();
 
     void verifyGame_finished(const WiTools::WitStatus);
+
+    void editGameImage_finished(const WiTools::WitStatus);
 
 public slots:
     void cancelTransfer();

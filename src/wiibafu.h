@@ -62,6 +62,7 @@ private:
     QStandardItemModel *wbfsListModel;
 
     void setupConnections();
+    void setupContextMenus();
     void setupMainProgressBar();
     void setupGeometry();
     void setMacOSXStyle();
@@ -156,6 +157,9 @@ private slots:
     void extractWBFS_finished(WiTools::WitStatus);
 
     void verifyGame_finished(WiTools::WitStatus);
+
+    void filesGame_Edit();
+    void filesGame_Edit_finished(WiTools::WitStatus status);
 
     void showGameDiscCover(const QImage gameCover);
     void showGame3DCover(const QImage gameCover);

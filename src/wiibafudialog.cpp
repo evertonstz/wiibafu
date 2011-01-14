@@ -199,6 +199,7 @@ void WiiBaFuDialog::on_comboBox_compressionDefaults_currentIndexChanged(int inde
 
 void WiiBaFuDialog::setOpenImageDirectory() {
     this->setWindowTitle(tr("Transfer games to image"));
+    ui->stackedWidget->setCurrentIndex(0);
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -220,6 +221,7 @@ void WiiBaFuDialog::setOpenImageDirectory() {
 
 void WiiBaFuDialog::setOpenDirectory() {
     this->setWindowTitle(tr("Extract game"));
+    ui->stackedWidget->setCurrentIndex(0);
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -241,6 +243,7 @@ void WiiBaFuDialog::setOpenDirectory() {
 
 void WiiBaFuDialog::setOpenFile() {
     this->setWindowTitle(tr("Transfer game to image"));
+    ui->stackedWidget->setCurrentIndex(0);
 
     ui->label_FilePath->setVisible(true);
     ui->lineEdit_FilePath->setVisible(true);
@@ -258,6 +261,154 @@ void WiiBaFuDialog::setOpenFile() {
     ui->label_SplitSize->setVisible(true);
     ui->lineEdit_SplitSize->setVisible(true);
     ui->pushButton_Split->setVisible(true);
+}
+
+void WiiBaFuDialog::setEditGame() {
+    this->setWindowTitle(tr("Edit game"));
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void WiiBaFuDialog::setGameID(const QString gameID) {
+    ui->lineEdit_ID->setText(gameID);
+}
+
+void WiiBaFuDialog::setGameName(const QString gameName) {
+    ui->lineEdit_Name->setText(gameName);
+}
+
+QString WiiBaFuDialog::gameID() {
+    return ui->lineEdit_ID->text();
+}
+
+QString WiiBaFuDialog::gameName() {
+    return ui->lineEdit_Name->text();
+}
+
+QString WiiBaFuDialog::gameRegion() {
+    switch (ui->comboBox_Region->currentIndex()) {
+        case 0:
+                return "AUTO";
+                break;
+        case 1:
+                return "JAPAN";
+                break;
+        case 2:
+                return "USA";
+                break;
+        case 3:
+                return "EUROPE";
+                break;
+        case 4:
+                return "KOREA";
+                break;
+        default:
+                return "AUTO";
+    }
+}
+
+void WiiBaFuDialog::on_comboBox_IOS_currentIndexChanged(int index) {
+    if (index == 0) {
+        ui->spinBox_HighIOS->setEnabled(false);
+        ui->spinBox_LowIOS->setEnabled(false);
+    }
+    else {
+        ui->spinBox_HighIOS->setEnabled(true);
+        ui->spinBox_LowIOS->setEnabled(true);
+    }
+}
+
+QString WiiBaFuDialog::gameIOS() {
+    switch (ui->comboBox_IOS->currentIndex()) {
+        case 0:
+                return "";
+                break;
+        case 1:
+                return QString("%1:%2").arg(ui->spinBox_HighIOS->value(), ui->spinBox_LowIOS->value());
+                break;
+        case 2:
+                return QString("%1-%2").arg(ui->spinBox_HighIOS->value(), ui->spinBox_LowIOS->value());
+                break;
+        case 3:
+                return QString::number(ui->spinBox_LowIOS->value());
+                break;
+        default:
+                return "";
+    }
+}
+
+QString WiiBaFuDialog::gameModify() {
+    switch (ui->comboBox_Modify->currentIndex()) {
+        case 0:
+                return "AUTO";
+                break;
+        case 1:
+                return "DISC";
+                break;
+        case 2:
+                return "BOOT";
+                break;
+        case 3:
+                return "TICKET";
+                break;
+        case 4:
+                return "TMD";
+                break;
+        case 5:
+                return "WBFS";
+                break;
+        case 6:
+                return "ALL";
+                break;
+        case 7:
+                return "NONE";
+                break;
+        default:
+                return "AUTO";
+    }
+}
+
+QString WiiBaFuDialog::gameEncodingMode() {
+    switch (ui->comboBox_EncodingMode->currentIndex()) {
+        case 0:
+                return "AUTO";
+                break;
+        case 1:
+                return "HASHONLY";
+                break;
+        case 2:
+                return "DECRYPT";
+                break;
+        case 3:
+                return "ENCRYPT";
+                break;
+        case 4:
+                return "SIGN";
+                break;
+        case 5:
+                return "NONE";
+                break;
+        default:
+                return "AUTO";
+    }
+}
+
+QString WiiBaFuDialog::gameCommonKey() {
+    switch (ui->comboBox_CommonKey->currentIndex()) {
+        case 0:
+                return "STANDARD";
+                break;
+        case 1:
+                return "KOREAN";
+                break;
+        case 2:
+                return "0";
+                break;
+        case 3:
+                return "1";
+                break;
+        default:
+                return "STANDARD";
+    }
 }
 
 void WiiBaFuDialog::setMacOSXStyle() {
