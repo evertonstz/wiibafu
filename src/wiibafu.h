@@ -158,8 +158,8 @@ private slots:
 
     void verifyGame_finished(WiTools::WitStatus);
 
-    void filesGame_Edit();
-    void filesGame_Edit_finished(WiTools::WitStatus status);
+    void filesGame_Patch();
+    void filesGame_Patch_finished(WiTools::WitStatus status);
 
     void showGameDiscCover(const QImage gameCover);
     void showGame3DCover(const QImage gameCover);

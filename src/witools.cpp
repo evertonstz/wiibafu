@@ -2109,8 +2109,8 @@ void WiTools::cancelVerifying() {
     witProcess->kill();
 }
 
-void WiTools::editGameImage(const QString filePath, const WiTools::GameEditParameters parameters) {
-    emit newLogEntry(tr("Starting game editing...\n"), Info);
+void WiTools::patchGameImage(const QString filePath, const WiTools::GamePatchParameters parameters) {
+    emit newLogEntry(tr("Starting game patching...\n"), Info);
 
     QStringList arguments;
     arguments.append("EDIT");
@@ -2153,18 +2153,18 @@ void WiTools::editGameImage(const QString filePath, const WiTools::GameEditParam
         if (witProcess->errorString().contains("No such file or directory")) {
             emit showStatusBarMessage(tr("Wiimms ISO Tool not found!"));
             emit newLogEntry(tr("Wiimms ISO Tool not found!"), Error);
-            emit editGameImage_finished(WiTools::NoSuchFileOrDirectory);
+            emit patchGameImage_finished(WiTools::NoSuchFileOrDirectory);
         }
         else {
-            emit showStatusBarMessage(tr("Edit game image failed!"));
-            emit newLogEntry(tr("Edit game image failed! (status: %1, code: %2,  %3)").arg(QString::number(witProcess->exitStatus()), QString::number(witProcess->exitCode()), witProcess->errorString()), Error);
-            emit editGameImage_finished(WiTools::UnknownError);
+            emit showStatusBarMessage(tr("Patch game image failed!"));
+            emit newLogEntry(tr("Patch game image failed! (status: %1, code: %2,  %3)").arg(QString::number(witProcess->exitStatus()), QString::number(witProcess->exitCode()), witProcess->errorString()), Error);
+            emit patchGameImage_finished(WiTools::UnknownError);
         }
     }
     else {
-        emit showStatusBarMessage(tr("Edit game image successfully!"));
-        emit newLogEntry(tr("Edit game image successfully!"), Info);
-        emit editGameImage_finished(WiTools::Ok);
+        emit showStatusBarMessage(tr("Patch game image successfully!"));
+        emit newLogEntry(tr("Patch game image successfully!"), Info);
+        emit patchGameImage_finished(WiTools::Ok);
     }
 
     delete witProcess;

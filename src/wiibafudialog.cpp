@@ -200,6 +200,7 @@ void WiiBaFuDialog::on_comboBox_compressionDefaults_currentIndexChanged(int inde
 void WiiBaFuDialog::setOpenImageDirectory() {
     this->setWindowTitle(tr("Transfer games to image"));
     ui->stackedWidget->setCurrentIndex(0);
+    ui->pushButton_Patch->setVisible(true);
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -222,6 +223,7 @@ void WiiBaFuDialog::setOpenImageDirectory() {
 void WiiBaFuDialog::setOpenDirectory() {
     this->setWindowTitle(tr("Extract game"));
     ui->stackedWidget->setCurrentIndex(0);
+    ui->pushButton_Patch->setVisible(true);
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -244,6 +246,7 @@ void WiiBaFuDialog::setOpenDirectory() {
 void WiiBaFuDialog::setOpenFile() {
     this->setWindowTitle(tr("Transfer game to image"));
     ui->stackedWidget->setCurrentIndex(0);
+    ui->pushButton_Patch->setVisible(true);
 
     ui->label_FilePath->setVisible(true);
     ui->lineEdit_FilePath->setVisible(true);
@@ -263,9 +266,10 @@ void WiiBaFuDialog::setOpenFile() {
     ui->pushButton_Split->setVisible(true);
 }
 
-void WiiBaFuDialog::setEditGame() {
-    this->setWindowTitle(tr("Edit game"));
+void WiiBaFuDialog::setPatchGame() {
+    this->setWindowTitle(tr("Patch game"));
     ui->stackedWidget->setCurrentIndex(1);
+    ui->pushButton_Patch->setVisible(false);
 }
 
 void WiiBaFuDialog::setGameID(const QString gameID) {
@@ -304,6 +308,10 @@ QString WiiBaFuDialog::gameRegion() {
         default:
                 return "AUTO";
     }
+}
+
+void WiiBaFuDialog::on_pushButton_Patch_toggled(bool checked) {
+    checked ? ui->stackedWidget->setCurrentIndex(1) : ui->stackedWidget->setCurrentIndex(0);
 }
 
 void WiiBaFuDialog::on_comboBox_IOS_currentIndexChanged(int index) {
@@ -424,6 +432,16 @@ void WiiBaFuDialog::setMacOSXStyle() {
 
         this->setAttribute(Qt::WA_MacBrushedMetal, false);
     }
+}
+
+bool WiiBaFuDialog::event(QEvent *event) {
+    if (event->type() == QEvent::Hide) {
+        if (ui->stackedWidget->currentIndex() == 1) {
+            ui->pushButton_Patch->setChecked(false);
+        }
+    }
+
+    return QDialog::event(event);
 }
 
 WiiBaFuDialog::~WiiBaFuDialog() {

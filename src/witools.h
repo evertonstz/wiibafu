@@ -58,7 +58,7 @@ public:
         bool Test;
     };
 
-    struct GameEditParameters {
+    struct GamePatchParameters {
         QString ID;
         QString Name;
         QString Region;
@@ -91,7 +91,7 @@ public:
     void createWBFS(const CreateWBFSParameters parameters);
     void verifyGame(const int index, const QString wbfsPath, const QString game);
 
-    void editGameImage(const QString filePath, const WiTools::GameEditParameters parameters);
+    void patchGameImage(const QString filePath, const WiTools::GamePatchParameters parameters);
 
     QString witVersion();
     QString wwtVersion();
@@ -159,7 +159,7 @@ signals:
 
     void verifyGame_finished(const WiTools::WitStatus);
 
-    void editGameImage_finished(const WiTools::WitStatus);
+    void patchGameImage_finished(const WiTools::WitStatus);
 
 public slots:
     void cancelTransfer();

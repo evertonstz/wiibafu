@@ -44,7 +44,7 @@ public:
     void setOpenImageDirectory();
     void setOpenDirectory();
     void setOpenFile();
-    void setEditGame();
+    void setPatchGame();
     void setGameID(const QString gameID);
     void setGameName(const QString gameName);
     QString gameID();
@@ -59,6 +59,7 @@ public:
 private:
     Ui::WiiBaFuDialog *ui;
     void setCurrentImageFormat(const QString path);
+    bool event(QEvent *event);
 
 private slots:
     void on_pushButton_Open_clicked();
@@ -66,6 +67,7 @@ private slots:
     void on_comboBox_ImageFormat_currentIndexChanged(int index);
     void on_pushButton_Split_toggled(bool checked);
     void on_comboBox_compressionDefaults_currentIndexChanged(int index);
+    void on_pushButton_Patch_toggled(bool checked);
     void on_comboBox_IOS_currentIndexChanged(int index);
 };
 

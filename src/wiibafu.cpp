@@ -117,7 +117,7 @@ void WiiBaFu::setupConnections() {
 
     connect(wiTools, SIGNAL(verifyGame_finished(WiTools::WitStatus)), this, SLOT(verifyGame_finished(WiTools::WitStatus)));
 
-    connect(wiTools, SIGNAL(editGameImage_finished(WiTools::WitStatus)), this, SLOT(filesGame_Edit_finished(WiTools::WitStatus)));
+    connect(wiTools, SIGNAL(patchGameImage_finished(WiTools::WitStatus)), this, SLOT(filesGame_Patch_finished(WiTools::WitStatus)));
 
     connect(wiTools, SIGNAL(stopBusy()), this, SLOT(stopMainProgressBarBusy()));
 
@@ -140,7 +140,7 @@ void WiiBaFu::setupContextMenus() {
     QAction *action_filesGame_TransferToImage = new QAction(tr("Transfer to &image"), this);
     QAction *action_filesGame_ExtractImage = new QAction(tr("E&xtract image"), this);
     QAction *action_filesGame_Verify = new QAction(tr("&Verify game"), this);
-    QAction *action_filesGame_Edit = new QAction(tr("&Edit"), this);
+    QAction *action_filesGame_Patch = new QAction(tr("&Patch"), this);
     QAction *action_filesGame_ShowInfo = new QAction(tr("Show i&nfo"), this);
     QAction *action_filesGame_Seperator1 = new QAction(this);
     QAction *action_filesGame_Seperator2 = new QAction(this);
@@ -158,7 +158,7 @@ void WiiBaFu::setupContextMenus() {
     connect(action_filesGame_TransferToImage, SIGNAL(triggered()), this, SLOT(on_filesTab_pushButton_TransferToImage_clicked()));
     connect(action_filesGame_ExtractImage, SIGNAL(triggered()), this, SLOT(on_filesTab_pushButton_ExtractImage_clicked()));
     connect(action_filesGame_Verify, SIGNAL(triggered()), this, SLOT(on_menuTools_VerifyGame_triggered()));
-    connect(action_filesGame_Edit, SIGNAL(triggered()), this, SLOT(filesGame_Edit()));
+    connect(action_filesGame_Patch, SIGNAL(triggered()), this, SLOT(filesGame_Patch()));
     connect(action_filesGame_ShowInfo, SIGNAL(triggered()), this, SLOT(on_filesTab_pushButton_ShowInfo_clicked()));
 
     connect(action_wbfsGame_Transfer, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_Transfer_clicked()));
@@ -171,7 +171,7 @@ void WiiBaFu::setupContextMenus() {
     ui->filesTab_tableView->addAction(action_filesGame_ExtractImage);
     ui->filesTab_tableView->addAction(action_filesGame_Verify);
     ui->filesTab_tableView->addAction(action_filesGame_Seperator1);
-    ui->filesTab_tableView->addAction(action_filesGame_Edit);
+    ui->filesTab_tableView->addAction(action_filesGame_Patch);
     ui->filesTab_tableView->addAction(action_filesGame_Seperator2);
     ui->filesTab_tableView->addAction(action_filesGame_ShowInfo);
 
@@ -892,13 +892,13 @@ void WiiBaFu::verifyGame_finished(WiTools::WitStatus) {
     ui->tabWidget->setCurrentIndex(4);
 }
 
-void WiiBaFu::filesGame_Edit() {
-    wiibafudialog->setEditGame();
+void WiiBaFu::filesGame_Patch() {
+    wiibafudialog->setPatchGame();
     wiibafudialog->setGameID(filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(0).first())->text());
     wiibafudialog->setGameName(filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(1).first())->text());
 
     if ( wiibafudialog->exec() == QDialog::Accepted) {
-        WiTools::GameEditParameters parameters;
+        WiTools::GamePatchParameters parameters;
 
         if (wiibafudialog->gameID() == filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(0).first())->text()) {
             parameters.ID = "";
@@ -920,11 +920,11 @@ void WiiBaFu::filesGame_Edit() {
         parameters.EncodingMode = wiibafudialog->gameEncodingMode();
         parameters.CommonKey = wiibafudialog->gameCommonKey();
 
-        QtConcurrent::run(wiTools, &WiTools::editGameImage, filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(10).first())->text(), parameters);
+        QtConcurrent::run(wiTools, &WiTools::patchGameImage, filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(10).first())->text(), parameters);
     }
 }
 
-void WiiBaFu::filesGame_Edit_finished(WiTools::WitStatus status) {
+void WiiBaFu::filesGame_Patch_finished(WiTools::WitStatus status) {
     if (status == WiTools::Ok) {
         emit startBusy();
         ui->filesTab_pushButton_Load->setText(tr("&Cancel loading"));
