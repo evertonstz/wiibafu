@@ -59,6 +59,7 @@ public:
     };
 
     struct GamePatchParameters {
+        bool patch;
         QString ID;
         QString Name;
         QString Region;
@@ -68,15 +69,24 @@ public:
         QString CommonKey;
     };
 
+    struct TransferFilesToImageParameters {
+        QModelIndexList IndexList;
+        QString Format;
+        QString Compression;
+        QString Directory;
+        QString SplitSize;
+        WiTools::GamePatchParameters PatchParameters;
+    };
+
     explicit WiTools(QObject *parent = 0);
 
     void requestFilesGameListModel(QStandardItemModel *model, const QString path, const int recurseDepth);
     void requestDVDGameListModel(QStandardItemModel *model, const QString path);
     void requestWBFSGameListModel(QStandardItemModel *model, const QString wbfsPath);
 
-    void transferFilesToWBFS(const QModelIndexList indexList, const QString wbfsPath);
-    void transferFilesToImage(const QModelIndexList indexList, const QString format, const QString compression, const QString directory, const QString splitSize);
-    void extractImage(const QModelIndexList indexList, const QString destination);
+    void transferFilesToWBFS(const QModelIndexList indexList, const QString wbfsPath, const WiTools::GamePatchParameters parameters);
+    void transferFilesToImage(WiTools::TransferFilesToImageParameters transferParameters);
+    void extractImage(const QModelIndexList indexList, const QString destination, const WiTools::GamePatchParameters patchParameters);
 
     void transferDVDToWBFS(const QString dvdPath, const QString wbfsPath);
     void transferDVDToImage(const QString dvdPath, const QString format, const QString compression, const QString directory, const QString splitSize);

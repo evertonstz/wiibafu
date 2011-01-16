@@ -61,6 +61,14 @@ private:
     QStandardItemModel *dvdListModel;
     QStandardItemModel *wbfsListModel;
 
+    QAction *action_filesGame_TransferToWBFS_Patch;
+    QAction *action_filesGame_TransferToImage_Patch;
+    QAction *action_filesGame_ExtractImage_Patch;
+    QAction *action_filesGame_Patch;
+
+    QAction *action_wbfsGame_Transfer_Patch;
+    QAction *action_wbfsGame_Extract_Patch;
+
     void setupConnections();
     void setupContextMenus();
     void setupMainProgressBar();
@@ -135,6 +143,14 @@ private slots:
     void on_logTab_pushButton_Copy_clicked();
     void on_logTab_pushButton_Find_clicked();
     void on_logTab_pushButton_Save_clicked();
+
+    void filesTab_ContextMenu_TransferToWBFS_Patch();
+    void filesTab_ContextMenu_TransferToImage_Patch();
+    void filesTab_ContextMenu_ExtractImage_Path();
+
+    void filesTab_TransferToWBFS(const bool patch);
+    void filesTab_TransferToImage(const bool patch);
+    void filesTab_ExtractImage(const bool patch);
 
     void filesTableView_selectionChanged(const QItemSelection selected, const QItemSelection deselected);
     void wbfsTableView_selectionChanged(const QItemSelection selected, const QItemSelection deselected);

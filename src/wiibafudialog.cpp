@@ -197,10 +197,10 @@ void WiiBaFuDialog::on_comboBox_compressionDefaults_currentIndexChanged(int inde
     }
 }
 
-void WiiBaFuDialog::setOpenImageDirectory() {
+void WiiBaFuDialog::setOpenImageDirectory(const bool patch) {
     this->setWindowTitle(tr("Transfer games to image"));
     ui->stackedWidget->setCurrentIndex(0);
-    ui->pushButton_Patch->setVisible(true);
+    ui->pushButton_Patch->setVisible(patch);
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -220,10 +220,10 @@ void WiiBaFuDialog::setOpenImageDirectory() {
     ui->pushButton_OpenFile->setVisible(false);
 }
 
-void WiiBaFuDialog::setOpenDirectory() {
+void WiiBaFuDialog::setOpenDirectory(const bool patch) {
     this->setWindowTitle(tr("Extract game"));
     ui->stackedWidget->setCurrentIndex(0);
-    ui->pushButton_Patch->setVisible(true);
+    ui->pushButton_Patch->setVisible(patch);
 
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
@@ -243,10 +243,10 @@ void WiiBaFuDialog::setOpenDirectory() {
     ui->pushButton_Split->setVisible(false);
 }
 
-void WiiBaFuDialog::setOpenFile() {
+void WiiBaFuDialog::setOpenFile(const bool patch) {
     this->setWindowTitle(tr("Transfer game to image"));
     ui->stackedWidget->setCurrentIndex(0);
-    ui->pushButton_Patch->setVisible(true);
+    ui->pushButton_Patch->setVisible(patch);
 
     ui->label_FilePath->setVisible(true);
     ui->lineEdit_FilePath->setVisible(true);

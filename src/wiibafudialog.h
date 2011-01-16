@@ -41,9 +41,9 @@ public:
     QString splitSize();
     QString imageFormat();
     QString compression();
-    void setOpenImageDirectory();
-    void setOpenDirectory();
-    void setOpenFile();
+    void setOpenImageDirectory(const bool patch);
+    void setOpenDirectory(const bool patch);
+    void setOpenFile(const bool patch);
     void setPatchGame();
     void setGameID(const QString gameID);
     void setGameName(const QString gameName);
