@@ -59,7 +59,7 @@ public:
     };
 
     struct GamePatchParameters {
-        bool patch;
+        bool Patch;
         QString ID;
         QString Name;
         QString Region;
@@ -88,9 +88,9 @@ public:
     void transferFilesToImage(WiTools::TransferFilesToImageParameters transferParameters);
     void extractImage(const QModelIndexList indexList, const QString destination, const WiTools::GamePatchParameters patchParameters);
 
-    void transferDVDToWBFS(const QString dvdPath, const QString wbfsPath);
-    void transferDVDToImage(const QString dvdPath, const QString format, const QString compression, const QString directory, const QString splitSize);
-    void extractDVD(const QString dvdPath, const QString destination);
+    void transferDVDToWBFS(const QString dvdPath, const QString wbfsPath, const WiTools::GamePatchParameters patchParameters);
+    void transferDVDToImage(const QString dvdPath, const WiTools::TransferFilesToImageParameters transferParameters);
+    void extractDVD(const QString dvdPath, const QString destination, const WiTools::GamePatchParameters patchParameters);
 
     void transferWBFSToImage(const QModelIndexList indexList, const QStringList options);
     void extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination);

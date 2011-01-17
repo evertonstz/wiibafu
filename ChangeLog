@@ -1,5 +1,6 @@
-2011-01-16 Kai Heitkamp <dynup@ymail.com>
+2011-01-17 Kai Heitkamp <dynup@ymail.com>
  Version 1.1 (wit v1.25b r2143)
+  * Patch game while transfer (DVD->WBFS, DVD->image, DVD->extract)
   * Patch game while transfer (image->WBFS, image->image, image->extract)
   * Patch game image
   * Progress infos in main window title on mac

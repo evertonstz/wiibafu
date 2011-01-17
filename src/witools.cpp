@@ -581,7 +581,7 @@ void WiTools::transferFilesToWBFS(const QModelIndexList indexList, const QString
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
-    if (parameters.patch) {
+    if (parameters.Patch) {
         emit newLogEntry(tr("Preparing transfer files to WBFS with patching.\n"), Info);
     }
     else {
@@ -655,7 +655,7 @@ void WiTools::transferFilesToWBFS(const QModelIndexList indexList, const QString
         arguments.append(pselModes);
     }
 
-    if (parameters.patch) {
+    if (parameters.Patch) {
         if (!parameters.ID.isEmpty()) {
             arguments.append("--id");
             arguments.append(parameters.ID);
@@ -759,7 +759,7 @@ void WiTools::transferFilesToImage(WiTools::TransferFilesToImageParameters trans
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (!transferParameters.Compression.isEmpty()) {
-        if (transferParameters.PatchParameters.patch) {
+        if (transferParameters.PatchParameters.Patch) {
             emit newLogEntry(tr("Starting transfer files to image in format '%1' with compression '%2' and patching.\n").arg(transferParameters.Format, transferParameters.Compression), Info);
         }
         else {
@@ -767,7 +767,7 @@ void WiTools::transferFilesToImage(WiTools::TransferFilesToImageParameters trans
         }
     }
     else {
-        if (transferParameters.PatchParameters.patch) {
+        if (transferParameters.PatchParameters.Patch) {
             emit newLogEntry(tr("Starting transfer files to image in format '%1' with patching.\n").arg(transferParameters.Format), Info);
         }
         else {
@@ -853,7 +853,7 @@ void WiTools::transferFilesToImage(WiTools::TransferFilesToImageParameters trans
         arguments.append(transferParameters.SplitSize);
     }
 
-    if (transferParameters.PatchParameters.patch) {
+    if (transferParameters.PatchParameters.Patch) {
         if (!transferParameters.PatchParameters.ID.isEmpty()) {
             arguments.append("--id");
             arguments.append(transferParameters.PatchParameters.ID);
@@ -981,7 +981,7 @@ void WiTools::extractImage(const QModelIndexList indexList, const QString destin
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing extraction..."));
 
-    if (patchParameters.patch) {
+    if (patchParameters.Patch) {
         emit newLogEntry(tr("Starting image extraction with patching.\n"), Info);
     }
     else {
@@ -1040,7 +1040,7 @@ void WiTools::extractImage(const QModelIndexList indexList, const QString destin
         arguments.append(pselModes);
     }
 
-    if (patchParameters.patch) {
+    if (patchParameters.Patch) {
         if (!patchParameters.ID.isEmpty()) {
             arguments.append("--id");
             arguments.append(patchParameters.ID);
@@ -1169,11 +1169,17 @@ void WiTools::extractImage_finished(const int exitCode, const QProcess::ExitStat
     delete witProcess;
 }
 
-void WiTools::transferDVDToWBFS(const QString dvdPath, const QString wbfsPath) {
+void WiTools::transferDVDToWBFS(const QString dvdPath, const QString wbfsPath, const WiTools::GamePatchParameters patchParameters) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
-    emit newLogEntry(tr("Starting transfer DVD to WBFS.\n"), Info);
+
+    if (patchParameters.Patch) {
+        emit newLogEntry(tr("Starting transfer DVD to WBFS with patching.\n"), Info);
+    }
+    else {
+        emit newLogEntry(tr("Starting transfer DVD to WBFS.\n"), Info);
+    }
 
     QStringList arguments;
     arguments.append("ADD");
@@ -1238,6 +1244,35 @@ void WiTools::transferDVDToWBFS(const QString dvdPath, const QString wbfsPath) {
         }
 
         arguments.append(pselModes);
+    }
+
+    if (patchParameters.Patch) {
+        if (!patchParameters.ID.isEmpty()) {
+            arguments.append("--id");
+            arguments.append(patchParameters.ID);
+        }
+
+        if (!patchParameters.Name.isEmpty()) {
+            arguments.append("--name");
+            arguments.append(patchParameters.Name);
+        }
+
+        arguments.append("--region");
+        arguments.append(patchParameters.Region);
+
+        if (!patchParameters.IOS.isEmpty()) {
+            arguments.append("--ios");
+            arguments.append(patchParameters.IOS);
+        }
+
+        arguments.append("--modify");
+        arguments.append(patchParameters.Modify);
+
+        arguments.append("--enc");
+        arguments.append(patchParameters.EncodingMode);
+
+        arguments.append("--common-key");
+        arguments.append(patchParameters.CommonKey);
     }
 
     arguments.append("--progress");
@@ -1309,16 +1344,26 @@ void WiTools::transferDVDToWBFS_finished(const int exitCode, const QProcess::Exi
     delete witProcess;
 }
 
-void WiTools::transferDVDToImage(const QString dvdPath, const QString format, const QString compression, const QString directory, const QString splitSize) {
+void WiTools::transferDVDToImage(const QString dvdPath, const WiTools::TransferFilesToImageParameters transferParameters) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
-    if (!compression.isEmpty()) {
-        emit newLogEntry(tr("Starting transfer DVD to image in format '%1' with compression '%2'.\n").arg(format, compression), Info);
+    if (!transferParameters.Compression.isEmpty()) {
+        if (transferParameters.PatchParameters.Patch) {
+            emit newLogEntry(tr("Starting transfer DVD to image in format '%1' with compression '%2' and patching.\n").arg(transferParameters.Format, transferParameters.Compression), Info);
+        }
+        else {
+            emit newLogEntry(tr("Starting transfer DVD to image in format '%1' with compression '%2'.\n").arg(transferParameters.Format, transferParameters.Compression), Info);
+        }
     }
     else {
-        emit newLogEntry(tr("Starting transfer DVD to image in format '%1'.\n").arg(format), Info);
+        if (transferParameters.PatchParameters.Patch) {
+            emit newLogEntry(tr("Starting transfer DVD to image in format '%1' with patching.\n").arg(transferParameters.Format), Info);
+        }
+        else {
+            emit newLogEntry(tr("Starting transfer DVD to image in format '%1'.\n").arg(transferParameters.Format), Info);
+        }
     }
 
     QStringList arguments;
@@ -1326,22 +1371,22 @@ void WiTools::transferDVDToImage(const QString dvdPath, const QString format, co
 
     arguments.append(dvdPath);
 
-    if (format.contains("wia")) {
+    if (transferParameters.Format.contains("wia")) {
         QString tmpstr = "--wia=";
 
-        if (compression.isEmpty()) {
+        if (transferParameters.Compression.isEmpty()) {
             arguments.append(tmpstr.append("DEFAULT"));
         }
         else {
-            arguments.append(tmpstr.append(compression));
+            arguments.append(tmpstr.append(transferParameters.Compression));
         }
     }
     else {
-        arguments.append(QString("--").append(format));
+        arguments.append(QString("--").append(transferParameters.Format));
     }
 
     arguments.append("--dest");
-    arguments.append(directory);
+    arguments.append(transferParameters.Directory);
 
     if (WiiBaFuSettings.value("TransferToImageFST/Test", QVariant(false)).toBool()) {
         arguments.append("--test");
@@ -1359,10 +1404,39 @@ void WiTools::transferDVDToImage(const QString dvdPath, const QString format, co
         arguments.append("--diff");
     }
 
-    if (!splitSize.isEmpty()) {
+    if (!transferParameters.SplitSize.isEmpty()) {
         arguments.append("--split");
         arguments.append("--split-size");
-        arguments.append(splitSize);
+        arguments.append(transferParameters.SplitSize);
+    }
+
+    if (transferParameters.PatchParameters.Patch) {
+        if (!transferParameters.PatchParameters.ID.isEmpty()) {
+            arguments.append("--id");
+            arguments.append(transferParameters.PatchParameters.ID);
+        }
+
+        if (!transferParameters.PatchParameters.Name.isEmpty()) {
+            arguments.append("--name");
+            arguments.append(transferParameters.PatchParameters.Name);
+        }
+
+        arguments.append("--region");
+        arguments.append(transferParameters.PatchParameters.Region);
+
+        if (!transferParameters.PatchParameters.IOS.isEmpty()) {
+            arguments.append("--ios");
+            arguments.append(transferParameters.PatchParameters.IOS);
+        }
+
+        arguments.append("--modify");
+        arguments.append(transferParameters.PatchParameters.Modify);
+
+        arguments.append("--enc");
+        arguments.append(transferParameters.PatchParameters.EncodingMode);
+
+        arguments.append("--common-key");
+        arguments.append(transferParameters.PatchParameters.CommonKey);
     }
 
     arguments.append("--section");
@@ -1458,11 +1532,17 @@ void WiTools::transferDVDToImage_finished(const int exitCode, const QProcess::Ex
     delete witProcess;
 }
 
-void WiTools::extractDVD(const QString dvdPath, const QString destination) {
+void WiTools::extractDVD(const QString dvdPath, const QString destination, const WiTools::GamePatchParameters patchParameters) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing extraction..."));
-    emit newLogEntry(tr("Starting DVD extraction.\n"), Info);
+
+    if (patchParameters.Patch) {
+        emit newLogEntry(tr("Starting DVD extraction with patching.\n"), Info);
+    }
+    else {
+        emit newLogEntry(tr("Starting DVD extraction.\n"), Info);
+    }
 
     QStringList arguments;
     arguments.append("COPY");
@@ -1516,6 +1596,35 @@ void WiTools::extractDVD(const QString dvdPath, const QString destination) {
         }
 
         arguments.append(pselModes);
+    }
+
+    if (patchParameters.Patch) {
+        if (!patchParameters.ID.isEmpty()) {
+            arguments.append("--id");
+            arguments.append(patchParameters.ID);
+        }
+
+        if (!patchParameters.Name.isEmpty()) {
+            arguments.append("--name");
+            arguments.append(patchParameters.Name);
+        }
+
+        arguments.append("--region");
+        arguments.append(patchParameters.Region);
+
+        if (!patchParameters.IOS.isEmpty()) {
+            arguments.append("--ios");
+            arguments.append(patchParameters.IOS);
+        }
+
+        arguments.append("--modify");
+        arguments.append(patchParameters.Modify);
+
+        arguments.append("--enc");
+        arguments.append(patchParameters.EncodingMode);
+
+        arguments.append("--common-key");
+        arguments.append(patchParameters.CommonKey);
     }
 
     arguments.append("--section");

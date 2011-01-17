@@ -530,9 +530,44 @@ void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
 void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
     if (!ui->dvdTab_pushButton_TransferToWBFS->text().contains(tr("&Cancel transfering"))) {
         if (dvdListModel->rowCount() > 0) {
-            ui->dvdTab_pushButton_TransferToWBFS->setText(tr("&Cancel transfering"));
+            WiTools::GamePatchParameters patchParameters;
+            patchParameters.Patch = false;
 
-            QtConcurrent::run(wiTools, &WiTools::transferDVDToWBFS, dvdListModel->index(15, 0).data().toString(), wbfsPath());
+            if (ui->dvdTab_pushButton_Patch->isChecked()) {
+                wiibafudialog->setPatchGame();
+                wiibafudialog->setGameID(dvdListModel->index(0, 0).data().toString());
+                wiibafudialog->setGameName(dvdListModel->index(1, 0).data().toString());
+
+                if (wiibafudialog->exec() == QDialog::Accepted) {
+                    patchParameters.Patch = true;
+
+                    if (wiibafudialog->gameID() == dvdListModel->index(0, 0).data().toString()) {
+                        patchParameters.ID = "";
+                    }
+                    else {
+                        patchParameters.ID = wiibafudialog->gameID();
+                    }
+
+                    if (wiibafudialog->gameName() == dvdListModel->index(1, 0).data().toString()) {
+                        patchParameters.Name = "";
+                    }
+                    else {
+                        patchParameters.Name = wiibafudialog->gameName();
+                    }
+
+                    patchParameters.Region = wiibafudialog->gameRegion();
+                    patchParameters.IOS = wiibafudialog->gameIOS();
+                    patchParameters.Modify = wiibafudialog->gameModify();
+                    patchParameters.EncodingMode = wiibafudialog->gameEncodingMode();
+                    patchParameters.CommonKey = wiibafudialog->gameCommonKey();
+                }
+                else {
+                    return;
+                }
+            }
+
+            ui->dvdTab_pushButton_TransferToWBFS->setText(tr("&Cancel transfering"));
+            QtConcurrent::run(wiTools, &WiTools::transferDVDToWBFS, dvdListModel->index(15, 0).data().toString(), wbfsPath(), patchParameters);
         }
     }
     else {
@@ -543,21 +578,51 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToWBFS_clicked() {
 void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
     if (!ui->dvdTab_pushButton_TransferToImage->text().contains(tr("&Cancel transfering"))) {
         if (dvdListModel->rowCount() > 0) {
-            wiibafudialog->setOpenFile(false);
+            wiibafudialog->setOpenFile(ui->dvdTab_pushButton_Patch->isChecked());
+            wiibafudialog->setGameID(dvdListModel->index(0, 0).data().toString());
+            wiibafudialog->setGameName(dvdListModel->index(1, 0).data().toString());
 
             if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->filePath().isEmpty()) {
-                QString filePath = wiibafudialog->filePath();
-                QString format = wiibafudialog->imageFormat();
-                QString compression = wiibafudialog->compression();
-                QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
-                QString splitSize = "";
+                WiTools::GamePatchParameters patchParameters;
+                WiTools::TransferFilesToImageParameters transferParameters;
+                patchParameters.Patch = false;
+
+                if (ui->dvdTab_pushButton_Patch->isChecked()) {
+                    patchParameters.Patch = true;
+
+                    if (wiibafudialog->gameID() == dvdListModel->index(0, 0).data().toString()) {
+                        patchParameters.ID = "";
+                    }
+                    else {
+                        patchParameters.ID = wiibafudialog->gameID();
+                    }
+
+                    if (wiibafudialog->gameName() == dvdListModel->index(1, 0).data().toString()) {
+                        patchParameters.Name = "";
+                    }
+                    else {
+                        patchParameters.Name = wiibafudialog->gameName();
+                    }
+
+                    patchParameters.Region = wiibafudialog->gameRegion();
+                    patchParameters.IOS = wiibafudialog->gameIOS();
+                    patchParameters.Modify = wiibafudialog->gameModify();
+                    patchParameters.EncodingMode = wiibafudialog->gameEncodingMode();
+                    patchParameters.CommonKey = wiibafudialog->gameCommonKey();
+                }
+
+                transferParameters.Directory = wiibafudialog->filePath();
+                transferParameters.Format = wiibafudialog->imageFormat();
+                transferParameters.Compression = wiibafudialog->compression();
+                transferParameters.SplitSize = "";
+                transferParameters.PatchParameters = patchParameters;
 
                 if (wiibafudialog->split()) {
-                    splitSize = wiibafudialog->splitSize();
+                    transferParameters.SplitSize = wiibafudialog->splitSize();
                 }
 
                 ui->dvdTab_pushButton_TransferToImage->setText(tr("&Cancel transfering"));
-                QtConcurrent::run(wiTools, &WiTools::transferDVDToImage, dvdPath, format, compression, filePath, splitSize);
+                QtConcurrent::run(wiTools, &WiTools::transferDVDToImage, WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString(), transferParameters);
             }
         }
     }
@@ -569,14 +634,40 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
 void WiiBaFu::on_dvdTab_pushButton_Extract_clicked() {
     if (!ui->dvdTab_pushButton_Extract->text().contains(tr("&Cancel extracting"))) {
         if (dvdListModel->rowCount() > 0) {
-            wiibafudialog->setOpenDirectory(false);
+            wiibafudialog->setOpenDirectory(ui->dvdTab_pushButton_Patch->isChecked());
+            wiibafudialog->setGameID(dvdListModel->index(0, 0).data().toString());
+            wiibafudialog->setGameName(dvdListModel->index(1, 0).data().toString());
 
             if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
-                QString directory = buildPath(wiibafudialog->directory(), dvdListModel, ui->dvdTab_tableView);
-                QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
+                WiTools::GamePatchParameters patchParameters;
+                patchParameters.Patch = false;
+
+                if (ui->dvdTab_pushButton_Patch->isChecked()) {
+                    patchParameters.Patch = true;
+
+                    if (wiibafudialog->gameID() == dvdListModel->index(0, 0).data().toString()) {
+                        patchParameters.ID = "";
+                    }
+                    else {
+                        patchParameters.ID = wiibafudialog->gameID();
+                    }
+
+                    if (wiibafudialog->gameName() == dvdListModel->index(1, 0).data().toString()) {
+                        patchParameters.Name = "";
+                    }
+                    else {
+                        patchParameters.Name = wiibafudialog->gameName();
+                    }
+
+                    patchParameters.Region = wiibafudialog->gameRegion();
+                    patchParameters.IOS = wiibafudialog->gameIOS();
+                    patchParameters.Modify = wiibafudialog->gameModify();
+                    patchParameters.EncodingMode = wiibafudialog->gameEncodingMode();
+                    patchParameters.CommonKey = wiibafudialog->gameCommonKey();
+                }
 
                 ui->dvdTab_pushButton_Extract->setText(tr("&Cancel extracting"));
-                QtConcurrent::run(wiTools, &WiTools::extractDVD, dvdPath, directory);
+                QtConcurrent::run(wiTools, &WiTools::extractDVD, WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString(), buildPath(wiibafudialog->directory(), dvdListModel, ui->dvdTab_tableView), patchParameters);
             }
         }
     }
@@ -806,7 +897,7 @@ void WiiBaFu::filesTab_ContextMenu_ExtractImage_Path() {
 
 void WiiBaFu::filesTab_TransferToWBFS(const bool patch) {
     WiTools::GamePatchParameters parameters;
-    parameters.patch = false;
+    parameters.Patch = false;
 
     if (patch) {
         wiibafudialog->setPatchGame();
@@ -814,7 +905,7 @@ void WiiBaFu::filesTab_TransferToWBFS(const bool patch) {
         wiibafudialog->setGameName(filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(1).first())->text());
 
         if (wiibafudialog->exec() == QDialog::Accepted) {
-            parameters.patch = true;
+            parameters.Patch = true;
 
             if (wiibafudialog->gameID() == filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(0).first())->text()) {
                 parameters.ID = "";
@@ -853,10 +944,10 @@ void WiiBaFu::filesTab_TransferToImage(const bool patch) {
     if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
         WiTools::GamePatchParameters patchParameters;
         WiTools::TransferFilesToImageParameters transferParameters;
-        patchParameters.patch = false;
+        patchParameters.Patch = false;
 
         if (patch) {
-            patchParameters.patch = true;
+            patchParameters.Patch = true;
 
             if (wiibafudialog->gameID() == filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(0).first())->text()) {
                 patchParameters.ID = "";
@@ -908,10 +999,10 @@ void WiiBaFu::filesTab_ExtractImage(const bool patch) {
 
     if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
         WiTools::GamePatchParameters patchParameters;
-        patchParameters.patch = false;
+        patchParameters.Patch = false;
 
         if (patch) {
-            patchParameters.patch = true;
+            patchParameters.Patch = true;
 
             if (wiibafudialog->gameID() == filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(0).first())->text()) {
                 patchParameters.ID = "";
