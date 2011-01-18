@@ -179,6 +179,8 @@ void WiiBaFu::setupContextMenus() {
 
     connect(action_wbfsGame_Transfer, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_Transfer_clicked()));
     connect(action_wbfsGame_Extract, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_Extract_clicked()));
+    connect(action_wbfsGame_Transfer_Patch, SIGNAL(triggered()), this, SLOT(wbfsTab_ContextMenu_Transfer_Patch()));
+    connect(action_wbfsGame_Extract_Patch, SIGNAL(triggered()), this, SLOT(wbfsTab_ContextMenu_Extract_Path()));
     connect(action_wbfsGame_Remove, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_Remove_clicked()));
     connect(action_wbfsGame_ShowInfo, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_ShowInfo_clicked()));
 
@@ -696,26 +698,7 @@ void WiiBaFu::on_wbfsTab_pushButton_SelectAll_clicked() {
 void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
     if (!ui->wbfsTab_pushButton_Transfer->text().contains(tr("&Cancel transfering"))) {
         if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
-            wiibafudialog->setOpenImageDirectory(false);
-
-            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
-                QDir path = wiibafudialog->directory();
-                QString format = wiibafudialog->imageFormat();
-                QString compression = wiibafudialog->compression();
-                QString splitSize = "";
-
-                if (wiibafudialog->split()) {
-                    splitSize = wiibafudialog->splitSize();
-                }
-
-                if (!path.exists() && !wiibafudialog->directory().isEmpty()) {
-                    QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
-                }
-                else {
-                    ui->wbfsTab_pushButton_Transfer->setText(tr("&Cancel transfering"));
-                    QtConcurrent::run(wiTools, &WiTools::transferWBFSToImage, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), QStringList() << wbfsPath() << format << compression << path.absolutePath() << splitSize);
-                }
-            }
+            wbfsTab_Transfer(false);
         }
     }
     else {
@@ -726,12 +709,7 @@ void WiiBaFu::on_wbfsTab_pushButton_Transfer_clicked() {
 void WiiBaFu::on_wbfsTab_pushButton_Extract_clicked() {
     if (!ui->wbfsTab_pushButton_Extract->text().contains(tr("&Cancel extracting"))) {
         if (wbfsListModel->rowCount() > 0 && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
-            wiibafudialog->setOpenDirectory(false);
-
-            if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
-                ui->wbfsTab_pushButton_Extract->setText(tr("&Cancel extracting"));
-                QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), buildPath(wiibafudialog->directory(), wbfsListModel, ui->wbfsTab_tableView));
-            }
+            wbfsTab_Extract(false);
         }
     }
     else {
@@ -1033,6 +1011,129 @@ void WiiBaFu::filesTab_ExtractImage(const bool patch) {
         else {
             ui->filesTab_pushButton_ExtractImage->setText(tr("&Cancel extracting"));
             QtConcurrent::run(wiTools, &WiTools::extractImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), buildPath(path.absolutePath(), filesListModel, ui->filesTab_tableView), patchParameters);
+        }
+    }
+}
+
+void WiiBaFu::wbfsTab_ContextMenu_Transfer_Patch() {
+    if (!ui->wbfsTab_pushButton_Transfer->text().contains(tr("&Cancel transfering"))) {
+        if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+            wbfsTab_Transfer(true);
+        }
+    }
+    else {
+        emit cancelTransfer();
+    }
+}
+
+void WiiBaFu::wbfsTab_ContextMenu_Extract_Path() {
+    if (!ui->wbfsTab_pushButton_Extract->text().contains(tr("&Cancel extracting"))) {
+        if (wbfsListModel->rowCount() > 0 && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+            wbfsTab_Extract(true);
+        }
+    }
+    else {
+        emit cancelTransfer();
+    }
+}
+
+void WiiBaFu::wbfsTab_Transfer(const bool patch) {
+    wiibafudialog->setOpenImageDirectory(patch);
+    wiibafudialog->setGameID(wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(0).first())->text());
+    wiibafudialog->setGameName(wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(1).first())->text());
+
+    if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
+        WiTools::GamePatchParameters patchParameters;
+        WiTools::TransferFilesToImageParameters transferParameters;
+        patchParameters.Patch = false;
+
+        if (patch) {
+            patchParameters.Patch = true;
+
+            if (wiibafudialog->gameID() == wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(0).first())->text()) {
+                patchParameters.ID = "";
+            }
+            else {
+                patchParameters.ID = wiibafudialog->gameID();
+            }
+
+            if (wiibafudialog->gameName() == wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(1).first())->text()) {
+                patchParameters.Name = "";
+            }
+            else {
+                patchParameters.Name = wiibafudialog->gameName();
+            }
+
+            patchParameters.Region = wiibafudialog->gameRegion();
+            patchParameters.IOS = wiibafudialog->gameIOS();
+            patchParameters.Modify = wiibafudialog->gameModify();
+            patchParameters.EncodingMode = wiibafudialog->gameEncodingMode();
+            patchParameters.CommonKey = wiibafudialog->gameCommonKey();
+        }
+
+        QDir path = wiibafudialog->directory();
+        transferParameters.IndexList = ui->wbfsTab_tableView->selectionModel()->selectedRows(0);
+        transferParameters.Directory = path.absolutePath();
+        transferParameters.Format = wiibafudialog->imageFormat();
+        transferParameters.Compression = wiibafudialog->compression();
+        transferParameters.SplitSize = "";
+        transferParameters.PatchParameters = patchParameters;
+
+        if (wiibafudialog->split()) {
+            transferParameters.SplitSize = wiibafudialog->splitSize();
+        }
+
+        if (!path.exists() && !wiibafudialog->directory().isEmpty()) {
+            QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
+        }
+        else {
+            ui->wbfsTab_pushButton_Transfer->setText(tr("&Cancel transfering"));
+            QtConcurrent::run(wiTools, &WiTools::transferWBFSToImage, wbfsPath(), transferParameters);
+        }
+    }
+}
+
+void WiiBaFu::wbfsTab_Extract(const bool patch) {
+    wiibafudialog->setOpenDirectory(patch);
+    wiibafudialog->setGameID(wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(0).first())->text());
+    wiibafudialog->setGameName(wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(1).first())->text());
+
+    if (wiibafudialog->exec() == QDialog::Accepted && !wiibafudialog->directory().isEmpty()) {
+        WiTools::GamePatchParameters patchParameters;
+        patchParameters.Patch = false;
+
+        if (patch) {
+            patchParameters.Patch = true;
+
+            if (wiibafudialog->gameID() == wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(0).first())->text()) {
+                patchParameters.ID = "";
+            }
+            else {
+                patchParameters.ID = wiibafudialog->gameID();
+            }
+
+            if (wiibafudialog->gameName() == wbfsListModel->itemFromIndex(ui->wbfsTab_tableView->selectionModel()->selectedRows(1).first())->text()) {
+                patchParameters.Name = "";
+            }
+            else {
+                patchParameters.Name = wiibafudialog->gameName();
+            }
+
+            patchParameters.Region = wiibafudialog->gameRegion();
+            patchParameters.IOS = wiibafudialog->gameIOS();
+            patchParameters.Modify = wiibafudialog->gameModify();
+            patchParameters.EncodingMode = wiibafudialog->gameEncodingMode();
+            patchParameters.CommonKey = wiibafudialog->gameCommonKey();
+        }
+
+        QDir path = wiibafudialog->directory();
+
+        if (!path.exists()) {
+            QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
+        }
+        else {
+            ui->wbfsTab_pushButton_Extract->setText(tr("&Cancel extracting"));
+            QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), buildPath(wiibafudialog->directory(), wbfsListModel, ui->wbfsTab_tableView), patchParameters);
         }
     }
 }

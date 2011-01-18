@@ -1,13 +1,9 @@
-2011-01-17 Kai Heitkamp <dynup@ymail.com>
+2011-01-18 Kai Heitkamp <dynup@ymail.com>
  Version 1.1 (wit v1.25b r2143)
-  * Patch game while transfer (DVD->WBFS, DVD->image, DVD->extract)
-  * Patch game while transfer (image->WBFS, image->image, image->extract)
-  * Patch game image
+  * Patch game image or while transfer
   * Progress infos in main window title on mac
-  * Extract DVD progress infos adapted to new wit
-  * Transfer DVD to image progress infos adapted to new wit
-  * Extract files progress infos adapted to new wit
-  * Transfer files to image progress infos adapted to new wit
+  * Progress infos while transfer adapted to new wit
+    (files->image, files->extract, dvd->image, dvd-extract)
   * Progress infos while loading games adapted to new wit
   * Set path for titles via settings
   * Autosearch path to wit and titles improved

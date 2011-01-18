@@ -1722,22 +1722,26 @@ void WiTools::extractDVD_finished(const int exitCode, const QProcess::ExitStatus
     delete witProcess;
 }
 
-void WiTools::transferWBFSToImage(const QModelIndexList indexList, const QStringList options) {
+void WiTools::transferWBFSToImage(const QString wbfsPath, const WiTools::TransferFilesToImageParameters transferParameters) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
-    const QString wbfsPath = options.at(0);
-    const QString format = options.at(1);
-    const QString compression = options.at(2);
-    const QString directory = options.at(3);
-    const QString splitSize = options.at(4);
-
-    if (!compression.isEmpty()) {
-        emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with compression '%2'.\n").arg(format, compression), Info);
+    if (!transferParameters.Compression.isEmpty()) {
+        if (transferParameters.PatchParameters.Patch) {
+            emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with compression '%2' and patching.\n").arg(transferParameters.Format, transferParameters.Compression), Info);
+        }
+        else {
+            emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with compression '%2'.\n").arg(transferParameters.Format, transferParameters.Compression), Info);
+        }
     }
     else {
-        emit newLogEntry(tr("Starting transfer WBFS to image in format '%1'.\n").arg(format), Info);
+        if (transferParameters.PatchParameters.Patch) {
+            emit newLogEntry(tr("Starting transfer WBFS to image in format '%1' with patching.\n").arg(transferParameters.Format), Info);
+        }
+        else {
+            emit newLogEntry(tr("Starting transfer WBFS to image in format '%1'.\n").arg(transferParameters.Format), Info);
+        }
     }
 
     QStringList arguments;
@@ -1751,26 +1755,26 @@ void WiTools::transferWBFSToImage(const QModelIndexList indexList, const QString
         arguments.append(wbfsPath);
     }
 
-    foreach (QModelIndex index, indexList) {
+    foreach (QModelIndex index, transferParameters.IndexList) {
         arguments.append(index.data().toString());
     }
 
-    if (format.contains("wia")) {
+    if (transferParameters.Format.contains("wia")) {
         QString tmpstr = "--wia=";
 
-        if (compression.isEmpty()) {
+        if (transferParameters.Compression.isEmpty()) {
             arguments.append(tmpstr.append("DEFAULT"));
         }
         else {
-            arguments.append(tmpstr.append(compression));
+            arguments.append(tmpstr.append(transferParameters.Compression));
         }
     }
     else {
-        arguments.append(QString("--").append(format));
+        arguments.append(QString("--").append(transferParameters.Format));
     }
 
     arguments.append("--dest");
-    arguments.append(directory);
+    arguments.append(transferParameters.Directory);
 
     if (WiiBaFuSettings.value("TransferFromWBFS/Force", QVariant(false)).toBool()) {
         arguments.append("--force");
@@ -1820,10 +1824,39 @@ void WiTools::transferWBFSToImage(const QModelIndexList indexList, const QString
         arguments.append(pselModes);
     }
 
-    if (!splitSize.isEmpty()) {
+    if (!transferParameters.SplitSize.isEmpty()) {
         arguments.append("--split");
         arguments.append("--split-size");
-        arguments.append(splitSize);
+        arguments.append(transferParameters.SplitSize);
+    }
+
+    if (transferParameters.PatchParameters.Patch) {
+        if (!transferParameters.PatchParameters.ID.isEmpty()) {
+            arguments.append("--id");
+            arguments.append(transferParameters.PatchParameters.ID);
+        }
+
+        if (!transferParameters.PatchParameters.Name.isEmpty()) {
+            arguments.append("--name");
+            arguments.append(transferParameters.PatchParameters.Name);
+        }
+
+        arguments.append("--region");
+        arguments.append(transferParameters.PatchParameters.Region);
+
+        if (!transferParameters.PatchParameters.IOS.isEmpty()) {
+            arguments.append("--ios");
+            arguments.append(transferParameters.PatchParameters.IOS);
+        }
+
+        arguments.append("--modify");
+        arguments.append(transferParameters.PatchParameters.Modify);
+
+        arguments.append("--enc");
+        arguments.append(transferParameters.PatchParameters.EncodingMode);
+
+        arguments.append("--common-key");
+        arguments.append(transferParameters.PatchParameters.CommonKey);
     }
 
     arguments.append("--progress");
@@ -1885,11 +1918,17 @@ void WiTools::transferWBFSToImage_finished(const int exitCode, const QProcess::E
     delete witProcess;
 }
 
-void WiTools::extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination) {
+void WiTools::extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination, const WiTools::GamePatchParameters patchParameters) {
     emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
     emit showStatusBarMessage(tr("Preparing extraction..."));
-    emit newLogEntry(tr("Starting WBFS extraction.\n"), Info);
+
+    if (patchParameters.Patch) {
+        emit newLogEntry(tr("Starting WBFS extraction with patching.\n"), Info);
+    }
+    else {
+        emit newLogEntry(tr("Starting WBFS extraction.\n"), Info);
+    }
 
     QStringList arguments;
     arguments.append("EXTRACT");
@@ -1946,6 +1985,35 @@ void WiTools::extractWBFS(const QModelIndexList indexList, const QString wbfsPat
         }
 
         arguments.append(pselModes);
+    }
+
+    if (patchParameters.Patch) {
+        if (!patchParameters.ID.isEmpty()) {
+            arguments.append("--id");
+            arguments.append(patchParameters.ID);
+        }
+
+        if (!patchParameters.Name.isEmpty()) {
+            arguments.append("--name");
+            arguments.append(patchParameters.Name);
+        }
+
+        arguments.append("--region");
+        arguments.append(patchParameters.Region);
+
+        if (!patchParameters.IOS.isEmpty()) {
+            arguments.append("--ios");
+            arguments.append(patchParameters.IOS);
+        }
+
+        arguments.append("--modify");
+        arguments.append(patchParameters.Modify);
+
+        arguments.append("--enc");
+        arguments.append(patchParameters.EncodingMode);
+
+        arguments.append("--common-key");
+        arguments.append(patchParameters.CommonKey);
     }
 
     arguments.append("--progress");

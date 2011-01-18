@@ -152,6 +152,12 @@ private slots:
     void filesTab_TransferToImage(const bool patch);
     void filesTab_ExtractImage(const bool patch);
 
+    void wbfsTab_ContextMenu_Transfer_Patch();
+    void wbfsTab_ContextMenu_Extract_Path();
+
+    void wbfsTab_Transfer(const bool patch);
+    void wbfsTab_Extract(const bool patch);
+
     void filesTableView_selectionChanged(const QItemSelection selected, const QItemSelection deselected);
     void wbfsTableView_selectionChanged(const QItemSelection selected, const QItemSelection deselected);
 

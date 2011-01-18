@@ -92,8 +92,8 @@ public:
     void transferDVDToImage(const QString dvdPath, const WiTools::TransferFilesToImageParameters transferParameters);
     void extractDVD(const QString dvdPath, const QString destination, const WiTools::GamePatchParameters patchParameters);
 
-    void transferWBFSToImage(const QModelIndexList indexList, const QStringList options);
-    void extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination);
+    void transferWBFSToImage(const QString wbfsPath, const WiTools::TransferFilesToImageParameters transferParameters);
+    void extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination, const WiTools::GamePatchParameters patchParameters);
 
     void removeGamesFromWBFS(const QModelIndexList indexList, const QString wbfsPath);
     void checkWBFS(const QString wbfsPath);
