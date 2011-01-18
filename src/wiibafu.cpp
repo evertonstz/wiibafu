@@ -159,6 +159,7 @@ void WiiBaFu::setupContextMenus() {
     action_wbfsGame_Transfer_Patch = new QAction(tr("Tranfer with patching"), this);
     action_wbfsGame_Extract_Patch = new QAction(tr("Extract with patching"), this);
     QAction *action_wbfsGame_Remove = new QAction(tr("&Remove"), this);
+    QAction *action_wbfsGame_Verify = new QAction(tr("&Verify"), this);
     QAction *action_wbfsGame_ShowInfo = new QAction(tr("Show i&nfo"), this);
     QAction *action_wbfsGame_Seperator1 = new QAction(this);
     QAction *action_wbfsGame_Seperator2 = new QAction(this);
@@ -181,6 +182,7 @@ void WiiBaFu::setupContextMenus() {
     connect(action_wbfsGame_Extract, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_Extract_clicked()));
     connect(action_wbfsGame_Transfer_Patch, SIGNAL(triggered()), this, SLOT(wbfsTab_ContextMenu_Transfer_Patch()));
     connect(action_wbfsGame_Extract_Patch, SIGNAL(triggered()), this, SLOT(wbfsTab_ContextMenu_Extract_Path()));
+    connect(action_wbfsGame_Verify, SIGNAL(triggered()), this, SLOT(on_menuTools_VerifyGame_triggered()));
     connect(action_wbfsGame_Remove, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_Remove_clicked()));
     connect(action_wbfsGame_ShowInfo, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_ShowInfo_clicked()));
 
@@ -204,6 +206,7 @@ void WiiBaFu::setupContextMenus() {
     ui->wbfsTab_tableView->addAction(action_wbfsGame_Transfer_Patch);
     ui->wbfsTab_tableView->addAction(action_wbfsGame_Extract_Patch);
     ui->wbfsTab_tableView->addAction(action_wbfsGame_Seperator2);
+    ui->wbfsTab_tableView->addAction(action_wbfsGame_Verify);
     ui->wbfsTab_tableView->addAction(action_wbfsGame_Remove);
     ui->wbfsTab_tableView->addAction(action_wbfsGame_Seperator3);
     ui->wbfsTab_tableView->addAction(action_wbfsGame_ShowInfo);
@@ -398,6 +401,7 @@ void WiiBaFu::on_menuTools_VerifyGame_triggered() {
             emit startBusy();
             ui->menuTools_VerifyGame->setText(tr("&Cancel verifying"));
             QtConcurrent::run(wiTools, &WiTools::verifyGame, ui->tabWidget->currentIndex(), wbfsPath(), game);
+            ui->tabWidget->setCurrentIndex(4);
         }
         else {
             setStatusBarText(tr("Verify error: No game selected!"));
