@@ -688,7 +688,7 @@ void WiiBaFu::on_wbfsTab_pushButton_Extract_clicked() {
 
 void WiiBaFu::on_wbfsTab_pushButton_Remove_clicked() {
     if (ui->wbfsTab_tableView->model() && !ui->wbfsTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
-        int result = QMessageBox::question(this, tr("Remove games"), tr("Are you sure that you want to delete the selected games?"), QMessageBox::Ok, QMessageBox::Cancel);
+        int result = QMessageBox::warning(this, tr("Remove games"), tr("Are you sure that you want to delete the selected games?\n\nAttention:\nThe selected games are finally deleted from the WBFS file system!"), QMessageBox::Ok, QMessageBox::Cancel);
         if (result == QMessageBox::Ok) {
             QtConcurrent::run(wiTools, &WiTools::removeGamesFromWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath());
         }
