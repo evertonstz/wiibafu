@@ -81,7 +81,7 @@ private:
     void setToolTips(QTableView *tableView, QStandardItemModel *model, const QString firstColumnName, const QString secondColumnName);
     void updateTitles();
 
-    QString buildPath(const QString directory, QStandardItemModel *model, QTableView *tableView);
+    QString buildPath(const QString directory, QStandardItemModel *model, QTableView *tableView, const QString id);
     QString currentGameLanguage();
     QString wbfsPath();
     QLocale locale();

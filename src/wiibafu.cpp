@@ -652,7 +652,7 @@ void WiiBaFu::on_dvdTab_pushButton_Extract_clicked() {
                 }
 
                 ui->dvdTab_pushButton_Extract->setText(tr("&Cancel extracting"));
-                QtConcurrent::run(wiTools, &WiTools::extractDVD, WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString(), buildPath(wiibafudialog->directory(), dvdListModel, ui->dvdTab_tableView), patchParameters);
+                QtConcurrent::run(wiTools, &WiTools::extractDVD, WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString(), buildPath(wiibafudialog->directory(), dvdListModel, ui->dvdTab_tableView, patchParameters.ID), patchParameters);
             }
         }
     }
@@ -974,7 +974,7 @@ void WiiBaFu::filesTab_ExtractImage(const bool patch) {
                 }
                 else {
                     ui->filesTab_pushButton_ExtractImage->setText(tr("&Cancel extracting"));
-                    QtConcurrent::run(wiTools, &WiTools::extractImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), buildPath(path.absolutePath(), filesListModel, ui->filesTab_tableView), patchParameters);
+                    QtConcurrent::run(wiTools, &WiTools::extractImage, ui->filesTab_tableView->selectionModel()->selectedRows(10), buildPath(path.absolutePath(), filesListModel, ui->filesTab_tableView, patchParameters.ID), patchParameters);
                 }
             }
         }
@@ -1097,7 +1097,7 @@ void WiiBaFu::wbfsTab_Extract(const bool patch) {
                 }
                 else {
                     ui->wbfsTab_pushButton_Extract->setText(tr("&Cancel extracting"));
-                    QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), buildPath(wiibafudialog->directory(), wbfsListModel, ui->wbfsTab_tableView), patchParameters);
+                    QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), buildPath(wiibafudialog->directory(), wbfsListModel, ui->wbfsTab_tableView, patchParameters.ID), patchParameters);
                 }
             }
         }
@@ -1307,7 +1307,7 @@ void WiiBaFu::updateTitles() {
     }
 }
 
-QString WiiBaFu::buildPath(const QString directory, QStandardItemModel *model, QTableView *tableView) {
+QString WiiBaFu::buildPath(const QString directory, QStandardItemModel *model, QTableView *tableView, const QString id) {
     QString path;
     QString gameId;
     QString gameTitle;
@@ -1321,6 +1321,10 @@ QString WiiBaFu::buildPath(const QString directory, QStandardItemModel *model, Q
         else {
             gameId = model->index(0, 0).data(Qt::DisplayRole).toString();
             gameTitle = model->index(2, 0).data(Qt::DisplayRole).toString();
+        }
+
+        if (!id.isEmpty()) {
+            gameId = id;
         }
 
         path = dir.path().append("/").append(gameTitle).append(" [").append(gameId).append("]");
