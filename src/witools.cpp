@@ -577,8 +577,8 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, const QString 
 }
 
 void WiTools::transferFilesToWBFS(const QModelIndexList indexList, const QString wbfsPath, const WiTools::GamePatchParameters parameters) {
-    emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
+    emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (parameters.Patch) {
@@ -754,8 +754,8 @@ void WiTools::transferFilesToWBFS_finished(const int exitCode, const QProcess::E
 }
 
 void WiTools::transferFilesToImage(WiTools::TransferFilesToImageParameters transferParameters) {
-    emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
+    emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (!transferParameters.Compression.isEmpty()) {
@@ -977,8 +977,8 @@ void WiTools::transferFilesToImage_finished(const int exitCode, const QProcess::
 }
 
 void WiTools::extractImage(const QModelIndexList indexList, const QString destination, const WiTools::GamePatchParameters patchParameters) {
-    emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
+    emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing extraction..."));
 
     if (patchParameters.Patch) {
@@ -1170,8 +1170,8 @@ void WiTools::extractImage_finished(const int exitCode, const QProcess::ExitStat
 }
 
 void WiTools::transferDVDToWBFS(const QString dvdPath, const QString wbfsPath, const WiTools::GamePatchParameters patchParameters) {
-    emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
+    emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (patchParameters.Patch) {
@@ -1345,8 +1345,8 @@ void WiTools::transferDVDToWBFS_finished(const int exitCode, const QProcess::Exi
 }
 
 void WiTools::transferDVDToImage(const QString dvdPath, const WiTools::TransferFilesToImageParameters transferParameters) {
-    emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
+    emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (!transferParameters.Compression.isEmpty()) {
@@ -1533,8 +1533,8 @@ void WiTools::transferDVDToImage_finished(const int exitCode, const QProcess::Ex
 }
 
 void WiTools::extractDVD(const QString dvdPath, const QString destination, const WiTools::GamePatchParameters patchParameters) {
-    emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
+    emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing extraction..."));
 
     if (patchParameters.Patch) {
@@ -1723,8 +1723,8 @@ void WiTools::extractDVD_finished(const int exitCode, const QProcess::ExitStatus
 }
 
 void WiTools::transferWBFSToImage(const QString wbfsPath, const WiTools::TransferFilesToImageParameters transferParameters) {
-    emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
+    emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
 
     if (!transferParameters.Compression.isEmpty()) {
@@ -1919,8 +1919,8 @@ void WiTools::transferWBFSToImage_finished(const int exitCode, const QProcess::E
 }
 
 void WiTools::extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination, const WiTools::GamePatchParameters patchParameters) {
-    emit setMainProgressBarVisible(true);
     emit setMainProgressBar(0, "%p%");
+    emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing extraction..."));
 
     if (patchParameters.Patch) {
