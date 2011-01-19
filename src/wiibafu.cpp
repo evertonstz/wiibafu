@@ -1864,9 +1864,8 @@ void WiiBaFu::on_menuHelp_About_triggered() {
         " | <a href='http://wiibafu.codeplex.com'>wiibafu.codeplex.com</a>"
         "<p><font color='red'>I don't support piracy! If you copy games with this software,"
         "<br>you must have the original and it's for your private use only!</font color>"
-        "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit"
-        "<br>and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! "
-        "Thanks to Patrick for the french translation! Thanks to Michael Krause for the norwegian translation!"
+        "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools!"
+        " Thanks to Patrick for the french translation, Antonio Lopez for the spanish translation and Michael Krause for the norwegian translation!"
         "<p><i>Dedicated in memory of my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>"));
 }
 
