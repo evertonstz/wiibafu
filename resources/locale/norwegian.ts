@@ -759,11 +759,11 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     </message>
     <message>
         <source>%1 file scanned, %2 directory and %3 game found.</source>
-        <translation>%1 fil skannet, %2 katalog og %3 spill funnet.</translation>
+        <translation type="obsolete">%1 fil skannet, %2 katalog og %3 spill funnet.</translation>
     </message>
     <message>
         <source>%1 files scanned, %2 directories and %3 games found.</source>
-        <translation>%1 filer skannet, %2 kataloger og %3 spill funnet.</translation>
+        <translation type="obsolete">%1 filer skannet, %2 kataloger og %3 spill funnet.</translation>
     </message>
     <message>
         <source>No games found!</source>
@@ -1004,7 +1004,7 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     </message>
     <message>
         <source>Transfering game %1 -&gt; %2...</source>
-        <translation>Overføre game %1 -&gt; %2...</translation>
+        <translation type="obsolete">Overføre game %1 -&gt; %2...</translation>
     </message>
     <message>
         <source>Ready.</source>
@@ -1162,6 +1162,107 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     <message>
         <source>Verification failed!</source>
         <translation>Verifisering mislyktes!</translation>
+    </message>
+    <message>
+        <source>%1 file(s) scanned, %2 directory(ies) and %3 game(s) found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 file(s) scanned, %2 directory(ies) and %3 game(s) found.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preparing transfer files to WBFS with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting transfer files to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting transfer files to image in format &apos;%1&apos; with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfering game [%1/%2] %3 -&gt; %4...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%p% (%1 MiB) copied in %2 (%3 MiB/sec) -&gt; ETA %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting image extraction with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%p% (%1 MiB) extracted in %2 (%3 MiB/sec) -&gt; ETA %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 MiB in %2 extracted (%3 MiB/sec)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting transfer DVD to WBFS with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting transfer DVD to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting transfer DVD to image in format &apos;%1&apos; with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfering game to %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting DVD extraction with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting transfer WBFS to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting transfer WBFS to image in format &apos;%1&apos; with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting WBFS extraction with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting game patching...
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patch game image failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patch game image failed! (status: %1, code: %2,  %3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patch game image successfully!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1550,7 +1651,7 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     </message>
     <message>
         <source>Are you sure that you want to delete the selected games?</source>
-        <translation>Er du sikker på at du vil slette de valgte spill?</translation>
+        <translation type="obsolete">Er du sikker på at du vil slette de valgte spill?</translation>
     </message>
     <message>
         <source>Check/Repair WBFS</source>
@@ -1604,11 +1705,62 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit&lt;br&gt;and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation! Thanks to Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;&lt;i&gt;Den komplette og enkelt å bruke backup løsning for Wii-spill&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;Jeg støtter ikke piratkopiering! Hvis du kopierer spill med denne programvaren,&lt;br&gt;må du ha originalen og det er for privat bruk!&lt;/font color&gt;&lt;p&gt;Stor takk til trollene på Trolltech Norge for hans utmerkede Qt toolkit&lt;br&gt;og gutta på Nokia for fortsettelsen, takk til Dirk Clemens (Wiimm) for hans store ISO verktøy! Takk til Patrick for den franske oversettelsen! Takk til Michael Krause for den norske oversettelsen! &lt;p&gt;&lt;i&gt;Dedikerte til minne om min far G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;&lt;b&gt;&lt;i&gt;Den komplette og enkelt å bruke backup løsning for Wii-spill&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;Jeg støtter ikke piratkopiering! Hvis du kopierer spill med denne programvaren,&lt;br&gt;må du ha originalen og det er for privat bruk!&lt;/font color&gt;&lt;p&gt;Stor takk til trollene på Trolltech Norge for hans utmerkede Qt toolkit&lt;br&gt;og gutta på Nokia for fortsettelsen, takk til Dirk Clemens (Wiimm) for hans store ISO verktøy! Takk til Patrick for den franske oversettelsen! Takk til Michael Krause for den norske oversettelsen! &lt;p&gt;&lt;i&gt;Dedikerte til minne om min far G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</translation>
     </message>
     <message>
         <source>Titles not found!</source>
         <translation>Titler ikke funnet!</translation>
+    </message>
+    <message>
+        <source>Patch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tranfer to &amp;WBFS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tranfer to WBFS with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer to image with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extract image with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Patch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tranfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tranfer with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extract with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Verify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you want to delete the selected games?
+
+Attention:
+The selected games are finally deleted from the WBFS file system!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation, Antonio Lopez for the spanish translation and Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1786,6 +1938,130 @@ Standard verdi er 4G</translation>
     <message>
         <source>Transfer game to image</source>
         <translation>Overfør spillet til bilde</translation>
+    </message>
+    <message>
+        <source>ID:</source>
+        <translation type="unfinished">ID:</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Navn:</translation>
+    </message>
+    <message>
+        <source>Region:</source>
+        <translation type="unfinished">Region:</translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Japan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>USA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Europe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Korea</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IOS:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High:Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High-Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modify:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ticket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TMD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WBFS</source>
+        <translation type="unfinished">WBFS</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Alle</translation>
+    </message>
+    <message>
+        <source>Encoding mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hash only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Common key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Korean</source>
+        <translation type="unfinished">Koreansk</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <source>Patch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patch game</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

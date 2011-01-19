@@ -46,68 +46,68 @@
         <translation>Hecho! %1 correctamente descargado!</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="167"/>
+        <location filename="../../src/common.cpp" line="185"/>
         <source>Downloading titles%1... (%2%)</source>
         <translation>Descargando títulos%1... (%2%)</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="169"/>
-        <location filename="../../src/common.cpp" line="172"/>
+        <location filename="../../src/common.cpp" line="187"/>
+        <location filename="../../src/common.cpp" line="190"/>
         <source>Downloading titles%1...</source>
         <translation>Descargando títulos%1...</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="175"/>
+        <location filename="../../src/common.cpp" line="193"/>
         <source>Download of titles%1 failed!</source>
         <translation>Descarga de títulos%1 fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="179"/>
+        <location filename="../../src/common.cpp" line="197"/>
         <source>Download titles%1 successfully!</source>
         <translation>Descarga de títulos%1 correcta!</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="186"/>
+        <location filename="../../src/common.cpp" line="204"/>
         <source>Download titles failed!</source>
         <translation>Descarga de titulos fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="189"/>
+        <location filename="../../src/common.cpp" line="207"/>
         <source>Download titles successfully!</source>
         <translation>Descarga de títulos correcta!</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="298"/>
+        <location filename="../../src/common.cpp" line="316"/>
         <source>copied</source>
         <translation>Copiado</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="302"/>
+        <location filename="../../src/common.cpp" line="320"/>
         <source>compared</source>
         <translation>Comparando</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="306"/>
+        <location filename="../../src/common.cpp" line="324"/>
         <source>sec</source>
         <translation>sec</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="310"/>
+        <location filename="../../src/common.cpp" line="328"/>
         <source>disc added</source>
         <translation>Disco Agregado</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="314"/>
+        <location filename="../../src/common.cpp" line="332"/>
         <source>discs added</source>
         <translation>Discos añadidos</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="318"/>
+        <location filename="../../src/common.cpp" line="336"/>
         <source>disc extracted</source>
         <translation>Extraer Disco</translation>
     </message>
     <message>
-        <location filename="../../src/common.cpp" line="322"/>
+        <location filename="../../src/common.cpp" line="340"/>
         <source>discs extracted</source>
         <translation>Discos extraidos</translation>
     </message>
@@ -946,7 +946,7 @@ La partición entera se utilizará! &apos;Todo&apos; se pasa por alto para las p
     <name>WiTools</name>
     <message>
         <location filename="../../src/witools.cpp" line="29"/>
-        <location filename="../../src/witools.cpp" line="379"/>
+        <location filename="../../src/witools.cpp" line="386"/>
         <source>Loading games...</source>
         <translation>Cargando juegos...</translation>
     </message>
@@ -958,620 +958,738 @@ La partición entera se utilizará! &apos;Todo&apos; se pasa por alto para las p
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="48"/>
-        <location filename="../../src/witools.cpp" line="49"/>
-        <location filename="../../src/witools.cpp" line="227"/>
-        <location filename="../../src/witools.cpp" line="228"/>
-        <location filename="../../src/witools.cpp" line="2067"/>
-        <location filename="../../src/witools.cpp" line="2068"/>
+        <location filename="../../src/witools.cpp" line="52"/>
+        <location filename="../../src/witools.cpp" line="53"/>
+        <location filename="../../src/witools.cpp" line="234"/>
+        <location filename="../../src/witools.cpp" line="235"/>
+        <location filename="../../src/witools.cpp" line="2441"/>
+        <location filename="../../src/witools.cpp" line="2442"/>
+        <location filename="../../src/witools.cpp" line="2478"/>
+        <location filename="../../src/witools.cpp" line="2479"/>
         <source>Wiimms ISO Tool not found!</source>
         <translation>Wiimms ISO Tool no encontrado!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="53"/>
-        <location filename="../../src/witools.cpp" line="158"/>
-        <location filename="../../src/witools.cpp" line="409"/>
+        <location filename="../../src/witools.cpp" line="57"/>
+        <location filename="../../src/witools.cpp" line="157"/>
+        <location filename="../../src/witools.cpp" line="416"/>
         <source>Loading games failed!</source>
         <translation>Carga de juegos fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="54"/>
-        <location filename="../../src/witools.cpp" line="410"/>
+        <location filename="../../src/witools.cpp" line="58"/>
+        <location filename="../../src/witools.cpp" line="417"/>
         <source>Loading games failed! (status: %1, code: %2,  %3)</source>
         <translation>Carga de juegos fallida! (status: %1, code: %2,  %3)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="80"/>
         <source>%1 file scanned, %2 directory and %3 game found.</source>
-        <translation>%1 archivo escaneado, %2 directorio y %3 juego encontrado.</translation>
+        <translation type="obsolete">%1 archivo escaneado, %2 directorio y %3 juego encontrado.</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="84"/>
         <source>%1 files scanned, %2 directories and %3 games found.</source>
-        <translation>%1 archivo escaneado, %2 directorio y %3 juego encontrado.</translation>
+        <translation type="obsolete">%1 archivo escaneado, %2 directorio y %3 juego encontrado.</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="94"/>
-        <location filename="../../src/witools.cpp" line="437"/>
+        <location filename="../../src/witools.cpp" line="77"/>
+        <source>%1 file(s) scanned, %2 directory(ies) and %3 game(s) found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="93"/>
+        <location filename="../../src/witools.cpp" line="444"/>
         <source>No games found!</source>
         <translation>No se encontraron juegos!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="164"/>
+        <location filename="../../src/witools.cpp" line="163"/>
         <source>Loading games canceled!</source>
         <translation>Carga juegos cancelada!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="168"/>
+        <location filename="../../src/witools.cpp" line="167"/>
         <source>Loading failed!</source>
         <translation>Carga fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="184"/>
-        <location filename="../../src/witools.cpp" line="548"/>
+        <location filename="../../src/witools.cpp" line="176"/>
+        <source>%1 file(s) scanned, %2 directory(ies) and %3 game(s) found.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="191"/>
+        <location filename="../../src/witools.cpp" line="555"/>
         <source>ID (0)</source>
         <translation>ID (0)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="185"/>
+        <location filename="../../src/witools.cpp" line="192"/>
         <source>Name (%1 GB)</source>
         <translation>Nombre (%1 GB)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="186"/>
-        <location filename="../../src/witools.cpp" line="550"/>
+        <location filename="../../src/witools.cpp" line="193"/>
+        <location filename="../../src/witools.cpp" line="557"/>
         <source>Title</source>
         <translation>Título</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="187"/>
-        <location filename="../../src/witools.cpp" line="551"/>
+        <location filename="../../src/witools.cpp" line="194"/>
+        <location filename="../../src/witools.cpp" line="558"/>
         <source>Region</source>
         <translation>Región</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="188"/>
-        <location filename="../../src/witools.cpp" line="552"/>
+        <location filename="../../src/witools.cpp" line="195"/>
+        <location filename="../../src/witools.cpp" line="559"/>
         <source>Size</source>
         <translation>Tamaño</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="189"/>
-        <location filename="../../src/witools.cpp" line="554"/>
+        <location filename="../../src/witools.cpp" line="196"/>
+        <location filename="../../src/witools.cpp" line="561"/>
         <source>Insertion</source>
         <translation>Insercción</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="190"/>
-        <location filename="../../src/witools.cpp" line="555"/>
+        <location filename="../../src/witools.cpp" line="197"/>
+        <location filename="../../src/witools.cpp" line="562"/>
         <source>Last modification</source>
         <translation>Última modificación</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="191"/>
-        <location filename="../../src/witools.cpp" line="556"/>
+        <location filename="../../src/witools.cpp" line="198"/>
+        <location filename="../../src/witools.cpp" line="563"/>
         <source>Last status change</source>
         <translation>Último cambio de estado</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="192"/>
-        <location filename="../../src/witools.cpp" line="557"/>
+        <location filename="../../src/witools.cpp" line="199"/>
+        <location filename="../../src/witools.cpp" line="564"/>
         <source>Last access</source>
         <translation>Consultado el</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="193"/>
-        <location filename="../../src/witools.cpp" line="558"/>
+        <location filename="../../src/witools.cpp" line="200"/>
+        <location filename="../../src/witools.cpp" line="565"/>
         <source>Type</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="194"/>
-        <location filename="../../src/witools.cpp" line="560"/>
+        <location filename="../../src/witools.cpp" line="201"/>
+        <location filename="../../src/witools.cpp" line="567"/>
         <source>Source</source>
         <translation>Fuente</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="215"/>
+        <location filename="../../src/witools.cpp" line="222"/>
         <source>Loading disc...</source>
         <translation>Cargando disco...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="216"/>
+        <location filename="../../src/witools.cpp" line="223"/>
         <source>Loading disc...
 </source>
         <translation>Cargando disco...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="231"/>
+        <location filename="../../src/witools.cpp" line="238"/>
         <source>Loading game disc failed!</source>
         <translation>Carga disco de juego fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="232"/>
+        <location filename="../../src/witools.cpp" line="239"/>
         <source>Loading game disc failed! (status: %1, code: %2,  %3)</source>
         <translation>Carga disco de juego fallida! (status: %1, code: %2,  %3)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="252"/>
+        <location filename="../../src/witools.cpp" line="259"/>
         <source>Can&apos;t open file!</source>
         <translation>No se puede abrir el archivo!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="257"/>
+        <location filename="../../src/witools.cpp" line="264"/>
         <source>No game found!</source>
         <translation>Juego no encontrado!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="358"/>
+        <location filename="../../src/witools.cpp" line="365"/>
         <source>ID:</source>
         <translation>ID:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="359"/>
+        <location filename="../../src/witools.cpp" line="366"/>
         <source>Name:</source>
         <translation>Nombre:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="360"/>
+        <location filename="../../src/witools.cpp" line="367"/>
         <source>Title:</source>
         <translation>Título:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="361"/>
+        <location filename="../../src/witools.cpp" line="368"/>
         <source>Region:</source>
         <translation>Región:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="362"/>
+        <location filename="../../src/witools.cpp" line="369"/>
         <source>Size:</source>
         <translation>Tamaño:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="363"/>
+        <location filename="../../src/witools.cpp" line="370"/>
         <source>Insertion:</source>
         <translation>Insercción:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="364"/>
+        <location filename="../../src/witools.cpp" line="371"/>
         <source>Last modification:</source>
         <translation>Última modificación:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="365"/>
+        <location filename="../../src/witools.cpp" line="372"/>
         <source>Last status change:</source>
         <translation>Último cambio de estado:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="366"/>
+        <location filename="../../src/witools.cpp" line="373"/>
         <source>Last access:</source>
         <translation>Consultado el:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="367"/>
+        <location filename="../../src/witools.cpp" line="374"/>
         <source>Type:</source>
         <translation>Tipo:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="368"/>
+        <location filename="../../src/witools.cpp" line="375"/>
         <source>Container:</source>
         <translation>Contenedor:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="369"/>
+        <location filename="../../src/witools.cpp" line="376"/>
         <source>Disc type:</source>
         <translation>Tipo de disco:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="370"/>
+        <location filename="../../src/witools.cpp" line="377"/>
         <source>N partitions:</source>
         <translation>N Particiones:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="371"/>
+        <location filename="../../src/witools.cpp" line="378"/>
         <source>Partition info:</source>
         <translation>Info Particion:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="372"/>
+        <location filename="../../src/witools.cpp" line="379"/>
         <source>WBFS slot:</source>
         <translation>Ranura-WBFS:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="373"/>
+        <location filename="../../src/witools.cpp" line="380"/>
         <source>Source:</source>
         <translation>Fuente:</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="380"/>
+        <location filename="../../src/witools.cpp" line="387"/>
         <source>Loading games from WBFS...
 </source>
         <translation>Cargando juegos desde WBFS...
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="405"/>
-        <location filename="../../src/witools.cpp" line="406"/>
-        <location filename="../../src/witools.cpp" line="1857"/>
-        <location filename="../../src/witools.cpp" line="1858"/>
-        <location filename="../../src/witools.cpp" line="1897"/>
-        <location filename="../../src/witools.cpp" line="1898"/>
-        <location filename="../../src/witools.cpp" line="2088"/>
-        <location filename="../../src/witools.cpp" line="2089"/>
+        <location filename="../../src/witools.cpp" line="412"/>
+        <location filename="../../src/witools.cpp" line="413"/>
+        <location filename="../../src/witools.cpp" line="2207"/>
+        <location filename="../../src/witools.cpp" line="2208"/>
+        <location filename="../../src/witools.cpp" line="2247"/>
+        <location filename="../../src/witools.cpp" line="2248"/>
+        <location filename="../../src/witools.cpp" line="2499"/>
+        <location filename="../../src/witools.cpp" line="2500"/>
         <source>Wiimms WBFS Tool not found!</source>
         <translation>Wiimms WBFS Tool no encontrado!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="432"/>
+        <location filename="../../src/witools.cpp" line="439"/>
         <source>No WBFS partitions found!</source>
         <translation>Particiones WBFS no encontradas!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="442"/>
+        <location filename="../../src/witools.cpp" line="449"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="446"/>
+        <location filename="../../src/witools.cpp" line="453"/>
         <source>Used discs: %1</source>
         <translation>Disco usado: %1</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="450"/>
+        <location filename="../../src/witools.cpp" line="457"/>
         <source>Total discs: %1</source>
         <translation>Disco total: %1</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="454"/>
+        <location filename="../../src/witools.cpp" line="461"/>
         <source>Used MiB: %1</source>
         <translation>MiB-Usados: %1</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="459"/>
+        <location filename="../../src/witools.cpp" line="466"/>
         <source>Free MiB: %1</source>
         <translation>MiB Libre: %1</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="463"/>
+        <location filename="../../src/witools.cpp" line="470"/>
         <source>Total MiB: %1</source>
         <translation>Total MiB: %1</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="549"/>
+        <location filename="../../src/witools.cpp" line="556"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="553"/>
+        <location filename="../../src/witools.cpp" line="560"/>
         <source>Used blocks</source>
         <translation>Bloques usados</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="559"/>
+        <location filename="../../src/witools.cpp" line="566"/>
         <source>WBFS slot</source>
         <translation>Ranura-WBFS</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="575"/>
-        <location filename="../../src/witools.cpp" line="726"/>
-        <location filename="../../src/witools.cpp" line="1020"/>
-        <location filename="../../src/witools.cpp" line="1169"/>
-        <location filename="../../src/witools.cpp" line="1426"/>
+        <location filename="../../src/witools.cpp" line="582"/>
+        <location filename="../../src/witools.cpp" line="759"/>
+        <location filename="../../src/witools.cpp" line="1175"/>
+        <location filename="../../src/witools.cpp" line="1350"/>
+        <location filename="../../src/witools.cpp" line="1728"/>
         <source>Preparing transfer...</source>
         <translation>Preparado transfer...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="576"/>
+        <location filename="../../src/witools.cpp" line="585"/>
+        <source>Preparing transfer files to WBFS with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="588"/>
         <source>Preparing transfer files to WBFS.
 </source>
         <translation>Preparación de transferencia de archivos a WBFS.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="666"/>
-        <location filename="../../src/witools.cpp" line="669"/>
-        <location filename="../../src/witools.cpp" line="1109"/>
-        <location filename="../../src/witools.cpp" line="1112"/>
-        <location filename="../../src/witools.cpp" line="1547"/>
+        <location filename="../../src/witools.cpp" line="707"/>
+        <location filename="../../src/witools.cpp" line="1298"/>
+        <location filename="../../src/witools.cpp" line="1882"/>
         <source>Transfering game %1...</source>
         <translation>Transfiriendo juego %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="691"/>
-        <location filename="../../src/witools.cpp" line="857"/>
-        <location filename="../../src/witools.cpp" line="1134"/>
-        <location filename="../../src/witools.cpp" line="1265"/>
-        <location filename="../../src/witools.cpp" line="1572"/>
+        <location filename="../../src/witools.cpp" line="724"/>
+        <location filename="../../src/witools.cpp" line="960"/>
+        <location filename="../../src/witools.cpp" line="1315"/>
+        <location filename="../../src/witools.cpp" line="1516"/>
+        <location filename="../../src/witools.cpp" line="1897"/>
         <source>Transfer failed!</source>
         <translation>Transferencia fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="698"/>
-        <location filename="../../src/witools.cpp" line="863"/>
-        <location filename="../../src/witools.cpp" line="1141"/>
-        <location filename="../../src/witools.cpp" line="1271"/>
-        <location filename="../../src/witools.cpp" line="1578"/>
+        <location filename="../../src/witools.cpp" line="731"/>
+        <location filename="../../src/witools.cpp" line="966"/>
+        <location filename="../../src/witools.cpp" line="1322"/>
+        <location filename="../../src/witools.cpp" line="1522"/>
+        <location filename="../../src/witools.cpp" line="1903"/>
         <source>Transfer successfully!</source>
         <translation>Transferencia con éxito!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="702"/>
-        <location filename="../../src/witools.cpp" line="1145"/>
+        <location filename="../../src/witools.cpp" line="735"/>
+        <location filename="../../src/witools.cpp" line="1326"/>
         <source>Disc already exists!</source>
         <translation>El disco ya existe!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="706"/>
-        <location filename="../../src/witools.cpp" line="716"/>
-        <location filename="../../src/witools.cpp" line="1009"/>
-        <location filename="../../src/witools.cpp" line="1149"/>
-        <location filename="../../src/witools.cpp" line="1159"/>
-        <location filename="../../src/witools.cpp" line="1415"/>
-        <location filename="../../src/witools.cpp" line="1730"/>
-        <location filename="../../src/witools.cpp" line="2039"/>
+        <location filename="../../src/witools.cpp" line="739"/>
+        <location filename="../../src/witools.cpp" line="749"/>
+        <location filename="../../src/witools.cpp" line="1164"/>
+        <location filename="../../src/witools.cpp" line="1330"/>
+        <location filename="../../src/witools.cpp" line="1340"/>
+        <location filename="../../src/witools.cpp" line="1717"/>
+        <location filename="../../src/witools.cpp" line="2080"/>
+        <location filename="../../src/witools.cpp" line="2389"/>
         <source>Error %1: %2</source>
         <translation>Error %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="711"/>
-        <location filename="../../src/witools.cpp" line="712"/>
-        <location filename="../../src/witools.cpp" line="868"/>
-        <location filename="../../src/witools.cpp" line="869"/>
-        <location filename="../../src/witools.cpp" line="1154"/>
-        <location filename="../../src/witools.cpp" line="1155"/>
-        <location filename="../../src/witools.cpp" line="1276"/>
-        <location filename="../../src/witools.cpp" line="1277"/>
-        <location filename="../../src/witools.cpp" line="1588"/>
-        <location filename="../../src/witools.cpp" line="1589"/>
+        <location filename="../../src/witools.cpp" line="744"/>
+        <location filename="../../src/witools.cpp" line="745"/>
+        <location filename="../../src/witools.cpp" line="971"/>
+        <location filename="../../src/witools.cpp" line="972"/>
+        <location filename="../../src/witools.cpp" line="1335"/>
+        <location filename="../../src/witools.cpp" line="1336"/>
+        <location filename="../../src/witools.cpp" line="1527"/>
+        <location filename="../../src/witools.cpp" line="1528"/>
+        <location filename="../../src/witools.cpp" line="1913"/>
+        <location filename="../../src/witools.cpp" line="1914"/>
         <source>Transfer canceled!</source>
         <translation>Transferencia cancelada!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="729"/>
+        <location filename="../../src/witools.cpp" line="763"/>
+        <source>Starting transfer files to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="766"/>
         <source>Starting transfer files to image in format &apos;%1&apos; with compression &apos;%2&apos;.
 </source>
         <translation>Comenzando transferencia de archivos de imagen en formato &apos;%1&apos; con compresión &apos;%2&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="732"/>
+        <location filename="../../src/witools.cpp" line="771"/>
+        <source>Starting transfer files to image in format &apos;%1&apos; with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="774"/>
         <source>Starting transfer files to image in format &apos;%1&apos;.
 </source>
         <translation>Comenzando transferencia de archivos de imagenen formato &apos;%1&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="838"/>
-        <location filename="../../src/witools.cpp" line="841"/>
-        <location filename="../../src/witools.cpp" line="1246"/>
-        <location filename="../../src/witools.cpp" line="1249"/>
-        <source>Transfering game %1 -&gt; %2...</source>
-        <translation>Transfiriendo juego %1 -&gt; %2...</translation>
+        <location filename="../../src/witools.cpp" line="955"/>
+        <source>Transfering game [%1/%2] %3 -&gt; %4...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="864"/>
-        <location filename="../../src/witools.cpp" line="1002"/>
-        <location filename="../../src/witools.cpp" line="1272"/>
-        <location filename="../../src/witools.cpp" line="1408"/>
-        <location filename="../../src/witools.cpp" line="1579"/>
-        <location filename="../../src/witools.cpp" line="1723"/>
-        <location filename="../../src/witools.cpp" line="2035"/>
+        <location filename="../../src/witools.cpp" line="956"/>
+        <location filename="../../src/witools.cpp" line="1512"/>
+        <source>%p% (%1 MiB) copied in %2 (%3 MiB/sec) -&gt; ETA %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="2400"/>
+        <source>Starting game patching...
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="2446"/>
+        <source>Patch game image failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="2447"/>
+        <source>Patch game image failed! (status: %1, code: %2,  %3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="2452"/>
+        <location filename="../../src/witools.cpp" line="2453"/>
+        <source>Patch game image successfully!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfering game %1 -&gt; %2...</source>
+        <translation type="obsolete">Transfiriendo juego %1 -&gt; %2...</translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="967"/>
+        <location filename="../../src/witools.cpp" line="1157"/>
+        <location filename="../../src/witools.cpp" line="1523"/>
+        <location filename="../../src/witools.cpp" line="1710"/>
+        <location filename="../../src/witools.cpp" line="1904"/>
+        <location filename="../../src/witools.cpp" line="2073"/>
+        <location filename="../../src/witools.cpp" line="2385"/>
         <source>Ready.</source>
         <translation>Listo.</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="879"/>
-        <location filename="../../src/witools.cpp" line="1287"/>
-        <location filename="../../src/witools.cpp" line="1599"/>
+        <location filename="../../src/witools.cpp" line="982"/>
+        <location filename="../../src/witools.cpp" line="1538"/>
+        <location filename="../../src/witools.cpp" line="1924"/>
         <source>Preparing extraction...</source>
         <translation>Preparado extracción...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="880"/>
+        <location filename="../../src/witools.cpp" line="985"/>
+        <source>Starting image extraction with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="988"/>
         <source>Starting image extraction.
 </source>
         <translation>Comenzando extracción de imagen.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="960"/>
-        <location filename="../../src/witools.cpp" line="963"/>
+        <location filename="../../src/witools.cpp" line="1105"/>
         <source>Extracting game %1 -&gt; %2...</source>
         <translation>Extraer juego %1 -&gt; %2...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="984"/>
-        <location filename="../../src/witools.cpp" line="1391"/>
-        <location filename="../../src/witools.cpp" line="1706"/>
+        <location filename="../../src/witools.cpp" line="1129"/>
+        <location filename="../../src/witools.cpp" line="1683"/>
+        <source>%p% (%1 MiB) extracted in %2 (%3 MiB/sec) -&gt; ETA %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1138"/>
+        <location filename="../../src/witools.cpp" line="1692"/>
+        <location filename="../../src/witools.cpp" line="2056"/>
         <source>Destination already exists!</source>
         <translation>Destino ya existe!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="994"/>
-        <location filename="../../src/witools.cpp" line="995"/>
-        <location filename="../../src/witools.cpp" line="1400"/>
-        <location filename="../../src/witools.cpp" line="1401"/>
-        <location filename="../../src/witools.cpp" line="1715"/>
-        <location filename="../../src/witools.cpp" line="1716"/>
+        <location filename="../../src/witools.cpp" line="1148"/>
+        <location filename="../../src/witools.cpp" line="1149"/>
+        <location filename="../../src/witools.cpp" line="1701"/>
+        <location filename="../../src/witools.cpp" line="1702"/>
+        <location filename="../../src/witools.cpp" line="2065"/>
+        <location filename="../../src/witools.cpp" line="2066"/>
         <source>Extraction canceled!</source>
         <translation>Extracción cancelada!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1001"/>
-        <location filename="../../src/witools.cpp" line="1407"/>
-        <location filename="../../src/witools.cpp" line="1722"/>
+        <location filename="../../src/witools.cpp" line="1155"/>
+        <location filename="../../src/witools.cpp" line="1708"/>
+        <source>%1 MiB in %2 extracted (%3 MiB/sec)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1156"/>
+        <location filename="../../src/witools.cpp" line="1709"/>
+        <location filename="../../src/witools.cpp" line="2072"/>
         <source>Extraction successfully!</source>
         <translation>Extracción exitosa!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1010"/>
-        <location filename="../../src/witools.cpp" line="1416"/>
-        <location filename="../../src/witools.cpp" line="1731"/>
+        <location filename="../../src/witools.cpp" line="1165"/>
+        <location filename="../../src/witools.cpp" line="1718"/>
+        <location filename="../../src/witools.cpp" line="2081"/>
         <source>Extraction failed!</source>
         <translation>Extracción fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1021"/>
+        <location filename="../../src/witools.cpp" line="1178"/>
+        <source>Starting transfer DVD to WBFS with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1181"/>
         <source>Starting transfer DVD to WBFS.
 </source>
         <translation>Comenzando transferencia DVD a WBFS.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1172"/>
+        <location filename="../../src/witools.cpp" line="1354"/>
+        <source>Starting transfer DVD to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1357"/>
         <source>Starting transfer DVD to image in format &apos;%1&apos; with compression &apos;%2&apos;.
 </source>
         <translation>Comenzando transferencia DVD a imagen en formato &apos;%1&apos; con comprensión  &apos;%2&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1175"/>
+        <location filename="../../src/witools.cpp" line="1362"/>
+        <source>Starting transfer DVD to image in format &apos;%1&apos; with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1365"/>
         <source>Starting transfer DVD to image in format &apos;%1&apos;.
 </source>
         <translation>Comenzando transferencia DVD a imagen en formato &apos;%1&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1288"/>
+        <location filename="../../src/witools.cpp" line="1511"/>
+        <source>Transfering game to %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1541"/>
+        <source>Starting DVD extraction with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1544"/>
         <source>Starting DVD extraction.
 </source>
         <translation>Comenzando extracción de DVD.</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1367"/>
-        <location filename="../../src/witools.cpp" line="1370"/>
-        <location filename="../../src/witools.cpp" line="1682"/>
-        <location filename="../../src/witools.cpp" line="1685"/>
+        <location filename="../../src/witools.cpp" line="1659"/>
+        <location filename="../../src/witools.cpp" line="2040"/>
         <source>Extracting game %1...</source>
         <translation>Extrayendo juego %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1435"/>
+        <location filename="../../src/witools.cpp" line="1732"/>
+        <source>Starting transfer WBFS to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1735"/>
         <source>Starting transfer WBFS to image in format &apos;%1&apos; with compression &apos;%2&apos;.
 </source>
         <translation>Comenzando transferencia WBFS a imagen en formato &apos;%1&apos; con comprensión  &apos;%2&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1438"/>
+        <location filename="../../src/witools.cpp" line="1740"/>
+        <source>Starting transfer WBFS to image in format &apos;%1&apos; with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1743"/>
         <source>Starting transfer WBFS to image in format &apos;%1&apos;.
 </source>
         <translation>Comenzando transferencia WBFS a imagen en formato &apos;%1&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1583"/>
-        <location filename="../../src/witools.cpp" line="1584"/>
+        <location filename="../../src/witools.cpp" line="1908"/>
+        <location filename="../../src/witools.cpp" line="1909"/>
         <source>File already exists!</source>
         <translation>El archivo ya existe!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1600"/>
+        <location filename="../../src/witools.cpp" line="1927"/>
+        <source>Starting WBFS extraction with patching.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1930"/>
         <source>Starting WBFS extraction.
 </source>
         <translation>Comenzando extracción WBFS.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1782"/>
+        <location filename="../../src/witools.cpp" line="2132"/>
         <source>Games removed successfully!</source>
         <translation>Juegos borrados correctamente!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1788"/>
+        <location filename="../../src/witools.cpp" line="2138"/>
         <source>Games removed failed!</source>
         <translation>Eliminar juegos fallido!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1796"/>
+        <location filename="../../src/witools.cpp" line="2146"/>
         <source>Checking and repairing WBFS...</source>
         <translation>Comprobación y reparación WBFS...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1799"/>
+        <location filename="../../src/witools.cpp" line="2149"/>
         <source>Checking WBFS...</source>
         <translation>Comprobación WBFS...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1861"/>
+        <location filename="../../src/witools.cpp" line="2211"/>
         <source>WBFS check failed!</source>
         <translation>Verificación WBFS fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1862"/>
+        <location filename="../../src/witools.cpp" line="2212"/>
         <source>WBFS check failed! (status: %1, code: %2,  %3)</source>
         <translation>Verificación WBFS fallida! (status: %1, code: %2,  %3)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1866"/>
+        <location filename="../../src/witools.cpp" line="2216"/>
         <source>WBFS check successfully!</source>
         <translation>Verificación WBFS con éxito!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1901"/>
+        <location filename="../../src/witools.cpp" line="2251"/>
         <source>WBFS dump failed!</source>
         <translation>Volcado WBFS fallido!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1902"/>
+        <location filename="../../src/witools.cpp" line="2252"/>
         <source>WBFS dump failed! (status: %1, code: %2,  %3)</source>
         <translation>Volcado WBFS fallido (status: %1, code: %2,  %3)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1906"/>
+        <location filename="../../src/witools.cpp" line="2256"/>
         <source>WBFS dump successfully!</source>
         <translation>WBFS volcado con éxito!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1915"/>
+        <location filename="../../src/witools.cpp" line="2265"/>
         <source>Creating WBFS...</source>
         <translation>Creando WBFS...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1959"/>
+        <location filename="../../src/witools.cpp" line="2309"/>
         <source>Create WBFS failed!</source>
         <translation>Creación WBFS fallida!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1963"/>
+        <location filename="../../src/witools.cpp" line="2313"/>
         <source>Create WBFS successfully!</source>
         <translation>Creación WBFS con éxito!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1974"/>
+        <location filename="../../src/witools.cpp" line="2324"/>
         <source>Starting game verification...
 </source>
         <translation>Comenzando verificación de juego...
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1983"/>
+        <location filename="../../src/witools.cpp" line="2333"/>
         <source>Verifying game %1...</source>
         <translation>Verificación juego %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1987"/>
+        <location filename="../../src/witools.cpp" line="2337"/>
         <source>Verifying game on drive %1...</source>
         <translation>Verificación de juego en el disco %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1999"/>
+        <location filename="../../src/witools.cpp" line="2349"/>
         <source>Verifying game %1 on WBFS...</source>
         <translation>Verificando juego %1 en WBFS...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2029"/>
-        <location filename="../../src/witools.cpp" line="2030"/>
+        <location filename="../../src/witools.cpp" line="2379"/>
+        <location filename="../../src/witools.cpp" line="2380"/>
         <source>Verification canceled!</source>
         <translation>Verificación cancelada!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2034"/>
+        <location filename="../../src/witools.cpp" line="2384"/>
         <source>Verification successfully!</source>
         <translation>Verificación exitosa!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2040"/>
+        <location filename="../../src/witools.cpp" line="2390"/>
         <source>Verification failed!</source>
         <translation>Verificación fallida!</translation>
     </message>
@@ -1591,54 +1709,58 @@ La partición entera se utilizará! &apos;Todo&apos; se pasa por alto para las p
     <message>
         <location filename="../ui/wiibafu.ui" line="62"/>
         <location filename="../ui/wiibafu.ui" line="228"/>
-        <location filename="../ui/wiibafu.ui" line="313"/>
-        <location filename="../../src/wiibafu.cpp" line="749"/>
-        <location filename="../../src/wiibafu.cpp" line="756"/>
-        <location filename="../../src/wiibafu.cpp" line="765"/>
+        <location filename="../ui/wiibafu.ui" line="323"/>
+        <location filename="../../src/wiibafu.cpp" line="1155"/>
+        <location filename="../../src/wiibafu.cpp" line="1162"/>
+        <location filename="../../src/wiibafu.cpp" line="1171"/>
         <source>&amp;Load</source>
         <translation>Carg&amp;ar</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="65"/>
         <location filename="../ui/wiibafu.ui" line="231"/>
-        <location filename="../ui/wiibafu.ui" line="316"/>
-        <location filename="../../src/wiibafu.cpp" line="750"/>
-        <location filename="../../src/wiibafu.cpp" line="757"/>
-        <location filename="../../src/wiibafu.cpp" line="766"/>
+        <location filename="../ui/wiibafu.ui" line="326"/>
+        <location filename="../../src/wiibafu.cpp" line="1156"/>
+        <location filename="../../src/wiibafu.cpp" line="1163"/>
+        <location filename="../../src/wiibafu.cpp" line="1172"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="72"/>
-        <location filename="../ui/wiibafu.ui" line="323"/>
+        <location filename="../ui/wiibafu.ui" line="333"/>
         <source>&amp;Select all / none</source>
         <translation>Seleccion&amp;ar todo / nada</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="79"/>
         <location filename="../ui/wiibafu.ui" line="238"/>
-        <location filename="../../src/wiibafu.cpp" line="805"/>
-        <location filename="../../src/wiibafu.cpp" line="821"/>
+        <location filename="../../src/wiibafu.cpp" line="1211"/>
+        <location filename="../../src/wiibafu.cpp" line="1227"/>
         <source>Transfer to &amp;WBFS</source>
         <translation>Transferir&amp;ir a WBFS</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="86"/>
         <location filename="../ui/wiibafu.ui" line="245"/>
-        <location filename="../../src/wiibafu.cpp" line="809"/>
-        <location filename="../../src/wiibafu.cpp" line="825"/>
+        <location filename="../../src/wiibafu.cpp" line="140"/>
+        <location filename="../../src/wiibafu.cpp" line="1215"/>
+        <location filename="../../src/wiibafu.cpp" line="1231"/>
         <source>Transfer to &amp;image</source>
         <translation>Transfer&amp;ir a imagen</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="93"/>
-        <location filename="../../src/wiibafu.cpp" line="813"/>
+        <location filename="../../src/wiibafu.cpp" line="141"/>
+        <location filename="../../src/wiibafu.cpp" line="1219"/>
         <source>E&amp;xtract image</source>
         <translation>Extr&amp;aer imagen</translation>
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="100"/>
-        <location filename="../ui/wiibafu.ui" line="358"/>
+        <location filename="../ui/wiibafu.ui" line="368"/>
+        <location filename="../../src/wiibafu.cpp" line="147"/>
+        <location filename="../../src/wiibafu.cpp" line="163"/>
         <source>Show i&amp;nfo</source>
         <translation>Show i&amp;nfo</translation>
     </message>
@@ -1649,739 +1771,963 @@ La partición entera se utilizará! &apos;Todo&apos; se pasa por alto para las p
     </message>
     <message>
         <location filename="../ui/wiibafu.ui" line="252"/>
-        <location filename="../ui/wiibafu.ui" line="337"/>
-        <location filename="../../src/wiibafu.cpp" line="829"/>
-        <location filename="../../src/wiibafu.cpp" line="837"/>
+        <location filename="../ui/wiibafu.ui" line="347"/>
+        <location filename="../../src/wiibafu.cpp" line="158"/>
+        <location filename="../../src/wiibafu.cpp" line="1235"/>
+        <location filename="../../src/wiibafu.cpp" line="1243"/>
         <source>E&amp;xtract</source>
         <translation>Extr&amp;aer</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="263"/>
+        <location filename="../ui/wiibafu.ui" line="259"/>
+        <source>Patch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafu.ui" line="273"/>
         <source>WBFS</source>
         <translation>WBFS</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="330"/>
-        <location filename="../../src/wiibafu.cpp" line="833"/>
+        <location filename="../ui/wiibafu.ui" line="340"/>
+        <location filename="../../src/wiibafu.cpp" line="1239"/>
         <source>&amp;Transfer</source>
         <translation>Tranfer&amp;ir</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="344"/>
+        <location filename="../ui/wiibafu.ui" line="354"/>
+        <location filename="../../src/wiibafu.cpp" line="161"/>
         <source>&amp;Remove</source>
         <translation>Borra&amp;r</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="351"/>
+        <location filename="../ui/wiibafu.ui" line="361"/>
         <source>Chec&amp;k</source>
         <translation>Comprob&amp;r</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="369"/>
+        <location filename="../ui/wiibafu.ui" line="379"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="488"/>
+        <location filename="../ui/wiibafu.ui" line="498"/>
         <source>ID:</source>
         <translation>ID:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="508"/>
+        <location filename="../ui/wiibafu.ui" line="518"/>
         <source>Name:</source>
         <translation>Nombre:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="528"/>
+        <location filename="../ui/wiibafu.ui" line="538"/>
         <source>Title:</source>
         <translation>Título:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="548"/>
+        <location filename="../ui/wiibafu.ui" line="558"/>
         <source>Region:</source>
         <translation>Región:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="568"/>
+        <location filename="../ui/wiibafu.ui" line="578"/>
         <source>Size:</source>
         <translation>Tamaño:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="588"/>
+        <location filename="../ui/wiibafu.ui" line="598"/>
         <source>Used blocks:</source>
         <translation>Bloques usados:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="608"/>
+        <location filename="../ui/wiibafu.ui" line="618"/>
         <source>Insertion:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="628"/>
+        <location filename="../ui/wiibafu.ui" line="638"/>
         <source>Last modification:</source>
         <translation>Última modificación:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="648"/>
+        <location filename="../ui/wiibafu.ui" line="658"/>
         <source>Last status change:</source>
         <translation>Último cambio de estado:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="668"/>
+        <location filename="../ui/wiibafu.ui" line="678"/>
         <source>Last access:</source>
         <translation>Consultado el:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="688"/>
+        <location filename="../ui/wiibafu.ui" line="698"/>
         <source>Type:</source>
         <translation>Tipo:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="708"/>
+        <location filename="../ui/wiibafu.ui" line="718"/>
         <source>WBFS slot:</source>
         <translation>Ranura-WBFS:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="728"/>
+        <location filename="../ui/wiibafu.ui" line="738"/>
         <source>Source:</source>
         <translation>Fuente:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="968"/>
+        <location filename="../ui/wiibafu.ui" line="978"/>
         <source>English</source>
         <translation>Inglés</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="973"/>
+        <location filename="../ui/wiibafu.ui" line="983"/>
         <source>American</source>
         <translation>Americano</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="978"/>
+        <location filename="../ui/wiibafu.ui" line="988"/>
         <source>French</source>
         <translation>Francés</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="983"/>
+        <location filename="../ui/wiibafu.ui" line="993"/>
         <source>German</source>
         <translation>Alemán</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="988"/>
+        <location filename="../ui/wiibafu.ui" line="998"/>
         <source>Spanish</source>
         <translation>Español</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="993"/>
+        <location filename="../ui/wiibafu.ui" line="1003"/>
         <source>Italian</source>
         <translation>Italiano</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="998"/>
+        <location filename="../ui/wiibafu.ui" line="1008"/>
         <source>Dutch</source>
         <translation>Holandés</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1003"/>
+        <location filename="../ui/wiibafu.ui" line="1013"/>
         <source>Portuguese</source>
         <translation>Portugués</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1008"/>
+        <location filename="../ui/wiibafu.ui" line="1018"/>
         <source>North Sami</source>
         <translation>North Sami</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1013"/>
+        <location filename="../ui/wiibafu.ui" line="1023"/>
         <source>Danish</source>
         <translation>Danés</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1018"/>
+        <location filename="../ui/wiibafu.ui" line="1028"/>
         <source>Norwegian</source>
         <translation>Noruego</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1023"/>
+        <location filename="../ui/wiibafu.ui" line="1033"/>
         <source>Finnish</source>
         <translation>finlandés</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1028"/>
+        <location filename="../ui/wiibafu.ui" line="1038"/>
         <source>Russian</source>
         <translation>Ruso</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1033"/>
+        <location filename="../ui/wiibafu.ui" line="1043"/>
         <source>Japanese</source>
         <translation>Japonés</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1038"/>
+        <location filename="../ui/wiibafu.ui" line="1048"/>
         <source>Korean</source>
         <translation>Coreano</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1043"/>
+        <location filename="../ui/wiibafu.ui" line="1053"/>
         <source>Taiwanese</source>
         <translation>Taiwanes</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1048"/>
+        <location filename="../ui/wiibafu.ui" line="1058"/>
         <source>Chinese</source>
         <translation>Chino</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1084"/>
+        <location filename="../ui/wiibafu.ui" line="1094"/>
         <source>Load &amp;3D cover</source>
         <translation>Carg&amp;r 3D cover</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1087"/>
+        <location filename="../ui/wiibafu.ui" line="1097"/>
         <source>Ctrl+3</source>
         <translation>Ctrl+3</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1094"/>
+        <location filename="../ui/wiibafu.ui" line="1104"/>
         <source>Load f&amp;ull HQ cover</source>
         <translation>Carg&amp;ar full HQ cover</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1097"/>
-        <location filename="../ui/wiibafu.ui" line="1291"/>
+        <location filename="../ui/wiibafu.ui" line="1107"/>
+        <location filename="../ui/wiibafu.ui" line="1301"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1104"/>
+        <location filename="../ui/wiibafu.ui" line="1114"/>
         <source>View game in &amp;browser</source>
         <translation>Ver juego en n&amp;avegador</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1107"/>
+        <location filename="../ui/wiibafu.ui" line="1117"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1114"/>
+        <location filename="../ui/wiibafu.ui" line="1124"/>
         <source>&amp;Reset</source>
         <translation>&amp;Reset</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1117"/>
-        <location filename="../ui/wiibafu.ui" line="1156"/>
+        <location filename="../ui/wiibafu.ui" line="1127"/>
+        <location filename="../ui/wiibafu.ui" line="1166"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1128"/>
+        <location filename="../ui/wiibafu.ui" line="1138"/>
         <source>Log</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1153"/>
+        <location filename="../ui/wiibafu.ui" line="1163"/>
         <source>Clea&amp;r</source>
         <translation>Limpi&amp;r</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1163"/>
+        <location filename="../ui/wiibafu.ui" line="1173"/>
         <source>&amp;Copy</source>
         <translation>Copi&amp;r</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1166"/>
+        <location filename="../ui/wiibafu.ui" line="1176"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1173"/>
+        <location filename="../ui/wiibafu.ui" line="1183"/>
         <source>&amp;Find</source>
         <translation>Encontr&amp;ado</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1176"/>
+        <location filename="../ui/wiibafu.ui" line="1186"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1183"/>
+        <location filename="../ui/wiibafu.ui" line="1193"/>
         <source>&amp;Save</source>
         <translation>Guard&amp;ar</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1186"/>
+        <location filename="../ui/wiibafu.ui" line="1196"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1210"/>
+        <location filename="../ui/wiibafu.ui" line="1220"/>
         <source>&amp;File</source>
         <translation>Arch&amp;ivo</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1216"/>
+        <location filename="../ui/wiibafu.ui" line="1226"/>
         <source>&amp;Options</source>
         <translation>Opcion&amp;s</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1222"/>
+        <location filename="../ui/wiibafu.ui" line="1232"/>
         <source>Tools</source>
         <translation>Herramientas</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1225"/>
+        <location filename="../ui/wiibafu.ui" line="1235"/>
         <source>Too&amp;ls</source>
         <translation>Herramient&amp;as</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1239"/>
+        <location filename="../ui/wiibafu.ui" line="1249"/>
         <source>&amp;Help</source>
         <translation>A&amp;yuda</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1252"/>
+        <location filename="../ui/wiibafu.ui" line="1262"/>
         <source>&amp;About...</source>
         <translation>&amp;Acerca de...</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1257"/>
+        <location filename="../ui/wiibafu.ui" line="1267"/>
         <source>E&amp;xit</source>
         <translation>S&amp;alir</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1260"/>
+        <location filename="../ui/wiibafu.ui" line="1270"/>
         <source>Exits Wii Backup Fusion</source>
         <translation>Salir Wii Backup Fusion</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1263"/>
+        <location filename="../ui/wiibafu.ui" line="1273"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1268"/>
+        <location filename="../ui/wiibafu.ui" line="1278"/>
         <source>About &amp;Qt...</source>
         <translation>Acerca de &amp;Qt...</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1273"/>
+        <location filename="../ui/wiibafu.ui" line="1283"/>
         <source>Chec&amp;k WBFS</source>
         <translation>Comprob&amp;r WBFS</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1278"/>
+        <location filename="../ui/wiibafu.ui" line="1288"/>
         <source>&amp;Settings...</source>
         <translation>&amp;Configurción...</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1283"/>
+        <location filename="../ui/wiibafu.ui" line="1293"/>
         <source>C&amp;reate WBFS</source>
         <translation>Cre&amp;r WBFS</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1288"/>
+        <location filename="../ui/wiibafu.ui" line="1298"/>
         <source>&amp;Update titles</source>
         <translation>Actualiz&amp;ar títulos</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1296"/>
-        <location filename="../../src/wiibafu.cpp" line="842"/>
+        <location filename="../ui/wiibafu.ui" line="1306"/>
+        <location filename="../../src/wiibafu.cpp" line="145"/>
+        <location filename="../../src/wiibafu.cpp" line="1248"/>
         <source>&amp;Verify game</source>
         <translation>Verific&amp;ar juego</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1301"/>
+        <location filename="../ui/wiibafu.ui" line="1311"/>
         <source>Com&amp;pare Files/WBFS</source>
         <translation>Compar&amp;ar Archivos/WBFS</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1304"/>
+        <location filename="../ui/wiibafu.ui" line="1314"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafu.ui" line="1309"/>
+        <location filename="../ui/wiibafu.ui" line="1319"/>
         <source>&amp;Dump WBFS</source>
         <translation>Volc&amp;r WBFS</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="59"/>
-        <location filename="../../src/wiibafu.cpp" line="751"/>
-        <location filename="../../src/wiibafu.cpp" line="796"/>
+        <location filename="../../src/wiibafu.cpp" line="60"/>
+        <location filename="../../src/wiibafu.cpp" line="1157"/>
+        <location filename="../../src/wiibafu.cpp" line="1202"/>
         <source>Ready.</source>
         <translation>Listo.</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="61"/>
+        <location filename="../../src/wiibafu.cpp" line="62"/>
         <source>(%1) Wii Backup Fusion %2 started.</source>
         <translation>(%1) Wii Backup Fusion %2 comenzando.</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="67"/>
+        <location filename="../../src/wiibafu.cpp" line="68"/>
         <source>Titles not found!</source>
         <translation>Títulos no encontrados!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="68"/>
+        <location filename="../../src/wiibafu.cpp" line="69"/>
         <source>Titles not found!
 </source>
         <translation>Títulos no encontrados!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="71"/>
+        <location filename="../../src/wiibafu.cpp" line="72"/>
         <source>Titles found in: %1
 </source>
         <translation>Títulos encontrados en: %1
 </translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="255"/>
-        <location filename="../../src/wiibafu.cpp" line="256"/>
-        <location filename="../../src/wiibafu.cpp" line="743"/>
-        <location filename="../../src/wiibafu.cpp" line="790"/>
+        <location filename="../../src/wiibafu.cpp" line="139"/>
+        <source>Tranfer to &amp;WBFS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="142"/>
+        <source>Tranfer to WBFS with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="143"/>
+        <source>Transfer to image with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="144"/>
+        <source>Extract image with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="146"/>
+        <source>&amp;Patch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="157"/>
+        <source>&amp;Tranfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="159"/>
+        <source>Tranfer with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="160"/>
+        <source>Extract with patching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="162"/>
+        <source>&amp;Verify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="334"/>
+        <location filename="../../src/wiibafu.cpp" line="335"/>
+        <location filename="../../src/wiibafu.cpp" line="1149"/>
+        <location filename="../../src/wiibafu.cpp" line="1196"/>
         <source>Title</source>
         <translation>Título</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="255"/>
-        <location filename="../../src/wiibafu.cpp" line="256"/>
-        <location filename="../../src/wiibafu.cpp" line="743"/>
-        <location filename="../../src/wiibafu.cpp" line="790"/>
+        <location filename="../../src/wiibafu.cpp" line="334"/>
+        <location filename="../../src/wiibafu.cpp" line="335"/>
+        <location filename="../../src/wiibafu.cpp" line="1149"/>
+        <location filename="../../src/wiibafu.cpp" line="1196"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="300"/>
-        <location filename="../../src/wiibafu.cpp" line="323"/>
+        <location filename="../../src/wiibafu.cpp" line="379"/>
+        <location filename="../../src/wiibafu.cpp" line="402"/>
         <source>&amp;Cancel verifying</source>
         <translation>Cancel&amp;r verificación</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="327"/>
-        <location filename="../../src/wiibafu.cpp" line="328"/>
+        <location filename="../../src/wiibafu.cpp" line="407"/>
+        <location filename="../../src/wiibafu.cpp" line="408"/>
         <source>Verify error: No game selected!</source>
         <translation>Verificar error: No hay juego seleccionado!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="383"/>
-        <location filename="../../src/wiibafu.cpp" line="389"/>
+        <location filename="../../src/wiibafu.cpp" line="463"/>
+        <location filename="../../src/wiibafu.cpp" line="469"/>
+        <location filename="../../src/wiibafu.cpp" line="1287"/>
         <source>&amp;Cancel loading</source>
         <translation>Cancel&amp;r carga</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="384"/>
+        <location filename="../../src/wiibafu.cpp" line="464"/>
         <source>Open directory</source>
         <translation>Abrir directorio</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="413"/>
-        <location filename="../../src/wiibafu.cpp" line="415"/>
-        <location filename="../../src/wiibafu.cpp" line="426"/>
-        <location filename="../../src/wiibafu.cpp" line="444"/>
-        <location filename="../../src/wiibafu.cpp" line="483"/>
-        <location filename="../../src/wiibafu.cpp" line="485"/>
-        <location filename="../../src/wiibafu.cpp" line="496"/>
-        <location filename="../../src/wiibafu.cpp" line="511"/>
-        <location filename="../../src/wiibafu.cpp" line="558"/>
-        <location filename="../../src/wiibafu.cpp" line="576"/>
+        <location filename="../../src/wiibafu.cpp" line="516"/>
+        <location filename="../../src/wiibafu.cpp" line="554"/>
+        <location filename="../../src/wiibafu.cpp" line="564"/>
+        <location filename="../../src/wiibafu.cpp" line="609"/>
+        <location filename="../../src/wiibafu.cpp" line="825"/>
+        <location filename="../../src/wiibafu.cpp" line="863"/>
+        <location filename="../../src/wiibafu.cpp" line="873"/>
+        <location filename="../../src/wiibafu.cpp" line="924"/>
+        <location filename="../../src/wiibafu.cpp" line="996"/>
+        <location filename="../../src/wiibafu.cpp" line="1047"/>
         <source>&amp;Cancel transfering</source>
         <translation>Cancel&amp;r transferencia</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="441"/>
-        <location filename="../../src/wiibafu.cpp" line="573"/>
+        <location filename="../../src/wiibafu.cpp" line="691"/>
+        <source>Are you sure that you want to delete the selected games?
+
+Attention:
+The selected games are finally deleted from the WBFS file system!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="921"/>
+        <location filename="../../src/wiibafu.cpp" line="973"/>
+        <location filename="../../src/wiibafu.cpp" line="1044"/>
+        <location filename="../../src/wiibafu.cpp" line="1096"/>
         <source>Warning</source>
         <translation>Cuidado</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="441"/>
-        <location filename="../../src/wiibafu.cpp" line="573"/>
+        <location filename="../../src/wiibafu.cpp" line="921"/>
+        <location filename="../../src/wiibafu.cpp" line="973"/>
+        <location filename="../../src/wiibafu.cpp" line="1044"/>
+        <location filename="../../src/wiibafu.cpp" line="1096"/>
         <source>The directory doesn&apos;t exists!</source>
         <translation>El directorio no existe!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="456"/>
-        <location filename="../../src/wiibafu.cpp" line="461"/>
-        <location filename="../../src/wiibafu.cpp" line="522"/>
-        <location filename="../../src/wiibafu.cpp" line="530"/>
-        <location filename="../../src/wiibafu.cpp" line="588"/>
-        <location filename="../../src/wiibafu.cpp" line="593"/>
+        <location filename="../../src/wiibafu.cpp" line="1861"/>
+        <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation, Antonio Lopez for the spanish translation and Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafu.cpp" line="620"/>
+        <location filename="../../src/wiibafu.cpp" line="654"/>
+        <location filename="../../src/wiibafu.cpp" line="936"/>
+        <location filename="../../src/wiibafu.cpp" line="976"/>
+        <location filename="../../src/wiibafu.cpp" line="1059"/>
+        <location filename="../../src/wiibafu.cpp" line="1099"/>
         <source>&amp;Cancel extracting</source>
         <translation>Cancel&amp;r extracción</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="605"/>
+        <location filename="../../src/wiibafu.cpp" line="691"/>
         <source>Remove games</source>
         <translation>Borrar juegos</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="605"/>
         <source>Are you sure that you want to delete the selected games?</source>
-        <translation>¿Usted está seguro de que quiere eliminar los juegos seleccionados?</translation>
+        <translation type="obsolete">¿Usted está seguro de que quiere eliminar los juegos seleccionados?</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="617"/>
+        <location filename="../../src/wiibafu.cpp" line="703"/>
         <source>Check/Repair WBFS</source>
         <translation>Comprobar/Reparar WBFS</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="617"/>
+        <location filename="../../src/wiibafu.cpp" line="703"/>
         <source>Are you sure that you want to check/repair the wbfs?</source>
         <translation>¿Usted está seguro de que quiere comprobar/reparar el wbfs?</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="672"/>
+        <location filename="../../src/wiibafu.cpp" line="758"/>
         <source>Search log</source>
         <translation>Buscar log</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="672"/>
+        <location filename="../../src/wiibafu.cpp" line="758"/>
         <source>Enter search string:</source>
         <translation>Introduzca la cadena de búsqueda:</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="705"/>
+        <location filename="../../src/wiibafu.cpp" line="791"/>
         <source>Nothing found!</source>
         <translation>Nada encontrado!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="712"/>
+        <location filename="../../src/wiibafu.cpp" line="798"/>
         <source>Save log file</source>
         <translation>Guardar archivo de registro</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="712"/>
+        <location filename="../../src/wiibafu.cpp" line="798"/>
         <source>WiiBaFu log file (*.log)</source>
         <translation>WiiBaFu log file (*.log)</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="727"/>
-        <location filename="../../src/wiibafu.cpp" line="731"/>
+        <location filename="../../src/wiibafu.cpp" line="1111"/>
+        <location filename="../../src/wiibafu.cpp" line="1128"/>
         <source>ID (%1)</source>
         <translation>ID (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="737"/>
+        <location filename="../../src/wiibafu.cpp" line="1143"/>
         <source>Files (%1)</source>
         <translation>Archivos (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="759"/>
+        <location filename="../../src/wiibafu.cpp" line="1165"/>
         <source>Loading canceled!</source>
         <translation>Carga cancelada!</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1088"/>
+        <location filename="../../src/wiibafu.cpp" line="1552"/>
         <source>WIT command line:
 %1</source>
         <translation>WIT command line:
 %1</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1395"/>
+        <location filename="../../src/wiibafu.cpp" line="1859"/>
         <source>About Wii Backup Fusion</source>
         <translation>Acerca de Wii Backup Fusion</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1397"/>
         <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit&lt;br&gt;and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation! Thanks to Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit&lt;br&gt;and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation! Thanks to Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit&lt;br&gt;and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation! Thanks to Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</translation>
     </message>
 </context>
 <context>
     <name>WiiBaFuDialog</name>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="39"/>
+        <location filename="../ui/wiibafudialog.ui" line="46"/>
         <source>Directory:</source>
         <translation>Directorio:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="59"/>
+        <location filename="../ui/wiibafudialog.ui" line="66"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="69"/>
+        <location filename="../ui/wiibafudialog.ui" line="76"/>
         <source>File path:</source>
         <translation>Ruta del archivo:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="86"/>
+        <location filename="../ui/wiibafudialog.ui" line="93"/>
         <location filename="../../src/wiibafudialog.cpp" line="43"/>
         <source>Open file</source>
         <translation>Abrir Archivo</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="96"/>
+        <location filename="../ui/wiibafudialog.ui" line="103"/>
         <source>Image format:</source>
         <translation>Image format:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="107"/>
+        <location filename="../ui/wiibafudialog.ui" line="114"/>
         <source>Wii Plain ISO (*.iso)</source>
         <translation>Wii Plain ISO (*.iso)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="112"/>
+        <location filename="../ui/wiibafudialog.ui" line="119"/>
         <source>Wii Compact ISO (*.ciso)</source>
         <translation>Wii Compact ISO (*.ciso)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="117"/>
+        <location filename="../ui/wiibafudialog.ui" line="124"/>
         <source>Wii ISO Archive (*.wia)</source>
         <translation>Wii ISO Archive (*.wia)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="122"/>
+        <location filename="../ui/wiibafudialog.ui" line="129"/>
         <source>Wii Disc Format (*.wdf)</source>
         <translation>Wii Disc Format (*.wdf)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="127"/>
+        <location filename="../ui/wiibafudialog.ui" line="134"/>
         <source>Wii Backup File System Container (*.wbfs)</source>
         <translation>Wii Backup File System Container (*.wbfs)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="139"/>
+        <location filename="../ui/wiibafudialog.ui" line="146"/>
         <source>Default</source>
         <translation>Por Defecto</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="144"/>
+        <location filename="../ui/wiibafudialog.ui" line="151"/>
         <source>Fast</source>
         <translation>Rápido</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="149"/>
+        <location filename="../ui/wiibafudialog.ui" line="156"/>
         <source>Good</source>
         <translation>Bueno</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="154"/>
+        <location filename="../ui/wiibafudialog.ui" line="161"/>
         <source>Best</source>
         <translation>Mejor</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="159"/>
+        <location filename="../ui/wiibafudialog.ui" line="166"/>
         <source>Other</source>
         <translation>Otro</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="170"/>
+        <location filename="../ui/wiibafudialog.ui" line="177"/>
         <source>Split size and optional unit factor &apos;kmgtpe&apos; (base=1000] or &apos;KMGTPE&apos; (base=1024)
 Default value is 4G</source>
         <translation>Split size and optional unit factor &apos;kmgtpe&apos; (base=1000] or &apos;KMGTPE&apos; (base=1024)
 Default value is 4G</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="174"/>
+        <location filename="../ui/wiibafudialog.ui" line="181"/>
         <source>4G</source>
         <translation>4G</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="181"/>
+        <location filename="../ui/wiibafudialog.ui" line="188"/>
         <source>Split size:</source>
         <translation>Dividir tamaño:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="188"/>
+        <location filename="../ui/wiibafudialog.ui" line="195"/>
         <source>Split</source>
         <translation>Dividir</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="238"/>
+        <location filename="../ui/wiibafudialog.ui" line="232"/>
         <source>Method:</source>
         <translation>Método:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="255"/>
+        <location filename="../ui/wiibafudialog.ui" line="249"/>
+        <location filename="../ui/wiibafudialog.ui" line="492"/>
+        <location filename="../ui/wiibafudialog.ui" line="571"/>
+        <location filename="../ui/wiibafudialog.ui" line="612"/>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="260"/>
+        <location filename="../ui/wiibafudialog.ui" line="254"/>
         <source>Purge</source>
         <translation>Purga</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="265"/>
+        <location filename="../ui/wiibafudialog.ui" line="259"/>
         <source>Bzip2</source>
         <translation>Bzip2</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="270"/>
+        <location filename="../ui/wiibafudialog.ui" line="264"/>
         <source>LZMA</source>
         <translation>LZMA</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="275"/>
+        <location filename="../ui/wiibafudialog.ui" line="269"/>
         <source>LZMA2</source>
         <translation>LZMA2</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="286"/>
+        <location filename="../ui/wiibafudialog.ui" line="280"/>
         <source>Level:</source>
         <translation>Nivel:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="303"/>
+        <location filename="../ui/wiibafudialog.ui" line="297"/>
         <source>0 (None)</source>
         <translation>0 (Nada)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="308"/>
+        <location filename="../ui/wiibafudialog.ui" line="302"/>
         <source>1 (Fast)</source>
         <translation>1 (Rápido)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="313"/>
+        <location filename="../ui/wiibafudialog.ui" line="307"/>
         <source>2</source>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="318"/>
+        <location filename="../ui/wiibafudialog.ui" line="312"/>
         <source>3</source>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="323"/>
+        <location filename="../ui/wiibafudialog.ui" line="317"/>
         <source>4</source>
         <translation>4</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="328"/>
+        <location filename="../ui/wiibafudialog.ui" line="322"/>
         <source>5 (Good)</source>
         <translation>5 (Bueno)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="333"/>
+        <location filename="../ui/wiibafudialog.ui" line="327"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="338"/>
+        <location filename="../ui/wiibafudialog.ui" line="332"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="343"/>
+        <location filename="../ui/wiibafudialog.ui" line="337"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="348"/>
+        <location filename="../ui/wiibafudialog.ui" line="342"/>
         <source>9 (Best)</source>
         <translation>9 (Mejor)</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="359"/>
+        <location filename="../ui/wiibafudialog.ui" line="353"/>
         <source>Factor:</source>
         <translation>Factor:</translation>
     </message>
     <message>
-        <location filename="../ui/wiibafudialog.ui" line="384"/>
+        <location filename="../ui/wiibafudialog.ui" line="378"/>
         <source>20</source>
         <translation>20</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="404"/>
+        <source>ID:</source>
+        <translation type="unfinished">ID:</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="421"/>
+        <source>Name:</source>
+        <translation type="unfinished">Nombre:</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="435"/>
+        <source>Region:</source>
+        <translation type="unfinished">Región:</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="443"/>
+        <location filename="../ui/wiibafudialog.ui" line="536"/>
+        <location filename="../ui/wiibafudialog.ui" line="587"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="448"/>
+        <source>Japan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="453"/>
+        <source>USA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="458"/>
+        <source>Europe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="463"/>
+        <source>Korea</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="471"/>
+        <source>IOS:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="497"/>
+        <source>High:Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="502"/>
+        <source>High-Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="507"/>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="528"/>
+        <source>Modify:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="541"/>
+        <source>Disc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="546"/>
+        <source>Boot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="551"/>
+        <source>Ticket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="556"/>
+        <source>TMD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="561"/>
+        <source>WBFS</source>
+        <translation type="unfinished">WBFS</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="566"/>
+        <source>All</source>
+        <translation type="unfinished">Todo</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="579"/>
+        <source>Encoding mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="592"/>
+        <source>Hash only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="597"/>
+        <source>Decrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="602"/>
+        <source>Encrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="607"/>
+        <source>Sign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="620"/>
+        <source>Common key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="628"/>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="633"/>
+        <source>Korean</source>
+        <translation type="unfinished">Coreano</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="638"/>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="643"/>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <location filename="../ui/wiibafudialog.ui" line="660"/>
+        <source>Patch</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/wiibafudialog.cpp" line="35"/>
@@ -2399,14 +2745,19 @@ Default value is 4G</translation>
         <translation>Transferir juegos a imagen</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="222"/>
+        <location filename="../../src/wiibafudialog.cpp" line="224"/>
         <source>Extract game</source>
         <translation>Extraer juego</translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="243"/>
+        <location filename="../../src/wiibafudialog.cpp" line="247"/>
         <source>Transfer game to image</source>
         <translation>Transferir juego a imagen</translation>
+    </message>
+    <message>
+        <location filename="../../src/wiibafudialog.cpp" line="270"/>
+        <source>Patch game</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
