@@ -2662,7 +2662,7 @@ Default value is 4G</source>
     <message>
         <location filename="../ui/wiibafudialog.ui" line="528"/>
         <source>Modify:</source>
-        <translation>Modifiziert:</translation>
+        <translation>Ändern:</translation>
     </message>
     <message>
         <location filename="../ui/wiibafudialog.ui" line="541"/>
@@ -2697,7 +2697,7 @@ Default value is 4G</source>
     <message>
         <location filename="../ui/wiibafudialog.ui" line="579"/>
         <source>Encoding mode:</source>
-        <translation>Encodingmodus:</translation>
+        <translation>Encoding-Modus:</translation>
     </message>
     <message>
         <location filename="../ui/wiibafudialog.ui" line="592"/>
