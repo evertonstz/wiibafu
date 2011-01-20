@@ -1279,7 +1279,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="585"/>
         <source>Preparing transfer files to WBFS with patching.
 </source>
-        <translation>Bereite Transfer Dateien zu WBFS mit Patching vor.
+        <translation>Bereite Transfer Dateien zu WBFS mit patchen vor.
 </translation>
     </message>
     <message>
@@ -1348,7 +1348,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="793"/>
         <source>Starting transfer files to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
 </source>
-        <translation>Starte Transfer Dateien zu Abbild im Format &apos;%1&apos; mit Kompression &apos;%2&apos; und Patching.
+        <translation>Starte Transfer Dateien zu Abbild im Format &apos;%1&apos; mit Kompression &apos;%2&apos; und patchen.
 </translation>
     </message>
     <message>
@@ -1362,7 +1362,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="801"/>
         <source>Starting transfer files to image in format &apos;%1&apos; with patching.
 </source>
-        <translation>Starte ransfer Dateien zu Abbild im Format &apos;%1&apos; mit Patching.
+        <translation>Starte ransfer Dateien zu Abbild im Format &apos;%1&apos; mit patchen.
 </translation>
     </message>
     <message>
@@ -1399,7 +1399,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="2512"/>
         <source>Starting game patching...
 </source>
-        <translation>Starte Patchen des Spiels...
+        <translation>Starte patchen des Spiels...
 </translation>
     </message>
     <message>
@@ -1459,7 +1459,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1012"/>
         <source>Starting image extraction with patching.
 </source>
-        <translation>Starte Abbildextraktion mit Patchen.
+        <translation>Starte Abbildextraktion mit patchen.
 </translation>
     </message>
     <message>
@@ -1525,7 +1525,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1206"/>
         <source>Starting transfer DVD to WBFS with patching.
 </source>
-        <translation>Starte Transfer DVD zu WBFS mit Patchen.
+        <translation>Starte Transfer DVD zu WBFS mit patchen.
 </translation>
     </message>
     <message>
@@ -1544,7 +1544,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1405"/>
         <source>Starting transfer DVD to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
 </source>
-        <translation>Starte Transfer DVD zu Abbild in Format &apos;%1&apos; mit Komprimierung &apos;%2&apos; und Patching.
+        <translation>Starte Transfer DVD zu Abbild in Format &apos;%1&apos; mit Komprimierung &apos;%2&apos; und patchen.
 </translation>
     </message>
     <message>
@@ -1558,7 +1558,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1413"/>
         <source>Starting transfer DVD to image in format &apos;%1&apos; with patching.
 </source>
-        <translation>Starte Transfer DVD zu Abbild im Format &apos;%1&apos; mit Patching.
+        <translation>Starte Transfer DVD zu Abbild im Format &apos;%1&apos; mit patchen.
 </translation>
     </message>
     <message>
@@ -1576,7 +1576,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1581"/>
         <source>Starting DVD extraction with patching.
 </source>
-        <translation>Starte DVD Extrahierung mit Patching.
+        <translation>Starte DVD Extrahierung mit patchen.
 </translation>
     </message>
     <message>
@@ -1594,7 +1594,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1777"/>
         <source>Starting transfer WBFS to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
 </source>
-        <translation>Starte Transfer WBFS zu Abbild im Format &apos;%1&apos; mit Kompression &apos;%2&apos; und Patching.
+        <translation>Starte Transfer WBFS zu Abbild im Format &apos;%1&apos; mit Kompression &apos;%2&apos; und patchen.
 </translation>
     </message>
     <message>
@@ -1608,7 +1608,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="1785"/>
         <source>Starting transfer WBFS to image in format &apos;%1&apos; with patching.
 </source>
-        <translation>Starte Transfer WBFS zu Abbild im Format &apos;%1&apos; mit Patching.
+        <translation>Starte Transfer WBFS zu Abbild im Format &apos;%1&apos; mit patchen.
 </translation>
     </message>
     <message>
@@ -1628,7 +1628,7 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="2008"/>
         <source>Starting WBFS extraction with patching.
 </source>
-        <translation>Starte WBFS Extrahierung mit Patching.
+        <translation>Starte WBFS Extrahierung mit patchen.
 </translation>
     </message>
     <message>
@@ -2221,17 +2221,17 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     <message>
         <location filename="../../src/wiibafu.cpp" line="142"/>
         <source>Tranfer to WBFS with patching</source>
-        <translation>Transfer zu WBFS mit Patching</translation>
+        <translation>Transfer zu WBFS mit patchen</translation>
     </message>
     <message>
         <location filename="../../src/wiibafu.cpp" line="143"/>
         <source>Transfer to image with patching</source>
-        <translation>Transfer zu Abbild mit Patching</translation>
+        <translation>Transfer zu Abbild mit patchen</translation>
     </message>
     <message>
         <location filename="../../src/wiibafu.cpp" line="144"/>
         <source>Extract image with patching</source>
-        <translation>Extrahiere Abbild mit Patching</translation>
+        <translation>Extrahiere Abbild mit patchen</translation>
     </message>
     <message>
         <location filename="../../src/wiibafu.cpp" line="146"/>
@@ -2246,12 +2246,12 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     <message>
         <location filename="../../src/wiibafu.cpp" line="159"/>
         <source>Tranfer with patching</source>
-        <translation>Transfer mit Patching</translation>
+        <translation>Transfer mit patchen</translation>
     </message>
     <message>
         <location filename="../../src/wiibafu.cpp" line="160"/>
         <source>Extract with patching</source>
-        <translation>Extrahiere mit Patching</translation>
+        <translation>Extrahiere mit patchen</translation>
     </message>
     <message>
         <location filename="../../src/wiibafu.cpp" line="162"/>
