@@ -964,10 +964,10 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
         <location filename="../../src/witools.cpp" line="53"/>
         <location filename="../../src/witools.cpp" line="234"/>
         <location filename="../../src/witools.cpp" line="235"/>
-        <location filename="../../src/witools.cpp" line="2441"/>
-        <location filename="../../src/witools.cpp" line="2442"/>
-        <location filename="../../src/witools.cpp" line="2478"/>
-        <location filename="../../src/witools.cpp" line="2479"/>
+        <location filename="../../src/witools.cpp" line="2553"/>
+        <location filename="../../src/witools.cpp" line="2554"/>
+        <location filename="../../src/witools.cpp" line="2590"/>
+        <location filename="../../src/witools.cpp" line="2591"/>
         <source>Wiimms ISO Tool not found!</source>
         <translation>Wiimms ISO Tool nicht gefunden!</translation>
     </message>
@@ -1207,12 +1207,12 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     <message>
         <location filename="../../src/witools.cpp" line="412"/>
         <location filename="../../src/witools.cpp" line="413"/>
-        <location filename="../../src/witools.cpp" line="2207"/>
-        <location filename="../../src/witools.cpp" line="2208"/>
-        <location filename="../../src/witools.cpp" line="2247"/>
-        <location filename="../../src/witools.cpp" line="2248"/>
-        <location filename="../../src/witools.cpp" line="2499"/>
-        <location filename="../../src/witools.cpp" line="2500"/>
+        <location filename="../../src/witools.cpp" line="2319"/>
+        <location filename="../../src/witools.cpp" line="2320"/>
+        <location filename="../../src/witools.cpp" line="2359"/>
+        <location filename="../../src/witools.cpp" line="2360"/>
+        <location filename="../../src/witools.cpp" line="2611"/>
+        <location filename="../../src/witools.cpp" line="2612"/>
         <source>Wiimms WBFS Tool not found!</source>
         <translation>Wimms WBFS Tool nicht gefunden!</translation>
     </message>
@@ -1268,10 +1268,10 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
     </message>
     <message>
         <location filename="../../src/witools.cpp" line="582"/>
-        <location filename="../../src/witools.cpp" line="759"/>
-        <location filename="../../src/witools.cpp" line="1175"/>
-        <location filename="../../src/witools.cpp" line="1350"/>
-        <location filename="../../src/witools.cpp" line="1728"/>
+        <location filename="../../src/witools.cpp" line="789"/>
+        <location filename="../../src/witools.cpp" line="1203"/>
+        <location filename="../../src/witools.cpp" line="1401"/>
+        <location filename="../../src/witools.cpp" line="1773"/>
         <source>Preparing transfer...</source>
         <translation>Bereite Transfer vor...</translation>
     </message>
@@ -1290,423 +1290,454 @@ Die gesamte Partition wird benutzt! &apos;Vollständig&apos; wird für überlage
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="707"/>
-        <location filename="../../src/witools.cpp" line="1298"/>
-        <location filename="../../src/witools.cpp" line="1882"/>
         <source>Transfering game %1...</source>
-        <translation>Transferiere Spiel %1...</translation>
+        <translation type="obsolete">Transferiere Spiel %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="724"/>
-        <location filename="../../src/witools.cpp" line="960"/>
-        <location filename="../../src/witools.cpp" line="1315"/>
-        <location filename="../../src/witools.cpp" line="1516"/>
-        <location filename="../../src/witools.cpp" line="1897"/>
+        <location filename="../../src/witools.cpp" line="753"/>
+        <location filename="../../src/witools.cpp" line="986"/>
+        <location filename="../../src/witools.cpp" line="1364"/>
+        <location filename="../../src/witools.cpp" line="1555"/>
+        <location filename="../../src/witools.cpp" line="1977"/>
         <source>Transfer failed!</source>
         <translation>Transfer fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="731"/>
-        <location filename="../../src/witools.cpp" line="966"/>
-        <location filename="../../src/witools.cpp" line="1322"/>
-        <location filename="../../src/witools.cpp" line="1522"/>
-        <location filename="../../src/witools.cpp" line="1903"/>
+        <location filename="../../src/witools.cpp" line="760"/>
+        <location filename="../../src/witools.cpp" line="992"/>
+        <location filename="../../src/witools.cpp" line="1371"/>
+        <location filename="../../src/witools.cpp" line="1561"/>
+        <location filename="../../src/witools.cpp" line="1983"/>
         <source>Transfer successfully!</source>
         <translation>Transfer erfolgreich!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="735"/>
-        <location filename="../../src/witools.cpp" line="1326"/>
+        <location filename="../../src/witools.cpp" line="765"/>
+        <location filename="../../src/witools.cpp" line="1376"/>
+        <location filename="../../src/witools.cpp" line="1377"/>
         <source>Disc already exists!</source>
         <translation>Disk existiert bereits!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="739"/>
-        <location filename="../../src/witools.cpp" line="749"/>
-        <location filename="../../src/witools.cpp" line="1164"/>
-        <location filename="../../src/witools.cpp" line="1330"/>
-        <location filename="../../src/witools.cpp" line="1340"/>
-        <location filename="../../src/witools.cpp" line="1717"/>
-        <location filename="../../src/witools.cpp" line="2080"/>
-        <location filename="../../src/witools.cpp" line="2389"/>
+        <location filename="../../src/witools.cpp" line="769"/>
+        <location filename="../../src/witools.cpp" line="779"/>
+        <location filename="../../src/witools.cpp" line="1192"/>
+        <location filename="../../src/witools.cpp" line="1381"/>
+        <location filename="../../src/witools.cpp" line="1391"/>
+        <location filename="../../src/witools.cpp" line="1762"/>
+        <location filename="../../src/witools.cpp" line="2192"/>
+        <location filename="../../src/witools.cpp" line="2501"/>
         <source>Error %1: %2</source>
         <translation>Fehler: %1 %2</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="744"/>
-        <location filename="../../src/witools.cpp" line="745"/>
-        <location filename="../../src/witools.cpp" line="971"/>
-        <location filename="../../src/witools.cpp" line="972"/>
-        <location filename="../../src/witools.cpp" line="1335"/>
-        <location filename="../../src/witools.cpp" line="1336"/>
-        <location filename="../../src/witools.cpp" line="1527"/>
-        <location filename="../../src/witools.cpp" line="1528"/>
-        <location filename="../../src/witools.cpp" line="1913"/>
-        <location filename="../../src/witools.cpp" line="1914"/>
+        <location filename="../../src/witools.cpp" line="774"/>
+        <location filename="../../src/witools.cpp" line="775"/>
+        <location filename="../../src/witools.cpp" line="998"/>
+        <location filename="../../src/witools.cpp" line="999"/>
+        <location filename="../../src/witools.cpp" line="1386"/>
+        <location filename="../../src/witools.cpp" line="1387"/>
+        <location filename="../../src/witools.cpp" line="1567"/>
+        <location filename="../../src/witools.cpp" line="1568"/>
+        <location filename="../../src/witools.cpp" line="1994"/>
+        <location filename="../../src/witools.cpp" line="1995"/>
         <source>Transfer canceled!</source>
         <translation>Transfer abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="763"/>
+        <location filename="../../src/witools.cpp" line="793"/>
         <source>Starting transfer files to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
 </source>
         <translation>Starte Transfer Dateien zu Abbild im Format &apos;%1&apos; mit Kompression &apos;%2&apos; und Patching.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="766"/>
+        <location filename="../../src/witools.cpp" line="796"/>
         <source>Starting transfer files to image in format &apos;%1&apos; with compression &apos;%2&apos;.
 </source>
         <translation>Starte ransfer Dateien zu Abbild im Format &apos;%1&apos; mit Kompression &apos;%2&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="771"/>
+        <location filename="../../src/witools.cpp" line="801"/>
         <source>Starting transfer files to image in format &apos;%1&apos; with patching.
 </source>
         <translation>Starte ransfer Dateien zu Abbild im Format &apos;%1&apos; mit Patching.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="774"/>
+        <location filename="../../src/witools.cpp" line="804"/>
         <source>Starting transfer files to image in format &apos;%1&apos;.
 </source>
         <translation>Starte Transfer Dateien zu Abbild in Format &apos;%1&apos;
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="955"/>
+        <location filename="../../src/witools.cpp" line="981"/>
+        <location filename="../../src/witools.cpp" line="1972"/>
         <source>Transfering game [%1/%2] %3 -&gt; %4...</source>
         <translation>Transferiere Spiel [%1/%2] %3 -&gt; %4...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="956"/>
-        <location filename="../../src/witools.cpp" line="1512"/>
+        <location filename="../../src/witools.cpp" line="749"/>
+        <location filename="../../src/witools.cpp" line="982"/>
+        <location filename="../../src/witools.cpp" line="1360"/>
+        <location filename="../../src/witools.cpp" line="1551"/>
+        <location filename="../../src/witools.cpp" line="1973"/>
         <source>%p% (%1 MiB) copied in %2 (%3 MiB/sec) -&gt; ETA %4</source>
         <translation>%p% (%1 MiB) kopiert in %2 (%3 MiB/Sek) -&gt; ETA %4</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2400"/>
+        <source>%1 MiB copied in %2 (%3 MiB/sec)</source>
+        <translation type="obsolete">%1 MiB in %2 kopiert (%3 MiB/Sek)</translation>
+    </message>
+    <message>
+        <source>Extracting game from %1...</source>
+        <translation type="obsolete">Extrahiere Spiel von %1...</translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="2512"/>
         <source>Starting game patching...
 </source>
         <translation>Starte Patchen des Spiels...
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2446"/>
+        <location filename="../../src/witools.cpp" line="2558"/>
         <source>Patch game image failed!</source>
         <translation>Patchen des Spielabbildes fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2447"/>
+        <location filename="../../src/witools.cpp" line="2559"/>
         <source>Patch game image failed! (status: %1, code: %2,  %3)</source>
         <translation>Patchen des Spielabbildes fehlgeschlagen! (Status: %1, Code: %2, %3)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2452"/>
-        <location filename="../../src/witools.cpp" line="2453"/>
+        <location filename="../../src/witools.cpp" line="2564"/>
+        <location filename="../../src/witools.cpp" line="2565"/>
         <source>Patch game image successfully!</source>
         <translation>Pathen des Spielabbildes erfolgreich!</translation>
     </message>
     <message>
+        <location filename="../../src/witools.cpp" line="1550"/>
         <source>Transfering game %1 -&gt; %2...</source>
-        <translation type="obsolete">Transferiere Spiel %1 -&gt; %2...</translation>
+        <translation>Transferiere Spiel %1 -&gt; %2...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="967"/>
-        <location filename="../../src/witools.cpp" line="1157"/>
-        <location filename="../../src/witools.cpp" line="1523"/>
-        <location filename="../../src/witools.cpp" line="1710"/>
-        <location filename="../../src/witools.cpp" line="1904"/>
-        <location filename="../../src/witools.cpp" line="2073"/>
-        <location filename="../../src/witools.cpp" line="2385"/>
+        <location filename="../../src/witools.cpp" line="748"/>
+        <source>Transfering game [%1/%2] %3 -&gt; WBFS...</source>
+        <translation>Transferiere Spiel [%1/%2] %3 -&gt; WBFS...</translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="761"/>
+        <location filename="../../src/witools.cpp" line="993"/>
+        <location filename="../../src/witools.cpp" line="1372"/>
+        <location filename="../../src/witools.cpp" line="1562"/>
+        <location filename="../../src/witools.cpp" line="1984"/>
+        <source>%1 MiB in %2 copied (%3 MiB/sec)</source>
+        <translation>%1 MiB in %2 kopiert (%3 MiB/Sek)</translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="994"/>
+        <location filename="../../src/witools.cpp" line="1185"/>
+        <location filename="../../src/witools.cpp" line="1563"/>
+        <location filename="../../src/witools.cpp" line="1755"/>
+        <location filename="../../src/witools.cpp" line="1985"/>
+        <location filename="../../src/witools.cpp" line="2185"/>
+        <location filename="../../src/witools.cpp" line="2497"/>
         <source>Ready.</source>
         <translation>Bereit.</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="982"/>
-        <location filename="../../src/witools.cpp" line="1538"/>
-        <location filename="../../src/witools.cpp" line="1924"/>
+        <location filename="../../src/witools.cpp" line="1009"/>
+        <location filename="../../src/witools.cpp" line="1578"/>
+        <location filename="../../src/witools.cpp" line="2005"/>
         <source>Preparing extraction...</source>
         <translation>Bereite Extrahierung vor...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="985"/>
+        <location filename="../../src/witools.cpp" line="1012"/>
         <source>Starting image extraction with patching.
 </source>
         <translation>Starte Abbildextraktion mit Patchen.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="988"/>
+        <location filename="../../src/witools.cpp" line="1015"/>
         <source>Starting image extraction.
 </source>
         <translation>Starte Abbildextraktion.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1105"/>
+        <location filename="../../src/witools.cpp" line="1156"/>
+        <location filename="../../src/witools.cpp" line="1727"/>
+        <location filename="../../src/witools.cpp" line="2157"/>
         <source>Extracting game %1 -&gt; %2...</source>
         <translation>Extrahiere Spiel %1 -&gt; %2...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1129"/>
-        <location filename="../../src/witools.cpp" line="1683"/>
+        <location filename="../../src/witools.cpp" line="1157"/>
+        <location filename="../../src/witools.cpp" line="1728"/>
+        <location filename="../../src/witools.cpp" line="2158"/>
         <source>%p% (%1 MiB) extracted in %2 (%3 MiB/sec) -&gt; ETA %4</source>
         <translation>%p% (%1 MiB) extrahiert in %2 (%3 MiB/Sek) -&gt; ETA %4</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1138"/>
-        <location filename="../../src/witools.cpp" line="1692"/>
-        <location filename="../../src/witools.cpp" line="2056"/>
+        <location filename="../../src/witools.cpp" line="1166"/>
+        <location filename="../../src/witools.cpp" line="1737"/>
+        <location filename="../../src/witools.cpp" line="2167"/>
         <source>Destination already exists!</source>
         <translation>Ziel existiert bereits!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1148"/>
-        <location filename="../../src/witools.cpp" line="1149"/>
-        <location filename="../../src/witools.cpp" line="1701"/>
-        <location filename="../../src/witools.cpp" line="1702"/>
-        <location filename="../../src/witools.cpp" line="2065"/>
-        <location filename="../../src/witools.cpp" line="2066"/>
+        <location filename="../../src/witools.cpp" line="1176"/>
+        <location filename="../../src/witools.cpp" line="1177"/>
+        <location filename="../../src/witools.cpp" line="1746"/>
+        <location filename="../../src/witools.cpp" line="1747"/>
+        <location filename="../../src/witools.cpp" line="2176"/>
+        <location filename="../../src/witools.cpp" line="2177"/>
         <source>Extraction canceled!</source>
         <translation>Extrahierung abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1155"/>
-        <location filename="../../src/witools.cpp" line="1708"/>
+        <location filename="../../src/witools.cpp" line="1183"/>
+        <location filename="../../src/witools.cpp" line="1754"/>
+        <location filename="../../src/witools.cpp" line="2184"/>
         <source>%1 MiB in %2 extracted (%3 MiB/sec)</source>
         <translation>%1 MiB in %2 extrahiert (%3 MiB/Sek)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1156"/>
-        <location filename="../../src/witools.cpp" line="1709"/>
-        <location filename="../../src/witools.cpp" line="2072"/>
+        <location filename="../../src/witools.cpp" line="1184"/>
+        <location filename="../../src/witools.cpp" line="1753"/>
+        <location filename="../../src/witools.cpp" line="2183"/>
         <source>Extraction successfully!</source>
         <translation>Extrahierung erfolgreich!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1165"/>
-        <location filename="../../src/witools.cpp" line="1718"/>
-        <location filename="../../src/witools.cpp" line="2081"/>
+        <location filename="../../src/witools.cpp" line="1193"/>
+        <location filename="../../src/witools.cpp" line="1763"/>
+        <location filename="../../src/witools.cpp" line="2193"/>
         <source>Extraction failed!</source>
         <translation>Extrahierung fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1178"/>
+        <location filename="../../src/witools.cpp" line="1206"/>
         <source>Starting transfer DVD to WBFS with patching.
 </source>
         <translation>Starte Transfer DVD zu WBFS mit Patchen.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1181"/>
+        <location filename="../../src/witools.cpp" line="1209"/>
         <source>Starting transfer DVD to WBFS.
 </source>
         <translation>Starte Transfer DVD zu WBFS.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1354"/>
+        <location filename="../../src/witools.cpp" line="1359"/>
+        <source>Transfering game %1 -&gt; WBFS...</source>
+        <translation>Transferiere Spiel %1 -&gt; WBFS...</translation>
+    </message>
+    <message>
+        <location filename="../../src/witools.cpp" line="1405"/>
         <source>Starting transfer DVD to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
 </source>
         <translation>Starte Transfer DVD zu Abbild in Format &apos;%1&apos; mit Komprimierung &apos;%2&apos; und Patching.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1357"/>
+        <location filename="../../src/witools.cpp" line="1408"/>
         <source>Starting transfer DVD to image in format &apos;%1&apos; with compression &apos;%2&apos;.
 </source>
         <translation>Starte Transfer DVD zu Abbild im Format &apos;%1&apos; mit Komprimierung &apos;%2&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1362"/>
+        <location filename="../../src/witools.cpp" line="1413"/>
         <source>Starting transfer DVD to image in format &apos;%1&apos; with patching.
 </source>
         <translation>Starte Transfer DVD zu Abbild im Format &apos;%1&apos; mit Patching.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1365"/>
+        <location filename="../../src/witools.cpp" line="1416"/>
         <source>Starting transfer DVD to image in format &apos;%1&apos;.
 </source>
         <translation>Starte Transfer DVD zu Abbild im Format &apos;%1&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1511"/>
         <source>Transfering game to %1...</source>
-        <translation>Transferiere Spiel nach %1...</translation>
+        <translation type="obsolete">Transferiere Spiel nach %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1541"/>
+        <location filename="../../src/witools.cpp" line="1581"/>
         <source>Starting DVD extraction with patching.
 </source>
         <translation>Starte DVD Extrahierung mit Patching.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1544"/>
+        <location filename="../../src/witools.cpp" line="1584"/>
         <source>Starting DVD extraction.
 </source>
         <translation>Starte DVD Extrahierung.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1659"/>
-        <location filename="../../src/witools.cpp" line="2040"/>
         <source>Extracting game %1...</source>
-        <translation>Extrahiere Spiel %1...</translation>
+        <translation type="obsolete">Extrahiere Spiel %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1732"/>
+        <location filename="../../src/witools.cpp" line="1777"/>
         <source>Starting transfer WBFS to image in format &apos;%1&apos; with compression &apos;%2&apos; and patching.
 </source>
         <translation>Starte Transfer WBFS zu Abbild im Format &apos;%1&apos; mit Kompression &apos;%2&apos; und Patching.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1735"/>
+        <location filename="../../src/witools.cpp" line="1780"/>
         <source>Starting transfer WBFS to image in format &apos;%1&apos; with compression &apos;%2&apos;.
 </source>
         <translation>Starte Transfer WBFS zu Abbild in Format &apos;%1&apos; mit Komprimierung &apos;%2&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1740"/>
+        <location filename="../../src/witools.cpp" line="1785"/>
         <source>Starting transfer WBFS to image in format &apos;%1&apos; with patching.
 </source>
         <translation>Starte Transfer WBFS zu Abbild im Format &apos;%1&apos; mit Patching.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1743"/>
+        <location filename="../../src/witools.cpp" line="1788"/>
         <source>Starting transfer WBFS to image in format &apos;%1&apos;.
 </source>
         <translation>Starte Transfer WBFS zu Abbild im Format &apos;%1&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1908"/>
-        <location filename="../../src/witools.cpp" line="1909"/>
+        <location filename="../../src/witools.cpp" line="1989"/>
+        <location filename="../../src/witools.cpp" line="1990"/>
         <source>File already exists!</source>
         <translation>Datei existiert bereits!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1927"/>
+        <location filename="../../src/witools.cpp" line="2008"/>
         <source>Starting WBFS extraction with patching.
 </source>
         <translation>Starte WBFS Extrahierung mit Patching.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="1930"/>
+        <location filename="../../src/witools.cpp" line="2011"/>
         <source>Starting WBFS extraction.
 </source>
         <translation>Starte WBFS Extrahierung.
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2132"/>
+        <location filename="../../src/witools.cpp" line="2244"/>
         <source>Games removed successfully!</source>
         <translation>Entfernen der Spiele erfolgreich!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2138"/>
+        <location filename="../../src/witools.cpp" line="2250"/>
         <source>Games removed failed!</source>
         <translation>Entfernen der Spiele fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2146"/>
+        <location filename="../../src/witools.cpp" line="2258"/>
         <source>Checking and repairing WBFS...</source>
         <translation>WBFS überprüfen und reparieren...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2149"/>
+        <location filename="../../src/witools.cpp" line="2261"/>
         <source>Checking WBFS...</source>
         <translation>Überprüfe WBFS...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2211"/>
+        <location filename="../../src/witools.cpp" line="2323"/>
         <source>WBFS check failed!</source>
         <translation>Überprüfung WBFS fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2212"/>
+        <location filename="../../src/witools.cpp" line="2324"/>
         <source>WBFS check failed! (status: %1, code: %2,  %3)</source>
         <translation>Überprüfung WBFS fehlgeschlagen! (Status: %1, Code: %2, %3)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2216"/>
+        <location filename="../../src/witools.cpp" line="2328"/>
         <source>WBFS check successfully!</source>
         <translation>Überprüfung WBFS erfolgreich!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2251"/>
+        <location filename="../../src/witools.cpp" line="2363"/>
         <source>WBFS dump failed!</source>
         <translation>WBFS Dump fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2252"/>
+        <location filename="../../src/witools.cpp" line="2364"/>
         <source>WBFS dump failed! (status: %1, code: %2,  %3)</source>
         <translation>WBFS Dump fehlgeschlagen! (Status: %1, Code: %2, %3)</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2256"/>
+        <location filename="../../src/witools.cpp" line="2368"/>
         <source>WBFS dump successfully!</source>
         <translation>WBFS Dump erfolgreich!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2265"/>
+        <location filename="../../src/witools.cpp" line="2377"/>
         <source>Creating WBFS...</source>
         <translation>Erzeuge WBFS...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2309"/>
+        <location filename="../../src/witools.cpp" line="2421"/>
         <source>Create WBFS failed!</source>
         <translation>WBFS Erzeugung fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2313"/>
+        <location filename="../../src/witools.cpp" line="2425"/>
         <source>Create WBFS successfully!</source>
         <translation>WBFS Erzeugung erfolgreich!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2324"/>
+        <location filename="../../src/witools.cpp" line="2436"/>
         <source>Starting game verification...
 </source>
         <translation>Starte Spieleüberprüfung...
 </translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2333"/>
+        <location filename="../../src/witools.cpp" line="2445"/>
         <source>Verifying game %1...</source>
         <translation>Überprüfe Spiel %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2337"/>
+        <location filename="../../src/witools.cpp" line="2449"/>
         <source>Verifying game on drive %1...</source>
         <translation>Überprüfe Spiel in Laufwerk %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2349"/>
+        <location filename="../../src/witools.cpp" line="2461"/>
         <source>Verifying game %1 on WBFS...</source>
         <translation>Überprüfe Spiel in WBFS %1...</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2379"/>
-        <location filename="../../src/witools.cpp" line="2380"/>
+        <location filename="../../src/witools.cpp" line="2491"/>
+        <location filename="../../src/witools.cpp" line="2492"/>
         <source>Verification canceled!</source>
         <translation>Überprüfung fehlgeschlagen!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2384"/>
+        <location filename="../../src/witools.cpp" line="2496"/>
         <source>Verification successfully!</source>
         <translation>Überprüfung erfolgreich!</translation>
     </message>
     <message>
-        <location filename="../../src/witools.cpp" line="2390"/>
+        <location filename="../../src/witools.cpp" line="2502"/>
         <source>Verification failed!</source>
         <translation>Überprüfung fehlgeschlagen!</translation>
     </message>

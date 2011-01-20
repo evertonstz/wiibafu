@@ -970,7 +970,7 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     </message>
     <message>
         <source>Transfering game %1...</source>
-        <translation>Overføre spillet %1...</translation>
+        <translation type="obsolete">Overføre spillet %1...</translation>
     </message>
     <message>
         <source>Transfer failed!</source>
@@ -1004,7 +1004,7 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     </message>
     <message>
         <source>Transfering game %1 -&gt; %2...</source>
-        <translation type="obsolete">Overføre game %1 -&gt; %2...</translation>
+        <translation type="unfinished">Overføre game %1 -&gt; %2...</translation>
     </message>
     <message>
         <source>Ready.</source>
@@ -1061,7 +1061,7 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     </message>
     <message>
         <source>Extracting game %1...</source>
-        <translation>Utpakking spill %1...</translation>
+        <translation type="obsolete">Utpakking spill %1...</translation>
     </message>
     <message>
         <source>Starting transfer WBFS to image in format &apos;%1&apos; with compression &apos;%2&apos;.
@@ -1224,10 +1224,6 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Transfering game to %1...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Starting DVD extraction with patching.
 </source>
         <translation type="unfinished"></translation>
@@ -1262,6 +1258,18 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     </message>
     <message>
         <source>Patch game image successfully!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfering game %1 -&gt; WBFS...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfering game [%1/%2] %3 -&gt; WBFS...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 MiB in %2 copied (%3 MiB/sec)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
