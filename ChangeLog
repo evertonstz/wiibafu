@@ -1,10 +1,9 @@
-2011-01-19 Kai Heitkamp <dynup@ymail.com>
- Version 1.1 (wit v1.25b r2143)
+2011-01-20 Kai Heitkamp <dynup@ymail.com>
+ Version 1.1 (wit v1.26a.beta5 r2191)
   * Spanish translation
   * Patch game image or while transfer
   * Progress infos in main window title on mac
   * Progress infos while transfer adapted to new wit
-    (files->image, files->extract, dvd->image, dvd-extract)
   * Progress infos while loading games adapted to new wit
   * Set path for titles via settings
   * Autosearch path to wit and titles improved
