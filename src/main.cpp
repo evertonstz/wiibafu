@@ -32,11 +32,13 @@ int main(int argc, char *argv[]) {
     QString file = QFile("TranslationPath:german.qm").fileName();
     QString path = file.mid(0, file.lastIndexOf("/"));
 
-    QTranslator translator;
+    QTranslator qtTranslator, appTranslator;
     QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
-    translator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    translator.load(QLocale::system().languageToString(QLocale::system().language()).toLower(), path);
-    app.installTranslator(&translator);
+    qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    appTranslator.load(QLocale::system().languageToString(QLocale::system().language()).toLower(), path);
+
+    app.installTranslator(&qtTranslator);
+    app.installTranslator(&appTranslator);
 
     WiiBaFu wiibafu;
     wiibafu.show();

@@ -1,5 +1,6 @@
-2011-01-20 Kai Heitkamp <dynup@ymail.com>
- Version 1.1 (wit v1.26a.beta5 r2191)
+2011-01-26 Kai Heitkamp <dynup@ymail.com>
+ Version 1.1 (wit v1.26a.beta6 r2209)
+  * Dutch translation
   * Spanish translation
   * Patch game image or while transfer
   * Progress infos in main window title on mac
