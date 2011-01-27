@@ -711,7 +711,7 @@ void WiTools::transferFilesToWBFS_readyReadStandardOutput() {
         if (line.isEmpty()) {
             continue;
         }
-        else if (line.contains("job-count=")) {
+        else if (line.contains("job-counter=")) {
             job_counter = line.section("=", 1);
             continue;
         }
@@ -2017,7 +2017,9 @@ void WiTools::extractWBFS(const QModelIndexList indexList, const QString wbfsPat
     arguments.append("--part");
     arguments.append(wbfsPath);
 
-    arguments.append(indexList.first().data().toString());
+    foreach (QModelIndex index, indexList) {
+        arguments.append(index.data().toString());
+    }
 
     arguments.append("--fst");
 

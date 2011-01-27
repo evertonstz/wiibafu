@@ -1097,7 +1097,7 @@ void WiiBaFu::wbfsTab_Extract(const bool patch) {
                 }
                 else {
                     ui->wbfsTab_pushButton_Extract->setText(tr("&Cancel extracting"));
-                    QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), buildPath(wiibafudialog->directory(), wbfsListModel, ui->wbfsTab_tableView, patchParameters.ID), patchParameters);
+                    QtConcurrent::run(wiTools, &WiTools::extractWBFS, ui->wbfsTab_tableView->selectionModel()->selectedRows(0), wbfsPath(), wiibafudialog->directory(), patchParameters);
                 }
             }
         }
