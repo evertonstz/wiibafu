@@ -418,7 +418,6 @@ void WiiBaFu::on_menuTools_Compare_triggered() {
         QTableView *tableView;
         QStandardItemModel *sourceModel, *targetModel;
 
-
         switch (ui->tabWidget->currentIndex()) {
             case 0:
                     tableView = ui->filesTab_tableView;
@@ -434,6 +433,7 @@ void WiiBaFu::on_menuTools_Compare_triggered() {
                     return;
         }
 
+        tableView->selectionModel()->clearSelection();
         tableView->setSelectionMode(QAbstractItemView::MultiSelection);
 
         for (int i = 0; sourceModel->rowCount() > i; ++i) {
