@@ -2381,8 +2381,11 @@ void WiTools::createWBFS(const CreateWBFSParameters parameters) {
     QStringList arguments;
     arguments.append("FORMAT");
     arguments.append(parameters.Path);
-    arguments.append("--size");
-    arguments.append(parameters.Size);
+
+    if (!parameters.Size.isEmpty()) {
+        arguments.append("--size");
+        arguments.append(parameters.Size);
+    }
 
     if (!parameters.SplitSize.isEmpty()) {
         arguments.append("--split-size");
