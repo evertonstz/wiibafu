@@ -28,14 +28,10 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setApplicationName("Wii Backup Fusion");
     QCoreApplication::setApplicationVersion("1.1");
 
-    QDir::setSearchPaths("TranslationPath", QStringList() << QDir::currentPath() << QDir::currentPath().append("/locale") << QDir::homePath().append("/WiiBaFu/resources/locale") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/Resources"));
-    QString file = QFile("TranslationPath:german.qm").fileName();
-    QString path = file.mid(0, file.lastIndexOf("/"));
-
     QTranslator qtTranslator, appTranslator;
     QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
-    qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    appTranslator.load(QLocale::system().languageToString(QLocale::system().language()).toLower(), path);
+    qtTranslator.load(QString(":locale/qt_%1.qm").arg(QLocale::system().name()));
+    appTranslator.load(QString(":locale/%1.qm").arg(QLocale::system().languageToString(QLocale::system().language()).toLower()));
 
     app.installTranslator(&qtTranslator);
     app.installTranslator(&appTranslator);

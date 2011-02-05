@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>locale/german.qm</file>
+        <file>locale/french.qm</file>
+        <file>locale/dutch.qm</file>
+        <file>locale/spanish.qm</file>
+        <file>locale/norwegian.qm</file>
+        <file>locale/qt_de.qm</file>
+        <file>locale/qt_es.qm</file>
+        <file>locale/qt_fr.qm</file>
+    </qresource>
+</RCC>
