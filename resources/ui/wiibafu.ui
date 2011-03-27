@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>640</height>
+    <height>643</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../wiibafu.qrc">
-    <normaloff>:/appicon/images/appicon.png</normaloff>:/appicon/images/appicon.png</iconset>
+    <normaloff>:/images/appicon.png</normaloff>:/images/appicon.png</iconset>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
@@ -40,6 +40,10 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="tabFiles">
+       <attribute name="icon">
+        <iconset resource="../wiibafu.qrc">
+         <normaloff>:/images/image.png</normaloff>:/images/image.png</iconset>
+       </attribute>
        <attribute name="title">
         <string>Files</string>
        </attribute>
@@ -61,6 +65,10 @@
              <property name="text">
               <string>&amp;Load</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
+             </property>
              <property name="shortcut">
               <string>Ctrl+L</string>
              </property>
@@ -71,12 +79,20 @@
              <property name="text">
               <string>&amp;Select all / none</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/select-all.png</normaloff>:/images/select-all.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_TransferToWBFS">
              <property name="text">
               <string>Transfer to &amp;WBFS</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/transfer-to-wbfs.png</normaloff>:/images/transfer-to-wbfs.png</iconset>
              </property>
             </widget>
            </item>
@@ -85,6 +101,10 @@
              <property name="text">
               <string>Transfer to &amp;image</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/transfer-to-image.png</normaloff>:/images/transfer-to-image.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
@@ -92,12 +112,20 @@
              <property name="text">
               <string>E&amp;xtract image</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/extract-image.png</normaloff>:/images/extract-image.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="filesTab_pushButton_ShowInfo">
              <property name="text">
-              <string>Show i&amp;nfo</string>
+              <string>I&amp;nfo</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/info.png</normaloff>:/images/info.png</iconset>
              </property>
             </widget>
            </item>
@@ -107,6 +135,10 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tabDVD">
+       <attribute name="icon">
+        <iconset resource="../wiibafu.qrc">
+         <normaloff>:/images/dvd-drive.png</normaloff>:/images/dvd-drive.png</iconset>
+       </attribute>
        <attribute name="title">
         <string>DVD</string>
        </attribute>
@@ -227,6 +259,10 @@
              <property name="text">
               <string>&amp;Load</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/dvd-load.png</normaloff>:/images/dvd-load.png</iconset>
+             </property>
              <property name="shortcut">
               <string>Ctrl+L</string>
              </property>
@@ -237,12 +273,20 @@
              <property name="text">
               <string>Transfer to &amp;WBFS</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/transfer-to-wbfs.png</normaloff>:/images/transfer-to-wbfs.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="dvdTab_pushButton_TransferToImage">
              <property name="text">
               <string>Transfer to &amp;image</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/transfer-to-image.png</normaloff>:/images/transfer-to-image.png</iconset>
              </property>
             </widget>
            </item>
@@ -251,12 +295,20 @@
              <property name="text">
               <string>E&amp;xtract</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/dvd-extract.png</normaloff>:/images/dvd-extract.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="dvdTab_pushButton_Patch">
              <property name="text">
               <string>Patch</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/patch.png</normaloff>:/images/patch.png</iconset>
              </property>
              <property name="checkable">
               <bool>true</bool>
@@ -269,6 +321,10 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tabWBFS">
+       <attribute name="icon">
+        <iconset resource="../wiibafu.qrc">
+         <normaloff>:/images/hdd.png</normaloff>:/images/hdd.png</iconset>
+       </attribute>
        <attribute name="title">
         <string>WBFS</string>
        </attribute>
@@ -322,6 +378,10 @@
              <property name="text">
               <string>&amp;Load</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/hdd-load.png</normaloff>:/images/hdd-load.png</iconset>
+             </property>
              <property name="shortcut">
               <string>Ctrl+L</string>
              </property>
@@ -332,12 +392,20 @@
              <property name="text">
               <string>&amp;Select all / none</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/select-all.png</normaloff>:/images/select-all.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_Transfer">
              <property name="text">
               <string>&amp;Transfer</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/transfer-to-image.png</normaloff>:/images/transfer-to-image.png</iconset>
              </property>
             </widget>
            </item>
@@ -346,12 +414,20 @@
              <property name="text">
               <string>E&amp;xtract</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/hdd-extract.png</normaloff>:/images/hdd-extract.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_Remove">
              <property name="text">
               <string>&amp;Remove</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
              </property>
             </widget>
            </item>
@@ -360,12 +436,20 @@
              <property name="text">
               <string>Chec&amp;k</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/check.png</normaloff>:/images/check.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="wbfsTab_pushButton_ShowInfo">
              <property name="text">
-              <string>Show i&amp;nfo</string>
+              <string>&amp;Info</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/info.png</normaloff>:/images/info.png</iconset>
              </property>
             </widget>
            </item>
@@ -375,6 +459,10 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tabInfo">
+       <attribute name="icon">
+        <iconset resource="../wiibafu.qrc">
+         <normaloff>:/images/info.png</normaloff>:/images/info.png</iconset>
+       </attribute>
        <attribute name="title">
         <string>Info</string>
        </attribute>
@@ -687,7 +775,7 @@
               </widget>
              </item>
              <item row="20" column="0">
-              <widget class="QLabel" name="label_7">
+              <widget class="QLabel" name="infoTab_label_Type">
                <property name="minimumSize">
                 <size>
                  <width>110</width>
@@ -977,85 +1065,153 @@
               <property name="text">
                <string>English</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/UnitedKingdom.png</normaloff>:/images/flags/UnitedKingdom.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>American</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/USA.png</normaloff>:/images/flags/USA.png</iconset>
               </property>
              </item>
              <item>
               <property name="text">
                <string>French</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/France.png</normaloff>:/images/flags/France.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>German</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Germany.png</normaloff>:/images/flags/Germany.png</iconset>
               </property>
              </item>
              <item>
               <property name="text">
                <string>Spanish</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Spain.png</normaloff>:/images/flags/Spain.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>Italian</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Italy.png</normaloff>:/images/flags/Italy.png</iconset>
               </property>
              </item>
              <item>
               <property name="text">
                <string>Dutch</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Netherlands.png</normaloff>:/images/flags/Netherlands.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>Portuguese</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Portugal.png</normaloff>:/images/flags/Portugal.png</iconset>
               </property>
              </item>
              <item>
               <property name="text">
                <string>North Sami</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/NorthSami.png</normaloff>:/images/flags/NorthSami.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>Danish</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Denmark.png</normaloff>:/images/flags/Denmark.png</iconset>
               </property>
              </item>
              <item>
               <property name="text">
                <string>Norwegian</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Norway.png</normaloff>:/images/flags/Norway.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>Finnish</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/France.png</normaloff>:/images/flags/France.png</iconset>
               </property>
              </item>
              <item>
               <property name="text">
                <string>Russian</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/RussianFederation.png</normaloff>:/images/flags/RussianFederation.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>Japanese</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Japan.png</normaloff>:/images/flags/Japan.png</iconset>
               </property>
              </item>
              <item>
               <property name="text">
                <string>Korean</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Korea.png</normaloff>:/images/flags/Korea.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>Taiwanese</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/Taiwan.png</normaloff>:/images/flags/Taiwan.png</iconset>
+              </property>
              </item>
              <item>
               <property name="text">
                <string>Chinese</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/flags/China.png</normaloff>:/images/flags/China.png</iconset>
               </property>
              </item>
             </widget>
@@ -1093,6 +1249,10 @@
              <property name="text">
               <string>Load &amp;3D cover</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/load-3dcover.png</normaloff>:/images/load-3dcover.png</iconset>
+             </property>
              <property name="shortcut">
               <string>Ctrl+3</string>
              </property>
@@ -1102,6 +1262,10 @@
             <widget class="QPushButton" name="infoTab_pushButton_LoadFullHQCover">
              <property name="text">
               <string>Load f&amp;ull HQ cover</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/load-cover.png</normaloff>:/images/load-cover.png</iconset>
              </property>
              <property name="shortcut">
               <string>Ctrl+U</string>
@@ -1113,6 +1277,10 @@
              <property name="text">
               <string>View game in &amp;browser</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/browser.png</normaloff>:/images/browser.png</iconset>
+             </property>
              <property name="shortcut">
               <string>Ctrl+B</string>
              </property>
@@ -1122,6 +1290,10 @@
             <widget class="QPushButton" name="infoTab_pushButton_Reset">
              <property name="text">
               <string>&amp;Reset</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/reset.png</normaloff>:/images/reset.png</iconset>
              </property>
              <property name="shortcut">
               <string>Ctrl+R</string>
@@ -1134,6 +1306,10 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tabLog">
+       <attribute name="icon">
+        <iconset resource="../wiibafu.qrc">
+         <normaloff>:/images/log.png</normaloff>:/images/log.png</iconset>
+       </attribute>
        <attribute name="title">
         <string>Log</string>
        </attribute>
@@ -1158,19 +1334,13 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QPushButton" name="logTab_pushButton_Clear">
-             <property name="text">
-              <string>Clea&amp;r</string>
-             </property>
-             <property name="shortcut">
-              <string>Ctrl+R</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QPushButton" name="logTab_pushButton_Copy">
              <property name="text">
               <string>&amp;Copy</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/copy.png</normaloff>:/images/copy.png</iconset>
              </property>
              <property name="shortcut">
               <string>Ctrl+C</string>
@@ -1182,6 +1352,10 @@
              <property name="text">
               <string>&amp;Find</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/search.png</normaloff>:/images/search.png</iconset>
+             </property>
              <property name="shortcut">
               <string>Ctrl+F</string>
              </property>
@@ -1192,8 +1366,26 @@
              <property name="text">
               <string>&amp;Save</string>
              </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/save.png</normaloff>:/images/save.png</iconset>
+             </property>
              <property name="shortcut">
               <string>Ctrl+S</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="logTab_pushButton_Clear">
+             <property name="text">
+              <string>&amp;Reset</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../wiibafu.qrc">
+               <normaloff>:/images/reset.png</normaloff>:/images/reset.png</iconset>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+R</string>
              </property>
             </widget>
            </item>
@@ -1258,11 +1450,22 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="menuHelp_About">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/appicon.png</normaloff>:/images/appicon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;About...</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuFile_Exit">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/exit.png</normaloff>:/images/exit.png</iconset>
+   </property>
    <property name="text">
     <string>E&amp;xit</string>
    </property>
@@ -1272,51 +1475,110 @@
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuHelp_About_Qt">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/qt.png</normaloff>:/images/qt.png</iconset>
+   </property>
    <property name="text">
     <string>About &amp;Qt...</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuTools_CheckWBFS">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/check.png</normaloff>:/images/check.png</iconset>
+   </property>
    <property name="text">
     <string>Chec&amp;k WBFS</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuOptions_Settings">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/settings.png</normaloff>:/images/settings.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Settings...</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuTools_CreateWBFS">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/create-wbfs.png</normaloff>:/images/create-wbfs.png</iconset>
+   </property>
    <property name="text">
     <string>C&amp;reate WBFS</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuTools_UpdateTitles">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/update.png</normaloff>:/images/update.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Update titles</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+U</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuTools_VerifyGame">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/verify-game.png</normaloff>:/images/verify-game.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Verify game</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuTools_Compare">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/compare.png</normaloff>:/images/compare.png</iconset>
+   </property>
    <property name="text">
     <string>Com&amp;pare Files/WBFS</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="menuTools_DumpWBFS">
+   <property name="icon">
+    <iconset resource="../wiibafu.qrc">
+     <normaloff>:/images/dump-wbfs.png</normaloff>:/images/dump-wbfs.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Dump WBFS</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
  </widget>

@@ -1,10 +1,14 @@
-2011-02-05 Kai Heitkamp <dynup@ymail.com>
- Version 1.1 (wit v1.26a r2223)
+2011-03-27 Kai Heitkamp <dynup@ymail.com>
+ Version 1.1 (wit v1.28a r2336)
+  * Some fixes and improvements
+  * Game ID in info tab
+  * Resets progress bar and infos after work
+  * Icons for better identify of functionalities
   * New language system
   * Dutch translation
   * Spanish translation
   * WBFS extract supports more than one game
-  * Patch game image or while transfer
+  * Patch game images (directly or while transfer)
   * Progress infos in main window title on mac
   * Progress infos while transfer adapted to new wit
   * Progress infos while loading games adapted to new wit

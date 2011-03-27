@@ -14,7 +14,7 @@
    <string>Settings</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../wiibafu.qrc">
+   <iconset>
     <normaloff>:/appicon/images/appicon.png</normaloff>:/appicon/images/appicon.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -33,30 +33,54 @@
       <property name="text">
        <string>Main</string>
       </property>
+      <property name="icon">
+       <iconset resource="../wiibafu.qrc">
+        <normaloff>:/images/settings.png</normaloff>:/images/settings.png</iconset>
+      </property>
      </item>
      <item>
       <property name="text">
        <string>WIT</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../wiibafu.qrc">
+        <normaloff>:/images/wit.png</normaloff>:/images/wit.png</iconset>
       </property>
      </item>
      <item>
       <property name="text">
        <string>Game list behavior</string>
       </property>
+      <property name="icon">
+       <iconset resource="../wiibafu.qrc">
+        <normaloff>:/images/gamelist-behavior.png</normaloff>:/images/gamelist-behavior.png</iconset>
+      </property>
      </item>
      <item>
       <property name="text">
        <string>Game list columns</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../wiibafu.qrc">
+        <normaloff>:/images/gamelist-columns.png</normaloff>:/images/gamelist-columns.png</iconset>
       </property>
      </item>
      <item>
       <property name="text">
        <string>Transfer options</string>
       </property>
+      <property name="icon">
+       <iconset resource="../wiibafu.qrc">
+        <normaloff>:/images/transfer-to-image.png</normaloff>:/images/transfer-to-image.png</iconset>
+      </property>
      </item>
      <item>
       <property name="text">
        <string>WBFS options</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../wiibafu.qrc">
+        <normaloff>:/images/wbfs.png</normaloff>:/images/wbfs.png</iconset>
       </property>
      </item>
     </widget>
@@ -243,85 +267,153 @@
                <property name="text">
                 <string>English</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/UnitedKingdom.png</normaloff>:/images/flags/UnitedKingdom.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>American</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/USA.png</normaloff>:/images/flags/USA.png</iconset>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>French</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/France.png</normaloff>:/images/flags/France.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>German</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Germany.png</normaloff>:/images/flags/Germany.png</iconset>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>Spanish</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Spain.png</normaloff>:/images/flags/Spain.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>Italian</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Italy.png</normaloff>:/images/flags/Italy.png</iconset>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>Dutch</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Netherlands.png</normaloff>:/images/flags/Netherlands.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>Portuguese</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Portugal.png</normaloff>:/images/flags/Portugal.png</iconset>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>North Sami</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/NorthSami.png</normaloff>:/images/flags/NorthSami.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>Danish</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Denmark.png</normaloff>:/images/flags/Denmark.png</iconset>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>Norwegian</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Norway.png</normaloff>:/images/flags/Norway.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>Finnish</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Finland.png</normaloff>:/images/flags/Finland.png</iconset>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>Russian</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/RussianFederation.png</normaloff>:/images/flags/RussianFederation.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>Japanese</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Japan.png</normaloff>:/images/flags/Japan.png</iconset>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>Korean</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Korea.png</normaloff>:/images/flags/Korea.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>Taiwanese</string>
                </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Taiwan.png</normaloff>:/images/flags/Taiwan.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>Chinese</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/China.png</normaloff>:/images/flags/China.png</iconset>
                </property>
               </item>
              </widget>
@@ -423,6 +515,10 @@
             <property name="text">
              <string>Open file</string>
             </property>
+            <property name="icon">
+             <iconset resource="../wiibafu.qrc">
+              <normaloff>:/images/openfile.png</normaloff>:/images/openfile.png</iconset>
+            </property>
            </widget>
           </item>
           <item row="0" column="2">
@@ -465,6 +561,10 @@
               <property name="text">
                <string>Open</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
+              </property>
              </widget>
             </item>
             <item row="1" column="0">
@@ -481,6 +581,10 @@
              <widget class="QPushButton" name="wit_pushButton_PathToTitlesOpen">
               <property name="text">
                <string>Open</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
               </property>
              </widget>
             </item>
@@ -530,12 +634,20 @@
               <property name="text">
                <string>Open</string>
               </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="wit_pushButton_WBFSOpenFile">
               <property name="text">
                <string>Open file</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/openfile.png</normaloff>:/images/openfile.png</iconset>
               </property>
              </widget>
             </item>
@@ -577,6 +689,10 @@
              <widget class="QPushButton" name="wit_pushButton_DVDDriveOpenDirectory">
               <property name="text">
                <string>Open</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../wiibafu.qrc">
+                <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
               </property>
              </widget>
             </item>
@@ -1321,6 +1437,9 @@ The whole partition will be used! 'Whole' is ignored for overlayed partitions!</
    </item>
    <item row="1" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="styleSheet">
+      <string notr="true">dialogbuttonbox-buttons-have-icons: 1;</string>
+     </property>
      <property name="locale">
       <locale language="English" country="UnitedStates"/>
      </property>

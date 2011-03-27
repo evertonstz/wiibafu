@@ -14,7 +14,7 @@
    <string>Create WBFS</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../wiibafu.qrc">
+   <iconset>
     <normaloff>:/appicon/images/appicon.png</normaloff>:/appicon/images/appicon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -56,6 +56,10 @@
           </property>
           <property name="text">
            <string>Open</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../wiibafu.qrc">
+            <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
           </property>
          </widget>
         </item>
@@ -166,6 +170,9 @@
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="styleSheet">
+      <string notr="true">dialogbuttonbox-buttons-have-icons: 1;</string>
+     </property>
      <property name="locale">
       <locale language="English" country="UnitedStates"/>
      </property>

@@ -134,6 +134,7 @@ private:
     QString mib_per_sec;
 
     void setWit();
+    void resetProgressBarVariables();
 
 signals:
     void stopBusy();

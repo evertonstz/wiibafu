@@ -1,5 +1,71 @@
 <RCC>
-    <qresource prefix="/appicon" lang="English">
+    <qresource prefix="/">
+        <file>images/appicon.icns</file>
+        <file>images/appicon.ico</file>
         <file>images/appicon.png</file>
+        <file>images/browser.png</file>
+        <file>images/cancel.png</file>
+        <file>images/check.png</file>
+        <file>images/compare.png</file>
+        <file>images/copy.png</file>
+        <file>images/create-wbfs.png</file>
+        <file>images/delete.png</file>
+        <file>images/dump-wbfs.png</file>
+        <file>images/dvd.png</file>
+        <file>images/dvd-drive.png</file>
+        <file>images/dvd-extract.png</file>
+        <file>images/dvd-load.png</file>
+        <file>images/exit.png</file>
+        <file>images/extract-image.png</file>
+        <file>images/extract-image-patch.png</file>
+        <file>images/gamecube.png</file>
+        <file>images/gamelist-behavior.png</file>
+        <file>images/gamelist-columns.png</file>
+        <file>images/hdd.png</file>
+        <file>images/hdd-extract.png</file>
+        <file>images/hdd-extract-patch.png</file>
+        <file>images/hdd-load.png</file>
+        <file>images/image.png</file>
+        <file>images/info.png</file>
+        <file>images/load-3dcover.png</file>
+        <file>images/load-cover.png</file>
+        <file>images/log.png</file>
+        <file>images/ok.png</file>
+        <file>images/open.png</file>
+        <file>images/openfile.png</file>
+        <file>images/patch.png</file>
+        <file>images/qt.png</file>
+        <file>images/reset.png</file>
+        <file>images/save.png</file>
+        <file>images/search.png</file>
+        <file>images/select-all.png</file>
+        <file>images/settings.png</file>
+        <file>images/split.png</file>
+        <file>images/transfer-to-image.png</file>
+        <file>images/transfer-to-image-patch.png</file>
+        <file>images/transfer-to-wbfs.png</file>
+        <file>images/transfer-to-wbfs-patch.png</file>
+        <file>images/update.png</file>
+        <file>images/verify-game.png</file>
+        <file>images/wbfs.png</file>
+        <file>images/wii.png</file>
+        <file>images/wit.png</file>
+        <file>images/flags/China.png</file>
+        <file>images/flags/Denmark.png</file>
+        <file>images/flags/Finland.png</file>
+        <file>images/flags/France.png</file>
+        <file>images/flags/Germany.png</file>
+        <file>images/flags/Italy.png</file>
+        <file>images/flags/Japan.png</file>
+        <file>images/flags/Korea.png</file>
+        <file>images/flags/Netherlands.png</file>
+        <file>images/flags/NorthSami.png</file>
+        <file>images/flags/Norway.png</file>
+        <file>images/flags/Portugal.png</file>
+        <file>images/flags/RussianFederation.png</file>
+        <file>images/flags/Spain.png</file>
+        <file>images/flags/Taiwan.png</file>
+        <file>images/flags/UnitedKingdom.png</file>
+        <file>images/flags/USA.png</file>
     </qresource>
 </RCC>

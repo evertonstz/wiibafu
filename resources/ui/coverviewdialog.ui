@@ -14,7 +14,7 @@
    <string>Game cover view</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../wiibafu.qrc">
+   <iconset>
     <normaloff>:/appicon/images/appicon.png</normaloff>:/appicon/images/appicon.png</iconset>
   </property>
   <property name="locale">
@@ -91,12 +91,20 @@
         <property name="text">
          <string>Save</string>
         </property>
+        <property name="icon">
+         <iconset resource="../wiibafu.qrc">
+          <normaloff>:/images/save.png</normaloff>:/images/save.png</iconset>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_OK">
         <property name="text">
          <string>OK</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../wiibafu.qrc">
+          <normaloff>:/images/ok.png</normaloff>:/images/ok.png</iconset>
         </property>
         <property name="default">
          <bool>true</bool>

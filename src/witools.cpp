@@ -99,7 +99,13 @@ void WiTools::requestFilesGameListModel_readyReadStandardOutput() {
             continue;
         }
         else if (line.startsWith("id=")) {
-            fgl_ids.append(new QStandardItem(line.section("=", 1)));
+            if (line.section("=", 1).left(1) == "G") {
+                fgl_ids.append(new QStandardItem(QIcon(":/images/gamecube.png"), line.section("=", 1)));
+            }
+            else {
+                fgl_ids.append(new QStandardItem(QIcon(":/images/wii.png"), line.section("=", 1)));
+            }
+
             continue;
         }
         else if (line.startsWith("name=")) {
@@ -472,7 +478,13 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, const QString 
             continue;
         }
         else if (line.startsWith("id=")) {
-            ids.append(new QStandardItem(line.section("=", 1)));
+            if (line.section("=", 1).left(1) == "G") {
+                ids.append(new QStandardItem(QIcon(":/images/gamecube.png"), line.section("=", 1)));
+            }
+            else {
+                ids.append(new QStandardItem(QIcon(":/images/wii.png"), line.section("=", 1)));
+            }
+
             continue;
         }
         else if (line.startsWith("name=")) {
@@ -491,7 +503,7 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, const QString 
             sizes.append(new QStandardItem(Common::calculateSize(line.section("=", 1))));
             continue;
         }
-        else if (line.startsWith("used_blocks=")) {
+        else if (line.startsWith("used-blocks=")) {
             item = new QStandardItem();
             item->setData(QVariant(line.section("=", 1).toInt()), Qt::DisplayRole);
             usedblocks.append(item);
@@ -577,6 +589,8 @@ void WiTools::requestWBFSGameListModel(QStandardItemModel *model, const QString 
 }
 
 void WiTools::transferFilesToWBFS(const QModelIndexList indexList, const QString wbfsPath, const WiTools::GamePatchParameters parameters) {
+    resetProgressBarVariables();
+
     emit setMainProgressBar(0, "%p%");
     emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -784,6 +798,8 @@ void WiTools::transferFilesToWBFS_finished(const int exitCode, const QProcess::E
 }
 
 void WiTools::transferFilesToImage(WiTools::TransferFilesToImageParameters transferParameters) {
+    resetProgressBarVariables();
+
     emit setMainProgressBar(0, "%p%");
     emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -1004,6 +1020,8 @@ void WiTools::transferFilesToImage_finished(const int exitCode, const QProcess::
 }
 
 void WiTools::extractImage(const QModelIndexList indexList, const QString destination, const WiTools::GamePatchParameters patchParameters) {
+    resetProgressBarVariables();
+
     emit setMainProgressBar(0, "%p%");
     emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing extraction..."));
@@ -1198,6 +1216,8 @@ void WiTools::extractImage_finished(const int exitCode, const QProcess::ExitStat
 }
 
 void WiTools::transferDVDToWBFS(const QString dvdPath, const QString wbfsPath, const WiTools::GamePatchParameters patchParameters) {
+    resetProgressBarVariables();
+
     emit setMainProgressBar(0, "%p%");
     emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -1396,6 +1416,8 @@ void WiTools::transferDVDToWBFS_finished(const int exitCode, const QProcess::Exi
 }
 
 void WiTools::transferDVDToImage(const QString dvdPath, const WiTools::TransferFilesToImageParameters transferParameters) {
+    resetProgressBarVariables();
+
     emit setMainProgressBar(0, "%p%");
     emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -1573,6 +1595,8 @@ void WiTools::transferDVDToImage_finished(const int exitCode, const QProcess::Ex
 }
 
 void WiTools::extractDVD(const QString dvdPath, const QString destination, const WiTools::GamePatchParameters patchParameters) {
+    resetProgressBarVariables();
+
     emit setMainProgressBar(0, "%p%");
     emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing extraction..."));
@@ -1768,6 +1792,8 @@ void WiTools::extractDVD_finished(const int exitCode, const QProcess::ExitStatus
 }
 
 void WiTools::transferWBFSToImage(const QString wbfsPath, const WiTools::TransferFilesToImageParameters transferParameters) {
+    resetProgressBarVariables();
+
     emit setMainProgressBar(0, "%p%");
     emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing transfer..."));
@@ -2000,6 +2026,8 @@ void WiTools::transferWBFSToImage_finished(const int exitCode, const QProcess::E
 }
 
 void WiTools::extractWBFS(const QModelIndexList indexList, const QString wbfsPath, const QString destination, const WiTools::GamePatchParameters patchParameters) {
+    resetProgressBarVariables();
+
     emit setMainProgressBar(0, "%p%");
     emit setMainProgressBarVisible(true);
     emit showStatusBarMessage(tr("Preparing extraction..."));
@@ -2584,6 +2612,14 @@ void WiTools::setWit() {
         wit = QFile("wit:wit").fileName();
         wwt = QFile("wit:wwt").fileName();
     #endif
+}
+
+void WiTools::resetProgressBarVariables() {
+    percent = "0";
+    elapsed_text = "0:00";
+    eta_text = "0:00";
+    mib_total = "0";
+    mib_per_sec = "0";
 }
 
 QString WiTools::witVersion() {
