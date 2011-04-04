@@ -1,5 +1,12 @@
-2011-03-27 Kai Heitkamp <dynup@ymail.com>
+2011-04-04 Kai Heitkamp <dynup@ymail.com>
  Version 1.1 (wit v1.28a r2336)
+  * Wia compression defaults fixed
+  * Load 3D cover icon fixed
+  * Italian translation added
+  * Spanish translation adapted
+
+2011-03-27 Kai Heitkamp <dynup@ymail.com>
+ Version 1.1 Beta (wit v1.28a r2336)
   * Some fixes and improvements
   * Game ID in info tab
   * Resets progress bar and infos after work

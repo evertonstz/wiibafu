@@ -94,10 +94,16 @@ QString WiiBaFuDialog::compression() {
     else {
         switch (ui->comboBox_compressionDefaults->currentIndex()) {
             case 0:
+                    compression = "DEFAULT";
+                    break;
             case 1:
+                    compression = "FAST";
+                    break;
             case 2:
+                    compression = "GOOD";
+                    break;
             case 3:
-                    compression = ui->comboBox_compressionDefaults->currentText().toUpper();
+                    compression = "BEST";
                     break;
             case 4:
                     compression = QString("%1.%2@%3").arg(ui->comboBox_compressionMethod->currentText().toUpper(), ui->comboBox_compressionLevel->currentText().mid(0, 1), ui->lineEdit_compressionFactor->text());
