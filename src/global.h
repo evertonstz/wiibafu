@@ -21,9 +21,13 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#define WiiBaFuSettings QSettings("WiiBaFu", "wiibafu")
+#ifdef Q_OS_WIN
+    #define WiiBaFuSettings QSettings("WiiBaFu.ini", QSettings::IniFormat)
+#else
+    #define WiiBaFuSettings QSettings("WiiBaFu", "wiibafu")
+#endif
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
     #define DEFAULT_WIT_PATH QDir::homePath().append("/wit/bin")
     #define DEFAULT_TITLES_PATH QDir::homePath().append("/wit/bin")
 #else
