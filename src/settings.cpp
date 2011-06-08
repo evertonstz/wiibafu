@@ -1,10 +1,10 @@
 /***************************************************************************
  *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | wiibafu.codeplex.com                                *
+ *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -169,6 +169,7 @@ void Settings::load() {
     ui->main_lineEdit_proxyUser->setText(WiiBaFuSettings.value("Main/ProxyUser", QVariant("")).toString());
     ui->main_lineEdit_proxyPassword->setText(WiiBaFuSettings.value("Main/ProxyPassword", QVariant("")).toString());
     ui->main_comboBox_proxyType->setCurrentIndex(WiiBaFuSettings.value("Main/ProxyType", QVariant(0)).toInt());
+    ui->main_comboBox_ApplicationLanguage->setCurrentIndex(WiiBaFuSettings.value("Main/ApplicationLanguage", QVariant(0)).toInt());
     ui->main_comboBox_Language->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
     ui->main_comboBox_Logging->setCurrentIndex(WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt());
     ui->main_checkBox_LogWitCommandLine->setChecked(WiiBaFuSettings.value("Main/LogWitCommandLine", QVariant(true)).toBool());
@@ -266,6 +267,7 @@ void Settings::save() {
     WiiBaFuSettings.setValue("Main/ProxyUser", ui->main_lineEdit_proxyUser->text());
     WiiBaFuSettings.setValue("Main/ProxyPassword", ui->main_lineEdit_proxyPassword->text());
     WiiBaFuSettings.setValue("Main/ProxyType", ui->main_comboBox_proxyType->currentIndex());
+    WiiBaFuSettings.setValue("Main/ApplicationLanguage", ui->main_comboBox_ApplicationLanguage->currentIndex());
     WiiBaFuSettings.setValue("Main/GameLanguage", ui->main_comboBox_Language->currentIndex());
     WiiBaFuSettings.setValue("Main/Logging", ui->main_comboBox_Logging->currentIndex());
     WiiBaFuSettings.setValue("Main/LogWitCommandLine", ui->main_checkBox_LogWitCommandLine->checkState());
@@ -357,6 +359,7 @@ void Settings::restoreDefaults(const int index) {
                 ui->main_lineEdit_proxyUser->setEnabled(false);
                 ui->main_lineEdit_proxyPassword->setEnabled(false);
                 ui->main_comboBox_proxyType->setCurrentIndex(3);
+                ui->main_comboBox_ApplicationLanguage->setCurrentIndex(0);
                 ui->main_comboBox_Language->setCurrentIndex(0);
                 ui->main_comboBox_Logging->setCurrentIndex(0);
                 ui->main_checkBox_LogWitCommandLine->setChecked(true);

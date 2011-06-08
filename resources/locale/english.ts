@@ -253,453 +253,460 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="260"/>
+        <location filename="../ui/settings.ui" line="289"/>
         <source>Language for titles and covers:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/settings.ui" line="268"/>
+        <location filename="../ui/settings.ui" line="297"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="277"/>
+        <location filename="../ui/settings.ui" line="260"/>
+        <source>Application language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/settings.ui" line="306"/>
         <source>American</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="286"/>
+        <location filename="../ui/settings.ui" line="315"/>
         <source>French</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="295"/>
+        <location filename="../ui/settings.ui" line="277"/>
+        <location filename="../ui/settings.ui" line="324"/>
         <source>German</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="304"/>
+        <location filename="../ui/settings.ui" line="333"/>
         <source>Spanish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="313"/>
+        <location filename="../ui/settings.ui" line="342"/>
         <source>Italian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="322"/>
+        <location filename="../ui/settings.ui" line="351"/>
         <source>Dutch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="331"/>
+        <location filename="../ui/settings.ui" line="360"/>
         <source>Portuguese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="340"/>
+        <location filename="../ui/settings.ui" line="369"/>
         <source>North Sami</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="349"/>
+        <location filename="../ui/settings.ui" line="378"/>
         <source>Danish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="358"/>
+        <location filename="../ui/settings.ui" line="387"/>
         <source>Norwegian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="367"/>
+        <location filename="../ui/settings.ui" line="396"/>
         <source>Finnish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="376"/>
+        <location filename="../ui/settings.ui" line="405"/>
         <source>Russian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="385"/>
+        <location filename="../ui/settings.ui" line="414"/>
         <source>Japanese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="394"/>
+        <location filename="../ui/settings.ui" line="423"/>
         <source>Korean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="403"/>
+        <location filename="../ui/settings.ui" line="432"/>
         <source>Taiwanese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="412"/>
+        <location filename="../ui/settings.ui" line="441"/>
         <source>Chinese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="441"/>
+        <location filename="../ui/settings.ui" line="470"/>
         <source>Mac OS X style:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="448"/>
+        <location filename="../ui/settings.ui" line="477"/>
         <source>Aqua</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="458"/>
+        <location filename="../ui/settings.ui" line="487"/>
         <source>Brushed metal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="470"/>
+        <location filename="../ui/settings.ui" line="499"/>
         <source>Logging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="476"/>
+        <location filename="../ui/settings.ui" line="505"/>
         <source>Mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="484"/>
+        <location filename="../ui/settings.ui" line="513"/>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="489"/>
+        <location filename="../ui/settings.ui" line="518"/>
         <source>Errors only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="494"/>
+        <location filename="../ui/settings.ui" line="523"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="502"/>
+        <location filename="../ui/settings.ui" line="531"/>
         <source>File:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="509"/>
+        <location filename="../ui/settings.ui" line="538"/>
         <source>If you want none log file, leave it blank!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="516"/>
-        <location filename="../ui/settings.ui" line="646"/>
+        <location filename="../ui/settings.ui" line="545"/>
+        <location filename="../ui/settings.ui" line="675"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="527"/>
+        <location filename="../ui/settings.ui" line="556"/>
         <source>WIT command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="544"/>
+        <location filename="../ui/settings.ui" line="573"/>
         <source>WIT options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="552"/>
+        <location filename="../ui/settings.ui" line="581"/>
         <source>Path to WIT:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="562"/>
-        <location filename="../ui/settings.ui" line="583"/>
-        <location filename="../ui/settings.ui" line="635"/>
-        <location filename="../ui/settings.ui" line="691"/>
+        <location filename="../ui/settings.ui" line="591"/>
+        <location filename="../ui/settings.ui" line="612"/>
+        <location filename="../ui/settings.ui" line="664"/>
+        <location filename="../ui/settings.ui" line="720"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="573"/>
+        <location filename="../ui/settings.ui" line="602"/>
         <source>Path to titles:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="603"/>
+        <location filename="../ui/settings.ui" line="632"/>
         <source>Search WBFS partitions using &apos;/proc/partitions&apos; or searching hard disks in &apos;/dev/&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="606"/>
+        <location filename="../ui/settings.ui" line="635"/>
         <source>Auto (search for WBFS partitions/hdds on system)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="621"/>
+        <location filename="../ui/settings.ui" line="650"/>
         <source>Path to WBFS (partition or file):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="674"/>
+        <location filename="../ui/settings.ui" line="703"/>
         <source>Path to DVD drive:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="713"/>
+        <location filename="../ui/settings.ui" line="742"/>
         <source>Recurse depth:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="720"/>
+        <location filename="../ui/settings.ui" line="749"/>
         <source>Set the maximum recurse depth for Files/Load. The default search depth is 10.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="752"/>
+        <location filename="../ui/settings.ui" line="781"/>
         <source>Visual appearances:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="758"/>
+        <location filename="../ui/settings.ui" line="787"/>
         <source>Show grid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="768"/>
+        <location filename="../ui/settings.ui" line="797"/>
         <source>Alternating row colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="775"/>
+        <location filename="../ui/settings.ui" line="804"/>
         <source>Tools tips for Name or Title, if one of this columns hidden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="778"/>
+        <location filename="../ui/settings.ui" line="807"/>
         <source>Tool tips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="791"/>
+        <location filename="../ui/settings.ui" line="820"/>
         <source>Scroll mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="797"/>
+        <location filename="../ui/settings.ui" line="826"/>
         <source>Scroll per pixel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="804"/>
+        <location filename="../ui/settings.ui" line="833"/>
         <source>Scroll per item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="817"/>
+        <location filename="../ui/settings.ui" line="846"/>
         <source>Resize mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="823"/>
+        <location filename="../ui/settings.ui" line="852"/>
         <source>Interactive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="830"/>
+        <location filename="../ui/settings.ui" line="859"/>
         <source>Stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="837"/>
+        <location filename="../ui/settings.ui" line="866"/>
         <source>Resize to contents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="844"/>
+        <location filename="../ui/settings.ui" line="873"/>
         <source>Fixed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="854"/>
+        <location filename="../ui/settings.ui" line="883"/>
         <source>Selection mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="864"/>
+        <location filename="../ui/settings.ui" line="893"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="869"/>
+        <location filename="../ui/settings.ui" line="898"/>
         <source>Single selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="874"/>
+        <location filename="../ui/settings.ui" line="903"/>
         <source>Multi selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="879"/>
+        <location filename="../ui/settings.ui" line="908"/>
         <source>Extended selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="884"/>
+        <location filename="../ui/settings.ui" line="913"/>
         <source>Contiguous selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="915"/>
+        <location filename="../ui/settings.ui" line="944"/>
         <source>Files game list columns:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="921"/>
-        <location filename="../ui/settings.ui" line="1007"/>
+        <location filename="../ui/settings.ui" line="950"/>
+        <location filename="../ui/settings.ui" line="1036"/>
         <source>ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="928"/>
-        <location filename="../ui/settings.ui" line="1035"/>
+        <location filename="../ui/settings.ui" line="957"/>
+        <location filename="../ui/settings.ui" line="1064"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="935"/>
-        <location filename="../ui/settings.ui" line="1070"/>
+        <location filename="../ui/settings.ui" line="964"/>
+        <location filename="../ui/settings.ui" line="1099"/>
         <source>Last access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="942"/>
-        <location filename="../ui/settings.ui" line="1014"/>
+        <location filename="../ui/settings.ui" line="971"/>
+        <location filename="../ui/settings.ui" line="1043"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="949"/>
-        <location filename="../ui/settings.ui" line="1049"/>
+        <location filename="../ui/settings.ui" line="978"/>
+        <location filename="../ui/settings.ui" line="1078"/>
         <source>Insertion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="956"/>
-        <location filename="../ui/settings.ui" line="1077"/>
+        <location filename="../ui/settings.ui" line="985"/>
+        <location filename="../ui/settings.ui" line="1106"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="963"/>
-        <location filename="../ui/settings.ui" line="1021"/>
+        <location filename="../ui/settings.ui" line="992"/>
+        <location filename="../ui/settings.ui" line="1050"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="970"/>
-        <location filename="../ui/settings.ui" line="1056"/>
+        <location filename="../ui/settings.ui" line="999"/>
+        <location filename="../ui/settings.ui" line="1085"/>
         <source>Last modification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="977"/>
-        <location filename="../ui/settings.ui" line="1091"/>
+        <location filename="../ui/settings.ui" line="1006"/>
+        <location filename="../ui/settings.ui" line="1120"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="984"/>
-        <location filename="../ui/settings.ui" line="1028"/>
+        <location filename="../ui/settings.ui" line="1013"/>
+        <location filename="../ui/settings.ui" line="1057"/>
         <source>Region</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="991"/>
-        <location filename="../ui/settings.ui" line="1063"/>
+        <location filename="../ui/settings.ui" line="1020"/>
+        <location filename="../ui/settings.ui" line="1092"/>
         <source>Last status change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1001"/>
+        <location filename="../ui/settings.ui" line="1030"/>
         <source>WBFS game list columns:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1042"/>
+        <location filename="../ui/settings.ui" line="1071"/>
         <source>Used blocks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1084"/>
+        <location filename="../ui/settings.ui" line="1113"/>
         <source>WBFS-Slot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1105"/>
+        <location filename="../ui/settings.ui" line="1134"/>
         <source>To WBFS transfer options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1111"/>
-        <location filename="../ui/settings.ui" line="1198"/>
-        <location filename="../ui/settings.ui" line="1420"/>
+        <location filename="../ui/settings.ui" line="1140"/>
+        <location filename="../ui/settings.ui" line="1227"/>
+        <location filename="../ui/settings.ui" line="1449"/>
         <source>Force</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1118"/>
+        <location filename="../ui/settings.ui" line="1147"/>
         <source>Newer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1125"/>
-        <location filename="../ui/settings.ui" line="1158"/>
-        <location filename="../ui/settings.ui" line="1205"/>
-        <location filename="../ui/settings.ui" line="1316"/>
-        <location filename="../ui/settings.ui" line="1427"/>
+        <location filename="../ui/settings.ui" line="1154"/>
+        <location filename="../ui/settings.ui" line="1187"/>
+        <location filename="../ui/settings.ui" line="1234"/>
+        <location filename="../ui/settings.ui" line="1345"/>
+        <location filename="../ui/settings.ui" line="1456"/>
         <source>Test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1132"/>
-        <location filename="../ui/settings.ui" line="1165"/>
-        <location filename="../ui/settings.ui" line="1212"/>
-        <location filename="../ui/settings.ui" line="1282"/>
+        <location filename="../ui/settings.ui" line="1161"/>
+        <location filename="../ui/settings.ui" line="1194"/>
+        <location filename="../ui/settings.ui" line="1241"/>
+        <location filename="../ui/settings.ui" line="1311"/>
         <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1139"/>
-        <location filename="../ui/settings.ui" line="1172"/>
-        <location filename="../ui/settings.ui" line="1219"/>
+        <location filename="../ui/settings.ui" line="1168"/>
+        <location filename="../ui/settings.ui" line="1201"/>
+        <location filename="../ui/settings.ui" line="1248"/>
         <source>Overwrite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1149"/>
+        <location filename="../ui/settings.ui" line="1178"/>
         <source>To image / file system transfer options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1155"/>
+        <location filename="../ui/settings.ui" line="1184"/>
         <source>Use this option is unsure!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1179"/>
+        <location filename="../ui/settings.ui" line="1208"/>
         <source>Diff images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1192"/>
+        <location filename="../ui/settings.ui" line="1221"/>
         <source>From WBFS transfer options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1229"/>
+        <location filename="../ui/settings.ui" line="1258"/>
         <source>Scrubbing is a method to remove unneeded data from Wii ISO discs
 and replace the data with the constant byte value &apos;0x00&apos;. This constant
 value is a good object for compressing. Wii Backup Fusion The file
@@ -708,134 +715,134 @@ format &apos;WIA&apos; is able to compress scrubbed files efficiently using
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1236"/>
+        <location filename="../ui/settings.ui" line="1265"/>
         <source>Scrubbing options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1242"/>
+        <location filename="../ui/settings.ui" line="1271"/>
         <source>Allow data (game) partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1245"/>
+        <location filename="../ui/settings.ui" line="1274"/>
         <source>Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1255"/>
+        <location filename="../ui/settings.ui" line="1284"/>
         <source>Allow channel partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1258"/>
+        <location filename="../ui/settings.ui" line="1287"/>
         <source>Channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1268"/>
+        <location filename="../ui/settings.ui" line="1297"/>
         <source>Ignore all other settings and copy the whole disc.
 This disables scrubbing at all!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1272"/>
+        <location filename="../ui/settings.ui" line="1301"/>
         <source>Raw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1279"/>
+        <location filename="../ui/settings.ui" line="1308"/>
         <source>Allow update partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1292"/>
+        <location filename="../ui/settings.ui" line="1321"/>
         <source>Don&apos;t analyse the partition filesystems to find unused sectors.
 The whole partition will be used! &apos;Whole&apos; is ignored for overlayed partitions!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1296"/>
+        <location filename="../ui/settings.ui" line="1325"/>
         <source>Whole</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1310"/>
+        <location filename="../ui/settings.ui" line="1339"/>
         <source>Check WBFS options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1323"/>
+        <location filename="../ui/settings.ui" line="1352"/>
         <source>Repair</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1336"/>
+        <location filename="../ui/settings.ui" line="1365"/>
         <source>Repair WBFS options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1342"/>
+        <location filename="../ui/settings.ui" line="1371"/>
         <source>Remove discs with free marked blocks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1345"/>
+        <location filename="../ui/settings.ui" line="1374"/>
         <source>RM-FREE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1352"/>
+        <location filename="../ui/settings.ui" line="1381"/>
         <source>Remove discs with invalid blocks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1355"/>
+        <location filename="../ui/settings.ui" line="1384"/>
         <source>RM-INVALID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1362"/>
+        <location filename="../ui/settings.ui" line="1391"/>
         <source>Remove discs with overlaped blocks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1365"/>
+        <location filename="../ui/settings.ui" line="1394"/>
         <source>RM-OVERLAP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1372"/>
+        <location filename="../ui/settings.ui" line="1401"/>
         <source>Remove discs without any valid blocks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1375"/>
+        <location filename="../ui/settings.ui" line="1404"/>
         <source>RM-EMPTY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1382"/>
+        <location filename="../ui/settings.ui" line="1411"/>
         <source>Repair free blocks table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1385"/>
+        <location filename="../ui/settings.ui" line="1414"/>
         <source>FBT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1395"/>
+        <location filename="../ui/settings.ui" line="1424"/>
         <source>Repair invalid inode infos (time stamps etc.)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1398"/>
+        <location filename="../ui/settings.ui" line="1427"/>
         <source>INODES</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/settings.ui" line="1414"/>
+        <location filename="../ui/settings.ui" line="1443"/>
         <source>Remove from WBFS options:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2278,11 +2285,6 @@ The selected games are finally deleted from the WBFS file system!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafu.cpp" line="1908"/>
-        <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation, Michel Schaart for the dutch translation, Antonio Lopez for the spanish translation and Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in loving memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/wiibafu.cpp" line="644"/>
         <location filename="../../src/wiibafu.cpp" line="679"/>
         <location filename="../../src/wiibafu.cpp" line="966"/>
@@ -2357,11 +2359,6 @@ The selected games are finally deleted from the WBFS file system!</source>
         <location filename="../../src/wiibafu.cpp" line="1599"/>
         <source>WIT command line:
 %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/wiibafu.cpp" line="1906"/>
-        <source>About Wii Backup Fusion</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2725,22 +2722,22 @@ Default value is 4G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="201"/>
+        <location filename="../../src/wiibafudialog.cpp" line="207"/>
         <source>Transfer games to image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="224"/>
+        <location filename="../../src/wiibafudialog.cpp" line="230"/>
         <source>Extract game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="247"/>
+        <location filename="../../src/wiibafudialog.cpp" line="253"/>
         <source>Transfer game to image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/wiibafudialog.cpp" line="270"/>
+        <location filename="../../src/wiibafudialog.cpp" line="276"/>
         <source>Patch game</source>
         <translation type="unfinished"></translation>
     </message>

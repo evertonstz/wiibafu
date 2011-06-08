@@ -67,5 +67,6 @@
         <file>images/flags/Taiwan.png</file>
         <file>images/flags/UnitedKingdom.png</file>
         <file>images/flags/USA.png</file>
+        <file>images/flags/English.png</file>
     </qresource>
 </RCC>

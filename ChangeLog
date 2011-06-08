@@ -1,5 +1,6 @@
-2011-04-04 Kai Heitkamp <dynup@ymail.com>
- Version 1.1 (wit v1.28a r2336)
+2011-06-08 Kai Heitkamp <dynup@ymail.com>
+ Version 1.1 (wit v1.29a r2655)
+  * New language system
   * Wia compression defaults fixed
   * Load 3D cover icon fixed
   * Italian translation added

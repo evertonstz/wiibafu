@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>700</width>
-    <height>462</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -253,15 +253,71 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
-            <item>
+           <layout class="QGridLayout" name="gridLayout_17">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>Application language:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="main_comboBox_ApplicationLanguage">
+              <item>
+               <property name="text">
+                <string>English</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/English.png</normaloff>:/images/flags/English.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>German</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Germany.png</normaloff>:/images/flags/Germany.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Dutch</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Netherlands.png</normaloff>:/images/flags/Netherlands.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Italian</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Italy.png</normaloff>:/images/flags/Italy.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Spanish</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Spain.png</normaloff>:/images/flags/Spain.png</iconset>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0">
              <widget class="QLabel" name="label_5">
               <property name="text">
                <string>Language for titles and covers:</string>
               </property>
              </widget>
             </item>
-            <item>
+            <item row="1" column="1">
              <widget class="QComboBox" name="main_comboBox_Language">
               <item>
                <property name="text">

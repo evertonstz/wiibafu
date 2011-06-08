@@ -1,10 +1,10 @@
 /***************************************************************************
  *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | wiibafu.codeplex.com                                *
+ *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -23,18 +23,43 @@
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    QCoreApplication::setOrganizationDomain("wiibafu.codeplex.com");
+    QCoreApplication::setOrganizationDomain("http://sf.net/p/wiibafu");
     QCoreApplication::setOrganizationName("Kai Heitkamp");
     QCoreApplication::setApplicationName("Wii Backup Fusion");
     QCoreApplication::setApplicationVersion("1.1");
 
     QTranslator qtTranslator, appTranslator;
     QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
-    qtTranslator.load(QString(":locale/qt_%1.qm").arg(QLocale::system().name()));
-    appTranslator.load(QString(":locale/%1.qm").arg(QLocale::system().languageToString(QLocale::system().language()).toLower()));
 
-    app.installTranslator(&qtTranslator);
-    app.installTranslator(&appTranslator);
+    QString appLang, qtLang;
+    int langIndex = WiiBaFuSettings.value("Main/ApplicationLanguage", QVariant(0)).toInt();
+
+    if (langIndex != 0) {
+        switch (langIndex) {
+            case 1:
+                appLang = "german";
+                qtLang = "de";
+                break;
+            case 2:
+                appLang = "dutch";
+                qtLang = "nl";
+                break;
+            case 3:
+                appLang = "italian";
+                qtLang = "it";
+                break;
+            case 4:
+                appLang = "spanish";
+                qtLang = "es";
+                break;
+        }
+
+        qtTranslator.load(QString(":locale/qt_%1.qm").arg(qtLang));
+        appTranslator.load(QString(":locale/%1.qm").arg(appLang));
+
+        app.installTranslator(&qtTranslator);
+        app.installTranslator(&appTranslator);
+    }
 
     WiiBaFu wiibafu;
     wiibafu.show();

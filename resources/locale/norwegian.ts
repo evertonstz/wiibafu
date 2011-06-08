@@ -682,6 +682,10 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
         <source>Open path to titles</source>
         <translation>Åpne vei til titler</translation>
     </message>
+    <message>
+        <source>Application language:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WBFSDialog</name>
@@ -756,14 +760,6 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
     <message>
         <source>Loading games failed! (status: %1, code: %2,  %3)</source>
         <translation>Laster spill mislyktes! (status: %1, code: %2, %3)</translation>
-    </message>
-    <message>
-        <source>%1 file scanned, %2 directory and %3 game found.</source>
-        <translation type="obsolete">%1 fil skannet, %2 katalog og %3 spill funnet.</translation>
-    </message>
-    <message>
-        <source>%1 files scanned, %2 directories and %3 games found.</source>
-        <translation type="obsolete">%1 filer skannet, %2 kataloger og %3 spill funnet.</translation>
     </message>
     <message>
         <source>No games found!</source>
@@ -969,10 +965,6 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
         <translation>Forbereder overføre filer til WBFS.</translation>
     </message>
     <message>
-        <source>Transfering game %1...</source>
-        <translation type="obsolete">Overføre spillet %1...</translation>
-    </message>
-    <message>
         <source>Transfer failed!</source>
         <translation>Overføring feilet!</translation>
     </message>
@@ -1058,10 +1050,6 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
         <source>Starting DVD extraction.
 </source>
         <translation>Starter DVD utvinning.</translation>
-    </message>
-    <message>
-        <source>Extracting game %1...</source>
-        <translation type="obsolete">Utpakking spill %1...</translation>
     </message>
     <message>
         <source>Starting transfer WBFS to image in format &apos;%1&apos; with compression &apos;%2&apos;.
@@ -1496,10 +1484,6 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
         <translation>Log</translation>
     </message>
     <message>
-        <source>Clea&amp;r</source>
-        <translation type="obsolete">Klar&amp;e</translation>
-    </message>
-    <message>
         <source>&amp;Copy</source>
         <translation>&amp;Kopier</translation>
     </message>
@@ -1658,10 +1642,6 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
         <translation>Fjern spill</translation>
     </message>
     <message>
-        <source>Are you sure that you want to delete the selected games?</source>
-        <translation type="obsolete">Er du sikker på at du vil slette de valgte spill?</translation>
-    </message>
-    <message>
         <source>Check/Repair WBFS</source>
         <translation>Sjekk/Reparasjon WBFS</translation>
     </message>
@@ -1706,14 +1686,6 @@ Hele partisjonen vil bli brukt! &quot;Hele&quot; er ignorert for overlagd partis
 %1</source>
         <translation>WIT kommandolinje:
 %1</translation>
-    </message>
-    <message>
-        <source>About Wii Backup Fusion</source>
-        <translation>Om Wii Backup Fusion</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit&lt;br&gt;and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation! Thanks to Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
-        <translation type="obsolete">&lt;p&gt;&lt;b&gt;&lt;i&gt;Den komplette og enkelt å bruke backup løsning for Wii-spill&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;Jeg støtter ikke piratkopiering! Hvis du kopierer spill med denne programvaren,&lt;br&gt;må du ha originalen og det er for privat bruk!&lt;/font color&gt;&lt;p&gt;Stor takk til trollene på Trolltech Norge for hans utmerkede Qt toolkit&lt;br&gt;og gutta på Nokia for fortsettelsen, takk til Dirk Clemens (Wiimm) for hans store ISO verktøy! Takk til Patrick for den franske oversettelsen! Takk til Michael Krause for den norske oversettelsen! &lt;p&gt;&lt;i&gt;Dedikerte til minne om min far G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</translation>
     </message>
     <message>
         <source>Titles not found!</source>
@@ -1776,10 +1748,6 @@ The selected games are finally deleted from the WBFS file system!</source>
     </message>
     <message>
         <source>Info (%1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;&lt;i&gt;The complete and simply to use backup solution for Wii games&lt;/b&gt;&lt;/i&gt;&lt;p&gt;Copyright &amp;copy; 2010 - 2011 Kai Heitkamp&lt;p&gt;&lt;a href=&apos;mailto:dynup&lt;dynup@ymail.com&gt;?subject=WiiBaFu%20feedback&apos;&gt;dynup@ymail.com&lt;/a&gt; | &lt;a href=&apos;http://wiibafu.codeplex.com&apos;&gt;wiibafu.codeplex.com&lt;/a&gt;&lt;p&gt;&lt;font color=&apos;red&apos;&gt;I don&apos;t support piracy! If you copy games with this software,&lt;br&gt;you must have the original and it&apos;s for your private use only!&lt;/font color&gt;&lt;p&gt;Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools! Thanks to Patrick for the french translation, Michel Schaart for the dutch translation, Antonio Lopez for the spanish translation and Michael Krause for the norwegian translation!&lt;p&gt;&lt;i&gt;Dedicated in loving memory of my father G&amp;uuml;nter Heitkamp (28.07.1935 - 06.10.2009)&lt;/i&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

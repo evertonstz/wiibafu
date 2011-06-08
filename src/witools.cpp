@@ -1,10 +1,10 @@
 /***************************************************************************
  *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | wiibafu.codeplex.com                                *
+ *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -759,7 +759,7 @@ void WiTools::transferFilesToWBFS_readyReadStandardOutput() {
         }
     }
 
-    emit showStatusBarMessage(tr("Transfering game [%1/%2] %3 -> WBFS...").arg(job_counter, job_total, source_path.mid(source_path.lastIndexOf("/") + 1, source_path.length() - source_path.lastIndexOf("/"))));
+    emit showStatusBarMessage(tr("Transfering game [%1/%2] %3 -> WBFS...").arg(job_counter, job_total, source_path.mid(source_path.lastIndexOf(QDir::separator()) + 1, source_path.length() - source_path.lastIndexOf(QDir::separator()))));
     emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) copied in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
@@ -994,7 +994,7 @@ void WiTools::transferFilesToImage_readyReadStandardOutput() {
         }
     }
 
-    emit showStatusBarMessage(tr("Transfering game [%1/%2] %3 -> %4...").arg(job_counter, job_total, source_path.mid(source_path.lastIndexOf("/") + 1, source_path.length() - source_path.lastIndexOf("/")), dest_type));
+    emit showStatusBarMessage(tr("Transfering game [%1/%2] %3 -> %4...").arg(job_counter, job_total, source_path.mid(source_path.lastIndexOf(QDir::separator()) + 1, source_path.length() - source_path.lastIndexOf(QDir::separator())), dest_type));
     emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) copied in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
@@ -1171,7 +1171,7 @@ void WiTools::extractImage_readyReadStandardOutput() {
         }
     }
 
-    emit showStatusBarMessage(tr("Extracting game %1 -> %2...").arg(source_path.mid(source_path.lastIndexOf("/") + 1, source_path.length() - source_path.lastIndexOf("/")), dest_type));
+    emit showStatusBarMessage(tr("Extracting game %1 -> %2...").arg(source_path.mid(source_path.lastIndexOf(QDir::separator()) + 1, source_path.length() - source_path.lastIndexOf(QDir::separator())), dest_type));
     emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) extracted in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
@@ -1995,7 +1995,7 @@ void WiTools::transferWBFSToImage_readyReadStandardOutput() {
         }
     }
 
-    emit showStatusBarMessage(tr("Transfering game [%1/%2] %3 -> %4...").arg(job_counter, job_total, source_path.mid(source_path.lastIndexOf("/") + 1, source_path.length() - source_path.lastIndexOf("/")), dest_type));
+    emit showStatusBarMessage(tr("Transfering game [%1/%2] %3 -> %4...").arg(job_counter, job_total, source_path.mid(source_path.lastIndexOf(QDir::separator()) + 1, source_path.length() - source_path.lastIndexOf(QDir::separator())), dest_type));
     emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) copied in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
@@ -2184,7 +2184,7 @@ void WiTools::extractWBFS_readyReadStandardOutput() {
         }
     }
 
-    emit showStatusBarMessage(tr("Extracting game %1 -> %2...").arg(source_path.mid(source_path.lastIndexOf("/") + 1, source_path.length() - source_path.lastIndexOf("/")), dest_type));
+    emit showStatusBarMessage(tr("Extracting game %1 -> %2...").arg(source_path.mid(source_path.lastIndexOf(QDir::separator()) + 1, source_path.length() - source_path.lastIndexOf(QDir::separator())), dest_type));
     emit setMainProgressBar(percent.toInt(), tr("%p% (%1 MiB) extracted in %2 (%3 MiB/sec) -> ETA %4").arg(mib_total, elapsed_text, mib_per_sec, eta_text));
 }
 
@@ -2475,7 +2475,7 @@ void WiTools::verifyGame(const int index, const QString wbfsPath, const QString 
     switch (index) {
         case 0:
                 witApp = wit;
-                emit showStatusBarMessage(tr("Verifying game %1...").arg(game.mid(game.lastIndexOf("/") + 1, game.length() - game.lastIndexOf("/"))));
+                emit showStatusBarMessage(tr("Verifying game %1...").arg(game.mid(game.lastIndexOf(QDir::separator()) + 1, game.length() - game.lastIndexOf(QDir::separator()))));
                 break;
         case 1:
                 witApp = wit;
@@ -2497,7 +2497,7 @@ void WiTools::verifyGame(const int index, const QString wbfsPath, const QString 
 
     arguments.append(game);
 
-    emit newWitCommandLineLogEntry(witApp.mid(witApp.lastIndexOf("/") + 1, witApp.length() - witApp.lastIndexOf("/")), arguments);
+    emit newWitCommandLineLogEntry(witApp.mid(witApp.lastIndexOf(QDir::separator()) + 1, witApp.length() - witApp.lastIndexOf(QDir::separator())), arguments);
 
     witProcess = new QProcess();
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");

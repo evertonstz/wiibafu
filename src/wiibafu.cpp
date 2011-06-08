@@ -1,10 +1,10 @@
 /***************************************************************************
  *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | wiibafu.codeplex.com                                *
+ *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -1372,7 +1372,7 @@ QString WiiBaFu::buildPath(const QString directory, QStandardItemModel *model, Q
             gameId = id;
         }
 
-        path = dir.path().append("/").append(gameTitle).append(" [").append(gameId).append("]");
+        path = dir.path().append(QDir::separator()).append(gameTitle).append(" [").append(gameId).append("]");
     }
     else {
         path = dir.path();
@@ -1903,17 +1903,17 @@ void WiiBaFu::setWBFSColumns() {
 }
 
 void WiiBaFu::on_menuHelp_About_triggered() {
-    QMessageBox::about(this, tr("About Wii Backup Fusion"),
+    QMessageBox::about(this, "About Wii Backup Fusion",
         QString("<h2>Wii Backup Fusion %1</h2>").arg(QCoreApplication::applicationVersion()) +
-        tr("<p><b><i>The complete and simply to use backup solution for Wii games</b></i>"
+        "<p><b><i>The complete and simply to use backup solution for Wii games</b></i>"
         "<p>Development and Copyright &copy; 2010 - 2011 Kai Heitkamp"
         "<p><a href='mailto:dynup<dynup@ymail.com>?subject=WiiBaFu%20feedback'>dynup@ymail.com</a>"
-        " | <a href='http://wiibafu.codeplex.com'>wiibafu.codeplex.com</a>"
+        " | <a href='http://sf.net/p/wiibafu'>http://sf.net/p/wiibafu</a>"
         "<p><font color='red'>I don't support piracy! If you copy games with this software,"
         "<br>you must have the original and it's for your private use only!</font color>"
         "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools!"
-        " Thanks to Patrick for the french translation, Michel Schaart for the dutch translation, Antonio Lopez for the spanish translation and Michael Krause for the norwegian translation!"
-        "<p><i>Dedicated in loving memory of my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>"));
+        "<p>This program is licensed under the GNU General Public License v3 (<a href='http://www.gnu.org/licenses/gpl-3.0.txt'>GPLv3</a>)."
+        "<p><i>Dedicated in loving memory of my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>");
 }
 
 bool WiiBaFu::event(QEvent *event) {
