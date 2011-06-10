@@ -161,8 +161,8 @@ void Common::updateTitles() {
     QString wiiTDBUrl = "http://wiitdb.com/titles.txt?LANG=";
     QString titlesPath = wiTools->witTitlesPath();
     if (titlesPath.contains("witTitles:")) {
-        if (!WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString().isEmpty() && !WiiBaFuSettings.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString().contains(DEFAULT_TITLES_PATH)) {
-            titlesPath = WiiBaFuSettings.value("WIT/PathToTitles").toString();
+        if (!WIIBAFU_SETTINGS.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString().isEmpty() && !WIIBAFU_SETTINGS.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString().contains(DEFAULT_TITLES_PATH)) {
+            titlesPath = WIIBAFU_SETTINGS.value("WIT/PathToTitles").toString();
         }
         else {
             #ifdef Q_OS_MACX
@@ -236,12 +236,12 @@ QNetworkReply::NetworkError Common::getTitle(const QString wiitdbPath, const QSt
 QNetworkProxy Common::proxy() {
     QNetworkProxy proxy;
 
-    if (WiiBaFuSettings.value("Main/UseProxy", QVariant(false)).toBool()) {
-        proxy.setType((QNetworkProxy::ProxyType)WiiBaFuSettings.value("Main/ProxyType", QVariant(3)).toInt());
-        proxy.setHostName(WiiBaFuSettings.value("Main/ProxyHost", QVariant("")).toString());
-        proxy.setPort(WiiBaFuSettings.value("Main/ProxyPort", QVariant(0)).toInt());
-        proxy.setUser(WiiBaFuSettings.value("Main/ProxyUser", QVariant("")).toString());
-        proxy.setPassword(WiiBaFuSettings.value("Main/ProxyPassword", QVariant("")).toString());
+    if (WIIBAFU_SETTINGS.value("Main/UseProxy", QVariant(false)).toBool()) {
+        proxy.setType((QNetworkProxy::ProxyType)WIIBAFU_SETTINGS.value("Main/ProxyType", QVariant(3)).toInt());
+        proxy.setHostName(WIIBAFU_SETTINGS.value("Main/ProxyHost", QVariant("")).toString());
+        proxy.setPort(WIIBAFU_SETTINGS.value("Main/ProxyPort", QVariant(0)).toInt());
+        proxy.setUser(WIIBAFU_SETTINGS.value("Main/ProxyUser", QVariant("")).toString());
+        proxy.setPassword(WIIBAFU_SETTINGS.value("Main/ProxyPassword", QVariant("")).toString());
     }
 
     return proxy;

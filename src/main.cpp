@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
 
     QString appLang, qtLang;
-    int langIndex = WiiBaFuSettings.value("Main/ApplicationLanguage", QVariant(0)).toInt();
+    int langIndex = WIIBAFU_SETTINGS.value("Main/ApplicationLanguage", QVariant(0)).toInt();
 
     if (langIndex != 0) {
         switch (langIndex) {

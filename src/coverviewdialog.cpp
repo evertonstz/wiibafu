@@ -51,7 +51,7 @@ void CoverViewDialog::on_pushButton_OK_clicked() {
 }
 
 void CoverViewDialog::setMacOSXStyle() {
-    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+    if (WIIBAFU_SETTINGS.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
         ui->frame_Cover->setFrameStyle(QFrame::NoFrame);
         ui->frame_Buttons->setFrameStyle(QFrame::NoFrame);
 

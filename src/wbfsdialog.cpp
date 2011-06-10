@@ -70,7 +70,7 @@ bool WBFSDialog::test() {
 }
 
 void WBFSDialog::setMacOSXStyle() {
-    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+    if (WIIBAFU_SETTINGS.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
         ui->frame->setFrameShape(QFrame::NoFrame);
         this->setAttribute(Qt::WA_MacBrushedMetal, true);
     }

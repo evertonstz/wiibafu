@@ -22,9 +22,9 @@
 #define GLOBAL_H
 
 #ifdef Q_OS_WIN
-    #define WiiBaFuSettings QSettings("WiiBaFu.ini", QSettings::IniFormat)
+    #define WIIBAFU_SETTINGS QSettings("WiiBaFu.ini", QSettings::IniFormat)
 #else
-    #define WiiBaFuSettings QSettings("WiiBaFu", "wiibafu")
+    #define WIIBAFU_SETTINGS QSettings("WiiBaFu", "wiibafu")
 #endif
 
 #ifdef Q_OS_WIN

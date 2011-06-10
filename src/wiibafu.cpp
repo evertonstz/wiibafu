@@ -50,8 +50,8 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
         setMacOSXStyle();
     #endif
 
-    if (!WiiBaFuSettings.value("Main/LogFile", QVariant("")).toString().isEmpty()) {
-        logFile.setFileName(WiiBaFuSettings.value("Main/LogFile", QVariant("")).toString());
+    if (!WIIBAFU_SETTINGS.value("Main/LogFile", QVariant("")).toString().isEmpty()) {
+        logFile.setFileName(WIIBAFU_SETTINGS.value("Main/LogFile", QVariant("")).toString());
         logFile.open(QIODevice::WriteOnly);
     }
 
@@ -252,19 +252,19 @@ void WiiBaFu::setupMainProgressBar() {
 }
 
 void WiiBaFu::setupGeometry() {
-    if (WiiBaFuSettings.contains("MainWindow/x")) {
+    if (WIIBAFU_SETTINGS.contains("MainWindow/x")) {
         QRect rect;
-        rect.setX(WiiBaFuSettings.value("MainWindow/x", QVariant(0)).toInt());
-        rect.setY(WiiBaFuSettings.value("MainWindow/y", QVariant(0)).toInt());
-        rect.setWidth(WiiBaFuSettings.value("MainWindow/width", QVariant(800)).toInt());
-        rect.setHeight(WiiBaFuSettings.value("MainWindow/height", QVariant(600)).toInt());
+        rect.setX(WIIBAFU_SETTINGS.value("MainWindow/x", QVariant(0)).toInt());
+        rect.setY(WIIBAFU_SETTINGS.value("MainWindow/y", QVariant(0)).toInt());
+        rect.setWidth(WIIBAFU_SETTINGS.value("MainWindow/width", QVariant(800)).toInt());
+        rect.setHeight(WIIBAFU_SETTINGS.value("MainWindow/height", QVariant(600)).toInt());
 
         this->setGeometry(rect);
     }
 }
 
 void WiiBaFu::setMacOSXStyle() {
-    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+    if (WIIBAFU_SETTINGS.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
         ui->filesTab_frame_Buttons->setFrameShape(QFrame::NoFrame);
         ui->dvdTab_frame_Info->setFrameShape(QFrame::NoFrame);
         ui->dvdTab_frame_Buttons->setFrameShape(QFrame::NoFrame);
@@ -291,20 +291,20 @@ void WiiBaFu::setMacOSXStyle() {
 }
 
 void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
-    gameTableView->setShowGrid(WiiBaFuSettings.value("GameListBehavior/ShowGrid", QVariant(false)).toBool());
-    gameTableView->setAlternatingRowColors(WiiBaFuSettings.value("GameListBehavior/AlternatingRowColors", QVariant(true)).toBool());
+    gameTableView->setShowGrid(WIIBAFU_SETTINGS.value("GameListBehavior/ShowGrid", QVariant(false)).toBool());
+    gameTableView->setAlternatingRowColors(WIIBAFU_SETTINGS.value("GameListBehavior/AlternatingRowColors", QVariant(true)).toBool());
     gameTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    gameTableView->setHorizontalScrollMode((QHeaderView::ScrollMode)WiiBaFuSettings.value("GameListBehavior/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
-    gameTableView->setVerticalScrollMode((QHeaderView::ScrollMode)WiiBaFuSettings.value("GameListBehavior/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
+    gameTableView->setHorizontalScrollMode((QHeaderView::ScrollMode)WIIBAFU_SETTINGS.value("GameListBehavior/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
+    gameTableView->setVerticalScrollMode((QHeaderView::ScrollMode)WIIBAFU_SETTINGS.value("GameListBehavior/ScrollMode", QVariant(QHeaderView::ScrollPerPixel)).toInt());
 
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();
         gameTableView->horizontalHeader()->setMovable(true);
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
-        gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)WiiBaFuSettings.value("GameListBehavior/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
+        gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)WIIBAFU_SETTINGS.value("GameListBehavior/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-        gameTableView->setSelectionMode((QAbstractItemView::SelectionMode)WiiBaFuSettings.value("GameListBehavior/SelectionMode", QVariant(QAbstractItemView::ExtendedSelection)).toInt());
+        gameTableView->setSelectionMode((QAbstractItemView::SelectionMode)WIIBAFU_SETTINGS.value("GameListBehavior/SelectionMode", QVariant(QAbstractItemView::ExtendedSelection)).toInt());
         gameTableView->setSortingEnabled(true);
         gameTableView->setTabKeyNavigation(false);
     }
@@ -319,10 +319,10 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 }
 
 void WiiBaFu::on_menuOptions_Settings_triggered() {
-    int language = WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt();
+    int language = WIIBAFU_SETTINGS.value("Main/GameLanguage", QVariant(0)).toInt();
 
     #ifdef Q_OS_MACX
-        QString macOSXStyle = WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString();
+        QString macOSXStyle = WIIBAFU_SETTINGS.value("Main/MacOSXStyle", QVariant("Aqua")).toString();
     #endif
 
     if (settings->exec() == QDialog::Accepted) {
@@ -333,7 +333,7 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
         setFilesColumns();
         setWBFSColumns();
 
-        if (WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt() != language) {
+        if (WIIBAFU_SETTINGS.value("Main/GameLanguage", QVariant(0)).toInt() != language) {
             updateTitles();
 
             if (!ui->infoTab_lineEdit_ID->text().isEmpty()) {
@@ -346,9 +346,9 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
             }
         }
 
-        ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
+        ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WIIBAFU_SETTINGS.value("Main/GameLanguage", QVariant(0)).toInt());
 
-        if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
+        if (WIIBAFU_SETTINGS.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
             setToolTips(ui->wbfsTab_tableView, wbfsListModel, tr("Title"), tr("Name"));
             ui->filesTab_tableView->update();
@@ -356,7 +356,7 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
         }
 
         #ifdef Q_OS_MACX
-            if (macOSXStyle != WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString()) {
+            if (macOSXStyle != WIIBAFU_SETTINGS.value("Main/MacOSXStyle", QVariant("Aqua")).toString()) {
                 setMacOSXStyle();
                 settings->setMacOSXStyle();
                 coverViewDialog->setMacOSXStyle();
@@ -464,7 +464,7 @@ void WiiBaFu::on_menuTools_Compare_triggered() {
         }
 
         tableView->setFocus();
-        tableView->setSelectionMode((QAbstractItemView::SelectionMode)WiiBaFuSettings.value("GameListBehavior/SelectionMode", QVariant(QAbstractItemView::ExtendedSelection)).toInt());
+        tableView->setSelectionMode((QAbstractItemView::SelectionMode)WIIBAFU_SETTINGS.value("GameListBehavior/SelectionMode", QVariant(QAbstractItemView::ExtendedSelection)).toInt());
     }
 }
 
@@ -482,15 +482,15 @@ void WiiBaFu::on_wbfsTab_tableView_doubleClicked(QModelIndex) {
 
 void WiiBaFu::on_filesTab_pushButton_Load_clicked() {
     if (!ui->filesTab_pushButton_Load->text().contains(tr("&Cancel loading"))) {
-        QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), WiiBaFuSettings.value("Main/LastFilesPath", QVariant(QDir::homePath())).toString(), QFileDialog::ShowDirsOnly);
+        QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), WIIBAFU_SETTINGS.value("Main/LastFilesPath", QVariant(QDir::homePath())).toString(), QFileDialog::ShowDirsOnly);
 
         if (!directory.isEmpty()) {
             emit startBusy();
 
             ui->filesTab_pushButton_Load->setIcon(QIcon(":/images/cancel.png"));
             ui->filesTab_pushButton_Load->setText(tr("&Cancel loading"));
-            WiiBaFuSettings.setValue("Main/LastFilesPath", directory);
-            int depth = WiiBaFuSettings.value("WIT/RecurseDepth", QVariant(10)).toInt();
+            WIIBAFU_SETTINGS.setValue("Main/LastFilesPath", directory);
+            int depth = WIIBAFU_SETTINGS.value("WIT/RecurseDepth", QVariant(10)).toInt();
 
             QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, directory, depth);
         }
@@ -530,7 +530,7 @@ void WiiBaFu::on_filesTab_pushButton_ShowInfo_clicked() {
 void WiiBaFu::on_dvdTab_pushButton_Load_clicked() {
     emit startBusy();
 
-    QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
+    QString dvdPath = WIIBAFU_SETTINGS.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
     QtConcurrent::run(wiTools, &WiTools::requestDVDGameListModel, dvdListModel, dvdPath);
 }
 
@@ -631,7 +631,7 @@ void WiiBaFu::on_dvdTab_pushButton_TransferToImage_clicked() {
 
                 ui->dvdTab_pushButton_TransferToImage->setIcon(QIcon(":/images/cancel.png"));
                 ui->dvdTab_pushButton_TransferToImage->setText(tr("&Cancel transfering"));
-                QtConcurrent::run(wiTools, &WiTools::transferDVDToImage, WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString(), transferParameters);
+                QtConcurrent::run(wiTools, &WiTools::transferDVDToImage, WIIBAFU_SETTINGS.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString(), transferParameters);
             }
         }
     }
@@ -677,7 +677,7 @@ void WiiBaFu::on_dvdTab_pushButton_Extract_clicked() {
 
                 ui->dvdTab_pushButton_Extract->setIcon(QIcon(":/images/cancel.png"));
                 ui->dvdTab_pushButton_Extract->setText(tr("&Cancel extracting"));
-                QtConcurrent::run(wiTools, &WiTools::extractDVD, WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString(), buildPath(wiibafudialog->directory(), dvdListModel, ui->dvdTab_tableView, patchParameters.ID), patchParameters);
+                QtConcurrent::run(wiTools, &WiTools::extractDVD, WIIBAFU_SETTINGS.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString(), buildPath(wiibafudialog->directory(), dvdListModel, ui->dvdTab_tableView, patchParameters.ID), patchParameters);
             }
         }
     }
@@ -782,11 +782,11 @@ void WiiBaFu::on_logTab_pushButton_Copy_clicked() {
 
 void WiiBaFu::on_logTab_pushButton_Find_clicked() {
     bool result;
-    QString lastSearchString = WiiBaFuSettings.value("Main/LastLogSearchString", QVariant("")).toString();
+    QString lastSearchString = WIIBAFU_SETTINGS.value("Main/LastLogSearchString", QVariant("")).toString();
     QString searchString = QInputDialog::getText(this, tr("Search log"), tr("Enter search string:"), QLineEdit::Normal, lastSearchString, &result);
 
     if (result && !searchString.isEmpty()) {
-        WiiBaFuSettings.setValue("Main/LastLogSearchString", searchString);
+        WIIBAFU_SETTINGS.setValue("Main/LastLogSearchString", searchString);
 
         bool found = false;
 
@@ -1175,10 +1175,10 @@ void WiiBaFu::setFilesGameListModel() {
         ui->filesTab_tableView->setModel(filesListModel);
         ui->tabWidget->setTabText(0, tr("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
 
-        ui->filesTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("FilesGameList/HeaderStates").toByteArray());
+        ui->filesTab_tableView->horizontalHeader()->restoreState(WIIBAFU_SETTINGS.value("FilesGameList/HeaderStates").toByteArray());
 
         setFilesColumns();
-        if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
+        if (WIIBAFU_SETTINGS.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->filesTab_tableView, filesListModel, tr("Title"), tr("Name"));
         }
 
@@ -1209,7 +1209,7 @@ void WiiBaFu::loadingGamesFailed(WiTools::WitStatus) {
 
 void WiiBaFu::setDVDGameListModel() {
     if (dvdListModel->rowCount() > 0) {
-        QString dvdPath = WiiBaFuSettings.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
+        QString dvdPath = WIIBAFU_SETTINGS.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
 
         ui->dvdTab_tableView->setModel(dvdListModel);
         ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
@@ -1224,10 +1224,10 @@ void WiiBaFu::setWBFSGameListModel() {
         ui->wbfsTab_tableView->setModel(wbfsListModel);
         ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
 
-        ui->wbfsTab_tableView->horizontalHeader()->restoreState(WiiBaFuSettings.value("WBFSGameList/HeaderStates").toByteArray());
+        ui->wbfsTab_tableView->horizontalHeader()->restoreState(WIIBAFU_SETTINGS.value("WBFSGameList/HeaderStates").toByteArray());
 
         setWBFSColumns();
-        if (WiiBaFuSettings.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
+        if (WIIBAFU_SETTINGS.value("GameListBehavior/ToolTips", QVariant(false)).toBool()) {
             setToolTips(ui->wbfsTab_tableView, wbfsListModel, tr("Title"), tr("Name"));
         }
 
@@ -1330,7 +1330,7 @@ void WiiBaFu::filesGame_Patch_finished(WiTools::WitStatus status) {
     if (status == WiTools::Ok) {
         emit startBusy();
         ui->filesTab_pushButton_Load->setText(tr("&Cancel loading"));
-        QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, WiiBaFuSettings.value("Main/LastFilesPath", QVariant(QDir::homePath())).toString(), WiiBaFuSettings.value("WIT/RecurseDepth", QVariant(10)).toInt());
+        QtConcurrent::run(wiTools, &WiTools::requestFilesGameListModel, filesListModel, WIIBAFU_SETTINGS.value("Main/LastFilesPath", QVariant(QDir::homePath())).toString(), WIIBAFU_SETTINGS.value("WIT/RecurseDepth", QVariant(10)).toInt());
     }
 }
 
@@ -1445,7 +1445,7 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
 
         if (!sameGame) {
             if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("PAL") || model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("RF")) {
-                ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt());
+                ui->infoTab_comboBox_GameLanguages->setCurrentIndex(WIIBAFU_SETTINGS.value("Main/GameLanguage", QVariant(0)).toInt());
             }
             else if (model->itemFromIndex(tableView->selectionModel()->selectedRows(3).first())->text().contains("NTSC")) {
                 ui->infoTab_comboBox_GameLanguages->setCurrentIndex(1);
@@ -1561,7 +1561,7 @@ void WiiBaFu::setStatusBarText(const QString text) {
 }
 
 void WiiBaFu::addEntryToLog(const QString entry, const WiTools::LogType type) {
-    switch (WiiBaFuSettings.value("Main/Logging", QVariant(0)).toInt()) {
+    switch (WIIBAFU_SETTINGS.value("Main/Logging", QVariant(0)).toInt()) {
         case 0:
                 ui->logTab_plainTextEdit_Log->appendPlainText(entry);
 
@@ -1595,7 +1595,7 @@ void WiiBaFu::addEntriesToLog(const QStringList entries, const WiTools::LogType 
 }
 
 void WiiBaFu::addWitCommandLineToLog(const QString wit, const QStringList arguments) {
-    if (WiiBaFuSettings.value("Main/LogWitCommandLine", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("Main/LogWitCommandLine", QVariant(true)).toBool()) {
         addEntriesToLog(QStringList() << tr("WIT command line:\n%1").arg(wit) << arguments << "\n" , WiTools::Info);
     }
 }
@@ -1643,7 +1643,7 @@ QString WiiBaFu::currentGameLanguage() {
 QLocale WiiBaFu::locale() {
     QLocale locale;
 
-    switch (WiiBaFuSettings.value("Main/GameLanguage", QVariant(0)).toInt()) {
+    switch (WIIBAFU_SETTINGS.value("Main/GameLanguage", QVariant(0)).toInt()) {
         case 0:  locale = QLocale(QLocale::English, QLocale::UnitedKingdom);
                  break;
         case 1:  locale = QLocale(QLocale::English, QLocale::UnitedStates);
@@ -1685,11 +1685,11 @@ QLocale WiiBaFu::locale() {
 }
 
 QString WiiBaFu::wbfsPath() {
-    if (WiiBaFuSettings.value("WIT/Auto", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WIT/Auto", QVariant(true)).toBool()) {
         return QString("");
     }
     else {
-        return WiiBaFuSettings.value("WIT/WBFSPath", QVariant("")).toString();
+        return WIIBAFU_SETTINGS.value("WIT/WBFSPath", QVariant("")).toString();
     }
 }
 
@@ -1714,94 +1714,94 @@ bool WiiBaFu::gameInList(QStandardItemModel *model, const QString gameId) {
 }
 
 void WiiBaFu::saveMainWindowGeometry() {
-    WiiBaFuSettings.setValue("MainWindow/x", this->geometry().x());
-    WiiBaFuSettings.setValue("MainWindow/y", this->geometry().y());
-    WiiBaFuSettings.setValue("MainWindow/width", this->geometry().width());
-    WiiBaFuSettings.setValue("MainWindow/height", this->geometry().height());
+    WIIBAFU_SETTINGS.setValue("MainWindow/x", this->geometry().x());
+    WIIBAFU_SETTINGS.setValue("MainWindow/y", this->geometry().y());
+    WIIBAFU_SETTINGS.setValue("MainWindow/width", this->geometry().width());
+    WIIBAFU_SETTINGS.setValue("MainWindow/height", this->geometry().height());
 }
 
 void WiiBaFu::saveGameListHeaderStates() {
     if (ui->filesTab_tableView->horizontalHeader()->count() > 0 ) {
-        WiiBaFuSettings.setValue("FilesGameList/HeaderStates", ui->filesTab_tableView->horizontalHeader()->saveState());
+        WIIBAFU_SETTINGS.setValue("FilesGameList/HeaderStates", ui->filesTab_tableView->horizontalHeader()->saveState());
     }
 
     if (ui->wbfsTab_tableView->horizontalHeader()->count() > 0 ) {
-        WiiBaFuSettings.setValue("WBFSGameList/HeaderStates", ui->wbfsTab_tableView->horizontalHeader()->saveState());
+        WIIBAFU_SETTINGS.setValue("WBFSGameList/HeaderStates", ui->wbfsTab_tableView->horizontalHeader()->saveState());
     }
 }
 
 void WiiBaFu::setFilesColumns() {
-    if (WiiBaFuSettings.value("FilesGameList/columnID", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnID", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(0);
     }
     else {
         ui->filesTab_tableView->hideColumn(0);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnName", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnName", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(1);
     }
     else {
         ui->filesTab_tableView->hideColumn(1);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnTitle", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnTitle", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(2);
     }
     else {
         ui->filesTab_tableView->hideColumn(2);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnRegion", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnRegion", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(3);
     }
     else {
         ui->filesTab_tableView->hideColumn(3);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnSize", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnSize", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(4);
     }
     else {
         ui->filesTab_tableView->hideColumn(4);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnInsertion", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnInsertion", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(5);
     }
     else {
         ui->filesTab_tableView->hideColumn(5);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnLastModification", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnLastModification", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(6);
     }
     else {
         ui->filesTab_tableView->hideColumn(6);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnLastStatusChange", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnLastStatusChange", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(7);
     }
     else {
         ui->filesTab_tableView->hideColumn(7);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnLastAccess", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnLastAccess", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(8);
     }
     else {
         ui->filesTab_tableView->hideColumn(8);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnType", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnType", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(9);
     }
     else {
         ui->filesTab_tableView->hideColumn(9);
     }
 
-    if (WiiBaFuSettings.value("FilesGameList/columnSource", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("FilesGameList/columnSource", QVariant(true)).toBool()) {
         ui->filesTab_tableView->showColumn(10);
     }
     else {
@@ -1810,91 +1810,91 @@ void WiiBaFu::setFilesColumns() {
 }
 
 void WiiBaFu::setWBFSColumns() {
-    if (WiiBaFuSettings.value("WBFSGameList/columnID", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnID", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(0);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(0);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnName", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnName", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(1);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(1);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnTitle", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnTitle", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(2);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(2);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnRegion", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnRegion", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(3);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(3);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnSize", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnSize", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(4);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(4);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnUsedBlocks", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnUsedBlocks", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(5);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(5);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnInsertion", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnInsertion", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(6);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(6);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnLastModification", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnLastModification", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(7);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(7);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnLastStatusChange", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnLastStatusChange", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(8);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(8);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnLastAccess", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnLastAccess", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(9);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(9);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnType", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnType", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(10);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(10);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnWBFSSlot", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnWBFSSlot", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(11);
     }
     else {
         ui->wbfsTab_tableView->hideColumn(11);
     }
 
-    if (WiiBaFuSettings.value("WBFSGameList/columnSource", QVariant(true)).toBool()) {
+    if (WIIBAFU_SETTINGS.value("WBFSGameList/columnSource", QVariant(true)).toBool()) {
         ui->wbfsTab_tableView->showColumn(12);
     }
     else {

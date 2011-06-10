@@ -426,7 +426,7 @@ QString WiiBaFuDialog::gameCommonKey() {
 }
 
 void WiiBaFuDialog::setMacOSXStyle() {
-    if (WiiBaFuSettings.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
+    if (WIIBAFU_SETTINGS.value("Main/MacOSXStyle", QVariant("Aqua")).toString().contains("BrushedMetal")) {
         ui->frame->setFrameShape(QFrame::NoFrame);
         ui->frame_compressionMethod->setFrameShape(QFrame::NoFrame);
 
