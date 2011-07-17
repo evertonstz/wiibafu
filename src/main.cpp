@@ -52,6 +52,14 @@ int main(int argc, char *argv[]) {
                 appLang = "spanish";
                 qtLang = "es";
                 break;
+            case 5:
+                appLang = "french";
+                qtLang = "fr";
+                break;
+            case 6:
+                appLang = "norwegian";
+                qtLang = "no";
+                break;
         }
 
         qtTranslator.load(QString(":locale/qt_%1.qm").arg(qtLang));

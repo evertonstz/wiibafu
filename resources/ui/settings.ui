@@ -308,6 +308,24 @@
                  <normaloff>:/images/flags/Spain.png</normaloff>:/images/flags/Spain.png</iconset>
                </property>
               </item>
+              <item>
+               <property name="text">
+                <string>French</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/France.png</normaloff>:/images/flags/France.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Norwegian</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../wiibafu.qrc">
+                 <normaloff>:/images/flags/Norway.png</normaloff>:/images/flags/Norway.png</iconset>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="1" column="0">
