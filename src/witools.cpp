@@ -2603,7 +2603,7 @@ void WiTools::patchGameImage(const QString filePath, const WiTools::GamePatchPar
 }
 
 void WiTools::setWit() {
-    QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WIIBAFU_SETTINGS.value("WIT/PathToWIT", QVariant(DEFAULT_WIT_PATH)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":"));
+    QDir::setSearchPaths("wit", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/bin" << "/usr/local/share/wit" << WIIBAFU_SETTINGS.value("WIT/PathToWIT", QVariant(DEFAULT_WIT_PATH)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":"));
 
     #ifdef Q_OS_WIN32
         wit = QFile("wit:wit.exe").fileName();

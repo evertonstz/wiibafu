@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Wii Backup Fusion
+Comment=The complete and simply to use backup solution for your Wii games
+Exec=WiiBaFu
+Icon=WiiBaFu
+Terminal=false
+Type=Application
+Categories=Network;
+StartupNotify=true
+

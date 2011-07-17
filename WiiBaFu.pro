@@ -6,7 +6,7 @@ TRANSLATIONS    += resources/locale/english.ts resources/locale/german.ts resour
 
 TEMPLATE         = app
 TARGET           = WiiBaFu
-CONFIG          += qt warn_on
+CONFIG          += qt warn_on thread
 QT              += core gui network
 DESTDIR          = bin
 INCLUDEPATH      = src
@@ -17,8 +17,19 @@ RCC_DIR          = build/rcc
 CODECFORTR       = UTF-8
 CODECFORSRC      = UTF-8
 
+linux-g++ {
+  target.path    = /usr/bin
+  icon.path     += /usr/share/pixmaps
+  icon.files    += resources/images/WiiBaFu.png
+  desktop.path  += /usr/share/applications
+  desktop.files += resources/WiiBaFu.desktop
+  INSTALLS      += target icon desktop
+}
+
 win32 {
   RC_FILE = win/appicon.rc
+  target.path  = "C:/Program Files/WiiBaFu"
+  INSTALLS      += target
 }
 
 macx {
@@ -26,4 +37,6 @@ macx {
   QMAKE_INFO_PLIST  += mac/Info.plist
   TARGET             = "Wii Backup Fusion"
   CONFIG            += x86 ppc
+  target.path        = /Applications
+  INSTALLS          += target
 }

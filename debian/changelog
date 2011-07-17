@@ -1,0 +1,10 @@
+wiibafu (1.1-1) stable; urgency=low
+
+  * Switch to GNU GPLv3
+  * New language system
+  * Wia compression defaults fixed
+  * Load 3D cover icon fixed
+  * Italian translation added
+  * Spanish translation adapted
+
+ -- Kai Heitkamp <dynup@ymail.com>  Sun, 17 Jul 2011 12:10:00 +0200
