@@ -1911,7 +1911,7 @@ void WiiBaFu::on_menuHelp_About_triggered() {
         " | <a href='http://sf.net/p/wiibafu'>http://sf.net/p/wiibafu</a>"
         "<p><font color='red'>I don't support piracy! If you copy games with this software,"
         "<br>you must have the original and it's for your private use only!</font color>"
-        "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools!"
+        "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools and thanks to the translators!"
         "<p>This program is licensed under the GNU General Public License v3 (<a href='http://www.gnu.org/licenses/gpl-3.0.txt'>GPLv3</a>)."
         "<p><i>Dedicated in loving memory of my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>");
 }
