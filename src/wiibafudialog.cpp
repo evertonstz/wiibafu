@@ -32,7 +32,16 @@ WiiBaFuDialog::WiiBaFuDialog(QWidget *parent) : QDialog(parent), ui(new Ui::WiiB
 }
 
 void WiiBaFuDialog::on_pushButton_Open_clicked() {
-    QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
+    QString defaultPath("");
+
+    if (ui->lineEdit_Directory->text().isEmpty()) {
+        defaultPath = QDir::homePath();
+    }
+    else {
+        defaultPath = ui->lineEdit_Directory->text();
+    }
+
+    QString directory = QFileDialog::getExistingDirectory(this, tr("Open directory"), defaultPath, QFileDialog::ShowDirsOnly);
 
     if (!directory.isEmpty()) {
         ui->lineEdit_Directory->setText(directory);
@@ -114,6 +123,10 @@ QString WiiBaFuDialog::compression() {
     }
 
     return compression;
+}
+
+void WiiBaFuDialog::setDirectory(const QString path) {
+    ui->lineEdit_Directory->setText(path);
 }
 
 void WiiBaFuDialog::setCurrentImageFormat(const QString path) {

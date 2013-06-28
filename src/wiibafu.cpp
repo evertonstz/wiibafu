@@ -398,6 +398,7 @@ void WiiBaFu::action_Reset_triggered() {
         case 1:
             dvdListModel->clear();
             ui->dvdTab_label_DiscCover->clear();
+            ui->toolBar->actions().at(1)->setText(tr("DVD"));
         case 2:
             wbfsListModel->clear();
             ui->wbfsTab_label_Info->clear();
@@ -1008,6 +1009,11 @@ void WiiBaFu::filesTab_TransferToWBFS(const bool patch) {
 void WiiBaFu::filesTab_TransferToImage(const bool patch) {
     if (!ui->filesTab_pushButton_TransferToImage->text().contains(tr("&Cancel transfering"))) {
         if (ui->filesTab_tableView->model() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
+            const int row = ui->filesTab_tableView->selectionModel()->selectedRows().first().row();
+            const QString sp = filesListModel->item(row, 10)->data(Qt::DisplayRole).toString();
+            const QString sourcePath = sp.mid(0, sp.lastIndexOf("/"));
+
+            wiibafudialog->setDirectory(sourcePath);
             wiibafudialog->setOpenImageDirectory(patch);
             wiibafudialog->setGameID(filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(0).first())->text());
             wiibafudialog->setGameName(filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(1).first())->text());

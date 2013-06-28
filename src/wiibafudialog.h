@@ -41,6 +41,7 @@ public:
     QString splitSize();
     QString imageFormat();
     QString compression();
+    void setDirectory(const QString path);
     void setOpenImageDirectory(const bool patch);
     void setOpenDirectory(const bool patch);
     void setOpenFile(const bool patch);
