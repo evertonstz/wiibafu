@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>460</width>
-    <height>264</height>
+    <width>498</width>
+    <height>290</height>
    </rect>
   </property>
   <property name="windowIcon">
@@ -69,6 +69,12 @@
              <iconset resource="../wiibafu.qrc">
               <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
             </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
@@ -99,6 +105,12 @@
             <property name="icon">
              <iconset resource="../wiibafu.qrc">
               <normaloff>:/images/openfile.png</normaloff>:/images/openfile.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -205,6 +217,12 @@ Default value is 4G</string>
             <property name="icon">
              <iconset resource="../wiibafu.qrc">
               <normaloff>:/images/split.png</normaloff>:/images/split.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -420,7 +438,7 @@ Default value is 4G</string>
           <item row="0" column="1" colspan="2">
            <widget class="QLineEdit" name="lineEdit_ID">
             <property name="inputMask">
-             <string notr="true">&gt;NNNNNN; </string>
+             <string notr="true">&gt;NNNNNN</string>
             </property>
             <property name="maxLength">
              <number>6</number>

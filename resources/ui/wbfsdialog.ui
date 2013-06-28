@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>258</height>
+    <height>279</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -60,6 +60,15 @@
           <property name="icon">
            <iconset resource="../wiibafu.qrc">
             <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+S, Ctrl+W</string>
           </property>
          </widget>
         </item>
