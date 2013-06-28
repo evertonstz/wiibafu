@@ -70,10 +70,13 @@ private:
     QAction *action_wbfsGame_Extract_Patch;
 
     void setupConnections();
+    void setupToolsButton();
     void setupContextMenus();
     void setupMainProgressBar();
     void setupGeometry();
     void setMacOSXStyle();
+
+    void setView(const int index);
 
     void setGameListAttributes(QTableView *gameTableView);
     void setGameInfo(QTableView *tableView, QStandardItemModel *model);
@@ -93,6 +96,7 @@ private:
     void setFilesColumns();
     void setWBFSColumns();
 
+    void keyPressEvent(QKeyEvent *keyEvent);
     bool event(QEvent *event);
 
 signals:
@@ -110,6 +114,16 @@ private slots:
     void on_menuTools_VerifyGame_triggered();
     void on_menuTools_Compare_triggered();
     void on_menuTools_UpdateTitles_triggered();
+
+    void action_Files_triggered();
+    void action_DVD_triggered();
+    void action_WBFS_triggered();
+    void action_Info_triggered();
+    void action_Log_triggered();
+    void action_Reset_triggered();
+    void action_Settings_triggered();
+    void action_About_triggered();
+    void action_Exit_triggered();
 
     void on_filesTab_tableView_doubleClicked(QModelIndex);
     void on_wbfsTab_tableView_doubleClicked(QModelIndex);

@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
+        <file>images/WiiBaFu.png</file>
+        <file>images/about.png</file>
         <file>images/appicon.icns</file>
         <file>images/appicon.ico</file>
         <file>images/appicon.png</file>
@@ -36,11 +38,13 @@
         <file>images/patch.png</file>
         <file>images/qt.png</file>
         <file>images/reset.png</file>
+        <file>images/resetg.png</file>
         <file>images/save.png</file>
         <file>images/search.png</file>
         <file>images/select-all.png</file>
         <file>images/settings.png</file>
         <file>images/split.png</file>
+        <file>images/tools.png</file>
         <file>images/transfer-to-image.png</file>
         <file>images/transfer-to-image-patch.png</file>
         <file>images/transfer-to-wbfs.png</file>
@@ -52,6 +56,7 @@
         <file>images/wit.png</file>
         <file>images/flags/China.png</file>
         <file>images/flags/Denmark.png</file>
+        <file>images/flags/English.png</file>
         <file>images/flags/Finland.png</file>
         <file>images/flags/France.png</file>
         <file>images/flags/Germany.png</file>
@@ -65,8 +70,7 @@
         <file>images/flags/RussianFederation.png</file>
         <file>images/flags/Spain.png</file>
         <file>images/flags/Taiwan.png</file>
-        <file>images/flags/UnitedKingdom.png</file>
         <file>images/flags/USA.png</file>
-        <file>images/flags/English.png</file>
+        <file>images/flags/UnitedKingdom.png</file>
     </qresource>
 </RCC>

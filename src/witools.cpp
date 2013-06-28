@@ -2705,7 +2705,7 @@ QString WiTools::witTitlesPath() {
         default: titles = "titles";
     }
 
-    QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << "/usr/local/share/wit" << WIIBAFU_SETTINGS.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":") << QString(getenv("WIT-TITLES")).split(":"));
+    QDir::setSearchPaths("witTitles", QStringList() << QDir::currentPath().append("/wit") << "/usr/share/wit" << "/usr/local/share/wit" << WIIBAFU_SETTINGS.value("WIT/PathToTitles", QVariant(DEFAULT_TITLES_PATH)).toString() << QDir::currentPath().remove("MacOS").append("wit") << QDir::currentPath().append("/Wii Backup Fusion.app/Contents/wit") << QString(getenv("PATH")).split(":") << QString(getenv("WIT-TITLES")).split(":"));
 
     return QFile(QString("witTitles:%1.txt").arg(titles)).fileName();
 }

@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
+ *   Copyright (C) 2010-2013 Kai Heitkamp                                  *
+ *   dynup@ymail.com | http://dynup.de.vu                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -39,6 +39,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
     setWindowTitle("Wii Backup Fusion " + QCoreApplication::applicationVersion());
     setupMainProgressBar();
     setupConnections();
+    setupToolsButton();
     setupContextMenus();
     setupGeometry();
 
@@ -133,6 +134,56 @@ void WiiBaFu::setupConnections() {
 
     connect(ui->menuHelp_About_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(ui->menuFile_Exit, SIGNAL(triggered()), this, SLOT(close()));
+}
+
+void WiiBaFu::setupToolsButton() {
+    QMenu *toolsContextMenu = new QMenu(this);
+
+    QAction *action_CheckWBFS = new QAction(QIcon(":/images/check.png"), tr("&Check WBFS"), this);
+    QAction *action_DumpWBFS = new QAction(QIcon(":/images/dump-wbfs.png"), tr("&Dump WBFS"), this);
+    QAction *action_CreateWBFS = new QAction(QIcon(":/images/create-wbfs.png"), tr("C&reate WBFS"), this);
+
+    QAction *action_VerifyGame = new QAction(QIcon(":/images/verify-game.png"), tr("&Verify Game"), this);
+    QAction *action_Compare = new QAction(QIcon(":/images/compare.png"), tr("Com&pare Files/WBFS"), this);
+
+    QAction *action_UpdateTitles = new QAction(QIcon(":/images/update.png"), tr("&Update titles"), this);
+
+    QAction *action_Seperator1 = new QAction(this);
+    QAction *action_Seperator2 = new QAction(this);
+    action_Seperator1->setSeparator(true);
+    action_Seperator2->setSeparator(true);
+
+    action_CheckWBFS->setIconVisibleInMenu(true);
+    action_DumpWBFS->setIconVisibleInMenu(true);
+    action_CreateWBFS->setIconVisibleInMenu(true);
+    action_VerifyGame->setIconVisibleInMenu(true);
+    action_Compare->setIconVisibleInMenu(true);
+    action_UpdateTitles->setIconVisibleInMenu(true);
+
+    connect(action_CheckWBFS, SIGNAL(triggered()), this, SLOT(on_menuTools_CheckWBFS_triggered()));
+    connect(action_DumpWBFS, SIGNAL(triggered()), this, SLOT(on_menuTools_DumpWBFS_triggered()));
+    connect(action_CreateWBFS, SIGNAL(triggered()), this, SLOT(on_menuTools_CreateWBFS_triggered()));
+    connect(action_VerifyGame, SIGNAL(triggered()), this, SLOT(on_menuTools_VerifyGame_triggered()));
+    connect(action_Compare, SIGNAL(triggered()), this, SLOT(on_menuTools_Compare_triggered()));
+    connect(action_UpdateTitles, SIGNAL(triggered()), this, SLOT(on_menuTools_UpdateTitles_triggered()));
+
+    toolsContextMenu->addAction(action_CheckWBFS);
+    toolsContextMenu->addAction(action_DumpWBFS);
+    toolsContextMenu->addAction(action_CreateWBFS);
+    toolsContextMenu->addAction(action_Seperator1);
+    toolsContextMenu->addAction(action_VerifyGame);
+    toolsContextMenu->addAction(action_Compare);
+    toolsContextMenu->addAction(action_Seperator2);
+    toolsContextMenu->addAction(action_UpdateTitles);
+
+    QToolButton* toolsButton = new QToolButton(this);
+    toolsButton->setIcon(QIcon(":/images/tools.png"));
+    toolsButton->setText(tr("Tools"));
+    toolsButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    toolsButton->setMenu(toolsContextMenu);
+    toolsButton->setPopupMode(QToolButton::InstantPopup);
+
+    ui->toolBar->insertWidget(ui->toolBar->actions().at(7), toolsButton);
 }
 
 void WiiBaFu::setupContextMenus() {
@@ -318,6 +369,62 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
     gameTableView->setLocale(locale());
 }
 
+void WiiBaFu::action_Files_triggered() {
+    setView(0);
+}
+
+void WiiBaFu::action_DVD_triggered() {
+    setView(1);
+}
+
+void WiiBaFu::action_WBFS_triggered() {
+    setView(2);
+}
+
+void WiiBaFu::action_Info_triggered() {
+    setView(3);
+}
+
+void WiiBaFu::action_Log_triggered() {
+    setView(4);
+}
+
+void WiiBaFu::action_Reset_triggered() {
+    const int index = ui->stackedWidget->currentIndex();
+
+    switch (index) {
+        case 0:
+            filesListModel->clear();
+        case 1:
+            dvdListModel->clear();
+            ui->dvdTab_label_DiscCover->clear();
+        case 2:
+            wbfsListModel->clear();
+            ui->wbfsTab_label_Info->clear();
+            ui->wbfsTab_progressBar->setValue(0);
+        case 3:
+            on_infoTab_pushButton_Reset_clicked();
+        case 4:
+            on_logTab_pushButton_Clear_clicked();
+    }
+}
+
+void WiiBaFu::action_Settings_triggered() {
+    on_menuOptions_Settings_triggered();
+}
+
+void WiiBaFu::action_About_triggered() {
+    on_menuHelp_About_triggered();
+}
+
+void WiiBaFu::action_Exit_triggered() {
+    exit(0);
+}
+
+void::WiiBaFu::setView(const int index) {
+    ui->stackedWidget->setCurrentIndex(index);
+}
+
 void WiiBaFu::on_menuOptions_Settings_triggered() {
     int language = WIIBAFU_SETTINGS.value("Main/GameLanguage", QVariant(0)).toInt();
 
@@ -397,7 +504,7 @@ void WiiBaFu::on_menuTools_VerifyGame_triggered() {
     if (!ui->menuTools_VerifyGame->text().contains(tr("&Cancel verifying"))) {
         QString game;
 
-        switch (ui->tabWidget->currentIndex()) {
+        switch (ui->stackedWidget->currentIndex()) {
             case 0:
                     if (filesListModel->rowCount() > 0 && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
                         game = filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(10).first())->text();
@@ -421,8 +528,8 @@ void WiiBaFu::on_menuTools_VerifyGame_triggered() {
             ui->menuTools_VerifyGame->setIcon(QIcon(":/images/cancel.png"));
             ui->menuTools_VerifyGame->setText(tr("&Cancel verifying"));
 
-            QtConcurrent::run(wiTools, &WiTools::verifyGame, ui->tabWidget->currentIndex(), wbfsPath(), game);
-            ui->tabWidget->setCurrentIndex(4);
+            QtConcurrent::run(wiTools, &WiTools::verifyGame, ui->stackedWidget->currentIndex(), wbfsPath(), game);
+            ui->stackedWidget->setCurrentIndex(4);
         }
         else {
             setStatusBarText(tr("Verify error: No game selected!"));
@@ -435,11 +542,11 @@ void WiiBaFu::on_menuTools_VerifyGame_triggered() {
 }
 
 void WiiBaFu::on_menuTools_Compare_triggered() {
-    if ((filesListModel->rowCount() > 0 && wbfsListModel->rowCount() > 0) && (ui->tabWidget->currentIndex() == 0 || ui->tabWidget->currentIndex() == 2)) {
+    if ((filesListModel->rowCount() > 0 && wbfsListModel->rowCount() > 0) && (ui->stackedWidget->currentIndex() == 0 || ui->stackedWidget->currentIndex() == 2)) {
         QTableView *tableView;
         QStandardItemModel *sourceModel, *targetModel;
 
-        switch (ui->tabWidget->currentIndex()) {
+        switch (ui->stackedWidget->currentIndex()) {
             case 0:
                     tableView = ui->filesTab_tableView;
                     sourceModel = filesListModel;
@@ -752,7 +859,7 @@ void WiiBaFu::on_infoTab_pushButton_viewInBrowser_clicked() {
 }
 
 void WiiBaFu::on_infoTab_pushButton_Reset_clicked() {
-    ui->tabWidget->setTabText(3, tr("Info"));
+    ui->toolBar->actions().at(3)->setText(tr("Info"));
 
     ui->infoTab_lineEdit_ID->clear();
     ui->infoTab_lineEdit_Name->clear();
@@ -1173,7 +1280,7 @@ void WiiBaFu::wbfsTableView_selectionChanged(const QItemSelection, const QItemSe
 void WiiBaFu::setFilesGameListModel() {
     if (filesListModel->rowCount() > 0 ) {
         ui->filesTab_tableView->setModel(filesListModel);
-        ui->tabWidget->setTabText(0, tr("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
+        ui->toolBar->actions().at(0)->setText(tr("Files (%1)").arg(ui->filesTab_tableView->model()->rowCount()));
 
         ui->filesTab_tableView->horizontalHeader()->restoreState(WIIBAFU_SETTINGS.value("FilesGameList/HeaderStates").toByteArray());
 
@@ -1212,7 +1319,7 @@ void WiiBaFu::setDVDGameListModel() {
         QString dvdPath = WIIBAFU_SETTINGS.value("WIT/DVDDrivePath", QVariant("/cdrom")).toString();
 
         ui->dvdTab_tableView->setModel(dvdListModel);
-        ui->tabWidget->setTabText(1, QString("DVD (%1)").arg(dvdPath));
+        ui->toolBar->actions().at(1)->setText(QString("DVD (%1)").arg(dvdPath));
 
         emit stopBusy();
         common->requestGameCover(dvdListModel->item(0, 0)->text(), QString("EN"), Common::Disc);
@@ -1222,7 +1329,7 @@ void WiiBaFu::setDVDGameListModel() {
 void WiiBaFu::setWBFSGameListModel() {
     if (wbfsListModel->rowCount() > 0) {
         ui->wbfsTab_tableView->setModel(wbfsListModel);
-        ui->tabWidget->setTabText(2, QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
+        ui->toolBar->actions().at(2)->setText(QString("WBFS (%1)").arg(ui->wbfsTab_tableView->model()->rowCount()));
 
         ui->wbfsTab_tableView->horizontalHeader()->restoreState(WIIBAFU_SETTINGS.value("WBFSGameList/HeaderStates").toByteArray());
 
@@ -1291,7 +1398,7 @@ void WiiBaFu::verifyGame_finished(WiTools::WitStatus) {
 
     ui->menuTools_VerifyGame->setIcon(QIcon(":/images/verify-game.png"));
     ui->menuTools_VerifyGame->setText(tr("&Verify game"));
-    ui->tabWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 void WiiBaFu::filesGame_Patch() {
@@ -1406,7 +1513,7 @@ void WiiBaFu::setToolTips(QTableView *tableView, QStandardItemModel *model, cons
 
 void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
     if (tableView->selectionModel() && !tableView->selectionModel()->selectedRows(0).isEmpty()) {
-        ui->tabWidget->setCurrentIndex(3);
+        ui->stackedWidget->setCurrentIndex(3);
 
         bool sameGame;
         if (!ui->infoTab_lineEdit_ID->text().contains(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text())) {
@@ -1416,7 +1523,7 @@ void WiiBaFu::setGameInfo(QTableView *tableView, QStandardItemModel *model) {
             sameGame = true;
         }
 
-        ui->tabWidget->setTabText(3, tr("Info (%1)").arg(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text()));
+        ui->toolBar->actions().at(3)->setText(tr("Info (%1)").arg(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text()));
 
         if (tableView == ui->wbfsTab_tableView) {
             ui->infoTab_lineEdit_ID->setText(model->itemFromIndex(tableView->selectionModel()->selectedRows(0).first())->text());
@@ -1903,17 +2010,53 @@ void WiiBaFu::setWBFSColumns() {
 }
 
 void WiiBaFu::on_menuHelp_About_triggered() {
-    QMessageBox::about(this, "About Wii Backup Fusion",
-        QString("<h2>Wii Backup Fusion %1</h2>").arg(QCoreApplication::applicationVersion()) +
+    QString message = QString("<h2>" + QCoreApplication::applicationName() + " %1</h2>").arg(QCoreApplication::applicationVersion()) +
         "<p><b><i>The complete and simply to use backup solution for Wii games</b></i>"
-        "<p>Development and Copyright &copy; 2010 - 2011 Kai Heitkamp"
+        "<p>Development and Copyright &copy; 2010 - 2013 Kai Christian Heitkamp"
         "<p><a href='mailto:dynup<dynup@ymail.com>?subject=WiiBaFu%20feedback'>dynup@ymail.com</a>"
-        " | <a href='http://sf.net/p/wiibafu'>http://sf.net/p/wiibafu</a>"
+        " | <a href='http://dynup.de.vu'>dynup.de.vu</a>"
         "<p><font color='red'>I don't support piracy! If you copy games with this software,"
         "<br>you must have the original and it's for your private use only!</font color>"
-        "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit and the guys at Nokia for the continuation, thanks to Dirk Clemens (Wiimm) for his great ISO tools and thanks to the translators!"
-        "<p>This program is licensed under the GNU General Public License v3 (<a href='http://www.gnu.org/licenses/gpl-3.0.txt'>GPLv3</a>)."
-        "<p><i>Dedicated in loving memory of my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>");
+        "<p><font color=black>Ctrl / Strg + 1:</font> shows Files"
+        "<br><font color=black>Ctrl / Strg + 2:</font> shows DVD"
+        "<br><font color=black>Ctrl / Strg + 3:</font> shows WBFS"
+        "<br><font color=black>Ctrl / Strg + 4:</font> shows Info"
+        "<br><font color=black>Ctrl / Strg + 5:</font> shows Log"
+        "<p>Big thanks to the trolls at Trolltech Norway for his excellent Qt toolkit, the guys at Digia for the continuation and all people at the Qt Project for the open source development of Qt!"
+        "<p>Thanks to Dirk Clemens for his excellent <a href='http://wit.wiimm.de'>WIT</a> (Wiimms ISO Tools)!"
+        "<p>" + QCoreApplication::applicationName() + " is licensed under the GNU General Public License v3 (<a href='http://www.gnu.org/licenses/gpl-3.0.txt'>GPLv3</a>)."
+        "<p><i>Dedicated in loving memory of my father G&uuml;nter Heitkamp (28.07.1935 - 06.10.2009)</i>";
+
+    QMessageBox messageBox;
+    messageBox.setIconPixmap(QPixmap(":/images/appicon.png").scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    messageBox.setWindowTitle(tr("About ") + QCoreApplication::applicationName());
+    messageBox.setText(message);
+
+    messageBox.addButton(QMessageBox::Cancel);
+    messageBox.addButton(QMessageBox::Ok);
+    messageBox.button(QMessageBox::Cancel)->setText("About &Qt");
+    messageBox.setDefaultButton(QMessageBox::Ok);
+    connect(messageBox.button(QMessageBox::Cancel), SIGNAL(clicked()), qApp, SLOT(aboutQt()));
+
+    QGridLayout* gridLayout = qobject_cast<QGridLayout*>(messageBox.layout());
+    QSpacerItem* horizontalSpacer = new QSpacerItem((qApp->fontMetrics().ascent() - qApp->fontMetrics().descent()) * 75, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    gridLayout->addItem(horizontalSpacer, gridLayout->rowCount(), 0, 1, gridLayout->columnCount());
+
+    messageBox.exec();
+}
+
+void WiiBaFu::keyPressEvent(QKeyEvent *keyEvent) {
+    if (keyEvent->modifiers() == Qt::ControlModifier) {
+        switch (keyEvent->key()) {
+            case Qt::Key_1: setView(0); break;
+            case Qt::Key_2: setView(1); break;
+            case Qt::Key_3: setView(2); break;
+            case Qt::Key_4: setView(3); break;
+            case Qt::Key_5: setView(4); break;
+        }
+    }
+
+    return QMainWindow::keyPressEvent(keyEvent);
 }
 
 bool WiiBaFu::event(QEvent *event) {

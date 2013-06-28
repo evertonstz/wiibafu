@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
+ *   Copyright (C) 2010-2013 Kai Heitkamp                                  *
  *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationDomain("http://sf.net/p/wiibafu");
     QCoreApplication::setOrganizationName("Kai Heitkamp");
     QCoreApplication::setApplicationName("Wii Backup Fusion");
-    QCoreApplication::setApplicationVersion("1.1");
+    QCoreApplication::setApplicationVersion(AppVersion);
 
     QTranslator qtTranslator, appTranslator;
     QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
