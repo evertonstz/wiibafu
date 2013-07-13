@@ -56,6 +56,7 @@ WiiBaFu::WiiBaFu(QWidget *parent) : QMainWindow(parent), ui(new Ui::WiiBaFu) {
         logFile.open(QIODevice::WriteOnly);
     }
 
+    lastOutputPath = WIIBAFU_SETTINGS.value("Main/LastOutputPath", QDir::homePath()).toString();
     logFindFirstTime = true;
 
     setStatusBarText(tr("Ready."));
@@ -131,9 +132,6 @@ void WiiBaFu::setupConnections() {
 
     connect(common, SIGNAL(setMainProgressBarVisible(bool)), this, SLOT(setMainProgressBarVisible(bool)));
     connect(common, SIGNAL(setMainProgressBar(int,QString)), this, SLOT(setMainProgressBar(int,QString)));
-
-    connect(ui->menuHelp_About_Qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-    connect(ui->menuFile_Exit, SIGNAL(triggered()), this, SLOT(close()));
 }
 
 void WiiBaFu::setupToolsButton() {
@@ -143,7 +141,7 @@ void WiiBaFu::setupToolsButton() {
     QAction *action_DumpWBFS = new QAction(QIcon(":/images/dump-wbfs.png"), tr("&Dump WBFS"), this);
     QAction *action_CreateWBFS = new QAction(QIcon(":/images/create-wbfs.png"), tr("C&reate WBFS"), this);
 
-    QAction *action_VerifyGame = new QAction(QIcon(":/images/verify-game.png"), tr("&Verify Game"), this);
+    action_VerifyGame = new QAction(QIcon(":/images/verify-game.png"), tr("&Verify Game"), this);
     QAction *action_Compare = new QAction(QIcon(":/images/compare.png"), tr("Com&pare Files/WBFS"), this);
 
     QAction *action_UpdateTitles = new QAction(QIcon(":/images/update.png"), tr("&Update titles"), this);
@@ -160,12 +158,12 @@ void WiiBaFu::setupToolsButton() {
     action_Compare->setIconVisibleInMenu(true);
     action_UpdateTitles->setIconVisibleInMenu(true);
 
-    connect(action_CheckWBFS, SIGNAL(triggered()), this, SLOT(on_menuTools_CheckWBFS_triggered()));
-    connect(action_DumpWBFS, SIGNAL(triggered()), this, SLOT(on_menuTools_DumpWBFS_triggered()));
-    connect(action_CreateWBFS, SIGNAL(triggered()), this, SLOT(on_menuTools_CreateWBFS_triggered()));
-    connect(action_VerifyGame, SIGNAL(triggered()), this, SLOT(on_menuTools_VerifyGame_triggered()));
-    connect(action_Compare, SIGNAL(triggered()), this, SLOT(on_menuTools_Compare_triggered()));
-    connect(action_UpdateTitles, SIGNAL(triggered()), this, SLOT(on_menuTools_UpdateTitles_triggered()));
+    connect(action_CheckWBFS, SIGNAL(triggered()), this, SLOT(tools_CheckWBFS_triggered()));
+    connect(action_DumpWBFS, SIGNAL(triggered()), this, SLOT(tools_DumpWBFS_triggered()));
+    connect(action_CreateWBFS, SIGNAL(triggered()), this, SLOT(tools_CreateWBFS_triggered()));
+    connect(action_VerifyGame, SIGNAL(triggered()), this, SLOT(tools_VerifyGame_triggered()));
+    connect(action_Compare, SIGNAL(triggered()), this, SLOT(tools_Compare_triggered()));
+    connect(action_UpdateTitles, SIGNAL(triggered()), this, SLOT(tools_UpdateTitles_triggered()));
 
     toolsContextMenu->addAction(action_CheckWBFS);
     toolsContextMenu->addAction(action_DumpWBFS);
@@ -243,7 +241,7 @@ void WiiBaFu::setupContextMenus() {
     connect(action_filesGame_TransferToWBFS_Patch, SIGNAL(triggered()), this, SLOT(filesTab_ContextMenu_TransferToWBFS_Patch()));
     connect(action_filesGame_TransferToImage_Patch, SIGNAL(triggered()), this, SLOT(filesTab_ContextMenu_TransferToImage_Patch()));
     connect(action_filesGame_ExtractImage_Patch, SIGNAL(triggered()), this, SLOT(filesTab_ContextMenu_ExtractImage_Path()));
-    connect(action_filesGame_Verify, SIGNAL(triggered()), this, SLOT(on_menuTools_VerifyGame_triggered()));
+    connect(action_filesGame_Verify, SIGNAL(triggered()), this, SLOT(tools_VerifyGame_triggered()));
     connect(action_filesGame_Patch, SIGNAL(triggered()), this, SLOT(filesGame_Patch()));
     connect(action_filesGame_ShowInfo, SIGNAL(triggered()), this, SLOT(on_filesTab_pushButton_ShowInfo_clicked()));
 
@@ -251,7 +249,7 @@ void WiiBaFu::setupContextMenus() {
     connect(action_wbfsGame_Extract, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_Extract_clicked()));
     connect(action_wbfsGame_Transfer_Patch, SIGNAL(triggered()), this, SLOT(wbfsTab_ContextMenu_Transfer_Patch()));
     connect(action_wbfsGame_Extract_Patch, SIGNAL(triggered()), this, SLOT(wbfsTab_ContextMenu_Extract_Path()));
-    connect(action_wbfsGame_Verify, SIGNAL(triggered()), this, SLOT(on_menuTools_VerifyGame_triggered()));
+    connect(action_wbfsGame_Verify, SIGNAL(triggered()), this, SLOT(tools_VerifyGame_triggered()));
     connect(action_wbfsGame_Remove, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_Remove_clicked()));
     connect(action_wbfsGame_ShowInfo, SIGNAL(triggered()), this, SLOT(on_wbfsTab_pushButton_ShowInfo_clicked()));
 
@@ -351,9 +349,9 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
 
     if (gameTableView != ui->dvdTab_tableView) {
         gameTableView->verticalHeader()->hide();
-        gameTableView->horizontalHeader()->setMovable(true);
+        gameTableView->horizontalHeader()->setSectionsMovable(true);
         gameTableView->verticalHeader()->setDefaultSectionSize(20);
-        gameTableView->horizontalHeader()->setResizeMode((QHeaderView::ResizeMode)WIIBAFU_SETTINGS.value("GameListBehavior/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
+        gameTableView->horizontalHeader()->setSectionResizeMode((QHeaderView::ResizeMode)WIIBAFU_SETTINGS.value("GameListBehavior/ResizeMode", QVariant(QHeaderView::ResizeToContents)).toInt());
         gameTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         gameTableView->setSelectionMode((QAbstractItemView::SelectionMode)WIIBAFU_SETTINGS.value("GameListBehavior/SelectionMode", QVariant(QAbstractItemView::ExtendedSelection)).toInt());
         gameTableView->setSortingEnabled(true);
@@ -361,8 +359,8 @@ void WiiBaFu::setGameListAttributes(QTableView *gameTableView) {
     }
     else {
         gameTableView->horizontalHeader()->hide();
-        gameTableView->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
-        gameTableView->verticalHeader()->setResizeMode(QHeaderView::Stretch);
+        gameTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        gameTableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         gameTableView->setSelectionMode(QAbstractItemView::NoSelection);
     }
 
@@ -408,25 +406,27 @@ void WiiBaFu::action_Reset_triggered() {
         case 4:
             on_logTab_pushButton_Clear_clicked();
     }
+
+    setStatusBarText(tr("Ready."));
 }
 
 void WiiBaFu::action_Settings_triggered() {
-    on_menuOptions_Settings_triggered();
+    options_Settings_triggered();
 }
 
 void WiiBaFu::action_About_triggered() {
-    on_menuHelp_About_triggered();
+    help_About_triggered();
 }
 
 void WiiBaFu::action_Exit_triggered() {
-    exit(0);
+    close();
 }
 
 void::WiiBaFu::setView(const int index) {
     ui->stackedWidget->setCurrentIndex(index);
 }
 
-void WiiBaFu::on_menuOptions_Settings_triggered() {
+void WiiBaFu::options_Settings_triggered() {
     int language = WIIBAFU_SETTINGS.value("Main/GameLanguage", QVariant(0)).toInt();
 
     #ifdef Q_OS_MACX
@@ -475,15 +475,15 @@ void WiiBaFu::on_menuOptions_Settings_triggered() {
     }
 }
 
-void WiiBaFu::on_menuTools_CheckWBFS_triggered() {
+void WiiBaFu::tools_CheckWBFS_triggered() {
     on_wbfsTab_pushButton_Check_clicked();
 }
 
-void WiiBaFu::on_menuTools_DumpWBFS_triggered() {
+void WiiBaFu::tools_DumpWBFS_triggered() {
     QtConcurrent::run(wiTools, &WiTools::dumpWBFS, wbfsPath());
 }
 
-void WiiBaFu::on_menuTools_CreateWBFS_triggered() {
+void WiiBaFu::tools_CreateWBFS_triggered() {
     if (wbfsDialog->exec() == QDialog::Accepted) {
         emit startBusy();
 
@@ -501,8 +501,8 @@ void WiiBaFu::on_menuTools_CreateWBFS_triggered() {
     }
 }
 
-void WiiBaFu::on_menuTools_VerifyGame_triggered() {
-    if (!ui->menuTools_VerifyGame->text().contains(tr("&Cancel verifying"))) {
+void WiiBaFu::tools_VerifyGame_triggered() {
+    if (!action_VerifyGame->text().contains(tr("&Cancel verifying"))) {
         QString game;
 
         switch (ui->stackedWidget->currentIndex()) {
@@ -526,8 +526,8 @@ void WiiBaFu::on_menuTools_VerifyGame_triggered() {
         if (!game.isEmpty()) {
             emit startBusy();
 
-            ui->menuTools_VerifyGame->setIcon(QIcon(":/images/cancel.png"));
-            ui->menuTools_VerifyGame->setText(tr("&Cancel verifying"));
+            action_VerifyGame->setIcon(QIcon(":/images/cancel.png"));
+            action_VerifyGame->setText(tr("&Cancel verifying"));
 
             QtConcurrent::run(wiTools, &WiTools::verifyGame, ui->stackedWidget->currentIndex(), wbfsPath(), game);
             ui->stackedWidget->setCurrentIndex(4);
@@ -542,7 +542,7 @@ void WiiBaFu::on_menuTools_VerifyGame_triggered() {
     }
 }
 
-void WiiBaFu::on_menuTools_Compare_triggered() {
+void WiiBaFu::tools_Compare_triggered() {
     if ((filesListModel->rowCount() > 0 && wbfsListModel->rowCount() > 0) && (ui->stackedWidget->currentIndex() == 0 || ui->stackedWidget->currentIndex() == 2)) {
         QTableView *tableView;
         QStandardItemModel *sourceModel, *targetModel;
@@ -576,7 +576,7 @@ void WiiBaFu::on_menuTools_Compare_triggered() {
     }
 }
 
-void WiiBaFu::on_menuTools_UpdateTitles_triggered() {
+void WiiBaFu::tools_UpdateTitles_triggered() {
     QtConcurrent::run(common, &Common::updateTitles);
 }
 
@@ -1010,10 +1010,10 @@ void WiiBaFu::filesTab_TransferToImage(const bool patch) {
     if (!ui->filesTab_pushButton_TransferToImage->text().contains(tr("&Cancel transfering"))) {
         if (ui->filesTab_tableView->model() && !ui->filesTab_tableView->selectionModel()->selectedRows(0).isEmpty()) {
             const int row = ui->filesTab_tableView->selectionModel()->selectedRows().first().row();
-            const QString sp = filesListModel->item(row, 10)->data(Qt::DisplayRole).toString();
-            const QString sourcePath = sp.mid(0, sp.lastIndexOf("/"));
+            const QString imagePath = filesListModel->item(row, 10)->data(Qt::DisplayRole).toString();
 
-            wiibafudialog->setDirectory(sourcePath);
+            wiibafudialog->setSourceFilePath(imagePath);
+            wiibafudialog->setDirectory(lastOutputPath);
             wiibafudialog->setOpenImageDirectory(patch);
             wiibafudialog->setGameID(filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(0).first())->text());
             wiibafudialog->setGameName(filesListModel->itemFromIndex(ui->filesTab_tableView->selectionModel()->selectedRows(1).first())->text());
@@ -1048,7 +1048,13 @@ void WiiBaFu::filesTab_TransferToImage(const bool patch) {
                 }
 
                 QDir path = wiibafudialog->directory();
-                transferParameters.IndexList = ui->filesTab_tableView->selectionModel()->selectedRows(10);
+                QStringList filenames;
+
+                foreach (QModelIndex index, ui->filesTab_tableView->selectionModel()->selectedRows(10)) {
+                    filenames.append(index.data().toString());
+                }
+
+                transferParameters.fileList = filenames;
                 transferParameters.Directory = path.absolutePath();
                 transferParameters.Format = wiibafudialog->imageFormat();
                 transferParameters.Compression = wiibafudialog->compression();
@@ -1059,12 +1065,17 @@ void WiiBaFu::filesTab_TransferToImage(const bool patch) {
                     transferParameters.SplitSize = wiibafudialog->splitSize();
                 }
 
+                lastOutputPath = wiibafudialog->directory();
+
+                WIIBAFU_SETTINGS.setValue("Main/LastOutputPath", lastOutputPath);
+
                 if (!path.exists()) {
                     QMessageBox::warning(this, tr("Warning"), tr("The directory doesn't exists!"), QMessageBox::Ok, QMessageBox::NoButton);
                 }
                 else {
                     ui->filesTab_pushButton_TransferToImage->setIcon(QIcon(":/images/cancel.png"));
                     ui->filesTab_pushButton_TransferToImage->setText(tr("&Cancel transfering"));
+
                     QtConcurrent::run(wiTools, &WiTools::transferFilesToImage, transferParameters);
                 }
             }
@@ -1173,7 +1184,13 @@ void WiiBaFu::wbfsTab_Transfer(const bool patch) {
                 }
 
                 QDir path = wiibafudialog->directory();
-                transferParameters.IndexList = ui->wbfsTab_tableView->selectionModel()->selectedRows(0);
+                QStringList filenames;
+
+                foreach (QModelIndex index, ui->filesTab_tableView->selectionModel()->selectedRows(10)) {
+                    filenames.append(index.data().toString());
+                }
+
+                transferParameters.fileList = filenames;
                 transferParameters.Directory = path.absolutePath();
                 transferParameters.Format = wiibafudialog->imageFormat();
                 transferParameters.Compression = wiibafudialog->compression();
@@ -1402,8 +1419,8 @@ void WiiBaFu::extractWBFS_finished(WiTools::WitStatus) {
 void WiiBaFu::verifyGame_finished(WiTools::WitStatus) {
     emit stopBusy();
 
-    ui->menuTools_VerifyGame->setIcon(QIcon(":/images/verify-game.png"));
-    ui->menuTools_VerifyGame->setText(tr("&Verify game"));
+    action_VerifyGame->setIcon(QIcon(":/images/verify-game.png"));
+    action_VerifyGame->setText(tr("&Verify game"));
     ui->stackedWidget->setCurrentIndex(4);
 }
 
@@ -2015,7 +2032,7 @@ void WiiBaFu::setWBFSColumns() {
     }
 }
 
-void WiiBaFu::on_menuHelp_About_triggered() {
+void WiiBaFu::help_About_triggered() {
     QString message = QString("<h2>" + QCoreApplication::applicationName() + " %1</h2>").arg(QCoreApplication::applicationVersion()) +
         "<p><b><i>The complete and simply to use backup solution for Wii games</b></i>"
         "<p>Development and Copyright &copy; 2010 - 2013 Kai Christian Heitkamp"
@@ -2059,10 +2076,12 @@ void WiiBaFu::keyPressEvent(QKeyEvent *keyEvent) {
             case Qt::Key_3: setView(2); break;
             case Qt::Key_4: setView(3); break;
             case Qt::Key_5: setView(4); break;
+
+            case Qt::Key_Q: close();    break;
         }
     }
 
-    return QMainWindow::keyPressEvent(keyEvent);
+    QMainWindow::keyPressEvent(keyEvent);
 }
 
 bool WiiBaFu::event(QEvent *event) {

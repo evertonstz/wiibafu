@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
-    <height>290</height>
+    <width>530</width>
+    <height>302</height>
    </rect>
   </property>
   <property name="windowIcon">
@@ -37,27 +37,7 @@
           <enum>QFrame::Sunken</enum>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_Directory">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
-            <property name="text">
-             <string>Directory:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit_Directory">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
+          <item row="0" column="3">
            <widget class="QPushButton" name="pushButton_Open">
             <property name="locale">
              <locale language="English" country="UnitedStates"/>
@@ -77,86 +57,14 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_FilePath">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
-            <property name="text">
-             <string>File path:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_FilePath">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="pushButton_OpenFile">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
-            <property name="text">
-             <string>Open</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../wiibafu.qrc">
-              <normaloff>:/images/openfile.png</normaloff>:/images/openfile.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>16</width>
-              <height>16</height>
-             </size>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label_ImageFormat">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
+           <widget class="QLabel" name="label_SplitSize">
             <property name="text">
-             <string>Image format:</string>
+             <string>Split size:</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QComboBox" name="comboBox_ImageFormat">
-            <property name="locale">
-             <locale language="English" country="UnitedStates"/>
-            </property>
-            <item>
-             <property name="text">
-              <string>Wii Plain ISO (*.iso)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Wii Compact ISO (*.ciso)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Wii ISO Archive (*.wia)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Wii Disc Format (*.wdf)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Wii Backup File System Container (*.wbfs)</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="3" column="2">
+          <item row="4" column="3">
            <widget class="QComboBox" name="comboBox_compressionDefaults">
             <property name="enabled">
              <bool>false</bool>
@@ -188,28 +96,59 @@
             </item>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_SplitSize">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Split size and optional unit factor 'kmgtpe' (base=1000] or 'KMGTPE' (base=1024)
-Default value is 4G</string>
+          <item row="2" column="3">
+           <widget class="QPushButton" name="pushButton_OpenFile">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
             </property>
             <property name="text">
-             <string>4G</string>
+             <string>Open</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../wiibafu.qrc">
+              <normaloff>:/images/openfile.png</normaloff>:/images/openfile.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_SplitSize">
-            <property name="text">
-             <string>Split size:</string>
+          <item row="4" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_ImageFormat">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
             </property>
+            <item>
+             <property name="text">
+              <string>Wii Plain ISO (*.iso)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Wii Compact ISO (*.ciso)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Wii ISO Archive (*.wia)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Wii Disc Format (*.wdf)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Wii Backup File System Container (*.wbfs)</string>
+             </property>
+            </item>
            </widget>
           </item>
-          <item row="2" column="2">
+          <item row="3" column="3">
            <widget class="QPushButton" name="pushButton_Split">
             <property name="text">
              <string>Split</string>
@@ -226,6 +165,87 @@ Default value is 4G</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEdit_FilePath">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_FilePath">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="text">
+             <string>File path:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_Directory">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="text">
+             <string>Directory:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_ImageFormat">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="text">
+             <string>Image format:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEdit_SplitSize">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Split size and optional unit factor 'kmgtpe' (base=1000] or 'KMGTPE' (base=1024)
+Default value is 4G</string>
+            </property>
+            <property name="text">
+             <string>4G</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QLineEdit" name="lineEdit_Directory">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="pushButton_SourcePath">
+            <property name="locale">
+             <locale language="English" country="UnitedStates"/>
+            </property>
+            <property name="text">
+             <string>Source path</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../wiibafu.qrc">
+              <normaloff>:/images/image.png</normaloff>:/images/image.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
             </property>
            </widget>
           </item>

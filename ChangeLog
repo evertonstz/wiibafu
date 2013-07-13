@@ -1,5 +1,7 @@
-2013-06-28 Kai Heitkamp <dynup@ymail.com>
+2013-07-13 Kai Heitkamp <dynup@ymail.com>
  Version 2.0 (wit v2.20a r4399)
+  * Set game image source path for target file
+  * Ported to Qt5
   * Source path of game image in transfer dialog as default
   * New modern GUI
 

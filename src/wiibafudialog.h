@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
+ *   Copyright (C) 2010-2013 Kai Heitkamp                                  *
+ *   dynup@ymail.com | http://dynup.de.vu                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -35,12 +35,15 @@ public:
     explicit WiiBaFuDialog(QWidget *parent = 0);
     ~WiiBaFuDialog();
 
+    QString sourceFilePath();
     QString directory();
     QString filePath();
     bool split();
     QString splitSize();
     QString imageFormat();
     QString compression();
+
+    void setSourceFilePath(const QString path);
     void setDirectory(const QString path);
     void setOpenImageDirectory(const bool patch);
     void setOpenDirectory(const bool patch);
@@ -48,6 +51,7 @@ public:
     void setPatchGame();
     void setGameID(const QString gameID);
     void setGameName(const QString gameName);
+
     QString gameID();
     QString gameName();
     QString gameRegion();
@@ -55,15 +59,19 @@ public:
     QString gameModify();
     QString gameEncodingMode();
     QString gameCommonKey();
+
     void setMacOSXStyle();
 
 private:
     Ui::WiiBaFuDialog *ui;
+    QString m_sourceFilePath;
+
     void setCurrentImageFormat(const QString path);
     bool event(QEvent *event);
 
 private slots:
     void on_pushButton_Open_clicked();
+    void on_pushButton_SourcePath_clicked();
     void on_pushButton_OpenFile_clicked();
     void on_comboBox_ImageFormat_currentIndexChanged(int index);
     void on_pushButton_Split_toggled(bool checked);

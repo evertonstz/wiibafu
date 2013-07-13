@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
+ *   Copyright (C) 2010-2013 Kai Heitkamp                                  *
+ *   dynup@ymail.com | http://dynup.de.vu                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -823,10 +823,7 @@ void WiTools::transferFilesToImage(WiTools::TransferFilesToImageParameters trans
 
     QStringList arguments;
     arguments.append("COPY");
-
-    foreach (QModelIndex index, transferParameters.IndexList) {
-        arguments.append(index.data().toString());
-    }
+    arguments.append(transferParameters.fileList);
 
     if (transferParameters.Format.contains("wia")) {
         QString tmpstr = "--wia=";
@@ -1826,9 +1823,7 @@ void WiTools::transferWBFSToImage(const QString wbfsPath, const WiTools::Transfe
         arguments.append(wbfsPath);
     }
 
-    foreach (QModelIndex index, transferParameters.IndexList) {
-        arguments.append(index.data().toString());
-    }
+    arguments.append(transferParameters.fileList);
 
     if (transferParameters.Format.contains("wia")) {
         QString tmpstr = "--wia=";

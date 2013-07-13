@@ -24,7 +24,7 @@
    <item row="0" column="0">
     <widget class="QFrame" name="frame_Cover">
      <property name="frameShape">
-      <enum>QFrame::Box</enum>
+      <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Sunken</enum>
@@ -125,6 +125,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushButton_Save</tabstop>
+  <tabstop>pushButton_OK</tabstop>
+ </tabstops>
  <resources>
   <include location="../wiibafu.qrc"/>
  </resources>

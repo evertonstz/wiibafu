@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
+ *   Copyright (C) 2010-2013 Kai Heitkamp                                  *
+ *   dynup@ymail.com | http://dynup.de.vu                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,13 +18,14 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 
 #include "wiibafudialog.h"
 #include "ui_wiibafudialog.h"
 
 WiiBaFuDialog::WiiBaFuDialog(QWidget *parent) : QDialog(parent), ui(new Ui::WiiBaFuDialog) {
     ui->setupUi(this);
+    m_sourceFilePath = "";
 
     #ifdef Q_OS_MACX
         setMacOSXStyle();
@@ -48,6 +49,10 @@ void WiiBaFuDialog::on_pushButton_Open_clicked() {
     }
 }
 
+void WiiBaFuDialog::on_pushButton_SourcePath_clicked() {
+    ui->lineEdit_Directory->setText(m_sourceFilePath.mid(0, m_sourceFilePath.lastIndexOf("/")));
+}
+
 void WiiBaFuDialog::on_pushButton_OpenFile_clicked() {
     QString filePath = QFileDialog::getSaveFileName(this, tr("Open file"), QDir::homePath(), tr("Wii Plain ISO *.iso;;Wii Compact ISO *.ciso;;Wii ISO Archive *.wia;;Wii Disc Format *.wdf;;Wii Backup File System Container *.wbfs"));
 
@@ -55,6 +60,10 @@ void WiiBaFuDialog::on_pushButton_OpenFile_clicked() {
         ui->lineEdit_FilePath->setText(filePath);
         setCurrentImageFormat(filePath);
     }
+}
+
+QString WiiBaFuDialog::sourceFilePath() {
+    return m_sourceFilePath;
 }
 
 QString WiiBaFuDialog::directory() {
@@ -123,6 +132,10 @@ QString WiiBaFuDialog::compression() {
     }
 
     return compression;
+}
+
+void WiiBaFuDialog::setSourceFilePath(const QString path) {
+    m_sourceFilePath = path;
 }
 
 void WiiBaFuDialog::setDirectory(const QString path) {
@@ -224,6 +237,7 @@ void WiiBaFuDialog::setOpenImageDirectory(const bool patch) {
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
     ui->pushButton_Open->setVisible(true);
+    ui->pushButton_SourcePath->setVisible(true);
 
     ui->label_ImageFormat->setVisible(true);
     ui->comboBox_ImageFormat->setVisible(true);
@@ -247,6 +261,7 @@ void WiiBaFuDialog::setOpenDirectory(const bool patch) {
     ui->label_Directory->setVisible(true);
     ui->lineEdit_Directory->setVisible(true);
     ui->pushButton_Open->setVisible(true);
+    ui->pushButton_SourcePath->setVisible(false);
 
     ui->label_FilePath->setVisible(false);
     ui->lineEdit_FilePath->setVisible(false);
@@ -274,6 +289,7 @@ void WiiBaFuDialog::setOpenFile(const bool patch) {
     ui->label_Directory->setVisible(false);
     ui->lineEdit_Directory->setVisible(false);
     ui->pushButton_Open->setVisible(false);
+    ui->pushButton_SourcePath->setVisible(false);
 
     ui->label_ImageFormat->setVisible(true);
     ui->comboBox_ImageFormat->setVisible(true);

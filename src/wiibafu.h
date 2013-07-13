@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
+ *   Copyright (C) 2010-2013 Kai Heitkamp                                  *
+ *   dynup@ymail.com | http://dynup.de.vu                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -21,8 +21,9 @@
 #ifndef WIIBAFU_H
 #define WIIBAFU_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QMetaType>
+#include <QtConcurrent/QtConcurrentRun>
 
 #include "global.h"
 #include "witools.h"
@@ -45,6 +46,7 @@ public:
 
 private:
     Ui::WiiBaFu *ui;
+    QAction *action_VerifyGame;
     WiTools *wiTools;
     Common *common;
     Settings *settings;
@@ -52,6 +54,7 @@ private:
     CoverViewDialog *coverViewDialog;
     WBFSDialog *wbfsDialog;
     QFile logFile;
+    QString lastOutputPath;
     bool logFindFirstTime;
 
     QTimer *timer;
@@ -107,13 +110,13 @@ signals:
     void stopBusy();
 
 private slots:
-    void on_menuOptions_Settings_triggered();
-    void on_menuTools_CheckWBFS_triggered();
-    void on_menuTools_DumpWBFS_triggered();
-    void on_menuTools_CreateWBFS_triggered();
-    void on_menuTools_VerifyGame_triggered();
-    void on_menuTools_Compare_triggered();
-    void on_menuTools_UpdateTitles_triggered();
+    void options_Settings_triggered();
+    void tools_CheckWBFS_triggered();
+    void tools_DumpWBFS_triggered();
+    void tools_CreateWBFS_triggered();
+    void tools_VerifyGame_triggered();
+    void tools_Compare_triggered();
+    void tools_UpdateTitles_triggered();
 
     void action_Files_triggered();
     void action_DVD_triggered();
@@ -215,7 +218,7 @@ private slots:
     void addEntriesToLog(const QStringList entries, const WiTools::LogType type);
     void addWitCommandLineToLog(const QString wit, const QStringList arguments);
 
-    void on_menuHelp_About_triggered();
+    void help_About_triggered();
 };
 
 #endif // WIIBAFU_H

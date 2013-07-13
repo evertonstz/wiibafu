@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2010-2013 Kai Heitkamp                                  *
- *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
+ *   dynup@ymail.com | http://dynup.de.vu                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,7 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtGui/QApplication>
+#include <QtWidgets>
+#include <QApplication>
 #include "wiibafu.h"
 
 int main(int argc, char *argv[]) {
@@ -29,7 +30,7 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setApplicationVersion(AppVersion);
 
     QTranslator qtTranslator, appTranslator;
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf8"));
 
     QString appLang, qtLang;
     int langIndex = WIIBAFU_SETTINGS.value("Main/ApplicationLanguage", QVariant(0)).toInt();

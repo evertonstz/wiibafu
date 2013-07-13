@@ -5,11 +5,11 @@ What you need
 
 Make sure you get the following stuff:
 
-  * Qt library (4.7.x highly recommended)
+  * Qt library (5.1.x highly recommended)
 
 It is important that you compile AND INSTALL the above packages!
 
-Further you will need GNU make and a working C++ compiler (e.g. gcc 3.4.x or later).
+Further you will need GNU make and a working C++ compiler (e.g. gcc 4.x or later).
 
 
 Preparations

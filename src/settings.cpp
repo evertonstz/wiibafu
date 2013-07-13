@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2010-2011 Kai Heitkamp                                  *
- *   dynup@ymail.com | http://sf.net/p/wiibafu                             *
+ *   Copyright (C) 2010-2013 Kai Heitkamp                                  *
+ *   dynup@ymail.com | http://dynup.de.vu                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
