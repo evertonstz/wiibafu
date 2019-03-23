@@ -212,10 +212,10 @@
             </property>
             <property name="toolTip">
              <string>Split size and optional unit factor 'kmgtpe' (base=1000] or 'KMGTPE' (base=1024)
-Default value is 4G</string>
+Default value is 4G-32K</string>
             </property>
             <property name="text">
-             <string>4G</string>
+             <string>4G-32K</string>
             </property>
            </widget>
           </item>
