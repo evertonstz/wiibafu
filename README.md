@@ -14,6 +14,7 @@ I just changed the default split size wiibafu will offer the user fom "4G" to "4
 
 ## Arch Based
 It's on [AUR](https://aur.archlinux.org/packages/wiibafu/ "AUR")
+
 Binaries on [Releases](https://github.com/evertonstz/wiibafu/releases "Releases") can be installed with "sudo pacman -U wiibafu*.pacman", for now only x86_64 binaries are available
 
 # Build From Source
