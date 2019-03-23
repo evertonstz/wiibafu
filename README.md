@@ -10,6 +10,13 @@ Back when wiibafu was developed most people used the WBFS Partition system, the 
 ## The fix
 I just changed the default split size wiibafu will offer the user fom "4G" to "4G-32K", therefore the default setting will output splited WBFS FILES everyone can use.
 
+# Installation
+
+## Arch Based
+It's on [AUR](https://aur.archlinux.org/packages/wiibafu/ "AUR")
+
+# Build From Source
+More info [here](https://github.com/evertonstz/wiibafu/blob/master/INSTALL "here")
 
 # Original README
 This document contains important notes for Wii Backup Fusion
